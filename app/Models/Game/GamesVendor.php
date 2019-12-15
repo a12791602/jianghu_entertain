@@ -2,6 +2,7 @@
 
 namespace App\Models\Game;
 
+use App\ModelFilters\Game\GamesVendorFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
 
@@ -41,8 +42,15 @@ class GamesVendor extends BaseModel
     {
         if (!empty($value)) {
             return json_encode($value);
-        } else {
-            return '';
         }
+        return '';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function modelFilter()
+    {
+        return $this->provideFilter(GamesVendorFilter::class);
     }
 }

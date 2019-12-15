@@ -22,19 +22,19 @@ class DeleteAdminRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:merchant_admin_users',
+            'id' => 'required|exists:backend_admin_users',
         ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages()
+    public function messages(): array
     {
         return [
             'id.required' => '缺少管理员ID',

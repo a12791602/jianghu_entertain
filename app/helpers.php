@@ -8,6 +8,7 @@
  */
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Response;
 
 if (!function_exists('configure')) {
     /**
@@ -27,12 +28,12 @@ if (!function_exists('configure')) {
 
 
 /**
- * @param  boolean $success     Success.
- * @param  mixed   $data        Data.
- * @param  string  $code        Code.
- * @param  string  $message     Message.
- * @param  string  $placeholder Placeholder.
- * @param  string  $substituted Substituted.
+ * @param boolean $success     Success.
+ * @param mixed   $data        Data.
+ * @param string  $code        Code.
+ * @param string  $message     Message.
+ * @param string  $placeholder Placeholder.
+ * @param string  $substituted Substituted.
  * @return JsonResponse
  * @throws Exception 异常.
  */
@@ -45,9 +46,9 @@ function msgOut(
     string $substituted = ''
 ): JsonResponse {
     $defaultSuccessCode = '200';
-    $defaultErrorCode = '404';
-    $defaultCode = $success === true ? $defaultSuccessCode : $defaultErrorCode;
-    $code = $code === '' ? $defaultCode : $code;
+    $defaultErrorCode   = '404';
+    $defaultCode        = $success === true ? $defaultSuccessCode : $defaultErrorCode;
+    $code               = $code === '' ? $defaultCode : $code;
     if ($success === false) {
         throw new Exception($code);
     }
@@ -62,5 +63,6 @@ function msgOut(
         'data' => $data,
         'message' => $message,
     ];
-    return response()->json($datas);
+    $return = Response::json($datas);
+    return $return;
 }

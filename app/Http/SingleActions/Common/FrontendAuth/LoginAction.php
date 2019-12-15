@@ -37,8 +37,8 @@ class LoginAction
     /**
      * Login user and create token
      *
-     * @param  FrontendApiMainController $contll  Controller.
-     * @param  Request                   $request Request.
+     * @param FrontendApiMainController $contll  Controller.
+     * @param Request                   $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -47,15 +47,15 @@ class LoginAction
         $this->userAgent = $contll->userAgent;
         $request->validate(
             [
-            'username' => 'required|string|alpha_dash',
-            'password' => 'required|string',
-            'remember_me' => 'boolean',
+                'username' => 'required|string|alpha_dash',
+                'password' => 'required|string',
+                'remember_me' => 'boolean',
             ],
         );
-        $credentials = request(['username', 'password']);
-        $this->maxAttempts = 1; //1 times
+        $credentials        = request(['username', 'password']);
+        $this->maxAttempts  = 1; //1 times
         $this->decayMinutes = 1; //1 minutes
-        $token = $contll->currentAuth->attempt($credentials);
+        $token              = $contll->currentAuth->attempt($credentials);
         if (!$token) {
             throw new \Exception('100002');
         }
@@ -71,8 +71,8 @@ class LoginAction
         // user surpasses their maximum number of attempts they will get locked out.
         $this->incrementLoginAttempts($request);
         $expireInMinute = $contll->currentAuth->factory()->getTTL();
-        $expireAt = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
-        $user = $contll->currentAuth->user();
+        $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
+        $user           = $contll->currentAuth->user();
         if ($user->remember_token !== null) {
             try {
                 JWTAuth::setToken($user->remember_token);
@@ -81,37 +81,39 @@ class LoginAction
                 Log::info($e->getMessage());
             }
         }
-        $user->remember_token = $token;
-        $user->last_login_ip = request()->ip();
+        $user->remember_token  = $token;
+        $user->last_login_ip   = request()->ip();
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
-        $data = [
+        $data   = [
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_at' => $expireAt,
         ];
-        return msgOut(true, $data);
+        $result = msgOut(true, $data);
+        return $result;
     }
 
     /**
-     * @param  Request $request Request.
+     * @param Request $request Request.
      * @return string|null
      */
-    protected function throttleKey(Request $request):  ? string
+    protected function throttleKey(Request $request): ?string
     {
         if ($this->userAgent->isDesktop()) {
-            return Str::lower($request->input($this->username())) . '|Desktop|' . $request->ip();
+            $return = Str::lower($request->input($this->username())) . '|Desktop|' . $request->ip();
         } else {
-            return Str::lower($request->input($this->username())) .
-            '|' . $this->userAgent->device() .
-            '|' . $request->ip();
+            $return = Str::lower($request->input($this->username())) .
+                '|' . $this->userAgent->device() .
+                '|' . $request->ip();
         }
+        return $return;
     }
 
     /**
      * @return string
      */
-    protected function username() : string
+    protected function username(): string
     {
         return 'username';
     }
