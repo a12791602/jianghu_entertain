@@ -57,7 +57,7 @@ function msgOut(
     } else {
         $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
     }
-    $datas = [
+    $datas  = [
         'status' => true,
         'code' => $code,
         'data' => $data,
