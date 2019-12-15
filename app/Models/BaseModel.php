@@ -6,13 +6,14 @@ use EloquentFilter\Filterable;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model{
+class BaseModel extends Model
+{
     use Cachable, Filterable;
 
     private const DEFAULT_PAGESIZE = 50;
 
     /**
-     * 获取分页条数1
+     * 获取分页条数
      *
      * @return int|mixed
      */
