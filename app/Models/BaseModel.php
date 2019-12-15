@@ -12,7 +12,7 @@ class BaseModel extends Model{
     private const DEFAULT_PAGESIZE = 50;
 
     /**
-     * 获取分页条数
+     * 获取分页条数1
      *
      * @return int|mixed
      */
