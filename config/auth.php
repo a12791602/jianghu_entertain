@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\User\FrontendUser;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\Admin\MerchantAdminUser;
+use App\Models\User\FrontendUser;
 
 return [
 
@@ -137,4 +137,8 @@ return [
 
     'password_timeout' => 10800,
 
+    /**
+     * maximum number of attempts to allow
+     */
+    'max_attempts' => 3,
 ];

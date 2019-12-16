@@ -27,14 +27,15 @@ class LoginAction
     protected $userAgent;
 
     /**
-     * @var integer
+     * Get the maximum number of attempts to allow.
+     *
+     * @return integer
      */
-    protected $maxAttempts;
-
-    /**
-     * @var integer
-     */
-    protected $decayMinutes;
+    public function maxAttempts(): int
+    {
+        $attempt = config('auth.max_attempts');
+        return $attempt;
+    }
 
     /**
      * Login user and create token
@@ -47,18 +48,20 @@ class LoginAction
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
     {
         $this->userAgent = $contll->userAgent;
+        if ($this->hasTooManyLoginAttempts($request)) {
+            $this->sendLockoutResponse($request);
+        }
         $request->validate(
             [
-                'username' => 'required|string|alpha_dash',
+                'mobile' => 'required|numeric|digits:11',
                 'password' => 'required|string',
                 'remember_me' => 'boolean',
             ],
         );
-        $credentials        = request(['username', 'password']);
-        $this->maxAttempts  = 1; //1 times
-        $this->decayMinutes = 1; //1 minutes
-        $token              = $contll->currentAuth->attempt($credentials);
+        $credentials = request(['mobile', 'password']);
+        $token       = $contll->currentAuth->attempt($credentials);
         if (!$token) {
+            $this->incrementLoginAttempts($request);
             throw new \Exception('100002');
         }
         if ($contll->currentAuth->user()->frozen_type === 1) {
@@ -68,10 +71,6 @@ class LoginAction
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
         }
-        // If the login attempt was unsuccessful we will increment the number of attempts
-        // to login and redirect the user back to the login form. Of course, when this
-        // user surpasses their maximum number of attempts they will get locked out.
-        $this->incrementLoginAttempts($request);
         $expireInMinute = $contll->currentAuth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $user           = $contll->currentAuth->user();
@@ -117,6 +116,6 @@ class LoginAction
      */
     protected function username(): string
     {
-        return 'username';
+        return 'mobile';
     }
 }
