@@ -12,7 +12,9 @@ use Illuminate\Support\Str;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-
+/**
+ * Class for login action.
+ */
 class LoginAction
 {
     use AuthenticatesUsers;
