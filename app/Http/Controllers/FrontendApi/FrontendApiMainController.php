@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontendApi;
 
 use App\Http\Controllers\Controller;
+use App\Models\DeveloperUsage\Frontend\SystemRoutesH5;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesMobile;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesWeb;
 use Illuminate\Support\Facades\Log;
@@ -66,6 +67,35 @@ class FrontendApiMainController extends Controller
     public $userAgent;
 
     /**
+     * 对应model
+     *
+     * @var array
+     */
+    protected $routeModel = [
+        'app-api' => SystemRoutesMobile::class,
+        'h5-api' => SystemRoutesH5::class,
+        'pc-api' => SystemRoutesWeb::class,
+    ];
+
+    /**
+     * Model
+     *
+     * @var object
+     */
+    protected $webModel;
+
+    /**
+     * 对应的看守器
+     *
+     * @var array
+     */
+    protected $routeGuard = [
+        'app-api' => 'frontend-mobile',
+        'pc-api' => 'frontend-pc',
+        'h5-api' => 'frontend-h5',
+    ];
+
+    /**
      * AdminMainController constructor.
      */
     public function __construct()
@@ -85,27 +115,26 @@ class FrontendApiMainController extends Controller
     /**
      * 处理客户端
      * @return void
+     * @throws \Exception ThrowingError.
      */
     private function _handleEndUser(): void
     {
-        $result = false;
         $open_route = [];
-        $this->userAgent = new Agent();
-        if ($this->userAgent->isDesktop()) {
-            $open_route = SystemRoutesWeb::where('is_open', 1)->pluck('method')->toArray();
-            $this->currentGuard = 'frontend-web';
-            $result = true;
-        } elseif ($this->userAgent->isRobot()) {
+        //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
+        $this->currentOptRoute = Route::getCurrentRoute();
+        $prefix                = trim(Route::getCurrentRoute()->getPrefix(), '/');
+        $this->userAgent       = new Agent();
+        if ($this->userAgent->isRobot()) {
             Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
-            die();
-        } else if ($this->userAgent->isMobile()) {
-            $open_route = SystemRoutesMobile::where('is_open', 1)->pluck('method')->toArray();
-            $this->currentGuard = 'frontend-mobile';
-            $result = true;
+            throw new \Exception('100000');
         }
-        if ($result === true) {
-            $this->middleware('auth:' . $this->currentGuard, ['except' => $open_route]);
+        if (!isset($this->routeModel[$prefix])) {
+            throw new \Exception('100003');
         }
+        $this->webModel     = new $this->routeModel[$prefix]();
+        $open_route         = $this->webModel::where('is_open', 1)->pluck('method')->toArray();
+        $this->currentGuard = $this->routeGuard[$prefix];
+        $this->middleware('auth:' . $this->currentGuard, ['except' => $open_route]);
     }
 
     /**
@@ -114,16 +143,16 @@ class FrontendApiMainController extends Controller
      */
     private function _userOperateLog(): void
     {
-        $this->inputs = Request::all(); //获取所有相关的传参数据
-        $this->currentAuth = auth($this->currentGuard);
+        $this->inputs       = Request::all(); //获取所有相关的传参数据
+        $this->currentAuth  = auth($this->currentGuard);
         $this->frontendUser = $this->currentAuth->user();
-        //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
-        $this->currentOptRoute = Route::getCurrentRoute();
-        $this->log_uuid = Str::orderedUuid()->getNodeHex();
-        $datas['input'] = $this->inputs;
-        $datas['route'] = $this->currentOptRoute;
-        $datas['log_uuid'] = $this->log_uuid;
-        $logData = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
+        $this->log_uuid     = Str::orderedUuid()->getNodeHex();
+        $datas              = [
+            'input' => $this->inputs,
+            'route' => $this->currentOptRoute,
+            'log_uuid' => $this->log_uuid,
+        ];
+        $logData            = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
         Log::channel('frontend-by-queue')->info($logData);
     }
 }
