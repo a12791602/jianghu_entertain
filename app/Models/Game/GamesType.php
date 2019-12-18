@@ -5,6 +5,7 @@ namespace App\Models\Game;
 use App\ModelFilters\Game\GamesTypeFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class GamesType
@@ -19,19 +20,21 @@ class GamesType extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function lastEditor()
+    public function lastEditor(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
     }
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
     }
 
     /**
@@ -39,6 +42,7 @@ class GamesType extends BaseModel
      */
     public function modelFilter()
     {
-        return $this->provideFilter(GamesTypeFilter::class);
+        $object = $this->provideFilter(GamesTypeFilter::class);
+        return $object;
     }
 }

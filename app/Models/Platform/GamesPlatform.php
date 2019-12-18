@@ -6,6 +6,8 @@ use App\Models\BaseModel;
 use App\Models\Game\Game;
 use App\Models\Game\GamesType;
 use App\Models\Game\GamesVendor;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
  * Class GamesPlatform
@@ -21,27 +23,27 @@ class GamesPlatform extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @return object
+     * @return BelongsTo
      */
-    public function games(): object
+    public function games(): BelongsTo
     {
         $object = $this->belongsTo(Game::class, 'game_sign', 'sign');
         return $object;
     }
 
     /**
-     * @return object
+     * @return HasOneThrough
      */
-    public function vendor(): object
+    public function vendor(): HasOneThrough
     {
         $object = $this->hasOneThrough(GamesVendor::class, Game::class, 'sign', 'id', 'game_sign', 'vendor_id');
         return $object;
     }
 
     /**
-     * @return object
+     * @return HasOneThrough
      */
-    public function type(): object
+    public function type(): HasOneThrough
     {
         $object = $this->hasOneThrough(GamesType::class, Game::class, 'sign', 'id', 'game_sign', 'type_id');
         return $object;

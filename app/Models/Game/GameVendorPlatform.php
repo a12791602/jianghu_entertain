@@ -3,6 +3,7 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class GameVendorPlatform
@@ -22,9 +23,9 @@ class GameVendorPlatform extends BaseModel
     public const DEVICE_PC  = 1;
 
     /**
-     * @return object
+     * @return BelongsTo
      */
-    public function gameVendor(): object
+    public function gameVendor(): BelongsTo
     {
         $object = $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
         return $object;

@@ -3,6 +3,7 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class GameTypePlatform
@@ -16,24 +17,17 @@ class GameTypePlatform extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
-    /**
-     * @var integer
-     */
-    public const DEVICE_H5 = 2;
-    /**
-     * @var integer
-     */
+
+    public const DEVICE_H5  = 2;
     public const DEVICE_APP = 3;
-    /**
-     * @var integer
-     */
-    public const DEVICE_PC = 1;
+    public const DEVICE_PC  = 1;
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function gameType()
+    public function gameType(): BelongsTo
     {
-        return $this->belongsTo(GamesType::class, 'type_id', 'id');
+        $object = $this->belongsTo(GamesType::class, 'type_id', 'id');
+        return $object;
     }
 }

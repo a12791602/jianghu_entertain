@@ -24,6 +24,7 @@ class GamesPlatformFilter extends ModelFilter
     ];
 
     /**
+     * 根据平台标记查询
      * @param string $platform_sign PlatformSign.
      * @return object
      */
@@ -34,6 +35,7 @@ class GamesPlatformFilter extends ModelFilter
     }
 
     /**
+     * 根据设备查询
      * @param integer $device Device.
      * @return object
      */
@@ -44,6 +46,7 @@ class GamesPlatformFilter extends ModelFilter
     }
 
     /**
+     * 根据状态查询
      * @param integer $status Status.
      * @return object
      */

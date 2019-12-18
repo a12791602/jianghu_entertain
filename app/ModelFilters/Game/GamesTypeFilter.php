@@ -21,30 +21,33 @@ class GamesTypeFilter extends ModelFilter
     public $relations = [];
 
     /**
+     * 状态查询
      * @param  integer $status Status.
-     * @return object
+     * @return GamesTypeFilter
      */
-    public function status(int $status): object
+    public function status(int $status): GamesTypeFilter
     {
         $object = $this->where('status', $status);
         return $object;
     }
 
     /**
+     * 名称查询
      * @param  string $name Name.
-     * @return object
+     * @return GamesTypeFilter
      */
-    public function name(string $name): object
+    public function name(string $name): GamesTypeFilter
     {
         $object = $this->where('name', $name);
         return $object;
     }
 
     /**
+     * 分类查询
      * @param integer $type_id TypeId.
-     * @return object
+     * @return GamesTypeFilter
      */
-    public function type(int $type_id): object
+    public function type(int $type_id): GamesTypeFilter
     {
         $object = $this->where('games_types.id', $type_id);
         return $object;
