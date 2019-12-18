@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\DeveloperUsage\Merchant\SystemRoutesMerchant;
 use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +33,7 @@ class MerchantApiMainController extends Controller
 
     /**
      * 当前商户存在的平台
-     * @var \App\Models\SystemPlatform $currentPlatformEloq
+     * @var App\Models\Systems\SystemPlatform $currentPlatformEloq
      */
     public $currentPlatformEloq;
 
