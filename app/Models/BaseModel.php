@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-    use Cachable, Filterable;
-
+    use Cachable,Filterable;
     private const DEFAULT_PAGESIZE = 50;
 
     /**
@@ -19,6 +18,6 @@ class BaseModel extends Model
      */
     public static function getPageSize()
     {
-        return app('request')->get('pageSize') ?? self::DEFAULT_PAGESIZE;
+        return app('request')->get('pageSize')??self::DEFAULT_PAGESIZE;
     }
 }

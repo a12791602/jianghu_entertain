@@ -4,13 +4,14 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use EloquentFilter\Filterable;
+use App\Models\Traits\BaseModelLogics;
 
 /**
  * Class for base auth model.
  */
 class BaseAuthModel extends Authenticatable implements JWTSubject
 {
-    use Filterable;
+    use Filterable,BaseModelLogics;
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
