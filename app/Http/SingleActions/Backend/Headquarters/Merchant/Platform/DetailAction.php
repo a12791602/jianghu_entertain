@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  */
 class DetailAction
 {
-    
+
     /**
      * Comment
      *
@@ -32,6 +32,7 @@ class DetailAction
     public function execute(): JsonResponse
     {
         $platformData = $this->model->with('owner')->get()->toArray();
-        return msgOut(true, $platformData);
+        $msgOut       = msgOut(true, $platformData);
+        return $msgOut;
     }
 }

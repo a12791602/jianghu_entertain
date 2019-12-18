@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Finance\SystemPlatformBank;
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +21,7 @@ class AddDoAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $flag = false;
         try {
@@ -29,25 +29,25 @@ class AddDoAction extends BaseAction
             DB::beginTransaction();
             $this->model->fill($inputDatas);
             if ($this->model->save()) {
-                $lastId = $this->model->id;
+                $lastId    = $this->model->id;
                 $platforms = SystemPlatform::select('sign as platform_sign')->get()->toArray();
-                $data = [];
+                $data      = [];
                 foreach ($platforms as $platform) {
                     $platform['bank_id'] = $lastId;
-                    $data[] = $platform;
+                    $data[]              = $platform;
                 }
                 SystemPlatformBank::insert($data);
                 $flag = true;
             }
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             $flag = false;
         }
-        if ($flag) {
-            DB::commit();
-            return msgOut(true);
-        } else {
+        if (!$flag) {
             DB::rollBack();
             throw new \Exception('300900');
         }
+        DB::commit();
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

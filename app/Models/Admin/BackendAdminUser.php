@@ -2,9 +2,10 @@
 
 namespace App\Models\Admin;
 
-use App\Models\SystemPlatform;
-use Illuminate\Notifications\Notifiable;
 use App\Models\BaseAuthModel;
+use App\Models\Systems\SystemPlatform;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Notifications\Notifiable;
 
 /**
  * Class for backend admin user.
@@ -47,13 +48,14 @@ class BackendAdminUser extends BaseAuthModel
      */
     public function getJWTIdentifier()
     {
-        return $this->getKey();
+        $userKey = $this->getKey();
+        return $userKey;
     }
 
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
-     * @return array
+     * @return mixed
      */
     public function getJWTCustomClaims()
     {
@@ -63,20 +65,22 @@ class BackendAdminUser extends BaseAuthModel
     /**
      * 平台
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function platform()
+    public function platform(): HasOne
     {
-        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        $platform = $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        return $platform;
     }
 
     /**
      * 角色组
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function accessGroup()
+    public function accessGroup(): HasOne
     {
-        return $this->hasOne(BackendAdminAccessGroup::class, 'id', 'group_id');
+        $accessGroup = $this->hasOne(BackendAdminAccessGroup::class, 'id', 'group_id');
+        return $accessGroup;
     }
 }

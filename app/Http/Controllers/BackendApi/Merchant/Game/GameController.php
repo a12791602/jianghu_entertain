@@ -3,28 +3,28 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
-use App\Http\Requests\Backend\Merchant\GameVendor\IndexRequest;
-use App\Http\Requests\Backend\Merchant\GameVendor\SortRequest;
-use App\Http\Requests\Backend\Merchant\GameVendor\StatusRequest;
-use App\Http\SingleActions\Backend\Merchant\GameVendor\IndexAction;
-use App\Http\SingleActions\Backend\Merchant\GameVendor\SortAction;
-use App\Http\SingleActions\Backend\Merchant\GameVendor\StatusAction;
+use App\Http\Requests\Backend\Merchant\Game\DoHotRequest;
+use App\Http\Requests\Backend\Merchant\Game\IndexRequest;
+use App\Http\Requests\Backend\Merchant\Game\StatusRequest;
+use App\Http\SingleActions\Backend\Merchant\Game\DoHotAction;
+use App\Http\SingleActions\Backend\Merchant\Game\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\Game\StatusAction;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class GameVendorController
+ * Class GameController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameVendorController extends MerchantApiMainController
+class GameController extends MerchantApiMainController
 {
     /**
-     * 列表
+     * app端游戏列表
      * @param IndexAction  $action  Action.
      * @param IndexRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function index(IndexAction $action, IndexRequest $request): JsonResponse
+    public function appIndex(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($this, $inputDatas);
@@ -32,7 +32,7 @@ class GameVendorController extends MerchantApiMainController
     }
 
     /**
-     * 改表状态
+     * 更改游戏状态
      * @param StatusAction  $action  Action.
      * @param StatusRequest $request Request.
      * @return JsonResponse
@@ -46,12 +46,13 @@ class GameVendorController extends MerchantApiMainController
     }
 
     /**
-     * @param SortAction  $action  Action.
-     * @param SortRequest $request Request.
+     * 设置游戏是否热门
+     * @param DoHotAction  $action  Action.
+     * @param DoHotRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function sort(SortAction $action, SortRequest $request): JsonResponse
+    public function doHot(DoHotAction $action, DoHotRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);

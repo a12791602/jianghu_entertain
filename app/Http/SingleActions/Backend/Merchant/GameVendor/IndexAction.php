@@ -17,6 +17,7 @@ class IndexAction extends BaseAction
      * @var object
      */
     protected $model;
+
    /**
     * @param MerchantApiMainController $contll     Contll.
     * @param array $inputDatas InputDatas.
@@ -25,11 +26,11 @@ class IndexAction extends BaseAction
     */
    public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
    {
-       $inputDatas['platform_id'] = $contll->currentAdmin->id;
+       $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
        $datas = $this->model::with('gameVendor')
            ->orderByDesc('sort')
            ->filter($inputDatas, GameVendorPlatformFilter::class)
-           ->withCacheCooldownSeconds(60 * 60 * 24)
+           ->withCacheCooldownSeconds(86400)
            ->get();
        return msgOut(true, $datas);
    }

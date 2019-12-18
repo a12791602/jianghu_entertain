@@ -17,15 +17,16 @@ class GameVendorPlatform extends BaseModel
     protected $guarded = ['id'];
 
 
-    public const DEVICE_H5 = 2;
+    public const DEVICE_H5  = 2;
     public const DEVICE_APP = 3;
-    public const DEVICE_PC = 1;
+    public const DEVICE_PC  = 1;
 
     /**
-     * @return mixed
+     * @return object
      */
-    public function gameVendor()
+    public function gameVendor(): object
     {
-        return $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
+        $object = $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
+        return $object;
     }
 }

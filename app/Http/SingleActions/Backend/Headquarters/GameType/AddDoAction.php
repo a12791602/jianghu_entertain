@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use App\Models\Game\GameTypePlatform;
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -21,7 +21,7 @@ class AddDoAction extends BaseAction
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $flag = false;
         try {
@@ -33,35 +33,37 @@ class AddDoAction extends BaseAction
                 GameTypePlatform::insert($insertData);
                 $flag = true;
             }
-        } catch (\Exception $exception) {
+        } catch (\Throwable $exception) {
             $flag = false;
         }
-        if ($flag) {
-            DB::commit();
-            return msgOut(true);
-        } else {
+        if (!$flag) {
             DB::rollBack();
             throw new \Exception('300402');
         }
+        DB::commit();
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 
     /**
      * @param  integer $typeId TypeId.
-     * @return array
+     * @return mixed[]
      */
-    private function _getFormatDataForTypePlatform(int $typeId):array
+    private function _getFormatDataForTypePlatform(int $typeId): array
     {
-        $data = [];
+        $data      = [];
         $platforms = SystemPlatform::select('id')->get()->toArray();
         foreach ($platforms as $platform) {
-            $tmpData['type_id'] = $typeId;
-            $tmpData['platform_id'] = $platform['id'];
-            $tmpData['device'] = GameTypePlatform::DEVICE_H5;
-            $data[] = $tmpData;
+            $tmpData           = [
+                'type_id'     => $typeId,
+                'platform_id' => $platform['id'],
+                'device'      => GameTypePlatform::DEVICE_H5,
+            ];
+            $data[]            = $tmpData;
             $tmpData['device'] = GameTypePlatform::DEVICE_APP;
-            $data[] = $tmpData;
+            $data[]            = $tmpData;
             $tmpData['device'] = GameTypePlatform::DEVICE_PC;
-            $data[] = $tmpData;
+            $data[]            = $tmpData;
         }
         return $data;
     }

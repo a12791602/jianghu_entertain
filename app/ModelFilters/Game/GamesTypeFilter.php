@@ -24,17 +24,29 @@ class GamesTypeFilter extends ModelFilter
      * @param  integer $status Status.
      * @return object
      */
-    public function status(int $status) :object
+    public function status(int $status): object
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
      * @param  string $name Name.
      * @return object
      */
-    public function name(string $name) :object
+    public function name(string $name): object
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
+    }
+
+    /**
+     * @param integer $type_id TypeId.
+     * @return object
+     */
+    public function type(int $type_id): object
+    {
+        $object = $this->where('games_types.id', $type_id);
+        return $object;
     }
 }

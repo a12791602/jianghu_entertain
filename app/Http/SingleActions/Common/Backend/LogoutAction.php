@@ -5,8 +5,8 @@ namespace App\Http\SingleActions\Common\Backend;
 use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 /**
  * Class for backend auth logout action.
@@ -31,10 +31,7 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        return response()->json(
-            [
-            'message' => 'Successfully logged out',
-            ],
-        );
+        $msgOut = msgOut(true, [], '302100');
+        return $msgOut;
     }
 }

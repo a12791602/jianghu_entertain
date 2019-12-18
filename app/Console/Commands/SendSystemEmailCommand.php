@@ -30,27 +30,17 @@ class SendSystemEmailCommand extends Command
     protected $description = 'Command description';
 
     /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      * Execute the console command.
      * @param SystemEmail $systemEmail SystemEmail.
-     * @return void
+     * @return boolean
      */
-    public function handle(SystemEmail $systemEmail)
+    public function handle(SystemEmail $systemEmail): bool
     {
         $delayEmails = SystemEmail::where('is_send', $systemEmail::IS_SEND_NO)->where(
             'is_timing',
             $systemEmail::IS_TIMING_YES,
         )->where('send_time', '<=', Carbon::now())->get();
-        if (!$delayEmails->isEmpty()) {
+        try {
             foreach ($delayEmails as $delayEmail) {
                 event(
                     new SystemEmailEvent(
@@ -61,6 +51,9 @@ class SendSystemEmailCommand extends Command
                     ),
                 );
             }
+            return true;
+        } catch (\Throwable $exception) {
+            return false;
         }
     }
 }

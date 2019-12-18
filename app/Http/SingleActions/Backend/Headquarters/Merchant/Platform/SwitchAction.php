@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -34,12 +34,14 @@ class SwitchAction
     public function execute(array $inputDatas): JsonResponse
     {
         $platformEloq = $this->model::find($inputDatas['id']);
-        if ($platformEloq !== null) {
-            $platformEloq->status = $inputDatas['status'];
-            $platformEloq->save();
-        } else {
+        if ($platformEloq === null) {
             throw new \Exception('300706');
         }
-        return msgOut(true);
+        $platformEloq->status = $inputDatas['status'];
+        if (!$platformEloq->save()) {
+            throw new \Exception('300707');
+        }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

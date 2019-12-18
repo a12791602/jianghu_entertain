@@ -8,8 +8,8 @@ use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemPlatformBank;
-use App\Models\SystemPlatform;
 use App\Models\Systems\SystemDomain;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -20,10 +20,10 @@ use Illuminate\Support\Facades\DB;
 class DoAddAction
 {
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 传递的参数.
+     * @param BackEndApiMainController $contll     Controller.
+     * @param array                    $inputDatas 传递的参数.
+     * @throws \Exception               Exception.
      * @return JsonResponse
-     * @throws \Exception Exception.
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
@@ -45,8 +45,9 @@ class DoAddAction
             $this->_editPlatformOwner($platformEloq, $adminUser->id);
             //完成
             DB::commit();
-            return msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
-        } catch (\Exception $e) {
+            $msgOut = msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
+            return $msgOut;
+        } catch (\Throwable $e) {
             DB::rollback();
             throw new \Exception('300705');
         }
@@ -55,21 +56,21 @@ class DoAddAction
     /**
      * Creates a platform.
      *
-     * @param  array   $inputDatas 接收的参数.
-     * @param  integer $adminId    管理员ID.
+     * @param array   $inputDatas 接收的参数.
+     * @param integer $adminId    管理员ID.
      * @return SystemPlatform
      */
     private function _createPlatform(array $inputDatas, int $adminId): SystemPlatform
     {
         $platformEloq = new SystemPlatform();
         $platformData = [
-            'name' => $inputDatas['platform_name'],
-            'sign' => $inputDatas['platform_sign'],
-            'agency_method' => $inputDatas['agency_method'],
-            'author_id' => $adminId,
+            'name'           => $inputDatas['platform_name'],
+            'sign'           => $inputDatas['platform_sign'],
+            'agency_method'  => $inputDatas['agency_method'],
+            'author_id'      => $adminId,
             'last_editor_id' => $adminId,
-            'start_time' => $inputDatas['start_time'],
-            'end_time' => $inputDatas['end_time'],
+            'start_time'     => $inputDatas['start_time'],
+            'end_time'       => $inputDatas['end_time'],
         ];
         $platformEloq->fill($platformData);
         $platformEloq->save();
@@ -79,13 +80,14 @@ class DoAddAction
     /**
      * Creates a platform domain.
      *
-     * @param  array   $domains      添加的域名.
-     * @param  string  $platformSign 平台标识.
-     * @param  integer $adminId      平台标识.
+     * @param array   $domains      添加的域名.
+     * @param string  $platformSign 平台标识.
+     * @param integer $adminId      平台标识.
      * @return void
      */
     private function _createPlatformDomain(array $domains, string $platformSign, int $adminId): void
     {
+
         foreach ($domains as $domain) {
             $systemDomainELoq = new SystemDomain();
             $systemDomainELoq->insertAllTypeDomain($domain, $platformSign, $adminId);
@@ -93,16 +95,17 @@ class DoAddAction
     }
 
     /**
-     * @param  string $platformSign 平台标识.
+     * @param string $platformSign 平台标识.
      * @return void
      */
     private function _createBanks(string $platformSign): void
     {
         $systemBank = SystemBank::pluck('id')->toArray();
-        $addData = [
+        $addData    = [
             'platform_sign' => $platformSign,
-            'status' => SystemPlatformBank::STATUS_CLOSE,
+            'status'        => SystemPlatformBank::STATUS_CLOSE,
         ];
+
         foreach ($systemBank as $bankId) {
             $addData['bank_id'] = $bankId;
             $systemPlatformBank = new SystemPlatformBank();
@@ -114,16 +117,16 @@ class DoAddAction
     /**
      * Creates an admin group.
      *
-     * @param  string $platformSign 平台标识.
+     * @param string $platformSign 平台标识.
      * @return MerchantAdminAccessGroup
      */
     private function _createAdminGroup(string $platformSign): MerchantAdminAccessGroup
     {
         $adminGroupEloq = new MerchantAdminAccessGroup();
         $adminGroupData = [
-            'group_name' => '超级管理',
+            'group_name'    => '超级管理',
             'platform_sign' => $platformSign,
-            'is_super' => MerchantAdminAccessGroup::IS_SUPER,
+            'is_super'      => MerchantAdminAccessGroup::IS_SUPER,
         ];
         $adminGroupEloq->fill($adminGroupData);
         $adminGroupEloq->save();
@@ -133,17 +136,18 @@ class DoAddAction
     /**
      * Creates a group role.
      *
-     * @param  array   $inputDatas   接收的参数.
-     * @param  integer $adminGroupId 管理员角色组ID.
+     * @param array   $inputDatas   接收的参数.
+     * @param integer $adminGroupId 管理员角色组ID.
      * @return void
      */
     private function _createGroupRole(array $inputDatas, int $adminGroupId): void
     {
         $role = Arr::wrap(json_decode($inputDatas['role'], true));
+
         foreach ($role as $menuId) {
             $roleData = [
                 'group_id' => $adminGroupId,
-                'menu_id' => $menuId,
+                'menu_id'  => $menuId,
             ];
             $roleEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
             $roleEloq->fill($roleData);
@@ -154,24 +158,25 @@ class DoAddAction
     /**
      * Creates an admin user.
      *
-     * @param  array   $inputDatas   接收的参数.
-     * @param  integer $adminGroupId 管理员角色组ID.
+     * @param array   $inputDatas   接收的参数.
+     * @param integer $adminGroupId 管理员角色组ID.
      * @return MerchantAdminUser
      */
     private function _createAdminUser(array $inputDatas, int $adminGroupId): MerchantAdminUser
     {
-        $adminData = [
-            'name' => $inputDatas['username'],
-            'email' => $inputDatas['email'],
+        $adminData         = [
+            'name'     => $inputDatas['username'],
+            'email'    => $inputDatas['email'],
             'password' => bcrypt($inputDatas['password']),
             'group_id' => $adminGroupId,
         ];
-        return MerchantAdminUser::create($adminData);
+        $merchantAdminUser = MerchantAdminUser::create($adminData);
+        return $merchantAdminUser;
     }
 
     /**
-     * @param  SystemPlatform $platformEloq 平台eloq.
-     * @param  integer        $adminUserId  平台所属超级管理员ID.
+     * @param SystemPlatform $platformEloq 平台eloq.
+     * @param integer        $adminUserId  平台所属超级管理员ID.
      * @return void
      */
     private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId): void

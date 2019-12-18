@@ -2,8 +2,9 @@
 
 namespace App\Models\Admin;
 
-use App\Models\SystemPlatform;
 use App\Models\BaseAuthModel;
+use App\Models\Systems\SystemPlatform;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class for marchant admin user.
@@ -36,25 +37,25 @@ class MerchantAdminUser extends BaseAuthModel
         'email_verified_at' => 'datetime',
     ];
 
-    
-
     /**
      * 平台
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function platform()
+    public function platform(): HasOne
     {
-        return $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
+        $platform = $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
+        return $platform;
     }
 
     /**
      * 角色组
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function accessGroup()
+    public function accessGroup(): HasOne
     {
-        return $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
+        $accessGroup = $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
+        return $accessGroup;
     }
 }

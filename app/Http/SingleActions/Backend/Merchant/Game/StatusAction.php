@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Merchant\GameType;
+namespace App\Http\SingleActions\Backend\Merchant\Game;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class StatusAction
- * @package App\Http\SingleActions\Backend\Merchant\GameType
+ * @package App\Http\SingleActions\Backend\Merchant\Game
  */
 class StatusAction extends BaseAction
 {
@@ -20,9 +20,9 @@ class StatusAction extends BaseAction
     {
         $result = $this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']]);
         if ($result) {
-            $output = msgOut(true);
-            return $output;
+            $msgOut = msgOut(true);
+            return $msgOut;
         }
-        throw new \Exception('300404');
+        throw new \Exception('300203');
     }
 }

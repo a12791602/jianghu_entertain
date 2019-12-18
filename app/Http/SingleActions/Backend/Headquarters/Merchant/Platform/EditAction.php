@@ -6,7 +6,7 @@ use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupsHasBackendSystemMenuFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
-use App\Models\SystemPlatform;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -46,8 +46,8 @@ class EditAction
         }
         //基本信息修改
         $platformELoq->agency_method = $inputDatas['agency_method'];
-        $platformELoq->start_time = $inputDatas['start_time'];
-        $platformELoq->end_time = $inputDatas['end_time'];
+        $platformELoq->start_time    = $inputDatas['start_time'];
+        $platformELoq->end_time      = $inputDatas['end_time'];
         if (!$platformELoq->save()) {
             DB::rollback();
             throw new \Exception('302004');
@@ -62,7 +62,8 @@ class EditAction
             }
         }
         DB::commit();
-        return msgOut(true);
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 
     /**
@@ -73,12 +74,12 @@ class EditAction
      */
     private function _editRole(string $sign, array $role): bool
     {
-        $filterArr = [
+        $filterArr  = [
             'platform' => $sign,
-            'super' => MerchantAdminAccessGroup::IS_SUPER,
+            'super'    => MerchantAdminAccessGroup::IS_SUPER,
         ];
         $adminGroup = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->first();
-        $oldRole = $adminGroup->detail->pluck('menu_id')->toArray();
+        $oldRole    = $adminGroup->detail->pluck('menu_id')->toArray();
         //需要删除的权限
         $deleteRole = array_diff($oldRole, $role);
         if (!empty($deleteRole)) {
@@ -90,7 +91,8 @@ class EditAction
         //需要添加的权限
         $addRole = array_diff($role, $oldRole);
         if (!empty($addRole)) {
-            return $this->_addRole($adminGroup->id, $addRole);
+            $addRole = $this->_addRole($adminGroup->id, $addRole);
+            return $addRole;
         }
         return true;
     }
@@ -103,12 +105,14 @@ class EditAction
      */
     private function _deleteRole(int $groupId, array $deleteRole): int
     {
-        $filterArr = [
+        $filterArr  = [
             'groupId' => $groupId,
-            'menuIn' => $deleteRole,
+            'menuIn'  => $deleteRole,
         ];
-        return MerchantAdminAccessGroupsHasBackendSystemMenu::filter($filterArr, MerchantAdminAccessGroupsHasBackendSystemMenuFilter::class)
+        $deleteRole = MerchantAdminAccessGroupsHasBackendSystemMenu::
+            filter($filterArr, MerchantAdminAccessGroupsHasBackendSystemMenuFilter::class)
             ->delete();
+        return $deleteRole;
     }
 
     /**
@@ -120,9 +124,9 @@ class EditAction
     private function _addRole(int $groupId, array $roles): bool
     {
         foreach ($roles as $menuId) {
-            $addData = [
+            $addData  = [
                 'group_id' => $groupId,
-                'menu_id' => $menuId,
+                'menu_id'  => $menuId,
             ];
             $roleEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
             $roleEloq->fill($addData);
