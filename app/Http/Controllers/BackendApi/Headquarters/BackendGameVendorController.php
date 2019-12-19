@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Requests\Backend\Headquarters\GameVendor\StatusDoRequest;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\GameVendor\AddRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\DelRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\EditRequest;
 use App\Http\Requests\Backend\Headquarters\GameVendor\IndexDoRequest;
-use App\Http\SingleActions\Backend\Headquarters\GameVendor\StatusDoAction;
+use App\Http\Requests\Backend\Headquarters\GameVendor\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\IndexDoAction;
-use App\Http\Requests\Backend\Headquarters\GameVendor\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameVendor\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameVendor\EditRequest;
+use App\Http\SingleActions\Backend\Headquarters\GameVendor\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -27,10 +28,13 @@ class BackendGameVendorController extends BackEndApiMainController
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
-    public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
-    {
+    public function addDo(
+        AddDoAction $action,
+        AddRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -39,10 +43,13 @@ class BackendGameVendorController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
-    {
+    public function editDo(
+        EditDoAction $action,
+        EditRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -51,10 +58,13 @@ class BackendGameVendorController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
-    {
+    public function indexDo(
+        IndexDoAction $action,
+        IndexDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -63,10 +73,13 @@ class BackendGameVendorController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
-    {
+    public function delDo(
+        DelDoAction $action,
+        DelRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -75,9 +88,12 @@ class BackendGameVendorController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
-    {
+    public function statusDo(
+        StatusDoAction $action,
+        StatusDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

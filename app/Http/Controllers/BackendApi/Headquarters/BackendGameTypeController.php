@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameType\IndexDoAction;
-use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
@@ -26,10 +27,13 @@ class BackendGameTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
-    {
+    public function addDo(
+        AddDoAction $action,
+        AddRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -38,10 +42,13 @@ class BackendGameTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
-    {
+    public function editDo(
+        EditDoAction $action,
+        EditRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -50,10 +57,13 @@ class BackendGameTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
-    {
+    public function indexDo(
+        IndexDoAction $action,
+        IndexDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -62,10 +72,13 @@ class BackendGameTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
-    {
+    public function delDo(
+        DelDoAction $action,
+        DelRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -74,9 +87,12 @@ class BackendGameTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
-    {
+    public function statusDo(
+        StatusDoAction $action,
+        StatusDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

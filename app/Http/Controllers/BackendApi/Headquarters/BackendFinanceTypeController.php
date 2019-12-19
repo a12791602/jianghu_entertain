@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\FinanceType\AddDoRequest;
-use App\Http\Requests\Backend\Headquarters\FinanceType\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\FinanceType\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\FinanceType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\AddDoAction;
-use App\Http\SingleActions\Backend\Headquarters\FinanceType\IndexDoAction;
-use App\Http\SingleActions\Backend\Headquarters\FinanceType\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\FinanceType\EditDoAction;
+use App\Http\SingleActions\Backend\Headquarters\FinanceType\IndexDoAction;
 use App\Http\SingleActions\Backend\Headquarters\FinanceType\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
@@ -27,10 +28,13 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
-    {
+    public function addDo(
+        AddDoAction $action,
+        AddDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -39,10 +43,13 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
-    {
+    public function indexDo(
+        IndexDoAction $action,
+        IndexDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -51,10 +58,13 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function editDo(EditDoAction $action, EditDoRequest $request) :JsonResponse
-    {
+    public function editDo(
+        EditDoAction $action,
+        EditDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
     /**
      * @param  DelDoAction  $action  Action.
@@ -62,10 +72,13 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delDo(DelDoAction $action, DelDoRequest $request) :JsonResponse
-    {
+    public function delDo(
+        DelDoAction $action,
+        DelDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -74,9 +87,12 @@ class BackendFinanceTypeController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
-    {
+    public function statusDo(
+        StatusDoAction $action,
+        StatusDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

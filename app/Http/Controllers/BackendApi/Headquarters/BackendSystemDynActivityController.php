@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Requests\Backend\Headquarters\SystemDynActivity\StatusRequest;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\SystemDynActivity\IndexRequest;
-use App\Http\SingleActions\Backend\Headquarters\SystemDynActivity\StatusAction;
+use App\Http\Requests\Backend\Headquarters\SystemDynActivity\StatusRequest;
 use App\Http\SingleActions\Backend\Headquarters\SystemDynActivity\IndexAction;
+use App\Http\SingleActions\Backend\Headquarters\SystemDynActivity\StatusAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -24,10 +25,13 @@ class BackendSystemDynActivityController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function index(IndexAction $action, IndexRequest $request) :JsonResponse
-    {
+    public function index(
+        IndexAction $action,
+        IndexRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -38,9 +42,12 @@ class BackendSystemDynActivityController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function status(StatusAction $action, StatusRequest $request):JsonResponse
-    {
+    public function status(
+        StatusAction $action,
+        StatusRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

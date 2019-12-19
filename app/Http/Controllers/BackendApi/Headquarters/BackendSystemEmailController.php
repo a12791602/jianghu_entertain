@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Email\SendRequest;
 use App\Http\SingleActions\Backend\Headquarters\Email\SendAction;
 use Illuminate\Http\JsonResponse;
@@ -22,9 +23,12 @@ class BackendSystemEmailController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function send(SendAction $action, SendRequest $request):JsonResponse
-    {
+    public function send(
+        SendAction $action,
+        SendRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

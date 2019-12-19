@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Requests\Backend\Headquarters\SystemBank\StatusRequest;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\SystemBank\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\SystemBank\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\SystemBank\EditRequest;
 use App\Http\Requests\Backend\Headquarters\SystemBank\IndexRequest;
-use App\Http\Requests\Backend\Headquarters\SystemBank\AddDoRequest;
-use App\Http\SingleActions\Backend\Headquarters\SystemBank\StatusAction;
+use App\Http\Requests\Backend\Headquarters\SystemBank\StatusRequest;
+use App\Http\SingleActions\Backend\Headquarters\SystemBank\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\SystemBank\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\SystemBank\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\SystemBank\IndexAction;
-use App\Http\SingleActions\Backend\Headquarters\SystemBank\AddDoAction;
+use App\Http\SingleActions\Backend\Headquarters\SystemBank\StatusAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -30,10 +31,13 @@ class BackendSystemBankController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function addDo(AddDoAction $action, AddDoRequest $request) :JsonResponse
-    {
+    public function addDo(
+        AddDoAction $action,
+        AddDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -44,10 +48,13 @@ class BackendSystemBankController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function index(IndexAction $action, IndexRequest $request) :JsonResponse
-    {
+    public function index(
+        IndexAction $action,
+        IndexRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -58,10 +65,13 @@ class BackendSystemBankController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function edit(EditAction $action, EditRequest $request) :JsonResponse
-    {
+    public function edit(
+        EditAction $action,
+        EditRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -70,10 +80,13 @@ class BackendSystemBankController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delDo(DelDoAction $action, DelDoRequest $request) :JsonResponse
-    {
+    public function delDo(
+        DelDoAction $action,
+        DelDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -82,9 +95,12 @@ class BackendSystemBankController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function status(StatusAction $action, StatusRequest $request):JsonResponse
-    {
+    public function status(
+        StatusAction $action,
+        StatusRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

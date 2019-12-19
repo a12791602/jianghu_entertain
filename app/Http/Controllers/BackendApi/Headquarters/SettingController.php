@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Setting\LoginLogDetailRequest;
 use App\Http\SingleActions\Backend\Headquarters\Setting\LoginLogDetailAction;
 use Illuminate\Http\JsonResponse;
@@ -19,9 +20,12 @@ class SettingController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function loginLogDetail(LoginLogDetailRequest $request, LoginLogDetailAction $action): JsonResponse
-    {
+    public function loginLogDetail(
+        LoginLogDetailRequest $request,
+        LoginLogDetailAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

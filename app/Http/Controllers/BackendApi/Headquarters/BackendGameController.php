@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
 use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
@@ -33,10 +34,13 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function addDo(AddDoAction $action, AddRequest $request) :JsonResponse
-    {
+    public function addDo(
+        AddDoAction $action,
+        AddRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -47,10 +51,13 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function editDo(EditDoAction $action, EditRequest $request) :JsonResponse
-    {
+    public function editDo(
+        EditDoAction $action,
+        EditRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -61,10 +68,13 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function optEditDo(OptEditDoAction $action, OptEditDoRequest $request) :JsonResponse
-    {
+    public function optEditDo(
+        OptEditDoAction $action,
+        OptEditDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
     /**
      * 游戏列表
@@ -74,10 +84,13 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function indexDo(IndexDoAction $action, IndexDoRequest $request) :JsonResponse
-    {
+    public function indexDo(
+        IndexDoAction $action,
+        IndexDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -88,10 +101,13 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function delDo(DelDoAction $action, DelRequest $request) :JsonResponse
-    {
+    public function delDo(
+        DelDoAction $action,
+        DelRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -101,9 +117,10 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function getSearchCondition(GetSearchConditionAction $action):JsonResponse
+    public function getSearchCondition(GetSearchConditionAction $action): JsonResponse
     {
-        return $action->execute();
+        $msgOut = $action->execute();
+        return $msgOut;
     }
 
     /**
@@ -114,9 +131,12 @@ class BackendGameController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function statusDo(StatusDoAction $action, StatusDoRequest $request):JsonResponse
-    {
+    public function statusDo(
+        StatusDoAction $action,
+        StatusDoRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }
