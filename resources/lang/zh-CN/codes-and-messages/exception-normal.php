@@ -80,6 +80,8 @@ return [
     '302005' => '尝试修改权限时出现错误',
     //BackendAuthController
     '302100' => '退出成功',
+    //BackEndApiMainController
+    '302200' => '路由非法',
     //BackendSystemEmailController
     '303000' => '邮件保存失败!',
 ];

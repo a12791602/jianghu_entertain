@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\GameVendor;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\ModelFilters\Game\GameVendorPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -18,20 +18,20 @@ class IndexAction extends BaseAction
      */
     protected $model;
 
-   /**
-    * @param MerchantApiMainController $contll     Contll.
-    * @param array $inputDatas InputDatas.
-    * @return JsonResponse
-    * @throws \Exception Exception.
-    */
-   public function execute(MerchantApiMainController $contll, array $inputDatas) :JsonResponse
-   {
-       $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
-       $datas = $this->model::with('gameVendor')
-           ->orderByDesc('sort')
-           ->filter($inputDatas, GameVendorPlatformFilter::class)
-           ->withCacheCooldownSeconds(86400)
-           ->get();
-       return msgOut(true, $datas);
-   }
+    /**
+     * @param BackEndApiMainController $contll     Contll.
+     * @param array $inputDatas InputDatas.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    {
+        $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
+        $datas                     = $this->model::with('gameVendor')
+                                          ->orderByDesc('sort')
+                                          ->filter($inputDatas, GameVendorPlatformFilter::class)
+                                          ->withCacheCooldownSeconds(86400)
+                                          ->get();
+        return msgOut(true, $datas);
+    }
 }

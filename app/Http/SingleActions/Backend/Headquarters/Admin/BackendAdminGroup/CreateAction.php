@@ -2,10 +2,10 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\BackendAdminAccessGroup;
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
+use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +50,7 @@ class CreateAction
             $objAdminGroup->save();
 
             //添加AdminGroupDetails数据
-            $data['group_id'] = $objAdminGroup->id;
+            $data = ['group_id' => $objAdminGroup->id];
             foreach ($role as $roleId) {
                 $data['menu_id'] = $roleId;
                 $groupDetailEloq = new BackendAdminAccessGroupDetail();
@@ -62,10 +62,12 @@ class CreateAction
             $menuEloq->createMenuDatas($objAdminGroup->id, $role);
 
             DB::commit();
-            return msgOut(true, $data);
-        } catch (\Exception $e) {
+            $msgOut = msgOut(true, $data);
+            return $msgOut;
+        } catch (\Throwable $e) {
             DB::rollback();
-            return msgOut(false, [], $e->getCode(), $e->getMessage());
+            $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
+            return $msgOut;
         }
     }
 }

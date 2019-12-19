@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\CreateRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\DestroyRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\EditRequest;
@@ -17,7 +17,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员角色组
  */
-class MerchantAdminGroupController extends MerchantApiMainController
+class MerchantAdminGroupController extends BackEndApiMainController
 {
     /**
      * Display a listing of the resource.
@@ -27,7 +27,9 @@ class MerchantAdminGroupController extends MerchantApiMainController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        return $action->execute();
+        $platformSign = $this->currentPlatformEloq->sign;
+        $msgOut       = $action->execute($platformSign);
+        return $msgOut;
     }
 
     /**
@@ -37,10 +39,13 @@ class MerchantAdminGroupController extends MerchantApiMainController
      * @param  CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(CreateRequest $request, CreateAction $action): JsonResponse
-    {
+    public function create(
+        CreateRequest $request,
+        CreateAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -50,10 +55,13 @@ class MerchantAdminGroupController extends MerchantApiMainController
      * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(EditRequest $request, EditAction $action): JsonResponse
-    {
+    public function edit(
+        EditRequest $request,
+        EditAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -68,7 +76,8 @@ class MerchantAdminGroupController extends MerchantApiMainController
         DestroyAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -83,6 +92,7 @@ class MerchantAdminGroupController extends MerchantApiMainController
         SpecificGroupUsersAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

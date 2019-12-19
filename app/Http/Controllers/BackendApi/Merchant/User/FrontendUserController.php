@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\IndexRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\LoginLogRequest;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\IndexAction;
@@ -12,7 +12,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户相关
  */
-class FrontendUserController extends MerchantApiMainController
+class FrontendUserController extends BackEndApiMainController
 {
 
     /**

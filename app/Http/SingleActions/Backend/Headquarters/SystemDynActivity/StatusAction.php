@@ -1,7 +1,8 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -17,18 +18,18 @@ class StatusAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        if ($this->model->where('id', $inputDatas['id'])->update(
+        $update = $this->model->where('id', $inputDatas['id'])->update(
             [
-                'status' => $inputDatas['status'],
+                'status'         => $inputDatas['status'],
                 'last_editor_id' => $contll->currentAdmin->id,
             ],
-        )
-        ) {
-            return msgOut(true);
-        } else {
+        );
+        if (!$update) {
             throw new \Exception('301000');
         }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

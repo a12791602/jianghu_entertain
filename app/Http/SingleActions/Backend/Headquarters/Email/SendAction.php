@@ -1,8 +1,9 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
 use App\Events\SystemEmailEvent;
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
 
@@ -19,27 +20,27 @@ class SendAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $receivers = $inputDatas['receivers'];
-        $inputDatas['receivers'] = json_encode($inputDatas['receivers']);
-        $inputDatas['sender_type'] = SystemEmail::SENDER_TYPE_HEADQUARTERS;
-        $inputDatas['sender_id'] = $contll->currentAdmin->id;
+        $receivers                   = $inputDatas['receivers'];
+        $inputDatas['receivers']     = json_encode($inputDatas['receivers']);
+        $inputDatas['sender_type']   = SystemEmail::SENDER_TYPE_HEADQUARTERS;
+        $inputDatas['sender_id']     = $contll->currentAdmin->id;
         $inputDatas['platform_sign'] = '';
         $this->model->fill($inputDatas);
-        if ($this->model->save()) {
-            if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
-                event(
-                    new SystemEmailEvent(
-                        $this->model->id,
-                        $inputDatas['receiver_type'],
-                        $receivers,
-                    ),
-                );
-            }
-            return msgOut(true);
-        } else {
+        if (!$this->model->save()) {
             throw new \Exception('303000');
         }
+        if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
+            event(
+                new SystemEmailEvent(
+                    $this->model->id,
+                    $inputDatas['receiver_type'],
+                    $receivers,
+                ),
+            );
+        }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

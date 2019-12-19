@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\GameType\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameType\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\GameType\IndexAction;
@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameTypeController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameTypeController extends MerchantApiMainController
+class GameTypeController extends BackEndApiMainController
 {
     /**
      * 列表
@@ -23,10 +23,13 @@ class GameTypeController extends MerchantApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function index(IndexAction $action, IndexRequest $request) :JsonResponse
-    {
+    public function index(
+        IndexAction $action,
+        IndexRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -35,9 +38,12 @@ class GameTypeController extends MerchantApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function status(StatusAction $action, StatusRequest $request):JsonResponse
-    {
+    public function status(
+        StatusAction $action,
+        StatusRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

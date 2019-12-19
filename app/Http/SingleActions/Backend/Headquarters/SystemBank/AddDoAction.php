@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemPlatformBank;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;

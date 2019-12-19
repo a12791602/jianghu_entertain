@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
-use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditRequest;
-use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditAction;
 use Illuminate\Http\JsonResponse;
 
@@ -24,17 +24,19 @@ class MenuController extends BackEndApiMainController
      *
      * @return JsonResponse
      */
-    public function getAllMenu()
+    public function getAllMenu(): JsonResponse
     {
-        return msgOut(true, $this->fullMenuLists);
+        $msgOut = msgOut(true, $this->fullMenuLists);
+        return $msgOut;
     }
 
     /**
      * @return JsonResponse
      */
-    public function currentAdminMenu()
+    public function currentAdminMenu(): JsonResponse
     {
-        return msgOut(true, $this->menuLists);
+        $msgOut = msgOut(true, $this->menuLists);
+        return $msgOut;
     }
 
     /**
@@ -47,7 +49,8 @@ class MenuController extends BackEndApiMainController
         AllRequireInfosAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -55,10 +58,13 @@ class MenuController extends BackEndApiMainController
      * @param  DoAddAction  $action  Action.
      * @return JsonResponse
      */
-    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
-    {
+    public function doAdd(
+        DoAddRequest $request,
+        DoAddAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -66,10 +72,13 @@ class MenuController extends BackEndApiMainController
      * @param  DeleteAction  $action  Action.
      * @return JsonResponse
      */
-    public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
-    {
+    public function delete(
+        DeleteRequest $request,
+        DeleteAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -82,10 +91,13 @@ class MenuController extends BackEndApiMainController
      * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(EditRequest $request, EditAction $action): JsonResponse
-    {
+    public function edit(
+        EditRequest $request,
+        EditAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -94,6 +106,7 @@ class MenuController extends BackEndApiMainController
      */
     public function changeParent(ChangeParentAction $action): JsonResponse
     {
-        return $action->execute($this->inputs);
+        $msgOut = $action->execute($this->inputs);
+        return $msgOut;
     }
 }

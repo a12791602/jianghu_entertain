@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SearchAdminRequest;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SelfUpdatePasswordRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\UpdateAdminGroupRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\UpdatePasswordRequest;
-use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SelfUpdatePasswordRequest;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\CreateAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\DeleteAdminAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\SearchAdminAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\SelfUpdatePasswordAction;
-use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\UpdatePasswordAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\UpdateAdminGroupAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\UpdatePasswordAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,7 +33,8 @@ class BackendAdminUserController extends BackEndApiMainController
         CreateAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -47,7 +48,8 @@ class BackendAdminUserController extends BackEndApiMainController
         UpdateAdminGroupAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -61,7 +63,8 @@ class BackendAdminUserController extends BackEndApiMainController
         DeleteAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -75,7 +78,8 @@ class BackendAdminUserController extends BackEndApiMainController
         UpdatePasswordAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -89,7 +93,8 @@ class BackendAdminUserController extends BackEndApiMainController
         SelfUpdatePasswordAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -103,6 +108,7 @@ class BackendAdminUserController extends BackEndApiMainController
         SearchAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

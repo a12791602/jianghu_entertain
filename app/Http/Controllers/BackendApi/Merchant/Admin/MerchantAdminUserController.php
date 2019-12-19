@@ -2,22 +2,22 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\CreateRequest;
-use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\SearchAdminRequest;
-use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\CreateAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupAction;
-use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminAction;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupRequest;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\AllAdminsAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\CreateAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminAction;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\SearchAdminAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Controls the data flow into a merchant admin user object and updates the view whenever data changes.
  */
-class MerchantAdminUserController extends MerchantApiMainController
+class MerchantAdminUserController extends BackEndApiMainController
 {
     /**
      * create api
@@ -26,10 +26,13 @@ class MerchantAdminUserController extends MerchantApiMainController
      * @param  CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(CreateRequest $request, CreateAction $action): JsonResponse
-    {
+    public function create(
+        CreateRequest $request,
+        CreateAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -40,7 +43,8 @@ class MerchantAdminUserController extends MerchantApiMainController
      */
     public function allAdmins(AllAdminsAction $action): JsonResponse
     {
-        return $action->execute($this);
+        $msgOut = $action->execute($this);
+        return $msgOut;
     }
 
     /**
@@ -55,7 +59,8 @@ class MerchantAdminUserController extends MerchantApiMainController
         UpdateAdminGroupAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -70,7 +75,8 @@ class MerchantAdminUserController extends MerchantApiMainController
         DeleteAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -83,6 +89,7 @@ class MerchantAdminUserController extends MerchantApiMainController
         SearchAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 }

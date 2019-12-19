@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;

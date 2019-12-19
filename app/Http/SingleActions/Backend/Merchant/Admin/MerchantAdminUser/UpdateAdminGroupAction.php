@@ -1,10 +1,11 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminUser;
-use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -29,12 +30,12 @@ class UpdateAdminGroupAction
     /**
      * 修改管理员的归属组
      *
-     * @param  MerchantApiMainController $contll     Controller.
-     * @param  array                     $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         //验证管理员
         $AdminUserEloq = $this->model->find($inputDatas['id']);
@@ -45,17 +46,20 @@ class UpdateAdminGroupAction
             throw new \Exception('300702');
         }
         //更改的权限组是否合法
-        $filterArr = [
+        $filterArr            = [
             'platform' => $contll->currentPlatformEloq->sign,
-            'super' => MerchantAdminAccessGroup::NO_SUPER,
+            'super'    => MerchantAdminAccessGroup::NO_SUPER,
         ];
-        $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->pluck('id')->toArray();
+        $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)
+                                    ->pluck('id')
+                                    ->toArray();
         if (!in_array($inputDatas['group_id'], $platformAdminGroupId)) {
             throw new \Exception('300700');
         }
         //更改组
         $AdminUserEloq->group_id = $inputDatas['group_id'];
         $AdminUserEloq->save();
-        return msgOut(true, $AdminUserEloq->toArray());
+        $msgOut = msgOut(true, $AdminUserEloq->toArray());
+        return $msgOut;
     }
 }

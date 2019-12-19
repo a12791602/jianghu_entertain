@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,7 +18,7 @@ class AddDoAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas):JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $inputDatas['author_id'] = $contll->currentAdmin->id;
         $this->model->fill($inputDatas);

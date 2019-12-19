@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,15 +18,15 @@ class OptEditDoAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $model = $this->model->find($inputDatas['id']);
+        $model                        = $this->model->find($inputDatas['id']);
         $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
         $model->fill($inputDatas);
-        if ($model->save()) {
-            return msgOut(true);
-        } else {
+        if (!$model->save()) {
             throw new \Exception('300201');
         }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

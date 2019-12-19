@@ -2,10 +2,10 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
-use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
@@ -32,17 +32,17 @@ class CreateAction
     /**
      * Show the form for creating a new resource.
      *
-     * @param  MerchantApiMainController $contll     Controller.
-     * @param  array                     $inputDatas 传递的参数.
+     * @param  BackEndApiMainController $contll     Controller.
+     * @param  array                    $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(MerchantApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $platformSign = $contll->currentPlatformEloq->sign;
 
-        $filterArr = [
-            'platform' => $platformSign,
+        $filterArr    = [
+            'platform'  => $platformSign,
             'groupName' => $inputDatas['group_name'],
         ];
         $nameIsExists = $this->model::filter($filterArr, MerchantAdminAccessGroupFilter::class)->exists();
@@ -53,8 +53,8 @@ class CreateAction
         DB::beginTransaction();
         try {
             //添加AdminGroup数据
-            $groupData = [
-                'group_name' => $inputDatas['group_name'],
+            $groupData  = [
+                'group_name'    => $inputDatas['group_name'],
                 'platform_sign' => $platformSign,
             ];
             $adminGroup = $this->model;
@@ -64,7 +64,7 @@ class CreateAction
             //只提取当前登录管理员也拥有的权限,添加AdminGroupDetails权限数据
             $role = Arr::wrap(json_decode($inputDatas['role'], true));
             $role = array_intersect($role, $contll->adminAccessGroupDetail);
-            $data['group_id'] = $adminGroup->id;
+            $data = ['group_id' => $adminGroup->id];
             foreach ($role as $roleId) {
                 $data['menu_id'] = $roleId;
                 $groupDetailEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
@@ -73,10 +73,11 @@ class CreateAction
             }
 
             DB::commit();
-            return msgOut(true);
-        } catch (\Exception $e) {
+            $msgOut = msgOut(true);
+        } catch (\Throwable $e) {
             DB::rollback();
-            return msgOut(false, [], $e->getCode(), $e->getMessage());
+            $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
         }
+        return $msgOut;
     }
 }

@@ -11,4 +11,6 @@ return [
     //UserBlackListController
     '200300' => '解除黑名单失败，这条数据不存在',
     '200301' => '解除黑名单失败，修改数据时发生错误',
+    //MerchantAuthController
+    '200400' => '退出成功',
 ];

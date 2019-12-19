@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Admin;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\DestroyRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup\EditRequest;
@@ -27,7 +27,8 @@ class BackendAdminGroupController extends BackEndApiMainController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        return $action->execute();
+        $msgOut = $action->execute();
+        return $msgOut;
     }
 
     /**
@@ -40,7 +41,8 @@ class BackendAdminGroupController extends BackEndApiMainController
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -53,7 +55,8 @@ class BackendAdminGroupController extends BackEndApiMainController
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -63,12 +66,11 @@ class BackendAdminGroupController extends BackEndApiMainController
      * @param  DestroyAction  $action  Action.
      * @return JsonResponse
      */
-    public function destroy(
-        DestroyRequest $request,
-        DestroyAction $action
-    ): JsonResponse {
+    public function destroy(DestroyRequest $request, DestroyAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -83,6 +85,7 @@ class BackendAdminGroupController extends BackEndApiMainController
         SpecificGroupUsersAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

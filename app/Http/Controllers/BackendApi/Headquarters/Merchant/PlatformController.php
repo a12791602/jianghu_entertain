@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGameCancelRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
@@ -38,7 +38,8 @@ class PlatformController extends BackEndApiMainController
      */
     public function detail(DetailAction $action): JsonResponse
     {
-        return $action->execute();
+        $msgOut = $action->execute();
+        return $msgOut;
     }
 
     /**
@@ -47,10 +48,13 @@ class PlatformController extends BackEndApiMainController
      * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(EditRequest $request, EditAction $action): JsonResponse
-    {
+    public function edit(
+        EditRequest $request,
+        EditAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -61,10 +65,13 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
-    {
+    public function doAdd(
+        DoAddRequest $request,
+        DoAddAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -75,10 +82,13 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exceotion.
      */
-    public function switch(SwitchRequest $request, SwitchAction $action): JsonResponse
-    {
+    public function switch(
+        SwitchRequest $request,
+        SwitchAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -88,10 +98,13 @@ class PlatformController extends BackEndApiMainController
      * @param  DomainDetailAction  $action  Action.
      * @return JsonResponse
      */
-    public function domainDetail(DomainDetailRequest $request, DomainDetailAction $action): JsonResponse
-    {
+    public function domainDetail(
+        DomainDetailRequest $request,
+        DomainDetailAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -101,10 +114,13 @@ class PlatformController extends BackEndApiMainController
      * @param  DomainAddAction  $action  Action.
      * @return JsonResponse
      */
-    public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
-    {
+    public function domainAdd(
+        DomainAddRequest $request,
+        DomainAddAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -115,10 +131,13 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request): JsonResponse
-    {
+    public function assignGames(
+        AssignGamesAction $action,
+        AssignGamesRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -129,10 +148,13 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignedGames(AssignedGamesAction $action, AssignedGamesRequest $request): JsonResponse
-    {
+    public function assignedGames(
+        AssignedGamesAction $action,
+        AssignedGamesRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -143,10 +165,13 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function unassignGames(UnassignGamesAction $action, UnassignGamesRequest $request): JsonResponse
-    {
+    public function unassignGames(
+        UnassignGamesAction $action,
+        UnassignGamesRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 
     /**
@@ -158,7 +183,8 @@ class PlatformController extends BackEndApiMainController
      */
     public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action): JsonResponse
     {
-        return $action->execute();
+        $msgOut = $action->execute();
+        return $msgOut;
     }
 
     /**
@@ -169,9 +195,12 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignedGameCancel(AssignedGameCancelAction $action, AssignedGameCancelRequest $request): JsonResponse
-    {
+    public function assignedGameCancel(
+        AssignedGameCancelAction $action,
+        AssignedGameCancelRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
     }
 }

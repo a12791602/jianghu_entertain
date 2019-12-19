@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\GameVendor\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\SortRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\StatusRequest;
@@ -15,7 +15,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameVendorController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameVendorController extends MerchantApiMainController
+class GameVendorController extends BackEndApiMainController
 {
     /**
      * 列表

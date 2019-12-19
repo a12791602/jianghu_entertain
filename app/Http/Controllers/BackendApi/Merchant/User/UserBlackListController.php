@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\Merchant\MerchantApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\DetailRequest;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\IndexRequest;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\RemoveRequest;
@@ -14,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 黑名单管理
  */
-class UserBlackListController extends MerchantApiMainController
+class UserBlackListController extends BackEndApiMainController
 {
 
     /**

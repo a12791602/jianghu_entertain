@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
 
@@ -25,12 +26,18 @@ class IndexAction
     }
 
     /**
+     * @param  string $platformSign 平台标识.
      * @return JsonResponse
      */
-    public function execute(): JsonResponse
+    public function execute(string $platformSign): JsonResponse
     {
-        $data = $this->model->get()->toArray();
+        $filterArr = ['platform' => $platformSign];
+        $data      = $this->model
+                          ->filter($filterArr, MerchantAdminAccessGroupFilter::class)
+                          ->get()
+                          ->toArray();
 
-        return msgOut(true, $data);
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

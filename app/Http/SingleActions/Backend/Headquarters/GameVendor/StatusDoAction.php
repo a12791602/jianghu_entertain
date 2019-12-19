@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameVendor;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackEndApiMainController;
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,11 +18,11 @@ class StatusDoAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas) :JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->update(
             [
-                'status' => $inputDatas['status'],
+                'status'         => $inputDatas['status'],
                 'last_editor_id' => $contll->currentAdmin->id,
             ],
         )

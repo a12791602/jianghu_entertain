@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\SingleActions\Common\Backend\LoginAction;
 use App\Http\SingleActions\Common\Backend\LogoutAction;
 use Illuminate\Http\JsonResponse;
@@ -22,7 +23,8 @@ class BackendAuthController extends BackEndApiMainController
      */
     public function login(Request $request, LoginAction $action): JsonResponse
     {
-        return $action->execute($this, $request);
+        $msgOut = $action->execute($this, $request);
+        return $msgOut;
     }
 
     /**
@@ -34,6 +36,7 @@ class BackendAuthController extends BackEndApiMainController
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse
     {
-        return $action->execute($this, $request);
+        $msgOut = $action->execute($this, $request);
+        return $msgOut;
     }
 }
