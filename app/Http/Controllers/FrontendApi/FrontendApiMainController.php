@@ -109,7 +109,7 @@ class FrontendApiMainController extends Controller
                 }
                 return $next($request);
             },
-            );
+        );
     }
 
     /**
@@ -122,8 +122,8 @@ class FrontendApiMainController extends Controller
         $open_route = [];
         //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
         $this->currentOptRoute = Route::getCurrentRoute();
-        $prefixs = trim(Route::getCurrentRoute()->getPrefix(), '/');
-        $prefixArr = explode('/', $prefixs);
+        $prefixs               = trim(Route::getCurrentRoute()->getPrefix(), '/');
+        $prefixArr             = explode('/', $prefixs);
         if ($prefixArr !== false) {
             $prefix = $prefixArr[0];
         }
@@ -135,8 +135,8 @@ class FrontendApiMainController extends Controller
         if (!isset($this->routeModel[$prefix])) {
             throw new \Exception('100003');
         }
-        $this->webModel = new $this->routeModel[$prefix]();
-        $open_route = $this->webModel::where('is_open', 1)->pluck('method')->toArray();
+        $this->webModel     = new $this->routeModel[$prefix]();
+        $open_route         = $this->webModel::where('is_open', 1)->pluck('method')->toArray();
         $this->currentGuard = $this->routeGuard[$prefix];
         $this->middleware('auth:' . $this->currentGuard, ['except' => $open_route]);
     }
@@ -147,16 +147,16 @@ class FrontendApiMainController extends Controller
      */
     private function _userOperateLog(): void
     {
-        $this->inputs = Request::all(); //获取所有相关的传参数据
-        $this->currentAuth = auth($this->currentGuard);
+        $this->inputs       = Request::all(); //获取所有相关的传参数据
+        $this->currentAuth  = auth($this->currentGuard);
         $this->frontendUser = $this->currentAuth->user();
-        $this->log_uuid = Str::orderedUuid()->getNodeHex();
-        $datas = [
+        $this->log_uuid     = Str::orderedUuid()->getNodeHex();
+        $datas              = [
             'input' => $this->inputs,
             'route' => $this->currentOptRoute,
             'log_uuid' => $this->log_uuid,
         ];
-        $logData = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
+        $logData            = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
         Log::channel('frontend-by-queue')->info($logData);
     }
 }
