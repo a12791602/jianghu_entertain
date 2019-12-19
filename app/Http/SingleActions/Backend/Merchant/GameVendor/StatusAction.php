@@ -13,7 +13,7 @@ class StatusAction extends BaseAction
     public function execute(array $inputDatas) :JsonResponse
     {
         $field = 'status';
-        if ((int)$inputDatas['type'] === 1) {
+        if ((int)$inputDatas['type'] === 1) { //如果type == 1 则 修改的是 是否维护字段
             $field = 'is_maintain';
         }
         if ($this->model->where('id', $inputDatas['id'])->update([$field => $inputDatas['status']])) {

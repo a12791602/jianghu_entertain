@@ -44,7 +44,7 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-        'frontend-web' => [
+        'frontend-mobile' => [
             'driver' => 'jwt',
             'provider' => 'users',
         ],

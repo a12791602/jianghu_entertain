@@ -26,9 +26,9 @@ class GamesPlatformFilter extends ModelFilter
     /**
      * 根据平台标记查询
      * @param string $platform_sign PlatformSign.
-     * @return object
+     * @return GamesPlatformFilter
      */
-    public function platformSign(string $platform_sign): object
+    public function platformSign(string $platform_sign): GamesPlatformFilter
     {
         $object = $this->where('platform_sign', $platform_sign);
         return $object;
@@ -37,9 +37,9 @@ class GamesPlatformFilter extends ModelFilter
     /**
      * 根据设备查询
      * @param integer $device Device.
-     * @return object
+     * @return GamesPlatformFilter
      */
-    public function device(int $device): object
+    public function device(int $device): GamesPlatformFilter
     {
         $object = $this->where('device', $device);
         return $object;
@@ -48,11 +48,22 @@ class GamesPlatformFilter extends ModelFilter
     /**
      * 根据状态查询
      * @param integer $status Status.
-     * @return object
+     * @return GamesPlatformFilter
      */
-    public function status(int $status): object
+    public function status(int $status): GamesPlatformFilter
     {
         $object = $this->where('status', $status);
+        return $object;
+    }
+
+    /**
+     * 根据是否热门查找
+     * @param integer $is_hot IsHot.
+     * @return GamesPlatformFilter
+     */
+    public function isHot(int $is_hot): GamesPlatformFilter
+    {
+        $object = $this->where('is_hot', $is_hot);
         return $object;
     }
 }

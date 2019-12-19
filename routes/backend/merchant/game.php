@@ -58,6 +58,18 @@ Route::group(
             'app-index',
             [GameController::class, 'appIndex'],
         )->name($namePrefix . 'app-index');
+        //pc端游戏列表
+        Route::match(
+            ['get', 'options'],
+            'pc-index',
+            [GameController::class, 'pcIndex'],
+        )->name($namePrefix . 'pc-index');
+        //H5端游戏列表
+        Route::match(
+            ['get', 'options'],
+            'h5-index',
+            [GameController::class, 'h5Index'],
+        )->name($namePrefix . 'h5-index');
         //游戏状态改变
         Route::match(
             ['post', 'options'],
@@ -76,5 +88,23 @@ Route::group(
             'do-hot',
             [GameController::class, 'doHot'],
         )->name($namePrefix . 'do-hot');
+        //更改是否维护
+        Route::match(
+            ['post', 'options'],
+            'maintain',
+            [GameController::class, 'maintain'],
+        )->name($namePrefix . 'maintain');
+        //更改是否推荐
+        Route::match(
+            ['post', 'options'],
+            'recommend',
+            [GameController::class, 'recommend'],
+        )->name($namePrefix . 'recommend');
+        //获取查询条件
+        Route::match(
+            ['get', 'options'],
+            'get-search-condition-data',
+            [GameController::class, 'getSearchConditionData'],
+        )->name($namePrefix . 'get-search-condition-data');
     },
 );
