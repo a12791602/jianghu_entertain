@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
+namespace App\Http\SingleActions\Common\GamesLobby;
 
 use App\Models\Game\GameTypePlatform;
 use Illuminate\Http\JsonResponse;
@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 /**
  * Class GameCategoryAction
- * @package App\Http\SingleActions\Frontend\Common\GamesLobby
+ * @package App\Http\SingleActions\Common\GamesLobby
  */
 class GameCategoryAction
 {
