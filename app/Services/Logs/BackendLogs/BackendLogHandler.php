@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -9,27 +10,34 @@
 namespace App\Services\Logs\BackendLogs;
 
 use App\Services\Logs\LogsCommons\CommonLogFormatter;
+use Monolog\Formatter\FormatterInterface;
 use Monolog\Handler\AbstractProcessingHandler;
-use Monolog\Logger;
 
+/**
+ * Class BackendLogHandler
+ * @package App\Services\Logs\BackendLogs
+ */
 class BackendLogHandler extends AbstractProcessingHandler
 {
-    public function __construct($level = Logger::DEBUG)
-    {
-        parent::__construct($level);
-    }
-
+    /**
+     * @param array $record Records.
+     * @return void
+     */
     protected function write(array $record): void
     {
         // Queue implementation
         event(new BackendLogMonologEvent($record));
     }
 
+
     /**
-     * {@inheritDoc}
+     * inheritDoc
+     *
+     * @return FormatterInterface
      */
-    protected function getDefaultFormatter()
+    protected function getDefaultFormatter(): FormatterInterface
     {
-        return new CommonLogFormatter();
+        $return = new CommonLogFormatter();
+        return $return;
     }
 }

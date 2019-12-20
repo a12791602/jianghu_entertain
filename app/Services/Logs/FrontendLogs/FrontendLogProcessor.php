@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -11,32 +12,28 @@ namespace App\Services\Logs\FrontendLogs;
 use App\Models\Systems\FrontendSystemLog;
 use Jenssegers\Agent\Agent;
 
+/**
+ * Class FrontendLogProcessor
+ * @package App\Services\Logs\FrontendLogs
+ */
 class FrontendLogProcessor
 {
 
-    public function __invoke(array $record)
+    /**
+     * @param array $record Records.
+     * @return mixed[]
+     */
+    public function __invoke(array $record): array
     {
-        $agent = new Agent();
-        $os = $agent->platform();
-        $osVersion = $agent->version($os);
-        $browser = $agent->browser();
-        $bsVersion = $agent->version($browser);
-        $robot = $agent->robot();
-        if ($agent->isRobot()) {
-            $type = FrontendSystemLog::ROBOT;
-        } elseif ($agent->isDesktop()) {
-            $type = FrontendSystemLog::DESKSTOP;
-        } elseif ($agent->isTablet()) {
-            $type = FrontendSystemLog::TABLET;
-        } elseif ($agent->isMobile()) {
-            $type = FrontendSystemLog::MOBILE;
-        } elseif ($agent->isPhone()) {
-            $type = FrontendSystemLog::PHONE;
-        } else {
-            $type = FrontendSystemLog::OTHER;
-        }
-        $messageArr = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
-        $userId = auth()->user() ? auth()->user()->id : null;
+        $agent           = new Agent();
+        $clientOs        = $agent->platform();
+        $osVersion       = $agent->version($clientOs);
+        $browser         = $agent->browser();
+        $bsVersion       = $agent->version($browser);
+        $robot           = $agent->robot();
+        $type            = $this->_prepareType($agent);
+        $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
+        $userId          = auth()->user() ? auth()->user()->id : null;
         $record['extra'] = [
             'user_id' => $userId,
             'username' => $userId !== null ? auth()->user()->username : null,
@@ -46,7 +43,7 @@ class FrontendLogProcessor
             'user_agent' => request()->server('HTTP_USER_AGENT'),
             'lang' => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
             'device' => $agent->device(),
-            'os' => $os,
+            'os' => $clientOs,
             'browser' => $browser,
             'bs_version' => $bsVersion,
             'device_type' => $type,
@@ -73,5 +70,27 @@ class FrontendLogProcessor
         $record['message'] = '网络操作信息';
         }*/
         return $record;
+    }
+
+    /**
+     * @param Agent $agent AgentObj.
+     * @return integer
+     */
+    private function _prepareType(Agent $agent): int
+    {
+        if ($agent->isRobot()) {
+            $type = FrontendSystemLog::ROBOT;
+        } elseif ($agent->isDesktop()) {
+            $type = FrontendSystemLog::DESKSTOP;
+        } elseif ($agent->isTablet()) {
+            $type = FrontendSystemLog::TABLET;
+        } elseif ($agent->isMobile()) {
+            $type = FrontendSystemLog::MOBILE;
+        } elseif ($agent->isPhone()) {
+            $type = FrontendSystemLog::PHONE;
+        } else {
+            $type = FrontendSystemLog::OTHER;
+        }
+        return $type;
     }
 }

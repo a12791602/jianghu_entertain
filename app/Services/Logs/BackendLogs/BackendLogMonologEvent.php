@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -10,14 +11,21 @@ namespace App\Services\Logs\BackendLogs;
 
 use Illuminate\Queue\SerializesModels;
 
+/**
+ * Class BackendLogMonologEvent
+ * @package App\Services\Logs\BackendLogs
+ */
 class BackendLogMonologEvent
 {
     use SerializesModels;
 
+    /**
+     * @var array
+     */
     public $records;
 
     /**
-     * @param array $records
+     * @param array $records Records.
      */
     public function __construct(array $records)
     {

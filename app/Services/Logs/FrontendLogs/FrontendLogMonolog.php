@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -10,15 +11,18 @@ namespace App\Services\Logs\FrontendLogs;
 
 use Monolog\Logger;
 
+/**
+ * Class FrontendLogMonolog
+ * @package App\Services\Logs\FrontendLogs
+ */
 class FrontendLogMonolog
 {
     /**
      * Create a custom Monolog instance.
      *
-     * @param  array  $config
      * @return Logger
      */
-    public function __invoke(array $config)
+    public function __invoke(): Logger
     {
         $logger = new Logger('frontend-by-queue');
         $logger->pushHandler(new FrontendLogHandler());

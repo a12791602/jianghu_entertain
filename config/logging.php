@@ -1,12 +1,12 @@
 <?php
 
 use App\Services\Logs\BackendLogs\BackendLogMonolog;
-use Monolog\Handler\NullHandler;
 use App\Services\Logs\FrontendLogs\FrontendLogMonolog;
+use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
 
-return [
+$config = [
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,12 @@ return [
             'level' => 'debug',
             'days' => 14,
         ],
-
+        'telegram' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/telegram.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
         'slack' => [
             'driver' => 'slack',
             'url' => env('LOG_SLACK_WEBHOOK_URL'),
@@ -108,3 +113,4 @@ return [
     ],
 
 ];
+return $config;

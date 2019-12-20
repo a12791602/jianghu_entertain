@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -10,15 +11,18 @@ namespace App\Services\Logs\BackendLogs;
 
 use Monolog\Logger;
 
+/**
+ * Class BackendLogMonolog
+ * @package App\Services\Logs\BackendLogs
+ */
 class BackendLogMonolog
 {
     /**
      * Create a custom Monolog instance.
      *
-     * @param  array  $config
      * @return Logger
      */
-    public function __invoke(array $config)
+    public function __invoke(): Logger
     {
         $logger = new Logger('apibyqueue');
         $logger->pushHandler(new BackendLogHandler());
