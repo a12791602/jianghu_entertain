@@ -2,11 +2,12 @@
 
 namespace App\Models\User;
 
+use App\Models\BaseAuthModel;
+use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
-use App\Models\BaseAuthModel;
 
 /**
  * Class FrontendUser
@@ -15,15 +16,17 @@ use App\Models\BaseAuthModel;
  */
 class FrontendUser extends BaseAuthModel
 {
-
+    /**
+     * Notification
+     */
     use Notifiable;
 
     /**
-     * @var TYPE_TOP_AGENT
+     * TYPE_TOP_AGENT
      */
     public const TYPE_TOP_AGENT = 1;
     /**
-     * @var TYPE_AGENT
+     * TYPE_AGENT
      */
     public const TYPE_AGENT = 2;
     // 没用到  暂时注释
@@ -61,7 +64,8 @@ class FrontendUser extends BaseAuthModel
      */
     public function children(): HasMany
     {
-        return $this->hasMany($this, 'parent_id', 'id');
+        $result = $this->hasMany($this, 'parent_id', 'id');
+        return $result;
     }
 
     /**
@@ -71,7 +75,8 @@ class FrontendUser extends BaseAuthModel
      */
     public function parent(): HasOne
     {
-        return $this->hasOne($this, 'id', 'parent_id');
+        $result = $this->hasOne($this, 'id', 'parent_id');
+        return $result;
     }
 
     /**
@@ -81,7 +86,8 @@ class FrontendUser extends BaseAuthModel
      */
     public function account(): HasOne
     {
-        return $this->hasOne(FrontendUsersAccount::class, 'user_id', 'id');
+        $result = $this->hasOne(FrontendUsersAccount::class, 'user_id', 'id');
+        return $result;
     }
 
     /**
@@ -91,7 +97,8 @@ class FrontendUser extends BaseAuthModel
      */
     public function specificInfo(): HasOne
     {
-        return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
+        $result = $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
+        return $result;
     }
 
     /**
@@ -107,7 +114,8 @@ class FrontendUser extends BaseAuthModel
      */
     public function getMobileHiddenAttribute(): string
     {
-        return substr_replace($this->attributes['mobile'], '****', 3, 4);
+        $result = substr_replace($this->attributes['mobile'], '****', 3, 4);
+        return $result;
     }
 
     /**
@@ -116,6 +124,17 @@ class FrontendUser extends BaseAuthModel
      */
     public function platform(): HasOne
     {
-        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        $result = $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        return $result;
+    }
+
+    /**
+     * get user game_type_platforms
+     * @return HasMany
+     */
+    public function gameTypePlatform(): HasMany
+    {
+        $result = $this->hasMany(GameTypePlatform::class, 'platform_id', 'platform_id');
+        return $result;
     }
 }

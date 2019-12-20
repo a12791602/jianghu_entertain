@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FrontendApi\App;
+namespace App\Http\Controllers\FrontendApi\H5;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\VerificationCodeRequest;

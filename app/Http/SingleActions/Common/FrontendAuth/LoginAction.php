@@ -2,7 +2,9 @@
 
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
+//use App\Events\FrontendLoginEvent;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\Requests\Frontend\Common\VerificationCodeRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,23 +43,16 @@ class LoginAction
      * Login user and create token
      *
      * @param FrontendApiMainController $contll  Controller.
-     * @param Request                   $request Request.
+     * @param VerificationCodeRequest   $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
+    public function execute(FrontendApiMainController $contll, VerificationCodeRequest $request): JsonResponse
     {
         $this->userAgent = $contll->userAgent;
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->sendLockoutResponse($request);
         }
-        $request->validate(
-            [
-                'mobile' => 'required|numeric|digits:11',
-                'password' => 'required|string',
-                'remember_me' => 'boolean',
-            ],
-        );
         $credentials = request(['mobile', 'password']);
         $token       = $contll->currentAuth->attempt($credentials);
         if (!$token) {
@@ -86,11 +81,12 @@ class LoginAction
         $user->last_login_ip   = request()->ip();
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
-        $data   = [
+        $data = [
             'access_token' => $token,
             'token_type' => 'Bearer',
             'expires_at' => $expireAt,
         ];
+        //        event(new FrontendLoginEvent($user));
         $result = msgOut(true, $data);
         return $result;
     }
