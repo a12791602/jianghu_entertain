@@ -9,7 +9,7 @@
 
 namespace App\Services\Logs\BackendLogs;
 
-use App\Models\DeveloperUsage\Backend\BackendAdminRoute;
+use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 use App\Models\Systems\BackendSystemLog;
 use Jenssegers\Agent\Agent;
 
@@ -61,7 +61,7 @@ class BackendLogProcessor
         }
         if (isset($messageArr['route'])) {
             $record['extra']['route'] = json_encode($messageArr['route'], JSON_THROW_ON_ERROR, 512);
-            $routeEloq                = BackendAdminRoute::where('route_name', $messageArr['route']['action']['as'])
+            $routeEloq                = SystemRoutesBackend::where('route_name', $messageArr['route']['action']['as'])
                 ->first();
             if ($routeEloq !== null) {
                 $record['extra']['route_id']   = $routeEloq->id;
