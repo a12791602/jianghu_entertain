@@ -21,6 +21,7 @@ class GameTypePlatform extends BaseModel
     public const DEVICE_H5  = 2;
     public const DEVICE_APP = 3;
     public const DEVICE_PC  = 1;
+    public const STATUS     = 1;
 
     /**
      * @return BelongsTo

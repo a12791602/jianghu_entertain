@@ -22,8 +22,8 @@ class GameCategoryAction
     {
         $user      = $request->user();
         $condition = [
-            'status' => 1,
-            'device' => 2,
+            'status' => GameTypePlatform::STATUS,
+            'device' => GameTypePlatform::DEVICE_H5,
             'platform_id' => $user->platform_id,
         ];
 
