@@ -59,10 +59,11 @@ $config = [
         Telegram\Bot\Commands\HelpCommand::class,
     ],
     'chats' => [
-        'develop' => -324053205,
-        'test-develop' => -382469573,
-        'production' => [
+        'test-jianghu' => [
             'app-api' => -372413024,
+            'h5-api' => -365070029,
+            'merchant-api' => -386162456,
+            'headquarters-api' => -374337000,
         ],
     ],
 ];
