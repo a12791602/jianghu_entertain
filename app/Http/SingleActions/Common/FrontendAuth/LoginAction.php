@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
-//use App\Events\FrontendLoginEvent;
+use App\Events\FrontendLoginEvent;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\VerificationCodeRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -86,7 +86,7 @@ class LoginAction
             'token_type' => 'Bearer',
             'expires_at' => $expireAt,
         ];
-        //        event(new FrontendLoginEvent($user));
+        event(new FrontendLoginEvent($user));
         $result = msgOut(true, $data);
         return $result;
     }
