@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontendApi\H5\FrontendAuthController;
+use App\Http\Controllers\FrontendApi\H5\FrontendUserController;
 
 Route::match(['post', 'options'], 'login', [FrontendAuthController::class, 'login'])->name('h5-api.login');
 
@@ -17,7 +18,12 @@ Route::group(
         Route::match(
             ['put', 'options'],
             'refresh-token',
-            [FrontendAuthController::class,'refreshToken'],
+            [FrontendAuthController::class, 'refreshToken'],
         )->name($namePrefix . 'refresh-token');
+        Route::match(
+            ['get', 'options'],
+            'information',
+            [FrontendUserController::class, 'information'],
+        )->name($namePrefix . 'information');
     },
 );
