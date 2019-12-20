@@ -2,15 +2,15 @@
 
 namespace App\Models\Finance;
 
-use App\Models\Admin\BackendAdminUser;
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class SystemFinanceType
+ * Class SystemFinanceOfflineInfo
  * @package App\Models\Finance
  */
-class SystemFinanceType extends BaseModel
+class SystemFinanceOfflineInfo extends BaseModel
 {
 
     /**
@@ -18,15 +18,12 @@ class SystemFinanceType extends BaseModel
      */
     protected $guarded = ['id'];
 
-    public const IS_ONLINE_YES = 1;
-    public const IS_ONLINE_NO  = 0;
-
     /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
         return $object;
     }
 
@@ -35,7 +32,7 @@ class SystemFinanceType extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
         return $object;
     }
 }

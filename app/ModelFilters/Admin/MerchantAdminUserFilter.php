@@ -1,4 +1,5 @@
 <?php
+
 namespace App\ModelFilters\Admin;
 
 use EloquentFilter\ModelFilter;
@@ -18,23 +19,44 @@ class MerchantAdminUserFilter extends ModelFilter
     public $relations = [];
 
     /**
-     *
      * @param string $platform 平台标识.
-     *
-     * @return \App\Models\Admin\MerchantAdminUser
+     * @return MerchantAdminUserFilter
      */
-    public function platform(string $platform)
+    public function platform(string $platform): MerchantAdminUserFilter
     {
-        return $this->where('platform_sign', $platform);
+        $object = $this->where('platform_sign', $platform);
+        return $object;
     }
 
     /**
      * @param string $string 搜索的字符串.
-     *
-     * @return \App\Models\Admin\MerchantAdminUser
+     * @return MerchantAdminUserFilter
      */
-    public function searchNameEmail(string $string)
+    public function searchNameEmail(string $string): MerchantAdminUserFilter
     {
-        return $this->whereLike('name', $string)->orWhere('email', 'like', '%'.$string.'%');
+        $object = $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
+        return $object;
+    }
+
+    /**
+     * 名称搜索
+     * @param string $author_name AuthorName.
+     * @return MerchantAdminUserFilter
+     */
+    public function authorName(string $author_name): MerchantAdminUserFilter
+    {
+        $object = $this->where('name', $author_name);
+        return $object;
+    }
+
+    /**
+     * 名称搜索
+     * @param string $last_editor_name LastEditorName.
+     * @return MerchantAdminUserFilter
+     */
+    public function lastEditorName(string $last_editor_name): MerchantAdminUserFilter
+    {
+        $object = $this->where('name', $last_editor_name);
+        return $object;
     }
 }
