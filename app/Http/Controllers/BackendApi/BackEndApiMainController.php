@@ -189,7 +189,7 @@ class BackEndApiMainController extends Controller
     {
         $open_route      = [];
         $this->userAgent = new Agent();
-        if (!$this->userAgent->isDesktop() || Request::header('from') !== 'Lottery Center System v3.0.0.0') {
+        if (!$this->userAgent->isDesktop() && Request::header('from') !== 'Lottery Center System v3.0.0.0') {
             Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
             // echo '机器人禁止操作';
             return;
