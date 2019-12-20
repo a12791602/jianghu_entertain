@@ -21,4 +21,6 @@ return [
     '200504' => '修改该标签的用户数据时出错',
     //Merchant/Finance/OfflineFinanceController
     '200600' => '线下金流,添加失败',
+    //UserGradeController
+    '200700' => '配置晋级规则时发生错误',
 ];

@@ -12,12 +12,18 @@ Route::group(
             'rich-list',
             [GamesLobbyController::class, 'richList'],
         )
-        ->name($namePrefix . 'games-lobby.rich-list');
+        ->name($namePrefix . 'rich-list');
         Route::match(
             ['get', 'options'],
             'game-categories',
             [GamesLobbyController::class, 'category'],
         )
-        ->name($namePrefix . 'games-lobby.rich-list');
+        ->name($namePrefix . 'category');
+        Route::match(
+            ['get', 'options'],
+            'game-list',
+            [GamesLobbyController::class, 'gameList'],
+        )
+        ->name($namePrefix . 'game-list');
     },
 );
