@@ -14,11 +14,11 @@ class CreateSystemRoutesMerchantsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_routes_merchants',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('route_name', 64)->nullable()->default(null)->comment('路由名称');
@@ -31,6 +31,7 @@ class CreateSystemRoutesMerchantsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
+        DB::statement("ALTER TABLE `system_routes_merchants` comment '商户端路由表'");
     }
 
     /**
@@ -38,7 +39,7 @@ class CreateSystemRoutesMerchantsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_routes_merchants');
     }

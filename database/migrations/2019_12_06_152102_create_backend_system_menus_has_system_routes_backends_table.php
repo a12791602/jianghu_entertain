@@ -14,11 +14,11 @@ class CreateBackendSystemMenusHasSystemRoutesBackendsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'backend_system_menus_has_system_routes_backends',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('menu_id')->nullable()->default(null)->comment('菜单ID');
@@ -26,6 +26,7 @@ class CreateBackendSystemMenusHasSystemRoutesBackendsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
+        DB::statement("ALTER TABLE `backend_system_menus_has_system_routes_backends` comment '总后台菜单和路由的关联表'");
     }
 
     /**
@@ -33,7 +34,7 @@ class CreateBackendSystemMenusHasSystemRoutesBackendsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('backend_system_menus_has_system_routes_backends');
     }

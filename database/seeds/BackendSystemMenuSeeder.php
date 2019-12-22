@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use Illuminate\Database\Seeder;
 
 /**
  * Class BackendSystemMenuSeeder
@@ -13,7 +13,7 @@ class BackendSystemMenuSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         BackendSystemMenu::insert(
             [

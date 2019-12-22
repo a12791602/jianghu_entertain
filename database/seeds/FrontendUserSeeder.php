@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\User\FrontendUser;
+use Illuminate\Database\Seeder;
 
 /**
  * Class FrontendUserSeeder
@@ -13,7 +13,7 @@ class FrontendUserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         FrontendUser::insert(
             [

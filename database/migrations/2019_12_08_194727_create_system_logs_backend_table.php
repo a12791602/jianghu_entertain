@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateSystemLogsBackendTable
@@ -15,21 +15,20 @@ class CreateSystemLogsBackendTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_logs_backend',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('log_uuid', 45)->nullable()->default(null)->comment('唯一标识');
                 $table->text('description')->nullable()->default(null)->comment('描述');
                 $table->string('origin', 200)->nullable()->default(null)->comment('来源');
-                $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型')->collation('utf8mb4_unicode_ci');
-                $table->enum('result', ['success', 'neutral', 'failure'])->comment('结果')->collation('utf8mb4_unicode_ci');
+                $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型');
+                $table->enum('result', ['success', 'neutral', 'failure'])->comment('结果');
                 $table->enum('level', ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug'])
-                    ->comment('等级')
-                    ->collation('utf8mb4_unicode_ci');
+                    ->comment('等级');
                 $table->string('token', 100)->nullable()->default(null)->comment('token');
                 $table->string('ip', 45)->nullable()->default(null)->comment('IP地址');
                 $table->string('ips', 200)->nullable()->default(null)->comment('IP地址');
@@ -46,7 +45,8 @@ class CreateSystemLogsBackendTable extends Migration
                 $table->string('user_agent', 200)->nullable()->default(null)->comment('代理');
                 $table->text('inputs')->nullable()->default(null)->comment('传递参数');
                 $table->text('route')->nullable()->default(null)->comment('路由');
-                $table->unsignedInteger('route_id')->nullable()->default(null)->comment('路由id （backend_admin_routes表id）');
+                $table->unsignedInteger('route_id')->nullable()->default(null)
+                    ->comment('路由id （backend_admin_routes表id）');
                 $table->unsignedInteger('admin_id')->comment('管理员id');
                 $table->string('admin_name', 64)->nullable()->default(null)->comment('管理员名称');
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
@@ -64,7 +64,7 @@ class CreateSystemLogsBackendTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_logs_backend');
     }

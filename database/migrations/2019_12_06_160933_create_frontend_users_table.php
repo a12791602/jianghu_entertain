@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateFrontendUsersTable
@@ -15,15 +15,16 @@ class CreateFrontendUsersTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'frontend_users',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
+                $table->string('uid', 10)->nullable()->default(null)->comment('用户唯一标识UID');
                 $table->integer('top_id')->nullable()->default('0')->comment('最上级id');
                 $table->integer('parent_id')->nullable()->default('0')->comment('上级id');
                 $table->integer('platform_id')->nullable()->default(null)->comment('平台id');
@@ -56,7 +57,7 @@ class CreateFrontendUsersTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('frontend_users');
     }

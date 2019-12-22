@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateGamesPlatformsTable
@@ -15,11 +15,11 @@ class CreateGamesPlatformsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'games_platforms',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
@@ -27,6 +27,9 @@ class CreateGamesPlatformsTable extends Migration
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
                 $table->integer('sort')->nullable()->default(null)->comment('排序');
                 $table->tinyInteger('is_hot')->nullable()->default(null)->comment('是否热门 1 是 0 否');
+                $table->tinyInteger('device')->default(0)->comment('设备  1.PC  2.H5 3.APP');
+                $table->tinyInteger('is_maintain')->default(0)->comment('是否维护 0 否 1 是');
+                $table->tinyInteger('is_recommend')->default(0)->comment('是否推荐 0 否 1 是');
                 $table->nullableTimestamps();
             },
         );
@@ -38,7 +41,7 @@ class CreateGamesPlatformsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('games_platforms');
     }

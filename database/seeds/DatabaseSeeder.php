@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $this->call(
             [
@@ -27,9 +27,14 @@ class DatabaseSeeder extends Seeder
                 FrontendUserAccountTypeParamSeeder::class,
                 FrontendUserSpecificInfoSeeder::class,
                 MerchantSystemMenuSeeder::class,
-                SystemRoutesMerchantSeeder::class,
+                MerchantAdminAccessGroupSeeder::class,
+                MerchantAdminUserSeeder::class,
+                MerchantSystemMenuSeeder::class,
+                SystemPlatformSeeder::class,
                 SystemRoutesBackendSeeder::class,
-                SystemRoutesWebSeeder::class,
+                SystemRoutesH5Seeder::class,
+                SystemRoutesMerchantSeeder::class,
+                SystemRoutesMobileSeeder::class,
             ],
         );
     }

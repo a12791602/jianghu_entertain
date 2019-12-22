@@ -14,11 +14,11 @@ class CreateMerchantSystemMenusHasSystemRoutesMerchantsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'merchant_system_menus_has_system_routes_merchants',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('menu_id')->nullable()->default(null);
@@ -26,6 +26,7 @@ class CreateMerchantSystemMenusHasSystemRoutesMerchantsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
+        DB::statement("ALTER TABLE `merchant_system_menus_has_system_routes_merchants` comment '代理后台菜单和路由的关联表'");
     }
 
     /**
@@ -33,7 +34,7 @@ class CreateMerchantSystemMenusHasSystemRoutesMerchantsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('merchant_system_menus_has_system_routes_merchants');
     }

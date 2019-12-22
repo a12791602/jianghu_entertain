@@ -14,12 +14,13 @@ class CreateSystemEmailsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_emails',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->tinyInteger('is_timing')->default('0')->comment('是否是定时发送  0 不是 1 是');
                 $table->tinyInteger('is_send')->default('0')->comment('是否发送 0 未发送 1 已发送');
                 $table->string('title')->default(' ')->comment('邮件标题');
@@ -33,6 +34,7 @@ class CreateSystemEmailsTable extends Migration
                 $table->timestamp('updated_at')->useCurrent();
             },
         );
+        DB::statement("ALTER TABLE `system_emails` comment '邮件信息表'");
     }
 
     /**
@@ -40,7 +42,7 @@ class CreateSystemEmailsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_emails');
     }

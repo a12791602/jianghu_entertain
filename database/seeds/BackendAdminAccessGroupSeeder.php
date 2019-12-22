@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Admin\BackendAdminAccessGroup;
+use Illuminate\Database\Seeder;
 
 /**
  * Class BackendAdminAccessGroupSeeder
@@ -13,7 +13,7 @@ class BackendAdminAccessGroupSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         BackendAdminAccessGroup::insert(
             [

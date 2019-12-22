@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\User\FrontendUsersAccountsType;
+use Illuminate\Database\Seeder;
 
 /**
  * Class FrontendUserAccountTypeSeeder
@@ -13,7 +13,7 @@ class FrontendUserAccountTypeSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         FrontendUsersAccountsType::insert(
             [

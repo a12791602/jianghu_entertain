@@ -14,13 +14,13 @@ class CreateFailedJobsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'failed_jobs',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->bigIncrements('id');
-                $table->collation = 'utf8mb4_0900_ai_ci';
+
                 $table->text('connection')->nullable();
                 $table->text('queue')->nullable();
                 $table->longText('payload')->nullable();
@@ -28,6 +28,7 @@ class CreateFailedJobsTable extends Migration
                 $table->timestamp('failed_at')->useCurrent();
             },
         );
+        DB::statement("ALTER TABLE `failed_jobs` comment '失败的任务表'");
     }
 
     /**
@@ -35,7 +36,7 @@ class CreateFailedJobsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('failed_jobs');
     }

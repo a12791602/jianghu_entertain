@@ -14,11 +14,11 @@ class CreateBackendLoginLogsTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'backend_login_logs',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 64)->nullable()->default(null)->comment('用户名');
@@ -29,6 +29,7 @@ class CreateBackendLoginLogsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
+        DB::statement("ALTER TABLE `backend_login_logs` comment '登录记录表'");
     }
 
     /**
@@ -36,7 +37,7 @@ class CreateBackendLoginLogsTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('backend_login_logs');
     }

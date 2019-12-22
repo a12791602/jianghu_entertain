@@ -14,11 +14,11 @@ class CreateMerchantAdminAccessGroupsHasBackendSystemMenusTable extends Migratio
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'merchant_admin_access_groups_has_backend_system_menus',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('group_id')->nullable()->default(null)->comment('管理组ID')->unsigned();
@@ -31,6 +31,7 @@ class CreateMerchantAdminAccessGroupsHasBackendSystemMenusTable extends Migratio
                     ->onUpdate('cascade');
             },
         );
+        DB::statement("ALTER TABLE `merchant_admin_access_groups_has_backend_system_menus` comment '代理后台管理员组和菜单的关联表'");
     }
 
     /**
@@ -38,7 +39,7 @@ class CreateMerchantAdminAccessGroupsHasBackendSystemMenusTable extends Migratio
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('merchant_admin_access_groups_has_backend_system_menus');
     }

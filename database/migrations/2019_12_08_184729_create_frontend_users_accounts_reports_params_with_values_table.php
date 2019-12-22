@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateFrontendUsersAccountsReportsParamsWithValuesTable
@@ -15,11 +15,11 @@ class CreateFrontendUsersAccountsReportsParamsWithValuesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'frontend_users_accounts_reports_params_with_values',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('parent_id')->nullable()->default(null)->comment('上级id');
@@ -41,7 +41,7 @@ class CreateFrontendUsersAccountsReportsParamsWithValuesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('frontend_users_accounts_reports_params_with_values');
     }

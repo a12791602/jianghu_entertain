@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateSystemLogsFrontendTable
@@ -15,21 +15,20 @@ class CreateSystemLogsFrontendTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_logs_frontend',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('log_uuid', 45)->nullable()->default(null)->comment('唯一标识');
                 $table->text('description')->nullable()->default(null)->comment('描述');
                 $table->string('origin', 200)->nullable()->default(null)->comment('起源');
-                $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型')->collation('utf8mb4_unicode_ci');
-                $table->enum('result', ['success', 'neutral', 'failure'])->comment('结果')->collation('utf8mb4_unicode_ci');
+                $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型');
+                $table->enum('result', ['success', 'neutral', 'failure'])->comment('结果');
                 $table->enum('level', ['emergency', 'alert', 'critical', 'error', 'warning', 'notice', 'info', 'debug'])
-                    ->comment('等级')
-                    ->collation('utf8mb4_unicode_ci');
+                    ->comment('等级');
                 $table->string('token', 100)->nullable()->default(null)->comment('token');
                 $table->string('ip', 45)->nullable()->default(null)->comment('IP地址');
                 $table->string('ips', 200)->nullable()->default(null)->comment('IP地址');
@@ -64,7 +63,7 @@ class CreateSystemLogsFrontendTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_logs_frontend');
     }

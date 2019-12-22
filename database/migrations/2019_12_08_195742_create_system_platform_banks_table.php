@@ -14,11 +14,11 @@ class CreateSystemPlatformBanksTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_platform_banks',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 32)->default(' ')->comment('运营商标记');
@@ -28,6 +28,7 @@ class CreateSystemPlatformBanksTable extends Migration
                 $table->timestamp('updated_at')->useCurrent();
             },
         );
+        DB::statement("ALTER TABLE `system_platform_banks` comment '银行与平台关联表'");
     }
 
     /**
@@ -35,7 +36,7 @@ class CreateSystemPlatformBanksTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_platform_banks');
     }

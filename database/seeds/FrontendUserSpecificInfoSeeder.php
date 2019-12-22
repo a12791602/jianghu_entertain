@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\User\FrontendUsersSpecificInfo;
+use Illuminate\Database\Seeder;
 
 /**
  * Class FrontendUserSpecificInfoSeeder
@@ -13,7 +13,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         FrontendUsersSpecificInfo::insert(
             [

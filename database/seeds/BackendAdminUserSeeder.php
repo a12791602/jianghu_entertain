@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use App\Models\Admin\BackendAdminUser;
+use Illuminate\Database\Seeder;
 
 /**
  * Class BackendAdminUserSeeder
@@ -13,7 +13,7 @@ class BackendAdminUserSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         BackendAdminUser::insert(
             [

@@ -14,11 +14,11 @@ class CreateMerchantSystemMenusTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'merchant_system_menus',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('label', 20)->nullable()->default(null)->comment('标题');
@@ -33,6 +33,7 @@ class CreateMerchantSystemMenusTable extends Migration
                 $table->nullableTimestamps();
             },
         );
+        DB::statement("ALTER TABLE `merchant_system_menus` comment '代理后台的菜单表'");
     }
 
     /**
@@ -40,7 +41,7 @@ class CreateMerchantSystemMenusTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('merchant_system_menus');
     }

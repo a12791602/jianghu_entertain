@@ -14,11 +14,11 @@ class CreateSystemDynActivitiesTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'system_dyn_activities',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 32)->default(' ')->comment('活动名称');
@@ -29,6 +29,7 @@ class CreateSystemDynActivitiesTable extends Migration
                 $table->timestamp('updated_at')->useCurrent();
             },
         );
+        DB::statement("ALTER TABLE `system_dyn_activities` comment '系统动态活动表'");
     }
 
     /**
@@ -36,7 +37,7 @@ class CreateSystemDynActivitiesTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('system_dyn_activities');
     }

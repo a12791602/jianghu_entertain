@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 
 /**
  * Class CreateFrontendUsersSpecificInfosTable
@@ -15,11 +15,11 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(
             'frontend_users_specific_infos',
-            static function (Blueprint $table) {
+            static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('nickname', 16)->nullable()->default(null)->comment('昵称');
@@ -41,7 +41,7 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('frontend_users_specific_infos');
     }
