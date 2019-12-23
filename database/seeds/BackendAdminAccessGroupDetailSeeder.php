@@ -17,7 +17,6 @@ class BackendAdminAccessGroupDetailSeeder extends Seeder
     {
         BackendAdminAccessGroupDetail::insert(
             [
-
                 [
                     'group_id' => 1,
                     'menu_id' => 1,

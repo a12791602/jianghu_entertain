@@ -28,7 +28,7 @@ class BackendAdminUserSeeder extends Seeder
                 [
                     'name' => 'Ling',
                     'email' => 'Ling@gmail.com',
-                    'password' => '$2y$10$XaPvMsUOCZFxm6uTAqkOUuCJP/hPlUV.BN.Wf0Cps6qShpt1AfoRi',
+                    'password' => '$2y$10$Z1XyP6L7AclsM3sG6KxRhOtqHmLi2cyhbrKiNmJjK7rBjlv.rWCEe',
                     'is_test' => 1,
                     'group_id' => 1,
                     'status' => 1,
