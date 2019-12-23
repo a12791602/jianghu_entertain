@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 use Telegram\Bot\Api;
-use Telegram\Bot\Objects\Message;
 
 /**
  * Class TGMSG
@@ -33,15 +32,16 @@ class TGMSG
     {
         $this->tgObj  = new Api('823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM');
         $environment  = App::environment();
-        $prefixs      = trim(Route::getCurrentRoute()->getPrefix(), '/');
+        $currentRoute = Route::getCurrentRoute();
+        $prefixs      = empty($currentRoute) ? null : trim($currentRoute->getPrefix(), '/');
         $prefixArr    = explode('/', $prefixs);
-        $prefix       = $prefixArr[0];
+        $prefix       = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
         $this->chatId = Config::get('telegram.chats.' . $environment . '.' . $prefix);
     }
 
     /**
      * @param string $message 信息.
-     * @return Message|boolean
+     * @return \Telegram\Bot\Objects\Message|boolean
      */
     public function sendMessage(string $message = '江湖丁丁')
     {
@@ -67,7 +67,7 @@ class TGMSG
 
     /**
      * @param string $message 信息.
-     * @return boolean|Message
+     * @return boolean|\Telegram\Bot\Objects\Message
      */
     private function _sendMessage(string $message)
     {

@@ -10,8 +10,6 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -187,12 +185,12 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param Request $request Request.
+     * @param Request                 $request   Request.
      * @param AuthenticationException $exception Exception.
-     * @return JsonResponse|RedirectResponse
+     * @return Response
      * @throws Exception Exception.
      */
-    protected function unauthenticated($request, AuthenticationException $exception)
+    protected function unauthenticated($request, AuthenticationException $exception): Response
     {
         if ($request->expectsJson()) {
             $message = $exception->getMessage();
@@ -235,9 +233,11 @@ class Handler extends ExceptionHandler
         } else {
             $type = 'other';
         }
-        $error    = [
+        $currentRoute = Route::getCurrentRoute();
+        $route        = empty($currentRoute) ? null : $currentRoute->uri();
+        $error        = [
             'environment' => $appEnvironment,
-            'route' => Route::getCurrentRoute()->uri(),
+            'route' => $route,
             'origin' => $agent->getHttpHeaders(),
             'ips' => request()->ips(),//array
             'user_agent' => $agent->getUserAgent(),
@@ -257,7 +257,7 @@ class Handler extends ExceptionHandler
             'previous' => $e->getPrevious(),
             'TraceAsString' => $e->getTraceAsString(),
         ];
-        $telegram = new TGMSG();
+        $telegram     = new TGMSG();
         $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
     }
 }
