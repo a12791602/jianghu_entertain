@@ -6,7 +6,7 @@ use App\Http\Controllers\BackendApi\Merchant\Admin\MerchantAdminUserController;
 Route::group(
     ['prefix' => 'merchant-admin-user', 'namespace' => 'Admin'],
     static function (): void {
-        $namePrefix = 'merchant-api.merchant-admin-user.';
+        $namePrefix = 'headquarters-api.merchant-admin-user.';
         Route::match(
             ['post', 'options'],
             'create',
