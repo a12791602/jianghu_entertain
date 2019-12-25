@@ -22,6 +22,7 @@ return [
     //Merchant/Finance/OfflineFinanceController
     '200600' => '线下金流,添加失败',
     '200601' => '线下金流,删除失败',
+    '200602' => '线下金流,状态改变失败',
     //UserGradeController
     '200700' => '配置晋级规则时发生错误',
     '200701' => '最小经验值与其他等级存在冲突',

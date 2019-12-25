@@ -6,9 +6,11 @@ use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\IndexRequest;
+use App\Http\Requests\Backend\Merchant\Finance\Offline\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\AddDoAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\DelDoAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\Finance\Offline\StatusAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Offline\TypesAction;
 use Illuminate\Http\JsonResponse;
 
@@ -69,6 +71,20 @@ class OfflineFinanceController extends BackEndApiMainController
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 线下金流改变状态
+     * @param StatusAction  $action  Action.
+     * @param StatusRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function status(StatusAction $action, StatusRequest $request): JsonResponse
+    {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($this, $inputDatas);
         return $outputDatas;
     }
 }
