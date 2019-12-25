@@ -123,11 +123,28 @@ class BackEndApiMainController extends Controller
     protected $port = [];
 
     /**
+     * @var boolean
+     */
+    private $constructorExist = false;
+
+    /**
      * AdminMainController constructor.
      */
     public function __construct()
     {
+        $this->_initial();
+    }
+
+    /**
+     * @return void
+     */
+    private function _initial(): void
+    {
         $this->_getport();
+        if ($this->constructorExist === false) {
+            return;
+            // throw new \Exception('302200');
+        }
         $this->_handleEndUser();
         $this->middleware(
             function ($request, $next) {
@@ -138,9 +155,9 @@ class BackEndApiMainController extends Controller
                     if ($this->currentAdmin->accessGroup()->exists()) {
                         $this->currentAccessAdminGroup = $this->currentAdmin->accessGroup;
                         $this->adminAccessGroupDetail  = $this->currentAccessAdminGroup
-                                                              ->detail
-                                                              ->pluck('menu_id')
-                                                              ->toArray();
+                            ->detail
+                            ->pluck('menu_id')
+                            ->toArray();
                     }
                     $this->_menuAccess();
                     $this->_routeAccessCheck();
@@ -168,16 +185,35 @@ class BackEndApiMainController extends Controller
      */
     private function _getport(): void
     {
-        $prefix     = trim(Route::getCurrentRoute()->getPrefix(), '/');
-        $routeArr   = explode('/', $prefix);
+        $this->currentOptRoute = Route::getCurrentRoute();
+        if (empty($this->currentOptRoute)) {
+            return;
+        }
+
+        $prefix   = trim($this->currentOptRoute->getPrefix(), '/');
+        $routeArr = explode('/', $prefix);
+        if (!is_array($routeArr)) {
+            return;
+        }
+
         $portPrefix = $routeArr[0];
         if ($portPrefix === 'headquarters-api') {
+            $this->_constructorExist();
             $this->port = $this->headquarters;
         } elseif ($portPrefix === 'merchant-api') {
+            $this->_constructorExist();
             $this->port = $this->merchant;
         } else {
             throw new \Exception('302200');
         }
+    }
+
+    /**
+     * @return void
+     */
+    private function _constructorExist(): void
+    {
+        $this->constructorExist = true;
     }
 
     /**
@@ -187,7 +223,6 @@ class BackEndApiMainController extends Controller
      */
     private function _handleEndUser(): void
     {
-        $open_route      = [];
         $this->userAgent = new Agent();
         if (!$this->userAgent->isDesktop() && Request::header('from') !== 'Lottery Center System v3.0.0.0') {
             Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
@@ -222,7 +257,6 @@ class BackEndApiMainController extends Controller
      */
     private function _routeAccessCheck(): void
     {
-        $this->currentOptRoute  = Route::getCurrentRoute();
         $this->currentRouteName = $this->currentOptRoute->action['as']; //当前的route name;
         $routeEloq              = new $this->port['route']();
         $routeEloq              = $routeEloq->where('route_name', $this->currentRouteName)->first();
