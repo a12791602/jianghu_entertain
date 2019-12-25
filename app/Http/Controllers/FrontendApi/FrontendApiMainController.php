@@ -122,8 +122,11 @@ class FrontendApiMainController extends Controller
         $open_route = [];
         //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
         $this->currentOptRoute = Route::getCurrentRoute();
-        $prefixs               = trim(Route::getCurrentRoute()->getPrefix(), '/');
-        $prefixArr             = explode('/', $prefixs);
+        if (empty($this->currentOptRoute)) {
+            return;
+        }
+        $prefixs   = trim($this->currentOptRoute->getPrefix(), '/');
+        $prefixArr = explode('/', $prefixs);
         if ($prefixArr !== false) {
             $prefix = $prefixArr[0];
         }
