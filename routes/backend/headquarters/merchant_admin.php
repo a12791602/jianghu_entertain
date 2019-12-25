@@ -1,41 +1,36 @@
 <?php
-/**
- * Created by PhpStorm.
- * author: Harris
- * Date: 4/11/2019
- * Time: 12:22 PM
- */
+
+use App\Http\Controllers\BackendApi\Merchant\Admin\MerchantAdminUserController;
 
 //管理员相关
 Route::group(
     ['prefix' => 'merchant-admin-user', 'namespace' => 'Admin'],
-    static function () {
+    static function (): void {
         $namePrefix = 'merchant-api.merchant-admin-user.';
-        $controller = 'MerchantAdminUserController@';
         Route::match(
             ['post', 'options'],
             'create',
-            ['as' => $namePrefix . 'create', 'uses' => $controller . 'create'],
-        );
+            [MerchantAdminUserController::class, 'create'],
+        )->name($namePrefix . 'create');
         Route::match(
             ['get', 'options'],
             'get-all-admins',
-            ['as' => $namePrefix . 'get-all-admins', 'uses' => $controller . 'allAdmins'],
-        );
+            [MerchantAdminUserController::class, 'allAdmins'],
+        )->name($namePrefix . 'get-all-admins');
         Route::match(
             ['post', 'options'],
             'update-admin-group',
-            ['as' => $namePrefix . 'update-admin-group', 'uses' => $controller . 'updateAdminGroup'],
-        );
+            [MerchantAdminUserController::class, 'updateAdminGroup'],
+        )->name($namePrefix . 'update-admin-group');
         Route::match(
             ['post', 'options'],
             'delete-admin',
-            ['as' => $namePrefix . 'delete-admin', 'uses' => $controller . 'deletePartnerAdmin'],
-        );
+            [MerchantAdminUserController::class, 'deletePartnerAdmin'],
+        )->name($namePrefix . 'delete-admin');
         Route::match(
             ['post', 'options'],
             'search-admin',
-            ['as' => $namePrefix . 'search-admin', 'uses' => $controller . 'searchAdmin'],
-        );
+            [MerchantAdminUserController::class, 'searchAdmin'],
+        )->name($namePrefix . 'search-admin');
     },
 );

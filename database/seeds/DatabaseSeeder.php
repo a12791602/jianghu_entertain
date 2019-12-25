@@ -35,6 +35,10 @@ class DatabaseSeeder extends Seeder
                 SystemRoutesH5Seeder::class,
                 SystemRoutesMerchantSeeder::class,
                 SystemRoutesMobileSeeder::class,
+                GamePlatformSeeder::class,
+                GameSeeder::class,
+                GameTypeSeeder::class,
+                GameTypePlatformSeeder::class,
             ],
         );
     }

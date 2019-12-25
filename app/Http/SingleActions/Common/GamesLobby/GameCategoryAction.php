@@ -2,9 +2,10 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
+use App\Http\Requests\Frontend\Common\GameCategoryRequest;
+use App\ModelFilters\Game\GameTypePlatformFilter;
 use App\Models\Game\GameTypePlatform;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class GameCategoryAction
@@ -14,24 +15,21 @@ class GameCategoryAction
 {
 
     /**
-     * @param  Request $request Request.
+     * @param  GameCategoryRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function execute(GameCategoryRequest $request): JsonResponse
     {
-        $user      = $request->user();
-        $condition = [
-            'status' => GameTypePlatform::STATUS,
-            'device' => GameTypePlatform::DEVICE_H5,
-            'platform_id' => $user->platform_id,
-        ];
+        $validated                = $request->validated();
+        $validated['status']      = GameTypePlatform::STATUS;
+        $validated['platform_id'] = $request->user()->platform_id;
 
-        $outputDatas = GameTypePlatform::where($condition)
-            ->with('gameType:id,name,sign,created_at')
-            ->first()
-            ->getRelation('gameType');
-        $result      = msgOut(true, $outputDatas);
+        $data   = GameTypePlatform::with('gameType:id,name,sign')
+            ->filter($validated, GameTypePlatformFilter::class)
+            ->withCacheCooldownSeconds(86400)
+            ->get(['id', 'type_id', 'platform_id', 'device']);
+        $result = msgOut(true, $data);
         return $result;
     }
 }

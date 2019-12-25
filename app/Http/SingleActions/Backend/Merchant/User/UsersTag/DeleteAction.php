@@ -46,19 +46,20 @@ class DeleteAction
         if (!$usersTagEloq) {
             throw new \Exception('200501');
         }
-        $tagId = $usersTagEloq->id;
-        $title = $usersTagEloq->title;
         DB::beginTransaction();
+        //清除该标签下的会员标签
+        if ($usersTagEloq->user->isNotEmpty()) {
+            $updateUser = FrontendUser::where(['user_tag_id' => $usersTagEloq->id])->update(['user_tag_id' => null]);
+            if (!$updateUser) {
+                DB::rollback();
+                throw new \Exception('200504');
+            }
+        }
         //删除标签
+        $title = $usersTagEloq->title;
         if (!$usersTagEloq->delete()) {
             DB::rollback();
             throw new \Exception('200503');
-        }
-        //清除该标签下的会员标签
-        $updateUser = FrontendUser::where(['user_tag_id' => $tagId])->update(['user_tag_id' => null]);
-        if (!$updateUser) {
-            DB::rollback();
-            throw new \Exception('200504');
         }
         DB::commit();
         $msgOut = msgOut(true, ['title' => $title]);

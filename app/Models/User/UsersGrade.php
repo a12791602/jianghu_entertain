@@ -6,10 +6,9 @@ use App\Models\BaseAuthModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class UsersTag
- * @package App\Models\User
+ * 用户等级
  */
-class UsersTag extends BaseAuthModel
+class UsersGrade extends BaseAuthModel
 {
 
     /**
@@ -18,12 +17,11 @@ class UsersTag extends BaseAuthModel
     protected $guarded = ['id'];
 
     /**
-     * 标签下的会员
      * @return HasMany
      */
     public function user(): HasMany
     {
-        $users = $this->hasMany(FrontendUser::class, 'user_tag_id', 'id');
+        $users = $this->hasMany(FrontendUser::class, 'grade_id', 'id');
         return $users;
     }
 }

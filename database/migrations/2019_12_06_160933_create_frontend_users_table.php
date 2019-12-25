@@ -31,7 +31,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
                 $table->integer('account_id')->nullable()->default(null)->comment('account表id');
                 $table->tinyInteger('type')->default('3')->comment('用户类型:1会员 2代理');
-                $table->integer('vip_level_id')->nullable()->default('0')->comment('vip等级id');
+                $table->integer('grade_id')->nullable()->default('0')->comment('vip等级id');
                 $table->tinyInteger('is_tester')->nullable()->default('0')->comment('是否测试用户 0否 1是');
                 $table->string('password', 64)->nullable()->default(null)->comment('密码');
                 $table->string('fund_password', 64)->nullable()->default(null)->comment('资金密码');

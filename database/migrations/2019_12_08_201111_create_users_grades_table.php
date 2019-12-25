@@ -24,14 +24,10 @@ class CreateUsersGradesTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
                 $table->string('name', 45)->nullable()->default(null)->comment('名称');
-                $table->decimal('limit_min', 18, 4)->nullable()->default(null)->comment('该级别打码量范围的最小值');
-                $table->decimal('limit_max', 18, 4)->nullable()->default(null)->comment('该级别打码量范围的最大值');
-                $table->decimal('recharge_total', 18, 4)->nullable()->default(null)->comment('充值总额');
+                $table->decimal('experience_min', 18, 4)->nullable()->default(null)->comment('级别最小经验值');
+                $table->decimal('experience_max', 18, 4)->nullable()->default(null)->comment('级别最大经验值');
                 $table->decimal('grade_gift', 18, 4)->nullable()->default(null)->comment('晋级礼金');
                 $table->decimal('week_gift', 18, 4)->nullable()->default(null)->comment('周礼金');
-                $table->integer('checkin_multi')->nullable()->default(null)->comment('签到加倍的倍数');
-                $table->integer('red_envelope_multi')->nullable()->default(null)->comment('红包加倍的倍数');
-                $table->integer('grade')->nullable()->default(null)->comment('用户等级');
                 $table->nullableTimestamps();
             },
         );

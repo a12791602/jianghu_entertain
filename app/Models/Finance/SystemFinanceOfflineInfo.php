@@ -35,4 +35,13 @@ class SystemFinanceOfflineInfo extends BaseModel
         $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
         return $object;
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function bank(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        return $object;
+    }
 }

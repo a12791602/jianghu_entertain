@@ -5,12 +5,12 @@ use Illuminate\Http\JsonResponse;
 
 class DummyClass
 {
-   /**
-    * @param array $inputDatas InputDatas.
-    * @return JsonResponse
-    * @throws \Exception Exception.
-    */
-   public function execute(array $inputDatas) :JsonResponse
-   {
-   }
+    /**
+     * @param array $inputDatas InputDatas.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function execute(array $inputDatas): JsonResponse
+    {
+    }
 }

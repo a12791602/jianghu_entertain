@@ -28,7 +28,7 @@ class IndexAction extends BaseAction
     {
         $pageSize                  = $this->model::getPageSize();
         $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
-        $datas                     = $this->model::with('lastEditor:id,name', 'author:id,name')
+        $datas                     = $this->model::with('lastEditor:id,name', 'author:id,name', 'bank:id,name')
             ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
             ->paginate($pageSize);
         $result                    = msgOut(true, $datas);

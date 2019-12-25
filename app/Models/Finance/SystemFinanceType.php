@@ -21,6 +21,9 @@ class SystemFinanceType extends BaseModel
     public const IS_ONLINE_YES = 1;
     public const IS_ONLINE_NO  = 0;
 
+    public const STATUS_YES = 1;
+    public const STATUS_NO  = 0;
+
     /**
      * @return BelongsTo
      */

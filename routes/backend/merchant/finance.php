@@ -25,5 +25,17 @@ Route::group(
             'status',
             [OfflineFinanceController::class, 'status'],
         )->name($namePrefix . 'status');
+        //获取线下金流分类
+        Route::match(
+            ['get', 'options'],
+            'types',
+            [OfflineFinanceController::class, 'types'],
+        )->name($namePrefix . 'types');
+        //删除线下金流
+        Route::match(
+            ['post', 'options'],
+            'del-do',
+            [OfflineFinanceController::class, 'delDo'],
+        )->name($namePrefix . 'del-do');
     },
 );

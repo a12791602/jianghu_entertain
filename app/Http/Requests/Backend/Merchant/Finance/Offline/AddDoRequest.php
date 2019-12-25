@@ -30,9 +30,10 @@ class AddDoRequest extends BaseFormRequest
     {
         return [
             'type_id' => 'required|exists:system_finance_types,id',
+            'bank_id' => 'exists:system_banks,id',
             'name' => 'required|unique:system_finance_offline_infos,name',
             'username' => 'required',
-            'qrcode' => 'file',
+            'qrcode' => 'string',
             'account' => 'required|unique:system_finance_offline_infos,account',
             'branch' => 'string',
             'min' => 'required|integer|min:1',
@@ -51,6 +52,7 @@ class AddDoRequest extends BaseFormRequest
         return [
             'type_id.required' => '请选择入款类型',
             'type_id.exists' => '所选入款类型不存在',
+            'bank_id.exists' => '所选银行不存在',
             'name.required' => '请填写名称',
             'name.unique' => '名称已存在',
             'username.required' => '请填写姓名',
