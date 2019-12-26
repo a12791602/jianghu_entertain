@@ -14,8 +14,8 @@
 
 Route::group(
     [
-    'middleware' => ['backend-api'],
-    'prefix' => 'headquarters-api',
+        'middleware' => ['backend-api'],
+        'prefix' => 'headquarters-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/backend/headquarters/';
@@ -29,8 +29,8 @@ Route::group(
 
 Route::group(
     [
-    'middleware' => ['merchant-api'],
-    'prefix' => 'merchant-api',
+        'middleware' => ['registration'],
+        'prefix' => 'merchant-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/backend/merchant/';
@@ -44,30 +44,11 @@ Route::group(
 
 Route::group(
     [
-    'middleware' => ['frontend-api'],
-    'prefix' => 'app-api',
+        'name' => 'frontend-main',
     ],
     static function (): void {
-        $sRouteDir   = base_path() . '/routes/frontend/app/';
-        $aRouteFiles = glob($sRouteDir . '*.php');
-        foreach ($aRouteFiles as $sRouteFile) {
-            include $sRouteFile;
-        }
-        unset($aRouteFiles);
-    },
-);
-
-Route::group(
-    [
-        'middleware' => ['frontend-h5-api'],
-        'prefix' => 'h5-api',
-    ],
-    static function (): void {
-        $sRouteDir   = base_path() . '/routes/frontend/h5/';
-        $aRouteFiles = glob($sRouteDir . '*.php');
-        foreach ($aRouteFiles as $sRouteFile) {
-            include $sRouteFile;
-        }
-        unset($aRouteFiles);
+        $sRouteFile = base_path() . '/routes/frontend/frontend-main-route.php';
+        include $sRouteFile;
+        unset($sRouteFile);
     },
 );

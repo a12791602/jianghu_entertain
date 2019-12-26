@@ -51,33 +51,33 @@ class CreateAction
         }
 
         DB::beginTransaction();
-        try {
-            //添加AdminGroup数据
-            $groupData  = [
-                'group_name'    => $inputDatas['group_name'],
-                'platform_sign' => $platformSign,
-            ];
-            $adminGroup = $this->model;
-            $adminGroup->fill($groupData);
-            $adminGroup->save();
-
-            //只提取当前登录管理员也拥有的权限,添加AdminGroupDetails权限数据
-            $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($role, $contll->adminAccessGroupDetail);
-            $data = ['group_id' => $adminGroup->id];
-            foreach ($role as $roleId) {
-                $data['menu_id'] = $roleId;
-                $groupDetailEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
-                $groupDetailEloq->fill($data);
-                $groupDetailEloq->save();
-            }
-
-            DB::commit();
-            $msgOut = msgOut(true);
-        } catch (\Throwable $e) {
+        //添加AdminGroup数据
+        $groupData  = [
+            'group_name'    => $inputDatas['group_name'],
+            'platform_sign' => $platformSign,
+        ];
+        $adminGroup = $this->model;
+        $adminGroup->fill($groupData);
+        if (!$adminGroup->save()) {
             DB::rollback();
-            $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
+            throw new \Exception('200900');
         }
+
+        //只提取当前登录管理员也拥有的权限,添加AdminGroupDetails权限数据
+        $role = Arr::wrap(json_decode($inputDatas['role'], true));
+        $role = array_intersect($role, $contll->adminAccessGroupDetail);
+        $data = ['group_id' => $adminGroup->id];
+        foreach ($role as $roleId) {
+            $data['menu_id'] = $roleId;
+            $groupDetailEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
+            $groupDetailEloq->fill($data);
+            if (!$groupDetailEloq->save()) {
+                DB::rollback();
+                throw new \Exception('200901');
+            }
+        }
+        DB::commit();
+        $msgOut = msgOut(true);
         return $msgOut;
     }
 }

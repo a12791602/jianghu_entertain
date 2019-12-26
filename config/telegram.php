@@ -65,6 +65,7 @@ $config = [
             'merchant-api' => -386162456,
             'headquarters-api' => -374337000,
             'other' => -1001232635993,
+            'human' => -1001479716542,
         ],
     ],
 ];

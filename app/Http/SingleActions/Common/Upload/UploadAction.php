@@ -25,11 +25,10 @@ class UploadAction
             $path = $contll->currentPlatformEloq->sign . '/' . $inputDatas['basket'];
         }
         $file = (new UploadService())->setSavePath($path)->upload()->getFileInfo();
-        if ($file['status']) {
-            $result = msgOut(true, $file['file']);
-        } else {
-            $result = msgOut(false, [], $file['msg']);
+        if (!$file['status']) {
+            throw new \Exception('201100');
         }
+        $result = msgOut(true, $file['file']);
         return $result;
     }
 }

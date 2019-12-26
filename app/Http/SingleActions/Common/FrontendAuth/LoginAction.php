@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use App\Events\FrontendLoginEvent;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\Requests\Frontend\Common\VerificationCodeRequest;
+use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,11 +43,11 @@ class LoginAction
      * Login user and create token
      *
      * @param FrontendApiMainController $contll  Controller.
-     * @param VerificationCodeRequest   $request Request.
+     * @param LoginVerificationRequest  $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll, VerificationCodeRequest $request): JsonResponse
+    public function execute(FrontendApiMainController $contll, LoginVerificationRequest $request): JsonResponse
     {
         $this->userAgent = $contll->userAgent;
         if ($this->hasTooManyLoginAttempts($request)) {

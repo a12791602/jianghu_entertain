@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\FrontendApi\App;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\Requests\Frontend\Common\VerificationCodeRequest;
+use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use App\Http\SingleActions\Common\FrontendAuth\LoginAction;
 use App\Http\SingleActions\Common\FrontendAuth\LogoutAction;
 use App\Http\SingleActions\Common\FrontendAuth\RefreshAction;
@@ -25,11 +25,11 @@ class FrontendAuthController extends FrontendApiMainController
 
     /**
      * Login user and create token
-     * @param  LoginAction             $action  验证登录.
-     * @param  VerificationCodeRequest $request 请求.
+     * @param  LoginAction              $action  验证登录.
+     * @param  LoginVerificationRequest $request 请求.
      * @return JsonResponse [string]  access_token
      */
-    public function login(LoginAction $action, VerificationCodeRequest $request): JsonResponse
+    public function login(LoginAction $action, LoginVerificationRequest $request): JsonResponse
     {
         $result = $action->execute($this, $request);
         return $result;

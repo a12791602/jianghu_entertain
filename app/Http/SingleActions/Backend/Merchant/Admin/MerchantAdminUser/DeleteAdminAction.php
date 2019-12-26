@@ -41,13 +41,13 @@ class DeleteAdminAction
     {
         $adminEloq = $this->model->find($inputDatas['id']);
         if ($adminEloq === null) {
-            throw new \Exception('300701');
+            throw new \Exception('201000');
         }
         if ($adminEloq->platform_sign !== $contll->currentPlatformEloq->sign) {
-            throw new \Exception('300703');
+            throw new \Exception('201001');
         }
         if ($adminEloq->accessGroup->is_super === MerchantAdminAccessGroup::IS_SUPER) {
-            throw new \Exception('300704');
+            throw new \Exception('201002');
         }
         if ($adminEloq->remember_token !== null) {
             try {
@@ -57,12 +57,11 @@ class DeleteAdminAction
                 Log::info($e->getMessage());
             }
         }
-        try {
-            $adminEloq->delete();
-            $msgOut = msgOut(true);
-        } catch (\Throwable $e) {
-            $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
+        if (!$adminEloq->delete()) {
+            throw new \Exception('201003');
         }
+
+        $msgOut = msgOut(true);
         return $msgOut;
     }
 }

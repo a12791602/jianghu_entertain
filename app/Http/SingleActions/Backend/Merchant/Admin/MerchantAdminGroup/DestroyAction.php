@@ -31,21 +31,19 @@ class DestroyAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $id = $inputDatas['id'];
         $adminGroupELoq = $this->model->where(
             [
-            ['id', $id],
-            ['group_name', $inputDatas['group_name']],
+                ['id', $inputDatas['id']],
+                ['group_name', $inputDatas['group_name']],
             ],
         )->first();
         if ($adminGroupELoq === null) {
-            throw new \Exception('300100');
+            throw new \Exception('200902');
         }
-        try {
-            $adminGroupELoq->delete();
-            return msgOut(true);
-        } catch (\Exception $e) {
-            return msgOut(false, [], $e->getCode(), $e->getMessage());
+        if (!$adminGroupELoq->delete()) {
+            throw new \Exception('200903');
         }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

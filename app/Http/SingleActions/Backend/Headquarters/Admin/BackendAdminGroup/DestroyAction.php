@@ -31,21 +31,19 @@ class DestroyAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $id = $inputDatas['id'];
         $datas = $this->model->where(
             [
-            ['id', $id],
-            ['group_name', $inputDatas['group_name']],
+                ['id', $inputDatas['id']],
+                ['group_name', $inputDatas['group_name']],
             ],
         )->first();
         if ($datas === null) {
             throw new \Exception('300100');
         }
-        try {
-            $datas->delete(); //管理员关联外键一起删除
-            return msgOut(true);
-        } catch (\Exception $e) {
-            return msgOut(false, [], $e->getCode(), $e->getMessage());
+        if (!$datas->delete()) {
+            throw new \Exception('300104');
         }
+        $msgOut = msgOut(true);
+        return $msgOut;
     }
 }

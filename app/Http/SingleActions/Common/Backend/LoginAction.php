@@ -19,14 +19,15 @@ class LoginAction
     use AuthenticatesUsers;
 
     /**
-     * @var integer
+     * Get the maximum number of attempts to allow.
+     *
+     * @return integer
      */
-    protected $maxAttempts;
-
-    /**
-     * @var integer
-     */
-    protected $decayMinutes;
+    public function maxAttempts(): int
+    {
+        $attempt = config('auth.max_attempts');
+        return $attempt;
+    }
 
     /**
      * Login user and create token
@@ -45,10 +46,8 @@ class LoginAction
                 'remember_me' => 'boolean',
             ],
         );
-        $credentials        = request(['email', 'password']);
-        $this->maxAttempts  = 1; //1 times
-        $this->decayMinutes = 1; //1 minutes
-        $token              = $contll->currentAuth->attempt($credentials);
+        $credentials = request(['email', 'password']);
+        $token       = $contll->currentAuth->attempt($credentials);
         if (!$token) {
             throw new \Exception('100002');
         }

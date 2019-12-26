@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use App\Models\BaseModel;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class for backend admin access group.
@@ -19,43 +20,34 @@ class BackendAdminAccessGroup extends BaseModel
     /**
      * Gets the table columns.
      *
-     * @return array
+     * @return mixed
      */
     public function getTableColumns()
     {
-        return $this
-            ->getConnection()
-            ->getSchemaBuilder()
-            ->getColumnListing($this->getTable());
+        $tableColumns = $this->getConnection()
+                             ->getSchemaBuilder()
+                             ->getColumnListing($this->getTable());
+        return $tableColumns;
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function adminUsers()
+    public function adminUsers(): HasMany
     {
-        return $this->hasMany(BackendAdminUser::class, 'group_id', 'id')
-            ->select(['id', 'name', 'email', 'is_test', 'status', 'platform_id', 'group_id']);
-    }
-
-    /**
-     * 连带管理员一起删除
-     *
-     * @return mixed
-     */
-    public function delete()
-    {
-        $this->adminUsers()->delete();
-        return parent::delete();
+        $adminUsers = $this->hasMany(BackendAdminUser::class, 'group_id', 'id')
+                           ->select(['id', 'name', 'email', 'is_test', 'status', 'platform_id', 'group_id']);
+        return $adminUsers;
     }
 
     /**
      * 管理员组权限
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function detail()
+    public function detail(): HasMany
     {
-        return $this->hasMany(BackendAdminAccessGroupDetail::class, 'group_id', 'id');
+        $detail = $this->hasMany(BackendAdminAccessGroupDetail::class, 'group_id', 'id');
+        return $detail;
     }
 }

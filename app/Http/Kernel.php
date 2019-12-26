@@ -39,7 +39,7 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
-            'throttle:60,1',
+            'throttle:400,1',
             'bindings',
         ],
         'frontend-api' => [
@@ -62,6 +62,12 @@ class Kernel extends HttpKernel
             'throttle:500,1',
             'bindings',
             'cors',
+        ],
+        'registration' => [
+            'throttle:1,1',
+        ],
+        'frontend-auth' => [
+            'throttle:5,1',
         ],
     ];
 

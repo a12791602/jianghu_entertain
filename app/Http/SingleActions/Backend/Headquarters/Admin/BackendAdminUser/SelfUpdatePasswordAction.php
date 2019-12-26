@@ -22,23 +22,21 @@ class SelfUpdatePasswordAction
     {
         if (!Hash::check($inputDatas['old_password'], $contll->currentAdmin->password)) {
             throw new \Exception('301102');
-        } else {
-            $token = $contll->currentAuth->refresh();
-            $contll->currentAdmin->password = Hash::make($inputDatas['password']);
-            $contll->currentAdmin->remember_token = $token;
-            try {
-                $contll->currentAdmin->save();
-                $expireInMinute = $contll->currentAuth->factory()->getTTL();
-                $expireAt = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
-                $data = [
-                    'access_token' => $token,
-                    'token_type' => 'Bearer',
-                    'expires_at' => $expireAt,
-                ];
-                return msgOut(true, $data);
-            } catch (\Exception $e) {
-                return msgOut(false, [], $e->getCode(), $e->getMessage());
-            }
         }
+        $token                                = $contll->currentAuth->refresh();
+        $contll->currentAdmin->password       = Hash::make($inputDatas['password']);
+        $contll->currentAdmin->remember_token = $token;
+        if (!$contll->currentAdmin->save()) {
+            throw new \Exception('301103');
+        }
+        $expireInMinute = $contll->currentAuth->factory()->getTTL();
+        $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
+        $data           = [
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+            'expires_at' => $expireAt,
+        ];
+        $msgOut         = msgOut(true, $data);
+        return $msgOut;
     }
 }

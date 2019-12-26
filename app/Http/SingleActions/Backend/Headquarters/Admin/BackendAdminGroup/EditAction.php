@@ -69,8 +69,7 @@ class EditAction
             return $msgOut;
         } catch (\Throwable $e) {
             DB::rollBack();
-            $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
-            return $msgOut;
+            throw new \Exception('300105');
         }
     }
 }
