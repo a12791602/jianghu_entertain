@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
@@ -90,7 +91,6 @@ class Handler extends ExceptionHandler
      */
     public function report(\Exception $e): void
     {
-        $this->_sendToTg($e);
         parent::report($e);
         $this->reportResponses = [];
         if ($this->shouldntReport($e)) {
@@ -130,6 +130,7 @@ class Handler extends ExceptionHandler
     public function render($request, \Exception $e): Response
     {
         $response = $this->_generateExceptionResponse($request, $e);
+        $this->_sendToTg($e,$response);
         if ($this->config['add_cors_headers']) {
             if (!class_exists(CorsService::class)) {
                 throw new InvalidArgumentException(
@@ -208,9 +209,10 @@ class Handler extends ExceptionHandler
 
     /**
      * @param Exception $e Exception.
+     * @param JsonResponse $response
      * @return void
      */
-    private function _sendToTg(Exception $e): void
+    private function _sendToTg(Exception $e,JsonResponse $response): void
     {
         //###### sending errors to tg //Harris ############
         $appEnvironment = App::environment();
@@ -257,7 +259,7 @@ class Handler extends ExceptionHandler
             'previous' => $e->getPrevious(),
             'TraceAsString' => $e->getTraceAsString(),
         ];
-        $telegram     = new TGMSG();
+        $telegram     = new TGMSG($response);
         $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
     }
 }

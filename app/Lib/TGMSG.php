@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
@@ -27,16 +28,24 @@ class TGMSG
 
     /**
      * TGMSG constructor.
+     * @param JsonResponse $response
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
      */
-    public function __construct()
+    public function __construct(JsonResponse $response)
     {
-        $this->tgObj  = new Api('823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM');
-        $environment  = App::environment();
+        $this->tgObj = new Api('823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM');
+        $environment = App::environment();
         $currentRoute = Route::getCurrentRoute();
-        $prefixs      = empty($currentRoute) ? null : trim($currentRoute->getPrefix(), '/');
-        $prefixArr    = explode('/', $prefixs);
-        $prefix       = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
-        $this->chatId = Config::get('telegram.chats.' . $environment . '.' . $prefix);
+        $prefixs = empty($currentRoute) ? null : trim($currentRoute->getPrefix(), '/');
+        $prefixArr = explode('/', $prefixs);
+        $prefix = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
+        $code = $response->getStatusCode();
+        $codeToHuman = [403];
+        if (in_array($code, $codeToHuman, true)) {
+            $this->chatId = Config::get('telegram.chats.' . $environment . '.human');
+        } else {
+            $this->chatId = Config::get('telegram.chats.' . $environment . '.' . $prefix);
+        }
     }
 
     /**
@@ -45,22 +54,22 @@ class TGMSG
      */
     public function sendMessage(string $message = '江湖丁丁')
     {
-        $preMsg               = "######################[开始]######################\n";
-        $tailMsg              = "######################[结束]######################\n";
-        $fullmsg              = $preMsg . $message . $tailMsg;
-        $stringLenUtf8        = mb_strlen($fullmsg, 'UTF-8');
+        $preMsg = "######################[开始]######################\n";
+        $tailMsg = "######################[结束]######################\n";
+        $fullmsg = $preMsg . $message . $tailMsg;
+        $stringLenUtf8 = mb_strlen($fullmsg, 'UTF-8');
         $sendAbleStringLength = 4096;
         if ($stringLenUtf8 <= $sendAbleStringLength) {
             $return = $this->_sendMessage($fullmsg);
             return $return;
         }
-        $modulus         = $stringLenUtf8 % $sendAbleStringLength;
+        $modulus = $stringLenUtf8 % $sendAbleStringLength;
         $additionalTimes = $modulus > 0 ? 1 : 0;
-        $times           = (int) floor($stringLenUtf8 / $sendAbleStringLength) + $additionalTimes;
-        $start           = 0;
+        $times = (int)floor($stringLenUtf8 / $sendAbleStringLength) + $additionalTimes;
+        $start = 0;
         for ($i = 1; $i <= $times; $i++) {
             $message = mb_substr($fullmsg, $start, $sendAbleStringLength);
-            $start  += $sendAbleStringLength;
+            $start += $sendAbleStringLength;
             $this->_sendMessage($message);
         }
     }
@@ -81,13 +90,13 @@ class TGMSG
         try {
             $response = $this->tgObj->sendMessage(
                 $params,
-            );
+                );
             return $response;
         } catch (\Throwable $e) {
             Log::channel('telegram')->error(
                 $e->getMessage(),
                 ['exception' => $e],
-            );
+                );
             return false;
         }
     }

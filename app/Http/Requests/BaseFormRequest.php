@@ -46,19 +46,19 @@ abstract class BaseFormRequest extends FormRequest
      */
     abstract public function authorize(): bool;
 
-    /**
-     * @param Validator $validator Validator.
-     * @throws HttpResponseException HttpResponseException.
-     * @return void
-     */
-    protected function failedValidation(Validator $validator): void
-    {
-        $datas = [
-            'success' => false,
-            'code' => 400,
-            'data' => [],
-            'message' => $validator->errors()->first(),
-        ];
-        throw new HttpResponseException(response()->json($datas));
-    }
+//    /**
+//     * @param Validator $validator Validator.
+//     * @throws HttpResponseException HttpResponseException.
+//     * @return void
+//     */
+//    protected function failedValidation(Validator $validator): void
+//    {
+//        $datas = [
+//            'success' => false,
+//            'code' => 400,
+//            'data' => [],
+//            'message' => $validator->errors()->first(),
+//        ];
+//        throw new HttpResponseException(response()->json($datas));
+//    }
 }
