@@ -40,7 +40,7 @@ class TGMSG
         $prefixArr = explode('/', $prefixs);
         $prefix = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
         $code = $response->getStatusCode();
-        $codeToHuman = [403];
+        $codeToHuman = Config::get('telegram.http-group');
         if (in_array($code, $codeToHuman, true)) {
             $this->chatId = Config::get('telegram.chats.' . $environment . '.human');
         } else {
