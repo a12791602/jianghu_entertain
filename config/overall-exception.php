@@ -8,13 +8,15 @@ return [
     'add_cors_headers' => false,
     // Has to be in prioritized order, e.g. highest priority first.
     'formatters' => [
-        SymfonyException\UnprocessableEntityHttpException::class => Formatters\UnprocessableEntityHttpExceptionFormatter::class,
+        SymfonyException\UnprocessableEntityHttpException::class
+        => Formatters\UnprocessableEntityHttpExceptionFormatter::class,
         SymfonyException\HttpException::class => Formatters\HttpExceptionFormatter::class,
         \Illuminate\Validation\ValidationException::class  => Formatters\ValidationExceptionFormatter::class,
         PDOException::class => Formatters\PDOExceptionFormatter::class,
+        \Illuminate\Auth\AuthenticationException::class => Formatters\AuthExceptionFormatter::class,
         Exception::class => Formatters\ExceptionFormatter::class,
     ],
-    'response_factory' =>ResponseFactory::class,
+    'response_factory' => ResponseFactory::class,
     'reporters' => [
         /*'sentry' => [
             'class'  => \Optimus\Heimdal\Reporters\SentryReporter::class,
@@ -26,5 +28,5 @@ return [
             ]
         ]*/
     ],
-    'server_error_production' => 'An error occurred.'
+    'server_error_production' => 'An error occurred.',
 ];
