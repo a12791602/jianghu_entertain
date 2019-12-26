@@ -99,8 +99,9 @@ class OfflineFinanceController extends BackEndApiMainController
      */
     public function edit(EditAction $action, EditRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $inputDatas           = $request->validated();
+        $inputDatas['method'] = $request->method();
+        $outputDatas          = $action->execute($this, $inputDatas);
         return $outputDatas;
     }
 }

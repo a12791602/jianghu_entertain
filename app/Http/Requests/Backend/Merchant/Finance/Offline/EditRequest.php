@@ -28,20 +28,26 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         $myId = $this->get('id');
+        if ($this->isMethod('post')) {
+            return [
+                'id' => 'required|exists:system_finance_offline_infos,id',
+                'type_id' => 'required|exists:system_finance_types,id',
+                'bank_id' => 'exists:system_banks,id',
+                'name' => 'required|unique:system_finance_offline_infos,name,' . $myId,
+                'username' => 'required',
+                'qrcode' => 'string',
+                'account' => 'required|unique:system_finance_offline_infos,account,' . $myId,
+                'branch' => 'string',
+                'min' => 'required|integer|min:1',
+                'max' => 'required|integer|gt:min',
+                'fee' => 'numeric|min:0',
+                'tags' => 'array',
+                'tags.*' => 'exists:users_tags,id',
+                'remark' => 'string',
+            ];
+        }
         return [
             'id' => 'required|exists:system_finance_offline_infos,id',
-            'type_id' => 'required|exists:system_finance_types,id',
-            'bank_id' => 'exists:system_banks,id',
-            'name' => 'required|unique:system_finance_offline_infos,name,' . $myId,
-            'username' => 'required',
-            'qrcode' => 'string',
-            'account' => 'required|unique:system_finance_offline_infos,account,' . $myId,
-            'branch' => 'string',
-            'min' => 'required|integer|min:1',
-            'max' => 'required|integer|gt:min',
-            'fee' => 'numeric|min:0',
-            'tags' => 'array',
-            'remark' => 'string',
         ];
     }
 
@@ -71,6 +77,7 @@ class EditRequest extends BaseFormRequest
             'fee.numeric' => '手续费不符合规则',
             'fee.min' => '手续费不能小于0元',
             'tags.array' => '用户标签不符合规则',
+            'tags.*' => '用户标签不存在',
             'remark.string' => '说明不符合规则',
         ];
     }

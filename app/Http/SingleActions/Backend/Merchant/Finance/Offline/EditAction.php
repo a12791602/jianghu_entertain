@@ -22,6 +22,13 @@ class EditAction extends BaseAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
+        $method = strtolower($inputDatas['method']);
+        if ($method === 'get') {
+            $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_NO)
+                ->where('finance_id', $inputDatas['id'])->select('tag_id')->get();
+            $result   = msgOut(true, $userTags);
+            return $result;
+        }
         $flag = false;
         try {
             $platformId                = $contll->currentPlatformEloq->id;

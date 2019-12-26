@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
 
-//游戏种类
+//线下金流
 Route::group(
     ['prefix' => 'offline-finance'],
     static function (): void {
@@ -37,9 +37,9 @@ Route::group(
             'del-do',
             [OfflineFinanceController::class, 'delDo'],
         )->name($namePrefix . 'del-do');
-        //删除线下金流
+        //编辑线下金流
         Route::match(
-            ['post', 'options'],
+            ['post', 'get', 'options'],
             'edit',
             [OfflineFinanceController::class, 'edit'],
         )->name($namePrefix . 'edit');
