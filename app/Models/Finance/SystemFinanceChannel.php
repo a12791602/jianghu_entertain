@@ -4,6 +4,7 @@ namespace App\Models\Finance;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class SystemFinanceChannel
@@ -16,19 +17,40 @@ class SystemFinanceChannel extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function lastEditor()
+    public function lastEditor(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
     }
 
     /**
-     * @return mixed
+     * @return BelongsTo
      */
-    public function author()
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function vendor(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemFinanceVendor::class, 'vendor_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function type(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
+        return $object;
     }
 }
