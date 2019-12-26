@@ -68,6 +68,7 @@ $config = [
             'human' => -1001479716542,
         ],
     ],
+    'http-group' => [403, 401],
 ];
 
 return $config;
