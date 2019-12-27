@@ -45,7 +45,6 @@ Route::group(
 Route::group(
     [
         'name' => 'frontend-main',
-        'namespace' => 'App\Http\Controllers\FrontendApi\Common',
     ],
     static function (): void {
         $sRouteFile = base_path() . '/routes/frontend/frontend-main-route.php';

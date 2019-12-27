@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontendApi\Common\RegisterController;
+
 Route::group(
     [
         'middleware' => ['frontend-api'],
@@ -22,7 +24,7 @@ Route::group(
         'prefix'    => 'h5-api',
     ],
     static function (): void {
-        Route::post('register/verification-code', 'RegisterController@code')
+        Route::post('register/verification-code', [RegisterController::class,'code'])
             ->name('h5-api.register.verification-code');
     },
 );
@@ -32,7 +34,7 @@ Route::group(
         'prefix'     => 'app-api',
     ],
     static function (): void {
-        Route::post('register/verification-code', 'RegisterController@code')
+        Route::post('register/verification-code', [RegisterController::class,'code'])
             ->name('app-api.register.verification-code');
     },
 );
@@ -44,7 +46,7 @@ Route::group(
         'prefix'     => 'app-api',
     ],
     static function (): void {
-        Route::post('register', 'RegisterController@store')->name('app-api.register');
+        Route::post('register', [RegisterController::class,'store'])->name('app-api.register');
     },
 );
 Route::group(
@@ -53,7 +55,7 @@ Route::group(
         'prefix'     => 'h5-api',
     ],
     static function (): void {
-        Route::post('register', 'RegisterController@store')->name('h5-api.register');
+        Route::post('register', [RegisterController::class,'store'])->name('h5-api.register');
     },
 );
 

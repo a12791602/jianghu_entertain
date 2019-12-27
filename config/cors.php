@@ -1,8 +1,5 @@
 <?php
 
-use App\Models\Systems\SystemDomain;
-
-$allowed = SystemDomain::where('status', SystemDomain::STATUS_OPEN)->pluck('domain')->all();
 return [
 
     /*
@@ -16,7 +13,11 @@ return [
     */
 
     'supportsCredentials' => false,
-    'allowedOrigins' => $allowed,
+    'allowedOrigins' => [
+        'h5.jianghu.local',
+        'madmin.jianghu.local',
+        'cadmin.jianghu.local',
+    ],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
     'allowedMethods' => ['GET', 'POST', 'PUT', 'PATCH'],
