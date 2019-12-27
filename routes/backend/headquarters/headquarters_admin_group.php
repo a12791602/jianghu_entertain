@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: Harris
@@ -11,24 +12,25 @@ use App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupControll
 //管理员角色相关
 Route::group(
     ['prefix' => 'backend-admin-group'],
-    static function () {
+    static function (): void {
         $namePrefix = 'headquarters-api.backend-admin-group.';
         //添加管理员角色
-        Route::match(['post', 'options'], 'create', [BackendAdminGroupController::class, 'create'])->name($namePrefix . 'create');
+        Route::post('create', [BackendAdminGroupController::class, 'create'])
+            ->name($namePrefix . 'create');
         //获取管理员角色
-        Route::match(['get', 'options'], 'detail', [BackendAdminGroupController::class, 'index'])->name($namePrefix . 'detail');
+        Route::get('detail', [BackendAdminGroupController::class, 'index'])
+            ->name($namePrefix . 'detail');
         //编辑管理员角色
-        Route::match(['post', 'options'], 'edit', [BackendAdminGroupController::class, 'edit'])->name($namePrefix . 'edit');
+        Route::post('edit', [BackendAdminGroupController::class, 'edit'])
+            ->name($namePrefix . 'edit');
         //删除管理员角色
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete-access-group',
             [
             BackendAdminGroupController::class,  'destroy'],
         )->name($namePrefix . 'delete-access-group');
         //获取管理员角色
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'specific-group-users',
             [BackendAdminGroupController::class, 'specificGroupUsers'],
         )->name($namePrefix . 'specific-group-users');

@@ -45,3 +45,15 @@ Route::group(
         )->name($namePrefix . 'edit');
     },
 );
+
+//线下金流
+//Route::group(
+//    ['prefix' => 'online-finance'],
+//    static function (): void {
+//        $namePrefix = 'merchant-api.online-finance.';
+//        Route::get('get-channels', [OnlineFinanceController::class, 'getChannels'])
+//            ->name($namePrefix . 'get-channels');
+//        Route::post('add-do', [OnlineFinanceController::class, 'addDo'])
+//            ->name($namePrefix . 'add-do');
+//    },
+//);

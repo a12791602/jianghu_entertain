@@ -7,9 +7,8 @@ Route::group(
     ['prefix' => 'bank'],
     static function (): void {
         $namePrefix = 'merchant-api.bank.';
-        //添加线下金流
-        Route::match(
-            ['get', 'options'],
+        //获取系统银行
+        Route::get(
             'get-system-banks',
             [BankController::class, 'getSystemBanks'],
         )->name($namePrefix . 'get-system-banks');

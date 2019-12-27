@@ -8,32 +8,27 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.user-grade.';
         //会员等级-配置
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'config',
             [UserGradeController::class, 'gradeConfig'],
         )->name($namePrefix . 'config');
         //会员等级-列表
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'index',
             [UserGradeController::class, 'index'],
         )->name($namePrefix . 'index');
         //会员等级-添加
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'do-add',
             [UserGradeController::class, 'doAdd'],
         )->name($namePrefix . 'do-add');
         //会员等级-编辑
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'edit',
             [UserGradeController::class, 'edit'],
         )->name($namePrefix . 'config');
         //会员等级-删除
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete',
             [UserGradeController::class, 'delete'],
         )->name($namePrefix . 'delete');

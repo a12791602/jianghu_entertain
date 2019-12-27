@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\FrontendApi\App\RegisterController as AppRegister;
-use App\Http\Controllers\FrontendApi\H5\RegisterController as H5Register;
-
 Route::group(
     [
         'middleware' => ['frontend-api'],
@@ -21,21 +18,21 @@ Route::group(
 // Verification code
 Route::group(
     [
-        'middleware' => ['registration'],
+        'middleware' => ['frontend-verification'],
         'prefix'    => 'h5-api',
     ],
     static function (): void {
-        Route::match(['post', 'options'], 'register/verification-code', [H5Register::class, 'code'])
+        Route::post('register/verification-code', 'RegisterController@code')
             ->name('h5-api.register.verification-code');
     },
 );
 Route::group(
     [
-        'middleware' => ['registration'],
+        'middleware' => ['frontend-verification'],
         'prefix'     => 'app-api',
     ],
     static function (): void {
-        Route::match(['post', 'options'], 'register/verification-code', [AppRegister::class, 'code'])
+        Route::post('register/verification-code', 'RegisterController@code')
             ->name('app-api.register.verification-code');
     },
 );
@@ -43,20 +40,20 @@ Route::group(
 // Login & register
 Route::group(
     [
-        'middleware' => ['frontend-auth'],
+        'middleware' => ['frontend-registration'],
         'prefix'     => 'app-api',
     ],
     static function (): void {
-        Route::match(['post', 'options'], 'register', [AppRegister::class, 'store'])->name('app-api.register');
+        Route::post('register', 'RegisterController@store')->name('app-api.register');
     },
 );
 Route::group(
     [
-        'middleware' => ['frontend-auth'],
+        'middleware' => ['frontend-registration'],
         'prefix'     => 'h5-api',
     ],
     static function (): void {
-        Route::match(['post', 'options'], 'register', [H5Register::class, 'store'])->name('h5-api.register');
+        Route::post('register', 'RegisterController@store')->name('h5-api.register');
     },
 );
 

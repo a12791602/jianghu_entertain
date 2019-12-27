@@ -8,68 +8,57 @@ Route::group(
     static function (): void {
         $namePrefix = 'headquarters-api.platform.';
         //运营商列表
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'detail',
             [PlatformController::class, 'detail'],
         )->name($namePrefix . 'detail');
         //添加运营商
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'do-add',
             [PlatformController::class, 'doAdd'],
         )->name($namePrefix . 'do-add');
         //运营商站点配置（编辑）
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'edit',
             [PlatformController::class, 'edit'],
         )->name($namePrefix . 'edit');
         //运营商状态开关
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'switch',
             [PlatformController::class, 'switch'],
         )->name($namePrefix . 'switch');
         //运营商域名列表
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'domain-detail',
             [PlatformController::class, 'domainDetail'],
         )->name($namePrefix . 'domain-detail');
         //添加运营商域名
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'domain-add',
             [PlatformController::class, 'domainAdd'],
         )->name($namePrefix . 'domain-add');
         //删除已分配的游戏
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'assigned-game-cancel',
             [PlatformController::class, 'assignedGameCancel'],
         )->name($namePrefix . 'assigned-game-cancel');
         //分配游戏
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'assign-games',
             [PlatformController::class, 'assignGames'],
         )->name($namePrefix . 'assign-games');
         //已分配的游戏
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'assigned-games',
             [PlatformController::class, 'assignedGames'],
         )->name($namePrefix . 'assigned-games');
         //未分配的游戏
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'unassign-games',
             [PlatformController::class, 'unassignGames'],
         )->name($namePrefix . 'unassign-games');
         //获取分配游戏接口的查询条件
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'get-search-data-of-assign-game',
             [PlatformController::class, 'getSearchDataOfAssignGame'],
         )->name($namePrefix . 'get-search-data-of-assign-game');

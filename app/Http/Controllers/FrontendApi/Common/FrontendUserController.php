@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FrontendApi\H5;
+namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\SingleActions\Common\FrontendUser\IndexAction;

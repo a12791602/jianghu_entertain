@@ -1,5 +1,8 @@
 <?php
 
+use App\Models\Systems\SystemDomain;
+
+$allowed = SystemDomain::where('status', SystemDomain::STATUS_OPEN)->pluck('domain')->all();
 return [
 
     /*
@@ -11,13 +14,12 @@ return [
     | to accept any value.
     |
     */
-   
+
     'supportsCredentials' => false,
-    'allowedOrigins' => ['*'],
+    'allowedOrigins' => $allowed,
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],
-    'allowedMethods' => ['*'],
+    'allowedMethods' => ['GET', 'POST', 'PUT', 'PATCH'],
     'exposedHeaders' => [],
     'maxAge' => 0,
-
 ];

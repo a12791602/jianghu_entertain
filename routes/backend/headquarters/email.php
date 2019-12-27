@@ -5,9 +5,10 @@ use App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController;
 //总控邮件管理
 Route::group(
     ['prefix' => 'email'],
-    static function () {
+    static function (): void {
         $namePrefix = 'headquarters-api.email.';
         //发邮件
-        Route::match(['post','options'], 'send', [BackendSystemEmailController::class, 'send'])->name($namePrefix.'send');
+        Route::post('send', [BackendSystemEmailController::class, 'send'])
+            ->name($namePrefix . 'send');
     },
 );

@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 
+/**
+ * Class DummyClassSeeder
+ */
 class DummyClassSeeder extends Seeder
 {
     /**

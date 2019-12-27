@@ -7,28 +7,23 @@ Route::group(
     ['prefix' => 'merchant-admin-user', 'namespace' => 'Admin'],
     static function (): void {
         $namePrefix = 'headquarters-api.merchant-admin-user.';
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'create',
             [MerchantAdminUserController::class, 'create'],
         )->name($namePrefix . 'create');
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'get-all-admins',
             [MerchantAdminUserController::class, 'allAdmins'],
         )->name($namePrefix . 'get-all-admins');
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'update-admin-group',
             [MerchantAdminUserController::class, 'updateAdminGroup'],
         )->name($namePrefix . 'update-admin-group');
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete-admin',
             [MerchantAdminUserController::class, 'deletePartnerAdmin'],
         )->name($namePrefix . 'delete-admin');
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'search-admin',
             [MerchantAdminUserController::class, 'searchAdmin'],
         )->name($namePrefix . 'search-admin');

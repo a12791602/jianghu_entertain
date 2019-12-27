@@ -24,12 +24,12 @@ class SeederCommand extends GeneratorCommand
     /**
      * @var string $headerStr
      */
-    protected $headerStr = "\t\t\t[\r\n";
+    protected $headerStr = "            [\r\n";
 
     /**
      * @var string $footerStr
      */
-    protected $footerStr = "\t\t\t],";
+    protected $footerStr = '            ],';
 
     /**
      * 最大执行条数
@@ -262,7 +262,7 @@ class SeederCommand extends GeneratorCommand
      */
     private function _arrToStr(array $array): string
     {
-        $tabKey  = "\t";
+        $tabKey  = '    ';
         $enter   = "\r\n";
         $header  = $this->headerStr;
         $footer  = $this->footerStr;
@@ -272,8 +272,20 @@ class SeederCommand extends GeneratorCommand
         foreach ($array as $item) {
             $content .= $tabKey . $tabKey . $tabKey . $tabKey . '[' . $enter;
             foreach ($item as $ikey => $value) {
-                $content .= $tabKey . $tabKey . $tabKey . $tabKey .
-                    $tabKey . "'" . $ikey . "' => '" . $value . "'," . $enter;
+                if (is_string($value)) {
+                    $value    = "'" . $value . "'";
+                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
+                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                } elseif ($value === null) {
+                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
+                        $tabKey . "'" . $ikey . "' =>  null," . $enter;
+                } elseif (is_numeric($value)) {
+                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
+                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                } else {
+                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
+                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                }
             }
             $content .= $tabKey . $tabKey . $tabKey . $tabKey . '],' . $enter;
         }

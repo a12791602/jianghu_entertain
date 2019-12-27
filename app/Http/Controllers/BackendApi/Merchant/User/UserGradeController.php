@@ -27,10 +27,8 @@ class UserGradeController extends BackEndApiMainController
      * @param  GradeConfigAction  $action  Action.
      * @return JsonResponse
      */
-    public function gradeConfig(
-        GradeConfigRequest $request,
-        GradeConfigAction $action
-    ): JsonResponse {
+    public function gradeConfig(GradeConfigRequest $request, GradeConfigAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -55,10 +53,8 @@ class UserGradeController extends BackEndApiMainController
      * @param  DoAddAction  $action  Action.
      * @return JsonResponse
      */
-    public function doAdd(
-        DoAddRequest $request,
-        DoAddAction $action
-    ): JsonResponse {
+    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -71,10 +67,8 @@ class UserGradeController extends BackEndApiMainController
      * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(
-        EditRequest $request,
-        EditAction $action
-    ): JsonResponse {
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -87,10 +81,8 @@ class UserGradeController extends BackEndApiMainController
      * @param  DeleteAction  $action  Action.
      * @return JsonResponse
      */
-    public function delete(
-        DeleteRequest $request,
-        DeleteAction $action
-    ): JsonResponse {
+    public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
