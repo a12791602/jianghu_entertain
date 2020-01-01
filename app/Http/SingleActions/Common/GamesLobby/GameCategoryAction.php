@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
-use App\Http\Resources\GameCategoryResource;
+use App\Http\Resources\Frontend\GamesLobby\GameCategoryResource;
 use App\Models\Game\GameTypePlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

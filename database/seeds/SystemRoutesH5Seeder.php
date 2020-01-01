@@ -38,6 +38,11 @@ class SystemRoutesH5Seeder extends Seeder
                     'is_open' => 0,
                 ],
                 [
+                    'route_name' => 'h5-api.games-lobby.slides',
+                    'method' => 'slides',
+                    'is_open' => 0,
+                ],
+                [
                     'route_name' => 'h5-api.user.information',
                     'method' => 'information',
                     'is_open' => 0,

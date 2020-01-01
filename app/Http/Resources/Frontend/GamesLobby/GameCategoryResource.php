@@ -1,26 +1,27 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Frontend\GamesLobby;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class RichListResource
+ * Class GameCategoryResource
  * @package App\Http\Resources
  */
-class RichListResource extends JsonResource
+class GameCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request Request.
+     * @param  Request $request Request.
      * @return mixed[]
      */
     public function toArray($request): array
     {
         $result = [
-            'mobile' => optional($this->frontendUser)->mobile_hidden,
-            'balance' => $this->balance,
+            'type_id' => $this->type_id,
+            'name' => optional($this->gameType)->name,
         ];
         return $result;
     }

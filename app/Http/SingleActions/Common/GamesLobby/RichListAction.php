@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
-use App\Http\Resources\RichListResource;
+use App\Http\Resources\Frontend\GamesLobby\RichListResource;
 use App\Models\User\FrontendUsersAccount;
 use Illuminate\Http\JsonResponse;
 
