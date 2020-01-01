@@ -136,6 +136,7 @@ class BackEndApiMainController extends Controller
     }
 
     /**
+     * @throws \Exception Exception.
      * @return void
      */
     private function _initial(): void
@@ -143,7 +144,6 @@ class BackEndApiMainController extends Controller
         $this->_getport();
         if ($this->constructorExist === false) {
             return;
-            // throw new \Exception('302200');
         }
         $this->_handleEndUser();
         $this->middleware(
@@ -162,8 +162,7 @@ class BackEndApiMainController extends Controller
                     $this->_menuAccess();
                     $this->_routeAccessCheck();
                     if ($this->routeAccessable === false) {
-                        $msgOut = msgOut($this->routeAccessable, [], '100001');
-                        return $msgOut;
+                        throw new \Exception('100001');
                     }
                     if ($this->port['portPrefix'] === 'merchant-api') {
                         $this->currentPlatformEloq = $this->currentAdmin->platform;
@@ -227,7 +226,7 @@ class BackEndApiMainController extends Controller
         if (!$this->userAgent->isDesktop() && Request::header('from') !== 'Lottery Center System v3.0.0.0') {
             Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
             // echo '机器人禁止操作';
-            return;
+            die();
         }
         $systemRouteELoq = new $this->port['route']();
         $open_route      = $systemRouteELoq->where('is_open', 1)->pluck('method')->toArray();
