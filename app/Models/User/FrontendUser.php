@@ -107,7 +107,7 @@ class FrontendUser extends BaseAuthModel
      *
      * @var array
      */
-    protected $appends = ['mobile_hidden'];
+    //    protected $appends = ['mobile_hidden'];
 
     /**
      * 隐藏手机号中间四位 ****
@@ -115,7 +115,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function getMobileHiddenAttribute(): string
     {
-        $result = substr_replace($this->attributes['mobile'], '****', 3, 4);
+        $result = substr_replace($this->mobile, '****', 3, 4);
         return $result;
     }
 

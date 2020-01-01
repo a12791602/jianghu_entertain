@@ -21,15 +21,7 @@ class SeederCommand extends GeneratorCommand
      */
     protected $content;
 
-    /**
-     * @var string $headerStr
-     */
-    protected $headerStr = "            [\r\n";
-
-    /**
-     * @var string $footerStr
-     */
-    protected $footerStr = '            ],';
+    public const SPACE = ' ';
 
     /**
      * 最大执行条数
@@ -142,11 +134,14 @@ class SeederCommand extends GeneratorCommand
             $mode = strtolower($mode);
             if ($mode === self::MODE_APPEND) {
                 $content       = $this->files->get($filePath);
-                $indexStart    = strpos($content, $this->headerStr);
-                $headerLen     = strlen($this->headerStr);
-                $content       = substr($content, $indexStart + $headerLen);
-                $indexEnd      = strrpos($content, $this->footerStr);
-                $content       = substr($content, 0, $indexEnd);
+                $header        = $this->_getHeader();
+                $footer        = $this->_getFooter();
+                $indexStart    = strpos($content, $header);
+                $headerLen     = strlen($header);
+                $indexEnd      = strrpos($content, $footer);
+                $strStart      = $indexStart + $headerLen;
+                $strEnd        = $indexEnd - ($indexStart + $headerLen);
+                $content       = substr($content, $strStart, $strEnd);
                 $this->content = $content;
             }
         }
@@ -262,32 +257,28 @@ class SeederCommand extends GeneratorCommand
      */
     private function _arrToStr(array $array): string
     {
-        $tabKey  = '    ';
-        $enter   = "\r\n";
-        $header  = $this->headerStr;
-        $footer  = $this->footerStr;
+        $sixteen = str_pad('', 16, self::SPACE);
+        $twenty  = str_pad('', 20, self::SPACE);
+        $header  = $this->_getHeader();
+        $footer  = $this->_getFooter();
         $string  = '';
         $content = '';
         $string .= $header;
         foreach ($array as $item) {
-            $content .= $tabKey . $tabKey . $tabKey . $tabKey . '[' . $enter;
+            $content .= $sixteen . '[' . PHP_EOL;
             foreach ($item as $ikey => $value) {
                 if (is_string($value)) {
                     $value    = "'" . $value . "'";
-                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
-                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
                 } elseif ($value === null) {
-                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
-                        $tabKey . "'" . $ikey . "' =>  null," . $enter;
+                    $content .= $twenty . "'" . $ikey . "' =>  null," . PHP_EOL;
                 } elseif (is_numeric($value)) {
-                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
-                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
                 } else {
-                    $content .= $tabKey . $tabKey . $tabKey . $tabKey .
-                        $tabKey . "'" . $ikey . "' => " . $value . ',' . $enter;
+                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
                 }
             }
-            $content .= $tabKey . $tabKey . $tabKey . $tabKey . '],' . $enter;
+            $content .= $sixteen . '],' . PHP_EOL;
         }
         $mode = $this->option('m');
         $mode = strtolower($mode);
@@ -297,5 +288,25 @@ class SeederCommand extends GeneratorCommand
         $string .= $content;
         $string .= $footer;
         return $string;
+    }
+
+    /**
+     * 得到字符串的头部
+     * @return string
+     */
+    private function _getHeader(): string
+    {
+        $twelve = str_pad('', 12, self::SPACE);
+        return $twelve . '[' . PHP_EOL;
+    }
+
+    /**
+     * 得到字符串的尾部
+     * @return string
+     */
+    private function _getFooter(): string
+    {
+        $twelve = str_pad('', 12, self::SPACE);
+        return $twelve . '],';
     }
 }

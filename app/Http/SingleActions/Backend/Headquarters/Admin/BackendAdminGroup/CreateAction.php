@@ -62,12 +62,15 @@ class CreateAction
             $menuEloq->createMenuDatas($objAdminGroup->id, $role);
 
             DB::commit();
-            $msgOut = msgOut(true, $data);
-            return $msgOut;
+            $msgData = [
+                'group_name' => $objAdminGroup->group_name,
+                'role'     => $role,
+            ];
+            $msgOut  = msgOut(true, $msgData);
         } catch (\Throwable $e) {
             DB::rollback();
             $msgOut = msgOut(false, [], $e->getCode(), $e->getMessage());
-            return $msgOut;
         }
+        return $msgOut;
     }
 }

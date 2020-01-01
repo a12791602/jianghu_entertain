@@ -18,7 +18,7 @@ class GamesLobbyController extends FrontendApiMainController
 {
 
     /**
-     * 今日富豪榜.
+     * Rich list.
      * @param  RichListAction $action Action.
      * @return JsonResponse.
      * @throws \Exception Exception.
@@ -30,7 +30,7 @@ class GamesLobbyController extends FrontendApiMainController
     }
 
     /**
-     * game category
+     * Game category
      * @param  GameCategoryAction  $action  Action.
      * @param  GameCategoryRequest $request Request.
      * @return JsonResponse
@@ -43,12 +43,13 @@ class GamesLobbyController extends FrontendApiMainController
     }
 
     /**
-     * game list.
+     * Game list.
      * @param GameListAction  $action  Action.
      * @param GameListRequest $request Request.
-     * @return mixed
+     * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function gameList(GameListAction $action, GameListRequest $request)
+    public function gameList(GameListAction $action, GameListRequest $request): JsonResponse
     {
         $result = $action->execute($request);
         return $result;

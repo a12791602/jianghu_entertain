@@ -72,7 +72,7 @@ class OfflineFinanceController extends BackEndApiMainController
     public function delDo(DelDoAction $action, DelDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
+        $outputDatas = $action->execute($this, $inputDatas);
         return $outputDatas;
     }
 

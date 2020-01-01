@@ -18,6 +18,7 @@ class FrontendUserSeeder extends Seeder
         FrontendUser::insert(
             [
                 [
+                    'uid' => 189673,
                     'username' => 'harriszhongdai',
                     'mobile' => 13880628809,
                     'top_id' => 0,
@@ -34,8 +35,10 @@ class FrontendUserSeeder extends Seeder
                     'user_specific_id' => 1,
                     'status' => 1,
                     'invite_code' => 123456,
+                    'pic_path' => '/avatar.png',
                 ],
                 [
+                    'uid' => 189674,
                     'username' => 'ling1',
                     'mobile' => 18844446666,
                     'top_id' => 0,
@@ -52,6 +55,7 @@ class FrontendUserSeeder extends Seeder
                     'user_specific_id' => 2,
                     'status' => 1,
                     'invite_code' => 123456,
+                    'pic_path' => '/avatar.png',
                 ],
             ],
         );

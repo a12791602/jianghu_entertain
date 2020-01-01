@@ -35,8 +35,7 @@ class BackendAdminAccessGroup extends BaseModel
      */
     public function adminUsers(): HasMany
     {
-        $adminUsers = $this->hasMany(BackendAdminUser::class, 'group_id', 'id')
-                           ->select(['id', 'name', 'email', 'is_test', 'status', 'platform_id', 'group_id']);
+        $adminUsers = $this->hasMany(BackendAdminUser::class, 'group_id', 'id');
         return $adminUsers;
     }
 

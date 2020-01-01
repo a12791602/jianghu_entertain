@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
+use App\Http\Resources\RichListResource;
 use App\Models\User\FrontendUsersAccount;
 use Illuminate\Http\JsonResponse;
 
@@ -13,16 +14,15 @@ use Illuminate\Http\JsonResponse;
 class RichListAction
 {
     /**
+     * Rich list
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(): JsonResponse
     {
-        $outputDatas = FrontendUsersAccount::with('frontendUser.specificInfo')
-            ->orderBy('balance', 'desc')
-            ->limit(3)
-            ->get();
-        $result      = msgOut(true, $outputDatas);
+        $outputDatas = FrontendUsersAccount::with(['frontendUser:account_id,uid,username,mobile'])
+            ->orderBy('balance', 'desc')->get();
+        $result      = msgOut(true, RichListResource::collection($outputDatas));
         return $result;
     }
 }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
-use App\Http\Requests\Frontend\Common\VerificationCodeRequest;
+use App\Http\Requests\Frontend\Common\RegisterVerificationCodeRequest;
 use App\Http\SingleActions\Common\FrontendAuth\RegisterAction;
 use App\Http\SingleActions\Common\FrontendAuth\VerificationCodeAction;
 use Illuminate\Http\JsonResponse;
@@ -17,6 +17,7 @@ class RegisterController extends FrontendApiMainController
 {
 
     /**
+     * Store new user.
      * @param RegisterAction  $action  RegisterAction.
      * @param RegisterRequest $request RegisterRequest.
      * @return JsonResponse
@@ -29,12 +30,13 @@ class RegisterController extends FrontendApiMainController
     }
 
     /**
-     * @param VerificationCodeAction  $action  VerificationCodeAction.
-     * @param VerificationCodeRequest $request VerificationCodeRequest.
+     * Get registration verification code.
+     * @param VerificationCodeAction          $action  VerificationCodeAction.
+     * @param RegisterVerificationCodeRequest $request VerificationCodeRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function code(VerificationCodeAction $action, VerificationCodeRequest $request): JsonResponse
+    public function code(VerificationCodeAction $action, RegisterVerificationCodeRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         $result     = $action->execute($inputDatas);

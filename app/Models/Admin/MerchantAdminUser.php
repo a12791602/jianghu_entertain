@@ -61,11 +61,11 @@ class MerchantAdminUser extends BaseAuthModel
     }
 
     /**
-     * @return MerchantAdminUser
+     * @return string
      */
-    public function modelFilter(): MerchantAdminUser
+    public function modelFilter(): string
     {
-        $object = $this->provideFilter(MerchantAdminUserFilter::class);
-        return $object;
+        $string = $this->provideFilter(MerchantAdminUserFilter::class);
+        return $string;
     }
 }

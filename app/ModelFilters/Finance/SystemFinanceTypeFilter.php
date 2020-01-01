@@ -19,21 +19,37 @@ class SystemFinanceTypeFilter extends ModelFilter
      * @var array
      */
     public $relations = [];
+
     /**
-     * @param  integer $status Status.
-     * @return object
+     * 按状态搜索
+     * @param integer $status Status.
+     * @return SystemFinanceTypeFilter
      */
-    public function status(int $status) :object
+    public function status(int $status): SystemFinanceTypeFilter
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
+     * 按名称搜索
      * @param  string $name Name.
-     * @return object
+     * @return SystemFinanceTypeFilter
      */
-    public function name(string $name) :object
+    public function name(string $name): SystemFinanceTypeFilter
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
+    }
+
+    /**
+     * 按是否是线上金流搜索
+     * @param integer $is_online IsOnline.
+     * @return SystemFinanceTypeFilter
+     */
+    public function isOnline(int $is_online): SystemFinanceTypeFilter
+    {
+        $object = $this->where('is_online', $is_online);
+        return $object;
     }
 }

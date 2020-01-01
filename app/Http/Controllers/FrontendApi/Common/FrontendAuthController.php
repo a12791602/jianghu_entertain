@@ -50,6 +50,7 @@ class FrontendAuthController extends FrontendApiMainController
      * Refresh user token
      * @param RefreshAction $action Refresh token.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function refreshToken(RefreshAction $action): JsonResponse
     {

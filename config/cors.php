@@ -14,9 +14,11 @@ return [
 
     'supportsCredentials' => false,
     'allowedOrigins' => [
-        'h5.jianghu.local',
-        'madmin.jianghu.local',
-        'cadmin.jianghu.local',
+        'http://h5.jianghu.local',
+        'http://madmin.jianghu.local',
+        'http://cadmin.jianghu.local',
+        'http://10.10.50.127:8080',
+        'http://10.10.50.194:8081',
     ],
     'allowedOriginsPatterns' => [],
     'allowedHeaders' => ['*'],

@@ -31,7 +31,11 @@ class IndexAction
      */
     public function execute(): JsonResponse
     {
-        $data = $this->model->get()->toArray();
-        return msgOut(true, $data);
+        $data   = $this->model
+            ->with('detail:group_id,menu_id')
+            ->get()
+            ->toArray();
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

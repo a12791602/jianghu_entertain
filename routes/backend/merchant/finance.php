@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
+use App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController;
 
 //线下金流
 Route::group(
@@ -46,14 +47,31 @@ Route::group(
     },
 );
 
-//线下金流
-//Route::group(
-//    ['prefix' => 'online-finance'],
-//    static function (): void {
-//        $namePrefix = 'merchant-api.online-finance.';
-//        Route::get('get-channels', [OnlineFinanceController::class, 'getChannels'])
-//            ->name($namePrefix . 'get-channels');
-//        Route::post('add-do', [OnlineFinanceController::class, 'addDo'])
-//            ->name($namePrefix . 'add-do');
-//    },
-//);
+//线上金流
+Route::group(
+    ['prefix' => 'online-finance'],
+    static function (): void {
+        $namePrefix = 'merchant-api.online-finance.';
+        //线上金流列表
+        Route::get('index', [OnlineFinanceController::class, 'index'])
+            ->name($namePrefix . 'index');
+        //获取可配置的支付渠道
+        Route::get('get-channels', [OnlineFinanceController::class, 'getChannels'])
+            ->name($namePrefix . 'get-channels');
+        //添加支付方式
+        Route::post('add-do', [OnlineFinanceController::class, 'addDo'])
+            ->name($namePrefix . 'add-do');
+        //获取编辑支付方式的前置数据
+        Route::get('edit', [OnlineFinanceController::class, 'edit'])
+            ->name($namePrefix . 'edit');
+        //编辑支付方式
+        Route::post('edit', [OnlineFinanceController::class, 'edit'])
+            ->name($namePrefix . 'edit');
+        //删除支付方式
+        Route::post('del-do', [OnlineFinanceController::class, 'delDo'])
+            ->name($namePrefix . 'del-do');
+        //支付方式修改状态
+        Route::post('status', [OnlineFinanceController::class, 'status'])
+            ->name($namePrefix . 'status');
+    },
+);

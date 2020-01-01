@@ -27,7 +27,7 @@ class DeleteAdminRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:backend_admin_users',
+            'id' => 'required|exists:merchant_admin_users',
         ];
     }
 

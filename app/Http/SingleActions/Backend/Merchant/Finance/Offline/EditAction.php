@@ -31,14 +31,14 @@ class EditAction extends BaseAction
         }
         $flag = false;
         try {
-            $platformId                = $contll->currentPlatformEloq->id;
-            $inputDatas['platform_id'] = $platformId;
-            $inputDatas['author_id']   = $contll->currentAdmin->id;
-            $tags                      = [];
+            $inputDatas['platform_id']    = $contll->currentPlatformEloq->id;
+            $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
+            $tags                         = [];
             if (isset($inputDatas['tags'])) {
                 $tags = $inputDatas['tags'];
                 unset($inputDatas['tags']);
             }
+            unset($inputDatas['method']);
             DB::beginTransaction();
             $model = $this->model->find($inputDatas['id']);
             $model->fill($inputDatas);
@@ -46,15 +46,15 @@ class EditAction extends BaseAction
                 $tmpData = [];
                 $data    = [];
                 foreach ($tags as $tagId) {
-                    $tmpData['platform_id'] = $platformId;
+                    $tmpData['platform_id'] = $contll->currentPlatformEloq->id;
                     $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_NO;
                     $tmpData['finance_id']  = $inputDatas['id'];
                     $tmpData['tag_id']      = $tagId;
                     $data[]                 = $tmpData;
                 }
                 if (!empty($data)) {
-                    SystemFinanceUserTag::where('platform_id', $platformId)
-                        ->where('finance_id', $inputDatas['id'])
+                    SystemFinanceUserTag::where('platform_id', $contll->currentPlatformEloq->id)
+                        ->where('finance_id', $inputDatas['id'])->where('is_online', SystemFinanceType::IS_ONLINE_NO)
                         ->delete();
                     SystemFinanceUserTag::insert($data);
                 }

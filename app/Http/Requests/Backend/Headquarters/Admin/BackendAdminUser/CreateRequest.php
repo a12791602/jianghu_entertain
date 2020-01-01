@@ -22,7 +22,7 @@ class CreateRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
@@ -30,7 +30,6 @@ class CreateRequest extends BaseFormRequest
             'name' => 'required|unique:backend_admin_users', //用户名
             'email' => 'required|email|unique:backend_admin_users', //邮箱
             'password' => 'required|string', //密码
-            'is_test' => 'required|numeric', //0正常用户 1测试用户
             'group_id' => 'required|numeric|exists:backend_admin_access_groups,id', //管理员组ID
         ];
     }

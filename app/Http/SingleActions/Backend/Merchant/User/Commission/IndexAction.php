@@ -36,6 +36,7 @@ class IndexAction
         $inputDatas['platformSign'] = $contll->currentPlatformEloq->sign;
         $data                       = $this->model
             ->filter($inputDatas, UsersCommissionConfigFilter::class)
+            ->with('configDetail.userGrade')
             ->get()
             ->toArray();
         $msgOut                     = msgOut(true, $data);

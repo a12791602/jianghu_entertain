@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\FrontendApi\Common\RegisterController;
+use App\Http\Controllers\FrontendApi\Common\ResetPasswordController;
 
 Route::group(
     [
@@ -26,6 +27,8 @@ Route::group(
     static function (): void {
         Route::post('register/verification-code', [RegisterController::class,'code'])
             ->name('h5-api.register.verification-code');
+        Route::post('reset-password/verification-code', [ResetPasswordController::class,'code'])
+            ->name('h5-api.reset-password.verification-code');
     },
 );
 Route::group(
@@ -36,8 +39,12 @@ Route::group(
     static function (): void {
         Route::post('register/verification-code', [RegisterController::class,'code'])
             ->name('app-api.register.verification-code');
+        Route::post('reset-password/verification-code', [ResetPasswordController::class,'code'])
+            ->name('app-api.reset-password.verification-code');
     },
 );
+
+
 
 // Login & register
 Route::group(

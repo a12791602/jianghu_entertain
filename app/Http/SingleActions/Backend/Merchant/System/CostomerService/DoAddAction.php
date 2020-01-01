@@ -33,7 +33,7 @@ class DoAddAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $inputDatas['sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('201200');
