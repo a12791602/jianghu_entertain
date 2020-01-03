@@ -87,6 +87,11 @@ class SystemRoutesMobileSeeder extends Seeder
                     'method' => 'securityCode',
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'app-api.user.grades',
+                    'method' => 'grades',
+                    'is_open' => 0,
+                ],
             ],
         );
     }

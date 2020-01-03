@@ -92,6 +92,11 @@ class SystemRoutesH5Seeder extends Seeder
                     'method' => 'recharge',
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'h5-api.user.grades',
+                    'method' => 'grades',
+                    'is_open' => 0,
+                ],
             ],
         );
     }
