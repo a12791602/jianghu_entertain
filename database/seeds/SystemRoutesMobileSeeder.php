@@ -69,13 +69,23 @@ class SystemRoutesMobileSeeder extends Seeder
                 ],
                 [
                     'route_name' => 'app-api.user.reset-password',
-                    'method' => 'store',
+                    'method' => 'password',
                     'is_open' => 1,
                 ],
                 [
                     'route_name' => 'app-api.reset-password.verification-code',
-                    'method' => 'code',
+                    'method' => 'passwordCode',
                     'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'app-api.user.security-code',
+                    'method' => 'security',
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'app-api.user.security-verification-code',
+                    'method' => 'securityCode',
+                    'is_open' => 0,
                 ],
             ],
         );

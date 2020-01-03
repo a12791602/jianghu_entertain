@@ -69,13 +69,28 @@ class SystemRoutesH5Seeder extends Seeder
                 ],
                 [
                     'route_name' => 'h5-api.user.reset-password',
-                    'method' => 'store',
+                    'method' => 'password',
                     'is_open' => 1,
                 ],
                 [
                     'route_name' => 'h5-api.reset-password.verification-code',
-                    'method' => 'code',
+                    'method' => 'passwordCode',
                     'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'h5-api.user.security-code',
+                    'method' => 'security',
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'h5-api.user.security-verification-code',
+                    'method' => 'securityCode',
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'h5-api.recharge.recharge',
+                    'method' => 'recharge',
+                    'is_open' => 0,
                 ],
             ],
         );

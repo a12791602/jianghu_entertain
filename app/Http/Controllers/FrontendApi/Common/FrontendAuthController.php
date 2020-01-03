@@ -25,9 +25,10 @@ class FrontendAuthController extends FrontendApiMainController
 
     /**
      * Login user and create token
-     * @param  LoginAction              $action  验证登录.
-     * @param  LoginVerificationRequest $request 请求.
+     * @param LoginAction              $action  验证登录.
+     * @param LoginVerificationRequest $request 请求.
      * @return JsonResponse [string]  access_token
+     * @throws \Exception Exception.
      */
     public function login(LoginAction $action, LoginVerificationRequest $request): JsonResponse
     {

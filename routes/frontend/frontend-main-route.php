@@ -1,7 +1,7 @@
 <?php
 
+use App\Http\Controllers\FrontendApi\Common\PasswordController;
 use App\Http\Controllers\FrontendApi\Common\RegisterController;
-use App\Http\Controllers\FrontendApi\Common\ResetPasswordController;
 
 Route::group(
     [
@@ -25,10 +25,13 @@ Route::group(
         'prefix'    => 'h5-api',
     ],
     static function (): void {
+        $namePrefix = 'h5-api.';
         Route::post('register/verification-code', [RegisterController::class,'code'])
-            ->name('h5-api.register.verification-code');
-        Route::post('reset-password/verification-code', [ResetPasswordController::class,'code'])
-            ->name('h5-api.reset-password.verification-code');
+            ->name($namePrefix . 'register.verification-code');
+        Route::post('reset-password/verification-code', [PasswordController::class,'passwordCode'])
+            ->name($namePrefix . 'reset-password.verification-code');
+        Route::post('security-verification-code', [PasswordController::class,'securityCode'])
+            ->name($namePrefix . 'security-verification-code');
     },
 );
 Route::group(
@@ -37,10 +40,13 @@ Route::group(
         'prefix'     => 'app-api',
     ],
     static function (): void {
+        $namePrefix = 'app-api.';
         Route::post('register/verification-code', [RegisterController::class,'code'])
-            ->name('app-api.register.verification-code');
-        Route::post('reset-password/verification-code', [ResetPasswordController::class,'code'])
-            ->name('app-api.reset-password.verification-code');
+            ->name($namePrefix . 'register.verification-code');
+        Route::post('reset-password/verification-code', [PasswordController::class,'passwordCode'])
+            ->name($namePrefix . 'reset-password.verification-code');
+        Route::post('security-verification-code', [PasswordController::class,'securityCode'])
+            ->name($namePrefix . 'security-verification-code');
     },
 );
 

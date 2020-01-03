@@ -35,6 +35,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->tinyInteger('is_tester')->nullable()->default('0')->comment('是否测试用户 0否 1是');
                 $table->string('password', 64)->nullable()->default(null)->comment('密码');
                 $table->string('fund_password', 64)->nullable()->default(null)->comment('资金密码');
+                $table->string('security_code', 64)->nullable()->default(null)->comment('安全码');
                 $table->text('remember_token')->nullable()->default(null)->comment('token');
                 $table->integer('level_deep')->nullable()->default('0')->comment('用户等级深度');
                 $table->char('register_ip', 15)->nullable()->default(null)->comment('注册IP');

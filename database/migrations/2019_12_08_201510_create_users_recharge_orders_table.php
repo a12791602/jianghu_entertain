@@ -37,6 +37,8 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是线上存款 1 是 0 否');
                 $table->tinyInteger('recharge_status')->nullable()->default(null)->comment('支付状态 1 已支付 0 未支付');
                 $table->string('remark')->nullable()->default(null)->comment('备注');
+                $table->string('client_ip', 30)->default(null)->comment('下单ip');
+
                 $table->nullableTimestamps();
             },
         );
