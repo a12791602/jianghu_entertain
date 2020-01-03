@@ -44,6 +44,12 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
                 $table->integer('sort')->nullable()->default(null)->comment('排序');
                 $table->tinyInteger('auto_audit')->nullable()->default(null)->comment('是否自动审核 1 是 0 否');
+                $table->string('merchant_no')->nullable()->default(null)->comment('商户编号');
+                $table->string('desc')->nullable()->default(null)->comment('充值说明 备注');
+                $table->tinyInteger('encrypt_mode')->nullable()->default(null)->comment('加密方式 1 密钥模式 2 证书模式');
+                $table->string('certificate')->nullable()->default(null)->comment('证书');
+                $table->integer('author_id')->default(0)->comment('创建人id');
+                $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->nullableTimestamps();
             },
         );

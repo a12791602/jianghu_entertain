@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class MerchantAdminUser extends BaseAuthModel
 {
 
+    public const STATUS_CLOSE = 0;
+    public const STATUS_OPEN  = 1;
+    
     /**
      * The attributes that are mass assignable.
      *

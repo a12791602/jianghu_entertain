@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Common\GamesLobby;
 
 use App\Http\Requests\Frontend\Common\GameListRequest;
-use App\Http\Resources\GameListResource;
+use App\Http\Resources\Frontend\GamesLobby\GameListResource;
 use App\ModelFilters\Platform\GamesPlatformFilter;
 use App\Models\Platform\GamesPlatform;
 use Illuminate\Http\JsonResponse;

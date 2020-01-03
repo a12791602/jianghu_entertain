@@ -2,15 +2,15 @@
 
 namespace App\Http\SingleActions\Common\FrontendUser;
 
-use App\Http\Resources\HomePersonalInformationResource;
+use App\Http\Resources\Frontend\GamesLobby\HomePersonalInformationResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 /**
- * Class IndexAction
+ * Class InformationAction
  * @package App\Http\SingleActions\Common\FrontendUser
  */
-class ShowAction
+class InformationAction
 {
     /**
      * Personal information.
@@ -18,7 +18,7 @@ class ShowAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function information(Request $request): JsonResponse
     {
         $user   = $request->user()->only(['uid','username','pic_path','level_deep']);
         $result = msgOut(true, $user);

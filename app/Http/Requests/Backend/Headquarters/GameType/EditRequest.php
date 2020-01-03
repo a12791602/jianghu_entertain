@@ -16,7 +16,7 @@ class EditRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,22 +24,22 @@ class EditRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
+        $myId = $this->get('id');
         return [
             'id' => 'required|exists:games_types,id',
-            'name' => 'required|unique:games_types,name,'.$this->input('id'),
-            'sign' => ['required','regex:/\w+/','unique:games_types,sign,'.$this->input('id')],
-            'status' => 'required|in:0,1',
+            'name' => 'required|unique:games_types,name,' . $myId,
+            'sign' => 'required|regex:/\w+/|unique:games_types,sign,' . $myId,
         ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
             'id.required' => 'ID不存在',
@@ -49,8 +49,6 @@ class EditRequest extends BaseFormRequest
             'sign.required' => '请填写游戏种类标记',
             'sign.regex' => '游戏种类标记只能包含数字,字母,下划线',
             'sign.unique' => '游戏种类标记已存在',
-            'status.required' => '请选择状态',
-            'status.in' => '所选择状态不存在',
         ];
     }
 }

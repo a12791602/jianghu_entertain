@@ -5,6 +5,7 @@ namespace App\Models\Finance;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
  * Class SystemFinanceOnlineInfo
@@ -45,6 +46,15 @@ class SystemFinanceOnlineInfo extends BaseModel
     public function author(): BelongsTo
     {
         $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return HasOneThrough
+     */
+    public function type(): HasOneThrough
+    {
+        $object = $this->hasOneThrough(SystemFinanceType::class, SystemFinanceChannel::class, 'channel_id', 'type_id');
         return $object;
     }
 }

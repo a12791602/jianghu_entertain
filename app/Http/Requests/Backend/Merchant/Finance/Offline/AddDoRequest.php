@@ -32,7 +32,7 @@ class AddDoRequest extends BaseFormRequest
         $unique = new CustomUnique($this, 'system_finance_offline_infos', 'platform_id');
         return [
             'type_id' => 'required|exists:system_finance_types,id',
-            'bank_id' => 'exists:system_banks,id',
+            'bank_id' => 'exists:system_banks,id|unique:system_finance_offline_infos,bank_id',
             'name' => ['required', $unique],
             'username' => 'required',
             'qrcode' => 'string',
@@ -55,6 +55,7 @@ class AddDoRequest extends BaseFormRequest
             'type_id.required' => '请选择入款类型',
             'type_id.exists' => '所选入款类型不存在',
             'bank_id.exists' => '所选银行不存在',
+            'bank_id.unique' => '该银行类型已绑定银行卡',
             'name.required' => '请填写名称',
             'name.unique' => '名称已存在',
             'username.required' => '请填写姓名',

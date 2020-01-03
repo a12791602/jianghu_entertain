@@ -10,9 +10,9 @@ trait SystemDomainLogics
      * @param  string  $domain       域名.
      * @param  string  $platformSign 平台标识.
      * @param  integer $adminId      管理员ID.
-     * @return void
+     * @return boolean
      */
-    public function insertAllTypeDomain(string $domain, string $platformSign, int $adminId)
+    public function insertAllTypeDomain(string $domain, string $platformSign, int $adminId): bool
     {
         $typePrefix = $this->typePrefix;
         foreach ($typePrefix as $type => $prefix) {
@@ -23,20 +23,25 @@ trait SystemDomainLogics
                 'domain' => $prefix . $domain,
                 'type' => $type,
             ];
-            $this->insertDomain($addData);
+            $insert  = $this->insertDomain($addData);
+            if ($insert === false) {
+                return false;
+            }
         }
+        return true;
     }
 
     /**
      * 插入一条域名
      * @param array $addData 数据.
-     * @return void
+     * @return boolean
      */
-    public function insertDomain(array $addData)
+    public function insertDomain(array $addData): bool
     {
         $domainEloq = new self();
         $domainEloq->fill($addData);
-        $domainEloq->save();
+        $save = $domainEloq->save();
+        return $save;
     }
 
     /**
@@ -45,13 +50,13 @@ trait SystemDomainLogics
      * @param  integer $type   类型.
      * @return boolean
      */
-    public function checkDomainPrefix(string $domain, int $type)
+    public function checkDomainPrefix(string $domain, int $type): bool
     {
         $success = false;
-        $count = mb_substr_count($domain, '.');
+        $count   = mb_substr_count($domain, '.');
         //必须是二级域名
         if ($count === 2) {
-            $prefix = substr($domain, 0, strpos($domain, '.') + 1);
+            $prefix     = substr($domain, 0, strpos($domain, '.') + 1);
             $typePrefix = $this->typePrefix;
             //检查域名前缀是否正确
             if ($typePrefix[$type] === $prefix) {

@@ -7,12 +7,14 @@ use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SearchAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SelfUpdatePasswordRequest;
+use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\SwitchAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\UpdateAdminGroupRequest;
 use App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser\UpdatePasswordRequest;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\CreateAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\DeleteAdminAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\SearchAdminAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\SelfUpdatePasswordAction;
+use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\SwitchAdminAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\UpdateAdminGroupAction;
 use App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser\UpdatePasswordAction;
 use Illuminate\Http\JsonResponse;
@@ -28,10 +30,8 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(
-        CreateRequest $request,
-        CreateAction $action
-    ): JsonResponse {
+    public function create(CreateRequest $request, CreateAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -43,10 +43,8 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param UpdateAdminGroupAction  $action  Action.
      * @return JsonResponse
      */
-    public function updateAdminGroup(
-        UpdateAdminGroupRequest $request,
-        UpdateAdminGroupAction $action
-    ): JsonResponse {
+    public function updateAdminGroup(UpdateAdminGroupRequest $request, UpdateAdminGroupAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -58,10 +56,8 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param DeleteAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function deleteAdmin(
-        DeleteAdminRequest $request,
-        DeleteAdminAction $action
-    ): JsonResponse {
+    public function deleteAdmin(DeleteAdminRequest $request, DeleteAdminAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -73,10 +69,8 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param UpdatePasswordAction  $action  Action.
      * @return JsonResponse
      */
-    public function updatePassword(
-        UpdatePasswordRequest $request,
-        UpdatePasswordAction $action
-    ): JsonResponse {
+    public function updatePassword(UpdatePasswordRequest $request, UpdatePasswordAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -103,10 +97,21 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param SearchAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function searchAdmin(
-        SearchAdminRequest $request,
-        SearchAdminAction $action
-    ): JsonResponse {
+    public function searchAdmin(SearchAdminRequest $request, SearchAdminAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 修改管理员状态
+     * @param  SwitchAdminRequest $request 接收的参数.
+     * @param  SwitchAdminAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function switchAdmin(SwitchAdminRequest $request, SwitchAdminAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;

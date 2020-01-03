@@ -22,10 +22,10 @@ class CreateFrontendUsersBankCardsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->integer('user_id')->comment('用户id （frontend_users表id）');
-                $table->string('username', 64)->nullable()->default(null)->comment('用户名');
-                $table->string('bank_sign', 32)->nullable()->default(null)->comment('银行标识');
-                $table->string('bank_name', 64)->nullable()->default(null)->comment('银行名称');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
+                $table->integer('uid')->comment('用户UID');
+                $table->string('mobile', 11)->comment('用户手机号码');
+                $table->integer('bank_id')->comment('银行ID');
                 $table->string('owner_name', 128)->nullable()->default(null)->comment('持卡人姓名');
                 $table->string('card_number', 64)->nullable()->default(null)->comment('银行卡号');
                 $table->integer('province_id')->comment('省份');

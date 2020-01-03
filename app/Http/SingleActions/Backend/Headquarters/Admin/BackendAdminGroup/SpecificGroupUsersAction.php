@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
-use App\Models\Admin\BackendAdminAccessGroup;
+use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,16 +12,16 @@ class SpecificGroupUsersAction
 {
 
     /**
-     * @var BackendAdminAccessGroup
+     * @var BackendAdminUser
      */
     protected $model;
 
     /**
-     * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
+     * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
+    public function __construct(BackendAdminUser $backendAdminUser)
     {
-        $this->model = $backendAdminAccessGroup;
+        $this->model = $backendAdminUser;
     }
 
     /**
@@ -31,12 +31,8 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $accessGroupEloq = $this->model::find($inputDatas['id']);
-        if ($accessGroupEloq !== null) {
-            $data = $accessGroupEloq->adminUsers->toArray();
-            return msgOut(true, $data);
-        } else {
-            throw new \Exception('300100');
-        }
+        $data   = $this->model->where('group_id', $inputDatas['id'])->paginate($this->model::getPageSize());
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

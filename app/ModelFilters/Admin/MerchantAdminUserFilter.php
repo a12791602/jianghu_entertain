@@ -19,6 +19,16 @@ class MerchantAdminUserFilter extends ModelFilter
     public $relations = [];
 
     /**
+     * @param integer $dataId ID.
+     * @return MerchantAdminUserFilter
+     */
+    public function dataId(int $dataId): MerchantAdminUserFilter
+    {
+        $object = $this->where('id', $dataId);
+        return $object;
+    }
+
+    /**
      * @param string $platform 平台标识.
      * @return MerchantAdminUserFilter
      */
