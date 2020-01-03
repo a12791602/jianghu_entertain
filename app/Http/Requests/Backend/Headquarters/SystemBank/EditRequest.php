@@ -16,7 +16,7 @@ class EditRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize() :bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,23 +24,23 @@ class EditRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
+        $myId = $this->get('id');
         return [
             'id' => 'required|exists:system_banks,id',
-            'name' => 'required|unique:system_banks,name,'.$this->get('id'),
-            'code' => 'required|unique:system_banks,code,'.$this->get('id'),
-            'official_url' => 'url',
+            'name' => 'required|unique:system_banks,name,' . $myId,
+            'code' => 'required|unique:system_banks,code,' . $myId,
             'status' => 'required|in:0,1',
         ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
             'id.required' => 'ID不存在',
@@ -49,7 +49,6 @@ class EditRequest extends BaseFormRequest
             'name.unique' => '银行名称已存在',
             'code.required' => '请填写银行编码',
             'code.unique' => '银行编码已存在',
-            'official_url.url' => '官网地址不符合规则',
             'status.required' => '请选择状态',
             'status.in' => '所选状态不再范围内',
         ];

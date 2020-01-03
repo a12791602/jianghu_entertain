@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
                 SystemFePageBannerSeeder::class,
                 GameVendorPlatformSeeder::class,
                 SystemFinanceUserTagSeeder::class,
+                UsersGradesSeeder::class,
             ],
         );
     }

@@ -21,10 +21,13 @@ class IndexAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize = $this->model::getPageSize();
-        $outputDatas = $this->model::filter($inputDatas, SystemBankFilter::class)->paginate($pageSize);
-        return msgOut(true, $outputDatas);
+        $pageSize    = $this->model::getPageSize();
+        $outputDatas = $this->model::with(
+            ['lastEditor:id,name', 'author:id,name'],
+        )->filter($inputDatas, SystemBankFilter::class)->paginate($pageSize);
+        $msgOut      = msgOut(true, $outputDatas);
+        return $msgOut;
     }
 }

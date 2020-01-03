@@ -21,5 +21,7 @@ Route::group(
         Route::get('information', [FrontendUserController::class,'information'])->name($namePrefix . 'information');
         Route::get('home-information', [FrontendUserController::class,'homeInformation'])
             ->name($namePrefix . 'information');
+
+        Route::get('grades', [FrontendUserController::class,'grades'])->name($namePrefix . 'grades');
     },
 );

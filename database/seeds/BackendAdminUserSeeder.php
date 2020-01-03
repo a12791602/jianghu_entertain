@@ -33,6 +33,14 @@ class BackendAdminUserSeeder extends Seeder
                     'group_id' => 1,
                     'status' => 1,
                 ],
+                [
+                    'name' => 'aaron',
+                    'email' => 'aaron@qq.com',
+                    'password' => '$2y$10$FfNqefi/YF9OqR2IthMzKOqPOVxfA10JzC/qnqZ3PjpdC.fs5dZQO',
+                    'is_test' => 1,
+                    'group_id' => 1,
+                    'status' => 1,
+                ],
             ],
         );
     }
