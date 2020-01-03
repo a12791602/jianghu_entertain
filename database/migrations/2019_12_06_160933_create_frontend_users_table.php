@@ -41,6 +41,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->char('last_login_ip', 15)->nullable()->default(null)->comment('最后登陆IP');
                 $table->timestamp('last_login_time')->nullable()->default(null)->comment('最后登陆时间');
                 $table->integer('user_specific_id')->nullable()->default(null)->comment('用户扩展信息表id');
+                $table->integer('user_tag_id')->nullable()->default(null)->comment('用户标签id');
                 $table->tinyInteger('status')->default('1')->comment('状态 0禁用 1正常');
                 $table->string('pic_path', 128)->nullable()->default(null)->comment('头像路径');
                 $table->string('invite_code', 64)->nullable()->default(null)->comment('邀请码');

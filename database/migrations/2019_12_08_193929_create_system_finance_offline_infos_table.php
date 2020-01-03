@@ -34,7 +34,7 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->integer('sort')->nullable()->default(null)->comment('排序');
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
                 $table->tinyInteger('pay_type')->nullable()->default(null)->comment('支付类型 1 转账 2 发红包 3 转银行卡');
-                $table->string('branch', 128)->comment('支行');
+                $table->string('branch', 128)->comment('支行')->default(null);
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->decimal('fee', 20, 4)->default(0)->comment('手续费');

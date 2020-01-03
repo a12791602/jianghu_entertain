@@ -3,11 +3,12 @@
 namespace App\Http\SingleActions\Common\MerchantAuth;
 
 use App\Http\Controllers\BackendApi\Merchant\MerchantAuthController;
+use App\Http\Resources\Backend\LoginResource;
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\Systems\BackendLoginLog;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -49,7 +50,7 @@ class LoginAction
         $credentials = request(['email', 'password']);
         $token       = $contll->currentAuth->attempt($credentials);
         if (!$token) {
-            throw new \Exception('100002');
+            throw new \Exception('200401');
         }
         if ($request->hasSession()) {
             $request->session()->regenerate();
@@ -57,9 +58,10 @@ class LoginAction
         }
 
         $this->incrementLoginAttempts($request);
-        $expireInMinute = $contll->currentAuth->factory()->getTTL();
-        $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
-        $user           = $contll->currentAuth->user();
+        $user = $contll->currentAuth->user();
+        if ($user->status === MerchantAdminUser::STATUS_CLOSE) {
+            throw new \Exception('200402');
+        }
         if ($user->remember_token !== null) {
             try {
                 JWTAuth::setToken($user->remember_token);
@@ -74,12 +76,7 @@ class LoginAction
         $backendLoginLog = new BackendLoginLog();
         $backendLoginLog->insertData($user, $request, BackendLoginLog::TYPE_MERCHANT);
 
-        $data   = [
-            'access_token' => $token,
-            'token_type'   => 'Bearer',
-            'expires_at'   => $expireAt,
-        ];
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut(true, LoginResource::make($user));
         return $msgOut;
     }
 }

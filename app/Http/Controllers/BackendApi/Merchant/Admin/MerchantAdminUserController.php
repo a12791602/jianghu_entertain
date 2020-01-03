@@ -6,11 +6,13 @@ use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\CreateRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\SearchAdminRequest;
+use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\SwitchAdminRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupRequest;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\AllAdminsAction;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\CreateAction;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminAction;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\SearchAdminAction;
+use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\SwitchAdminAction;
 use App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser\UpdateAdminGroupAction;
 use Illuminate\Http\JsonResponse;
 
@@ -26,10 +28,8 @@ class MerchantAdminUserController extends BackEndApiMainController
      * @param  CreateAction  $action  Action.
      * @return JsonResponse
      */
-    public function create(
-        CreateRequest $request,
-        CreateAction $action
-    ): JsonResponse {
+    public function create(CreateRequest $request, CreateAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -54,10 +54,8 @@ class MerchantAdminUserController extends BackEndApiMainController
      * @param  UpdateAdminGroupAction  $action  Action.
      * @return JsonResponse
      */
-    public function updateAdminGroup(
-        UpdateAdminGroupRequest $request,
-        UpdateAdminGroupAction $action
-    ): JsonResponse {
+    public function updateAdminGroup(UpdateAdminGroupRequest $request, UpdateAdminGroupAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -70,10 +68,8 @@ class MerchantAdminUserController extends BackEndApiMainController
      * @param  DeleteAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function deletePartnerAdmin(
-        DeleteAdminRequest $request,
-        DeleteAdminAction $action
-    ): JsonResponse {
+    public function deletePartnerAdmin(DeleteAdminRequest $request, DeleteAdminAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -84,10 +80,21 @@ class MerchantAdminUserController extends BackEndApiMainController
      * @param  SearchAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function searchAdmin(
-        SearchAdminRequest $request,
-        SearchAdminAction $action
-    ): JsonResponse {
+    public function searchAdmin(SearchAdminRequest $request, SearchAdminAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($this, $inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 修改管理员状态
+     * @param  SwitchAdminRequest $request 接收的参数.
+     * @param  SwitchAdminAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function switchAdmin(SwitchAdminRequest $request, SwitchAdminAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;

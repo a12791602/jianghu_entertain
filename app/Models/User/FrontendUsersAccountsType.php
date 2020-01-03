@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\User\Logics\FrontendUsersAccountsTypeLogics;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -10,6 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class FrontendUsersAccountsType extends Model
 {
+    /**
+     * 帐变类型Logics
+     */
+    use FrontendUsersAccountsTypeLogics;
 
     /**
      * @var array $guarded

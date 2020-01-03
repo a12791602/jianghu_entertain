@@ -44,5 +44,10 @@ Route::group(
             'search-admin',
             [BackendAdminUserController::class, 'searchAdmin'],
         )->name('headquarters-api.headquarters-admin-user.search-admin');
+        //管理员开关
+        Route::post(
+            'switch-admin',
+            [BackendAdminUserController::class, 'switchAdmin'],
+        )->name('headquarters-api.headquarters-admin-user.switch-admin');
     },
 );

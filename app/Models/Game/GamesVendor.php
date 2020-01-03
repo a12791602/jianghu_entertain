@@ -39,15 +39,15 @@ class GamesVendor extends BaseModel
 
     /**
      * @param array $value Value.
-     * @return false|string
+     * @return void
      */
-    public function setWhitelistIpsAttribute(array $value)
+    public function setWhitelistIpsAttribute(array $value): void
     {
         if (!empty($value)) {
-            $value = json_encode($value);
-            return $value;
+            $this->attributes['whitelist_ips'] = json_encode($value);
+        } else {
+            $this->attributes['whitelist_ips'] = null;
         }
-        return '';
     }
 
     /**

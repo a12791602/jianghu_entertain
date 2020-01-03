@@ -701,6 +701,30 @@ class SystemRoutesBackendSeeder extends Seeder
                     'menu_group_id' => 5,
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'headquarters-api.platform.detail',
+                    'method' => '',
+                    'menu_group_id' => 5,
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'headquarters-api.platform.switch',
+                    'method' => '',
+                    'menu_group_id' => 5,
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'headquarters-api.platform.domain-detail',
+                    'method' => '',
+                    'menu_group_id' => 5,
+                    'is_open' => 0,
+                ],
+                [
+                    'route_name' => 'headquarters-api.headquarters-admin-user.switch-admin',
+                    'method' => '',
+                    'menu_group_id' => 5,
+                    'is_open' => 0,
+                ],
             ],
         );
     }

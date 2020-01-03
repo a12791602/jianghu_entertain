@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminGroup;
 
-use App\Models\Admin\MerchantAdminAccessGroup;
+use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,16 +12,16 @@ class SpecificGroupUsersAction
 {
 
     /**
-     * @var MerchantAdminAccessGroup
+     * @var MerchantAdminUser
      */
     protected $model;
 
     /**
-     * @param MerchantAdminAccessGroup $merchantAdminAccessGroup MerchantAdminAccessGroup.
+     * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
      */
-    public function __construct(MerchantAdminAccessGroup $merchantAdminAccessGroup)
+    public function __construct(MerchantAdminUser $merchantAdminUser)
     {
-        $this->model = $merchantAdminAccessGroup;
+        $this->model = $merchantAdminUser;
     }
 
     /**
@@ -31,12 +31,8 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $accessGroupEloq = $this->model::find($inputDatas['id']);
-        if ($accessGroupEloq !== null) {
-            $data = $accessGroupEloq->adminUsers->toArray();
-            return msgOut(true, $data);
-        } else {
-            throw new \Exception('300100');
-        }
+        $data   = $this->model->where('group_id', $inputDatas['id'])->paginate($this->model::getPageSize());
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

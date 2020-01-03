@@ -30,6 +30,8 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->decimal('money', 18, 4)->nullable()->default(null)->comment('订单金额');
                 $table->decimal('real_money', 18, 4)->nullable()->default(null)->comment('真实付款金额');
                 $table->decimal('discount_money', 18, 4)->nullable()->default(null)->comment('优惠金额');
+                $table->decimal('handling_money', 18, 4)->nullable()->default(null)->comment('手续费');
+                $table->decimal('total_money', 18, 4)->nullable()->default(null)->comment('总金额');
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 0 审核中 1 审核通过');
                 $table->integer('admin_id')->nullable()->default(null)->comment('操作人ID');
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是线上存款 1 是 0 否');
