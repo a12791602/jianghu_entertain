@@ -3,7 +3,7 @@
 namespace App\Models\User\Logics;
 
 use App\Lib\BaseCache;
-use Illuminate\Support\Facades\DB;
+use App\Models\User\FrontendUsersAccountsTypesParam;
 
 trait FrontendUsersAccountsTypeLogics
 {
@@ -58,16 +58,19 @@ trait FrontendUsersAccountsTypeLogics
      */
     public static function getParamToTransmit(string $sType = ''): array
     {
-        $accTypeParams = DB::table('frontend_users_accounts_types as fuat')
-            ->leftJoin(
-                'frontend_users_accounts_types_params as fuatp',
-                static function ($join): void {
-                    $join->whereRaw('find_in_set(fuatp.id, fuat.param)');
-                },
-            )->select('fuat.*', DB::raw('GROUP_CONCAT(fuatp.param) as param'))
-            ->where('sign', $sType)
-            ->groupBy(DB::raw('fuat.id'))->pluck('param');
-        $params        = explode(',', $accTypeParams[0]);
+        $data        = [];
+        $accountType = self::where('sign', $sType)->first();
+        if (!$accountType) {
+            return $data;
+        }
+        $paramIds = explode(',', $accountType->param);
+        if (!$paramIds) {
+            return $data;
+        }
+        $params = FrontendUsersAccountsTypesParam::whereIn('id', $paramIds)->pluck('param')->toArray();
+        if (empty($params)) {
+            return $data;
+        }
         $paramsFlipped = array_flip($params);
         $data          = array_fill_keys(array_keys($paramsFlipped), 'required');
         return $data;

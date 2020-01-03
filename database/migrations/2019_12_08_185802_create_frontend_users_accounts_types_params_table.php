@@ -24,7 +24,6 @@ class CreateFrontendUsersAccountsTypesParamsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('label', 32)->nullable()->default(null)->comment('名称');
                 $table->string('param', 32)->nullable()->default(null)->comment('参数');
-                $table->unsignedTinyInteger('compatible')->nullable()->default('1')->comment('1兼容两张表都存在数据');
                 $table->nullableTimestamps();
             },
         );

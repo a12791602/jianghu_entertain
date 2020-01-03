@@ -5,8 +5,8 @@ namespace App\Lib\Logic;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersAccountsReport;
-use App\Models\User\FrontendUsersAccountsReportsParamsWithValue;
 use App\Models\User\FrontendUsersAccountsType;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -34,24 +34,31 @@ class AccountChange
     }
 
     /**
-     * @param string $typeSign 帐变类型.
-     * @param array  $params   参数.
+     * @param array  $inputDatas 接收的数据.
+     * @param string $typeSign   帐变类型.
+     * @param string $params     参数.
+     * @throws \Exception Exception.
      * @return mixed
      */
-    public function doChange(string $typeSign, array $params)
+    public function doChange(array $inputDatas, string $typeSign, string $params)
     {
         $user       = $this->account->frontendUser;
         $typeConfig = FrontendUsersAccountsType::getTypeBySign($typeSign);
         //　1. 获取帐变配置
         $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);
         // 2. 参数检测
-        $validator = Validator::make($params, $paramsValidator);
+        $paramArr = json_decode($params, true);
+        if (!is_array($paramArr)) {
+            DB::rollback();
+            throw new \Exception('100201');
+        }
+        $validator = Validator::make($paramArr, $paramsValidator);
         if ($validator->fails()) {
-            $return = 'doChange' . $validator->errors()->first();
-            return $return;
+            DB::rollback();
+            throw new \Exception('100201');
         }
         // 3. 检测金额
-        $amount = abs($params['amount']);
+        $amount = abs($inputDatas['amount']);
         if ((bool) $amount === false) {
             return true;
         }
@@ -63,16 +70,18 @@ class AccountChange
         // 根据冻结类型处理
         $return = $this->_handleFrozen($typeConfig, $amount);
         if ($return !== true) {
-            return '对不起, 账户异常(' . $return . ')!';
+            DB::rollback();
+            throw new \Exception('100202');
         }
         // 修改数据
         $saveData = $this->_saveData(
+            $inputDatas,
             $params,
             $typeConfig,
             $user,
             $beforeBalance,
             $beforeFrozen,
-            $validator->validated(),
+            $amount,
         );
         return $saveData;
     }
@@ -111,50 +120,45 @@ class AccountChange
     {
         $this->account->fresh();
         $this->account->balance += $money;
-        if ($this->account->save()) {
-            $return = true;
-        } else {
-            $return = false;
-        }
-        return $return;
+        $save                    = $this->account->save();
+        return $save;
     }
 
     /**
      * 消耗资金
      * @param float $money 金额.
-     * @return mixed
+     * @throws \Exception Exception.
+     * @return boolean
      */
-    public function cost(float $money)
+    public function cost(float $money): bool
     {
         $this->account->fresh();
         if ($money > $this->account->balance) {
-            return '对不起, 用户余额不足!';
+            DB::rollback();
+            throw new \Exception('100203');
         }
         $this->account->balance -= $money;
-        if ($this->account->save()) {
-            return true;
-        }
+        $save                    = $this->account->save();
+        return $save;
     }
 
     /**
      * 冻结资金
      * @param float $money 金额.
-     * @return mixed
+     * @throws \Exception Exception.
+     * @return boolean
      */
-    public function frozen(float $money)
+    public function frozen(float $money): bool
     {
         $this->account->fresh();
         if ($money > $this->account->balance) {
-            return '对不起, 用户余额不足!';
+            DB::rollback();
+            throw new \Exception('100203');
         }
         $this->account->balance -= $money;
         $this->account->frozen  += $money;
-        if ($this->account->save()) {
-            $return = true;
-        } else {
-            $return = false;
-        }
-        return $return;
+        $save                    = $this->account->save();
+        return $save;
     }
 
     /**
@@ -172,27 +176,30 @@ class AccountChange
 
     /**
      *
-     * @param  array        $params          参数.
-     * @param  array        $typeConfig      帐变类型.
-     * @param  FrontendUser $user            用户Eloq.
-     * @param  float        $beforeBalance   帐变前金额.
-     * @param  float        $beforeFrozen    帐变前冻结金额.
-     * @param  array        $reportFieldData 帐变参数详情.
+     * @param  array        $inputDatas    接收的数据.
+     * @param  string       $params        参数.
+     * @param  array        $typeConfig    帐变类型.
+     * @param  FrontendUser $user          用户Eloq.
+     * @param  float        $beforeBalance 帐变前金额.
+     * @param  float        $beforeFrozen  帐变前冻结金额.
+     * @param  float        $amount        金额.
      * @return boolean
      */
     private function _saveData(
-        array $params,
+        array $inputDatas,
+        string $params,
         array $typeConfig,
         FrontendUser $user,
         float $beforeBalance,
         float $beforeFrozen,
-        array $reportFieldData
+        float $amount
     ): bool {
         // 保存帐变记录
-        $report         = [
+        $report = [
+            'parent_id'             => $user->parent_id,
             'serial_number'         => self::getSerialNumber(),
-            'activity_sign'         => $params['activity_sign'] ?? 0,
-            'desc'                  => $params['desc'] ?? 0,
+            'activity_sign'         => $inputDatas['activity_sign'] ?? 0,
+            'desc'                  => $inputDatas['desc'] ?? 0,
             'frozen_type'           => $typeConfig['frozen_type'],
             'process_time'          => time(),
             'platform_sign'         => $user->platform_sign,
@@ -205,17 +212,13 @@ class AccountChange
             'balance'               => $this->account->balance,
             'frozen_balance'        => $this->account->frozen,
             'before_frozen_balance' => $beforeFrozen,
+            'params'                => $params,
+            'amount'                => $amount,
         ];
+
         $accountsReport = new FrontendUsersAccountsReport();
         $accountsReport->fill($report);
-        if (!$accountsReport->save()) {
-            return false;
-        }
-        //插入帐变详情数据
-        $reportFieldData['parent_id'] = $user->parent_id;
-        $reportFieldEloq              = new FrontendUsersAccountsReportsParamsWithValue();
-        $reportFieldEloq->fill($reportFieldData);
-        $save = $reportFieldEloq->save();
+        $save = $accountsReport->save();
         return $save;
     }
 

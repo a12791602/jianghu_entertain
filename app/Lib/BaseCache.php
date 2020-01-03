@@ -13,7 +13,7 @@ trait BaseCache
      * @param string $cacheKey 缓存键.
      * @return mixed
      */
-    public static function getTagsCacheData(string $cacheKey): mixed
+    public static function getTagsCacheData(string $cacheKey)
     {
         $data = [];
         if (self::hasTagsCache($cacheKey)) {

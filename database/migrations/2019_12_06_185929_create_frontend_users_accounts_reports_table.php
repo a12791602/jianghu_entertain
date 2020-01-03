@@ -25,9 +25,12 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->string('serial_number', 64)->nullable()->default(null)->comment('序列号');
                 $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
                 $table->integer('top_id')->nullable()->default(null)->comment('最上级id');
+                $table->integer('parent_id')->nullable()->default(null)->comment('上级id');
+                $table->integer('user_id')->nullable()->default(null)->comment('用户ID');
                 $table->string('username', 32)->nullable()->default(null)->comment('用户名');
                 $table->string('type_sign', 32)->nullable()->default(null)->comment('帐变类型标识');
                 $table->string('type_name', 32)->nullable()->default(null)->comment('帐变类型名称');
+                $table->integer('params_value_id')->nullable()->default(null)->comment('详情数据表ID');
                 $table->tinyInteger('in_out')->nullable()->default(null)->comment('帐变类型1增加 2减少');
                 $table->string('activity_sign', 32)->nullable()->default(null)->comment('活动标识');
                 $table->decimal('before_balance', 18, 4)->default('0.0000')->comment('变动前的资金')->unsigned();
@@ -36,6 +39,7 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->decimal('frozen_balance', 18, 4)->default('0.0000')->comment('变动后的冻结资金')->unsigned();
                 $table->tinyInteger('frozen_type')->default('0')->comment('冻结类型');
                 $table->integer('process_time')->default('0')->comment('处理时间');
+                $table->text('params')->nullable()->default(null)->comment('扩展的数据');
                 $table->string('desc')->nullable()->default(null)->comment('备注');
                 $table->nullableTimestamps();
             },

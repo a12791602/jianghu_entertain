@@ -5,42 +5,34 @@ namespace App\Models\User\Logics;
 use App\Lib\Locker\AccountLocker;
 use App\Lib\Logic\AccountChange;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 trait UserAccountLogics
 {
 
     /**
-     * @param  array  $params 参数.
-     * @param  string $type   帐变类型.
+     * @param  array  $inputDatas 接收的数据.
+     * @param  string $params     扩展数据.
+     * @param  string $type       帐变类型.
+     * @throws \Exception Exception.
      * @return mixed
      */
-    public function operateAccount(array $params, string $type)
+    public function operateAccount(array $inputDatas, string $params, string $type)
     {
         $accountLocker = new AccountLocker($this->frontendUser->id);
         if (!$accountLocker->getLock()) {
-            $message = '对不起, 获取账户锁失败!';
-            return $message;
+            throw new \Exception('100200');
         }
-        try {
-            // 帐变
-            $accountChange = new AccountChange($this);
-            DB::beginTransaction();
-            $resource = $accountChange->doChange($type, $params);
-            // $accountChange->triggerSave();
-            $accountLocker->release();
-            if ($resource !== true) {
-                DB::rollback();
-                $message = '对不起, ' . $resource;
-                return $message;
-            }
-            DB::commit();
-            return true;
-        } catch (\Throwable $e) {
-            $accountLocker->release();
-            Log::info('投注-异常:' . $e->getMessage() . '|' . $e->getFile() . '|' . $e->getLine());
-            $message = '对不起, ' . $e->getMessage() . '|' . $e->getFile() . '|' . $e->getLine();
-            return $message;
+        // 帐变
+        $accountChange = new AccountChange($this);
+        DB::beginTransaction();
+        $resource = $accountChange->doChange($inputDatas, $type, $params);
+        // $accountChange->triggerSave();
+        $accountLocker->release();
+        if ($resource !== true) {
+            DB::rollback();
+            throw new \Exception('100204');
         }
+        DB::commit();
+        return true;
     }
 }
