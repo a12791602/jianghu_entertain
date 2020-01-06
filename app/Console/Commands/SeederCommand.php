@@ -271,7 +271,7 @@ class SeederCommand extends GeneratorCommand
                     $value    = "'" . $value . "'";
                     $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
                 } elseif ($value === null) {
-                    $content .= $twenty . "'" . $ikey . "' =>  null," . PHP_EOL;
+                    $content .= $twenty . "'" . $ikey . "' => null," . PHP_EOL;
                 } elseif (is_numeric($value)) {
                     $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
                 } else {

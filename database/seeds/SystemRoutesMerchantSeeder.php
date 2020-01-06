@@ -514,6 +514,13 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'menu_group_id' => 2,
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'merchant-api.merchant-admin-user.switch-admin',
+                    'controller' => null,
+                    'method' => null,
+                    'menu_group_id' => 2,
+                    'is_open' => 0,
+                ],
             ],
         );
     }
