@@ -18,7 +18,7 @@ class SystemDomainSeeder extends Seeder
         SystemDomain::insert(
             [
                 [
-                    'platform_sign' => null,
+                    'platform_sign' => 'test',
                     'admin_id' => null,
                     'domain' => 'h5.jianghu.local',
                     'status' => 1,
@@ -26,7 +26,7 @@ class SystemDomainSeeder extends Seeder
                     'is_default' => 0,
                 ],
                 [
-                    'platform_sign' => null,
+                    'platform_sign' => 'test',
                     'admin_id' => null,
                     'domain' => 'madmin.jianghu.local',
                     'status' => 1,
@@ -34,9 +34,25 @@ class SystemDomainSeeder extends Seeder
                     'is_default' => 0,
                 ],
                 [
-                    'platform_sign' => null,
+                    'platform_sign' => 'test',
                     'admin_id' => null,
                     'domain' => 'cadmin.jianghu.local',
+                    'status' => 1,
+                    'type' => null,
+                    'is_default' => 0,
+                ],
+                [
+                    'platform_sign' => 'test',
+                    'admin_id' => null,
+                    'domain' => 'api.jianghu.local',
+                    'status' => 1,
+                    'type' => null,
+                    'is_default' => 0,
+                ],
+                [
+                    'platform_sign' => 'test',
+                    'admin_id' => null,
+                    'domain' => '10.10.50.127:8080',
                     'status' => 1,
                     'type' => null,
                     'is_default' => 0,

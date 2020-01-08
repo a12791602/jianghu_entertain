@@ -44,6 +44,7 @@ class DatabaseSeeder extends Seeder
                 GameVendorPlatformSeeder::class,
                 SystemFinanceUserTagSeeder::class,
                 UsersGradesSeeder::class,
+                MerchantAdminAccessGroupsHasBackendSystemMenuSeeder::class,
             ],
         );
     }

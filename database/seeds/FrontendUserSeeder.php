@@ -57,7 +57,7 @@ class FrontendUserSeeder extends Seeder
                     'user_specific_id' => 2,
                     'status' => 1,
                     'invite_code' => 123456,
-                    'pic_path' => '/avatar.png',
+                    'pic_path' => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
                 ],
             ],
         );

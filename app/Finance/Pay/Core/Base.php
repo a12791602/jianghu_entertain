@@ -12,9 +12,10 @@ abstract class Base implements Payment
     use DesUnit;
     use CommonUnit;
 
-    public const MODE_JUMP = 1; //前端拿到链接直接跳转
-    public const MODE_SHOW = 0; //前端拿到链接做成二维码展示,或者拿到二维码直接展示
-    public const CALLBACK  = '/online-finance/callback/'; //回调的基础地址
+    public const MODE_JUMP   = 'jump'; //前端拿到链接直接跳转
+    public const MODE_QRCODE = 'qrcode'; //前端拿到链接做成二维码展示,或者拿到二维码直接展示
+    public const MODE_HTML   = 'html'; //前端拿到链接做成二维码展示,或者拿到二维码直接展示
+    public const CALLBACK    = '/online-finance/callback/'; //回调的基础地址
 
     /**
      * 支付信息.
@@ -22,6 +23,7 @@ abstract class Base implements Payment
      * @var array $payInfo
      */
     public $payInfo = [
+        'platformSign' => null, //所属平台标记
         'orderNo' => null, //系统订单号
         'money' => null, //订单金额
         'merchantCode' => null, //商户号
@@ -42,13 +44,12 @@ abstract class Base implements Payment
      *
      * @var array $returnData
      */
-    protected $returnData = [
+    public $returnData = [
         'orderNo' => null, //系统订单号
-        'payUrl' => null, //付款链接
-        'qrcode' => null, //支付二维码
+        'payContent' => null, //付款信息
         'money' => null, //订单金额
-        'real_money' => null, //实际支付金额
-        'mode' => self::MODE_SHOW, //展示方式
+        'realMoney' => null, //实际支付金额
+        'mode' => null, //展示方式
     ];
 
     /**
@@ -56,7 +57,7 @@ abstract class Base implements Payment
      *
      * @var array $verifyData
      */
-    protected $verifyData = [
+    public $verifyData = [
         'flag' => false, //验签是否成功的标记
         'money' => null, //订单金额
         'real_money' => null, //实际支付金额
@@ -73,12 +74,14 @@ abstract class Base implements Payment
      */
     public function setPreDataOfRecharge(object $data)
     {
+        $this->payInfo['platformSign']   = $data->platform_sign;
         $this->payInfo['orderNo']        = $data->order_no;
         $this->payInfo['money']          = $data->money;
         $this->payInfo['merchantCode']   = $data->onlineInfo->merchant_code;
         $this->payInfo['merchantSecret'] = $data->onlineInfo->merchant_secret;
         $this->payInfo['publicKey']      = $data->onlineInfo->public_key;
         $this->payInfo['privateKey']     = $data->onlineInfo->private_key;
+        $this->payInfo['requestUrl']     = $data->onlineInfo->request_url;
         $this->payInfo['callbackUrl']    = app('request')
                 ->getSchemeAndHttpHost() . self::CALLBACK . $data->platform_sign . '/' . $data->order_no;
         if (isset($data->onlineInfo->vendor_url)) {
@@ -89,6 +92,8 @@ abstract class Base implements Payment
         $this->payInfo['user']            = $data->platform_sign . '_' . $data->user->username;
         $this->payInfo['clientIp']        = $data->client_ip;
         $this->payInfo['certificatePath'] = $data->onlineInfo->certificate;
+        $this->returnData['orderNo']      = $data->order_no;
+        $this->returnData['money']        = $data->money;
         return $this;
     }
 

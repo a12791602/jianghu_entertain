@@ -48,6 +48,7 @@ class RechargeAction
      */
     public function execute(FrontendApiMainController $contll, array $inputDatas): JsonResponse
     {
+        $result           = [];
         $this->contll     = $contll;
         $this->inputDatas = $inputDatas;
         //获取模型
@@ -56,7 +57,7 @@ class RechargeAction
         $this->_preCheck();
         //生成订单数据
         $data = $this->_generateOrderData();
-        //保存订单
+        //保存线上订单
         if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $order        = $this->_saveOnlineOrderData($data);
             $platformSign = $this->model->channel->vendor->sign; //第三方平台厂商的标记
@@ -69,14 +70,13 @@ class RechargeAction
             } catch (\Throwable $exception) {
                 throw new \Exception('100300');
             }
-            return $result;
         }
-
+        //保存线下订单
         if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $result = $this->_saveOfflineOrderData($data);
-            $result = msgOut(true, $result);
-            return $result;
         }
+        $result = msgOut(true, $result);
+        return $result;
     }
 
     /**

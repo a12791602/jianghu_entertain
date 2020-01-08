@@ -4,6 +4,7 @@ namespace App\Models\Systems;
 
 use App\Models\BaseModel;
 use App\Models\Systems\Traits\SystemDomainLogics;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class for system domain.
@@ -58,4 +59,14 @@ class SystemDomain extends BaseModel
         2 => 'm.',   //H5域名
         3 => 'app.', //APP域名
     ];
+
+    /**
+     * 所属平台
+     * @return BelongsTo
+     */
+    public function platform(): BelongsTo
+    {
+        $platform = $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
+        return $platform;
+    }
 }

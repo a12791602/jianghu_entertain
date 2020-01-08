@@ -13,15 +13,17 @@ interface Payment
     /**
      * 发起支付.
      *
-     * @return mixed
+     * @return mixed[]
+     * @throws \Exception Exception.
      */
-    public function recharge();
+    public function recharge(): array;
 
     /**
      * 校验返回参数.
      *
      * @param array $data Data.
      * @return mixed[]
+     * @throws \Exception Exception.
      */
     public function verify(array $data): array;
 }
