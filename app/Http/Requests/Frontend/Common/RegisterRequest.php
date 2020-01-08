@@ -34,10 +34,27 @@ class RegisterRequest extends BaseFormRequest
                 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
                 'unique:frontend_users',
             ],
-            'password' => 'required|alpha_dash|confirmed|min:6',
-            'password_confirmation' => 'required|alpha_dash|min:6',
+            'password' => [
+                'required',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
+            ],
+            'password_confirmation' => 'required',
             'verification_key' => 'required|string',
             'verification_code' => 'required|string',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return mixed[]
+     */
+    public function messages(): array
+    {
+        return [
+            'mobile.unique' => '手机号已存在',
+            'password.regex' => '密码必须由8-16位大小写字母加数字组成',
         ];
     }
 }

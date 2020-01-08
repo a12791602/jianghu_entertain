@@ -473,6 +473,18 @@ class BackendSystemMenuSeeder extends Seeder
                     'sort' => null,
                     'type' => 1,
                 ],
+                [
+                    'id' => '39',
+                    'label' => '全域',
+                    'en_name' => '',
+                    'route' => '',
+                    'pid' => 0,
+                    'icon' => null,
+                    'display' => 0,
+                    'level' => 1,
+                    'sort' => null,
+                    'type' => 1,
+                ],
             ],
         );
     }

@@ -3,6 +3,8 @@
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Models\Finance\SystemFinanceOfflineInfo;
+use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use Illuminate\Http\JsonResponse;
 
@@ -51,6 +53,7 @@ class ChannelsAction
                             'system_finance_user_tags.finance_id',
                         )->where('system_finance_user_tags.is_online', SystemFinanceType::IS_ONLINE_YES)
                         ->where('system_finance_user_tags.tag_id', $inputDatas['tag_id'])
+                        ->where('system_finance_online_infos.status', SystemFinanceOnlineInfo::STATUS_YES)
                         ->select(
                             [
                                 'system_finance_online_infos.id',
@@ -90,6 +93,7 @@ class ChannelsAction
                             'system_finance_user_tags.finance_id',
                         )->where('system_finance_user_tags.is_online', SystemFinanceType::IS_ONLINE_NO)
                         ->where('system_finance_user_tags.tag_id', $inputDatas['tag_id'])
+                        ->where('system_finance_offline_infos.status', SystemFinanceOfflineInfo::STATUS_YES)
                         ->select(
                             [
                                 'system_finance_offline_infos.id',
@@ -97,12 +101,8 @@ class ChannelsAction
                                 'type_id',
                                 'name',
                                 'remark',
-                                'qrcode',
-                                'account',
-                                'username',
                                 'min',
                                 'max',
-                                'branch',
                                 'fee',
                             ],
                         );

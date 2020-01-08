@@ -6,10 +6,12 @@ use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGameCancelRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DetailRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\EditRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\MaintainRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGameCancelAction;
@@ -21,6 +23,7 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainAddActio
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\MaintainAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
 use Illuminate\Http\JsonResponse;
@@ -33,12 +36,14 @@ class PlatformController extends BackEndApiMainController
     /**
      * 运营商平台列表
      *
-     * @param  DetailAction $action Action.
+     * @param  DetailRequest $request Request.
+     * @param  DetailAction  $action  Action.
      * @return JsonResponse
      */
-    public function detail(DetailAction $action): JsonResponse
+    public function detail(DetailRequest $request, DetailAction $action): JsonResponse
     {
-        $msgOut = $action->execute();
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -48,10 +53,8 @@ class PlatformController extends BackEndApiMainController
      * @param  EditAction  $action  Action.
      * @return JsonResponse
      */
-    public function edit(
-        EditRequest $request,
-        EditAction $action
-    ): JsonResponse {
+    public function edit(EditRequest $request, EditAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -65,10 +68,8 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function doAdd(
-        DoAddRequest $request,
-        DoAddAction $action
-    ): JsonResponse {
+    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
@@ -82,10 +83,23 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exceotion.
      */
-    public function switch(
-        SwitchRequest $request,
-        SwitchAction $action
-    ): JsonResponse {
+    public function switch(SwitchRequest $request, SwitchAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 运营商平台维护
+     *
+     * @param  MaintainRequest $request Request.
+     * @param  MaintainAction  $action  Action.
+     * @return JsonResponse
+     * @throws \Exception Exceotion.
+     */
+    public function maintain(MaintainRequest $request, MaintainAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -98,10 +112,8 @@ class PlatformController extends BackEndApiMainController
      * @param  DomainDetailAction  $action  Action.
      * @return JsonResponse
      */
-    public function domainDetail(
-        DomainDetailRequest $request,
-        DomainDetailAction $action
-    ): JsonResponse {
+    public function domainDetail(DomainDetailRequest $request, DomainDetailAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -114,10 +126,8 @@ class PlatformController extends BackEndApiMainController
      * @param  DomainAddAction  $action  Action.
      * @return JsonResponse
      */
-    public function domainAdd(
-        DomainAddRequest $request,
-        DomainAddAction $action
-    ): JsonResponse {
+    public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -131,10 +141,8 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignGames(
-        AssignGamesAction $action,
-        AssignGamesRequest $request
-    ): JsonResponse {
+    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request): JsonResponse
+    {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;

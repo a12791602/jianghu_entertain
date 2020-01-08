@@ -8,7 +8,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'headquarters-api.platform.';
         //运营商列表
-        Route::get(
+        Route::post(
             'detail',
             [PlatformController::class, 'detail'],
         )->name($namePrefix . 'detail');
@@ -27,6 +27,11 @@ Route::group(
             'switch',
             [PlatformController::class, 'switch'],
         )->name($namePrefix . 'switch');
+        //运营商维护
+        Route::post(
+            'maintain',
+            [PlatformController::class, 'maintain'],
+        )->name($namePrefix . 'maintain');
         //运营商域名列表
         Route::post(
             'domain-detail',

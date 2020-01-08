@@ -21,20 +21,24 @@ class SystemBankFilter extends ModelFilter
     public $relations = [];
 
     /**
-     * @param  integer $status Status.
-     * @return object
+     * 按状态搜索
+     * @param integer $status Status.
+     * @return SystemBankFilter
      */
-    public function status(int $status) :object
+    public function status(int $status): SystemBankFilter
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
-     * @param  string $name Name.
-     * @return object
+     * 按名称搜索
+     * @param string $name Name.
+     * @return SystemBankFilter
      */
-    public function name(string $name) :object
+    public function name(string $name): SystemBankFilter
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
     }
 }

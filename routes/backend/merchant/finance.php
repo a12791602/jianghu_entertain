@@ -73,5 +73,8 @@ Route::group(
         //支付方式修改状态
         Route::post('status', [OnlineFinanceController::class, 'status'])
             ->name($namePrefix . 'status');
+        //接收回调
+        Route::any('callback/{platform}/{order}', [OnlineFinanceController::class, 'callback'])
+            ->name($namePrefix . 'callback');
     },
 );

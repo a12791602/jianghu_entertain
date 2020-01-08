@@ -63,10 +63,11 @@ class DoAddAction
             'name'           => $inputDatas['platform_name'],
             'sign'           => $inputDatas['platform_sign'],
             'agency_method'  => $inputDatas['agency_method'],
-            'author_id'      => $adminId,
-            'last_editor_id' => $adminId,
             'start_time'     => $inputDatas['start_time'],
             'end_time'       => $inputDatas['end_time'],
+            'sms_num'        => $inputDatas['sms_num'],
+            'author_id'      => $adminId,
+            'last_editor_id' => $adminId,
         ];
         $platformEloq->fill($platformData);
         if (!$platformEloq->save()) {

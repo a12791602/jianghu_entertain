@@ -22,6 +22,7 @@ class HomePersonalInformationResource extends JsonResource
             'uid' => $this->uid,
             'pic_path' => $this->pic_path,
             'username' => $this->username,
+            'level_deep' => $this->level_deep,
             'balance' => optional($this->account)->balance,
         ];
         return $result;

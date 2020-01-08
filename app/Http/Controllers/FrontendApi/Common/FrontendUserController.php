@@ -28,19 +28,6 @@ class FrontendUserController extends FrontendApiMainController
     }
 
     /**
-     * Home personal information.
-     * @param InformationAction $action  Action.
-     * @param Request           $request Request.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function homeInformation(InformationAction $action, Request $request): JsonResponse
-    {
-        $result = $action->homeInformation($request);
-        return $result;
-    }
-
-    /**
      * Get user grade rules.
      * @param GradesAction $action  GradesAction.
      * @param Request      $request Request.

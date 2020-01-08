@@ -13,15 +13,10 @@ Route::group(
         $namePrefix = 'h5-api.user.';
         Route::get('logout', [FrontendAuthController::class,'logout'])->name($namePrefix . 'logout');
         Route::post('reset-password', [PasswordController::class,'password'])->name($namePrefix . 'reset-password');
-
         Route::patch('security-code', [PasswordController::class,'security'])->name($namePrefix . 'security-code');
-
         Route::put('refresh-token', [FrontendAuthController::class,'refreshToken'])
             ->name($namePrefix . 'refresh-token');
         Route::get('information', [FrontendUserController::class,'information'])->name($namePrefix . 'information');
-        Route::get('home-information', [FrontendUserController::class,'homeInformation'])
-            ->name($namePrefix . 'information');
-
         Route::get('grades', [FrontendUserController::class,'grades'])->name($namePrefix . 'grades');
     },
 );

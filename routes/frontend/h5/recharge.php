@@ -10,5 +10,7 @@ Route::group(
         Route::get('types', [RechargeController::class, 'types'])->name($namePrefix . 'types');
         //获取充值渠道
         Route::get('channels', [RechargeController::class, 'channels'])->name($namePrefix . 'channels');
+        //发起充值
+        Route::post('recharge', [RechargeController::class, 'recharge'])->name($namePrefix . 'recharge');
     },
 );

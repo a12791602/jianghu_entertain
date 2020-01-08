@@ -48,6 +48,16 @@ class EditAction
         $platformELoq->agency_method = $inputDatas['agency_method'];
         $platformELoq->start_time    = $inputDatas['start_time'];
         $platformELoq->end_time      = $inputDatas['end_time'];
+        if (isset($inputDatas['sms_num']) && isset($inputDatas['type'])) {
+            if ((int) $inputDatas['type'] === 0) {
+                $platformELoq->sms_num -= $inputDatas['sms_num'];
+                if ($platformELoq->sms_num < 0) {
+                    $platformELoq->sms_num = 0;
+                }
+            } elseif ((int) $inputDatas['type'] === 1) {
+                $platformELoq->sms_num += $inputDatas['sms_num'];
+            }
+        }
         if (!$platformELoq->save()) {
             DB::rollback();
             throw new \Exception('302004');

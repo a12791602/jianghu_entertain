@@ -110,6 +110,13 @@ $config = [
             'driver' => 'custom',
             'via' => BackendLogMonolog::class,
         ],
+
+        'finance' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
     ],
 
 ];

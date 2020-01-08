@@ -9,6 +9,7 @@ use App\Http\Requests\Backend\Merchant\Finance\Online\EditRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\AddDoAction;
+use App\Http\SingleActions\Backend\Merchant\Finance\Online\CallbackAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\DelDoAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\EditAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\GetChannelsAction;
@@ -103,6 +104,21 @@ class OnlineFinanceController extends BackEndApiMainController
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($this, $inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 接收回调信息
+     *
+     * @param CallbackAction $action   Action.
+     * @param string         $platform Platform.
+     * @param string         $order    Order.
+     * @return string
+     * @throws \Exception Exception.
+     */
+    public function callback(CallbackAction $action, string $platform, string $order): string
+    {
+        $outputDatas = $action->execute($this, $platform, $order);
         return $outputDatas;
     }
 }

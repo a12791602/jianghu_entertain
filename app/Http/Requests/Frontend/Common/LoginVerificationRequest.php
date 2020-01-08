@@ -31,9 +31,22 @@ class LoginVerificationRequest extends BaseFormRequest
             'mobile' => [
                 'required',
                 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
+                'exists:frontend_users,mobile',
             ],
-            'password' => 'required|alpha_dash',
+            'password' => 'required',
             'remember_me' => 'boolean',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return mixed[]
+     */
+    public function messages(): array
+    {
+        return [
+            'mobile.exists' => '手机号不存在',
         ];
     }
 }

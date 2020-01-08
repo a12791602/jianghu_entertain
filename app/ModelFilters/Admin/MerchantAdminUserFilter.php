@@ -69,4 +69,16 @@ class MerchantAdminUserFilter extends ModelFilter
         $object = $this->where('name', $last_editor_name);
         return $object;
     }
+
+    /**
+     * 邮箱查询
+     *
+     * @param  string $email 邮箱.
+     * @return MerchantAdminUserFilter
+     */
+    public function email(string $email): MerchantAdminUserFilter
+    {
+        $object = $this->where('email', $email);
+        return $object;
+    }
 }

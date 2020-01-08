@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\ModelFilters\System\SystemPlatformFilter;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 
@@ -27,11 +28,16 @@ class DetailAction
     }
 
     /**
+     * @param  array $inputDatas 接收的参数.
      * @return JsonResponse
      */
-    public function execute(): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $platformData = $this->model->with('owner')->get()->toArray();
+        $platformData = $this->model
+            ->filter($inputDatas, SystemPlatformFilter::class)
+            ->with('owner')
+            ->get()
+            ->toArray();
         $msgOut       = msgOut(true, $platformData);
         return $msgOut;
     }

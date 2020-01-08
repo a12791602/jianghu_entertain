@@ -30,6 +30,8 @@ class CreateSystemPlatformsTable extends Migration
                 $table->integer('owner_id')->nullable()->default(null)->comment('所属人id');
                 $table->timestamp('start_time')->nullable()->default(null)->comment('开始时间');
                 $table->timestamp('end_time')->nullable()->default(null)->comment('结束时间');
+                $table->integer('sms_num')->nullable()->default(null)->comment('短信条数');
+                $table->timestamp('maintain_time')->nullable()->default(null)->comment('维护时间');
                 $table->tinyInteger('status')->nullable()->default('1')->comment('状态 0关闭 1开启');
                 $table->integer('author_id')->nullable()->default(null)->comment('管理员id');
                 $table->integer('last_editor_id')->nullable()->default(null)->comment('最后修改的管理员id');

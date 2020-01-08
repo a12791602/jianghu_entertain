@@ -4,8 +4,10 @@ namespace App\Http\Controllers\FrontendApi\H5;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\H5\Recharge\ChannelsRequest;
+use App\Http\Requests\Frontend\H5\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\H5\Recharge\TypesRequest;
 use App\Http\SingleActions\Frontend\H5\Recharge\ChannelsAction;
+use App\Http\SingleActions\Frontend\H5\Recharge\RechargeAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\TypesAction;
 use Illuminate\Http\JsonResponse;
 
@@ -40,6 +42,21 @@ class RechargeController extends FrontendApiMainController
     {
         $inputDatas = $request->validated();
         $outputs    = $action->execute($this, $inputDatas);
+        return $outputs;
+    }
+
+    /**
+     * 发起充值
+     * @param RechargeAction  $action  Action.
+     * @param RechargeRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function recharge(RechargeAction $action, RechargeRequest $request): JsonResponse
+    {
+        $inputDatas       = $request->validated();
+        $inputDatas['ip'] = $request->ip();
+        $outputs          = $action->execute($this, $inputDatas);
         return $outputs;
     }
 }

@@ -22,6 +22,9 @@ class SystemFinanceOnlineInfo extends BaseModel
     public const ENCRYPT_MODE_SECRET = 1;
     public const ENCRYPT_MODE_CERT   = 2;
 
+    public const STATUS_YES = 1;
+    public const STATUS_NO  = 0;
+
     /**
      * @return BelongsTo
      */
