@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesH5;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesMobile;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesWeb;
+use App\Models\Systems\SystemDomain;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -37,7 +38,7 @@ class FrontendApiMainController extends Controller
     protected $currentOptRoute;
 
     /**
-     * 当前用户存在的平台
+     * 当前域名所属的平台
      * @var object $currentPlatformEloq \App\Models\SystemPlatform
      */
     public $currentPlatformEloq;
@@ -73,8 +74,8 @@ class FrontendApiMainController extends Controller
      */
     protected $routeModel = [
         'app-api' => SystemRoutesMobile::class,
-        'h5-api' => SystemRoutesH5::class,
-        'pc-api' => SystemRoutesWeb::class,
+        'h5-api'  => SystemRoutesH5::class,
+        'pc-api'  => SystemRoutesWeb::class,
     ];
 
     /**
@@ -91,8 +92,8 @@ class FrontendApiMainController extends Controller
      */
     protected $routeGuard = [
         'app-api' => 'frontend-mobile',
-        'pc-api' => 'frontend-pc',
-        'h5-api' => 'frontend-h5',
+        'pc-api'  => 'frontend-pc',
+        'h5-api'  => 'frontend-h5',
     ];
 
     /**
@@ -104,12 +105,33 @@ class FrontendApiMainController extends Controller
         $this->middleware(
             function ($request, $next) {
                 $this->_userOperateLog();
-                if (($this->frontendUser !== null) && $this->frontendUser->platform()->exists()) {
-                    $this->currentPlatformEloq = $this->frontendUser->platform; //获取目前账号用户属于平台的对象
-                }
+                $this->_getCurrentPlatform();
                 return $next($request);
             },
         );
+    }
+
+    /**
+     * 获取当前域名所属平台
+     * @return void
+     * @throws \Exception Exception.
+     */
+    private function _getCurrentPlatform(): void
+    {
+        $host   = Request::server('HTTP_REFERER');
+        $strArr = explode('/', $host);
+        if (!is_array($strArr) || !isset($strArr[2])) {
+            throw new \Exception('100103');
+        }
+        $domain = $strArr[2];
+        $domainEloq = SystemDomain::where('domain', $domain)->first();
+        if (!$domainEloq) {
+            throw new \Exception('100101');
+        }
+        $this->currentPlatformEloq = $domainEloq->platform;
+        if (!$this->currentPlatformEloq) {
+            throw new \Exception('100102');
+        }
     }
 
     /**
@@ -133,7 +155,7 @@ class FrontendApiMainController extends Controller
         $this->userAgent = new Agent();
         if ($this->userAgent->isRobot()) {
             Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
-            throw new \Exception('100000');
+            throw new \Exception('100100');
         }
         if (!isset($this->routeModel[$prefix])) {
             throw new \Exception('100003');
@@ -155,8 +177,8 @@ class FrontendApiMainController extends Controller
         $this->frontendUser = $this->currentAuth->user();
         $this->log_uuid     = Str::orderedUuid()->getNodeHex();
         $datas              = [
-            'input' => $this->inputs,
-            'route' => $this->currentOptRoute,
+            'input'    => $this->inputs,
+            'route'    => $this->currentOptRoute,
             'log_uuid' => $this->log_uuid,
         ];
         $logData            = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
