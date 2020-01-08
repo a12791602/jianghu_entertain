@@ -20,7 +20,7 @@ class HomePersonalInformationResource extends JsonResource
     {
         $result = [
             'uid' => $this->uid,
-            'pic_path' => $this->pic_path,
+            'pic_path' => config('image_domain.jianghu') . $this->pic_path,
             'username' => $this->username,
             'level_deep' => $this->level_deep,
             'balance' => optional($this->account)->balance,

@@ -21,7 +21,7 @@ class SystemSlidesResource extends JsonResource
         $result = [
             'title' => $this->title,
             'content' => $this->content,
-            'pic_path' => $this->pic_path,
+            'pic_path' => config('image_domain.jianghu') . $this->pic_path,
             'redirect_url' => $this->redirect_url,
         ];
         return $result;
