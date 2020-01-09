@@ -16,11 +16,11 @@ class AuthExceptionFormatter extends ExceptionFormatter
     public function format(JsonResponse $response, Exception $e, array $reporterResponses)
     {
         $data = $response->getData(true);
-        $serverCode = '401';
+        $serverCode = 401;
         $response->setStatusCode($serverCode);//Forbidden
         $message = __('codes-map.' . 100401);
         $data = array_merge($data, [
-            'code' => $e->getCode(),
+            'code' => (string)$e->getCode(),
             'message' => $message,
         ]);
         $response->setData($data);
