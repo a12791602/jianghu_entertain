@@ -28,7 +28,7 @@ class IndexAction extends BaseAction
     {
         $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
         $pageSize                  = $this->model::getPageSize();
-        $datas                     = $this->model::with('gameType')
+        $datas                     = $this->model::with('gameType:id,name,sign')
                                           ->filter($inputDatas, GameTypePlatformFilter::class)
                                           ->paginate($pageSize);
         $result                    = msgOut(true, $datas);
