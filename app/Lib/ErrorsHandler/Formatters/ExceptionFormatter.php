@@ -44,11 +44,12 @@ class ExceptionFormatter extends BaseFormatter
     }
 
     /**
-     * @param $serverCode
+     * @param int $serverCode HttpCode.
      * @return bool
      */
-    private function _isInvalid($serverCode): bool
+    private function _isInvalid(int $serverCode): bool
     {
-        return $serverCode < 100 || $serverCode >= 600;
+        $result= $serverCode < 100 || $serverCode >= 600;
+        return $result;
     }
 }
