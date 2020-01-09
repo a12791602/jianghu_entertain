@@ -37,7 +37,7 @@ class ExceptionFormatter extends BaseFormatter
             $code = $serverCode;
         }
         $data = array_merge($data, [
-            'code' => $code,
+            'code' => (string) $code,
             'message' => $message,
         ]);
         $response->setData($data);
