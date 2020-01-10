@@ -23,7 +23,7 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('type_id')->nullable()->default(null)->comment('所属类型id');
                 $table->integer('platform_id')->default(0)->comment('平台id');
-                $table->integer('bank_id')->comment('银行卡id');
+                $table->integer('bank_id')->default(0)->comment('银行卡id');
                 $table->string('name', 64)->nullable()->default(null)->comment('名称');
                 $table->string('remark')->nullable()->default(null)->comment('备注');
                 $table->string('qrcode')->nullable()->default(null)->comment('二维码');
