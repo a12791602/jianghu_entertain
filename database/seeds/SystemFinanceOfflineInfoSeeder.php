@@ -19,7 +19,7 @@ class SystemFinanceOfflineInfoSeeder extends Seeder
             [
                 [
                     'type_id' => 1,
-                    'platform_id' => 2,
+                    'platform_id' => 1,
                     'bank_id' => 1,
                     'name' => '中国人民银行',
                     'remark' => null,
@@ -37,7 +37,7 @@ class SystemFinanceOfflineInfoSeeder extends Seeder
                 ],
                 [
                     'type_id' => 2,
-                    'platform_id' => 2,
+                    'platform_id' => 1,
                     'bank_id' => 0,
                     'name' => '支付宝转账1',
                     'remark' => null,

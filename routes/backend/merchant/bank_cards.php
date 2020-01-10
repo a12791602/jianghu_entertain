@@ -8,14 +8,12 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.bank-cards.';
         //会员银行卡-列表
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'index',
             [BankCardsController::class, 'index'],
         )->name($namePrefix . 'index');
         //会员银行卡-删除
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete',
             [BankCardsController::class, 'delete'],
         )->name($namePrefix . 'delete');

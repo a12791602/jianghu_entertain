@@ -9,38 +9,36 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.offline-finance.';
         //添加线下金流
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'add-do',
             [OfflineFinanceController::class, 'addDo'],
         )->name($namePrefix . 'add-do');
         //线下金流列表
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'index',
             [OfflineFinanceController::class, 'index'],
         )->name($namePrefix . 'index');
         //更改线下金流状态
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'status',
             [OfflineFinanceController::class, 'status'],
         )->name($namePrefix . 'status');
         //获取线下金流分类
-        Route::match(
-            ['get', 'options'],
+        Route::get(
             'types',
             [OfflineFinanceController::class, 'types'],
         )->name($namePrefix . 'types');
         //删除线下金流
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'del-do',
             [OfflineFinanceController::class, 'delDo'],
         )->name($namePrefix . 'del-do');
         //编辑线下金流
-        Route::match(
-            ['post', 'get', 'options'],
+        Route::post(
+            'edit',
+            [OfflineFinanceController::class, 'edit'],
+        )->name($namePrefix . 'edit');
+        Route::get(
             'edit',
             [OfflineFinanceController::class, 'edit'],
         )->name($namePrefix . 'edit');
@@ -73,8 +71,11 @@ Route::group(
         //支付方式修改状态
         Route::post('status', [OnlineFinanceController::class, 'status'])
             ->name($namePrefix . 'status');
-        //接收回调
-        Route::any('callback/{platform}/{order}', [OnlineFinanceController::class, 'callback'])
-            ->name($namePrefix . 'callback');
+        //接收回调 platform 系统的平台 order 订单号
+        Route::match(
+            ['get', 'post'],
+            'callback/{platform}/{order}',
+            [OnlineFinanceController::class, 'callback'],
+        )->name($namePrefix . 'callback');
     },
 );

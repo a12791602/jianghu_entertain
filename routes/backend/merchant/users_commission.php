@@ -8,26 +8,22 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.commission.';
         //列表
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'index',
             [CommissionController::class, 'index'],
         )->name($namePrefix . 'index');
         //添加
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'do-add',
             [CommissionController::class, 'doAdd'],
         )->name($namePrefix . 'do-add');
         //编辑
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'edit',
             [CommissionController::class, 'edit'],
         )->name($namePrefix . 'edit');
         //删除
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete',
             [CommissionController::class, 'delete'],
         )->name($namePrefix . 'delete');

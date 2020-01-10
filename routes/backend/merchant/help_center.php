@@ -8,26 +8,22 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.help-center.';
         //列表
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'index',
             [HelpCenterController::class, 'index'],
         )->name($namePrefix . 'index');
         //添加
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'do-add',
             [HelpCenterController::class, 'doAdd'],
         )->name($namePrefix . 'do-add');
         //编辑
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'edit',
             [HelpCenterController::class, 'edit'],
         )->name($namePrefix . 'edit');
         //删除
-        Route::match(
-            ['post', 'options'],
+        Route::post(
             'delete',
             [HelpCenterController::class, 'delete'],
         )->name($namePrefix . 'delete');
