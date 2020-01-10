@@ -3,26 +3,24 @@
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use Cache;
-use Illuminate\Http\JsonResponse;
-//use Log;
 use Str;
 
 /**
- * Class VerificationCodeAction
+ * Class BaseAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class VerificationCodeAction
+class BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
-     * @return JsonResponse
+     * Send the verification code.
+     * @param string $mobile Mobile.
+     * @return mixed[]
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function sendVerificationCode(string $mobile): array
     {
         $random           = strval(random_int(1, 999999));
         $code             = str_pad($random, 6, '0', STR_PAD_LEFT);
-        $mobile           = $inputDatas['mobile'];
         $expiredAt        = now()->addMinutes(10);
         $verification_key = 'verificationCode:' . Str::random(15);
 
@@ -37,7 +35,6 @@ class VerificationCodeAction
             $item['verification_code'] = $code;
         }
 
-        $result = msgOut(true, $item);
-        return $result;
+        return $item;
     }
 }

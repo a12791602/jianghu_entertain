@@ -16,14 +16,14 @@ class SlidesAction
 
     /**
      * Home carousel slides.
-     * @param array $request Request.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $request): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $request['status'] = 1;
-        $slides            = SystemFePageBanner::filter($request, SystemFePageBannerFilter::class)->get();
+        $inputDatas['status'] = SystemFePageBanner::STATUS_OPEN;
+        $slides               = SystemFePageBanner::filter($inputDatas, SystemFePageBannerFilter::class)->get();
 
         $result = msgOut(true, SystemSlidesResource::collection($slides));
         return $result;

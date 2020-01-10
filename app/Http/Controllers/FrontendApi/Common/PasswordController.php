@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\Requests\Frontend\Common\PVerificationCodeRequest;
 use App\Http\Requests\Frontend\Common\ResetPasswordRequest;
 use App\Http\Requests\Frontend\Common\SecurityCodeRequest;
-use App\Http\Requests\Frontend\Common\SecurityVerificationCodeRequest;
 use App\Http\SingleActions\Common\FrontendAuth\ResetPasswordAction;
+use App\Http\SingleActions\Common\FrontendAuth\RPVerificationCodeAction;
 use App\Http\SingleActions\Common\FrontendAuth\SecurityCodeAction;
-use App\Http\SingleActions\Common\FrontendAuth\VerificationCodeAction;
+use App\Http\SingleActions\Common\FrontendAuth\SecurityVerificationCodeAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,15 +34,15 @@ class PasswordController extends FrontendApiMainController
 
     /**
      * Get reset password verification code.
-     * @param VerificationCodeAction $action  VerificationCodeAction.
-     * @param ResetPasswordRequest   $request ResetPasswordRequest.
+     * @param RPVerificationCodeAction $action  VerificationCodeAction.
+     * @param PVerificationCodeRequest $request PVerificationCodeRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function passwordCode(VerificationCodeAction $action, ResetPasswordRequest $request): JsonResponse
+    public function passwordCode(RPVerificationCodeAction $action, PVerificationCodeRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $result     = $action->execute($inputDatas);
+        $result     = $action->execute($this, $inputDatas);
         return $result;
     }
 
@@ -60,16 +61,13 @@ class PasswordController extends FrontendApiMainController
 
     /**
      * Get security verification code.
-     * @param VerificationCodeAction          $action  VerificationCodeAction.
-     * @param SecurityVerificationCodeRequest $request SecurityVerificationCodeRequest.
+     * @param SecurityVerificationCodeAction $action SecurityVerificationCodeAction.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function securityCode(VerificationCodeAction $action, SecurityVerificationCodeRequest $request): JsonResponse
+    public function securityCode(SecurityVerificationCodeAction $action): JsonResponse
     {
-        $inputDatas           = $request->validated();
-        $inputDatas['mobile'] = $request->user()->mobile;
-        $result               = $action->execute($inputDatas);
+        $result = $action->execute($this);
         return $result;
     }
 }

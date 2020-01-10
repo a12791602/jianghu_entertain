@@ -45,6 +45,14 @@ class DatabaseSeeder extends Seeder
                 SystemFinanceUserTagSeeder::class,
                 UsersGradesSeeder::class,
                 MerchantAdminAccessGroupsHasBackendSystemMenuSeeder::class,
+                SystemBankSeeder::class,
+                SystemPlatformBankSeeder::class,
+                SystemFinanceChannelSeeder::class,
+                SystemFinanceOfflineInfoSeeder::class,
+                SystemFinanceOnlineInfoSeeder::class,
+                SystemFinanceTypeSeeder::class,
+                SystemFinanceVendorSeeder::class,
+                UsersTagSeeder::class,
             ],
         );
     }

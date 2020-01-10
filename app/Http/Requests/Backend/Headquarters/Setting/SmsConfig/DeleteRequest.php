@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Frontend\Common;
+namespace App\Http\Requests\Backend\Headquarters\Setting\SmsConfig;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class SlidesRequest
- * @package App\Http\Requests\Frontend\Common
+ * 短信配置-删除
  */
-class SlidesRequest extends BaseFormRequest
+class DeleteRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,18 +27,18 @@ class SlidesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'flag' => 'integer',
+            'id' => 'required|exists:system_sms_configs', //ID
         ];
     }
 
     /**
-     * Get custom messages for validator errors.
      * @return mixed[]
      */
     public function messages(): array
     {
         return [
-            'flag.integer' => '标记类型不符合规则',
+            'id.required' => '缺少短信配置ID',
+            'id.exists'   => '该短信配置不存在',
         ];
     }
 }

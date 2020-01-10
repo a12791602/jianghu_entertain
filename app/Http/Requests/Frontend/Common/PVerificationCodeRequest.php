@@ -5,10 +5,10 @@ namespace App\Http\Requests\Frontend\Common;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class RegisterVerificationCodeRequest
+ * Class PasswordVerificationCodeRequest
  * @package App\Http\Requests\Frontend\Common
  */
-class RegisterVerificationCodeRequest extends BaseFormRequest
+class PVerificationCodeRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

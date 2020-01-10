@@ -15,4 +15,6 @@ class SystemFePageBanner extends BaseModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+
+    public const STATUS_OPEN = 1;
 }

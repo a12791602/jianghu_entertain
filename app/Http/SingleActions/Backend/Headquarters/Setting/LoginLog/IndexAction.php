@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Setting;
+namespace App\Http\SingleActions\Backend\Headquarters\Setting\LoginLog;
 
 use App\ModelFilters\System\BackendLoginLogFilter;
 use App\Models\Systems\BackendLoginLog;
@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员登录日志
  */
-class LoginLogDetailAction
+class IndexAction
 {
 
     /**
@@ -33,7 +33,11 @@ class LoginLogDetailAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data = $this->model::filter($inputDatas, BackendLoginLogFilter::class)->paginate($this->model::getPageSize());
-        return msgOut(true, $data);
+        $data = $this->model
+            ->filter($inputDatas, BackendLoginLogFilter::class)
+            ->paginate($this->model::getPageSize());
+            
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

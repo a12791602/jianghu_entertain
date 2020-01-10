@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\Requests\Frontend\Common\GameCategoryRequest;
 use App\Http\Requests\Frontend\Common\GameListRequest;
+use App\Http\Requests\Frontend\Common\GamesLobby\GameCategoryRequest;
 use App\Http\Requests\Frontend\Common\SlidesRequest;
 use App\Http\SingleActions\Common\GamesLobby\GameCategoryAction;
 use App\Http\SingleActions\Common\GamesLobby\GameListAction;
@@ -40,7 +40,7 @@ class GamesLobbyController extends FrontendApiMainController
      */
     public function category(GameCategoryAction $action, GameCategoryRequest $request): JsonResponse
     {
-        $result = $action->execute($request);
+        $result = $action->execute($this, $request);
         return $result;
     }
 
@@ -53,7 +53,7 @@ class GamesLobbyController extends FrontendApiMainController
      */
     public function gameList(GameListAction $action, GameListRequest $request): JsonResponse
     {
-        $result = $action->execute($request);
+        $result = $action->execute($this, $request);
         return $result;
     }
 

@@ -12,7 +12,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'h5-api.user.';
         Route::get('logout', [FrontendAuthController::class,'logout'])->name($namePrefix . 'logout');
-        Route::post('reset-password', [PasswordController::class,'password'])->name($namePrefix . 'reset-password');
+        Route::put('reset-password', [PasswordController::class,'password'])->name($namePrefix . 'reset-password');
         Route::patch('security-code', [PasswordController::class,'security'])->name($namePrefix . 'security-code');
         Route::put('refresh-token', [FrontendAuthController::class,'refreshToken'])
             ->name($namePrefix . 'refresh-token');

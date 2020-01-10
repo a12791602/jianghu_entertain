@@ -24,10 +24,10 @@ class RegisterAction
         $verification_key = $request['verification_key'];
         $verifyData       = Cache::get($verification_key);
         if (!$verifyData) {
-            throw new \Exception('200002');
+            throw new \Exception('100502');
         }
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
-            throw new \Exception('200003', 401);
+            throw new \Exception('100503', 401);
         }
         $item = [
             'mobile' => $verifyData['mobile'],

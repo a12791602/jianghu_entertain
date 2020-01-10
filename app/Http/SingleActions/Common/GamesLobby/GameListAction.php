@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
+use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\GameListRequest;
 use App\Http\Resources\Frontend\GamesLobby\GameListResource;
 use App\ModelFilters\Platform\GamesPlatformFilter;
@@ -17,19 +18,21 @@ class GameListAction
 
     /**
      * Game list.
-     * @param GameListRequest $request GameListRequest.
+     * @param FrontendApiMainController $controller FrontendApiMainController.
+     * @param GameListRequest           $request    GameListRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(GameListRequest $request): JsonResponse
+    public function execute(FrontendApiMainController $controller, GameListRequest $request): JsonResponse
     {
-        $user                       = $request->user();
-        $inputData                  = $request->validated();
-        $inputData['platform_sign'] = $user->platform_sign;
+        $condition = [];
 
-        $result = GamesPlatform::with('games:type_id,sign,name')
-           ->filter($inputData, GamesPlatformFilter::class)
-           ->get(['id','platform_sign','game_sign']);
+        $condition['platform_sign'] = $controller->currentPlatformEloq->sign;
+
+        $condition           = $request->validated();
+        $condition['status'] = GamesPlatform::STATUS_OPEN;
+
+        $result = GamesPlatform::with('games')->filter($condition, GamesPlatformFilter::class)->get();
 
         $result = msgOut(true, GameListResource::collection($result));
         return $result;

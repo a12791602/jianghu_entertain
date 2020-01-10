@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\ModelFilters\Admin\BackendAdminUserFilter;
 use App\Models\BaseAuthModel;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -85,5 +86,14 @@ class BackendAdminUser extends BaseAuthModel
     {
         $accessGroup = $this->hasOne(BackendAdminAccessGroup::class, 'id', 'group_id');
         return $accessGroup;
+    }
+
+    /**
+     * @return string
+     */
+    public function modelFilter(): string
+    {
+        $string = $this->provideFilter(BackendAdminUserFilter::class);
+        return $string;
     }
 }

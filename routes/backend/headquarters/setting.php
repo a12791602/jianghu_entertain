@@ -1,13 +1,15 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\SettingController;
+use App\Http\Controllers\BackendApi\Headquarters\Setting\LoginLogController;
 
 //设置管理
 Route::group(
-    ['prefix' => 'setting'],
+    ['prefix' => 'login-log'],
     static function (): void {
-        $namePrefix = 'headquarters-api.setting.';
-        Route::post('login-log-detail', [SettingController::class, 'loginLogDetail'])
-            ->name($namePrefix . 'login-log-detail');
+        $namePrefix = 'headquarters-api.login-log.';
+        Route::post(
+            'index',
+            [LoginLogController::class, 'index'],
+        )->name($namePrefix . 'index');
     },
 );

@@ -2,10 +2,12 @@
 
 namespace App\Http\SingleActions\Common\GamesLobby;
 
+use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\Requests\Frontend\Common\GamesLobby\GameCategoryRequest;
 use App\Http\Resources\Frontend\GamesLobby\GameCategoryResource;
+use App\ModelFilters\Game\GameTypePlatformFilter;
 use App\Models\Game\GameTypePlatform;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class GameCategoryAction
@@ -16,20 +18,20 @@ class GameCategoryAction
 
     /**
      * Game category
-     * @param  Request $request Request.
+     * @param FrontendApiMainController $controller FrontendApiMainController.
+     * @param GameCategoryRequest       $request    GameCategoryRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function execute(FrontendApiMainController $controller, GameCategoryRequest $request): JsonResponse
     {
-        $user      = $request->user();
-        $condition = [
-            'status' => GameTypePlatform::STATUS,
-            'device' => GameTypePlatform::DEVICE_H5,
-            'platform_id' => $user->platform_id,
-        ];
+        $condition = $request->validated();
 
-        $outputDatas = GameTypePlatform::with('gameType:id,name,sign')->where($condition)->get();
+        $condition['status']      = GameTypePlatform::STATUS;
+        $condition['platform_id'] = $controller->currentPlatformEloq->id;
+
+        $outputDatas = GameTypePlatform::with('gameType:id,name,sign')
+            ->filter($condition, GameTypePlatformFilter::class)->where($condition)->get();
         $result      = msgOut(true, GameCategoryResource::collection($outputDatas));
         return $result;
     }

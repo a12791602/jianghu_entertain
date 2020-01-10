@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Setting;
+namespace App\Http\Requests\Backend\Headquarters\Setting\LoginLog;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
  * 管理员登录日志
  */
-class LoginLogDetailRequest extends BaseFormRequest
+class IndexRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,14 +22,14 @@ class LoginLogDetailRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'email' => 'email:rfc,dns',
-            'name' => 'string',
-            'ip' => 'ip',
+            'email'    => 'email:rfc,dns',
+            'name'     => 'string',
+            'ip'       => 'ip',
             'createAt' => 'string',
         ];
     }

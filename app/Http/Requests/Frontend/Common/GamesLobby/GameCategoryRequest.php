@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Requests\Frontend\Common;
+namespace App\Http\Requests\Frontend\Common\GamesLobby;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseFormRequest;
 
 /**
  * Class GameCategoryRequest
  * @package App\Http\Requests\Frontend\Common
  */
-class GameCategoryRequest extends FormRequest
+class GameCategoryRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
