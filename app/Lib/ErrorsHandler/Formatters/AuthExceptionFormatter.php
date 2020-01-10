@@ -20,7 +20,7 @@ class AuthExceptionFormatter extends ExceptionFormatter
         $response->setStatusCode($serverCode);//Forbidden
         $message = __('codes-map.' . 100401);
         $data = array_merge($data, [
-            'code' => (string)$e->getCode(),
+            'code' => (string) $e->getCode(),
             'message' => $message,
         ]);
         $response->setData($data);
