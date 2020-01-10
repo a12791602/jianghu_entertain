@@ -18,10 +18,10 @@ class GameSeeder extends Seeder
         Game::insert(
             [
                 [
-                    'type_id' => 5,
+                    'type_id' => 1,
                     'vendor_id' => 1,
-                    'name' => '开心下象棋1',
-                    'sign' => 'kxxxq1',
+                    'name' => '开心下象棋',
+                    'sign' => 'kxxxq',
                     'request_mode' => 1,
                     'conver_url' => 'http://aaa.com',
                     'test_conver_url' => 'http://aaa.com',
@@ -43,10 +43,10 @@ class GameSeeder extends Seeder
 
                 ],
                 [
-                    'type_id' => 5,
+                    'type_id' => 1,
                     'vendor_id' => 1,
-                    'name' => '开心下象棋2',
-                    'sign' => 'kxxxq2',
+                    'name' => '斗地主',
+                    'sign' => 'ddz',
                     'request_mode' => 1,
                     'conver_url' => 'http://aaa.com',
                     'test_conver_url' => 'http://aaa.com',
@@ -67,10 +67,10 @@ class GameSeeder extends Seeder
                     'private_key' => 'fasdfadfdsafdasfadsfdasf',
                 ],
                 [
-                    'type_id' => 4,
+                    'type_id' => 2,
                     'vendor_id' => 1,
-                    'name' => '开心下象棋3',
-                    'sign' => 'kxxxq3',
+                    'name' => '北京PK10',
+                    'sign' => 'bjpk',
                     'request_mode' => 1,
                     'conver_url' => 'http://aaa.com',
                     'test_conver_url' => 'http://aaa.com',

@@ -18,27 +18,39 @@ class GameTypeSeeder extends Seeder
         GamesType::insert(
             [
                 [
+                    'id' => 1,
+                    'name' => '棋牌游戏',
+                    'sign' => 'jianghu_1',
+                    'status' => 1,
+                ],
+                [
                     'id' => 2,
-                    'name' => '捕鱼',
-                    'sign' => 'fish1',
+                    'name' => '体育赛事',
+                    'sign' => 'jianghu_2',
                     'status' => 1,
                 ],
                 [
                     'id' => 3,
-                    'name' => '捕鱼21111',
-                    'sign' => 'FISH221111',
+                    'name' => '捕鱼游戏',
+                    'sign' => 'jianghu_3',
                     'status' => 1,
                 ],
                 [
                     'id' => 4,
-                    'name' => '捕鱼3',
-                    'sign' => 'FISH3',
+                    'name' => '电子游戏',
+                    'sign' => 'jianghu_4',
                     'status' => 1,
                 ],
                 [
                     'id' => 5,
-                    'name' => '捕鱼4',
-                    'sign' => 'FISH4',
+                    'name' => '真人视讯',
+                    'sign' => 'jianghu_5',
+                    'status' => 1,
+                ],
+                [
+                    'id' => 6,
+                    'name' => '彩票投注',
+                    'sign' => 'jianghu_6',
                     'status' => 1,
                 ],
             ],

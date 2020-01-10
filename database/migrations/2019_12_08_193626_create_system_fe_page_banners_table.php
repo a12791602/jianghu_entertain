@@ -28,15 +28,11 @@ class CreateSystemFePageBannersTable extends Migration
                 $table->string('thumbnail_path', 128)->nullable()->default(null)->comment('缩略图');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1内部 2活动');
                 $table->string('redirect_url', 128)->nullable()->default(null)->comment('跳转地址');
-                $table->integer('activity_id')
-                    ->nullable()
-                    ->default(null)
-                    ->comment('活动id（frontend_activity_contents表id）');
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 0关闭 1开启');
                 $table->timestamp('start_time')->nullable()->default(null)->comment('开始时间');
                 $table->timestamp('end_time')->nullable()->default(null)->comment('结束时间');
                 $table->unsignedInteger('sort')->nullable()->default(null)->comment('排序');
-                $table->tinyInteger('flag')->comment('banner 属于哪端,1:网页端banner ,2:手机端banner');
+                $table->tinyInteger('flag')->comment('1:H5, 2:内部静态引用');
                 $table->nullableTimestamps();
             },
         );

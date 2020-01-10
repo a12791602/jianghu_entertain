@@ -29,8 +29,8 @@ class GameListRequest extends BaseFormRequest
     {
         return [
             'device' => 'integer|required',
-            'type_id' => 'integer|required',
-            'is_hot' => 'integer|required',
+            'type_id' => 'integer',
+            'is_hot' => 'integer',
         ];
     }
 

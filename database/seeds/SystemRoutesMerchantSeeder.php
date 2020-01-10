@@ -585,6 +585,22 @@ class SystemRoutesMerchantSeeder extends Seeder
                     'title' => '',
                     'is_open' => 0,
                 ],
+                [
+                    'route_name' => 'merchant-api.game.ackIn',
+                    'controller' => null,
+                    'method' => ackIn,
+                    'menu_group_id' => null,
+                    'title' => '',
+                    'is_open' => 1,
+                ],
+                [
+                    'route_name' => 'merchant-api.game.ackOut',
+                    'controller' => null,
+                    'method' => ackOut,
+                    'menu_group_id' => null,
+                    'title' => '',
+                    'is_open' => 1,
+                ],
             ],
         );
     }
