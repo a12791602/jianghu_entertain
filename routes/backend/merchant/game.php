@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameTypeController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameVendorController;
@@ -92,5 +93,10 @@ Route::group(
             'get-search-condition-data',
             [GameController::class, 'getSearchConditionData'],
         )->name($namePrefix . 'get-search-condition-data');
+
+        Route::match(['post','get'], 'acknowledge-In', [AcknowledgementController::class, 'ackIn'])
+            ->name($namePrefix . 'ackIn');
+        Route::match(['post','get'], 'acknowledge-Out', [AcknowledgementController::class, 'ackOut'])
+            ->name($namePrefix . 'ackOut');
     },
 );

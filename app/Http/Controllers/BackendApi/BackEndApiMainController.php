@@ -8,6 +8,7 @@ use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use App\Models\DeveloperUsage\Merchant\SystemRoutesMerchant;
 use App\Models\Systems\SystemPlatform;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -100,21 +101,21 @@ class BackEndApiMainController extends Controller
      * @var array
      */
     protected $headquarters = [
-        'portPrefix'    => 'headquarters-api',
+        'portPrefix' => 'headquarters-api',
         'current_guard' => 'backend',
-        'route'         => SystemRoutesBackend::class,
-        'menu'          => BackendSystemMenu::class,
+        'route' => SystemRoutesBackend::class,
+        'menu' => BackendSystemMenu::class,
     ];
 
     /**
      * @var array
      */
     protected $merchant = [
-        'portPrefix'    => 'merchant-api',
+        'portPrefix' => 'merchant-api',
         'current_guard' => 'merchant',
-        'route'         => SystemRoutesMerchant::class,
-        'menu'          => MerchantSystemMenu::class,
-        'platform'      => SystemPlatform::class,
+        'route' => SystemRoutesMerchant::class,
+        'menu' => MerchantSystemMenu::class,
+        'platform' => SystemPlatform::class,
     ];
 
     /**
@@ -136,8 +137,8 @@ class BackEndApiMainController extends Controller
     }
 
     /**
-     * @throws \Exception Exception.
      * @return void
+     * @throws \Exception Exception.
      */
     private function _initial(): void
     {
@@ -179,8 +180,8 @@ class BackEndApiMainController extends Controller
     /**
      * 获取当前接口所属端口
      *
-     * @throws \Exception Exception.
      * @return void
+     * @throws \Exception Exception.
      */
     private function _getport(): void
     {
@@ -222,9 +223,17 @@ class BackEndApiMainController extends Controller
      */
     private function _handleEndUser(): void
     {
-        $this->userAgent = new Agent();
-        if (!$this->userAgent->isDesktop() && Request::header('from') !== 'Lottery Center System v3.0.0.0') {
-            Log::info('robot attacks: ' . json_encode(Request::all()) . json_encode(Request::header()));
+        $open_api_whitelists = Config::get('open-api-whitelists.ip');
+        $requestIp           = Request::ip();
+        $this->userAgent     = new Agent();
+        $isRobot             = $this->userAgent->isRobot();
+        $isWhiteLists        = Request::header('from') === 'Lottery Center System v3.0.0.0' ||
+            in_array($requestIp, $open_api_whitelists, true);
+        $allowStatus         = $isRobot && !$isWhiteLists;
+        if ($allowStatus) {
+            $inputToLog   = json_encode(Request::all(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+            $headersToLog = json_encode(Request::header(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+            Log::info('robot attacks: ' . $inputToLog . $headersToLog);
             // echo '机器人禁止操作';
             die();
         }
@@ -289,8 +298,8 @@ class BackEndApiMainController extends Controller
     {
         $this->log_uuid = Str::orderedUuid()->getNodeHex();
         $datas          = [
-            'input'    => $this->inputs,
-            'route'    => $this->currentOptRoute,
+            'input' => $this->inputs,
+            'route' => $this->currentOptRoute,
             'log_uuid' => $this->log_uuid,
         ];
         $logData        = json_encode($datas, JSON_UNESCAPED_UNICODE);

@@ -117,6 +117,12 @@ $config = [
             'level' => 'debug',
             'days' => 14,
         ],
+        'ack-center' => [//通知中心日志
+            'driver' => 'daily',
+            'path' => storage_path('logs/ackcenter.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
     ],
 
 ];
