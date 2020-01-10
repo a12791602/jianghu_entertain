@@ -110,10 +110,56 @@ $config = [
             'driver' => 'custom',
             'via' => BackendLogMonolog::class,
         ],
-
-        'finance' => [
+        //记录请求第三方的数据
+        'finance-recharge-data' => [
             'driver' => 'daily',
-            'path' => storage_path('logs/finance.log'),
+            'path' => storage_path('logs/finance/recharge/data.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        //记录签名前后数据
+        'finance-recharge-sign' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance/recharge/sign.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        //记录发起充值时,支付系统的一些异常信息
+        'finance-recharge-system' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance/recharge/system.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        //记录接收到的回调参数
+        'finance-callback-data' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance/callback/data.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        //记录回调时的签名前后信息
+        'finance-callback-sign' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance/callback/sign.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+
+        //记录回调时的一些系统异常信息
+        'finance-callback-system' => [
+            'driver' => 'daily',
+            'path' => storage_path('logs/finance/callback/system.log'),
+            'level' => 'debug',
+            'days' => 14,
+        ],
+        'ack-center' => [//通知中心日志
+            'driver' => 'daily',
+            'path' => storage_path('logs/ackcenter.log'),
             'level' => 'debug',
             'days' => 14,
         ],

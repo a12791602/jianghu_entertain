@@ -94,9 +94,9 @@ Route::group(
             [GameController::class, 'getSearchConditionData'],
         )->name($namePrefix . 'get-search-condition-data');
 
-        Route::match(['post','get'], 'acknowledge-In', [AcknowledgementController::class, 'ackIn'])
+        Route::match(['post','get'], 'acknowledge-in', [AcknowledgementController::class, 'ackIn'])
             ->name($namePrefix . 'ackIn');
-        Route::match(['post','get'], 'acknowledge-Out', [AcknowledgementController::class, 'ackOut'])
+        Route::match(['post','get'], 'acknowledge-out', [AcknowledgementController::class, 'ackOut'])
             ->name($namePrefix . 'ackOut');
     },
 );

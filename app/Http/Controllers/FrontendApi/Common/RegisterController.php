@@ -25,7 +25,7 @@ class RegisterController extends FrontendApiMainController
      */
     public function store(RegisterAction $action, RegisterRequest $request): JsonResponse
     {
-        $result = $action->execute($request);
+        $result = $action->execute($this, $request);
         return $result;
     }
 

@@ -30,7 +30,7 @@ class DoAddRequest extends BaseFormRequest
             'menu_group_id' => 'required|exists:merchant_system_menus,id',               //菜单ID
             'title'         => 'required|string|max:10',                                 //标题
             'route_name'    => 'required|string|max:128|unique:system_routes_merchants', //路由名称
-            'controller'    => 'required|string|max:32',                                 //控制器
+            'controller'    => 'required|string|max:64',                                 //控制器
             'method'        => 'required|string|max:32',                                 //方法
         ];
         return $rules;
@@ -53,7 +53,7 @@ class DoAddRequest extends BaseFormRequest
             'route_name.unique'      => '路由名称已存在',
             'controller.required'    => '缺少控制器名称',
             'controller.string'      => '控制器名称只能是字符串',
-            'controller.max'         => '控制器名称最多32个字符',
+            'controller.max'         => '控制器名称最多64个字符',
             'method.required'        => '缺少方法名称',
             'method.string'          => '方法名称只能是字符串',
             'method.max'             => '方法名称最多32个字符',

@@ -37,8 +37,8 @@ class EditRequest extends BaseFormRequest
                 'max:128',
                 Rule::unique('system_routes_merchants')->ignore($this->get('id')),
             ],                                           //路由名称
-            'controller'    => 'required|string|max:32', //控制器
-            'method'        => 'required|string|max:32',
+            'controller'    => 'required|string|max:64', //控制器
+            'method'        => 'required|string|max:32', //方法
         ];
         return $rules;
     }
@@ -62,7 +62,7 @@ class EditRequest extends BaseFormRequest
             'route_name.unique'      => '路由名称已存在',
             'controller.required'    => '缺少控制器名称',
             'controller.string'      => '控制器名称只能是字符串',
-            'controller.max'         => '控制器名称最多32个字符',
+            'controller.max'         => '控制器名称最多64个字符',
             'method.required'        => '缺少方法名称',
             'method.string'          => '方法名称只能是字符串',
             'method.max'             => '方法名称最多32个字符',

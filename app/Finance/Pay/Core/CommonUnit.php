@@ -3,6 +3,7 @@
 namespace App\Finance\Pay\Core;
 
 use App\Models\Order\UsersRechargeOrder;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Trait CommonUnit
@@ -13,7 +14,7 @@ trait CommonUnit
     /**
      * 设置第三方平台需要的订单号.
      *
-     * @param string $platformNeedNo PlatformNeedNo.
+     * @param string $platformNeedNo 平台所需要的订单号.
      * @return void
      * @throws \Exception Exception.
      */
@@ -30,11 +31,11 @@ trait CommonUnit
     /**
      * 得到待签名的字符串 key=value 形式.
      *
-     * @param array  $data      Data.
-     * @param string $sort      Sort.
-     * @param string $joiner    Joiner.
-     * @param string $secretKey SecretKey.
-     * @param string $secret    Secret.
+     * @param array  $data      数据.
+     * @param string $sort      排序方式.
+     * @param string $joiner    连接符.
+     * @param string $secretKey 密钥的key.
+     * @param string $secret    密钥.
      * @return string
      */
     public function generateToBeSignedString(
@@ -56,8 +57,8 @@ trait CommonUnit
     /**
      * 跳转去支付.
      *
-     * @param array  $data   Data.
-     * @param string $method Method.
+     * @param array  $data   支付的数据.
+     * @param string $method 跳转的方法.
      * @return string
      */
     public function generateRedirectPayString(array $data, string $method): string
@@ -72,5 +73,19 @@ trait CommonUnit
         $html .= '</form>' . PHP_EOL;
         $html .= '<script>document.forms["submit"].submit();</script>';
         return $html;
+    }
+
+    /**
+     * 写日志.
+     *
+     * @param string $channel 通道.
+     * @param string $orderNo 订单号.
+     * @param string $msgs    消息.
+     * @param array  $data    具体数据.
+     * @return void
+     */
+    public function writeLog(string $channel, string $orderNo, string $msgs, array $data = []): void
+    {
+        Log::channel($channel)->info(['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
     }
 }

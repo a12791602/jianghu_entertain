@@ -29,12 +29,6 @@ class FrontendUserAccountSeeder extends Seeder
                     'frozen' => 0.0000,
                     'status' => 1,
                 ],
-                [
-                    'user_id' => '3',
-                    'balance' => 1000000.0000,
-                    'frozen' => 0.0000,
-                    'status' => 1,
-                ],
             ],
         );
     }

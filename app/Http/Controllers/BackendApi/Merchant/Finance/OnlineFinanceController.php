@@ -118,7 +118,7 @@ class OnlineFinanceController extends BackEndApiMainController
      */
     public function callback(CallbackAction $action, string $platform, string $order): string
     {
-        $outputDatas = $action->execute($this, $platform, $order);
+        $outputDatas = $action->execute($platform, $order);
         return $outputDatas;
     }
 }

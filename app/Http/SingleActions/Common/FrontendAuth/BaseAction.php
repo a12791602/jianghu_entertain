@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
 use Cache;
+use Carbon\Carbon;
 use Str;
 
 /**
@@ -21,6 +22,8 @@ class BaseAction
     {
         $random           = strval(random_int(1, 999999));
         $code             = str_pad($random, 6, '0', STR_PAD_LEFT);
+        $currentReqTime   = Carbon::now()->timestamp;
+        $nextReqTime      = Carbon::now()->addMinutes(1)->timestamp;
         $expiredAt        = now()->addMinutes(10);
         $verification_key = 'verificationCode:' . Str::random(15);
 
@@ -29,6 +32,8 @@ class BaseAction
         $item = [
            'verification_key' => $verification_key,
            'expired_at' => $expiredAt->toDayDateTimeString(),
+           'nextReqTime' => $nextReqTime, // Next allowed request timestamp.
+           'currentReqTime' => $currentReqTime, // Current request timestamp.
         ];
 
         if (!app()->environment('production')) {

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\User\FrontendUser;
+use App\Observers\FrontendUserObserver;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
@@ -69,5 +71,7 @@ class AppServiceProvider extends ServiceProvider
                 return $this;
             },
         );
+
+        FrontendUser::observe(FrontendUserObserver::class);
     }
 }
