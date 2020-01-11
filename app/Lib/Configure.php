@@ -1,6 +1,8 @@
-<?php namespace App\Lib;
+<?php
 
-use App\Models\Admin\SystemConfiguration;
+namespace App\Lib;
+
+use App\Models\Systems\SystemConfiguration;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -13,63 +15,79 @@ class Configure
     /**
      * system_configurations
      *
-     * @param  string      $configKey ConfigureKey.
-     * @param  string|null $default   Value.
+     * @param  string      $platformSign 平台标识.
+     * @param  string      $configKey    ConfigureKey.
+     * @param  string|null $default      Value.
      * @return mixed
      */
-    public function getData(string $configKey, ?string $default = null)
+    public function getData(string $platformSign, string $configKey, ?string $default = null)
     {
-        $tags = self::getTags();
-        return Cache::tags($tags)->get(
+        $tags = self::getTags($platformSign);
+        $data = Cache::tags($tags)->get(
             $configKey,
             static function () use (
                 $configKey,
                 $default,
-                $tags
+                $tags,
+                $platformSign
             ) {
-                $result = SystemConfiguration::where('sign', '=', $configKey)->where('status', '=', 1)->first();
-                if ($result !== null) {
-                    Cache::tags($tags)->forever($configKey, $result->value);
-                    return $result->value;
-                } else {
+                $result = SystemConfiguration::where(
+                    [
+                        ['platform_sign', $platformSign],
+                        ['sign', $configKey],
+                    ],
+                )->where('status', '=', 1)->first();
+                if ($result === null) {
                     return $default;
                 }
+                Cache::tags($tags)->forever($configKey, $result->value);
+                return $result->value;
             },
         );
+        return $data;
     }
 
     /**
      * Setting Data into the Config
      *
-     * @param string $configKey Config  Key.
-     * @param string $value     Value.
+     * @param string $platformSign 平台标识.
+     * @param string $configKey    Config Key.
+     * @param string $value        Value.
      * @return void
      */
-    public static function setData(string $configKey, string $value): void
+    public static function setData(string $platformSign, string $configKey, string $value): void
     {
-        $tags = self::getTags();
-        SystemConfiguration::where('sign', '=', $configKey)->update(['value' => $value]);
+        $tags = self::getTags($platformSign);
+        SystemConfiguration::where(
+            [
+                ['platform_sign', $platformSign],
+                ['sign', $configKey],
+            ],
+        )->update(['value' => $value]);
         Cache::tags($tags)->forget($configKey);
     }
 
     /**
      * clean the cache
      *
+     * @param string $platformSign 平台标识.
      * @return void
      */
-    public function flush(): void
+    public function flush(string $platformSign): void
     {
-        $tags = self::getTags();
+        $tags = self::getTags($platformSign);
         Cache::tags($tags)->flush();
     }
 
     /**
      * get Tag name
      *
+     * @param  string $platformSign 平台标识.
      * @return string
      */
-    public static function getTags(): string
+    public static function getTags(string $platformSign): string
     {
-        return 'configure';
+        $tags = $platformSign . 'configure';
+        return $tags;
     }
 }

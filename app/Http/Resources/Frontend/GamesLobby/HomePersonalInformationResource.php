@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Frontend\GamesLobby;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class HomePersonalInformationResource
@@ -18,9 +19,10 @@ class HomePersonalInformationResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
+        $appEnvironment = App::environment();
+        $result         = [
             'uid' => $this->uid,
-            'pic_path' => config('image_domain.jianghu') . $this->pic_path,
+            'pic_path' => config('image_domain.' . $appEnvironment) . $this->pic_path,
             'username' => $this->username,
             'level_deep' => $this->level_deep,
             'balance' => optional($this->account)->balance,

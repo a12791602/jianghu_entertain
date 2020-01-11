@@ -22,6 +22,7 @@ class CreateSystemConfigurationsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('parent_id')->nullable()->default('0')->comment('父级id');
                 $table->integer('pid')->comment('父类id, 顶级为0');
                 $table->string('sign', 32)->nullable()->default(null)->comment('标识');

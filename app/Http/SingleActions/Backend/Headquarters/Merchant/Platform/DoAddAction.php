@@ -10,38 +10,48 @@ use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemPlatformBank;
 use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemPlatform;
+use App\Models\Systems\SystemPlatformSsl;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 /**
  * Class for merchant admin user do add action .
  */
 class DoAddAction
 {
+    
+    /**
+     * @var SystemPlatform
+     */
+    private $platformEloq;
+
     /**
      * @param BackEndApiMainController $contll     Controller.
      * @param array                    $inputDatas 传递的参数.
-     * @throws \Exception               Exception.
+     * @throws \Exception Exception.
      * @return JsonResponse
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         DB::beginTransaction();
         //生成平台
-        $platformEloq = $this->_createPlatform($inputDatas, $contll->currentAdmin->id);
+        $this->_createPlatform($inputDatas, $contll->currentAdmin->id);
+        //生成平台加密数据用的证书
+        $this->_createSSL();
         //平台绑定域名
-        $this->_createPlatformDomain($inputDatas['domains'], $platformEloq->sign, $contll->currentAdmin->id);
+        $this->_createPlatformDomain($inputDatas['domains'], $contll->currentAdmin->id);
         //生成平台银行配置
-        $this->_createBanks($platformEloq->sign);
+        $this->_createBanks();
         //生成超级管理员组
-        $adminGroupEloq = $this->_createAdminGroup($platformEloq->sign);
+        $adminGroupEloq = $this->_createAdminGroup();
         //生成管理员组权限
         $this->_createGroupRole($inputDatas, $adminGroupEloq->id);
         //生成运营商帐号
         $adminUser = $this->_createAdminUser($inputDatas, $adminGroupEloq->id);
         //插入平台所属人id
-        $this->_editPlatformOwner($platformEloq, $adminUser->id);
+        $this->_editPlatformOwner($adminUser->id);
         //完成
         DB::commit();
         $msgOut = msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
@@ -54,12 +64,12 @@ class DoAddAction
      * @param array   $inputDatas 接收的参数.
      * @param integer $adminId    管理员ID.
      * @throws \Exception Exception.
-     * @return SystemPlatform
+     * @return void
      */
-    private function _createPlatform(array $inputDatas, int $adminId): SystemPlatform
+    private function _createPlatform(array $inputDatas, int $adminId): void
     {
-        $platformEloq = new SystemPlatform();
-        $platformData = [
+        $this->platformEloq = new SystemPlatform();
+        $platformData       = [
             'name'           => $inputDatas['platform_name'],
             'sign'           => $inputDatas['platform_sign'],
             'agency_method'  => $inputDatas['agency_method'],
@@ -69,28 +79,56 @@ class DoAddAction
             'author_id'      => $adminId,
             'last_editor_id' => $adminId,
         ];
-        $platformEloq->fill($platformData);
-        if (!$platformEloq->save()) {
+        $this->platformEloq->fill($platformData);
+        if (!$this->platformEloq->save()) {
             DB::rollback();
             throw new \Exception('300708');
         }
-        return $platformEloq;
+    }
+
+    /**
+     * Creates a ssl.
+     * @throws \Exception Exception.
+     * @return void
+     */
+    private function _createSSL(): void
+    {
+        $config   = config('web.ssl.rule');
+        $resourse = openssl_pkey_new($config); //返回pkey的资源标识符:   OpenSSL key resource @12
+        if ($resourse === false) {
+            DB::rollback();
+            throw new \Exception('300715');
+        }
+        openssl_pkey_export($resourse, $privateKey);
+        $publicKey         = openssl_pkey_get_details($resourse);
+        $publicKey         = $publicKey['key'];
+        $intervalStr       = Str::random(11);
+        $addData           = [
+            'platform_sign' => $this->platformEloq->sign,
+            'private_key'   => $privateKey,
+            'public_key'    => $publicKey,
+            'interval_str'  => $intervalStr,
+        ];
+        $systemPlatformSsl = new SystemPlatformSsl();
+        $systemPlatformSsl->fill($addData);
+        if (!$systemPlatformSsl->save()) {
+            throw new \Exception('300716');
+        }
     }
 
     /**
      * Creates a platform domain.
      *
-     * @param array   $domains      添加的域名.
-     * @param string  $platformSign 平台标识.
-     * @param integer $adminId      平台标识.
+     * @param array   $domains 添加的域名.
+     * @param integer $adminId 平台标识.
      * @throws \Exception Exception.
      * @return void
      */
-    private function _createPlatformDomain(array $domains, string $platformSign, int $adminId): void
+    private function _createPlatformDomain(array $domains, int $adminId): void
     {
         foreach ($domains as $domain) {
             $systemDomainELoq = new SystemDomain();
-            $insertDomain     = $systemDomainELoq->insertAllTypeDomain($domain, $platformSign, $adminId);
+            $insertDomain     = $systemDomainELoq->insertAllTypeDomain($domain, $this->platformEloq->sign, $adminId);
             if ($insertDomain !== true) {
                 DB::rollback();
                 throw new \Exception('300709');
@@ -99,15 +137,14 @@ class DoAddAction
     }
 
     /**
-     * @param string $platformSign 平台标识.
      * @throws \Exception Exception.
      * @return void
      */
-    private function _createBanks(string $platformSign): void
+    private function _createBanks(): void
     {
         $systemBank = SystemBank::pluck('id')->toArray();
         $addData    = [
-            'platform_sign' => $platformSign,
+            'platform_sign' => $this->platformEloq->sign,
             'status'        => SystemPlatformBank::STATUS_CLOSE,
         ];
 
@@ -125,16 +162,15 @@ class DoAddAction
     /**
      * Creates an admin group.
      *
-     * @param string $platformSign 平台标识.
      * @throws \Exception Exception.
      * @return MerchantAdminAccessGroup
      */
-    private function _createAdminGroup(string $platformSign): MerchantAdminAccessGroup
+    private function _createAdminGroup(): MerchantAdminAccessGroup
     {
         $adminGroupEloq = new MerchantAdminAccessGroup();
         $adminGroupData = [
             'group_name'    => '超级管理',
-            'platform_sign' => $platformSign,
+            'platform_sign' => $this->platformEloq->sign,
             'is_super'      => MerchantAdminAccessGroup::IS_SUPER,
         ];
         $adminGroupEloq->fill($adminGroupData);
@@ -197,15 +233,14 @@ class DoAddAction
     }
 
     /**
-     * @param SystemPlatform $platformEloq 平台eloq.
-     * @param integer        $adminUserId  平台所属超级管理员ID.
+     * @param integer $adminUserId 平台所属超级管理员ID.
      * @throws \Exception Exception.
      * @return void
      */
-    private function _editPlatformOwner(SystemPlatform $platformEloq, int $adminUserId): void
+    private function _editPlatformOwner(int $adminUserId): void
     {
-        $platformEloq->owner_id = $adminUserId;
-        if (!$platformEloq->save()) {
+        $this->platformEloq->owner_id = $adminUserId;
+        if (!$this->platformEloq->save()) {
             throw new \Exception('300714');
         }
     }

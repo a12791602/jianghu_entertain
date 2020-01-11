@@ -23,18 +23,6 @@ class FrontendUser extends BaseAuthModel
     use Notifiable;
 
     /**
-     * TYPE_TOP_AGENT
-     */
-    public const TYPE_TOP_AGENT = 1;
-    /**
-     * TYPE_AGENT
-     */
-    public const TYPE_AGENT = 2;
-    // 没用到  暂时注释
-    // const TYPE_USER = 3;
-    public const FROZEN_TYPE_NO_WITHDRAWAL = 3;
-
-    /**
      * @var array $guarded
      */
     protected $guarded = ['id'];

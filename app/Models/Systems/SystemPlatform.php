@@ -40,4 +40,14 @@ class SystemPlatform extends BaseModel
         $owner = $this->hasOne(MerchantAdminUser::class, 'id', 'owner_id');
         return $owner;
     }
+
+    /**
+     * 平台SSL证书
+     * @return HasOne
+     */
+    public function sslKey(): HasOne
+    {
+        $sslKey = $this->hasOne(SystemPlatformSsl::class, 'platform_sign', 'sign');
+        return $sslKey;
+    }
 }

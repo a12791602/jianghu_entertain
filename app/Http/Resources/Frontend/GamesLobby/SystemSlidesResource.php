@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Frontend\GamesLobby;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 
 /**
  * Class SystemSlidesResource
@@ -18,9 +19,10 @@ class SystemSlidesResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
+        $appEnvironment = App::environment();
+        $result         = [
             'title' => $this->title,
-            'pic_path' => config('image_domain.jianghu') . $this->pic_path,
+            'pic_path' => config('image_domain.' . $appEnvironment)  . $this->pic_path,
             'redirect_url' => $this->redirect_url,
             'type' => $this->type,
         ];

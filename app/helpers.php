@@ -12,15 +12,16 @@ use Illuminate\Support\Facades\Response;
 
 if (!function_exists('configure')) {
     /**
-     * @param  string|null $sysKey  SysKey.
-     * @param  string|null $default Default.
+     * @param  string      $platformSign 平台标识.
+     * @param  string|null $sysKey       SysKey.
+     * @param  string|null $default      Default.
      * @return \Illuminate\Contracts\Foundation\Application|mixed
      */
-    function configure(?string $sysKey = null, ?string $default = null)
+    function configure(string $platformSign, ?string $sysKey = null, ?string $default = null)
     {
-        $configure = app('Configure');
+        $configure = app('App\Lib\Configure');
         if (isset($sysKey)) {
-            $configure = $configure->getData($sysKey, $default);
+            $configure = $configure->getData($platformSign, $sysKey, $default);
         }
         return $configure;
     }
