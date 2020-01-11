@@ -16,7 +16,7 @@ class PDOExceptionFormatter extends ExceptionFormatter
         $message = $e->getMessage();
         $data = array_merge($data, [
             'code' => (string) $e->getCode(),
-            'message' => $message,
+            'message' => __($message),
         ]);
         $response->setData($data);
     }

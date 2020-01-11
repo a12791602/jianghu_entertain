@@ -16,7 +16,7 @@ class ValidationExceptionFormatter extends BaseFormatter
         $message = $e->validator->getMessageBag()->first();
         $data = array_merge($data, [
             'code' => (string) $serverCode,
-            'message' => $message,
+            'message' => __($message),
         ]);
         $response->setData($data);
     }

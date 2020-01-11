@@ -21,7 +21,7 @@ class AuthExceptionFormatter extends ExceptionFormatter
         $message = __('codes-map.' . 100401);
         $data = array_merge($data, [
             'code' => (string) $e->getCode(),
-            'message' => $message,
+            'message' => __($message),
         ]);
         $response->setData($data);
     }
