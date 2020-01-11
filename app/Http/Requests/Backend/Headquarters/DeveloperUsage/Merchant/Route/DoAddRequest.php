@@ -28,7 +28,7 @@ class DoAddRequest extends BaseFormRequest
     {
         $rules = [
             'menu_group_id' => 'required|exists:merchant_system_menus,id',               //菜单ID
-            'title'         => 'required|string|max:10',                                 //标题
+            'title'         => 'required|string|max:32',                                 //标题
             'route_name'    => 'required|string|max:128|unique:system_routes_merchants', //路由名称
             'controller'    => 'required|string|max:64',                                 //控制器
             'method'        => 'required|string|max:32',                                 //方法
@@ -46,7 +46,7 @@ class DoAddRequest extends BaseFormRequest
             'menu_group_id.exists'   => '绑定的菜单ID不存在',
             'title.required'         => '缺少标题',
             'title.string'           => '标题只能是字符串',
-            'title.max'              => '标题最多10个字符',
+            'title.max'              => '标题最多32个字符',
             'route_name.required'    => '缺少路由名称',
             'route_name.string'      => '路由名称只能是字符串',
             'route_name.max'         => '路由名称最多128个字符',
