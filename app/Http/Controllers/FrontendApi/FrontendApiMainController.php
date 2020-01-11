@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesH5;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesMobile;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesWeb;
-use App\Models\Systems\SystemDomain;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -105,7 +105,7 @@ class FrontendApiMainController extends Controller
         $this->middleware(
             function ($request, $next) {
                 $this->_userOperateLog();
-                $this->_getCurrentPlatform();
+                $this->_getCurrentPlatform($request);
                 return $next($request);
             },
         );
@@ -113,25 +113,12 @@ class FrontendApiMainController extends Controller
 
     /**
      * 获取当前域名所属平台
+     * @param  HttpRequest $request Request.
      * @return void
-     * @throws \Exception Exception.
      */
-    private function _getCurrentPlatform(): void
+    private function _getCurrentPlatform(HttpRequest $request): void
     {
-        $host   = Request::server('HTTP_REFERER');
-        $strArr = explode('/', $host);
-        if (!is_array($strArr) || !isset($strArr[2])) {
-            throw new \Exception('100103');
-        }
-        $domain = $strArr[2];
-        $domainEloq = SystemDomain::where('domain', $domain)->first();
-        if (!$domainEloq) {
-            throw new \Exception('100101');
-        }
-        $this->currentPlatformEloq = $domainEloq->platform;
-        if (!$this->currentPlatformEloq) {
-            throw new \Exception('100102');
-        }
+        $this->currentPlatformEloq = $request->get('current_platform_eloq');
     }
 
     /**
@@ -141,7 +128,7 @@ class FrontendApiMainController extends Controller
      */
     private function _handleEndUser(): void
     {
-        $open_route = [];
+        $openRoute = [];
         //登录注册的时候是没办法获取到当前用户的相关信息所以需要过滤
         $this->currentOptRoute = Route::getCurrentRoute();
         if (empty($this->currentOptRoute)) {
@@ -161,9 +148,9 @@ class FrontendApiMainController extends Controller
             throw new \Exception('100003');
         }
         $this->webModel     = new $this->routeModel[$prefix]();
-        $open_route         = $this->webModel::where('is_open', 1)->pluck('method')->toArray();
+        $openRoute          = $this->webModel::where('is_open', 1)->pluck('method')->toArray();
         $this->currentGuard = $this->routeGuard[$prefix];
-        $this->middleware('auth:' . $this->currentGuard, ['except' => $open_route]);
+        $this->middleware('auth:' . $this->currentGuard, ['except' => $openRoute]);
     }
 
     /**
