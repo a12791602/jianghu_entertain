@@ -130,7 +130,7 @@ class Handler extends ExceptionHandler
     public function render($request, \Exception $e): Response
     {
         $response = $this->_generateExceptionResponse($request, $e);
-        $this->_sendToTg($e,$response);
+        $this->_sendToTg($e,$request,$response);
         if ($this->config['add_cors_headers']) {
             if (!class_exists(CorsService::class)) {
                 throw new InvalidArgumentException(
@@ -209,10 +209,12 @@ class Handler extends ExceptionHandler
 
     /**
      * @param Exception $e Exception.
+     * @param Request $request
      * @param JsonResponse $response
      * @return void
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
      */
-    private function _sendToTg(Exception $e,JsonResponse $response): void
+    private function _sendToTg(Exception $e, Request $request, JsonResponse $response): void
     {
         //###### sending errors to tg //Harris ############
         $appEnvironment = App::environment();
@@ -241,7 +243,7 @@ class Handler extends ExceptionHandler
             'environment' => $appEnvironment,
             'route' => $route,
             'origin' => $agent->getHttpHeaders(),
-            'ips' => request()->ips(),//array
+            'ips' => $request->ips(),//array
             'user_agent' => $agent->getUserAgent(),
             'lang' => $agent->languages(),//array
             'device' => $agent->device(),
@@ -251,7 +253,7 @@ class Handler extends ExceptionHandler
             'os_version' => $osVersion,
             'device_type' => $type,
             'robot' => $robot,
-            'inputs' => (new Request())->all(),//array
+            'inputs' => $request->all(),//array
             'file' => $e->getFile(),
             'line' => $e->getLine(),
             'code' => $e->getCode(),
