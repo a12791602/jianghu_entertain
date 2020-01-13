@@ -12,8 +12,8 @@ $config = [
     | Refer for more details:
     | https://core.telegram.org/bots#botfather
     |
-    */
-    'bot_token' => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
+     */
+           'bot_token'           => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
 
     /*
     |--------------------------------------------------------------------------
@@ -25,8 +25,8 @@ $config = [
     | Default: false
     | Possible Values: (Boolean) "true" OR "false"
     |
-    */
-    'async_requests' => env('TELEGRAM_ASYNC_REQUESTS', false),
+     */
+           'async_requests'      => env('TELEGRAM_ASYNC_REQUESTS', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,8 +38,8 @@ $config = [
     |
     | Default: GuzzlePHP
     |
-    */
-    'http_client_handler' => null,
+     */
+           'http_client_handler' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -54,29 +54,32 @@ $config = [
     | Default: The SDK registers, a help command which when a user sends /help
     | will respond with a list of available commands and description.
     |
-    */
-    'commands' => [
-        Telegram\Bot\Commands\HelpCommand::class,
-    ],
-    'chats' => [
-        'test-jianghu' => [
-            'app-api' => -372413024,
-            'h5-api' => -365070029,
-            'merchant-api' => -386162456,
-            'headquarters-api' => -374337000,
-            'other' => -1001232635993,
-            'human' => -1001479716542,
-        ],
-        'testonline-jianghu' => [
-            'app-api' => -1001202373755,
-            'h5-api' => -1001301424599,
-            'merchant-api' => -1001478401589,
-            'headquarters-api' => -1001465761233,
-            'other' => -1001343161867,
-            'human' => -1001479716542,
-        ],
-    ],
-    'http-group' => [403, 401],
-];
+     */
+           'commands'            => [
+                                     Telegram\Bot\Commands\HelpCommand::class,
+                                    ],
+           'chats'               => [
+                                     'test-jianghu'       => [
+                                                              'app-api'          => -372413024,
+                                                              'h5-api'           => -365070029,
+                                                              'merchant-api'     => -386162456,
+                                                              'headquarters-api' => -374337000,
+                                                              'other'            => -1001232635993,
+                                                              'human'            => -1001479716542,
+                                                             ],
+                                     'testonline-jianghu' => [
+                                                              'app-api'          => -1001202373755,
+                                                              'h5-api'           => -1001301424599,
+                                                              'merchant-api'     => -1001478401589,
+                                                              'headquarters-api' => -1001465761233,
+                                                              'other'            => -1001343161867,
+                                                              'human'            => -1001479716542,
+                                                             ],
+                                    ],
+           'http-group'          => [
+                                     403,
+                                     401,
+                                    ],
+          ];
 
 return $config;
