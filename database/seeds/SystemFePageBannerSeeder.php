@@ -65,6 +65,22 @@ class SystemFePageBannerSeeder extends Seeder
                     'status' => 1,
                     'flag' => 2,
                 ],
+                [
+                    'title' => '',
+                    'pic_path' => 'uploads/test/slides/2020-01-08/5d446820bdac52ae0c6c4948b6c79a23.png',
+                    'type' => 1,
+                    'redirect_url' => 'register',
+                    'status' => 1,
+                    'flag' => 2,
+                ],
+                [
+                    'title' => '',
+                    'pic_path' => 'uploads/test/slides/2020-01-08/5d446820bdac52ae0c6c4948b6c79a23.png',
+                    'type' => 1,
+                    'redirect_url' => 'forget-password',
+                    'status' => 1,
+                    'flag' => 2,
+                ],
             ],
         );
     }

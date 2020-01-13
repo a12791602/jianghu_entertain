@@ -64,7 +64,7 @@ Route::group(
 );
 Route::group(
     [
-        'middleware' => ['frontend-registration'],
+         'middleware' => ['frontend-registration'],
         'prefix'     => 'h5-api',
     ],
     static function (): void {
