@@ -5,8 +5,8 @@ use App\Http\Controllers\FrontendApi\Common\RegisterController;
 
 Route::group(
     [
-        'middleware' => ['frontend-api'],
-        'prefix' => 'app-api',
+     'middleware' => ['frontend-api'],
+     'prefix'     => 'app-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/frontend/app/';
@@ -21,31 +21,31 @@ Route::group(
 // Verification code
 Route::group(
     [
-        'middleware' => ['frontend-verification'],
-        'prefix'    => 'h5-api',
+     'middleware' => ['frontend-verification'],
+     'prefix'     => 'h5-api',
     ],
     static function (): void {
         $namePrefix = 'h5-api.';
-        Route::post('register/verification-code', [RegisterController::class,'code'])
+        Route::post('register/verification-code', [RegisterController::class, 'code'])
             ->name($namePrefix . 'register.verification-code');
-        Route::post('reset-password/verification-code', [PasswordController::class,'passwordCode'])
+        Route::post('reset-password/verification-code', [PasswordController::class, 'passwordCode'])
             ->name($namePrefix . 'reset-password.verification-code');
-        Route::post('security-verification-code', [PasswordController::class,'securityCode'])
+        Route::post('security-verification-code', [PasswordController::class, 'securityCode'])
             ->name($namePrefix . 'security-verification-code');
     },
 );
 Route::group(
     [
-        'middleware' => ['frontend-verification'],
-        'prefix'     => 'app-api',
+     'middleware' => ['frontend-verification'],
+     'prefix'     => 'app-api',
     ],
     static function (): void {
         $namePrefix = 'app-api.';
-        Route::post('register/verification-code', [RegisterController::class,'code'])
+        Route::post('register/verification-code', [RegisterController::class, 'code'])
             ->name($namePrefix . 'register.verification-code');
-        Route::post('reset-password/verification-code', [PasswordController::class,'passwordCode'])
+        Route::post('reset-password/verification-code', [PasswordController::class, 'passwordCode'])
             ->name($namePrefix . 'reset-password.verification-code');
-        Route::post('security-verification-code', [PasswordController::class,'securityCode'])
+        Route::post('security-verification-code', [PasswordController::class, 'securityCode'])
             ->name($namePrefix . 'security-verification-code');
     },
 );
@@ -55,27 +55,27 @@ Route::group(
 // Login & register
 Route::group(
     [
-        'middleware' => ['frontend-registration'],
-        'prefix'     => 'app-api',
+     'middleware' => ['frontend-registration'],
+     'prefix'     => 'app-api',
     ],
     static function (): void {
-        Route::post('register', [RegisterController::class,'store'])->name('app-api.register');
+        Route::post('register', [RegisterController::class, 'store'])->name('app-api.register');
     },
 );
 Route::group(
     [
-         'middleware' => ['frontend-registration'],
-        'prefix'     => 'h5-api',
+     'middleware' => ['frontend-registration'],
+     'prefix'     => 'h5-api',
     ],
     static function (): void {
-        Route::post('register', [RegisterController::class,'store'])->name('h5-api.register');
+        Route::post('register', [RegisterController::class, 'store'])->name('h5-api.register');
     },
 );
 
 Route::group(
     [
-        'middleware' => ['frontend-h5-api'],
-        'prefix' => 'h5-api',
+     'middleware' => ['frontend-h5-api'],
+     'prefix'     => 'h5-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/frontend/h5/';
