@@ -116,8 +116,10 @@ class Crypt
         if (!$deData) {
             throw new \Exception('100604');
         }
-        //给request赋值并删除加密的data数据
-        $request->merge($deData);
+        //给request重新赋值并删除加密的data数据
+        // $request->merge($deData);
+        $request->replace($deData);
+        $request->attributes->add(['crypt_data' => $inData]);
         unset($request['data']);
     }
 

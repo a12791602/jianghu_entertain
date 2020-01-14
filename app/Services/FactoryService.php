@@ -72,4 +72,17 @@ class FactoryService
         $payInstence = self::_generateClass($className);
         return $payInstence;
     }
+
+    /**
+     * 获取服务类实例.
+     *
+     * @param string $service Service.
+     * @return object
+     */
+    public function generateService(string $service): object
+    {
+        $className       = 'App\Services\\' . ucfirst($service) . 'Service';
+        $serviceInstence = self::_generateClass($className);
+        return $serviceInstence;
+    }
 }

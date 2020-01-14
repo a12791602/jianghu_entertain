@@ -4,6 +4,10 @@ namespace DummyNamespace;
 
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class DummyClass
+ * @package DummyNamespace
+ */
 class DummyClass
 {
     /**
