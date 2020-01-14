@@ -24,6 +24,7 @@ trait CommonUnit
             ->where('order_no', $this->payInfo['orderNo'])
             ->update(['platform_need_no' => $platformNeedNo]);
         if (!$result) {
+            $this->writeLog('finance-recharge-system', $this->payInfo['orderNo'], '保存第三方所需要的订单号失败!');
             throw new \Exception('100304');
         }
     }
