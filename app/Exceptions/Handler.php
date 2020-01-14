@@ -130,7 +130,7 @@ class Handler extends ExceptionHandler
     public function render($request, \Exception $e): Response
     {
         $response = $this->_generateExceptionResponse($request, $e);
-        $this->_sendToTg($e,$request,$response);
+        $this->_sendToTg($e, $request, $response);
         if ($this->config['add_cors_headers']) {
             if (!class_exists(CorsService::class)) {
                 throw new InvalidArgumentException(
@@ -240,28 +240,29 @@ class Handler extends ExceptionHandler
         $currentRoute = Route::getCurrentRoute();
         $route        = empty($currentRoute) ? null : $currentRoute->uri();
         $error        = [
-            'environment' => $appEnvironment,
-            'route' => $route,
-            'origin' => $agent->getHttpHeaders(),
-            'ips' => $request->ips(),//array
-            'user_agent' => $agent->getUserAgent(),
-            'lang' => $agent->languages(),//array
-            'device' => $agent->device(),
-            'os' => $requestOs,
-            'browser' => $browser,
-            'bs_version' => $bsVersion,
-            'os_version' => $osVersion,
-            'device_type' => $type,
-            'robot' => $robot,
-            'inputs' => $request->all(),//array
-            'file' => $e->getFile(),
-            'line' => $e->getLine(),
-            'code' => $e->getCode(),
-            'message' => $e->getMessage(),
-            'previous' => $e->getPrevious(),
+            'environment'   => $appEnvironment,
+            'route'         => $route,
+            'origin'        => $agent->getHttpHeaders(),
+            'ips'           => $request->ips(), //array
+            'user_agent'    => $agent->getUserAgent(),
+            'lang'          => $agent->languages(), //array
+            'device'        => $agent->device(),
+            'os'            => $requestOs,
+            'browser'       => $browser,
+            'bs_version'    => $bsVersion,
+            'os_version'    => $osVersion,
+            'device_type'   => $type,
+            'robot'         => $robot,
+            'inputs'        => $request->all(),                   //array
+            'data'          => $request->get('crypt_data') ?? '', //加密的data
+            'file'          => $e->getFile(),
+            'line'          => $e->getLine(),
+            'code'          => $e->getCode(),
+            'message'       => $e->getMessage(),
+            'previous'      => $e->getPrevious(),
             'TraceAsString' => $e->getTraceAsString(),
         ];
-        $telegram     = new TGMSG($response);
+        $telegram = new TGMSG($response);
         $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
     }
 }
