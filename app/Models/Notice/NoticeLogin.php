@@ -1,0 +1,38 @@
+<?php
+
+namespace App\Models\Notice;
+
+use App\Models\Admin\MerchantAdminUser;
+use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+/**
+ * Class NoticeLogin
+ * @package App\Models\Notice
+ */
+class NoticeLogin extends BaseModel
+{
+
+    /**
+     * @var mixed[]
+     */
+    protected $guarded = ['id'];
+
+    /**
+     * @return BelongsTo
+     */
+    public function lastEditor(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function author(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
+}
