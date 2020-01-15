@@ -22,28 +22,28 @@ class UpdateAdminGroupRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:merchant_admin_users,id',
-            'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
-        ];
+                'id'       => 'required|integer|exists:merchant_admin_users,id',
+                'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages()
+    public function messages(): array
     {
         return [
-            'id.required' => '缺少管理员ID',
-            'id.integer' => '管理员ID只能是整数',
-            'id.exists' => '管理员不存在',
-            'group_id.required' => '缺少角色组ID',
-            'group_id.integer' => '角色组ID只能是整数',
-            'group_id.exists' => '角色组不存在',
-        ];
+                'id.required'       => '缺少管理员ID',
+                'id.integer'        => '管理员ID只能是整数',
+                'id.exists'         => '管理员不存在',
+                'group_id.required' => '缺少角色组ID',
+                'group_id.integer'  => '角色组ID只能是整数',
+                'group_id.exists'   => '角色组不存在',
+               ];
     }
 }

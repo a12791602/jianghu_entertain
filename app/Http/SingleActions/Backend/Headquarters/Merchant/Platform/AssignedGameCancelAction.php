@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Models\Platform\GamesPlatform;
@@ -16,13 +17,14 @@ class AssignedGameCancelAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $result = GamesPlatform::where('platform_sign', $inputDatas['platform_sign'])->whereIn('game_sign', $inputDatas['game_signs'])->delete();
+        $result = GamesPlatform::where('platform_sign', $inputDatas['platform_sign'])
+            ->whereIn('game_sign', $inputDatas['game_signs'])->delete();
         if ($result) {
-            return msgOut(true);
-        } else {
-            throw new \Exception('302001');
+            $msgOut = msgOut(true);
+            return $msgOut;
         }
+        throw new \Exception('302001');
     }
 }

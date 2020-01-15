@@ -22,15 +22,15 @@ class EditRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:merchant_admin_access_groups',
-            'group_name' => 'required',
-            'role' => 'required',
-        ];
+                'id'         => 'required|exists:merchant_admin_access_groups',
+                'group_name' => 'required',
+                'role'       => 'required',
+               ];
     }
 
     /*public function messages()

@@ -26,9 +26,8 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:system_users_help_centers', //ID
-        ];
+        $rules = ['id' => 'required|exists:system_users_help_centers']; //ID
+        return $rules;
     }
 
     /**
@@ -36,9 +35,10 @@ class DeleteRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'id.required' => '缺少客帮助设置ID',
-            'id.exists'   => '需要删除的帮助设置不存在',
-        ];
+        $messages = [
+                     'id.required' => '缺少客帮助设置ID',
+                     'id.exists'   => '需要删除的帮助设置不存在',
+                    ];
+        return $messages;
     }
 }

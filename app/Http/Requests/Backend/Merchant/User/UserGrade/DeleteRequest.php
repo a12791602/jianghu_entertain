@@ -26,9 +26,8 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:users_grades', //ID
-        ];
+        $rules = ['id' => 'required|exists:users_grades']; //ID
+        return $rules;
     }
 
     /**
@@ -36,8 +35,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'id.exists' => '该等级配置不存在',
-        ];
+        $messages = ['id.exists' => '该等级配置不存在'];
+        return $messages;
     }
 }

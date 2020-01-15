@@ -17,16 +17,17 @@ class GetSearchConditionAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute() :JsonResponse
+    public function execute(): JsonResponse
     {
         $channels = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();
-        $types = SystemFinanceType::select(['id', 'name'])->get();
-        $vendors = SystemFinanceVendor::select(['id', 'name'])->get();
-        $datas = [
-            'channels' => $channels,
-            'vendors' => $vendors,
-            'types' => $types,
-        ];
-        return msgOut(true, $datas);
+        $types    = SystemFinanceType::select(['id', 'name'])->get();
+        $vendors  = SystemFinanceVendor::select(['id', 'name'])->get();
+        $datas    = [
+                     'channels' => $channels,
+                     'vendors'  => $vendors,
+                     'types'    => $types,
+                    ];
+        $msgOut   = msgOut(true, $datas);
+        return $msgOut;
     }
 }

@@ -26,9 +26,8 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|integer|exists:users_commission_configs', //ID
-        ];
+        $rules = ['id' => 'required|integer|exists:users_commission_configs']; //ID
+        return $rules;
     }
 
     /**
@@ -36,9 +35,10 @@ class DeleteRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'id.required' => '缺少洗码配置',
-            'id.exists'   => '该洗码配置不存在',
-        ];
+        $messages = [
+                     'id.required' => '缺少洗码配置',
+                     'id.exists'   => '该洗码配置不存在',
+                    ];
+        return $messages;
     }
 }

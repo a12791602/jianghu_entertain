@@ -6,6 +6,7 @@ use App\Models\User\FrontendUser;
 use App\Observers\FrontendUserObserver;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -23,7 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //temporary empty
+        // Redis 0 database.
+        $this->app->singleton(
+            'redis_user_unique_id',
+            static function () {
+                $result = Redis::connection();
+
+                return $result;
+            },
+        );
     }
 
     /**
@@ -71,10 +80,10 @@ class AppServiceProvider extends ServiceProvider
                     },
                 );
                 // Return the $query, so you can call other methods like ->get(), ->first(), ->where(), etc
+
                 return $this;
             },
         );
-
         FrontendUser::observe(FrontendUserObserver::class);
     }
 }

@@ -22,13 +22,12 @@ class SpecificGroupUsersRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|numeric|exists:backend_admin_access_groups,id',
-        ];
+        $rules = ['id' => 'required|numeric|exists:backend_admin_access_groups,id'];
+        return $rules;
     }
 
     /*public function messages()

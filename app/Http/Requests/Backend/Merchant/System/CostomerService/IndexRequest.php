@@ -26,9 +26,8 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'type' => 'required|integer|in:1,2', //1.qq微信    2.在线
-        ];
+        $rules = ['type' => 'required|integer|in:1,2'];// 1.qq微信 2.在线
+        return $rules;
     }
 
     /**
@@ -36,10 +35,11 @@ class IndexRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'type.required' => '缺少客服类型',
-            'type.integer'   => '客服类型必须是数字',
-            'type.in'   => '客服类型数据非法',
-        ];
+        $messages = [
+                     'type.required' => '缺少客服类型',
+                     'type.integer'  => '客服类型必须是数字',
+                     'type.in'       => '客服类型数据非法',
+                    ];
+        return $messages;
     }
 }

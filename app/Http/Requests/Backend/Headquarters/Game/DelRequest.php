@@ -16,7 +16,7 @@ class DelRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,25 +24,21 @@ class DelRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
-        if ($this->isMethod('post')) {
-            return [
-                'id' => 'required|exists:games,id',
-            ];
-        }
-        return [];
+        return ['id' => 'required|exists:games,id'];
     }
+
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-        ];
+                'id.required' => 'ID不存在',
+                'id.exists'   => 'ID不存在',
+               ];
     }
 }

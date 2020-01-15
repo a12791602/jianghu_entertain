@@ -22,23 +22,22 @@ class DeleteRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'toDelete' => 'required|array',
-            'toDelete.*' => 'int|exists:merchant_system_menus,id',
-        ];
+        $rules = [
+                  'toDelete'   => 'required|array',
+                  'toDelete.*' => 'int|exists:merchant_system_menus,id',
+                 ];
+        return $rules;
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages()
+    public function messages(): array
     {
-        return [
-            'toDelete.*.exists' => '需要删除的菜单不存在!',
-        ];
+        return ['toDelete.*.exists' => '需要删除的菜单不存在!'];
     }
 }

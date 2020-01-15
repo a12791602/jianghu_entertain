@@ -37,25 +37,24 @@ class EditAction
         }
         $menuEloq = $this->model::find($inputDatas['menu_id']);
         if ($menuEloq) {
-            $menuEloq->label = $inputDatas['label'];
+            $menuEloq->label   = $inputDatas['label'];
             $menuEloq->en_name = $inputDatas['en_name'];
             $menuEloq->display = $inputDatas['display'];
-            $menuEloq->icon = $inputDatas['icon'] ?? null;
+            $menuEloq->icon    = $inputDatas['icon'] ?? null;
             if ($parent === true) {
                 $menuEloq->route = '#';
-                $menuEloq->pid = 0;
+                $menuEloq->pid   = 0;
             } else {
                 $menuEloq->route = $inputDatas['route'];
-                $menuEloq->pid = $inputDatas['parent_id'];
+                $menuEloq->pid   = $inputDatas['parent_id'];
             }
             $data = $menuEloq->toArray();
             if ($menuEloq->save()) {
-                return msgOut(true, $data);
-            } else {
-                throw new \Exception('300000');
+                $msgOut = msgOut(true, $data);
+                return $msgOut;
             }
-        } else {
             throw new \Exception('300000');
         }
+        throw new \Exception('300000');
     }
 }

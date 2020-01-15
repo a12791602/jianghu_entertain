@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class for marchant admin access group.
@@ -22,18 +23,20 @@ class MerchantAdminAccessGroup extends BaseModel
     /**
      * 管理员组权限
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function detail()
+    public function detail(): HasMany
     {
-        return $this->hasMany(MerchantAdminAccessGroupsHasBackendSystemMenu::class, 'group_id', 'id');
+        $detail = $this->hasMany(MerchantAdminAccessGroupsHasBackendSystemMenu::class, 'group_id', 'id');
+        return $detail;
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function adminUsers()
+    public function adminUsers(): HasMany
     {
-        return $this->hasMany(MerchantAdminUser::class, 'group_id', 'id');
+        $adminUsers = $this->hasMany(MerchantAdminUser::class, 'group_id', 'id');
+        return $adminUsers;
     }
 }

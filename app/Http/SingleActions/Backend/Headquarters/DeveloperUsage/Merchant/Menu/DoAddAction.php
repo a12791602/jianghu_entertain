@@ -34,18 +34,19 @@ class DoAddAction
         if (isset($inputDatas['is_parent']) && (int) $inputDatas['is_parent'] === 1) {
             $parent = true;
         }
-        $menuEloq = $this->model;
-        $menuEloq->label = $inputDatas['label'];
+        $menuEloq          = $this->model;
+        $menuEloq->label   = $inputDatas['label'];
         $menuEloq->en_name = $inputDatas['en_name'];
-        $menuEloq->route = $inputDatas['route'];
+        $menuEloq->route   = $inputDatas['route'];
         $menuEloq->display = $inputDatas['display'];
-        $menuEloq->icon = $inputDatas['icon'] ?? null;
-        $menuEloq->sort = $inputDatas['sort'];
+        $menuEloq->icon    = $inputDatas['icon'] ?? null;
+        $menuEloq->sort    = $inputDatas['sort'];
         if ($parent === false) {
-            $menuEloq->pid = $inputDatas['parent_id'];
+            $menuEloq->pid   = $inputDatas['parent_id'];
             $menuEloq->level = $inputDatas['level'];
         }
         $menuEloq->save();
-        return msgOut(true, $menuEloq->toArray());
+        $msgOut = msgOut(true, $menuEloq->toArray());
+        return $msgOut;
     }
 }

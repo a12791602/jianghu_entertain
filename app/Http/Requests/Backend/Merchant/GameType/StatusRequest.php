@@ -15,7 +15,7 @@ class StatusRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,26 +23,26 @@ class StatusRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules() :array
+    public function rules(): array
     {
         return [
-            'id' => 'required|exists:game_type_platforms,id',
-            'status' => 'required|in:0,1',
-        ];
+                'id'     => 'required|exists:game_type_platforms,id',
+                'status' => 'required|in:0,1',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'status.required' => '请选择状态',
-            'status.in' => '所选状态不存在',
-        ];
+                'id.required'     => 'ID不存在',
+                'id.exists'       => 'ID不存在',
+                'status.required' => '请选择状态',
+                'status.in'       => '所选状态不存在',
+               ];
     }
 }

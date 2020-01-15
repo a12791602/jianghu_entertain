@@ -14,7 +14,7 @@ class MerchantSystemMenu extends BaseModel
     use MerchantMenuLogics;
 
     /**
-     * @var string
+     * RedisKey
      */
     public const ALL_MENU_REDIS_KEY = '*';
 
@@ -28,6 +28,7 @@ class MerchantSystemMenu extends BaseModel
      */
     public function childs(): HasMany
     {
-        return $this->hasMany(__CLASS__, 'pid', 'id');
+        $childs = $this->hasMany(MerchantSystemMenu::class, 'pid', 'id');
+        return $childs;
     }
 }

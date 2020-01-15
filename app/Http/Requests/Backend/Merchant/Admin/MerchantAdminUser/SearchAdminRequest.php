@@ -22,13 +22,12 @@ class SearchAdminRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'searchNameEmail' => 'required|string',
-        ];
+        $rules = ['searchNameEmail' => 'required|string'];
+        return $rules;
     }
 
     /*public function messages()

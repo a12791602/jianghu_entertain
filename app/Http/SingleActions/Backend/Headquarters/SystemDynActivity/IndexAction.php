@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
 use App\ModelFilters\Activity\SystemDynActivityFilter;
@@ -20,10 +21,11 @@ class IndexAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize = $this->model::getPageSize();
+        $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
-        return msgOut(true, $outputDatas);
+        $msgOut      = msgOut(true, $outputDatas);
+        return $msgOut;
     }
 }

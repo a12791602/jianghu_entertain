@@ -2,8 +2,8 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
-use App\Models\Admin\MerchantAdminUser;
 use App\ModelFilters\Admin\BackendAdminUserFilter;
+use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -31,7 +31,8 @@ class SearchAdminAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data = $this->model->filter($inputDatas, BackendAdminUserFilter::class)->get()->toArray();
-        return msgOut(true, $data);
+        $data   = $this->model->filter($inputDatas, BackendAdminUserFilter::class)->get()->toArray();
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

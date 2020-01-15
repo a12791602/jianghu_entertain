@@ -22,14 +22,15 @@ class DestroyRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|numeric|exists:backend_admin_access_groups,id',
-            'group_name' => 'required|exists:backend_admin_access_groups,group_name',
-        ];
+        $rules = [
+                  'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
+                  'group_name' => 'required|exists:backend_admin_access_groups,group_name',
+                 ];
+        return $rules;
     }
 
     /*public function messages()

@@ -40,10 +40,10 @@ class UpdateAdminGroupAction
             throw new \Exception('301100');
         }
         //验证管理组
-        $filterArr = [
-            'id' => $inputDatas['group_id'],
-            'groupName' => $inputDatas['group_name'],
-        ];
+        $filterArr     = [
+                          'id'        => $inputDatas['group_id'],
+                          'groupName' => $inputDatas['group_name'],
+                         ];
         $groupIsExists = BackendAdminAccessGroup::filter($filterArr, BackendAdminAccessGroupFilter::class)->exists();
         if ($groupIsExists === false) {
             throw new \Exception('301101');
@@ -52,10 +52,11 @@ class UpdateAdminGroupAction
         $adminEloq->group_id = $inputDatas['group_id'];
         $adminEloq->save();
         //返回信息
-        $data = [
-            'admin_name' => $adminEloq->name,
-            'group_name' => $inputDatas['group_name'],
-        ];
-        return msgOut(true, $data);
+        $data   = [
+                   'admin_name' => $adminEloq->name,
+                   'group_name' => $inputDatas['group_name'],
+                  ];
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

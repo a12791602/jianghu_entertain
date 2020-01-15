@@ -22,15 +22,16 @@ class UpdatePasswordRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|numeric|exists:backend_admin_users',
-            'name' => 'required|string',
-            'password' => 'required|string',
-        ];
+        $rules = [
+                  'id'       => 'required|numeric|exists:backend_admin_users',
+                  'name'     => 'required|string',
+                  'password' => 'required|string',
+                 ];
+        return $rules;
     }
 
     /*public function messages()

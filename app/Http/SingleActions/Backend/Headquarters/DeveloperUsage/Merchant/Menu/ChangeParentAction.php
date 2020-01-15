@@ -31,13 +31,13 @@ class ChangeParentAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $parseDatas = json_decode($inputDatas['drag_result'], true);
+        $parseDatas  = json_decode($inputDatas['drag_result'], true);
         $itemProcess = [];
         if (!empty($parseDatas)) {
             $itemProcess = $this->model->changeParent($parseDatas);
-            return msgOut(true, $itemProcess);
-        } else {
-            throw new \Exception('300001');
+            $msgOut      = msgOut(true, $itemProcess);
+            return $msgOut;
         }
+        throw new \Exception('300001');
     }
 }

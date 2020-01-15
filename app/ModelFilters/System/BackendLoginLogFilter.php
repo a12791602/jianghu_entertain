@@ -26,7 +26,8 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function email(string $email)
     {
-        return $this->where('email', $email);
+        $eloq = $this->where('email', $email);
+        return $eloq;
     }
 
     /**
@@ -37,7 +38,8 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function name(string $name)
     {
-        return $this->whereLike('name', $name);
+        $eloq = $this->whereLike('name', $name);
+        return $eloq;
     }
 
     /**
@@ -48,18 +50,24 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function loginIp(string $loginIp)
     {
-        return $this->where('ip', $loginIp);
+        $eloq = $this->where('ip', $loginIp);
+        return $eloq;
     }
 
     /**
      * 登录时间查询
      *
-     * @param  string $createAt 登录时间.
+     * @param  string $createdStr 登录时间.
      * @return $this
      */
-    public function createAt(string $createAt)
+    public function createAt(string $createdStr)
     {
-        $createTime = json_decode($createAt, true);
-        return $this->whereBetween('created_at', $createTime);
+        $createdArr = json_decode($createdStr, true);
+        if (!is_array($createdArr) || count($createdArr) !== 2) {
+            $eloq = $this;
+        } else {
+            $eloq = $this->whereBetween('created_at', $createdArr);
+        }
+        return $eloq;
     }
 }

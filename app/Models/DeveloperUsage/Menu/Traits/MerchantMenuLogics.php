@@ -14,29 +14,31 @@ use Illuminate\Support\Facades\Cache;
 trait MerchantMenuLogics
 {
     /**
-     * @return array
+     * @return mixed[]
      */
     public function forStar(): array
     {
-        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
+        $menuDatas = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
+        return $menuDatas;
     }
 
     /**
      * @param  integer $accessGroupId          管理员组id.
      * @param  array   $adminAccessGroupDetail 用户拥有的菜单权限.
-     * @return array|mixed
+     * @return mixed
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+        $menuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+        return $menuDatas;
     }
 
     /**
      * @param  string|integer $redisKey               RedisKey.
      * @param  array          $adminAccessGroupDetail 管理员拥有的菜单权限.
-     * @return array
+     * @return mixed[]
      */
-    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = [])
+    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
             $menuData = Cache::tags([$this->redisFirstTag])->get($redisKey);
@@ -49,22 +51,23 @@ trait MerchantMenuLogics
     /**
      * @param  string|integer $redisKey               RedisKey.
      * @param  array          $adminAccessGroupDetail 管理员组权限.
-     * @return array
+     * @return mixed[]
      */
     public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
         if ($redisKey === self::ALL_MENU_REDIS_KEY) {
-            $menuLists = self::getAllFirstLevelList();
+            $menuLists              = self::getAllFirstLevelList();
             $adminAccessGroupDetail = $this->pluck('id')->toArray();
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
         }
         foreach ($menuLists as $firstMenu) {
             $menuForFE[$firstMenu->id] = $firstMenu->toArray();
-            if ($firstMenu->childs()->exists()) {
-                $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+            if (!$firstMenu->childs()->exists()) {
+                continue;
             }
+            $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
@@ -77,18 +80,23 @@ trait MerchantMenuLogics
      * @param MerchantSystemMenu $firstMenu              BackendSystemMenu.
      * @param array              $menuForFE              整理后的管理员组权限.
      *
-     * @return array
+     * @return mixed[]
      */
-    private function _getMenuChilds(array $adminAccessGroupDetail, MerchantSystemMenu $firstMenu, array $menuForFE)
-    {
+    private function _getMenuChilds(
+        array $adminAccessGroupDetail,
+        MerchantSystemMenu $firstMenu,
+        array $menuForFE
+    ): array {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         foreach ($firstChilds as $secondMenu) {
             $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
-            if ($secondMenu->childs()->exists()) {
-                $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-                foreach ($secondChilds as $thirdMenu) {
-                    $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id] = $thirdMenu->toArray();
-                }
+            if (!$secondMenu->childs()->exists()) {
+                continue;
+            }
+            $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
+            foreach ($secondChilds as $thirdMenu) {
+                $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id]
+                    = $thirdMenu->toArray();
             }
         }
         return $menuForFE;
@@ -109,7 +117,8 @@ trait MerchantMenuLogics
      */
     public static function getAllFirstLevelList()
     {
-        return self::where('pid', 0)->orderBy('sort')->get();
+        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
+        return $allFirstLevelList;
     }
 
     /**
@@ -118,30 +127,32 @@ trait MerchantMenuLogics
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)
     {
-        return self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
+        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
+        return $firstLevelList;
     }
 
     /**
      * @param  array $parseDatas 修改的数据.
-     * @return array $itemProcess
+     * @return mixed[]
      */
     public function changeParent(array $parseDatas): array
     {
-        $atLeastOne = false;
+        $atLeastOne  = false;
         $itemProcess = [];
         foreach ($parseDatas as $value) {
             $menuEloq = self::find($value['currentId']);
-            if ($menuEloq !== null) {
-                $menuEloq->pid = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
-                $menuEloq->sort = $value['currentSort'];
-                if ($menuEloq->save()) {
-                    $pass['pass'] = $value['currentText'];
-                    $itemProcess[] = $pass;
-                    $atLeastOne = true;
-                } else {
-                    $fail['fail'] = $value['currentText'];
-                    $itemProcess[] = $fail;
-                }
+            if ($menuEloq === null) {
+                continue;
+            }
+            $menuEloq->pid  = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
+            $menuEloq->sort = $value['currentSort'];
+            if ($menuEloq->save()) {
+                $pass          = ['pass' => $value['currentText']];
+                $itemProcess[] = $pass;
+                $atLeastOne    = true;
+            } else {
+                $fail          = ['fail' => $value['currentText']];
+                $itemProcess[] = $fail;
             }
         }
         if ($atLeastOne === true && isset($menuEloq)) {

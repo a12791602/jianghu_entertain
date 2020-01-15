@@ -26,9 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-            'id' => 'required|exists:system_routes_merchants', //ID
-        ];
+        $rules = ['id' => 'required|exists:system_routes_merchants'];  //ID
         return $rules;
     }
 
@@ -38,9 +36,9 @@ class DeleteRequest extends BaseFormRequest
     public function messages(): array
     {
         $messages = [
-            'id.required' => '缺少路由ID',
-            'id.exists'   => '当前路由不存在',
-        ];
+                     'id.required' => '缺少路由ID',
+                     'id.exists'   => '当前路由不存在',
+                    ];
         return $messages;
     }
 }

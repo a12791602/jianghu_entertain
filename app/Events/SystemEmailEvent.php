@@ -14,7 +14,9 @@ use Illuminate\Queue\SerializesModels;
  */
 class SystemEmailEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     /**
      * 邮件id
@@ -53,19 +55,20 @@ class SystemEmailEvent
      */
     public function __construct(int $emailId, int $receiverType, array $receivers, string $platformSign = '')
     {
-        $this->emailId = $emailId;
+        $this->emailId      = $emailId;
         $this->receiverType = $receiverType;
-        $this->receivers = $receivers;
+        $this->receivers    = $receivers;
         $this->platformSign = $platformSign;
     }
 
     /**
      * Get the channels the event should broadcast on.
      *
-     * @return \Illuminate\Broadcasting\Channel|array
+     * @return \Illuminate\Broadcasting\Channel|mixed[]
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        $object = new PrivateChannel('channel-name');
+        return $object;
     }
 }

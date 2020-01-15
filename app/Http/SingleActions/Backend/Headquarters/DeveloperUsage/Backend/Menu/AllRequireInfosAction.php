@@ -28,9 +28,10 @@ class AllRequireInfosAction
         //$data['firstlevelmenus'] = $firstlevelmenus;
         //$data['editMenu'] = $editMenu;
         //$data['routeMatchingName'] = $routeMatchingName;
-        $data['route_info'] = $routeInfo;
+        $data = ['route_info' => $routeInfo];
 
-        return msgOut(true, $data);
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 
     /**
@@ -39,15 +40,15 @@ class AllRequireInfosAction
      * @param array $routeCollection RouteCollection.
      * @param array $inputDatas      传递的参数.
      *
-     * @return array
+     * @return mixed[]
      */
     private function _getRouteInfo(array $routeCollection, array $inputDatas): array
     {
-        $type = [
-            1 => 'headquarters-api',
-            2 => 'merchant-api',
-            3 => 'app-api',
-        ];
+        $type        = [
+                        1 => 'headquarters-api',
+                        2 => 'merchant-api',
+                        3 => 'app-api',
+                       ];
         $routeEndKey = $type[$inputDatas['type']] ?? $type[1];
         //      firstlevelmenus = BackendSystemMenu::getFirstLevelList();
 
@@ -56,18 +57,20 @@ class AllRequireInfosAction
         $registeredRoute = SystemRoutesBackend::pluck('route_name');
 
         $routeInfo = [];
+
         foreach ($routeCollection as $dataKey => $route) {
-            if (isset($route->action['as'])
-                && $route->action['prefix'] !== '_debugbar'
-                && preg_match('#^' . $routeEndKey . '#', $route->action['as']) === 1
-                && !in_array($route->action['as'], (array) $registeredRoute)
+            if (!isset($route->action['as'])
+                || $route->action['prefix'] === '_debugbar'
+                || preg_match('#^' . $routeEndKey . '#', $route->action['as']) !== 1
+                || in_array($route->action['as'], (array) $registeredRoute)
             ) {
-                $routeShortData[$dataKey]['url'] = $route->uri;
-                $routeShortData[$dataKey]['controller'] = $route->action['controller'];
-                $routeShortData[$dataKey]['route_name'] = $route->action['as'];
-                $routeInfo[] = $routeShortData[$dataKey];
-                //              $routeInfo[$r->action['as']] = $r->uri;
+                continue;
             }
+            $routeShortData[$dataKey]['url']        = $route->uri;
+            $routeShortData[$dataKey]['controller'] = $route->action['controller'];
+            $routeShortData[$dataKey]['route_name'] = $route->action['as'];
+            $routeInfo[]                            = $routeShortData[$dataKey];
+            //$routeInfo[$r->action['as']] = $r->uri;
         }
 
         return $routeInfo;
@@ -78,18 +81,19 @@ class AllRequireInfosAction
      *
      * @param array $routeCollection RouteCollection.
      *
-     * @return array
+     * @return mixed[]
      */
-    private function _getAllRouteInfo(array $routeCollection)
+    private function _getAllRouteInfo(array $routeCollection): array
     {
         $routeInfo = [];
         foreach ($routeCollection as $dataKey => $route) {
-            if (isset($route->action['as']) && $route->action['prefix'] !== '_debugbar') {
-                $routeShortData[$dataKey]['url'] = $route->uri;
-                $routeShortData[$dataKey]['controller'] = $route->action['controller'];
-                $routeShortData[$dataKey]['route_name'] = $route->action['as'];
-                $routeInfo[] = $routeShortData[$dataKey];
+            if (!isset($route->action['as']) || $route->action['prefix'] === '_debugbar') {
+                continue;
             }
+            $routeShortData[$dataKey]['url']        = $route->uri;
+            $routeShortData[$dataKey]['controller'] = $route->action['controller'];
+            $routeShortData[$dataKey]['route_name'] = $route->action['as'];
+            $routeInfo[]                            = $routeShortData[$dataKey];
         }
         return $routeInfo;
     }

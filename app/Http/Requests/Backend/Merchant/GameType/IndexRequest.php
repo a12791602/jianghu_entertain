@@ -15,7 +15,7 @@ class IndexRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize() :bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -23,27 +23,27 @@ class IndexRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'device' => 'required|in:1,2,3',
-            'status' => 'in:0,1',
-            'name' => 'string',
-        ];
+                'device' => 'required|in:1,2,3',
+                'status' => 'in:0,1',
+                'name'   => 'string',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
-            'device.required' => '请选择设备',
-            'device.in' => '所选设备不再范围内',
-            'status.in' => '所传状态不在范围内',
-            'name.string' => '名称不符合规则',
-        ];
+                'device.required' => '请选择设备',
+                'device.in'       => '所选设备不再范围内',
+                'status.in'       => '所传状态不在范围内',
+                'name.string'     => '名称不符合规则',
+               ];
     }
 }

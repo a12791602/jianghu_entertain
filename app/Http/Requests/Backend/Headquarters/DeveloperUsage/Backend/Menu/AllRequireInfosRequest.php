@@ -22,13 +22,12 @@ class AllRequireInfosRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'type' => 'required|integer|in:1,2,3,0',
-        ];
+        $rules = ['type' => 'required|integer|in:1,2,3,0'];
+        return $rules;
     }
 
     /*public function messages()

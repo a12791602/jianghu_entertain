@@ -17,15 +17,15 @@ class DelDoAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         if (!Game::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
             throw new \Exception('300400');
         }
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
-            return msgOut(true);
-        } else {
-            throw new \Exception('300401');
+            $msgOut = msgOut(true);
+            return $msgOut;
         }
+        throw new \Exception('300401');
     }
 }

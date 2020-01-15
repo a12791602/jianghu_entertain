@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\ModelFilters\Game\GameFilter;
@@ -16,13 +17,19 @@ class UnassignGamesAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize = Game::getPageSize();
+        $pageSize                             = Game::getPageSize();
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas = Game::filter($inputDatas, GameFilter::class)->select(
-            ['id', 'name', 'sign', 'vendor_id'],
+        $outputDatas                          = Game::filter($inputDatas, GameFilter::class)->select(
+            [
+             'id',
+             'name',
+             'sign',
+             'vendor_id',
+            ],
         )->paginate($pageSize);
-        return msgOut(true, $outputDatas);
+        $msgOut                               = msgOut(true, $outputDatas);
+        return $msgOut;
     }
 }

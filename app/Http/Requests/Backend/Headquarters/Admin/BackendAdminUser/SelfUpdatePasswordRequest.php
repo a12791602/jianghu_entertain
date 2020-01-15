@@ -22,25 +22,31 @@ class SelfUpdatePasswordRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'old_password' => 'required|string', //旧密码
-            'password' => ['required', 'string', 'between:6,16', 'regex:/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/'], //新密码
-        ];
+        $rules = [
+                  'old_password' => 'required|string', //旧密码
+                  'password'     => [
+                                     'required',
+                                     'string',
+                                     'between:6,16',
+                                     'regex:/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/',
+                                    ], //新密码
+                 ];
+        return $rules;
     }
 
     /**
      * 返回信息
-     * @return array
+     * @return mixed[]
      */
-    public function messages()
+    public function messages(): array
     {
         return [
-            'password.between' => '管理员密码必须是6---16位之间',
-            'password.regex' => '管理员密码必须是字母+数字组合，不能有特殊字符',
-        ];
+                'password.between' => '管理员密码必须是6---16位之间',
+                'password.regex'   => '管理员密码必须是字母+数字组合，不能有特殊字符',
+               ];
     }
 }

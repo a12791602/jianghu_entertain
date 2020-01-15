@@ -22,17 +22,17 @@ class CreateRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:merchant_admin_users',
-            'email' => 'required|email|unique:merchant_admin_users',
-            'password' => 'required|string',
-            'is_test' => 'required|integer',
-            'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
-        ];
+                'name'     => 'required|unique:merchant_admin_users',
+                'email'    => 'required|email|unique:merchant_admin_users',
+                'password' => 'required|string',
+                'is_test'  => 'required|integer',
+                'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
+               ];
     }
 
     /*public function messages()

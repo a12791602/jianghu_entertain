@@ -33,16 +33,18 @@ class DeleteAction
     {
         $toDelete = $inputDatas['toDelete'];
         try {
+            $data  = [];
             $datas = $this->model->find($toDelete)->each(
-                static function ($product) {
+                static function ($product) use ($data) {
                     $data[] = $product->toArray();
                     $product->delete();
                     return $data;
                 },
             );
             $this->model->refreshStar();
-            return msgOut(true, $datas);
-        } catch (\Exception $e) {
+            $msgOut = msgOut(true, $datas);
+            return $msgOut;
+        } catch (\Throwable $e) {
             throw new \Exception('300002');
         }
     }

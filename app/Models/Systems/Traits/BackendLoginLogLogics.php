@@ -14,15 +14,15 @@ trait BackendLoginLogLogics
      * @param  integer $type    总后台1  代理后台2.
      * @return void
      */
-    public function insertData(object $user, Request $request, int $type)
+    public function insertData(object $user, Request $request, int $type): void
     {
         $addData = [
-            'name' => $user->name,
-            'email' => $user->email,
-            'ip' => $request->ip(),
-            'ips' => implode($request->ips(), ','),
-            'type' => $type,
-        ];
+                    'name'  => $user->name,
+                    'email' => $user->email,
+                    'ip'    => $request->ip(),
+                    'ips'   => implode(',', $request->ips()),
+                    'type'  => $type,
+                   ];
         $this->fill($addData);
         $this->save();
     }

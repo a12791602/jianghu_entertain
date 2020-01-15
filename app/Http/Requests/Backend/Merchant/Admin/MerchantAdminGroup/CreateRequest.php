@@ -22,14 +22,15 @@ class CreateRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'group_name' => 'required|string',
-            'role' => 'required',
-        ];
+        $rules = [
+                  'group_name' => 'required|string',
+                  'role'       => 'required',
+                 ];
+        return $rules;
     }
 
     /*public function messages()

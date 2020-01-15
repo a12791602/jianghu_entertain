@@ -22,15 +22,16 @@ class EditRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|numeric|exists:backend_admin_access_groups,id',
-            'group_name' => 'required',
-            'role' => 'required',
-        ];
+        $rules = [
+                  'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
+                  'group_name' => 'required',
+                  'role'       => 'required',
+                 ];
+        return $rules;
     }
 
     /*public function messages()

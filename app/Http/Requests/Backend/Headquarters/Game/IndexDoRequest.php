@@ -16,7 +16,7 @@ class IndexDoRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,26 +24,26 @@ class IndexDoRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'game_id' => 'integer',
-            'vendor_id' => 'integer',
-            'type_id' => 'integer',
-        ];
+                'game_id'   => 'integer',
+                'vendor_id' => 'integer',
+                'type_id'   => 'integer',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
-            'game_id.integer' => '游戏ID不符合规则',
-            'vendor_id.integer' => '游戏厂商ID不符合规则',
-            'type_id.integer' => '游戏分类ID不符合规则',
-        ];
+                'game_id.integer'   => '游戏ID不符合规则',
+                'vendor_id.integer' => '游戏厂商ID不符合规则',
+                'type_id.integer'   => '游戏分类ID不符合规则',
+               ];
     }
 }

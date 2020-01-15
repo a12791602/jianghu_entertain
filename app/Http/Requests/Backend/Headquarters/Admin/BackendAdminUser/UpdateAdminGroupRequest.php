@@ -22,15 +22,16 @@ class UpdateAdminGroupRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|numeric|exists:backend_admin_users,id', //管理员ID
-            'group_id' => 'required|numeric|exists:backend_admin_access_groups,id', //管理组ID
-            'group_name' => 'required|string|exists:backend_admin_access_groups', //管理组名称
-        ];
+        $rules = [
+                  'id'         => 'required|numeric|exists:backend_admin_users,id',         //管理员ID
+                  'group_id'   => 'required|numeric|exists:backend_admin_access_groups,id', //管理组ID
+                  'group_name' => 'required|string|exists:backend_admin_access_groups',     //管理组名称
+                 ];
+        return $rules;
     }
 
     // public function messages()

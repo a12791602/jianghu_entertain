@@ -21,14 +21,14 @@ class SystemDynActivity extends BaseModel
 
     /**
      * @param  integer $value Value.
-     * @return string|null
+     * @return string
      */
-    public function getLastEditorIdAttribute(int $value)
+    public function getLastEditorIdAttribute(int $value): string
     {
         if (!empty($value)) {
-            return BackendAdminUser::find($value)->name;
-        } else {
-            return null;
+            $name = BackendAdminUser::find($value)->name;
+            return $name;
         }
+        return '';
     }
 }

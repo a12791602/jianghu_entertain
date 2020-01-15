@@ -29,14 +29,15 @@ class RechargeRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $onLine  = 'system_finance_online_infos';
-        $offLine = 'system_finance_offline_infos';
-        $table   = (int) $this->get('is_online') === SystemFinanceType::IS_ONLINE_YES ? $onLine : $offLine;
+        $onLine   = 'system_finance_online_infos';
+        $offLine  = 'system_finance_offline_infos';
+        $isOnline = (int) $this->get('is_online');
+        $table    = $isOnline === SystemFinanceType::IS_ONLINE_YES ? $onLine : $offLine;
         return [
-            'is_online' => 'required|in:0,1',
-            'channel_id' => 'required|exists:' . $table . ',id',
-            'money' => 'required|integer|min:1',
-        ];
+                'is_online'  => 'required|in:0,1',
+                'channel_id' => 'required|exists:' . $table . ',id',
+                'money'      => 'required|integer|min:1',
+               ];
     }
 
     /**
@@ -45,13 +46,13 @@ class RechargeRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'is_online.required' => '请选择是否是线上金流',
-            'is_online.in' => '所选是否是线上金流参数不正确',
-            'channel_id.required' => '请选择支付通道',
-            'channel_id.exists' => '所选支付通道不存在',
-            'money.required' => '请填写充值金额',
-            'money.integer' => '充值金额必须填写整数',
-            'money.min' => '充值金额不能低于1元',
-        ];
+                'is_online.required'  => '请选择是否是线上金流',
+                'is_online.in'        => '所选是否是线上金流参数不正确',
+                'channel_id.required' => '请选择支付通道',
+                'channel_id.exists'   => '所选支付通道不存在',
+                'money.required'      => '请填写充值金额',
+                'money.integer'       => '充值金额必须填写整数',
+                'money.min'           => '充值金额不能低于1元',
+               ];
     }
 }

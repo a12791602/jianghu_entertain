@@ -22,14 +22,15 @@ class DeleteRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'toDelete' => 'required|array',
-            'toDelete.*' => 'int',
-        ];
+        $rules = [
+                  'toDelete'   => 'required|array',
+                  'toDelete.*' => 'int',
+                 ];
+        return $rules;
     }
 
     /*public function messages()

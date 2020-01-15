@@ -16,7 +16,7 @@ class IndexDoRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize() :bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,24 +24,24 @@ class IndexDoRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'status' => 'in:0,1',
-            'name' => 'string',
-        ];
+                'status' => 'in:0,1',
+                'name'   => 'string',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
-            'status.in' => '所选状态不存在',
-            'name.string' => '分类名称不符合规则',
-        ];
+                'status.in'   => '所选状态不存在',
+                'name.string' => '分类名称不符合规则',
+               ];
     }
 }

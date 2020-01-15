@@ -16,7 +16,7 @@ class IndexDoRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize() :bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,26 +24,26 @@ class IndexDoRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'channel_id' => 'integer',
-            'type_id' => 'integer',
-            'vendor_id' => 'integer',
-        ];
+                'channel_id' => 'integer',
+                'type_id'    => 'integer',
+                'vendor_id'  => 'integer',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
-            'channel_id.integer' => '通道ID格式不正确',
-            'type_id.integer' => '金流分类ID格式不正确',
-            'vendor_id.integer' => '金流厂商ID格式不正确',
-        ];
+                'channel_id.integer' => '通道ID格式不正确',
+                'type_id.integer'    => '金流分类ID格式不正确',
+                'vendor_id.integer'  => '金流厂商ID格式不正确',
+               ];
     }
 }

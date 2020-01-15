@@ -14,30 +14,32 @@ use Illuminate\Support\Facades\Cache;
 trait MenuLogics
 {
     /**
-     * @return array
+     * @return mixed[]
      */
     public function forStar(): array
     {
         $adminAccessGroupDetail = $this->find(self::ALL_MENU_REDIS_KEY)->pluck('id')->toArray();
-        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
+        $menuData               = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
+        return $menuData;
     }
 
     /**
      * @param integer $accessGroupId          管理员组id.
      * @param array   $adminAccessGroupDetail 用户拥有的菜单权限.
-     * @return array|mixed
+     * @return mixed
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+        $userMenuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+        return $userMenuDatas;
     }
 
     /**
      * @param string|integer $redisKey               RedisKey.
      * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
-     * @return array
+     * @return mixed[]
      */
-    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = [])
+    public function getMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
             $menuData = Cache::tags([$this->redisFirstTag])->get($redisKey);
@@ -50,7 +52,7 @@ trait MenuLogics
     /**
      * @param string|integer $redisKey               RedisKey.
      * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
-     * @return array
+     * @return mixed[]
      */
     public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
@@ -62,9 +64,10 @@ trait MenuLogics
         }
         foreach ($menuLists as $firstMenu) {
             $menuForFE[$firstMenu->id] = $firstMenu->toArray();
-            if ($firstMenu->childs()->exists()) {
-                $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+            if (!$firstMenu->childs()->exists()) {
+                continue;
             }
+            $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
@@ -76,18 +79,23 @@ trait MenuLogics
      * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
      * @param array             $menuForFE              整理后的管理员组权限.
      *
-     * @return array
+     * @return mixed[]
      */
-    private function _getMenuChilds(array $adminAccessGroupDetail, BackendSystemMenu $firstMenu, array $menuForFE)
-    {
+    private function _getMenuChilds(
+        array $adminAccessGroupDetail,
+        BackendSystemMenu $firstMenu,
+        array $menuForFE
+    ): array {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         foreach ($firstChilds as $secondMenu) {
             $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
-            if ($secondMenu->childs()->exists()) {
-                $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-                foreach ($secondChilds as $thirdMenu) {
-                    $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id] = $thirdMenu->toArray();
-                }
+            if (!$secondMenu->childs()->exists()) {
+                continue;
+            }
+            $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
+            foreach ($secondChilds as $thirdMenu) {
+                $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id]
+                    = $thirdMenu->toArray();
             }
         }
         return $menuForFE;
@@ -108,7 +116,8 @@ trait MenuLogics
      */
     public static function getAllFirstLevelList()
     {
-        return self::where('pid', 0)->orderBy('sort')->get();
+        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
+        return $allFirstLevelList;
     }
 
     /**
@@ -117,27 +126,28 @@ trait MenuLogics
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)
     {
-        return self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
+        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
+        return $firstLevelList;
     }
 
     /**
      * @param array $parseDatas 修改的数据.
-     * @return array $itemProcess
+     * @return mixed[]
      */
     public function changeParent(array $parseDatas): array
     {
-        $atLeastOne = false;
+        $atLeastOne  = false;
         $itemProcess = [];
         foreach ($parseDatas as $value) {
-            $menuEloq = self::find($value['currentId']);
-            $menuEloq->pid = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
+            $menuEloq       = self::find($value['currentId']);
+            $menuEloq->pid  = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
             $menuEloq->sort = $value['currentSort'];
             if ($menuEloq->save()) {
-                $pass['pass'] = $value['currentText'];
+                $pass          = ['pass' => $value['currentText']];
                 $itemProcess[] = $pass;
-                $atLeastOne = true;
+                $atLeastOne    = true;
             } else {
-                $fail['fail'] = $value['currentText'];
+                $fail          = ['fail' => $value['currentText']];
                 $itemProcess[] = $fail;
             }
         }

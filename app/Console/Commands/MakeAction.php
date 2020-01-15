@@ -36,48 +36,17 @@ class MakeAction extends GeneratorCommand
      */
     protected function getStub()
     {
-        return base_path('template/stubs').'/Action.stub';
+        $stub = base_path('template/stubs') . '/Action.stub';
+        return $stub;
     }
 
     /**
      * @param mixed $rootNamespace RootNamespace.
      * @return string
      */
-    protected function getDefaultNamespace($rootNamespace):string
+    protected function getDefaultNamespace($rootNamespace): string
     {
-        return $rootNamespace.'\Http\SingleActions';
-    }
-
-    /**
-     * @param mixed $stub Stub.
-     * @param mixed $name Name.
-     * @return string
-     */
-    protected function replaceClass($stub, $name):string
-    {
-
-        $stub = $this->replaceCustomizeSetting($stub);
-
-        return parent::replaceClass($stub, $name);
-    }
-
-    /**
-     * @param mixed $stub Stub.
-     * @param mixed $name Name.
-     * @return GeneratorCommand
-     */
-    protected function replaceNamespace(&$stub, $name):object
-    {
-        return parent::replaceNamespace($stub, $name);
-    }
-
-    /**
-     * @param string $stub Stub.
-     * @return string
-     */
-    protected function replaceCustomizeSetting(string $stub) :string
-    {
-        return $stub;
+        return $rootNamespace . '\Http\SingleActions';
     }
 
     /**
@@ -91,19 +60,23 @@ class MakeAction extends GeneratorCommand
             return false;
         }
         if ($this->option('r')) {
-            $this->createRequest();
+            $this->_createRequest();
         }
-        return parent::handle();
+        $result = parent::handle();
+        return $result;
     }
 
     /**
      * 创建request
      * @return void
      */
-    private function createRequest()
+    private function _createRequest()
     {
-        $this->call('make:request', [
-            'name' => substr($this->argument('name'), 0, -6).'Request',
-        ]);
+        $this->call(
+            'make:request',
+            [
+             'name' => substr($this->argument('name'), 0, -6) . 'Request',
+            ],
+        );
     }
 }

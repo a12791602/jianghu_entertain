@@ -4,6 +4,7 @@ namespace App\Models\DeveloperUsage\Merchant;
 
 use App\Models\BaseModel;
 use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class for system routes merchant.
@@ -17,10 +18,11 @@ class SystemRoutesMerchant extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function menu()
+    public function menu(): BelongsTo
     {
-        return $this->belongsTo(MerchantSystemMenu::class, 'menu_group_id', 'id');
+        $menu = $this->belongsTo(MerchantSystemMenu::class, 'menu_group_id', 'id');
+        return $menu;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Models\Platform\GamesPlatform;
@@ -15,17 +16,20 @@ class AssignGamesAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $data = [];
         foreach ($inputDatas['game_signs'] as $game_sign) {
+            $tmpData                  = [];
             $tmpData['platform_sign'] = $inputDatas['platform_sign'];
-            $tmpData['game_sign'] = $game_sign;
-            $data[] = $tmpData;
+            $tmpData['game_sign']     = $game_sign;
+            $data[]                   = $tmpData;
         }
-        if (GamesPlatform::insert($data) === true) {
-            return msgOut(true);
-        } else {
+        try {
+            GamesPlatform::insert($data);
+            $msgOut = msgOut(true);
+            return $msgOut;
+        } catch (\Throwable $exception) {
             throw new \Exception('302000');
         }
     }

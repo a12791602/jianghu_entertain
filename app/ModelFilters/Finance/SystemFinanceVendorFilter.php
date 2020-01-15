@@ -21,19 +21,21 @@ class SystemFinanceVendorFilter extends ModelFilter
     public $relations = [];
     /**
      * @param  integer $status Status.
-     * @return object
+     * @return SystemFinanceVendorFilter
      */
-    public function status(int $status) :object
+    public function status(int $status): SystemFinanceVendorFilter
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
      * @param  string $name Name.
-     * @return object
+     * @return SystemFinanceVendorFilter
      */
-    public function name(string $name) :object
+    public function name(string $name): SystemFinanceVendorFilter
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
     }
 }

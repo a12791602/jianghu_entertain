@@ -16,7 +16,7 @@ class UnassignGamesRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,26 +24,27 @@ class UnassignGamesRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
         return [
-            'platform_sign' => 'required|exists:system_platforms,sign',
-            'vendor_id' => 'exists:games_vendors,id',
-            'game_id' => 'exists:games,id',
-        ];
+                'platform_sign' => 'required|exists:system_platforms,sign',
+                'vendor_id'     => 'exists:games_vendors,id',
+                'game_id'       => 'exists:games,id',
+               ];
     }
+
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages() :array
+    public function messages(): array
     {
         return [
-            'platform_sign.required' => '请选择平台',
-            'platform_sign.exists' => '所选择平台不存在',
-            'vendor_id.exists' => '所选厂商不存在',
-            'game_id.exists' => '所选游戏不存在',
-        ];
+                'platform_sign.required' => '请选择平台',
+                'platform_sign.exists'   => '所选择平台不存在',
+                'vendor_id.exists'       => '所选厂商不存在',
+                'game_id.exists'         => '所选游戏不存在',
+               ];
     }
 }

@@ -29,7 +29,8 @@ class GetAllMenuAction
      */
     public function execute(): JsonResponse
     {
-        $data = $this->model->forStar();
-        return msgOut(true, $data);
+        $data   = $this->model->forStar();
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

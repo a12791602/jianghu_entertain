@@ -35,16 +35,24 @@ class UpdatePasswordAction
     {
         $adminEloq = $this->model::where(
             [
-                ['id', '=', $inputDatas['id']],
-                ['name', '=', $inputDatas['name']],
+             [
+              'id',
+              '=',
+              $inputDatas['id'],
+             ],
+             [
+              'name',
+              '=',
+              $inputDatas['name'],
+             ],
             ],
         )->first();
         if ($adminEloq !== null) {
             $adminEloq->password = Hash::make($inputDatas['password']);
             $adminEloq->save();
-            return msgOut(true, ['name' => $inputDatas['name']]);
-        } else {
-            throw new \Exception('301100');
+            $msgOut = msgOut(true, ['name' => $inputDatas['name']]);
+            return $msgOut;
         }
+        throw new \Exception('301100');
     }
 }

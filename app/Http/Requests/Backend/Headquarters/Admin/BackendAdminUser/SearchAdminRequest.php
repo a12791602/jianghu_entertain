@@ -22,13 +22,12 @@ class SearchAdminRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
-        return [
-            'searchStr' => 'required|string', //搜索的字符串
-        ];
+        $rules = ['searchStr' => 'required|string'];//搜索的字符串
+        return $rules;
     }
 
     /*public function messages()

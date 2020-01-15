@@ -23,6 +23,7 @@ class SystemRoutesBackend extends BaseModel
      */
     public function menu(): BelongsTo
     {
-        return $this->belongsTo(BackendSystemMenu::class, 'menu_group_id', 'id');
+        $menu = $this->belongsTo(BackendSystemMenu::class, 'menu_group_id', 'id');
+        return $menu;
     }
 }
