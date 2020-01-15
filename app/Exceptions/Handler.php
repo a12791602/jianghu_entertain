@@ -59,8 +59,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [
-    ];
+    protected $dontReport = [];
 
     /**
      * A list of the inputs that are never flashed for validation exceptions.
@@ -68,9 +67,9 @@ class Handler extends ExceptionHandler
      * @var array
      */
     protected $dontFlash = [
-        'password',
-        'password_confirmation',
-    ];
+                            'password',
+                            'password_confirmation',
+                           ];
 
     /**
      * ExceptionHandler constructor.
@@ -89,7 +88,7 @@ class Handler extends ExceptionHandler
      * @return void
      * @throws Exception|InvalidArgumentException Exception.
      */
-    public function report(\Exception $e): void
+    public function report(Exception $e): void
     {
         parent::report($e);
         $this->reportResponses = [];
@@ -125,9 +124,9 @@ class Handler extends ExceptionHandler
      * @param Request   $request Request.
      * @param Exception $e       Exception.
      * @return Response
-     * @throws Exception ReflectionException.
+     * @throws Exception|InvalidArgumentException Exception.
      */
-    public function render($request, \Exception $e): Response
+    public function render($request, Exception $e): Response
     {
         $response = $this->_generateExceptionResponse($request, $e);
         $this->_sendToTg($e, $request, $response);
@@ -152,9 +151,9 @@ class Handler extends ExceptionHandler
      * @param Request   $request Request.
      * @param Exception $e       Exception.
      * @return mixed
-     * @throws Exception ReflectionException.
+     * @throws Exception|InvalidArgumentException Exception.
      */
-    private function _generateExceptionResponse(Request $request, \Exception $e)
+    private function _generateExceptionResponse(Request $request, Exception $e)
     {
         $formatters = $this->config['formatters'];
         // :: notation will otherwise not work for PHP <= 5.6
@@ -208,11 +207,11 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param Exception $e Exception.
-     * @param Request $request
-     * @param JsonResponse $response
+     * @param Exception    $e        Exception.
+     * @param Request      $request  Requset.
+     * @param JsonResponse $response JsonResponse.
      * @return void
-     * @throws \Telegram\Bot\Exceptions\TelegramSDKException
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException TelegramSDKException.
      */
     private function _sendToTg(Exception $e, Request $request, JsonResponse $response): void
     {
@@ -240,29 +239,29 @@ class Handler extends ExceptionHandler
         $currentRoute = Route::getCurrentRoute();
         $route        = empty($currentRoute) ? null : $currentRoute->uri();
         $error        = [
-            'environment'   => $appEnvironment,
-            'route'         => $route,
-            'origin'        => $agent->getHttpHeaders(),
-            'ips'           => $request->ips(), //array
-            'user_agent'    => $agent->getUserAgent(),
-            'lang'          => $agent->languages(), //array
-            'device'        => $agent->device(),
-            'os'            => $requestOs,
-            'browser'       => $browser,
-            'bs_version'    => $bsVersion,
-            'os_version'    => $osVersion,
-            'device_type'   => $type,
-            'robot'         => $robot,
-            'inputs'        => $request->all(),                   //array
-            'data'          => $request->get('crypt_data') ?? '', //加密的data
-            'file'          => $e->getFile(),
-            'line'          => $e->getLine(),
-            'code'          => $e->getCode(),
-            'message'       => $e->getMessage(),
-            'previous'      => $e->getPrevious(),
-            'TraceAsString' => $e->getTraceAsString(),
-        ];
-        $telegram = new TGMSG($response);
+                         'environment'   => $appEnvironment,
+                         'route'         => $route,
+                         'origin'        => $agent->getHttpHeaders(),
+                         'ips'           => $request->ips(), //array
+                         'user_agent'    => $agent->getUserAgent(),
+                         'lang'          => $agent->languages(), //array
+                         'device'        => $agent->device(),
+                         'os'            => $requestOs,
+                         'browser'       => $browser,
+                         'bs_version'    => $bsVersion,
+                         'os_version'    => $osVersion,
+                         'device_type'   => $type,
+                         'robot'         => $robot,
+                         'inputs'        => $request->all(),                   //array
+                         'data'          => $request->get('crypt_data') ?? '', //加密的data
+                         'file'          => $e->getFile(),
+                         'line'          => $e->getLine(),
+                         'code'          => $e->getCode(),
+                         'message'       => $e->getMessage(),
+                         'previous'      => $e->getPrevious(),
+                         'TraceAsString' => $e->getTraceAsString(),
+                        ];
+        $telegram     = new TGMSG($response);
         $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
     }
 }
