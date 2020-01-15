@@ -12,7 +12,7 @@ $config = [
     | Refer for more details:
     | https://core.telegram.org/bots#botfather
     |
-     */
+    */
            'bot_token'           => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
 
     /*
@@ -25,7 +25,7 @@ $config = [
     | Default: false
     | Possible Values: (Boolean) "true" OR "false"
     |
-     */
+    */
            'async_requests'      => env('TELEGRAM_ASYNC_REQUESTS', false),
 
     /*
@@ -38,7 +38,7 @@ $config = [
     |
     | Default: GuzzlePHP
     |
-     */
+    */
            'http_client_handler' => null,
 
     /*
@@ -54,7 +54,7 @@ $config = [
     | Default: The SDK registers, a help command which when a user sends /help
     | will respond with a list of available commands and description.
     |
-     */
+    */
            'commands'            => [
                                      Telegram\Bot\Commands\HelpCommand::class,
                                     ],
