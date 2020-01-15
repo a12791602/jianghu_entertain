@@ -2,16 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\ModelFilters\System\SystemDomainFilter;
 use App\Models\Systems\SystemDomain;
 use Illuminate\Http\JsonResponse;
-use App\ModelFilters\System\SystemDomainFilter;
 
 /**
  * Class for merchant admin user do add action.
  */
 class DomainDetailAction
 {
-
+    
     /**
      * @var SystemDomain
      */
@@ -31,7 +31,10 @@ class DomainDetailAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data = $this->model->filter($inputDatas, SystemDomainFilter::class)->get()->toArray();
-        return msgOut(true, $data);
+        $data   = $this->model
+            ->filter($inputDatas, SystemDomainFilter::class)
+            ->paginate($this->model::getPageSize());
+        $msgOut = msgOut(true, $data);
+        return $msgOut;
     }
 }

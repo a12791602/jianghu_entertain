@@ -257,28 +257,31 @@ class SeederCommand extends GeneratorCommand
      */
     private function _arrToStr(array $array): string
     {
-        $sixteen = str_pad('', 16, self::SPACE);
-        $twenty  = str_pad('', 20, self::SPACE);
-        $header  = $this->_getHeader();
-        $footer  = $this->_getFooter();
-        $string  = '';
-        $content = '';
-        $string .= $header;
+        $thirteen = str_pad('', 13, self::SPACE);
+        $fourteen = str_pad('', 14, self::SPACE);
+        $header   = $this->_getHeader();
+        $footer   = $this->_getFooter();
+        $string   = '';
+        $content  = '';
+        $string  .= $header;
         foreach ($array as $item) {
-            $content .= $sixteen . '[' . PHP_EOL;
+            $content  .= $thirteen . '[' . PHP_EOL;
+            $maxLength = $this->_getMaxLength($item);
             foreach ($item as $ikey => $value) {
+                $spaceNum = $maxLength - strlen($ikey);
+                $space    = str_pad('', $spaceNum, self::SPACE);
                 if (is_string($value)) {
                     $value    = "'" . $value . "'";
-                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
+                    $content .= $fourteen . "'" . $ikey . "'" . $space . ' => ' . $value . ',' . PHP_EOL;
                 } elseif ($value === null) {
-                    $content .= $twenty . "'" . $ikey . "' => null," . PHP_EOL;
+                    $content .= $fourteen . "'" . $ikey . "'" . $space . ' => null,' . PHP_EOL;
                 } elseif (is_numeric($value)) {
-                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
+                    $content .= $fourteen . "'" . $ikey . "'" . $space . ' => ' . $value . ',' . PHP_EOL;
                 } else {
-                    $content .= $twenty . "'" . $ikey . "' => " . $value . ',' . PHP_EOL;
+                    $content .= $fourteen . "'" . $ikey . "'" . $space . ' => ' . $value . ',' . PHP_EOL;
                 }
             }
-            $content .= $sixteen . '],' . PHP_EOL;
+            $content .= $thirteen . '],' . PHP_EOL;
         }
         $mode = $this->option('m');
         $mode = strtolower($mode);
@@ -308,5 +311,23 @@ class SeederCommand extends GeneratorCommand
     {
         $twelve = str_pad('', 12, self::SPACE);
         return $twelve . '],';
+    }
+
+    /**
+     * 获取数组最长键的长度值.
+     *
+     * @param mixed[] $data 数据.
+     * @return integer
+     */
+    private function _getMaxLength(array $data): int
+    {
+        $keys    = array_keys($data);
+        $numbers = [];
+        foreach ($keys as $item) {
+            $numbers[] = strlen($item);
+        }
+        rsort($numbers);
+        $maxLength = $numbers[0] ?? 0;
+        return $maxLength;
     }
 }

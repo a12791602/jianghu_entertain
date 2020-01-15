@@ -22,21 +22,29 @@ class DomainDetailRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request .
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'sign' => 'required|exists:system_platforms', //平台标识
-        ];
+                'sign'      => 'required|exists:system_platforms', //平台标识
+                'type'      => 'required|in:0,1,2,3',              //类型 0.主域名 1.PC  2.H5  3.APP
+                'domain'    => 'string',                           //域名
+                'status'    => 'integer|in:0,1',                   //状态  0.关闭 1.开启
+                'createdAt' => 'string',                           //添加时间
+               ];
     }
 
-    /*public function messages()
+    /**
+     * @return mixed[]
+     */
+    public function messages(): array
     {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
+        return [
+                'sign.required' => '缺少平台标识',
+                'sign.exists'   => '该平台不存在',
+                'type.required' => '缺少域名类型',
+                'type.in'       => '域名类型数据不合法',
+               ];
+    }
 }

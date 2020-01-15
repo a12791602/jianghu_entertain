@@ -218,7 +218,7 @@ class DoAddAction
     private function _createAdminUser(array $inputDatas, int $adminGroupId): MerchantAdminUser
     {
         $adminData         = [
-                              'name'     => $inputDatas['username'],
+                              'name'     => 'admin',
                               'email'    => $inputDatas['email'],
                               'password' => bcrypt($inputDatas['password']),
                               'group_id' => $adminGroupId,

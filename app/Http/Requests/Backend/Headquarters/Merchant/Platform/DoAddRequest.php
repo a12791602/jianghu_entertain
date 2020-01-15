@@ -27,7 +27,6 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'username'      => 'required|string|max:32',                     //厅主名称
                 'email'         => 'required|email|unique:merchant_admin_users', //超管邮箱
                 'password'      => 'required|string',                            //密码
                 'platform_name' => 'required|unique:system_platforms,name',      //平台名称

@@ -37,18 +37,15 @@ class MaintainAction
         if (!$systemPlatform) {
             throw new \Exception('302003');
         }
-        if (isset($inputDatas['start_time']) && isset($inputDatas['end_time'])) {
-            $maintainTime                  = [
-                                              $inputDatas['start_time'],
-                                              $inputDatas['end_time'],
-                                             ];
-            $systemPlatform->maintain_time = json_encode($maintainTime);
-        } else {
-            $systemPlatform->maintain_time = null;
-        }
+
+        $inputDatas['maintain_start'] = $inputDatas['maintain_start'] ?? null;
+        $inputDatas['maintain_end']   = $inputDatas['maintain_end'] ?? null;
+
+        $systemPlatform->fill($inputDatas);
         if (!$systemPlatform->save()) {
             throw new \Exception('302006');
         }
+
         $msgOut = msgOut(true);
         return $msgOut;
     }

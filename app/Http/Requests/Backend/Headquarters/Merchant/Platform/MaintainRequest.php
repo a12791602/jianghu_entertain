@@ -27,9 +27,9 @@ class MaintainRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'         => 'required|exists:system_platforms',         //ID
-                'start_time' => 'date_format:Y-m-d H:i:s',                  //开始时间
-                'end_time'   => 'date_format:Y-m-d H:i:s|after:start_time', //结束时间
+                'id'             => 'required|exists:system_platforms',             //ID
+                'maintain_start' => 'date_format:Y-m-d H:i:s',                      //维护开始时间
+                'maintain_end'   => 'date_format:Y-m-d H:i:s|after:maintain_start', //维护结束时间
                ];
     }
 
@@ -39,11 +39,11 @@ class MaintainRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-                'id.required'            => '缺少站点ID',
-                'id.exists'              => '该站点不存在',
-                'start_time.date_format' => '维护时间的时间格式只能是Y-m-d H:i:s',
-                'end_time.date_format'   => '维护时间的时间格式只能是Y-m-d H:i:s',
-                'end_time.after'         => '维护结束时间必须大于开始时间',
+                'id.required'                => '缺少站点ID',
+                'id.exists'                  => '该站点不存在',
+                'maintain_start.date_format' => '维护时间的时间格式只能是Y-m-d H:i:s',
+                'maintain_end.date_format'   => '维护时间的时间格式只能是Y-m-d H:i:s',
+                'maintain_end.after'         => '维护结束时间必须大于开始时间',
                ];
     }
 }
