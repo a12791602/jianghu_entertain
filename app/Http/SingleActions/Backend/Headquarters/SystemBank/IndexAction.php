@@ -25,7 +25,10 @@ class IndexAction extends BaseAction
     {
         $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::with(
-            ['lastEditor:id,name', 'author:id,name'],
+            [
+             'lastEditor:id,name',
+             'author:id,name',
+            ],
         )->filter($inputDatas, SystemBankFilter::class)->paginate($pageSize);
         $msgOut      = msgOut(true, $outputDatas);
         return $msgOut;

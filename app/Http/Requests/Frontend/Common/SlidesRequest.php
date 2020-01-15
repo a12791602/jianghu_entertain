@@ -27,9 +27,7 @@ class SlidesRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'flag' => 'integer',
-        ];
+        return ['flag' => 'integer'];
     }
 
     /**
@@ -38,8 +36,6 @@ class SlidesRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'flag.integer' => '标记类型不符合规则',
-        ];
+        return ['flag.integer' => '标记类型不符合规则'];
     }
 }

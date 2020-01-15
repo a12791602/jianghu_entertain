@@ -28,16 +28,16 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'invite_code' => 'integer',
-            'password' => [
-                'required',
-                'confirmed',
-                'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',
-            ],
-            'password_confirmation' => 'required',
-            'verification_key' => 'required|string',
-            'verification_code' => 'required|string',
-        ];
+                'invite_code'           => 'integer',
+                'password'              => [
+                                            'required',
+                                            'confirmed',
+                                            'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',
+                                           ],
+                'password_confirmation' => 'required',
+                'verification_key'      => 'required|string',
+                'verification_code'     => 'required|string',
+               ];
     }
 
     /**
@@ -47,8 +47,6 @@ class RegisterRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'password.regex' => '密码仅允许8-16位数字或大小写字母组成',
-        ];
+        return ['password.regex' => '密码仅允许8-16位数字或大小写字母组成'];
     }
 }

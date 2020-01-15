@@ -17,12 +17,12 @@ class SystemPlatformSeeder extends Seeder
     {
         SystemPlatform::insert(
             [
-                'id' => 1,
-                'name' => '测试平台',
-                'sign' => 'test',
-                'owner_id' => 1,
-                'status' => 1,
-                'created_at' => '2020-01-01 00:00:00',
+             'id'         => 1,
+             'name'       => '测试平台',
+             'sign'       => 'test',
+             'owner_id'   => 1,
+             'status'     => 1,
+             'created_at' => '2020-01-01 00:00:00',
             ],
         );
     }

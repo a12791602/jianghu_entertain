@@ -17,23 +17,38 @@ Route::group(
         //获取运营后台的所有菜单
         Route::get(
             'get-all-menu',
-            [MenuController::class, 'getAllMenu'],
+            [
+             MenuController::class,
+             'getAllMenu',
+            ],
         )->name($namePrefix . 'get-all-menu');
         Route::post(
             'change-parent',
-            [MenuController::class, 'changeParent'],
+            [
+             MenuController::class,
+             'changeParent',
+            ],
         )->name($namePrefix . 'change-parent');
         Route::post(
             'add',
-            [MenuController::class, 'doAdd'],
+            [
+             MenuController::class,
+             'doAdd',
+            ],
         )->name($namePrefix . 'add');
         Route::post(
             'edit',
-            [MenuController::class, 'edit'],
+            [
+             MenuController::class,
+             'edit',
+            ],
         )->name($namePrefix . 'edit');
         Route::post(
             'delete',
-            [MenuController::class, 'delete'],
+            [
+             MenuController::class,
+             'delete',
+            ],
         )->name($namePrefix . 'delete');
     },
 );

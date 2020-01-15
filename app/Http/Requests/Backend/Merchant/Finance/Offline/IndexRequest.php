@@ -28,16 +28,16 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string',
-            'account' => 'string',
-            'username' => 'string',
-            'author_name' => 'string',
-            'created_at' => 'array',
-            'created_at.*' => 'date',
-            'last_editor_name' => 'string',
-            'updated_at' => 'array',
-            'updated_at.*' => 'date',
-        ];
+                'name'             => 'string',
+                'account'          => 'string',
+                'username'         => 'string',
+                'author_name'      => 'string',
+                'created_at'       => 'array',
+                'created_at.*'     => 'date',
+                'last_editor_name' => 'string',
+                'updated_at'       => 'array',
+                'updated_at.*'     => 'date',
+               ];
     }
 
     /**
@@ -46,11 +46,11 @@ class IndexRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'created_at.array' => '添加时间格式不正确',
-            'created_at.*.date' => '添加时间格式必须是时间类型',
-            'updated_at.array' => '更新时间格式不正确',
-            'updated_at.*.date' => '更新时间格式必须是时间类型',
-        ];
+                'created_at.array'  => '添加时间格式不正确',
+                'created_at.*.date' => '添加时间格式必须是时间类型',
+                'updated_at.array'  => '更新时间格式不正确',
+                'updated_at.*.date' => '更新时间格式必须是时间类型',
+               ];
     }
     /**
      * @return mixed[]
@@ -58,8 +58,8 @@ class IndexRequest extends BaseFormRequest
     public function filters(): array
     {
         return [
-            'created_at' => 'cast:array',
-            'updated_at' => 'cast:array',
-        ];
+                'created_at' => 'cast:array',
+                'updated_at' => 'cast:array',
+               ];
     }
 }

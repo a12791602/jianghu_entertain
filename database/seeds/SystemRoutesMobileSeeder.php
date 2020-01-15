@@ -17,76 +17,76 @@ class SystemRoutesMobileSeeder extends Seeder
     {
         SystemRoutesMobile::insert(
             [
-                [
-                    'route_name' => 'app-api.login',
-                    'method' => 'login',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.logout',
-                    'method' => 'logout',
-                    'is_open' => 0,
-                ],
-                [
-                    'route_name' => 'app-api.user.refresh-token',
-                    'method' => 'refreshToken',
-                    'is_open' => 0,
-                ],
-                [
-                    'route_name' => 'app-api.games-lobby.rich-list',
-                    'method' => 'richList',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.games-lobby.games-categories',
-                    'method' => 'category',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.user.information',
-                    'method' => 'information',
-                    'is_open' => 0,
-                ],
-                [
-                    'route_name' => 'app-api.user.game-list',
-                    'method' => 'gameList',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.register',
-                    'method' => 'store',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.register/verification-code',
-                    'method' => 'code',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.user.reset-password',
-                    'method' => 'password',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.reset-password.verification-code',
-                    'method' => 'passwordCode',
-                    'is_open' => 1,
-                ],
-                [
-                    'route_name' => 'app-api.user.security-code',
-                    'method' => 'security',
-                    'is_open' => 0,
-                ],
-                [
-                    'route_name' => 'app-api.user.security-verification-code',
-                    'method' => 'securityCode',
-                    'is_open' => 0,
-                ],
-                [
-                    'route_name' => 'app-api.user.grades',
-                    'method' => 'grades',
-                    'is_open' => 0,
-                ],
+             [
+              'route_name' => 'app-api.login',
+              'method'     => 'login',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.logout',
+              'method'     => 'logout',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'app-api.user.refresh-token',
+              'method'     => 'refreshToken',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'app-api.games-lobby.rich-list',
+              'method'     => 'richList',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.games-lobby.games-categories',
+              'method'     => 'category',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.user.information',
+              'method'     => 'information',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'app-api.user.game-list',
+              'method'     => 'gameList',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.register',
+              'method'     => 'store',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.register/verification-code',
+              'method'     => 'code',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.user.reset-password',
+              'method'     => 'password',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.reset-password.verification-code',
+              'method'     => 'passwordCode',
+              'is_open'    => 1,
+             ],
+             [
+              'route_name' => 'app-api.user.security-code',
+              'method'     => 'security',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'app-api.user.security-verification-code',
+              'method'     => 'securityCode',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'app-api.user.grades',
+              'method'     => 'grades',
+              'is_open'    => 0,
+             ],
             ],
         );
     }

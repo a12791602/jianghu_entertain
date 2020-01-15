@@ -10,11 +10,10 @@ use App\Models\Systems\Traits\BackendLoginLogLogics;
  */
 class BackendLoginLog extends BaseModel
 {
-
     use BackendLoginLogLogics;
     
     public const TYPE_HEADQUARTERS = 1;
-    public const TYPE_MERCHANT = 2;
+    public const TYPE_MERCHANT     = 2;
 
     /**
      * @var array $guarded

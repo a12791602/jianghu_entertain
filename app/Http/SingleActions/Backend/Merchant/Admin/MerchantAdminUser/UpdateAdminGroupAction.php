@@ -47,9 +47,9 @@ class UpdateAdminGroupAction
         }
         //更改的权限组是否合法
         $filterArr            = [
-            'platform' => $contll->currentPlatformEloq->sign,
-            'super'    => MerchantAdminAccessGroup::NO_SUPER,
-        ];
+                                 'platform' => $contll->currentPlatformEloq->sign,
+                                 'super'    => MerchantAdminAccessGroup::NO_SUPER,
+                                ];
         $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)
                                     ->pluck('id')
                                     ->toArray();

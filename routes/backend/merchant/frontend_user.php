@@ -10,12 +10,18 @@ Route::group(
         //会员列表查询
         Route::post(
             'index',
-            [FrontendUserController::class, 'index'],
+            [
+             FrontendUserController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         //会员登陆记录
         Route::post(
             'login-log',
-            [FrontendUserController::class, 'loginLog'],
+            [
+             FrontendUserController::class,
+             'loginLog',
+            ],
         )->name($namePrefix . 'login-log');
     },
 );

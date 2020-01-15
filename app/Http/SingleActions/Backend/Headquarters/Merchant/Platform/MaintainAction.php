@@ -38,7 +38,10 @@ class MaintainAction
             throw new \Exception('302003');
         }
         if (isset($inputDatas['start_time']) && isset($inputDatas['end_time'])) {
-            $maintainTime                  = [$inputDatas['start_time'], $inputDatas['end_time']];
+            $maintainTime                  = [
+                                              $inputDatas['start_time'],
+                                              $inputDatas['end_time'],
+                                             ];
             $systemPlatform->maintain_time = json_encode($maintainTime);
         } else {
             $systemPlatform->maintain_time = null;

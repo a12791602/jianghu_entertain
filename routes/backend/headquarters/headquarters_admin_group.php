@@ -27,12 +27,17 @@ Route::group(
         Route::post(
             'delete-access-group',
             [
-            BackendAdminGroupController::class,  'destroy'],
+             BackendAdminGroupController::class,
+             'destroy',
+            ],
         )->name($namePrefix . 'delete-access-group');
         //获取管理员角色
         Route::post(
             'specific-group-users',
-            [BackendAdminGroupController::class, 'specificGroupUsers'],
+            [
+             BackendAdminGroupController::class,
+             'specificGroupUsers',
+            ],
         )->name($namePrefix . 'specific-group-users');
     },
 );

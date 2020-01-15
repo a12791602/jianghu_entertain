@@ -27,9 +27,7 @@ class GameCategoryRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'device' => 'integer|required',
-        ];
+        return ['device' => 'integer|required'];
     }
 
     /**
@@ -38,8 +36,6 @@ class GameCategoryRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'device.integer' => '设备类型不符合规则',
-        ];
+        return ['device.integer' => '设备类型不符合规则'];
     }
 }

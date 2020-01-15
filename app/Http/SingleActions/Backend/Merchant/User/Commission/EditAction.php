@@ -86,11 +86,11 @@ class EditAction
             throw new \Exception('200802');
         }
         $filterArr             = [
-            'notInId'      => $this->commissionConfig->id,
-            'platformSign' => $platformSign,
-            'gameTypeId'   => $this->commissionConfig->game_type_id,
-            'gameVendorId' => $this->commissionConfig->game_vendor_id,
-        ];
+                                  'notInId'      => $this->commissionConfig->id,
+                                  'platformSign' => $platformSign,
+                                  'gameTypeId'   => $this->commissionConfig->game_type_id,
+                                  'gameVendorId' => $this->commissionConfig->game_vendor_id,
+                                 ];
         $otherCommissionConfig = $this->model
                                       ->filter($filterArr, UsersCommissionConfigFilter::class)
                                       ->get();

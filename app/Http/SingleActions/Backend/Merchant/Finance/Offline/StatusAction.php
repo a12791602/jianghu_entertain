@@ -23,8 +23,8 @@ class StatusAction extends BaseAction
             ->where('id', $inputDatas['id'])
             ->update(
                 [
-                    'status' => $inputDatas['status'],
-                    'last_editor_id' => $contll->currentAdmin->id,
+                 'status'         => $inputDatas['status'],
+                 'last_editor_id' => $contll->currentAdmin->id,
                 ],
             );
         if ($result) {

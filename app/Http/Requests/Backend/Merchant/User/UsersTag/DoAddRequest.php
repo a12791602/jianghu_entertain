@@ -27,12 +27,12 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'title'       => 'required|string|max:10',  //标签名称
-            'no_withdraw' => 'required|integer|in:0,1', //是否禁止提现 0否 1是
-            'no_login'    => 'required|integer|in:0,1', //是否禁止登陆 0否 1是
-            'no_play'     => 'required|integer|in:0,1', //是否禁止游戏 0否 1是
-            'no_promote'  => 'required|integer|in:0,1', //是否禁止推广 0否 1是
-        ];
+                'title'       => 'required|string|max:10',  //标签名称
+                'no_withdraw' => 'required|integer|in:0,1', //是否禁止提现 0否 1是
+                'no_login'    => 'required|integer|in:0,1', //是否禁止登陆 0否 1是
+                'no_play'     => 'required|integer|in:0,1', //是否禁止游戏 0否 1是
+                'no_promote'  => 'required|integer|in:0,1', //是否禁止推广 0否 1是
+               ];
     }
 
     // /**

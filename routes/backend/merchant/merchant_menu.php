@@ -10,7 +10,10 @@ Route::group(
         //获取当前商户的菜单
         Route::get(
             'current-admin-menu',
-            [MenuController::class, 'currentAdminMenu'],
+            [
+             MenuController::class,
+             'currentAdminMenu',
+            ],
         )->name($namePrefix . 'current-admin-menu');
     },
 );

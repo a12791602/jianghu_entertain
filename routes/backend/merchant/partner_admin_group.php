@@ -22,7 +22,10 @@ Route::group(
         //获取管理员角色
         Route::post(
             'specific-group-users',
-            [MerchantAdminGroupController::class,  'specificGroupUsers'],
+            [
+             MerchantAdminGroupController::class,
+             'specificGroupUsers',
+            ],
         )->name($namePrefix . 'specific-group-users');
     },
 );

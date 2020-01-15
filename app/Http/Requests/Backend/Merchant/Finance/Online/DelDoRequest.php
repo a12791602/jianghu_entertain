@@ -27,9 +27,7 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:system_finance_online_infos,id',
-        ];
+        return ['id' => 'required|exists:system_finance_online_infos,id'];
     }
 
     /**
@@ -38,8 +36,8 @@ class DelDoRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-        ];
+                'id.required' => 'ID不存在',
+                'id.exists'   => 'ID不存在',
+               ];
     }
 }

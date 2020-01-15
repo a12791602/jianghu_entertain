@@ -27,9 +27,9 @@ class SwitchAdminRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id'     => 'required|exists:merchant_admin_users', //ID
-            'status' => 'required|integer|in:0,1',             //状态
-        ];
+                'id'     => 'required|exists:merchant_admin_users', //ID
+                'status' => 'required|integer|in:0,1',             //状态
+               ];
     }
 
     /*public function messages()

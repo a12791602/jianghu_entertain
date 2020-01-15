@@ -17,18 +17,18 @@ class FrontendUserAccountSeeder extends Seeder
     {
         FrontendUsersAccount::insert(
             [
-                [
-                    'user_id' => '1',
-                    'balance' => 999022347.8236,
-                    'frozen' => 86853.2200,
-                    'status' => 1,
-                ],
-                [
-                    'user_id' => '2',
-                    'balance' => 1000000.0000,
-                    'frozen' => 0.0000,
-                    'status' => 1,
-                ],
+             [
+              'user_id' => '1',
+              'balance' => 999022347.8236,
+              'frozen'  => 86853.2200,
+              'status'  => 1,
+             ],
+             [
+              'user_id' => '2',
+              'balance' => 1000000.0000,
+              'frozen'  => 0.0000,
+              'status'  => 1,
+             ],
             ],
         );
     }

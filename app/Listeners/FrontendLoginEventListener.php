@@ -32,7 +32,14 @@ class FrontendLoginEventListener
     {
         $agent                     = new Agent();
         $data                      = $event->user->only(
-            ['uid', 'mobile', 'platform_sign', 'last_login_ip', 'last_login_time', 'last_login_ip',],
+            [
+             'uid',
+             'mobile',
+             'platform_sign',
+             'last_login_ip',
+             'last_login_time',
+             'last_login_ip',
+            ],
         );
         $data['last_login_device'] = $agent->device();
         UsersLoginLog::insert($data);

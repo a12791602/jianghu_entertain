@@ -10,22 +10,34 @@ Route::group(
         //列表
         Route::post(
             'index',
-            [CommissionController::class, 'index'],
+            [
+             CommissionController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         //添加
         Route::post(
             'do-add',
-            [CommissionController::class, 'doAdd'],
+            [
+             CommissionController::class,
+             'doAdd',
+            ],
         )->name($namePrefix . 'do-add');
         //编辑
         Route::post(
             'edit',
-            [CommissionController::class, 'edit'],
+            [
+             CommissionController::class,
+             'edit',
+            ],
         )->name($namePrefix . 'edit');
         //删除
         Route::post(
             'delete',
-            [CommissionController::class, 'delete'],
+            [
+             CommissionController::class,
+             'delete',
+            ],
         )->name($namePrefix . 'delete');
     },
 );

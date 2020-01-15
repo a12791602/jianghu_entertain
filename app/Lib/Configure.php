@@ -33,8 +33,14 @@ class Configure
             ) {
                 $result = SystemConfiguration::where(
                     [
-                        ['platform_sign', $platformSign],
-                        ['sign', $configKey],
+                     [
+                      'platform_sign',
+                      $platformSign,
+                     ],
+                     [
+                      'sign',
+                      $configKey,
+                     ],
                     ],
                 )->where('status', '=', 1)->first();
                 if ($result === null) {
@@ -60,8 +66,14 @@ class Configure
         $tags = self::getTags($platformSign);
         SystemConfiguration::where(
             [
-                ['platform_sign', $platformSign],
-                ['sign', $configKey],
+             [
+              'platform_sign',
+              $platformSign,
+             ],
+             [
+              'sign',
+              $configKey,
+             ],
             ],
         )->update(['value' => $value]);
         Cache::tags($tags)->forget($configKey);

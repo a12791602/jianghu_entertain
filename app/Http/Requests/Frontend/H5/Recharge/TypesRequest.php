@@ -29,8 +29,8 @@ class TypesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'is_online' => 'in:' . SystemFinanceType::IS_ONLINE_NO . ',' . SystemFinanceType::IS_ONLINE_YES,
-        ];
+                'is_online' => 'in:' . SystemFinanceType::IS_ONLINE_NO . ',' . SystemFinanceType::IS_ONLINE_YES,
+               ];
     }
 
     /**
@@ -38,8 +38,6 @@ class TypesRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'is_online.in' => '参数错误',
-        ];
+        return ['is_online.in' => '参数错误'];
     }
 }

@@ -30,9 +30,9 @@ class IndexAction extends BaseAction
         $pageSize                    = $this->model::getPageSize();
         $data                        = $this->model::with(
             [
-                'channel:id,name,sign',
-                'author:id,name',
-                'lastEditor:id,name',
+             'channel:id,name,sign',
+             'author:id,name',
+             'lastEditor:id,name',
             ],
         )->filter($inputDatas, SystemFinanceOnlineInfoFilter::class)->paginate($pageSize);
         $msgOut                      = msgOut(true, $data);

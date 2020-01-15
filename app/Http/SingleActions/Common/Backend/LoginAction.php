@@ -42,9 +42,9 @@ class LoginAction
     {
         $request->validate(
             [
-                'email'       => 'required|string|email',
-                'password'    => 'required|string',
-                'remember_me' => 'boolean',
+             'email'       => 'required|string|email',
+             'password'    => 'required|string',
+             'remember_me' => 'boolean',
             ],
         );
         $credentials = request(['email', 'password']);

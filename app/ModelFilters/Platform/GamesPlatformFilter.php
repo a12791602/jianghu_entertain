@@ -18,10 +18,10 @@ class GamesPlatformFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'games' => ['name'],
-        'vendor' => ['vendor_id'],
-        'type' => ['type_id'],
-    ];
+                         'games'  => ['name'],
+                         'vendor' => ['vendor_id'],
+                         'type'   => ['type_id'],
+                        ];
 
     /**
      * 根据平台标记查询

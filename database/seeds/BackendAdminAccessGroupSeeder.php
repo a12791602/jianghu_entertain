@@ -17,12 +17,12 @@ class BackendAdminAccessGroupSeeder extends Seeder
     {
         BackendAdminAccessGroup::insert(
             [
-                [
-                    'id' => 1,
-                    'group_name' => '超级管理组',
-                    'status' => 1,
-                    'recharge_status' => 0,
-                ],
+             [
+              'id'              => 1,
+              'group_name'      => '超级管理组',
+              'status'          => 1,
+              'recharge_status' => 0,
+             ],
             ],
         );
     }

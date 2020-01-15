@@ -68,7 +68,10 @@ Route::group(
             ->name($namePrefix . 'del-do');
         Route::get(
             'get-search-condition',
-            [BackendFinanceChannelController::class, 'getSearchCondition'],
+            [
+             BackendFinanceChannelController::class,
+             'getSearchCondition',
+            ],
         )->name($namePrefix . 'get-search-condition');
         Route::post('status-do', [BackendFinanceChannelController::class, 'statusDo'])
             ->name($namePrefix . 'status-do');

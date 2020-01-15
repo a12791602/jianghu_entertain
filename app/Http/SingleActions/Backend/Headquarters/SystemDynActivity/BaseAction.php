@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\SystemDynActivity;
 
 use App\Models\Activity\SystemDynActivity;

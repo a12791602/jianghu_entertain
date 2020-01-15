@@ -17,14 +17,14 @@ class UploadService
      * @var array $result
      */
     protected $result = [
-        'status' => false,
-        'msg' => '上传失败!',
-        'file' => [
-            'name' => null,
-            'path' => null,
-            'size' => null,
-        ],
-    ];
+                         'status' => false,
+                         'msg'    => '上传失败!',
+                         'file'   => [
+                                      'name' => null,
+                                      'path' => null,
+                                      'size' => null,
+                                     ],
+                        ];
 
     /**
      * 表单中文件键的名称

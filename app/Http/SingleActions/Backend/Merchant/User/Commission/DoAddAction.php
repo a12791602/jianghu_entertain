@@ -49,10 +49,10 @@ class DoAddAction
 
         //获取当前游戏平台的洗码设置
         $filterArr        = [
-            'platformSign' => $sign,
-            'gameTypeId'   => $this->inputDatas['game_type_id'],
-            'gameVendorId' => $this->inputDatas['game_vendor_id'],
-        ];
+                             'platformSign' => $sign,
+                             'gameTypeId'   => $this->inputDatas['game_type_id'],
+                             'gameVendorId' => $this->inputDatas['game_vendor_id'],
+                            ];
         $commissionConfig = $this->model->filter($filterArr, UsersCommissionConfigFilter::class)->get();
 
         //验证数据是否合法
@@ -113,11 +113,11 @@ class DoAddAction
     private function _insertConfig(string $sign): void
     {
         $insertData = [
-            'platform_sign'  => $sign,
-            'game_type_id'   => $this->inputDatas['game_type_id'],
-            'game_vendor_id' => $this->inputDatas['game_vendor_id'],
-            'bet'            => $this->inputDatas['bet'],
-        ];
+                       'platform_sign'  => $sign,
+                       'game_type_id'   => $this->inputDatas['game_type_id'],
+                       'game_vendor_id' => $this->inputDatas['game_vendor_id'],
+                       'bet'            => $this->inputDatas['bet'],
+                      ];
         $this->model->fill($insertData);
         if (!$this->model->save()) {
             DB::rollback();
@@ -139,11 +139,11 @@ class DoAddAction
                 throw new \Exception('200809');
             }
             $insertData       = [
-                'config_id'     => $this->model->id,
-                'grade_id'      => $grade->id,
-                'percent'       => $percent,
-                'grade_exp_max' => $gradeExp,
-            ];
+                                 'config_id'     => $this->model->id,
+                                 'grade_id'      => $grade->id,
+                                 'percent'       => $percent,
+                                 'grade_exp_max' => $gradeExp,
+                                ];
             $commissionDetail = new UsersCommissionConfigDetail();
             $commissionDetail->fill($insertData);
             if (!$commissionDetail->save()) {

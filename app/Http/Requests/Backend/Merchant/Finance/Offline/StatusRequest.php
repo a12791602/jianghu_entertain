@@ -28,9 +28,9 @@ class StatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:system_finance_offline_infos,id',
-            'status' => 'required|in:0,1',
-        ];
+                'id'     => 'required|exists:system_finance_offline_infos,id',
+                'status' => 'required|in:0,1',
+               ];
     }
 
     /**
@@ -39,10 +39,10 @@ class StatusRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'status.required' => '请选择状态',
-            'status.in' => '所选状态不在范围内',
-        ];
+                'id.required'     => 'ID不存在',
+                'id.exists'       => 'ID不存在',
+                'status.required' => '请选择状态',
+                'status.in'       => '所选状态不在范围内',
+               ];
     }
 }

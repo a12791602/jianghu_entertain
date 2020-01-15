@@ -25,9 +25,9 @@ class GetSearchConditionDataAction extends BaseAction
             ->withCacheCooldownSeconds(86400)
             ->get();
         $datas       = [
-            'gameVendors' => $gameVendors,
-            'gameTypes' => $gameTypes,
-        ];
+                        'gameVendors' => $gameVendors,
+                        'gameTypes'   => $gameTypes,
+                       ];
         $result      = msgOut(true, $datas);
         return $result;
     }

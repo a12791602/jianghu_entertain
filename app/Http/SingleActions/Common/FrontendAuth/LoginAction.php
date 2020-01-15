@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
@@ -73,7 +72,7 @@ class LoginAction
             try {
                 JWTAuth::setToken($user->remember_token);
                 JWTAuth::invalidate();
-            } catch (JWTException $e) {
+            } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
                 Log::info($e->getMessage());
             }
         }
@@ -82,10 +81,10 @@ class LoginAction
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
         $data = [
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'expires_at' => $expireAt,
-        ];
+                 'access_token' => $token,
+                 'token_type'   => 'Bearer',
+                 'expires_at'   => $expireAt,
+                ];
         event(new FrontendLoginEvent($user));
         $result = msgOut(true, $data);
         return $result;

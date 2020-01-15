@@ -63,9 +63,9 @@ class CreateAction
 
             DB::commit();
             $msgData = [
-                'group_name' => $objAdminGroup->group_name,
-                'role'     => $role,
-            ];
+                        'group_name' => $objAdminGroup->group_name,
+                        'role'       => $role,
+                       ];
             $msgOut  = msgOut(true, $msgData);
         } catch (\Throwable $e) {
             DB::rollback();

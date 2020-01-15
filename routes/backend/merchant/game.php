@@ -12,11 +12,17 @@ Route::group(
         $namePrefix = 'merchant-api.game-type.';
         Route::get(
             'index',
-            [GameTypeController::class, 'index'],
+            [
+             GameTypeController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         Route::post(
             'status',
-            [GameTypeController::class, 'status'],
+            [
+             GameTypeController::class,
+             'status',
+            ],
         )->name($namePrefix . 'status');
     },
 );
@@ -29,15 +35,24 @@ Route::group(
         $namePrefix = 'merchant-api.game-vendor.';
         Route::get(
             'index',
-            [GameVendorController::class, 'index'],
+            [
+             GameVendorController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         Route::post(
             'status',
-            [GameVendorController::class, 'status'],
+            [
+             GameVendorController::class,
+             'status',
+            ],
         )->name($namePrefix . 'status');
         Route::post(
             'sort',
-            [GameVendorController::class, 'sort'],
+            [
+             GameVendorController::class,
+             'sort',
+            ],
         )->name($namePrefix . 'sort');
     },
 );
@@ -51,52 +66,79 @@ Route::group(
         //app端游戏列表
         Route::get(
             'app-index',
-            [GameController::class, 'appIndex'],
+            [
+             GameController::class,
+             'appIndex',
+            ],
         )->name($namePrefix . 'app-index');
         //pc端游戏列表
         Route::get(
             'pc-index',
-            [GameController::class, 'pcIndex'],
+            [
+             GameController::class,
+             'pcIndex',
+            ],
         )->name($namePrefix . 'pc-index');
         //H5端游戏列表
         Route::get(
             'h5-index',
-            [GameController::class, 'h5Index'],
+            [
+             GameController::class,
+             'h5Index',
+            ],
         )->name($namePrefix . 'h5-index');
         //游戏状态改变
         Route::post(
             'status',
-            [GameController::class, 'status'],
+            [
+             GameController::class,
+             'status',
+            ],
         )->name($namePrefix . 'status');
         //游戏排序
         Route::post(
             'sort',
-            [GameController::class, 'sort'],
+            [
+             GameController::class,
+             'sort',
+            ],
         )->name($namePrefix . 'sort');
         //更改热门属性
         Route::post(
             'do-hot',
-            [GameController::class, 'doHot'],
+            [
+             GameController::class,
+             'doHot',
+            ],
         )->name($namePrefix . 'do-hot');
         //更改是否维护
         Route::post(
             'maintain',
-            [GameController::class, 'maintain'],
+            [
+             GameController::class,
+             'maintain',
+            ],
         )->name($namePrefix . 'maintain');
         //更改是否推荐
         Route::post(
             'recommend',
-            [GameController::class, 'recommend'],
+            [
+             GameController::class,
+             'recommend',
+            ],
         )->name($namePrefix . 'recommend');
         //获取查询条件
         Route::get(
             'get-search-condition-data',
-            [GameController::class, 'getSearchConditionData'],
+            [
+             GameController::class,
+             'getSearchConditionData',
+            ],
         )->name($namePrefix . 'get-search-condition-data');
 
-        Route::match(['post','get'], 'acknowledge-in', [AcknowledgementController::class, 'ackIn'])
+        Route::match(['post', 'get'], 'acknowledge-in', [AcknowledgementController::class, 'ackIn'])
             ->name($namePrefix . 'ackIn');
-        Route::match(['post','get'], 'acknowledge-out', [AcknowledgementController::class, 'ackOut'])
+        Route::match(['post', 'get'], 'acknowledge-out', [AcknowledgementController::class, 'ackOut'])
             ->name($namePrefix . 'ackOut');
     },
 );

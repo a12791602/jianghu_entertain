@@ -39,8 +39,14 @@ class DeleteAction
     ): JsonResponse {
         $usersTagEloq = $this->model->where(
             [
-                ['id', $inputDatas['id']],
-                ['platform_sign', $contll->currentPlatformEloq->sign],
+             [
+              'id',
+              $inputDatas['id'],
+             ],
+             [
+              'platform_sign',
+              $contll->currentPlatformEloq->sign,
+             ],
             ],
         )->first();
         if (!$usersTagEloq) {

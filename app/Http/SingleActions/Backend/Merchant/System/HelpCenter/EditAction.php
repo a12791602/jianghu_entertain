@@ -35,9 +35,9 @@ class EditAction
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $filterArr  = [
-            'dataId' => $inputDatas['id'],
-            'sign'   => $contll->currentPlatformEloq->sign,
-        ];
+                       'dataId' => $inputDatas['id'],
+                       'sign'   => $contll->currentPlatformEloq->sign,
+                      ];
         $helpCenter = $this->model
             ->filter($filterArr, SystemUsersHelpCenterFilter::class)
             ->first();

@@ -32,10 +32,10 @@ class SelfUpdatePasswordAction
         $expireInMinute = $contll->currentAuth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $data           = [
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'expires_at' => $expireAt,
-        ];
+                           'access_token' => $token,
+                           'token_type'   => 'Bearer',
+                           'expires_at'   => $expireAt,
+                          ];
         $msgOut         = msgOut(true, $data);
         return $msgOut;
     }

@@ -99,10 +99,10 @@ class CallbackAction
             return $result['backStr'];
         } catch (\Throwable $exception) {
             $data = [
-                'file' => $exception->getFile(),
-                'line' => $exception->getLine(),
-                'message' => $exception->getMessage(),
-            ];
+                     'file'    => $exception->getFile(),
+                     'line'    => $exception->getLine(),
+                     'message' => $exception->getMessage(),
+                    ];
             $this->_writeLog('finance-callback-system', $this->order, '系统错误!', $data);
             DB::rollBack();
             return '500';
@@ -136,7 +136,10 @@ class CallbackAction
         $whiteListIps = json_decode($orderInfo->onlineInfo->channel->vendor->whitelist_ips, true);
         //检测ip是否在自己厂商的ip白名单内
         if (empty($whiteListIps) || !in_array($this->remoteIp, $whiteListIps)) {
-            $data = ['remoteIp' => $this->remoteIp, 'whiteListIps' => $whiteListIps];
+            $data = [
+                     'remoteIp'     => $this->remoteIp,
+                     'whiteListIps' => $whiteListIps,
+                    ];
             $this->_writeLog('finance-callback-system', $this->order, 'IP不在白名单内!', $data);
             return false;
         }

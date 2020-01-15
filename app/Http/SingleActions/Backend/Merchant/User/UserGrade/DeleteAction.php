@@ -38,8 +38,14 @@ class DeleteAction
         //检查当前平台的这条数据是否存在。
         $currentUsersGrade = $this->model->where(
             [
-                ['id', $inputDatas['id']],
-                ['platform_sign', $contll->currentPlatformEloq->sign],
+             [
+              'id',
+              $inputDatas['id'],
+             ],
+             [
+              'platform_sign',
+              $contll->currentPlatformEloq->sign,
+             ],
             ],
         )->first();
         if (!$currentUsersGrade) {

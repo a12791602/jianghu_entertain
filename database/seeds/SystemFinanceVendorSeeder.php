@@ -17,13 +17,13 @@ class SystemFinanceVendorSeeder extends Seeder
     {
         SystemFinanceVendor::insert(
             [
-                [
-                    'name' => '天道支付',
-                    'sign' => 'td',
-                    'whitelist_ips' => '["10.10.57.10"]',
-                    'status' => 1,
-                    'author_id' => 2,
-                ],
+             [
+              'name'          => '天道支付',
+              'sign'          => 'td',
+              'whitelist_ips' => '["10.10.57.10"]',
+              'status'        => 1,
+              'author_id'     => 2,
+             ],
             ],
         );
     }

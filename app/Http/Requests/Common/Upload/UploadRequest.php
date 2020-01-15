@@ -31,9 +31,9 @@ class UploadRequest extends BaseFormRequest
         $maxSize = config('upload.max_size', 2048);
         $mimes   = config('upload.mimes', '*');
         return [
-            $file => 'required|file|max:' . $maxSize . '|mimetypes:' . $mimes,
-            'basket' => 'string',
-        ];
+                $file    => 'required|file|max:' . $maxSize . '|mimetypes:' . $mimes,
+                'basket' => 'string',
+               ];
     }
 
     /**
@@ -43,10 +43,10 @@ class UploadRequest extends BaseFormRequest
     {
         $file = config('upload.input_name', 'file');
         return [
-            $file . '.required' => '请上传文件',
-            $file . '.file' => '请上传文件',
-            $file . '.mimetypes' => '所传文件格式不在范围内',
-            $file . '.max' => '所传文件大小不在范围内',
-        ];
+                $file . '.required'  => '请上传文件',
+                $file . '.file'      => '请上传文件',
+                $file . '.mimetypes' => '所传文件格式不在范围内',
+                $file . '.max'       => '所传文件大小不在范围内',
+               ];
     }
 }

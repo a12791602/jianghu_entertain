@@ -28,9 +28,9 @@ class SecurityVerificationCodeRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'security_code' => 'required|confirmed|digits:6',
-            'security_code_confirmation' => 'required|digits:6',
-        ];
+                'security_code'              => 'required|confirmed|digits:6',
+                'security_code_confirmation' => 'required|digits:6',
+               ];
     }
 
 
@@ -42,9 +42,9 @@ class SecurityVerificationCodeRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'security_code.required' => '安全码不能为空',
-            'security_code.confirmed' => '安全码两次输入不一致',
-            'security_code.digits' => '安全码必须由6位数字组成',
-        ];
+                'security_code.required'  => '安全码不能为空',
+                'security_code.confirmed' => '安全码两次输入不一致',
+                'security_code.digits'    => '安全码必须由6位数字组成',
+               ];
     }
 }

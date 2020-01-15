@@ -19,8 +19,8 @@ class SystemSmsConfigFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'admin' => ['name'],
-    ];
+                         'admin' => ['name'],
+                        ];
 
     /**
      * 修改时间查询

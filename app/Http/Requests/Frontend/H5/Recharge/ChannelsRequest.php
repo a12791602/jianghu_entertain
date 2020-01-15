@@ -27,9 +27,7 @@ class ChannelsRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'type_id' => 'required|exists:system_finance_types,id',
-        ];
+        return ['type_id' => 'required|exists:system_finance_types,id'];
     }
 
     /**
@@ -38,8 +36,8 @@ class ChannelsRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'type_id.required' => '请选择分类',
-            'type_id.exists' => '所选分类不存在',
-        ];
+                'type_id.required' => '请选择分类',
+                'type_id.exists'   => '所选分类不存在',
+               ];
     }
 }

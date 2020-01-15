@@ -18,8 +18,8 @@ class GameTypePlatformFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'gameType' => ['name'],
-    ];
+                         'gameType' => ['name'],
+                        ];
 
     /**
      * 状态查询

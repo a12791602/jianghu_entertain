@@ -18,8 +18,8 @@ class GameVendorPlatformFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'gameVendor' => ['name'],
-    ];
+                         'gameVendor' => ['name'],
+                        ];
 
     /**
      * 根据状态查询

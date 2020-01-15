@@ -28,10 +28,10 @@ class GameListRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'device' => 'integer|required',
-            'type_id' => 'integer',
-            'is_hot' => 'integer',
-        ];
+                'device'  => 'integer|required',
+                'type_id' => 'integer',
+                'is_hot'  => 'integer',
+               ];
     }
 
     /**
@@ -41,9 +41,9 @@ class GameListRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'device.integer' => '设备类型不符合规则',
-            'type_id.integer' => '游戏分类ID不符合规则',
-            'is_hot.integer' => '游戏分类是否热门不符合规则',
-        ];
+                'device.integer'  => '设备类型不符合规则',
+                'type_id.integer' => '游戏分类ID不符合规则',
+                'is_hot.integer'  => '游戏分类是否热门不符合规则',
+               ];
     }
 }

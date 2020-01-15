@@ -10,7 +10,10 @@ Route::group(
         //获取系统银行
         Route::get(
             'get-system-banks',
-            [BankController::class, 'getSystemBanks'],
+            [
+             BankController::class,
+             'getSystemBanks',
+            ],
         )->name($namePrefix . 'get-system-banks');
     },
 );

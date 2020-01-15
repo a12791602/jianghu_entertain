@@ -27,11 +27,11 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'game_type_id'   => 'required|integer|exists:games_types,id',   //游戏类型ID
-            'game_vendor_id' => 'required|integer|exists:games_vendors,id', //游戏平台ID
-            'bet'            => 'required|numeric|gte:0',                   //打码量
-            'percent'        => 'required|string',                          //洗码比例
-        ];
+                'game_type_id'   => 'required|integer|exists:games_types,id',   //游戏类型ID
+                'game_vendor_id' => 'required|integer|exists:games_vendors,id', //游戏平台ID
+                'bet'            => 'required|numeric|gte:0',                   //打码量
+                'percent'        => 'required|string',                          //洗码比例
+               ];
     }
 
     /**
@@ -40,9 +40,9 @@ class DoAddRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'bet.required' => '缺少打码量',
-            'bet.numeric'  => '打码量必须是数字',
-            'bet.gte'      => '打码量必须大于等于0',
-        ];
+                'bet.required' => '缺少打码量',
+                'bet.numeric'  => '打码量必须是数字',
+                'bet.gte'      => '打码量必须大于等于0',
+               ];
     }
 }

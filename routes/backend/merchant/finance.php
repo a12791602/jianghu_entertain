@@ -11,36 +11,57 @@ Route::group(
         //添加线下金流
         Route::post(
             'add-do',
-            [OfflineFinanceController::class, 'addDo'],
+            [
+             OfflineFinanceController::class,
+             'addDo',
+            ],
         )->name($namePrefix . 'add-do');
         //线下金流列表
         Route::get(
             'index',
-            [OfflineFinanceController::class, 'index'],
+            [
+             OfflineFinanceController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         //更改线下金流状态
         Route::post(
             'status',
-            [OfflineFinanceController::class, 'status'],
+            [
+             OfflineFinanceController::class,
+             'status',
+            ],
         )->name($namePrefix . 'status');
         //获取线下金流分类
         Route::get(
             'types',
-            [OfflineFinanceController::class, 'types'],
+            [
+             OfflineFinanceController::class,
+             'types',
+            ],
         )->name($namePrefix . 'types');
         //删除线下金流
         Route::post(
             'del-do',
-            [OfflineFinanceController::class, 'delDo'],
+            [
+             OfflineFinanceController::class,
+             'delDo',
+            ],
         )->name($namePrefix . 'del-do');
         //编辑线下金流
         Route::post(
             'edit',
-            [OfflineFinanceController::class, 'edit'],
+            [
+             OfflineFinanceController::class,
+             'edit',
+            ],
         )->name($namePrefix . 'edit');
         Route::get(
             'edit',
-            [OfflineFinanceController::class, 'edit'],
+            [
+             OfflineFinanceController::class,
+             'edit',
+            ],
         )->name($namePrefix . 'edit');
     },
 );
@@ -73,9 +94,15 @@ Route::group(
             ->name($namePrefix . 'status');
         //接收回调 platform 系统的平台 order 订单号
         Route::match(
-            ['get', 'post'],
+            [
+             'get',
+             'post',
+            ],
             'callback/{platform}/{order}',
-            [OnlineFinanceController::class, 'callback'],
+            [
+             OnlineFinanceController::class,
+             'callback',
+            ],
         )->name($namePrefix . 'callback');
     },
 );

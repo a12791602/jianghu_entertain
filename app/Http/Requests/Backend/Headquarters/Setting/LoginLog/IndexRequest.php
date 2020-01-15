@@ -27,11 +27,11 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'email'    => 'email:rfc,dns',
-            'name'     => 'string',
-            'ip'       => 'ip',
-            'createAt' => 'string',
-        ];
+                'email'    => 'email:rfc,dns',
+                'name'     => 'string',
+                'ip'       => 'ip',
+                'createAt' => 'string',
+               ];
     }
 
     // /**

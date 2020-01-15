@@ -17,32 +17,50 @@ Route::group(
         //创建管理员
         Route::post(
             'create',
-            [MerchantAdminUserController::class, 'create'],
+            [
+             MerchantAdminUserController::class,
+             'create',
+            ],
         )->name($namePrefix . 'create');
         //获取所有管理员
         Route::get(
             'get-all-admins',
-            [MerchantAdminUserController::class, 'allAdmins'],
+            [
+             MerchantAdminUserController::class,
+             'allAdmins',
+            ],
         )->name($namePrefix . 'get-all-admins');
         //修改管理员所属组
         Route::post(
             'update-admin-group',
-            [MerchantAdminUserController::class, 'updateAdminGroup'],
+            [
+             MerchantAdminUserController::class,
+             'updateAdminGroup',
+            ],
         )->name($namePrefix . 'update-admin-group');
         //删除管理员
         Route::post(
             'delete-admin',
-            [MerchantAdminUserController::class, 'deletePartnerAdmin'],
+            [
+             MerchantAdminUserController::class,
+             'deletePartnerAdmin',
+            ],
         )->name($namePrefix . 'delete-admin');
         //查找管理员
         Route::post(
             'search-admin',
-            [MerchantAdminUserController::class, 'searchAdmin'],
+            [
+             MerchantAdminUserController::class,
+             'searchAdmin',
+            ],
         )->name($namePrefix . 'search-admin');
         //管理员开关
         Route::post(
             'switch-admin',
-            [MerchantAdminUserController::class, 'switchAdmin'],
+            [
+             MerchantAdminUserController::class,
+             'switchAdmin',
+            ],
         )->name($namePrefix . 'switch-admin');
     },
 );

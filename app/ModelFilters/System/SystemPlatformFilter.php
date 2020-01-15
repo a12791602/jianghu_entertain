@@ -17,8 +17,8 @@ class SystemPlatformFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'owner' => ['email'],
-    ];
+                         'owner' => ['email'],
+                        ];
 
     /**
      * 状态查询

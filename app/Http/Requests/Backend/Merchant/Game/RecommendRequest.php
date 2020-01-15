@@ -28,9 +28,9 @@ class RecommendRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:games_platforms,id',
-            'is_recommend' => 'required|in:0,1',
-        ];
+                'id'           => 'required|exists:games_platforms,id',
+                'is_recommend' => 'required|in:0,1',
+               ];
     }
 
     /**
@@ -39,10 +39,10 @@ class RecommendRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'is_recommend.required' => '请选择是否推荐',
-            'is_recommend.in' => '所选是否推荐不在范围内',
-        ];
+                'id.required'           => 'ID不存在',
+                'id.exists'             => 'ID不存在',
+                'is_recommend.required' => '请选择是否推荐',
+                'is_recommend.in'       => '所选是否推荐不在范围内',
+               ];
     }
 }

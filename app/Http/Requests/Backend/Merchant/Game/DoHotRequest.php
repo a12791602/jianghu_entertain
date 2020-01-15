@@ -28,9 +28,9 @@ class DoHotRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:games_platforms,id',
-            'is_hot' => 'required|in:0,1',
-        ];
+                'id'     => 'required|exists:games_platforms,id',
+                'is_hot' => 'required|in:0,1',
+               ];
     }
 
     /**
@@ -39,10 +39,10 @@ class DoHotRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'is_hot.required' => '请选择是否热门',
-            'is_hot.in' => '所选是否热门不在范围内',
-        ];
+                'id.required'     => 'ID不存在',
+                'id.exists'       => 'ID不存在',
+                'is_hot.required' => '请选择是否热门',
+                'is_hot.in'       => '所选是否热门不在范围内',
+               ];
     }
 }

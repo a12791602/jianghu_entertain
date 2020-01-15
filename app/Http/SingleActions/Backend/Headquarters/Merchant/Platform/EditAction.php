@@ -85,9 +85,9 @@ class EditAction
     private function _editRole(string $sign, array $role): bool
     {
         $filterArr  = [
-            'platform' => $sign,
-            'super'    => MerchantAdminAccessGroup::IS_SUPER,
-        ];
+                       'platform' => $sign,
+                       'super'    => MerchantAdminAccessGroup::IS_SUPER,
+                      ];
         $adminGroup = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->first();
         $oldRole    = $adminGroup->detail->pluck('menu_id')->toArray();
         //需要删除的权限
@@ -116,9 +116,9 @@ class EditAction
     private function _deleteRole(int $groupId, array $deleteRole): int
     {
         $filterArr  = [
-            'groupId' => $groupId,
-            'menuIn'  => $deleteRole,
-        ];
+                       'groupId' => $groupId,
+                       'menuIn'  => $deleteRole,
+                      ];
         $deleteRole = MerchantAdminAccessGroupsHasBackendSystemMenu::
             filter($filterArr, MerchantAdminAccessGroupsHasBackendSystemMenuFilter::class)
             ->delete();
@@ -135,9 +135,9 @@ class EditAction
     {
         foreach ($roles as $menuId) {
             $addData  = [
-                'group_id' => $groupId,
-                'menu_id'  => $menuId,
-            ];
+                         'group_id' => $groupId,
+                         'menu_id'  => $menuId,
+                        ];
             $roleEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
             $roleEloq->fill($addData);
             if (!$roleEloq->save()) {

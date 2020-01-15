@@ -27,11 +27,11 @@ class LoginLogRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'mobile'      => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
-            'uniqueId'    => 'string', //用户UID
-            'createAt'    => 'string', //登陆时间
-            'lastLoginIp' => 'ip', //登陆IP
-        ];
+                'mobile'      => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
+                'uniqueId'    => 'string', //用户UID
+                'createAt'    => 'string', //登陆时间
+                'lastLoginIp' => 'ip', //登陆IP
+               ];
     }
 
     // /**

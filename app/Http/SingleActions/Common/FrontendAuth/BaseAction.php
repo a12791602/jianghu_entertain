@@ -30,11 +30,11 @@ class BaseAction
         Cache::put($verification_key, ['mobile' => $mobile, 'verification_code' => $code], $expiredAt);
 
         $item = [
-           'verification_key' => $verification_key,
-           'expired_at' => $expiredAt->toDayDateTimeString(),
-           'nextReqTime' => $nextReqTime, // Next allowed request timestamp.
-           'currentReqTime' => $currentReqTime, // Current request timestamp.
-        ];
+                 'verification_key' => $verification_key,
+                 'expired_at'       => $expiredAt->toDayDateTimeString(),
+                 'nextReqTime'      => $nextReqTime, // Next allowed request timestamp.
+                 'currentReqTime'   => $currentReqTime, // Current request timestamp.
+                ];
 
         if (!app()->environment('production')) {
             $item['verification_code'] = $code;

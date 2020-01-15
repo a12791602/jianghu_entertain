@@ -33,8 +33,14 @@ class DestroyAction
     {
         $datas = $this->model->where(
             [
-                ['id', $inputDatas['id']],
-                ['group_name', $inputDatas['group_name']],
+             [
+              'id',
+              $inputDatas['id'],
+             ],
+             [
+              'group_name',
+              $inputDatas['group_name'],
+             ],
             ],
         )->first();
         if ($datas === null) {

@@ -26,9 +26,7 @@ class DeleteAdminRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:merchant_admin_users',
-        ];
+        return ['id' => 'required|exists:merchant_admin_users'];
     }
 
     /**
@@ -37,8 +35,8 @@ class DeleteAdminRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => '缺少管理员ID',
-            'id.exists' => '管理员不存在',
-        ];
+                'id.required' => '缺少管理员ID',
+                'id.exists'   => '管理员不存在',
+               ];
     }
 }

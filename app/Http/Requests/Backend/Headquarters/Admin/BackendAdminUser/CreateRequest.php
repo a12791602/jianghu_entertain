@@ -27,11 +27,11 @@ class CreateRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|unique:backend_admin_users', //用户名
-            'email' => 'required|email|unique:backend_admin_users', //邮箱
-            'password' => 'required|string', //密码
-            'group_id' => 'required|numeric|exists:backend_admin_access_groups,id', //管理员组ID
-        ];
+                'name'     => 'required|unique:backend_admin_users', //用户名
+                'email'    => 'required|email|unique:backend_admin_users', //邮箱
+                'password' => 'required|string', //密码
+                'group_id' => 'required|numeric|exists:backend_admin_access_groups,id', //管理员组ID
+               ];
     }
 
     /*public function messages()

@@ -27,14 +27,14 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
-            'userUid'       => 'string', //用户UID
-            'parent_mobile' => ['regex' => 'regex:/^1[345789]\d{9}$/'], //上级手机号码
-            'isOnline'      => 'integer|in:0,1', //0离线 1在线
-            'lastLoginIp'   => 'ip', //最后登陆IP
-            'registerIp'    => 'ip', //注册IP
-            'createAt'      => 'string', //注册时间
-        ];
+                'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
+                'userUid'       => 'string', //用户UID
+                'parent_mobile' => ['regex' => 'regex:/^1[345789]\d{9}$/'], //上级手机号码
+                'isOnline'      => 'integer|in:0,1', //0离线 1在线
+                'lastLoginIp'   => 'ip', //最后登陆IP
+                'registerIp'    => 'ip', //注册IP
+                'createAt'      => 'string', //注册时间
+               ];
     }
 
     /**
@@ -42,8 +42,6 @@ class IndexRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-
-        ];
+        return [];
     }
 }

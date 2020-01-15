@@ -18,9 +18,9 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-        'author' => ['author_name'],
-        'lastEditor' => ['last_editor_name'],
-    ];
+                         'author'     => ['author_name'],
+                         'lastEditor' => ['last_editor_name'],
+                        ];
 
     /**
      * 按名称搜索

@@ -27,10 +27,10 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'name'      => 'string', //最后更新人名称
-            'updatedAt' => 'string', //更新时间
-            'status'    => 'in:0,1', //状态 0禁用 1启用
-        ];
+                'name'      => 'string', //最后更新人名称
+                'updatedAt' => 'string', //更新时间
+                'status'    => 'in:0,1', //状态 0禁用 1启用
+               ];
     }
 
     /**
@@ -39,9 +39,9 @@ class IndexRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'editorId.integer' => '更新人ID必须是整数',
-            'updatedAt.string' => '更新时间区间必须是字符串',
-            'status.in'        => '启用状态数据非法',
-        ];
+                'editorId.integer' => '更新人ID必须是整数',
+                'updatedAt.string' => '更新时间区间必须是字符串',
+                'status.in'        => '启用状态数据非法',
+               ];
     }
 }

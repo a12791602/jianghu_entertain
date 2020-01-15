@@ -25,9 +25,9 @@ class CreateAction
     {
         //管理员角色组ID是否合法
         $filterArr            = [
-            'platform' => $contll->currentPlatformEloq->sign,
-            'super'    => MerchantAdminAccessGroup::NO_SUPER,
-        ];
+                                 'platform' => $contll->currentPlatformEloq->sign,
+                                 'super'    => MerchantAdminAccessGroup::NO_SUPER,
+                                ];
         $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)
                                     ->pluck('id')
                                     ->toArray();

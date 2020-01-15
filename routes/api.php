@@ -14,8 +14,8 @@
 
 Route::group(
     [
-        'middleware' => ['backend-api'],
-        'prefix' => 'headquarters-api',
+     'middleware' => ['backend-api'],
+     'prefix'     => 'headquarters-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/backend/headquarters/';
@@ -29,8 +29,8 @@ Route::group(
 
 Route::group(
     [
-        'middleware' => ['merchant-api'],
-        'prefix' => 'merchant-api',
+     'middleware' => ['merchant-api'],
+     'prefix'     => 'merchant-api',
     ],
     static function (): void {
         $sRouteDir   = base_path() . '/routes/backend/merchant/';
@@ -43,9 +43,7 @@ Route::group(
 );
 
 Route::group(
-    [
-        'name' => 'frontend-main',
-    ],
+    ['name' => 'frontend-main'],
     static function (): void {
         $sRouteFile = base_path() . '/routes/frontend/frontend-main-route.php';
         include $sRouteFile;

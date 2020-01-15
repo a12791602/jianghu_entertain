@@ -70,15 +70,15 @@ class DoAddAction
     {
         $this->platformEloq = new SystemPlatform();
         $platformData       = [
-            'name'           => $inputDatas['platform_name'],
-            'sign'           => $inputDatas['platform_sign'],
-            'agency_method'  => $inputDatas['agency_method'],
-            'start_time'     => $inputDatas['start_time'],
-            'end_time'       => $inputDatas['end_time'],
-            'sms_num'        => $inputDatas['sms_num'],
-            'author_id'      => $adminId,
-            'last_editor_id' => $adminId,
-        ];
+                               'name'           => $inputDatas['platform_name'],
+                               'sign'           => $inputDatas['platform_sign'],
+                               'agency_method'  => $inputDatas['agency_method'],
+                               'start_time'     => $inputDatas['start_time'],
+                               'end_time'       => $inputDatas['end_time'],
+                               'sms_num'        => $inputDatas['sms_num'],
+                               'author_id'      => $adminId,
+                               'last_editor_id' => $adminId,
+                              ];
         $this->platformEloq->fill($platformData);
         if (!$this->platformEloq->save()) {
             DB::rollback();
@@ -104,11 +104,11 @@ class DoAddAction
         $publicKey         = $publicKey['key'];
         $intervalStr       = Str::random(11);
         $addData           = [
-            'platform_sign' => $this->platformEloq->sign,
-            'private_key'   => $privateKey,
-            'public_key'    => $publicKey,
-            'interval_str'  => $intervalStr,
-        ];
+                              'platform_sign' => $this->platformEloq->sign,
+                              'private_key'   => $privateKey,
+                              'public_key'    => $publicKey,
+                              'interval_str'  => $intervalStr,
+                             ];
         $systemPlatformSsl = new SystemPlatformSsl();
         $systemPlatformSsl->fill($addData);
         if (!$systemPlatformSsl->save()) {
@@ -144,9 +144,9 @@ class DoAddAction
     {
         $systemBank = SystemBank::pluck('id')->toArray();
         $addData    = [
-            'platform_sign' => $this->platformEloq->sign,
-            'status'        => SystemPlatformBank::STATUS_CLOSE,
-        ];
+                       'platform_sign' => $this->platformEloq->sign,
+                       'status'        => SystemPlatformBank::STATUS_CLOSE,
+                      ];
 
         foreach ($systemBank as $bankId) {
             $addData['bank_id'] = $bankId;
@@ -169,10 +169,10 @@ class DoAddAction
     {
         $adminGroupEloq = new MerchantAdminAccessGroup();
         $adminGroupData = [
-            'group_name'    => '超级管理',
-            'platform_sign' => $this->platformEloq->sign,
-            'is_super'      => MerchantAdminAccessGroup::IS_SUPER,
-        ];
+                           'group_name'    => '超级管理',
+                           'platform_sign' => $this->platformEloq->sign,
+                           'is_super'      => MerchantAdminAccessGroup::IS_SUPER,
+                          ];
         $adminGroupEloq->fill($adminGroupData);
         if (!$adminGroupEloq->save()) {
             DB::rollback();
@@ -195,9 +195,9 @@ class DoAddAction
 
         foreach ($role as $menuId) {
             $roleData = [
-                'group_id' => $adminGroupId,
-                'menu_id'  => $menuId,
-            ];
+                         'group_id' => $adminGroupId,
+                         'menu_id'  => $menuId,
+                        ];
             $roleEloq = new MerchantAdminAccessGroupsHasBackendSystemMenu();
             $roleEloq->fill($roleData);
             if (!$roleEloq->save()) {
@@ -218,11 +218,11 @@ class DoAddAction
     private function _createAdminUser(array $inputDatas, int $adminGroupId): MerchantAdminUser
     {
         $adminData         = [
-            'name'     => $inputDatas['username'],
-            'email'    => $inputDatas['email'],
-            'password' => bcrypt($inputDatas['password']),
-            'group_id' => $adminGroupId,
-        ];
+                              'name'     => $inputDatas['username'],
+                              'email'    => $inputDatas['email'],
+                              'password' => bcrypt($inputDatas['password']),
+                              'group_id' => $adminGroupId,
+                             ];
         $merchantAdminUser = new MerchantAdminUser();
         $merchantAdminUser->fill($adminData);
         if (!$merchantAdminUser->save()) {

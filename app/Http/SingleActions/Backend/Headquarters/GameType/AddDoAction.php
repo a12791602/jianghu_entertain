@@ -55,10 +55,10 @@ class AddDoAction extends BaseAction
         $platforms = SystemPlatform::select('id')->get()->toArray();
         foreach ($platforms as $platform) {
             $tmpData           = [
-                'type_id'     => $typeId,
-                'platform_id' => $platform['id'],
-                'device'      => GameTypePlatform::DEVICE_H5,
-            ];
+                                  'type_id'     => $typeId,
+                                  'platform_id' => $platform['id'],
+                                  'device'      => GameTypePlatform::DEVICE_H5,
+                                 ];
             $data[]            = $tmpData;
             $tmpData['device'] = GameTypePlatform::DEVICE_APP;
             $data[]            = $tmpData;

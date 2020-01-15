@@ -115,11 +115,11 @@ class DoAddAction
             ->get();
         foreach ($allCommissionConfig as $commissionConfig) {
             $insertData   = [
-                'config_id'     => $commissionConfig->id,
-                'grade_id'      => $this->model->id,
-                'percent'       => 0,
-                'grade_exp_max' => $this->model->experience_max,
-            ];
+                             'config_id'     => $commissionConfig->id,
+                             'grade_id'      => $this->model->id,
+                             'percent'       => 0,
+                             'grade_exp_max' => $this->model->experience_max,
+                            ];
             $configDetail = new UsersCommissionConfigDetail();
             $configDetail->fill($insertData);
             if (!$configDetail->save()) {

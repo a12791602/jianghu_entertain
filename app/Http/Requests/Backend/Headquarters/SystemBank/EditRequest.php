@@ -30,11 +30,11 @@ class EditRequest extends BaseFormRequest
     {
         $myId = $this->get('id');
         return [
-            'id' => 'required|exists:system_banks,id',
-            'name' => 'required|unique:system_banks,name,' . $myId,
-            'code' => 'required|unique:system_banks,code,' . $myId,
-            'status' => 'required|in:0,1',
-        ];
+                'id'     => 'required|exists:system_banks,id',
+                'name'   => 'required|unique:system_banks,name,' . $myId,
+                'code'   => 'required|unique:system_banks,code,' . $myId,
+                'status' => 'required|in:0,1',
+               ];
     }
 
     /**
@@ -43,14 +43,14 @@ class EditRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'name.required' => '请填写银行名称',
-            'name.unique' => '银行名称已存在',
-            'code.required' => '请填写银行编码',
-            'code.unique' => '银行编码已存在',
-            'status.required' => '请选择状态',
-            'status.in' => '所选状态不再范围内',
-        ];
+                'id.required'     => 'ID不存在',
+                'id.exists'       => 'ID不存在',
+                'name.required'   => '请填写银行名称',
+                'name.unique'     => '银行名称已存在',
+                'code.required'   => '请填写银行编码',
+                'code.unique'     => '银行编码已存在',
+                'status.required' => '请选择状态',
+                'status.in'       => '所选状态不再范围内',
+               ];
     }
 }

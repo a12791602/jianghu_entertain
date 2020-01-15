@@ -33,8 +33,11 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token', 'fund_password', 'mobile',
-    ];
+                         'password',
+                         'remember_token',
+                         'fund_password',
+                         'mobile',
+                        ];
 
     /**
      * The attributes that should be cast to native types.
@@ -42,9 +45,9 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $casts = [
-        'register_time' => 'datetime',
-        'last_login_time' => 'datetime',
-    ];
+                        'register_time'   => 'datetime',
+                        'last_login_time' => 'datetime',
+                       ];
 
     /**
      * 找子级

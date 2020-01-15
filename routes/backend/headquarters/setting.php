@@ -9,7 +9,10 @@ Route::group(
         $namePrefix = 'headquarters-api.login-log.';
         Route::post(
             'index',
-            [LoginLogController::class, 'index'],
+            [
+             LoginLogController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
     },
 );

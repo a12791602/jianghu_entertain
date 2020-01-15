@@ -61,7 +61,10 @@ class BasePay extends Base implements Payment
             'finance-recharge-sign',
             $this->payInfo['orderNo'],
             '天道支付(支付宝扫码) 支付签名信息',
-            ['signBefore' => $signStr, 'sign' => $sign],
+            [
+             'signBefore' => $signStr,
+             'sign'       => $sign,
+            ],
         );
         return $this->returnData;
     }
@@ -90,7 +93,11 @@ class BasePay extends Base implements Payment
                 'finance-callback-sign',
                 $this->payInfo['orderNo'],
                 '天道支付(支付宝扫码) 回调验签信息',
-                ['signBefore' => $signStr, 'oldSign' => $oldSign, 'newSign' => $newSign],
+                [
+                 'signBefore' => $signStr,
+                 'oldSign'    => $oldSign,
+                 'newSign'    => $newSign,
+                ],
             );
             if ($oldSign === $newSign) {
                 $this->verifyData['flag']            = true;

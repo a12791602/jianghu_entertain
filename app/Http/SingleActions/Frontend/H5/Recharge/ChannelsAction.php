@@ -44,8 +44,9 @@ class ChannelsAction
     private function _getOnlineChannels(array $inputDatas): array
     {
         $data = SystemFinanceType::with(
-            ['onlineInfos' => static function ($query) use ($inputDatas) {
-                    $query = $query->where('platform_sign', $inputDatas['platform_sign'])
+            [
+             'onlineInfos' => static function ($query) use ($inputDatas) {
+                        $query = $query->where('platform_sign', $inputDatas['platform_sign'])
                         ->join(
                             'system_finance_user_tags',
                             'system_finance_online_infos.id',
@@ -56,18 +57,18 @@ class ChannelsAction
                         ->where('system_finance_online_infos.status', SystemFinanceOnlineInfo::STATUS_YES)
                         ->select(
                             [
-                                'system_finance_online_infos.id',
-                                'frontend_name',
-                                'frontend_remark',
-                                'min',
-                                'max',
-                                'handle_fee',
-                                'merchant_no',
-                                'system_finance_online_infos.desc',
+                             'system_finance_online_infos.id',
+                             'frontend_name',
+                             'frontend_remark',
+                             'min',
+                             'max',
+                             'handle_fee',
+                             'merchant_no',
+                             'system_finance_online_infos.desc',
                             ],
                         );
-                    return $query;
-            },
+                        return $query;
+             },
             ],
         )->select(['id', 'name', 'sign', 'is_online'])
             ->where('id', $inputDatas['type_id'])
@@ -83,8 +84,9 @@ class ChannelsAction
     private function _getOfflineChannels(array $inputDatas): array
     {
         $data = SystemFinanceType::with(
-            ['offlineInfos' => static function ($query) use ($inputDatas) {
-                    $query = $query->with('bank:id,name,code')
+            [
+             'offlineInfos' => static function ($query) use ($inputDatas) {
+                        $query = $query->with('bank:id,name,code')
                         ->where('system_finance_offline_infos.platform_id', $inputDatas['platform_id'])
                         ->join(
                             'system_finance_user_tags',
@@ -96,18 +98,18 @@ class ChannelsAction
                         ->where('system_finance_offline_infos.status', SystemFinanceOfflineInfo::STATUS_YES)
                         ->select(
                             [
-                                'system_finance_offline_infos.id',
-                                'bank_id',
-                                'type_id',
-                                'name',
-                                'remark',
-                                'min',
-                                'max',
-                                'fee',
+                             'system_finance_offline_infos.id',
+                             'bank_id',
+                             'type_id',
+                             'name',
+                             'remark',
+                             'min',
+                             'max',
+                             'fee',
                             ],
                         );
-                    return $query;
-            },
+                        return $query;
+             },
             ],
         )->select(['id', 'name', 'sign', 'is_online'])
             ->where('id', $inputDatas['type_id'])

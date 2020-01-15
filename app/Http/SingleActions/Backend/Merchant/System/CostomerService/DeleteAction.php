@@ -35,9 +35,9 @@ class DeleteAction
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $filterArr       = [
-            'dataId' => $inputDatas['id'],
-            'sign'   => $contll->currentPlatformEloq->sign,
-        ];
+                            'dataId' => $inputDatas['id'],
+                            'sign'   => $contll->currentPlatformEloq->sign,
+                           ];
         $costomerService = $this->model
             ->filter($filterArr, SystemCostomerServiceFilter::class)
             ->first();

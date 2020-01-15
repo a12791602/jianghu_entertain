@@ -54,11 +54,11 @@ class SystemDomain extends BaseModel
      * @var array
      */
     public $typePrefix = [
-        0 => '',     //主域名不需要前缀
-        1 => 'www.', //PC域名
-        2 => 'm.',   //H5域名
-        3 => 'app.', //APP域名
-    ];
+                          0 => '',     //主域名不需要前缀
+                          1 => 'www.', //PC域名
+                          2 => 'm.',   //H5域名
+                          3 => 'app.', //APP域名
+                         ];
 
     /**
      * 所属平台

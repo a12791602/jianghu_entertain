@@ -27,9 +27,9 @@ class CreateAction
         $credentials            = Arr::only($inputDatas, ['email', 'password']);
         $token                  = $contll->currentAuth->attempt($credentials);
         $success                = [
-            'token' => $token,
-            'name'  => $user->name,
-        ];
+                                   'token' => $token,
+                                   'name'  => $user->name,
+                                  ];
         $msgOut                 = msgOut(true, $success);
         return $msgOut;
     }

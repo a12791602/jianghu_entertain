@@ -27,10 +27,10 @@ class DetailRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-            'uniqueId' => 'required|exists:frontend_users_black_lists,uid', //用户UID
-            'createAt' => 'string', //进入黑名单日期
-            'status' => 'integer|in:0,1', //状态  0拉黑 1解封
-        ];
+                'uniqueId' => 'required|exists:frontend_users_black_lists,uid', //用户UID
+                'createAt' => 'string', //进入黑名单日期
+                'status'   => 'integer|in:0,1', //状态  0拉黑 1解封
+               ];
     }
 
     // /**

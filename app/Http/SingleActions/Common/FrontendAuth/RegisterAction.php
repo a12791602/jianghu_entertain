@@ -10,7 +10,6 @@ use Cache;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
@@ -38,14 +37,14 @@ class RegisterAction
             throw new \Exception('100503', 401);
         }
         $item = [
-            'mobile' => $verifyData['mobile'],
-            'username' => $verifyData['mobile'],
-            'password' => bcrypt($request['password']),
-            'invite_code' => $request['invite_code'],
-            'register_ip' => $request->ip(),
-            'platform_id' => $controller->currentPlatformEloq->id,
-            'platform_sign' => $controller->currentPlatformEloq->sign,
-        ];
+                 'mobile'        => $verifyData['mobile'],
+                 'username'      => $verifyData['mobile'],
+                 'password'      => bcrypt($request['password']),
+                 'invite_code'   => $request['invite_code'],
+                 'register_ip'   => $request->ip(),
+                 'platform_id'   => $controller->currentPlatformEloq->id,
+                 'platform_sign' => $controller->currentPlatformEloq->sign,
+                ];
         $user = FrontendUser::create($item);
 
         $token          = $controller->currentAuth->login($user);
@@ -57,7 +56,7 @@ class RegisterAction
             try {
                 JWTAuth::setToken($user->remember_token);
                 JWTAuth::invalidate();
-            } catch (JWTException $e) {
+            } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
                 Log::info($e->getMessage());
             }
         }
@@ -66,10 +65,10 @@ class RegisterAction
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
         $data = [
-            'access_token' => $token,
-            'token_type' => 'Bearer',
-            'expires_at' => $expireAt,
-        ];
+                 'access_token' => $token,
+                 'token_type'   => 'Bearer',
+                 'expires_at'   => $expireAt,
+                ];
         event(new FrontendLoginEvent($user));
         $result = msgOut(true, $data);
         Cache::forget($verification_key);

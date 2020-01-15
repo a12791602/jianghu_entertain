@@ -19,9 +19,9 @@ class CurrentSslAction
     {
         $currentSSL = $contll->currentPlatformEloq->sslKey;
         $data       = [
-            'public_key'   => $currentSSL->public_key ?? null,
-            'interval_str' => $currentSSL->interval_str ?? null,
-        ];
+                       'public_key'   => $currentSSL->public_key ?? null,
+                       'interval_str' => $currentSSL->interval_str ?? null,
+                      ];
         $msgOut     = msgOut(true, $data);
         return $msgOut;
     }

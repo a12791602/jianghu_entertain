@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
 use App\Models\Email\SystemEmail;

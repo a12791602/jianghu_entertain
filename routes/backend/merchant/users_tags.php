@@ -10,22 +10,34 @@ Route::group(
         //会员标签列表
         Route::get(
             'index',
-            [UsersTagController::class, 'index'],
+            [
+             UsersTagController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         //添加会员标签
         Route::post(
             'do-add',
-            [UsersTagController::class, 'doAdd'],
+            [
+             UsersTagController::class,
+             'doAdd',
+            ],
         )->name($namePrefix . 'do-add');
         //编辑会员标签
         Route::post(
             'edit',
-            [UsersTagController::class, 'edit'],
+            [
+             UsersTagController::class,
+             'edit',
+            ],
         )->name($namePrefix . 'edit');
         //删除会员标签
         Route::post(
             'delete',
-            [UsersTagController::class, 'delete'],
+            [
+             UsersTagController::class,
+             'delete',
+            ],
         )->name($namePrefix . 'delete');
     },
 );

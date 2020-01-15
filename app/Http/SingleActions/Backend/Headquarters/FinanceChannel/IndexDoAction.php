@@ -25,7 +25,12 @@ class IndexDoAction extends BaseAction
     {
         $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::with(
-            ['lastEditor:id,name', 'author:id,name', 'vendor:id,name', 'type:id,name'],
+            [
+             'lastEditor:id,name',
+             'author:id,name',
+             'vendor:id,name',
+             'type:id,name',
+            ],
         )->filter($inputDatas, SystemFinanceChannelFilter::class)->paginate($pageSize);
         $msgOut      = msgOut(true, $outputDatas);
         return $msgOut;

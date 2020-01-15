@@ -67,7 +67,10 @@ Route::group(
             ->name($namePrefix . 'del-do');
         Route::get(
             'get-search-condition',
-            [BackendGameController::class, 'getSearchCondition'],
+            [
+             BackendGameController::class,
+             'getSearchCondition',
+            ],
         )->name($namePrefix . 'get-search-condition');
         Route::post('status-do', [BackendGameController::class, 'statusDo'])
             ->name($namePrefix . 'status-do');

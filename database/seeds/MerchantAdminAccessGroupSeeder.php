@@ -17,12 +17,12 @@ class MerchantAdminAccessGroupSeeder extends Seeder
     {
         MerchantAdminAccessGroup::insert(
             [
-                [
-                    'group_name' => '超级管理组',
-                    'status' => 1,
-                    'platform_sign' => 'b',
-                    'is_super' => 1,
-                ],
+             [
+              'group_name'    => '超级管理组',
+              'status'        => 1,
+              'platform_sign' => 'b',
+              'is_super'      => 1,
+             ],
             ],
         );
     }

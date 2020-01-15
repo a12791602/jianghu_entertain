@@ -10,7 +10,10 @@ Route::group(
         //测试帐变
         Route::post(
             'account-change',
-            [TestController::class, 'accountChange'],
+            [
+             TestController::class,
+             'accountChange',
+            ],
         )->name($namePrefix . 'account-change');
     },
 );

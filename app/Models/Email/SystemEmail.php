@@ -19,43 +19,36 @@ class SystemEmail extends BaseModel
     /**
      * 立即发送
      *
-     * @var integer
      */
     public const IS_TIMING_NO = 0;
     /**
      * 延时发送
      *
-     * @var integer
      */
     public const IS_TIMING_YES = 1;
     /**
      * 已发送
      *
-     * @var integer
      */
     public const IS_SEND_YES = 1;
     /**
      * 未发送
      *
-     * @var integer
      */
     public const IS_SEND_NO = 0;
     /**
      * 发送者类型 总后台
      *
-     * @var integer
      */
     public const SENDER_TYPE_HEADQUARTERS = 1;
     /**
      * 发送者类型 运营商
      *
-     * @var integer
      */
     public const SENDER_TYPE_MERCHANT = 2;
     /**
      * 发送者类型 玩家
      *
-     * @var integer
      */
     public const SENDER_TYPE_PLAYER = 3;
 }

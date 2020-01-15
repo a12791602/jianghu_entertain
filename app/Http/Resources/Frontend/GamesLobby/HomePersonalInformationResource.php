@@ -21,12 +21,12 @@ class HomePersonalInformationResource extends JsonResource
     {
         $appEnvironment = App::environment();
         $result         = [
-            'uid' => $this->uid,
-            'pic_path' => config('image_domain.' . $appEnvironment) . $this->pic_path,
-            'username' => $this->username,
-            'level_deep' => $this->level_deep,
-            'balance' => optional($this->account)->balance,
-        ];
+                           'uid'        => $this->uid,
+                           'pic_path'   => config('image_domain.' . $appEnvironment) . $this->pic_path,
+                           'username'   => $this->username,
+                           'level_deep' => $this->level_deep,
+                           'balance'    => optional($this->account)->balance,
+                          ];
         return $result;
     }
 }

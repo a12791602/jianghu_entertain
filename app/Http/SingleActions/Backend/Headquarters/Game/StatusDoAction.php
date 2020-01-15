@@ -22,8 +22,8 @@ class StatusDoAction extends BaseAction
     {
         $update = $this->model->where('id', $inputDatas['id'])->update(
             [
-                'status'         => $inputDatas['status'],
-                'last_editor_id' => $contll->currentAdmin->id,
+             'status'         => $inputDatas['status'],
+             'last_editor_id' => $contll->currentAdmin->id,
             ],
         );
         if (!$update) {

@@ -17,12 +17,12 @@ trait SystemDomainLogics
         $typePrefix = $this->typePrefix;
         foreach ($typePrefix as $type => $prefix) {
             $addData = [
-                'platform_sign' => $platformSign,
-                'admin_id' => $adminId,
-                'status' => self::STATUS_OPEN,
-                'domain' => $prefix . $domain,
-                'type' => $type,
-            ];
+                        'platform_sign' => $platformSign,
+                        'admin_id'      => $adminId,
+                        'status'        => self::STATUS_OPEN,
+                        'domain'        => $prefix . $domain,
+                        'type'          => $type,
+                       ];
             $insert  = $this->insertDomain($addData);
             if ($insert === false) {
                 return false;

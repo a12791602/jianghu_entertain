@@ -36,9 +36,9 @@ class SwitchAdminAction
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
         $filterArr = [
-            'dataId'   => $inputDatas['id'],
-            'platform' => $contll->currentPlatformEloq->sign,
-        ];
+                      'dataId'   => $inputDatas['id'],
+                      'platform' => $contll->currentPlatformEloq->sign,
+                     ];
         $adminUser = $this->model->filter($filterArr, MerchantAdminUserFilter::class)->first();
         if (!$adminUser) {
             throw new \Exception('201000');

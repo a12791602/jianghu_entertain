@@ -23,21 +23,21 @@ abstract class Base implements Payment
      * @var array $payInfo
      */
     public $payInfo = [
-        'platformSign' => null, //所属平台标记
-        'orderNo' => null, //系统订单号
-        'money' => null, //订单金额
-        'merchantCode' => null, //商户号
-        'merchantSecret' => null, //商户密钥
-        'publicKey' => null, //第三方公钥
-        'privateKey' => null, //第三方私钥
-        'requestUrl' => null, //请求地址
-        'callbackUrl' => null, //回调地址
-        'redirectUrl' => null, //同步跳转地址
-        'appId' => null, //终端号
-        'user' => null, //用户
-        'clientIp' => null, //终端ip
-        'certificatePath' => null, //证书地址
-    ];
+                       'platformSign'    => null, //所属平台标记
+                       'orderNo'         => null, //系统订单号
+                       'money'           => null, //订单金额
+                       'merchantCode'    => null, //商户号
+                       'merchantSecret'  => null, //商户密钥
+                       'publicKey'       => null, //第三方公钥
+                       'privateKey'      => null, //第三方私钥
+                       'requestUrl'      => null, //请求地址
+                       'callbackUrl'     => null, //回调地址
+                       'redirectUrl'     => null, //同步跳转地址
+                       'appId'           => null, //终端号
+                       'user'            => null, //用户
+                       'clientIp'        => null, //终端ip
+                       'certificatePath' => null, //证书地址
+                      ];
 
     /**
      * request mode 为 0 时 返回的数据.
@@ -45,12 +45,12 @@ abstract class Base implements Payment
      * @var array $returnData
      */
     public $returnData = [
-        'orderNo' => null, //系统订单号
-        'payContent' => null, //付款信息
-        'money' => null, //订单金额
-        'realMoney' => null, //实际支付金额
-        'mode' => null, //展示方式
-    ];
+                          'orderNo'    => null, //系统订单号
+                          'payContent' => null, //付款信息
+                          'money'      => null, //订单金额
+                          'realMoney'  => null, //实际支付金额
+                          'mode'       => null, //展示方式
+                         ];
 
     /**
      * 验签完毕返回上层的数据.
@@ -58,13 +58,13 @@ abstract class Base implements Payment
      * @var array $verifyData
      */
     public $verifyData = [
-        'flag' => false, //验签是否成功的标记
-        'money' => null, //订单金额
-        'realMoney' => null, //实际支付金额
-        'orderNo' => null, //系统订单号
-        'merchantOrderNo' => null, //商户订单号
-        'backStr' => 'success', //返回给第三方的信息
-    ];
+                          'flag'            => false, //验签是否成功的标记
+                          'money'           => null, //订单金额
+                          'realMoney'       => null, //实际支付金额
+                          'orderNo'         => null, //系统订单号
+                          'merchantOrderNo' => null, //商户订单号
+                          'backStr'         => 'success', //返回给第三方的信息
+                         ];
 
     /**
      * 设置发起支付时的前置数据.

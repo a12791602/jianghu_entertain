@@ -7,7 +7,6 @@ use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
@@ -53,7 +52,7 @@ class DeleteAdminAction
             try {
                 JWTAuth::setToken($adminEloq->remember_token);
                 JWTAuth::invalidate();
-            } catch (JWTException $e) {
+            } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
                 Log::info($e->getMessage());
             }
         }

@@ -21,11 +21,11 @@ class SystemSlidesResource extends JsonResource
     {
         $appEnvironment = App::environment();
         $result         = [
-            'title' => $this->title,
-            'pic_path' => config('image_domain.' . $appEnvironment)  . $this->pic_path,
-            'redirect_url' => $this->redirect_url,
-            'type' => $this->type,
-        ];
+                           'title'        => $this->title,
+                           'pic_path'     => config('image_domain.' . $appEnvironment)  . $this->pic_path,
+                           'redirect_url' => $this->redirect_url,
+                           'type'         => $this->type,
+                          ];
         return $result;
     }
 }

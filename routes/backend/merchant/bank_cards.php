@@ -10,12 +10,18 @@ Route::group(
         //会员银行卡-列表
         Route::post(
             'index',
-            [BankCardsController::class, 'index'],
+            [
+             BankCardsController::class,
+             'index',
+            ],
         )->name($namePrefix . 'index');
         //会员银行卡-删除
         Route::post(
             'delete',
-            [BankCardsController::class, 'delete'],
+            [
+             BankCardsController::class,
+             'delete',
+            ],
         )->name($namePrefix . 'delete');
     },
 );

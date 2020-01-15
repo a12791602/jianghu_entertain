@@ -49,7 +49,10 @@ class AppServiceProvider extends ServiceProvider
                                 $query->when(
                                     Str::contains($attribute, '.'),
                                     static function ($query) use ($attribute, $term): void {
-                                        [$relationName, $relationAttribute] = explode('.', $attribute);
+                                        [
+                                         $relationName,
+                                         $relationAttribute,
+                                        ] = explode('.', $attribute);
                                         // Validating if the relationship exists on the current query
                                         $query->orWhereHas(
                                             $relationName,

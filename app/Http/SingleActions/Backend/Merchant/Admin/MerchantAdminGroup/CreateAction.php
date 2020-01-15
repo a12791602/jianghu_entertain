@@ -42,9 +42,9 @@ class CreateAction
         $platformSign = $contll->currentPlatformEloq->sign;
 
         $filterArr    = [
-            'platform'  => $platformSign,
-            'groupName' => $inputDatas['group_name'],
-        ];
+                         'platform'  => $platformSign,
+                         'groupName' => $inputDatas['group_name'],
+                        ];
         $nameIsExists = $this->model::filter($filterArr, MerchantAdminAccessGroupFilter::class)->exists();
         if ($nameIsExists === true) {
             throw new \Exception('300102');
@@ -53,9 +53,9 @@ class CreateAction
         DB::beginTransaction();
         //添加AdminGroup数据
         $groupData  = [
-            'group_name'    => $inputDatas['group_name'],
-            'platform_sign' => $platformSign,
-        ];
+                       'group_name'    => $inputDatas['group_name'],
+                       'platform_sign' => $platformSign,
+                      ];
         $adminGroup = $this->model;
         $adminGroup->fill($groupData);
         if (!$adminGroup->save()) {
