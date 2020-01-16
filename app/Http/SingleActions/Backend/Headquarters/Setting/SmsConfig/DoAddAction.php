@@ -41,7 +41,7 @@ class DoAddAction
         }
 
         $data   = ['name' => $this->model->name];
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

@@ -33,7 +33,7 @@ class TestController extends FrontendApiMainController
             $inputDatas['params'] = [];
         }
         $data   = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

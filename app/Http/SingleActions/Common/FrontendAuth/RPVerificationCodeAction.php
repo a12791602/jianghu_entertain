@@ -33,7 +33,7 @@ class RPVerificationCodeAction extends BaseAction
             throw new \Exception('100505');
         }
         $code   = $this->sendVerificationCode($mobile);
-        $result = msgOut(true, $code);
+        $result = msgOut($code);
         return $result;
     }
 }

@@ -30,7 +30,7 @@ class IndexAction extends BaseAction
         $pageSize                  = $this->model::getPageSize();
         $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
             ->filter($inputDatas, NoticeLoginFilter::class)->paginate($pageSize);
-        $msgOut                    = msgOut(true, $data);
+        $msgOut                    = msgOut($data);
         return $msgOut;
     }
 }

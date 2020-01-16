@@ -30,7 +30,7 @@ class CreateAction
                                    'token' => $token,
                                    'name'  => $user->name,
                                   ];
-        $msgOut                 = msgOut(true, $success);
+        $msgOut                 = msgOut($success);
         return $msgOut;
     }
 }

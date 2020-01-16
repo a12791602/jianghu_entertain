@@ -35,7 +35,7 @@ class DoAddAction
         if (!$this->model->save()) {
             throw new \Exception('302300');
         }
-        $msgOut = msgOut(true, ['title' => $this->model->title]);
+        $msgOut = msgOut(['title' => $this->model->title]);
         return $msgOut;
     }
 }

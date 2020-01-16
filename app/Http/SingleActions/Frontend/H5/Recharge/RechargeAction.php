@@ -75,7 +75,7 @@ class RechargeAction
         if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $result = $this->_saveOfflineOrderData($data);
         }
-        $result = msgOut(true, $result);
+        $result = msgOut($result);
         return $result;
     }
 

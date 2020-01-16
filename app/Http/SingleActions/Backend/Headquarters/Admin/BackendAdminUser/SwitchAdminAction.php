@@ -40,7 +40,7 @@ class SwitchAdminAction
         if (!$adminUser->save()) {
             throw new \Exception('301104');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

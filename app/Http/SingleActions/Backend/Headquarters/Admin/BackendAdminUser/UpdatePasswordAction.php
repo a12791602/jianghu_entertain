@@ -50,7 +50,7 @@ class UpdatePasswordAction
         if ($adminEloq !== null) {
             $adminEloq->password = Hash::make($inputDatas['password']);
             $adminEloq->save();
-            $msgOut = msgOut(true, ['name' => $inputDatas['name']]);
+            $msgOut = msgOut(['name' => $inputDatas['name']]);
             return $msgOut;
         }
         throw new \Exception('301100');

@@ -26,7 +26,7 @@ class EditAction extends BaseAction
         if ($method === 'get') {
             $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_NO)
                 ->where('finance_id', $inputDatas['id'])->select('tag_id')->get();
-            $result   = msgOut(true, $userTags);
+            $result   = msgOut($userTags);
             return $result;
         }
         $flag = false;
@@ -65,7 +65,7 @@ class EditAction extends BaseAction
         }
         if ($flag) {
             DB::commit();
-            $result = msgOut(true);
+            $result = msgOut();
             return $result;
         }
         DB::rollBack();

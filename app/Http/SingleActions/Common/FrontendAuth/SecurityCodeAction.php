@@ -34,7 +34,7 @@ class SecurityCodeAction
         FrontendUser::where('mobile', $verifyData['mobile'])
             ->update(['security_code' => bcrypt($request['security_code'])]);
         Cache::forget($verification_key);
-        $result = msgOut(true);
+        $result = msgOut();
         return $result;
     }
 }

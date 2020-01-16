@@ -24,7 +24,7 @@ class EditDoAction extends BaseAction
         $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
         $model->fill($inputDatas);
         if ($model->save()) {
-            return msgOut(true);
+            return msgOut();
         } else {
             throw new \Exception('300303');
         }

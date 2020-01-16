@@ -23,7 +23,7 @@ class TypesAction
             ->select(['id', 'name', 'sign'])
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $result = msgOut(true, $data);
+        $result = msgOut($data);
         return $result;
     }
 }

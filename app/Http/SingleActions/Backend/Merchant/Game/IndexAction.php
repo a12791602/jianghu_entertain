@@ -34,7 +34,7 @@ class IndexAction extends BaseAction
                                             ->filter($inputDatas, GamesPlatformFilter::class)
                                             ->withCacheCooldownSeconds(86400)
                                             ->get();
-        $result                      = msgOut(true, $datas);
+        $result                      = msgOut($datas);
         return $result;
     }
 }

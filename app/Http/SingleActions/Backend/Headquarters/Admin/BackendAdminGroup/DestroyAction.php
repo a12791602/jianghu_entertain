@@ -49,7 +49,7 @@ class DestroyAction
         if (!$datas->delete()) {
             throw new \Exception('300104');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

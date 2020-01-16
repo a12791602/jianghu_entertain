@@ -25,7 +25,7 @@ class GetSearchDataOfAssignGameAction
                     'games'   => $games,
                     'vendors' => $vendors,
                    ];
-        $msgOut  = msgOut(true, $datas);
+        $msgOut  = msgOut($datas);
         return $msgOut;
     }
 }

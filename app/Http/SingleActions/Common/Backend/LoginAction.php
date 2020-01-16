@@ -76,7 +76,7 @@ class LoginAction
         $backendLoginLog = new BackendLoginLog();
         $backendLoginLog->insertData($user, $request, BackendLoginLog::TYPE_HEADQUARTERS);
 
-        $msgOut = msgOut(true, LoginResource::make($user));
+        $msgOut = msgOut(LoginResource::make($user));
         return $msgOut;
     }
 }

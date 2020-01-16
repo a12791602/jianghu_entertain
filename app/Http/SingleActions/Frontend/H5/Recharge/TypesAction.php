@@ -24,7 +24,7 @@ class TypesAction
             ->select(['id', 'name', 'sign', 'is_online'])
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $msgOut               = msgOut(true, $datas);
+        $msgOut               = msgOut($datas);
         return $msgOut;
     }
 }

@@ -54,7 +54,7 @@ class DoAddAction
         $this->_editPlatformOwner($adminUser->id);
         //完成
         DB::commit();
-        $msgOut = msgOut(true, ['platform_name' => $inputDatas['platform_name']]);
+        $msgOut = msgOut(['platform_name' => $inputDatas['platform_name']]);
         return $msgOut;
     }
 

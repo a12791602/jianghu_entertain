@@ -30,7 +30,7 @@ class AllRequireInfosAction
         //$data['routeMatchingName'] = $routeMatchingName;
         $data = ['route_info' => $routeInfo];
 
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 

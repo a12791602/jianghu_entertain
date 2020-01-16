@@ -22,7 +22,7 @@ class SecurityVerificationCodeAction extends BaseAction
     {
         $mobile = $controller->currentAuth->user()->mobile;
         $code   = $this->sendVerificationCode($mobile);
-        $result = msgOut(true, $code);
+        $result = msgOut($code);
         return $result;
     }
 }

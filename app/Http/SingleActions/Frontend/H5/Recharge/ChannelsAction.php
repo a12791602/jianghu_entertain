@@ -32,7 +32,7 @@ class ChannelsAction
         } elseif ($type->is_online === SystemFinanceType::IS_ONLINE_NO) {
             $data = $this->_getOfflineChannels($inputDatas);
         }
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 

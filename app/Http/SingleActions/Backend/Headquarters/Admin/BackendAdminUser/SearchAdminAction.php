@@ -32,7 +32,7 @@ class SearchAdminAction
     public function execute(array $inputDatas): JsonResponse
     {
         $data   = $this->model->filter($inputDatas, BackendAdminUserFilter::class)->get()->toArray();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

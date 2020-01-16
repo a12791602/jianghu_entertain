@@ -40,7 +40,7 @@ class DoAddAction
         if (!$this->model->save()) {
             throw new \Exception('201300');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

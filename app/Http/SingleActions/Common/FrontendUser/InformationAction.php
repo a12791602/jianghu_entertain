@@ -21,7 +21,7 @@ class InformationAction
     public function information(Request $request): JsonResponse
     {
         $user   = $request->user();
-        $result = msgOut(true, HomePersonalInformationResource::make($user));
+        $result = msgOut(HomePersonalInformationResource::make($user));
         return $result;
     }
 }

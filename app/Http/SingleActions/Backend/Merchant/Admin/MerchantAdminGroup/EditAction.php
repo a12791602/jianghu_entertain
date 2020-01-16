@@ -68,7 +68,7 @@ class EditAction
         }
 
         DB::commit();
-        $msgOut = msgOut(true, $adminGroupELoq->toArray());
+        $msgOut = msgOut($adminGroupELoq->toArray());
         return $msgOut;
     }
 }

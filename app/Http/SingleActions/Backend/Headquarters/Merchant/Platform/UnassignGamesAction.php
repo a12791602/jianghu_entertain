@@ -29,7 +29,7 @@ class UnassignGamesAction
              'vendor_id',
             ],
         )->paginate($pageSize);
-        $msgOut                               = msgOut(true, $outputDatas);
+        $msgOut                               = msgOut($outputDatas);
         return $msgOut;
     }
 }

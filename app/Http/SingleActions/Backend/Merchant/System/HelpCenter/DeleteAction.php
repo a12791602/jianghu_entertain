@@ -48,7 +48,7 @@ class DeleteAction
         if (!$costomerService->delete()) {
             throw new \Exception('201303');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

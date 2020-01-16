@@ -16,7 +16,7 @@ class SortAction extends BaseAction
             foreach ($inputDatas['sorts'] as $inputData) {
                 $this->model::where('id',$inputData['id'])->update(['sort'=>$inputData['sort']]);
             }
-            return msgOut(true);
+            return msgOut();
        } catch (\Exception $exception) {
            throw new \Exception('200100');
        }

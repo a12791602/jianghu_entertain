@@ -22,7 +22,7 @@ class RichListAction
     {
         $outputDatas = FrontendUsersAccount::with(['frontendUser:account_id,uid,username,mobile'])
             ->orderBy('balance', 'desc')->get();
-        $result      = msgOut(true, RichListResource::collection($outputDatas));
+        $result      = msgOut(RichListResource::collection($outputDatas));
         return $result;
     }
 }

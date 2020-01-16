@@ -27,7 +27,7 @@ class AssignGamesAction
         }
         try {
             GamesPlatform::insert($data);
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         } catch (\Throwable $exception) {
             throw new \Exception('302000');

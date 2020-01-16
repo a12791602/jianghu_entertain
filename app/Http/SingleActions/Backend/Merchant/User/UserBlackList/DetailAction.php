@@ -34,7 +34,7 @@ class DetailAction
         $data   = $this->model
                      ->filter($inputDatas, FrontendUsersBlackListFilter::class)
                      ->paginate($this->model::getPageSize());
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

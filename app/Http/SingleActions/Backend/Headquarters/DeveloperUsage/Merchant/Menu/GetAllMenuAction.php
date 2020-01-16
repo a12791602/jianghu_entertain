@@ -30,7 +30,7 @@ class GetAllMenuAction
     public function execute(): JsonResponse
     {
         $data   = $this->model->forStar();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

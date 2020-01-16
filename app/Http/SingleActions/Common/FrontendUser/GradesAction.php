@@ -23,7 +23,7 @@ class GradesAction
         $grade = UsersGrade::where('platform_sign', $request->user()->platform_sign)
             ->get(['name', 'experience_min', 'experience_max', 'grade_gift', 'week_gift']);
 
-        $result = msgOut(true, $grade);
+        $result = msgOut($grade);
         return $result;
     }
 }

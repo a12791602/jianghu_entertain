@@ -27,6 +27,6 @@ class IndexDoAction extends BaseAction
         $outputDatas = $this->model::with(
             ['lastEditor:id,name', 'author:id,name'],
         )->filter($inputDatas, SystemFinanceVendorFilter::class)->paginate($pageSize);
-        return msgOut(true, $outputDatas);
+        return msgOut($outputDatas);
     }
 }

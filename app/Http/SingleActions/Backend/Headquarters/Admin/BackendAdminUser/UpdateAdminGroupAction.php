@@ -56,7 +56,7 @@ class UpdateAdminGroupAction
                    'admin_name' => $adminEloq->name,
                    'group_name' => $inputDatas['group_name'],
                   ];
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

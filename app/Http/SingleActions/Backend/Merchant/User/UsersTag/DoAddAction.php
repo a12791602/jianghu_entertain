@@ -40,7 +40,7 @@ class DoAddAction
         if (!$this->model->save()) {
             throw new \Exception('200500');
         }
-        $msgOut = msgOut(true, ['title' => $inputDatas['title']]);
+        $msgOut = msgOut(['title' => $inputDatas['title']]);
         return $msgOut;
     }
 }

@@ -34,7 +34,7 @@ class GameListAction
 
         $result = GamesPlatform::with('games')->filter($condition, GamesPlatformFilter::class)->get();
 
-        $result = msgOut(true, GameListResource::collection($result));
+        $result = msgOut(GameListResource::collection($result));
         return $result;
     }
 }

@@ -48,7 +48,7 @@ class DeleteAction
         if (!$bankCards->delete()) {
             throw new \Exception('201501');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

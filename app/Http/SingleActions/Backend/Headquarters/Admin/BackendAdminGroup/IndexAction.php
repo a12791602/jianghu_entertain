@@ -35,7 +35,7 @@ class IndexAction
             ->with('detail:group_id,menu_id')
             ->get()
             ->toArray();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

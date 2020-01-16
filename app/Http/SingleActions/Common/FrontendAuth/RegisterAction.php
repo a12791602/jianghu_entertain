@@ -50,7 +50,7 @@ class RegisterAction
         );
         $data = $this->token($controller, $user, $request);
         event(new FrontendLoginEvent($user));
-        $result = msgOut(true, $data);
+        $result = msgOut($data);
         Cache::forget($verification_key);
 
         return $result;

@@ -19,7 +19,7 @@ class DelDoAction extends BaseAction
     {
         $result = $this->model->where('id', $inputDatas['id'])->delete();
         if ($result) {
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         }
         throw new \Exception('201703');

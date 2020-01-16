@@ -32,7 +32,7 @@ class GameCategoryAction
 
         $outputDatas = GameTypePlatform::with('gameType:id,name,sign')
             ->filter($condition, GameTypePlatformFilter::class)->where($condition)->get();
-        $result      = msgOut(true, GameCategoryResource::collection($outputDatas));
+        $result      = msgOut(GameCategoryResource::collection($outputDatas));
         return $result;
     }
 }

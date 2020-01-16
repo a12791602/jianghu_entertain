@@ -41,7 +41,7 @@ class SwitchAction
         if (!$platformEloq->save()) {
             throw new \Exception('300707');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

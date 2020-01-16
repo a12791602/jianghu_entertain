@@ -55,7 +55,7 @@ class AddDoAction extends BaseAction
         }
         if ($flag) {
             DB::commit();
-            $result = msgOut(true);
+            $result = msgOut();
             return $result;
         }
         DB::rollBack();

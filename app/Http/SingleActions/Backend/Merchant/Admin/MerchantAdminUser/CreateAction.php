@@ -40,7 +40,7 @@ class CreateAction
         $user                        = MerchantAdminUser::create($inputDatas);
 
         $success = ['name' => $user->name];
-        $msgOut  = msgOut(true, $success);
+        $msgOut  = msgOut($success);
         return $msgOut;
     }
 }

@@ -31,7 +31,7 @@ class IndexAction extends BaseAction
         $datas                     = $this->model::with('lastEditor:id,name', 'author:id,name', 'bank:id,name')
             ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
             ->paginate($pageSize);
-        $result                    = msgOut(true, $datas);
+        $result                    = msgOut($datas);
         return $result;
     }
 }

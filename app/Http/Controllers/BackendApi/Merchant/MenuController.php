@@ -15,7 +15,7 @@ class MenuController extends BackEndApiMainController
      */
     public function currentAdminMenu(): JsonResponse
     {
-        $msgOut = msgOut(true, $this->menuLists);
+        $msgOut = msgOut($this->menuLists);
         return $msgOut;
     }
 }

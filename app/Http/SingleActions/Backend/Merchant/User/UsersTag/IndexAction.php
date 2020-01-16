@@ -36,7 +36,7 @@ class IndexAction
                           ->filter($filterArr, UsersTagFilter::class)
                           ->get()
                           ->toArray();
-        $msgOut    = msgOut(true, $data);
+        $msgOut    = msgOut($data);
         return $msgOut;
     }
 }

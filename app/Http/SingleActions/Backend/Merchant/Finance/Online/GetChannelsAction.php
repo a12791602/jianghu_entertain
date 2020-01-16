@@ -21,7 +21,7 @@ class GetChannelsAction
             ->select(['id', 'name', 'sign', 'request_url'])
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $msgOut          = msgOut(true, $financeChannels);
+        $msgOut          = msgOut($financeChannels);
         return $msgOut;
     }
 }

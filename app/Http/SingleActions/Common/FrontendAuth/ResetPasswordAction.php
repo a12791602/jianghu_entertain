@@ -33,7 +33,7 @@ class ResetPasswordAction
 
         FrontendUser::where('mobile', $verifyData['mobile'])->update(['password' => bcrypt($request['password'])]);
         Cache::forget($verification_key);
-        $result = msgOut(true);
+        $result = msgOut();
         return $result;
     }
 }

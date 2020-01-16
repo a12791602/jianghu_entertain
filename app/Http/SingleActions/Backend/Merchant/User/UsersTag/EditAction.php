@@ -39,7 +39,7 @@ class EditAction
         if (!$usersTagEloq->save()) {
             throw new \Exception('200502');
         }
-        $msgOut = msgOut(true, ['title' => $inputDatas['title']]);
+        $msgOut = msgOut(['title' => $inputDatas['title']]);
         return $msgOut;
     }
 }

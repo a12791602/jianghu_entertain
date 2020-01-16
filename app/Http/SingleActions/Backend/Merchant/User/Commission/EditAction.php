@@ -66,7 +66,7 @@ class EditAction
         $this->_editDetail($percentArr);
         DB::commit();
         //数据修改完成
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 

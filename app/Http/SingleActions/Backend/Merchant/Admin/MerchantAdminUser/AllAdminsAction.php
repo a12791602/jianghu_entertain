@@ -19,7 +19,7 @@ class AllAdminsAction
     public function execute(BackEndApiMainController $contll): JsonResponse
     {
         $data   = $contll->currentPlatformEloq->adminUsers->toArray();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

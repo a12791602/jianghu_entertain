@@ -27,7 +27,7 @@ class RefreshAction
                            'token_type'   => 'Bearer',
                            'expires_at'   => $expireAt,
                           ];
-        $msgOut         = msgOut(true, $data);
+        $msgOut         = msgOut($data);
         return $msgOut;
     }
 }

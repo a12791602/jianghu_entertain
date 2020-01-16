@@ -51,7 +51,7 @@ class DeleteAction
         }
         DB::commit();
         //删除数据-完成
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

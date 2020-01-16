@@ -50,7 +50,7 @@ class EditAction
         if (!$helpCenter->save()) {
             throw new \Exception('201302');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

@@ -23,7 +23,7 @@ class AddDoAction extends BaseAction
         $inputDatas['author_id'] = $contll->currentAdmin->id;
         $this->model->fill($inputDatas);
         if ($this->model->save()) {
-            return msgOut(true);
+            return msgOut();
         } else {
             throw new \Exception('300600');
         }

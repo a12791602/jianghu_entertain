@@ -29,7 +29,7 @@ class StatusDoAction extends BaseAction
         if (!$update) {
             throw new \Exception('300203');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

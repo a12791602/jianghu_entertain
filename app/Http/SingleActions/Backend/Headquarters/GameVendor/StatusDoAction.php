@@ -27,7 +27,7 @@ class StatusDoAction extends BaseAction
             ],
         )
         ) {
-            return msgOut(true);
+            return msgOut();
         } else {
             throw new \Exception('300304');
         }

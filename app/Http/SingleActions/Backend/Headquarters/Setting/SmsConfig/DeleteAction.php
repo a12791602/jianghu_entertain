@@ -40,7 +40,7 @@ class DeleteAction
             throw new \Exception('302404');
         }
 
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

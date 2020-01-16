@@ -53,7 +53,7 @@ class IndexAction
             )->with('admin:id,name')
             ->paginate($this->model::getPageSize());
 
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

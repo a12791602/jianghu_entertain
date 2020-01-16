@@ -59,7 +59,7 @@ class UpdateAdminGroupAction
         //更改组
         $AdminUserEloq->group_id = $inputDatas['group_id'];
         $AdminUserEloq->save();
-        $msgOut = msgOut(true, $AdminUserEloq->toArray());
+        $msgOut = msgOut($AdminUserEloq->toArray());
         return $msgOut;
     }
 }

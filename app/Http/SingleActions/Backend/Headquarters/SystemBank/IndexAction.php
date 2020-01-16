@@ -30,7 +30,7 @@ class IndexAction extends BaseAction
              'author:id,name',
             ],
         )->filter($inputDatas, SystemBankFilter::class)->paginate($pageSize);
-        $msgOut      = msgOut(true, $outputDatas);
+        $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }
 }

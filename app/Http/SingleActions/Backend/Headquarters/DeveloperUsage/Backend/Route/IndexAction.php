@@ -32,7 +32,7 @@ class IndexAction
         $data   = $this->model
             ->select(['id', 'route_name', 'menu_group_id', 'title', 'description', 'is_open'])
             ->get();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

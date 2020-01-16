@@ -29,30 +29,21 @@ if (!function_exists('configure')) {
 
 
 /**
- * @param boolean $success     Success.
- * @param mixed   $data        Data.
- * @param string  $code        Code.
- * @param string  $message     Message.
- * @param string  $placeholder Placeholder.
- * @param string  $substituted Substituted.
+ * @param mixed  $data        Data.
+ * @param string $code        Code.
+ * @param string $message     Message.
+ * @param string $placeholder Placeholder.
+ * @param string $substituted Substituted.
  * @return JsonResponse
  * @throws Exception 异常.
  */
 function msgOut(
-    bool $success = false,
     $data = [],
-    string $code = '',
+    string $code = '200',
     string $message = '',
     string $placeholder = '',
     string $substituted = ''
 ): JsonResponse {
-    $defaultSuccessCode = '200';
-    $defaultErrorCode   = '404';
-    $defaultCode        = $success === true ? $defaultSuccessCode : $defaultErrorCode;
-    $code               = $code === '' ? $defaultCode : $code;
-    if ($success === false) {
-        throw new Exception($code);
-    }
     if ($placeholder === '' || $substituted === '') {
         $message = $message === '' ? __('codes-map.' . $code) : $message;
     } else {

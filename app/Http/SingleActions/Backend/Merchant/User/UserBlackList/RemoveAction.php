@@ -41,7 +41,7 @@ class RemoveAction
         if (!$userBlackELoq->save()) {
             throw new \Exception('200301');
         }
-        $msgOut = msgOut(true, ['mobile' => $userBlackELoq->mobile]);
+        $msgOut = msgOut(['mobile' => $userBlackELoq->mobile]);
         return $msgOut;
     }
 }

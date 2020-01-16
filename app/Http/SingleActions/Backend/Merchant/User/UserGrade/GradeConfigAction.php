@@ -44,7 +44,7 @@ class GradeConfigAction
         if (!$gradesRuleEloq->save()) {
             throw new \Exception('200700');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

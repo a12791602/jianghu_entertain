@@ -86,7 +86,7 @@ class LoginAction
                  'expires_at'   => $expireAt,
                 ];
         event(new FrontendLoginEvent($user));
-        $result = msgOut(true, $data);
+        $result = msgOut($data);
         return $result;
     }
 

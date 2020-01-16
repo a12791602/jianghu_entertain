@@ -23,7 +23,7 @@ class AckOutAction
         Log::channel('ack-center')->info('Inputs are ' . $inputToLog);
         $headersToLog = json_encode($headers, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
         Log::channel('ack-center')->info('Headers are ' . $headersToLog);
-        $return = msgOut(true);
+        $return = msgOut();
         return $return;
     }
 }

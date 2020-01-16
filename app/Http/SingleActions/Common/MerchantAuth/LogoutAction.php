@@ -31,7 +31,7 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        $msgOut = msgOut(true, [], '200400');
+        $msgOut = msgOut([], '200400');
         return $msgOut;
     }
 }

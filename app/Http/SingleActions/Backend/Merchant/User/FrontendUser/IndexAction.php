@@ -39,7 +39,7 @@ class IndexAction
             }
         }
         $data   = $this->model->filter($inputDatas, FrontendUserFilter::class)->paginate($this->model::getPageSize());
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

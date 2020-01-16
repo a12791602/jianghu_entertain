@@ -36,7 +36,7 @@ class IndexAction
                      ->orderBy('experience_max', 'asc')
                      ->get()
                      ->toArray();
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

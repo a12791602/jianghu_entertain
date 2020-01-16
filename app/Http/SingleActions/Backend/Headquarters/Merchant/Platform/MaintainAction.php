@@ -46,7 +46,7 @@ class MaintainAction
             throw new \Exception('302006');
         }
 
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

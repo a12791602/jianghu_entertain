@@ -22,7 +22,7 @@ class CurrentSslAction
                        'public_key'   => $currentSSL->public_key ?? null,
                        'interval_str' => $currentSSL->interval_str ?? null,
                       ];
-        $msgOut     = msgOut(true, $data);
+        $msgOut     = msgOut($data);
         return $msgOut;
     }
 }

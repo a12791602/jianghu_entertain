@@ -28,7 +28,7 @@ class UploadAction
         if (!$file['status']) {
             throw new \Exception('201100');
         }
-        $result = msgOut(true, $file['file']);
+        $result = msgOut($file['file']);
         return $result;
     }
 }

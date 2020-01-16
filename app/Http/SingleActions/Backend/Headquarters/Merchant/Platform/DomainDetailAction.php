@@ -34,7 +34,7 @@ class DomainDetailAction
         $data   = $this->model
             ->filter($inputDatas, SystemDomainFilter::class)
             ->paginate($this->model::getPageSize());
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

@@ -26,7 +26,7 @@ class OptEditDoAction extends BaseAction
         if (!$model->save()) {
             throw new \Exception('300201');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

@@ -65,7 +65,7 @@ class DoAddAction
         DB::commit();
         //插入数据成功
 
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 

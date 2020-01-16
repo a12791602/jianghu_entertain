@@ -19,7 +19,7 @@ class DelDoAction extends BaseAction
     public function execute(array $inputDatas):JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
-            return msgOut(true);
+            return msgOut();
         } else {
             throw new \Exception('300602');
         }

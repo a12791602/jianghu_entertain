@@ -35,7 +35,7 @@ class ChangeParentAction
         $itemProcess = [];
         if (!empty($parseDatas)) {
             $itemProcess = $this->model->changeParent($parseDatas);
-            $msgOut      = msgOut(true, $itemProcess);
+            $msgOut      = msgOut($itemProcess);
             return $msgOut;
         }
         throw new \Exception('300001');

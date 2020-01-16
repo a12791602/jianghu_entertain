@@ -32,7 +32,7 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        $msgOut = msgOut(true); //'Successfully logged out'
+        $msgOut = msgOut(); //'Successfully logged out'
         return $msgOut;
     }
 }

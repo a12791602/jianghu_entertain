@@ -28,7 +28,7 @@ class GetSearchConditionDataAction extends BaseAction
                         'gameVendors' => $gameVendors,
                         'gameTypes'   => $gameTypes,
                        ];
-        $result      = msgOut(true, $datas);
+        $result      = msgOut($datas);
         return $result;
     }
 }

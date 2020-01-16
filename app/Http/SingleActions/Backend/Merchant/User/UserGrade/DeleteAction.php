@@ -73,7 +73,7 @@ class DeleteAction
             throw new \Exception('200705');
         }
         DB::commit();
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

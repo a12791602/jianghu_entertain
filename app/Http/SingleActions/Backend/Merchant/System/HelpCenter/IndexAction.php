@@ -38,7 +38,7 @@ class IndexAction
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
             ->get()
             ->toArray();
-        $msgOut             = msgOut(true, $data);
+        $msgOut             = msgOut($data);
         return $msgOut;
     }
 }

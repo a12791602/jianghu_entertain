@@ -41,7 +41,7 @@ class AddDoAction extends BaseAction
             throw new \Exception('300402');
         }
         DB::commit();
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 

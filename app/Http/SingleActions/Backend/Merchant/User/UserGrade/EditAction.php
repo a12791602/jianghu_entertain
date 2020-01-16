@@ -82,7 +82,7 @@ class EditAction
         $currentUsersGrade = $this->_editUserGrade($currentUsersGrade, $inputDatas);
         DB::commit();
 
-        $msgOut = msgOut(true, ['name' => $currentUsersGrade->name]);
+        $msgOut = msgOut(['name' => $currentUsersGrade->name]);
         return $msgOut;
     }
 

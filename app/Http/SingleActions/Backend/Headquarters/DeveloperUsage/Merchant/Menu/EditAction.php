@@ -50,7 +50,7 @@ class EditAction
             }
             $data = $menuEloq->toArray();
             if ($menuEloq->save()) {
-                $msgOut = msgOut(true, $data);
+                $msgOut = msgOut($data);
                 return $msgOut;
             }
             throw new \Exception('300000');

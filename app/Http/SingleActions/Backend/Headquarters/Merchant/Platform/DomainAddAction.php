@@ -52,7 +52,7 @@ class DomainAddAction
         if ($result !== true) {
             throw new \Exception($result);
         }
-        $msgOut = msgOut(true, ['domain' => $inputDatas['domain']]);
+        $msgOut = msgOut(['domain' => $inputDatas['domain']]);
         return $msgOut;
     }
 }

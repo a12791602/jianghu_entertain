@@ -25,7 +25,7 @@ class EditAction extends BaseAction
         $model->fill($inputDatas);
         $result = $model->save();
         if ($result) {
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         }
         throw new \Exception('201701');

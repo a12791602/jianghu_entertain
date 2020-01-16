@@ -25,7 +25,7 @@ class IndexAction extends BaseAction
     {
         $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
-        $msgOut      = msgOut(true, $outputDatas);
+        $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }
 }

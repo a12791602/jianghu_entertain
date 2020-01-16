@@ -22,7 +22,7 @@ class GetSystemBanksAction
             ->withCacheCooldownSeconds(86400)
             ->select(['id', 'name', 'code'])
             ->get();
-        $result = msgOut(true, $banks);
+        $result = msgOut($banks);
         return $result;
     }
 }

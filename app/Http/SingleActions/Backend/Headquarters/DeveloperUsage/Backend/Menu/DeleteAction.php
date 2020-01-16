@@ -42,7 +42,7 @@ class DeleteAction
                 },
             );
             $this->model->refreshStar();
-            $msgOut = msgOut(true, $datas);
+            $msgOut = msgOut($datas);
             return $msgOut;
         } catch (\Throwable $e) {
             throw new \Exception('300002');

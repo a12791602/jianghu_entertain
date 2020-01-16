@@ -60,7 +60,7 @@ class DeleteAdminAction
             throw new \Exception('201003');
         }
 
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

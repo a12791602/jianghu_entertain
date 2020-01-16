@@ -41,7 +41,7 @@ class StatusAction
         }
 
         $data   = ['name' => $systemSmsConfig->name];
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

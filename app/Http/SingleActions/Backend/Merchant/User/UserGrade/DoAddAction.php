@@ -63,7 +63,7 @@ class DoAddAction
         $this->_insertUsersCommission($contll->currentPlatformEloq->sign);
         DB::commit();
 
-        $msgOut = msgOut(true, ['name' => $this->model->name]);
+        $msgOut = msgOut(['name' => $this->model->name]);
         return $msgOut;
     }
 

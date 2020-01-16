@@ -25,7 +25,7 @@ class SlidesAction
         $inputDatas['status'] = SystemFePageBanner::STATUS_OPEN;
         $slides               = SystemFePageBanner::filter($inputDatas, SystemFePageBannerFilter::class)->get();
 
-        $result = msgOut(true, SystemSlidesResource::collection($slides));
+        $result = msgOut(SystemSlidesResource::collection($slides));
         return $result;
     }
 }

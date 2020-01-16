@@ -27,6 +27,6 @@ class IndexDoAction extends BaseAction
         $outputDatas = $this->model::with(
             ['lastEditor', 'author'],
         )->filter($inputDatas, GamesVendorFilter::class)->paginate($pageSize);
-        return msgOut(true, $outputDatas);
+        return msgOut($outputDatas);
     }
 }

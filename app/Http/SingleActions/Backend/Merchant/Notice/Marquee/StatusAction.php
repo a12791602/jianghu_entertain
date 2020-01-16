@@ -26,7 +26,7 @@ class StatusAction extends BaseAction
             ],
         );
         if ($result) {
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         }
         throw new \Exception('201603');

@@ -38,7 +38,7 @@ class DetailAction
             ->with('owner')
             ->get()
             ->toArray();
-        $msgOut       = msgOut(true, $platformData);
+        $msgOut       = msgOut($platformData);
         return $msgOut;
     }
 }

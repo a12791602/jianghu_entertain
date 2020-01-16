@@ -39,7 +39,7 @@ class DeleteAction
         if (!$routeEloq->delete()) {
             throw new \Exception('302303');
         }
-        $msgOut = msgOut(true, ['title' => $title]);
+        $msgOut = msgOut(['title' => $title]);
         return $msgOut;
     }
 }

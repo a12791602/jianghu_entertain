@@ -37,7 +37,7 @@ class IndexAction
             ->filter($inputDatas, BackendLoginLogFilter::class)
             ->paginate($this->model::getPageSize());
             
-        $msgOut = msgOut(true, $data);
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }

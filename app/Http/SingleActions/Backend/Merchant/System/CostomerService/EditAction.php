@@ -49,7 +49,7 @@ class EditAction
         if (!$costomerService->save()) {
             throw new \Exception('201202');
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

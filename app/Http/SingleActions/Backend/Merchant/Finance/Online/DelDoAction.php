@@ -35,7 +35,7 @@ class DelDoAction extends BaseAction
         }
         if ($flag) {
             DB::commit();
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         }
         DB::rollBack();

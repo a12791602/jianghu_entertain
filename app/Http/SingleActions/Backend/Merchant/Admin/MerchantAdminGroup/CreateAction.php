@@ -77,7 +77,7 @@ class CreateAction
             }
         }
         DB::commit();
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

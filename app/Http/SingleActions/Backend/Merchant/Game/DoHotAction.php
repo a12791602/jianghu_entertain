@@ -18,7 +18,7 @@ class DoHotAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->update(['is_hot' => $inputDatas['is_hot']])) {
-            $results = msgOut(true);
+            $results = msgOut();
             return $results;
         }
         throw new \Exception('200200');

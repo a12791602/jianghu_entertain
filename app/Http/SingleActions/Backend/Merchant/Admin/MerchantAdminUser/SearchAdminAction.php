@@ -35,7 +35,7 @@ class SearchAdminAction
     {
         $inputDatas['platform'] = $contll->currentPlatformEloq->sign;
         $data                   = $this->model->filter($inputDatas, MerchantAdminUserFilter::class)->get()->toArray();
-        $msgOut                 = msgOut(true, $data);
+        $msgOut                 = msgOut($data);
         return $msgOut;
     }
 }

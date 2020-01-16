@@ -35,7 +35,7 @@ class IndexAction extends BaseAction
              'lastEditor:id,name',
             ],
         )->filter($inputDatas, SystemFinanceOnlineInfoFilter::class)->paginate($pageSize);
-        $msgOut                      = msgOut(true, $data);
+        $msgOut                      = msgOut($data);
         return $msgOut;
     }
 }

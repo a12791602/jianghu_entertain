@@ -32,7 +32,7 @@ class RegisterVerificationCodeAction extends BaseAction
             throw new \Exception('100504');
         }
         $code   = $this->sendVerificationCode($mobile);
-        $result = msgOut(true, $code);
+        $result = msgOut($code);
         return $result;
     }
 }

@@ -40,7 +40,7 @@ class SendAction extends BaseAction
                 ),
             );
         }
-        $msgOut = msgOut(true);
+        $msgOut = msgOut();
         return $msgOut;
     }
 }

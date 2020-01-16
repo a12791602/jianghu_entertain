@@ -39,7 +39,7 @@ class EditAction
         if (!$routeEloq->save()) {
             throw new \Exception('302302');
         }
-        $msgOut = msgOut(true, ['title' => $routeEloq->title]);
+        $msgOut = msgOut(['title' => $routeEloq->title]);
         return $msgOut;
     }
 }

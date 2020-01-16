@@ -22,7 +22,7 @@ class AssignedGameCancelAction
         $result = GamesPlatform::where('platform_sign', $inputDatas['platform_sign'])
             ->whereIn('game_sign', $inputDatas['game_signs'])->delete();
         if ($result) {
-            $msgOut = msgOut(true);
+            $msgOut = msgOut();
             return $msgOut;
         }
         throw new \Exception('302001');

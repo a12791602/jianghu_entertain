@@ -30,7 +30,7 @@ class IndexDoAction extends BaseAction
              'author',
             ],
         )->filter($inputDatas, GamesTypeFilter::class)->paginate($pageSize);
-        $msgOut      = msgOut(true, $outputDatas);
+        $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }
 }

@@ -26,7 +26,7 @@ class MenuController extends BackEndApiMainController
      */
     public function getAllMenu(): JsonResponse
     {
-        $msgOut = msgOut(true, $this->fullMenuLists);
+        $msgOut = msgOut($this->fullMenuLists);
         return $msgOut;
     }
 
@@ -35,7 +35,7 @@ class MenuController extends BackEndApiMainController
      */
     public function currentAdminMenu(): JsonResponse
     {
-        $msgOut = msgOut(true, $this->menuLists);
+        $msgOut = msgOut($this->menuLists);
         return $msgOut;
     }
 
