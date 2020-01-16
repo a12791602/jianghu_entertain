@@ -22,14 +22,14 @@ class SwitchRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
     public function rules(): array
     {
         return [
-            'id' => 'required|exists:system_platforms', //ID
-            'status' => 'required|in:0,1', //状态 0关闭 1开启
-        ];
+                'id'     => 'required|exists:system_platforms', //ID
+                'status' => 'required|in:0,1', //状态 0关闭 1开启
+               ];
     }
 
     /*public function messages()

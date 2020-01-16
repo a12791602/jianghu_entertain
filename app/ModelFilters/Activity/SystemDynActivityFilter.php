@@ -22,19 +22,21 @@ class SystemDynActivityFilter extends ModelFilter
 
     /**
      * @param  integer $status Status.
-     * @return object
+     * @return SystemDynActivityFilter
      */
-    public function status(int $status) :object
+    public function status(int $status): SystemDynActivityFilter
     {
-        return $this->where('status', $status);
+        $object = $this->where('status', $status);
+        return $object;
     }
 
     /**
      * @param  string $name Name.
-     * @return object
+     * @return SystemDynActivityFilter
      */
-    public function name(string $name) :object
+    public function name(string $name): SystemDynActivityFilter
     {
-        return $this->where('name', $name);
+        $object = $this->where('name', $name);
+        return $object;
     }
 }

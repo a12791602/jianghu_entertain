@@ -17,7 +17,7 @@ class AssignGamesRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -25,44 +25,45 @@ class AssignGamesRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules() :array
+    public function rules(): array
     {
+        $platformSign = $this->get('platform_sign');
+        $unique       = Rule::unique('games_platforms', 'game_sign')
+            ->where('platform_sign', $platformSign);
         return [
-            'platform_sign' => 'required|exists:system_platforms,sign',
-            'game_signs' => 'required|array',
-            'game_signs.*' => [
-                'required',
-                'exists:games,sign',
-                Rule::unique('games_platforms', 'game_sign')->where('platform_sign', $this->get('platform_sign')),
-            ],
-        ];
+                'platform_sign' => 'required|exists:system_platforms,sign',
+                'game_signs'    => 'required|array',
+                'game_signs.*'  => [
+                                    'required',
+                                    'exists:games,sign',
+                                    $unique,
+                                   ],
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
-            'platform_sign.required' => '请选择厅主',
-            'platform_sign.exists' => '所选厅主不存在',
-            'game_signs.required' => '请选择游戏',
-            'game_signs.array' => '游戏格式不正确',
-            'game_signs.*.required' => '请选择游戏',
-            'game_signs.*.exists' => '所选游戏不存在',
-            'game_signs.*.unique' => '您所选的游戏已经分配过了',
-        ];
+                'platform_sign.required' => '请选择厅主',
+                'platform_sign.exists'   => '所选厅主不存在',
+                'game_signs.required'    => '请选择游戏',
+                'game_signs.array'       => '游戏格式不正确',
+                'game_signs.*.required'  => '请选择游戏',
+                'game_signs.*.exists'    => '所选游戏不存在',
+                'game_signs.*.unique'    => '您所选的游戏已经分配过了',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function filters():array
+    public function filters(): array
     {
-        return [
-            'game_signs' => 'cast:array',
-        ];
+        return ['game_signs' => 'cast:array'];
     }
 }

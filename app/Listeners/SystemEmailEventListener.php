@@ -20,12 +20,12 @@ class SystemEmailEventListener
     /**
      * @var SystemEmail
      */
-    private $_systemEmail;
+    private $systemEmail;
 
     /**
      * @var SystemEmailReceiver
      */
-    private $_systemEmailReceiver;
+    private $systemEmailReceiver;
 
     /**
      * SystemEmailEventListener constructor.
@@ -36,8 +36,8 @@ class SystemEmailEventListener
      */
     public function __construct(SystemEmail $systemEmail, SystemEmailReceiver $systemEmailReceiver)
     {
-        $this->_systemEmail = $systemEmail;
-        $this->_systemEmailReceiver = $systemEmailReceiver;
+        $this->systemEmail         = $systemEmail;
+        $this->systemEmailReceiver = $systemEmailReceiver;
     }
 
     /**
@@ -46,26 +46,27 @@ class SystemEmailEventListener
      * @param  SystemEmailEvent $event Event.
      * @return void
      */
-    public function handle(SystemEmailEvent $event)
+    public function handle(SystemEmailEvent $event): void
     {
-        $receiverIds = $this->_getReceiverIds($event);
-        $tmpData['email_id'] = $event->emailId;
+        $tmpData                  = [];
+        $receiverIds              = $this->_getReceiverIds($event);
+        $tmpData['email_id']      = $event->emailId;
         $tmpData['receiver_type'] = $event->receiverType;
         $tmpData['platform_sign'] = $event->platformSign;
-        $data = [];
+        $data                     = [];
         foreach ($receiverIds as $receiverId) {
             $tmpData['receiver_id'] = $receiverId;
-            $data[] = $tmpData;
+            $data[]                 = $tmpData;
         }
-        $this->_systemEmailReceiver::insert($data);
-        $this->_systemEmail->where('id', $event->emailId)->update(['is_send' => SystemEmail::IS_SEND_YES]);
+        $this->systemEmailReceiver::insert($data);
+        $this->systemEmail->where('id', $event->emailId)->update(['is_send' => SystemEmail::IS_SEND_YES]);
     }
 
     /**
      * @param  SystemEmailEvent $event Event.
-     * @return array
+     * @return mixed[]
      */
-    private function _getReceiverIds(SystemEmailEvent $event)
+    private function _getReceiverIds(SystemEmailEvent $event): array
     {
         $receiverIds = [];
         if ((int) $event->receiverType === (int) SystemEmailReceiver::RECEIVER_TYPE_PLAYER) {
@@ -73,9 +74,9 @@ class SystemEmailEventListener
                 'platform_sign',
                 $event->platformSign,
             )->whereIn('uid', $event->receivers)->get()->pluck('id')->toArray();
-        } else if ((int) $event->receiverType === (int) SystemEmailReceiver::RECEIVER_TYPE_MERCHANT) {
+        } elseif ((int) $event->receiverType === (int) SystemEmailReceiver::RECEIVER_TYPE_MERCHANT) {
             $receiverIds = MerchantAdminUser::whereIn('email', $event->receivers)->get()->pluck('id')->toArray();
-        } else if ((int) $event->receiverType === (int) SystemEmailReceiver::RECEIVER_TYPE_HEADQUARTERS) {
+        } elseif ((int) $event->receiverType === (int) SystemEmailReceiver::RECEIVER_TYPE_HEADQUARTERS) {
             $receiverIds = BackendAdminUser::select('id')->get()->pluck('id')->toArray();
         }
         return $receiverIds;

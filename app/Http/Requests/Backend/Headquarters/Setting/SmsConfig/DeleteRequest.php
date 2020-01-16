@@ -26,9 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:system_sms_configs', //ID
-        ];
+        return ['id' => 'required|exists:system_sms_configs'];
     }
 
     /**
@@ -37,8 +35,8 @@ class DeleteRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => '缺少短信配置ID',
-            'id.exists'   => '该短信配置不存在',
-        ];
+                'id.required' => '缺少短信配置ID',
+                'id.exists'   => '该短信配置不存在',
+               ];
     }
 }

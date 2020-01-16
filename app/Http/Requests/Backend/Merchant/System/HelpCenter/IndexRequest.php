@@ -26,9 +26,7 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'type' => 'required|integer|in:1,2,3', //1. H5  2. PC  3. APP
-        ];
+        return ['type' => 'required|integer|in:1,2,3'];
     }
 
     /**
@@ -37,9 +35,9 @@ class IndexRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'type.required' => '缺少客户端类型',
-            'type.integer'  => '客户端类型必须是数字',
-            'type.in'       => '客户端类型数据非法',
-        ];
+                'type.required' => '缺少客户端类型',
+                'type.integer'  => '客户端类型必须是数字',
+                'type.in'       => '客户端类型数据非法',
+               ];
     }
 }

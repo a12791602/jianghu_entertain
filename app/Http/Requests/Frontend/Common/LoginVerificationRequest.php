@@ -27,15 +27,16 @@ class LoginVerificationRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+        $phone = 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/';
         return [
-            'mobile' => [
-                'required',
-                'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
-                'exists:frontend_users,mobile',
-            ],
-            'password' => 'required',
-            'remember_me' => 'boolean',
-        ];
+                'mobile'      => [
+                                  'required',
+                                  $phone,
+                                  'exists:frontend_users,mobile',
+                                 ],
+                'password'    => 'required',
+                'remember_me' => 'boolean',
+               ];
     }
 
     /**
@@ -45,8 +46,6 @@ class LoginVerificationRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-            'mobile.exists' => '手机号不存在',
-        ];
+        return ['mobile.exists' => '手机号不存在'];
     }
 }

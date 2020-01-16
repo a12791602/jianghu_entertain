@@ -27,18 +27,19 @@ class ResetPasswordRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+        $phone = 'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/';
         return [
-            'mobile' => [
-                'required',
-                'regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/',
-            ],
-            'password' => [
-                'required',
-                'confirmed',
-                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
-            ],
-            'password_confirmation' => 'required',
-        ];
+                'mobile'                => [
+                                            'required',
+                                            $phone,
+                                           ],
+                'password'              => [
+                                            'required',
+                                            'confirmed',
+                                            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
+                                           ],
+                'password_confirmation' => 'required',
+               ];
     }
 
     /**
@@ -49,8 +50,8 @@ class ResetPasswordRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'mobile.exists' => '手机号不存在',
-            'password.regex' => '密码必须由8-16位大小写字母加数字组成',
-        ];
+                'mobile.exists'  => '手机号不存在',
+                'password.regex' => '密码必须由8-16位大小写字母加数字组成',
+               ];
     }
 }

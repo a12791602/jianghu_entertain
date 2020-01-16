@@ -14,12 +14,14 @@ use Illuminate\Support\Str;
 class LogoutAction
 {
     use AuthenticatesUsers;
+
     /**
      * Login user and create token
      *
-     * @param  FrontendApiMainController $contll  Controller.
-     * @param  Request                   $request Request.
+     * @param FrontendApiMainController $contll  Controller.
+     * @param Request                   $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(FrontendApiMainController $contll, Request $request): JsonResponse
     {
@@ -30,6 +32,7 @@ class LogoutAction
         $this->limiter()->clear($throtleKey);
         $contll->currentAuth->logout();
         $contll->currentAuth->invalidate();
-        return msgOut(true); //'Successfully logged out'
+        $msgOut = msgOut(true); //'Successfully logged out'
+        return $msgOut;
     }
 }

@@ -18,10 +18,7 @@ class ResponseFactory
      */
     public static function make(): JsonResponse
     {
-        return new JsonResponse(
-            [
-            'status' => false,
-            ],
-        );
+        $response = new JsonResponse(['status' => false]);
+        return $response;
     }
 }

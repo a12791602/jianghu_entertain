@@ -13,19 +13,19 @@ use Illuminate\Http\JsonResponse;
 class DelDoAction extends BaseAction
 {
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         if (!SystemPlatformBank::where('bank_id', $inputDatas['id'])->get()->isEmpty()) {
             throw new \Exception('300903');
         }
         if ($this->model->where('id', $inputDatas['id'])->delete()) {
-            return msgOut(true);
-        } else {
-            throw new \Exception('300902');
+            $msgOut = msgOut(true);
+            return $msgOut;
         }
+        throw new \Exception('300902');
     }
 }

@@ -3,24 +3,30 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class RedirectIfAuthenticated
+ * @package App\Http\Middleware
+ */
 class RedirectIfAuthenticated
 {
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \Closure                 $next
-     * @param  string|null              $guard
+     * @param Request  $request Request.
+     * @param \Closure $next    Next.
+     * @param string   $guard   Guard.
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle(Request $request, Closure $next, string $guard = '')
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            $redirect = redirect('/home');
+            return $redirect;
         }
-
-        return $next($request);
+        $result = $next($request);
+        return $result;
     }
 }

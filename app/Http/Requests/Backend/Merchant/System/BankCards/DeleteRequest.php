@@ -26,9 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-            'id' => 'required|exists:frontend_users_bank_cards', //ID
-        ];
+        return ['id' => 'required|exists:frontend_users_bank_cards'];
     }
 
     /**
@@ -37,8 +35,8 @@ class DeleteRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-            'id.required' => '缺少银行卡ID',
-            'id.exists'   => '需要删除的银行卡不存在',
-        ];
+                'id.required' => '缺少银行卡ID',
+                'id.exists'   => '需要删除的银行卡不存在',
+               ];
     }
 }
