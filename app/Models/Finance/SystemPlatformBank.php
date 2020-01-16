@@ -3,6 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class  SystemPlatformBank
@@ -28,4 +29,13 @@ class SystemPlatformBank extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @return BelongsTo
+     */
+    public function bank(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        return $object;
+    }
 }

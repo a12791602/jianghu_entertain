@@ -15,5 +15,21 @@ Route::group(
              'getSystemBanks',
             ],
         )->name($namePrefix . 'get-system-banks');
+        //列表
+        Route::get(
+            'index',
+            [
+             BankController::class,
+             'index',
+            ],
+        )->name($namePrefix . 'index');
+        //改变状态
+        Route::post(
+            'status',
+            [
+             BankController::class,
+             'status',
+            ],
+        )->name($namePrefix . 'status');
     },
 );
