@@ -101,22 +101,22 @@ class BackEndApiMainController extends Controller
      * @var array
      */
     protected $headquarters = [
-        'portPrefix' => 'headquarters-api',
-        'current_guard' => 'backend',
-        'route' => SystemRoutesBackend::class,
-        'menu' => BackendSystemMenu::class,
-    ];
+                               'portPrefix'    => 'headquarters-api',
+                               'current_guard' => 'backend',
+                               'route'         => SystemRoutesBackend::class,
+                               'menu'          => BackendSystemMenu::class,
+                              ];
 
     /**
      * @var array
      */
     protected $merchant = [
-        'portPrefix' => 'merchant-api',
-        'current_guard' => 'merchant',
-        'route' => SystemRoutesMerchant::class,
-        'menu' => MerchantSystemMenu::class,
-        'platform' => SystemPlatform::class,
-    ];
+                           'portPrefix'    => 'merchant-api',
+                           'current_guard' => 'merchant',
+                           'route'         => SystemRoutesMerchant::class,
+                           'menu'          => MerchantSystemMenu::class,
+                           'platform'      => SystemPlatform::class,
+                          ];
 
     /**
      * @var array
@@ -298,10 +298,10 @@ class BackEndApiMainController extends Controller
     {
         $this->log_uuid = Str::orderedUuid()->getNodeHex();
         $datas          = [
-            'input' => $this->inputs,
-            'route' => $this->currentOptRoute,
-            'log_uuid' => $this->log_uuid,
-        ];
+                           'input'    => $this->inputs,
+                           'route'    => $this->currentOptRoute,
+                           'log_uuid' => $this->log_uuid,
+                          ];
         $logData        = json_encode($datas, JSON_UNESCAPED_UNICODE);
         Log::channel('apibyqueue')->info($logData);
     }

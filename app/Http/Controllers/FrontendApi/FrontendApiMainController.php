@@ -73,10 +73,10 @@ class FrontendApiMainController extends Controller
      * @var array
      */
     protected $routeModel = [
-        'app-api' => SystemRoutesMobile::class,
-        'h5-api'  => SystemRoutesH5::class,
-        'pc-api'  => SystemRoutesWeb::class,
-    ];
+                             'app-api' => SystemRoutesMobile::class,
+                             'h5-api'  => SystemRoutesH5::class,
+                             'pc-api'  => SystemRoutesWeb::class,
+                            ];
 
     /**
      * Model
@@ -91,10 +91,10 @@ class FrontendApiMainController extends Controller
      * @var array
      */
     protected $routeGuard = [
-        'app-api' => 'frontend-mobile',
-        'pc-api'  => 'frontend-pc',
-        'h5-api'  => 'frontend-h5',
-    ];
+                             'app-api' => 'frontend-mobile',
+                             'pc-api'  => 'frontend-pc',
+                             'h5-api'  => 'frontend-h5',
+                            ];
 
     /**
      * AdminMainController constructor.
@@ -164,10 +164,10 @@ class FrontendApiMainController extends Controller
         $this->frontendUser = $this->currentAuth->user();
         $this->log_uuid     = Str::orderedUuid()->getNodeHex();
         $datas              = [
-            'input'    => $this->inputs,
-            'route'    => $this->currentOptRoute,
-            'log_uuid' => $this->log_uuid,
-        ];
+                               'input'    => $this->inputs,
+                               'route'    => $this->currentOptRoute,
+                               'log_uuid' => $this->log_uuid,
+                              ];
         $logData            = json_encode($datas, JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE, 512);
         Log::channel('frontend-by-queue')->info($logData);
     }
