@@ -28,7 +28,11 @@ class TestController extends FrontendApiMainController
         if (!$account) {
             return;
         }
-        $data   = $account->operateAccount($inputDatas, $inputDatas['params'], $inputDatas['type']);
+        $inputDatas['params'] = json_decode($inputDatas['params'], true);
+        if (!$inputDatas['params']) {
+            $inputDatas['params'] = [];
+        }
+        $data   = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
         $msgOut = msgOut(true, $data);
         return $msgOut;
     }
