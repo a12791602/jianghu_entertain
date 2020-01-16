@@ -18,7 +18,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
         FrontendUsersSpecificInfo::insert(
             [
              [
-              'nickname'      => 'harriszhongdai',
+              'nickname'      => '寡妇制造者',
               'email'         => '1823444@qq.com',
               'zip_code'      => 233333,
               'address'       => '朝歌',
@@ -27,13 +27,22 @@ class FrontendUserSpecificInfoSeeder extends Seeder
               'user_id'       => 1,
              ],
              [
-              'nickname'      => 'test',
+              'nickname'      => '亚索',
               'email'         => 'test@qq.com',
               'zip_code'      => 233333,
-              'address'       => 'test city',
+              'address'       => 'Tokyo',
               'register_type' => 0,
               'total_members' => 15,
               'user_id'       => 2,
+             ],
+             [
+              'nickname'      => '无极剑圣',
+              'email'         => 'test@qq.com',
+              'zip_code'      => 233333,
+              'address'       => 'Tokyo',
+              'register_type' => 0,
+              'total_members' => 15,
+              'user_id'       => 3,
              ],
             ],
         );

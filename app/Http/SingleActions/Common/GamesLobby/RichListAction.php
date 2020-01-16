@@ -20,8 +20,8 @@ class RichListAction
      */
     public function execute(): JsonResponse
     {
-        $outputDatas = FrontendUsersAccount::with(['frontendUser:account_id,uid,username,mobile'])
-            ->orderBy('balance', 'desc')->get();
+        $outputDatas = FrontendUsersAccount::with(['frontendUser.specificInfo'])
+            ->orderBy('balance', 'desc')->limit(100)->get();
         $result      = msgOut(RichListResource::collection($outputDatas));
         return $result;
     }

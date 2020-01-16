@@ -18,9 +18,6 @@ class FrontendUserObserver
      */
     public function created(FrontendUser $frontendUser): void
     {
-        $account = $frontendUser->account()->create([]);
-
-        $frontendUser->account_id = $account->id;
-        $frontendUser->update();
+        $frontendUser->account()->create(['status' => 1]);
     }
 }

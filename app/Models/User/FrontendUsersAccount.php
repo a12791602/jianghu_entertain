@@ -31,7 +31,7 @@ class FrontendUsersAccount extends BaseAuthModel
 
     public const MODE_CHANGE_AFTER = 2;
     public const MODE_CHANGE_NOW   = 1;
-    
+
     /**
      * 用户信息
      *
@@ -39,7 +39,7 @@ class FrontendUsersAccount extends BaseAuthModel
      */
     public function frontendUser(): BelongsTo
     {
-        $result = $this->belongsTo(FrontendUser::class, 'user_id', 'account_id');
+        $result = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
         return $result;
     }
 }

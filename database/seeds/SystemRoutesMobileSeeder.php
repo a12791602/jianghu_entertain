@@ -58,7 +58,7 @@ class SystemRoutesMobileSeeder extends Seeder
               'is_open'    => 1,
              ],
              [
-              'route_name' => 'app-api.register/verification-code',
+              'route_name' => 'app-api.register.verification-code',
               'method'     => 'code',
               'is_open'    => 1,
              ],

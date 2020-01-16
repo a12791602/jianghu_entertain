@@ -58,7 +58,7 @@ class SystemRoutesH5Seeder extends Seeder
               'is_open'    => 1,
              ],
              [
-              'route_name' => 'h5-api.register/verification-code',
+              'route_name' => 'h5-api.register.verification-code',
               'method'     => 'code',
               'is_open'    => 1,
              ],

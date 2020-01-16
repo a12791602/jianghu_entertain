@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\FrontendUser;
 
-use App\Http\Resources\Frontend\GamesLobby\HomePersonalInformationResource;
+use App\Http\Resources\Frontend\GamesLobby\PersonalInformationResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -21,7 +21,7 @@ class InformationAction
     public function information(Request $request): JsonResponse
     {
         $user   = $request->user();
-        $result = msgOut(HomePersonalInformationResource::make($user));
+        $result = msgOut(PersonalInformationResource::make($user));
         return $result;
     }
 }

@@ -19,7 +19,7 @@ class RichListResource extends JsonResource
     public function toArray($request): array
     {
         $result = [
-                   'mobile'  => optional($this->frontendUser)->mobile_hidden,
+                   'name'    => optional($this->frontendUser->specificInfo)->nickname,
                    'balance' => $this->balance,
                   ];
         return $result;

@@ -22,14 +22,12 @@ class CreateFrontendUsersTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('username', 64)->nullable()->default(null)->comment('用户名');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
                 $table->string('uid', 10)->nullable()->default(null)->comment('用户唯一标识UID');
                 $table->integer('top_id')->nullable()->default('0')->comment('最上级id');
                 $table->integer('parent_id')->nullable()->default('0')->comment('上级id');
                 $table->integer('platform_id')->nullable()->default(null)->comment('平台id');
                 $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
-                $table->integer('account_id')->nullable()->default(null)->comment('account表id');
                 $table->tinyInteger('type')->default('3')->comment('用户类型:1会员 2代理');
                 $table->integer('grade_id')->nullable()->default('0')->comment('vip等级id');
                 $table->tinyInteger('is_tester')->nullable()->default('0')->comment('是否测试用户 0否 1是');
