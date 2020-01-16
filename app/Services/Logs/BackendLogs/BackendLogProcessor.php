@@ -36,20 +36,20 @@ class BackendLogProcessor
         $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
         $adminUser       = auth()->user() ? auth()->user()->id : null;
         $record['extra'] = [
-            'admin_id' => $adminUser,
-            'admin_name' => $adminUser !== null ? auth()->user()->name : null,
-            'origin' => request()->headers->get('origin'),
-            'ip' => request()->ip(),
-            'ips' => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
-            'user_agent' => request()->server('HTTP_USER_AGENT'),
-            'lang' => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
-            'device' => $agent->device(),
-            'os' => $clientOs,
-            'browser' => $browser,
-            'bs_version' => $bsVersion,
-            'device_type' => $type,
-            'log_uuid' => $messageArr['log_uuid'],
-        ];
+                            'admin_id'    => $adminUser,
+                            'admin_name'  => $adminUser !== null ? auth()->user()->name : null,
+                            'origin'      => request()->headers->get('origin'),
+                            'ip'          => request()->ip(),
+                            'ips'         => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
+                            'user_agent'  => request()->server('HTTP_USER_AGENT'),
+                            'lang'        => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
+                            'device'      => $agent->device(),
+                            'os'          => $clientOs,
+                            'browser'     => $browser,
+                            'bs_version'  => $bsVersion,
+                            'device_type' => $type,
+                            'log_uuid'    => $messageArr['log_uuid'],
+                           ];
         if ($osVersion) {
             $record['extra']['os_version'] = $osVersion;
         }

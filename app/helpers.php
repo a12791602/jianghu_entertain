@@ -59,11 +59,11 @@ function msgOut(
         $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
     }
     $datas  = [
-        'status' => true,
-        'code' => $code,
-        'data' => $data,
-        'message' => $message,
-    ];
+               'status'  => true,
+               'code'    => $code,
+               'data'    => $data,
+               'message' => $message,
+              ];
     $return = Response::json($datas);
     return $return;
 }
