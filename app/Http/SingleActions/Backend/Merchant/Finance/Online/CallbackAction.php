@@ -91,6 +91,11 @@ class CallbackAction
                 $this->orderInfo->platform_no = $result['merchantOrderNo'];
                 $saveRes                      = $this->orderInfo->save();
                 if ($saveRes) {
+                    $this->orderInfo->user->account->operateAccount(
+                        ['amount' => $this->orderInfo->arrive_money],
+                        [],
+                        'recharge',
+                    );
                     DB::commit();
                 } else {
                     DB::rollBack();

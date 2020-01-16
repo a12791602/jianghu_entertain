@@ -28,7 +28,7 @@ class RegisterAction
     public function execute(FrontendApiMainController $controller, RegisterRequest $request): JsonResponse
     {
         $platform_sign    = $controller->currentPlatformEloq->sign;
-        $redis            = app('user_unique_id');
+        $redis            = app('redis_user_unique_id');
         $register_user_id = $redis->spop($platform_sign . '_' . config('web.main.frontend_user_unique_id'))[0];
         $verification_key = $request['verification_key'];
         $verifyData       = Cache::get($verification_key);
@@ -43,10 +43,10 @@ class RegisterAction
             $register_user_id,
             $verifyData['mobile'],
             bcrypt($request['password']),
-            $request['invite_code'],
+            $request->post('invite_code', '0'),
             $request->ip(),
             $controller->currentPlatformEloq->id,
-            $controller->currentPlatformEloq->sign,
+            $platform_sign,
         );
         $data = $this->token($controller, $user, $request);
         event(new FrontendLoginEvent($user));
