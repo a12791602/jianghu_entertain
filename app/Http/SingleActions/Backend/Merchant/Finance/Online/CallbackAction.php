@@ -93,7 +93,6 @@ class CallbackAction
                 if ($saveRes) {
                     $this->orderInfo->user->account->operateAccount(
                         ['amount' => $this->orderInfo->arrive_money],
-                        [],
                         'recharge',
                     );
                     DB::commit();
