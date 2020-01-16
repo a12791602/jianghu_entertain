@@ -36,23 +36,18 @@ class AccountChange
     /**
      * @param array  $inputDatas 接收的数据.
      * @param string $typeSign   帐变类型.
-     * @param string $params     参数.
+     * @param array  $params     参数.
      * @throws \Exception Exception.
      * @return mixed
      */
-    public function doChange(array $inputDatas, string $typeSign, string $params)
+    public function doChange(array $inputDatas, string $typeSign, array $params)
     {
         $user       = $this->account->frontendUser;
         $typeConfig = FrontendUsersAccountsType::getTypeBySign($typeSign);
         //　1. 获取帐变配置
         $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);
         // 2. 参数检测
-        $paramArr = json_decode($params, true);
-        if (!is_array($paramArr)) {
-            DB::rollback();
-            throw new \Exception('100201');
-        }
-        $validator = Validator::make($paramArr, $paramsValidator);
+        $validator = Validator::make($params, $paramsValidator);
         if ($validator->fails()) {
             DB::rollback();
             throw new \Exception('100201');
@@ -177,7 +172,7 @@ class AccountChange
     /**
      *
      * @param  array        $inputDatas    接收的数据.
-     * @param  string       $params        参数.
+     * @param  array        $params        参数.
      * @param  array        $typeConfig    帐变类型.
      * @param  FrontendUser $user          用户Eloq.
      * @param  float        $beforeBalance 帐变前金额.
@@ -187,7 +182,7 @@ class AccountChange
      */
     private function _saveData(
         array $inputDatas,
-        string $params,
+        array $params,
         array $typeConfig,
         FrontendUser $user,
         float $beforeBalance,
@@ -212,7 +207,7 @@ class AccountChange
             'balance'               => $this->account->balance,
             'frozen_balance'        => $this->account->frozen,
             'before_frozen_balance' => $beforeFrozen,
-            'params'                => $params,
+            'params'                => json_encode($params),
             'amount'                => $amount,
         ];
 
