@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\SmsConfig;
 
+use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Systems\SystemSmsConfig;
 use Illuminate\Http\JsonResponse;
 
@@ -25,12 +26,15 @@ class DoAddAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
+     * @param BackEndApiMainController $contll     Controller.
+     * @param array                    $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
+        $inputDatas['author_id']      = $contll->currentAdmin->id;
+        $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('302400');

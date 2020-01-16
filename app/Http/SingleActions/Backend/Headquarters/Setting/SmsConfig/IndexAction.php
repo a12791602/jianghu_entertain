@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\SmsConfig;
 
-use App\Http\Resources\Backend\Headquarters\Setting\SmsConfig\IndexResource;
 use App\ModelFilters\System\SystemSmsConfigFilter;
 use App\Models\Systems\SystemSmsConfig;
 use Illuminate\Http\JsonResponse;
@@ -35,10 +34,26 @@ class IndexAction
     {
         $data = $this->model
             ->filter($inputDatas, SystemSmsConfigFilter::class)
-            ->with('admin:id,name')
-            ->get();
+            ->select(
+                [
+                 'id',
+                 'name',
+                 'sign',
+                 'merchant_code',
+                 'merchant_secret',
+                 'public_key',
+                 'authorization_code',
+                 'sms_num',
+                 'url',
+                 'status',
+                 'last_editor_id',
+                 'updated_at',
+                 'created_at',
+                ],
+            )->with('admin:id,name')
+            ->paginate($this->model::getPageSize());
 
-        $msgOut = msgOut(true, IndexResource::collection($data));
+        $msgOut = msgOut(true, $data);
         return $msgOut;
     }
 }
