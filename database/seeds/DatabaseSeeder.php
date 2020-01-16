@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
              SystemFinanceTypeSeeder::class,
              SystemFinanceVendorSeeder::class,
              UsersTagSeeder::class,
+             SystemPlatformSslSeeder::class,
             ],
         );
     }

@@ -22,9 +22,9 @@ class BackendLoginLogFilter extends ModelFilter
      * 邮箱查询
      *
      * @param  string $email 邮箱.
-     * @return $this
+     * @return BackendLoginLogFilter
      */
-    public function email(string $email)
+    public function email(string $email): BackendLoginLogFilter
     {
         $eloq = $this->where('email', $email);
         return $eloq;
@@ -34,9 +34,9 @@ class BackendLoginLogFilter extends ModelFilter
      * 用户名查询
      *
      * @param  string $name 用户名.
-     * @return $this
+     * @return BackendLoginLogFilter
      */
-    public function name(string $name)
+    public function name(string $name): BackendLoginLogFilter
     {
         $eloq = $this->whereLike('name', $name);
         return $eloq;
@@ -46,9 +46,9 @@ class BackendLoginLogFilter extends ModelFilter
      * IP查询
      *
      * @param  string $loginIp IP.
-     * @return $this
+     * @return BackendLoginLogFilter
      */
-    public function loginIp(string $loginIp)
+    public function loginIp(string $loginIp): BackendLoginLogFilter
     {
         $eloq = $this->where('ip', $loginIp);
         return $eloq;
@@ -58,9 +58,9 @@ class BackendLoginLogFilter extends ModelFilter
      * 登录时间查询
      *
      * @param  string $createdStr 登录时间.
-     * @return $this
+     * @return BackendLoginLogFilter
      */
-    public function createAt(string $createdStr)
+    public function createAt(string $createdStr): BackendLoginLogFilter
     {
         $createdArr = json_decode($createdStr, true);
         if (!is_array($createdArr) || count($createdArr) !== 2) {

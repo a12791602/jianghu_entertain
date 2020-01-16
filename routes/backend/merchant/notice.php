@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackendApi\Merchant\Notice\CarouselNoticeController;
 use App\Http\Controllers\BackendApi\Merchant\Notice\LoginNoticeController;
 use App\Http\Controllers\BackendApi\Merchant\Notice\MarqueeNoticeController;
 use App\Http\Controllers\BackendApi\Merchant\Notice\SystemNoticeController;
@@ -139,6 +140,53 @@ Route::group(
             'status',
             [
              LoginNoticeController::class,
+             'status',
+            ],
+        )->name($namePrefix . 'status');
+    },
+);
+
+Route::group(
+    ['prefix' => 'carousel-notice'],
+    static function (): void {
+        $namePrefix = 'merchant-api.carousel-notice.';
+        //列表
+        Route::get(
+            'index',
+            [
+             CarouselNoticeController::class,
+             'index',
+            ],
+        )->name($namePrefix . 'index');
+        //添加
+        Route::post(
+            'add-do',
+            [
+             CarouselNoticeController::class,
+             'addDo',
+            ],
+        )->name($namePrefix . 'add-do');
+        //编辑
+        Route::post(
+            'edit',
+            [
+             CarouselNoticeController::class,
+             'edit',
+            ],
+        )->name($namePrefix . 'edit');
+        //删除
+        Route::post(
+            'del-do',
+            [
+             CarouselNoticeController::class,
+             'delDo',
+            ],
+        )->name($namePrefix . 'del-do');
+        //改变状态
+        Route::post(
+            'status',
+            [
+             CarouselNoticeController::class,
              'status',
             ],
         )->name($namePrefix . 'status');

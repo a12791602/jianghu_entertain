@@ -22,9 +22,9 @@ class SystemCostomerServiceFilter extends ModelFilter
      * ID
      *
      * @param  integer $dataId ID.
-     * @return $this
+     * @return SystemCostomerServiceFilter
      */
-    public function dataId(int $dataId)
+    public function dataId(int $dataId): SystemCostomerServiceFilter
     {
         $eloq = $this->where('id', $dataId);
         return $eloq;
@@ -34,9 +34,9 @@ class SystemCostomerServiceFilter extends ModelFilter
      * 客服类型
      *
      * @param  integer $type 客服类型.
-     * @return $this
+     * @return SystemCostomerServiceFilter
      */
-    public function type(int $type)
+    public function type(int $type): SystemCostomerServiceFilter
     {
         $eloq = $this->where('type', $type);
         return $eloq;
@@ -46,9 +46,9 @@ class SystemCostomerServiceFilter extends ModelFilter
      * 平台标识
      *
      * @param  string $sign 平台标识.
-     * @return $this
+     * @return SystemCostomerServiceFilter
      */
-    public function sign(string $sign)
+    public function sign(string $sign): SystemCostomerServiceFilter
     {
         $eloq = $this->where('platform_sign', $sign);
         return $eloq;

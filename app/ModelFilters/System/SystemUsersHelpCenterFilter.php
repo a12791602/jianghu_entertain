@@ -22,9 +22,9 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      * ID
      *
      * @param  integer $dataId ID.
-     * @return $this
+     * @return SystemUsersHelpCenterFilter
      */
-    public function dataId(int $dataId)
+    public function dataId(int $dataId): SystemUsersHelpCenterFilter
     {
         $eloq = $this->where('id', $dataId);
         return $eloq;
@@ -34,9 +34,9 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      * 客户端类型
      *
      * @param  integer $type 客户端类型.
-     * @return $this
+     * @return SystemUsersHelpCenterFilter
      */
-    public function type(int $type)
+    public function type(int $type): SystemUsersHelpCenterFilter
     {
         $eloq = $this->where('type', $type);
         return $eloq;
@@ -46,9 +46,9 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      * 平台标识
      *
      * @param  string $sign 平台标识.
-     * @return $this
+     * @return SystemUsersHelpCenterFilter
      */
-    public function sign(string $sign)
+    public function sign(string $sign): SystemUsersHelpCenterFilter
     {
         $eloq = $this->where('platform_sign', $sign);
         return $eloq;

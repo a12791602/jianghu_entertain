@@ -27,8 +27,8 @@ class CreateNoticeMarqueesTable extends Migration
                 $table->text('content')->nullable()->default(null)->comment('公告内容');
                 $table->string('device')->nullable()->default(null)->comment('设备');
                 $table->tinyInteger('status')->default(0)->comment('状态 0 禁用 1 启用');
-                $table->date('start_time')->nullable()->default(null)->comment('开始时间');
-                $table->date('end_time')->nullable()->default(null)->comment('结束时间');
+                $table->timestamp('start_time')->useCurrent()->comment('开始时间');
+                $table->timestamp('end_time')->useCurrent()->comment('结束时间');
                 $table->integer('author_id')->default(0)->comment('创建人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->timestamps();

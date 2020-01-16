@@ -22,9 +22,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 用户UID查询
      *
      * @param  string $uniqueId 用户UID.
-     * @return $this
+     * @return FrontendUsersBlackListFilter
      */
-    public function uniqueId(string $uniqueId)
+    public function uniqueId(string $uniqueId): FrontendUsersBlackListFilter
     {
         $eloq = $this->where('uid', $uniqueId);
         return $eloq;
@@ -34,9 +34,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 手机号码查询
      *
      * @param  string $mobile 手机号码.
-     * @return $this
+     * @return FrontendUsersBlackListFilter
      */
-    public function mobile(string $mobile)
+    public function mobile(string $mobile): FrontendUsersBlackListFilter
     {
         $eloq = $this->where('mobile', $mobile);
         return $eloq;
@@ -46,9 +46,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 拉黑时间查询
      *
      * @param  string $createAt 拉黑时间.
-     * @return $this
+     * @return FrontendUsersBlackListFilter
      */
-    public function createAt(string $createAt)
+    public function createAt(string $createAt): FrontendUsersBlackListFilter
     {
         $createTime = json_decode($createAt, true);
         $eloq       = $this;
@@ -64,9 +64,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 状态查询
      *
      * @param integer $status 状态.
-     * @return $this
+     * @return FrontendUsersBlackListFilter
      */
-    public function status(int $status)
+    public function status(int $status): FrontendUsersBlackListFilter
     {
         $eloq = $this->where('status', $status);
         return $eloq;
@@ -76,9 +76,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 平台标识查询
      *
      * @param  string $platformSign 平台标识.
-     * @return $this
+     * @return FrontendUsersBlackListFilter
      */
-    public function platformSign(string $platformSign)
+    public function platformSign(string $platformSign): FrontendUsersBlackListFilter
     {
         $eloq = $this->where('platform_sign', $platformSign);
         return $eloq;

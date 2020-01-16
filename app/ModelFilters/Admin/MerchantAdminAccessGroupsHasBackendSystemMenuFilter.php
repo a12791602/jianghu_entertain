@@ -21,9 +21,9 @@ class MerchantAdminAccessGroupsHasBackendSystemMenuFilter extends ModelFilter
     /**
      * @param integer $groupId 管理员组ID.
      *
-     * @return $this
+     * @return MerchantAdminAccessGroupsHasBackendSystemMenuFilter
      */
-    public function groupId(int $groupId)
+    public function groupId(int $groupId): MerchantAdminAccessGroupsHasBackendSystemMenuFilter
     {
         $eloq = $this->where('group_id', $groupId);
         return $eloq;
@@ -33,9 +33,9 @@ class MerchantAdminAccessGroupsHasBackendSystemMenuFilter extends ModelFilter
     /**
      * 菜单搜索In
      * @param array $menuIds 菜单的ID.
-     * @return $this
+     * @return MerchantAdminAccessGroupsHasBackendSystemMenuFilter
      */
-    public function menuIn(array $menuIds)
+    public function menuIn(array $menuIds): MerchantAdminAccessGroupsHasBackendSystemMenuFilter
     {
         $eloq = $this->whereIn('menu_id', $menuIds);
         return $eloq;

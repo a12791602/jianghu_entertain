@@ -22,9 +22,9 @@ class UsersCommissionConfigFilter extends ModelFilter
      * 平台标识查询
      *
      * @param  string $sign 平台标识.
-     * @return $this
+     * @return UsersCommissionConfigFilter
      */
-    public function platformSign(string $sign)
+    public function platformSign(string $sign): UsersCommissionConfigFilter
     {
         $eloq = $this->where('platform_sign', $sign);
         return $eloq;
@@ -34,9 +34,9 @@ class UsersCommissionConfigFilter extends ModelFilter
      * 游戏类型ID查询
      *
      * @param  string $typeId 游戏类型ID.
-     * @return $this
+     * @return UsersCommissionConfigFilter
      */
-    public function gameTypeId(string $typeId)
+    public function gameTypeId(string $typeId): UsersCommissionConfigFilter
     {
         $eloq = $this->where('game_type_id', $typeId);
         return $eloq;
@@ -46,9 +46,9 @@ class UsersCommissionConfigFilter extends ModelFilter
      * 厂商ID查询
      *
      * @param  string $vendorId 厂商ID.
-     * @return $this
+     * @return UsersCommissionConfigFilter
      */
-    public function gameVendorId(string $vendorId)
+    public function gameVendorId(string $vendorId): UsersCommissionConfigFilter
     {
         $eloq = $this->where('game_vendor_id', $vendorId);
         return $eloq;
@@ -58,9 +58,9 @@ class UsersCommissionConfigFilter extends ModelFilter
      * 排除ID
      *
      * @param  integer $configId ID.
-     * @return $this
+     * @return UsersCommissionConfigFilter
      */
-    public function notInId(int $configId)
+    public function notInId(int $configId): UsersCommissionConfigFilter
     {
         $eloq = $this->where('id', '!=', $configId);
         return $eloq;

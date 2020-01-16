@@ -242,6 +242,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.platform.maintain',
+              'method'        => '',
+              'menu_group_id' => 5,
+              'title'         => '厅主列表-维护',
+              'is_open'       => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.headquarters-route.index',
               'method'        => '',
               'menu_group_id' => 5,

@@ -2,7 +2,6 @@
 
 namespace App\ModelFilters\Admin;
 
-use App\Models\Admin\BackendAdminAccessGroup;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -22,9 +21,9 @@ class BackendAdminAccessGroupFilter extends ModelFilter
     /**
      * ID查找
      * @param integer $groupId 管理组ID.
-     * @return BackendAdminAccessGroup
+     * @return BackendAdminAccessGroupFilter
      */
-    public function id(int $groupId): BackendAdminAccessGroup
+    public function id(int $groupId): BackendAdminAccessGroupFilter
     {
         $eloq = $this->where('id', $groupId);
         return $eloq;
@@ -33,9 +32,9 @@ class BackendAdminAccessGroupFilter extends ModelFilter
     /**
      * 名称查找
      * @param string $groupName 管理组名称.
-     * @return BackendAdminAccessGroup
+     * @return BackendAdminAccessGroupFilter
      */
-    public function groupName(string $groupName): BackendAdminAccessGroup
+    public function groupName(string $groupName): BackendAdminAccessGroupFilter
     {
         $eloq = $this->where('group_name', $groupName);
         return $eloq;

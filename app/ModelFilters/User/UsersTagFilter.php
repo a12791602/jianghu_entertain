@@ -21,9 +21,9 @@ class UsersTagFilter extends ModelFilter
     /**
      * 平台标识查询
      * @param  string $sign 平台标识.
-     * @return $this
+     * @return UsersTagFilter
      */
-    public function platformSign(string $sign)
+    public function platformSign(string $sign): UsersTagFilter
     {
         $eloq = $this->where('platform_sign', $sign);
         return $eloq;

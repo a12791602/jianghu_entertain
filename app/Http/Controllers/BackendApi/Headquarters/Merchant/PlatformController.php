@@ -129,7 +129,7 @@ class PlatformController extends BackEndApiMainController
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;
     }
 

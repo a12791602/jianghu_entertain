@@ -2,7 +2,6 @@
 
 namespace App\ModelFilters\Admin;
 
-use App\Models\Admin\MerchantAdminAccessGroup;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -22,9 +21,9 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
     /**
      * @param string $platformSign PlatformSign.
      *
-     * @return MerchantAdminAccessGroup
+     * @return MerchantAdminAccessGroupFilter
      */
-    public function platform(string $platformSign): MerchantAdminAccessGroup
+    public function platform(string $platformSign): MerchantAdminAccessGroupFilter
     {
         $eloq = $this->where('platform_sign', $platformSign);
         return $eloq;
@@ -33,9 +32,9 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
     /**
      * @param string $groupName GroupName.
      *
-     * @return MerchantAdminAccessGroup
+     * @return MerchantAdminAccessGroupFilter
      */
-    public function groupName(string $groupName): MerchantAdminAccessGroup
+    public function groupName(string $groupName): MerchantAdminAccessGroupFilter
     {
         $eloq = $this->where('group_name', $groupName);
         return $eloq;
@@ -44,9 +43,9 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
     /**
      * @param integer $super 是否超管.
      *
-     * @return MerchantAdminAccessGroup
+     * @return MerchantAdminAccessGroupFilter
      */
-    public function super(int $super): MerchantAdminAccessGroup
+    public function super(int $super): MerchantAdminAccessGroupFilter
     {
         $eloq = $this->where('is_super', $super);
         return $eloq;
