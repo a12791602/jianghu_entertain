@@ -22,7 +22,7 @@ class SystemConfigurationSeeder extends Seeder
               'pid'                  => 0,
               'sign'                 => 'is_crypt_data',
               'name'                 => '传输数据是否加密',
-              'value'                => 0,
+              'value'                => 1,
               'add_admin_id'         => 2,
               'last_update_admin_id' => 2,
               'status'               => 1,

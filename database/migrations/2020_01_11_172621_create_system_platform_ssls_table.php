@@ -22,12 +22,12 @@ class CreateSystemPlatformSslsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
-                $table->text('private_key_first')->nullable()->default(null)->comment('私钥一');
-                $table->text('public_key_first')->nullable()->default(null)->comment('公钥一');
-                $table->string('interval_str_first', 32)->nullable()->default(null)->comment('间隔字符串一');
-                $table->text('private_key_second')->nullable()->default(null)->comment('私钥二');
-                $table->text('public_key_second')->nullable()->default(null)->comment('公钥二');
-                $table->string('interval_str_second', 32)->nullable()->default(null)->comment('间隔字符串二');
+                $table->text('private_key_first')->nullable()->default(null)->comment('私钥一（后端解密使用）');
+                $table->text('public_key_first')->nullable()->default(null)->comment('公钥一（前端加密使用）');
+                $table->string('interval_str_first', 32)->nullable()->default(null)->comment('间隔字符串一（后端解密&前端加密）');
+                $table->text('private_key_second')->nullable()->default(null)->comment('私钥二（前端解密使用）');
+                $table->text('public_key_second')->nullable()->default(null)->comment('公钥二（后端加密使用）');
+                $table->string('interval_str_second', 32)->nullable()->default(null)->comment('间隔字符串二（前端解密&后端加密）');
                 $table->timestamps();
             },
         );

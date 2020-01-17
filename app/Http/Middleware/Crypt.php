@@ -2,6 +2,8 @@
 
 namespace App\Http\Middleware;
 
+use App\Lib\Crypt\AesCrypt;
+use App\Lib\Crypt\RsaCrypt;
 use App\Models\Systems\SystemDomain;
 use Closure;
 use Illuminate\Http\Request;
@@ -43,16 +45,17 @@ class Crypt
             if (isset($request['data'])) {
                 throw new \Exception('100607');
             }
+            
             return $next($request);
         }
         //空参放行
         if (count($request->request) === 0) {
             return $next($request);
         }
-        
+
         //数据解密处理
         $this->_dataHandle($request);
-        
+
         return $next($request);
     }
 
@@ -70,8 +73,7 @@ class Crypt
         if (!is_array($strArr) || !isset($strArr[2])) {
             throw new \Exception('100611');
         }
-        $domain = $strArr[2]; // "www.learnku.com"
-        //来源域名数据Eloq
+        $domain     = $strArr[2]; // "www.learnku.com"
         $domainEloq = SystemDomain::where('domain', $domain)->first();
         if (!$domainEloq) {
             throw new \Exception('100609');
@@ -108,60 +110,20 @@ class Crypt
             throw new \Exception('100601');
         }
         //开始数据解密   0加密的数据  1加密数据的值  2加密数据的键
-        $data      = $requestCryptData[0];
-        $iValue    = self::_rsaDeCrypt($requestCryptData[1]);
-        $iKey      = self::_rsaDeCrypt($requestCryptData[2]);
-        $deAesData = self::_deAesCrypt($data, $iKey, $iValue);
+        $data     = $requestCryptData[0];
+        $aesCrypt = new RsaCrypt();
+        $aesCrypt->setPrivateKey($this->currentSSL->private_key_first);
+        $iValue    = $aesCrypt->rsaDeCrypt($requestCryptData[1]);
+        $iKey      = $aesCrypt->rsaDeCrypt($requestCryptData[2]);
+        $aesCrypt  = new AesCrypt($iKey, $iValue);
+        $deAesData = $aesCrypt->aesDecrypt($data);
         $deData    = json_decode($deAesData, true);
         if (!$deData) {
             throw new \Exception('100604');
         }
         //给request重新赋值并删除加密的data数据
-        // $request->merge($deData);
         $request->replace($deData);
         $request->attributes->add(['crypt_data' => $inData]);
         unset($request['data']);
-    }
-
-    /**
-     * RSA解密 自带私钥
-     * @param  mixed $rsaData 数据.
-     * @throws \Exception Exception.
-     * @return string
-     */
-    private function _rsaDeCrypt($rsaData): string
-    {
-        $privateKey = $this->currentSSL->private_key_first;
-        $sslSign    = openssl_pkey_get_private($privateKey);
-        if (!$sslSign) {
-            throw new \Exception('100608');
-        }
-        $baseRsa = base64_decode($rsaData);
-        if (!$baseRsa) {
-            throw new \Exception('100603');
-        }
-        $flag = openssl_private_decrypt($baseRsa, $deRsaCryptData, $privateKey);
-        if ($flag === false) {
-            throw new \Exception('100603');
-        }
-        return $deRsaCryptData;
-    }
-
-    /**
-     * AES解密 加密方式 AES-128-CBC
-     * @param  mixed $enAes   数据.
-     * @param  mixed $dataKey 键.
-     * @param  mixed $iValue  值.
-     * @throws \Exception Exception.
-     * @return string
-     */
-    private function _deAesCrypt($enAes, $dataKey, $iValue): string
-    {
-        $baseEnAes = base64_decode($enAes);
-        $deAesData = openssl_decrypt((string) $baseEnAes, 'AES-128-CBC', $dataKey, OPENSSL_RAW_DATA, $iValue);
-        if (!$deAesData) {
-            throw new \Exception('100605');
-        }
-        return $deAesData;
     }
 }

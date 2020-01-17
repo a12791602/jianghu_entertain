@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
              UsersTagSeeder::class,
              SystemPlatformSslSeeder::class,
              SystemConfigurationSeeder::class,
+             SystemUserPublicAvatarSeeder::class,
             ],
         );
     }

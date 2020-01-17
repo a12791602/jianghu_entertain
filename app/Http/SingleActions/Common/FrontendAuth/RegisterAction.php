@@ -41,7 +41,6 @@ class RegisterAction
         $user = $this->user(
             $verifyData['mobile'],
             $register_user_id,
-            $verifyData['mobile'],
             bcrypt($request['password']),
             $request->post('invite_code', '0'),
             $request->ip(),
@@ -95,7 +94,6 @@ class RegisterAction
      * Frontend User Model
      * @param string  $mobile      Mobile.
      * @param string  $user_id     User_id.
-     * @param string  $username    Username.
      * @param string  $password    Password.
      * @param string  $invite_code Invite_code.
      * @param string  $register_ip Register_ip.
@@ -106,7 +104,6 @@ class RegisterAction
     public function user(
         string $mobile,
         string $user_id,
-        string $username,
         string $password,
         string $invite_code,
         string $register_ip,
@@ -116,7 +113,6 @@ class RegisterAction
         $item = [
                  'mobile'        => $mobile,
                  'uid'           => $user_id,
-                 'username'      => $username,
                  'password'      => $password,
                  'invite_code'   => $invite_code,
                  'register_ip'   => $register_ip,

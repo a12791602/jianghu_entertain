@@ -19,6 +19,7 @@ return [
                                      'http://cadmin.jianghu.local',
                                      'http://10.10.50.127:8080',
                                      'http://10.10.50.194:8081',
+                                     'http://10.10.50.194:8080',
                                      'http://10.10.40.196:7456',
                                     ],
         'allowedOriginsPatterns' => [],

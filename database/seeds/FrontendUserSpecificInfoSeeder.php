@@ -19,6 +19,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
             [
              [
               'nickname'      => '寡妇制造者',
+              'avatar'        => 1,
               'email'         => '1823444@qq.com',
               'zip_code'      => 233333,
               'address'       => '朝歌',
@@ -28,6 +29,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
              ],
              [
               'nickname'      => '亚索',
+              'avatar'        => 1,
               'email'         => 'test@qq.com',
               'zip_code'      => 233333,
               'address'       => 'Tokyo',
@@ -37,6 +39,7 @@ class FrontendUserSpecificInfoSeeder extends Seeder
              ],
              [
               'nickname'      => '无极剑圣',
+              'avatar'        => 1,
               'email'         => 'test@qq.com',
               'zip_code'      => 233333,
               'address'       => 'Tokyo',

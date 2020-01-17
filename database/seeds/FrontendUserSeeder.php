@@ -34,8 +34,7 @@ class FrontendUserSeeder extends Seeder
               'user_specific_id' => 1,
               'status'           => 1,
               'user_tag_id'      => 4,
-              'invite_code'      => 123456,
-              'pic_path'         => '/avatar.png',
+              'invite_code'      => null,
              ],
              [
               'uid'              => 1896732,
@@ -54,8 +53,7 @@ class FrontendUserSeeder extends Seeder
               'user_specific_id' => 2,
               'status'           => 1,
               'user_tag_id'      => 4,
-              'invite_code'      => 123456,
-              'pic_path'         => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
+              'invite_code'      => 1896731,
              ],
              [
               'uid'              => 1896733,
@@ -74,8 +72,7 @@ class FrontendUserSeeder extends Seeder
               'user_specific_id' => 2,
               'status'           => 1,
               'user_tag_id'      => 4,
-              'invite_code'      => 123456,
-              'pic_path'         => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
+              'invite_code'      => 1234567,
              ],
             ],
         );
