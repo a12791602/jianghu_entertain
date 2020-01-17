@@ -30,7 +30,7 @@ class IndexAction extends BaseAction
         $pageSize                    = $this->model::getPageSize();
         $data                        = $this->model::with('bank:id,name')
             ->filter($inputDatas, SystemPlatformBankFilter::class)->paginate($pageSize);
-        $msgOut                      = msgOut(true, $data);
+        $msgOut                      = msgOut($data);
         return $msgOut;
     }
 }

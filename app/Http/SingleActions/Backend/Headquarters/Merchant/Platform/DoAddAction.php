@@ -93,27 +93,46 @@ class DoAddAction
      */
     private function _createSSL(): void
     {
-        $config   = config('web.ssl.rule');
-        $resourse = openssl_pkey_new($config); //返回pkey的资源标识符:   OpenSSL key resource @12
-        if ($resourse === false) {
-            DB::rollback();
-            throw new \Exception('300715');
-        }
-        openssl_pkey_export($resourse, $privateKey);
-        $publicKey         = openssl_pkey_get_details($resourse);
-        $publicKey         = $publicKey['key'];
-        $intervalStr       = Str::random(11);
+        $config            = config('web.ssl.rule');
+        $sslFirst          = $this->_getSSL($config);
+        $sslSecond         = $this->_getSSL($config);
         $addData           = [
-                              'platform_sign' => $this->platformEloq->sign,
-                              'private_key'   => $privateKey,
-                              'public_key'    => $publicKey,
-                              'interval_str'  => $intervalStr,
+                              'platform_sign'       => $this->platformEloq->sign,
+                              'private_key_first'   => $sslFirst['private_key'],
+                              'public_key_first'    => $sslFirst['public_key'],
+                              'interval_str_first'  => $sslFirst['interval_str'],
+                              'private_key_second'  => $sslSecond['private_key'],
+                              'public_key_second'   => $sslSecond['public_key'],
+                              'interval_str_second' => $sslSecond['interval_str'],
                              ];
         $systemPlatformSsl = new SystemPlatformSsl();
         $systemPlatformSsl->fill($addData);
         if (!$systemPlatformSsl->save()) {
             throw new \Exception('300716');
         }
+    }
+
+    /**
+     * get a ssl
+     * @param  array $config SSL生成配置.
+     * @throws \Exception Exception.
+     * @return mixed[]
+     */
+    private function _getSSL(array $config): array
+    {
+        $resourse = openssl_pkey_new($config); //返回pkey的资源标识符:   OpenSSL key resource @12
+        if ($resourse === false) {
+            DB::rollback();
+            throw new \Exception('300715');
+        }
+        openssl_pkey_export($resourse, $privateKey);
+        $publicKey = openssl_pkey_get_details($resourse);
+        $data      = [
+                      'private_key'  => $privateKey,
+                      'public_key'   => $publicKey['key'],
+                      'interval_str' => Str::random(11),
+                     ];
+        return $data;
     }
 
     /**

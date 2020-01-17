@@ -103,7 +103,7 @@ class Crypt
         if (!is_string($inData)) {
             throw new \Exception('100600');
         }
-        $requestCryptData = explode($this->currentSSL->interval_str, $inData);
+        $requestCryptData = explode($this->currentSSL->interval_str_first, $inData);
         if (count($requestCryptData) !== 3) {
             throw new \Exception('100601');
         }
@@ -131,7 +131,7 @@ class Crypt
      */
     private function _rsaDeCrypt($rsaData): string
     {
-        $privateKey = $this->currentSSL->private_key;
+        $privateKey = $this->currentSSL->private_key_first;
         $sslSign    = openssl_pkey_get_private($privateKey);
         if (!$sslSign) {
             throw new \Exception('100608');
