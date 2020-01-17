@@ -17,10 +17,9 @@ return [
                                      'http://h5.jianghu.local',
                                      'http://madmin.jianghu.local',
                                      'http://cadmin.jianghu.local',
-                                     'http://10.10.50.127:8080',
-                                     'http://10.10.50.194:8081',
-                                     'http://10.10.50.194:8080',
-                                     'http://10.10.40.196:7456',
+                                     'http://10.10.50.127:8080',// Marsh
+                                     'http://10.10.50.194:8081',// Aaron
+                                     'http://10.10.40.196:7456',// Ray
                                     ],
         'allowedOriginsPatterns' => [],
         'allowedHeaders'         => ['*'],

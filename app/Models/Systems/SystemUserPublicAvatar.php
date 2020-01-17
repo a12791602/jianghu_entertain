@@ -3,6 +3,7 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
+use Illuminate\Support\Facades\App;
 
 /**
  * System user's public avatar.
@@ -15,4 +16,18 @@ class SystemUserPublicAvatar extends BaseModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+
+    /**
+     * Get the user's full avatar URL.
+     *
+     * @return string
+     */
+    public function getAvatarFullAttribute(): string
+    {
+        $avatar         = $this->pic_path;
+        $appEnvironment = App::environment();
+        $result         = config('image_domain.' . $appEnvironment) . $avatar;
+
+        return $result;
+    }
 }
