@@ -104,6 +104,7 @@ $config = [
                                                         'driver' => 'custom',
                                                         'via'    => FrontendLogMonolog::class,
                                                        ],
+
                           'apibyqueue'              => [
                                                         'driver' => 'custom',
                                                         'via'    => BackendLogMonolog::class,

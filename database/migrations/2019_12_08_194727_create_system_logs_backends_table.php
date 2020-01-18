@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class CreateSystemLogsBackendTable
  */
-class CreateSystemLogsBackendTable extends Migration
+class CreateSystemLogsBackendsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateSystemLogsBackendTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'system_logs_backend',
+            'system_logs_backends',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';

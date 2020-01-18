@@ -10,7 +10,7 @@
 namespace App\Services\Logs\BackendLogs;
 
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
-use App\Models\Systems\BackendSystemLog;
+use App\Models\Systems\SystemLogsBackend;
 use Jenssegers\Agent\Agent;
 
 /**
@@ -81,17 +81,17 @@ class BackendLogProcessor
     private function _prepareType(Agent $agent): int
     {
         if ($agent->isRobot()) {
-            $type = BackendSystemLog::ROBOT;
+            $type = SystemLogsBackend::ROBOT;
         } elseif ($agent->isDesktop()) {
-            $type = BackendSystemLog::DESKSTOP;
+            $type = SystemLogsBackend::DESKSTOP;
         } elseif ($agent->isTablet()) {
-            $type = BackendSystemLog::TABLET;
+            $type = SystemLogsBackend::TABLET;
         } elseif ($agent->isMobile()) {
-            $type = BackendSystemLog::MOBILE;
+            $type = SystemLogsBackend::MOBILE;
         } elseif ($agent->isPhone()) {
-            $type = BackendSystemLog::PHONE;
+            $type = SystemLogsBackend::PHONE;
         } else {
-            $type = BackendSystemLog::OTHER;
+            $type = SystemLogsBackend::OTHER;
         }
         return $type;
     }

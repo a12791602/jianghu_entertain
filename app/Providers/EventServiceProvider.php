@@ -4,7 +4,9 @@ namespace App\Providers;
 
 use App\Events\FrontendLoginEvent;
 use App\Events\SystemEmailEvent;
+use App\Listeners\BackendLogMonologEventListener;
 use App\Listeners\FrontendLoginEventListener;
+use App\Listeners\FrontendLogMonologEventListener;
 use App\Listeners\SystemEmailEventListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -34,4 +36,12 @@ class EventServiceProvider extends ServiceProvider
                                                        FrontendLoginEventListener::class,
                                                       ],
                         ];
+
+    /**
+     * @var array
+     */
+    protected $subscribe = [
+                            FrontendLogMonologEventListener::class,
+                            BackendLogMonologEventListener::class,
+                           ];
 }

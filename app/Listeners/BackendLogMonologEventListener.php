@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: harris
@@ -8,58 +9,80 @@
 
 namespace App\Listeners;
 
-use App\Models\Systems\BackendSystemLog;
+use App\Models\Systems\SystemLogsBackend;
 use App\Services\Logs\BackendLogs\BackendLogMonologEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Events\Dispatcher;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
+/**
+ * Class BackendLogMonologEventListener
+ * @package App\Listeners
+ */
 class BackendLogMonologEventListener implements ShouldQueue
 {
+
+    /**
+     * @var string
+     */
     public $queue = 'apilogs';
-    protected $log;
+
+    /**
+     * @var SystemLogsBackend
+     */
+    protected $sysLog;
+
+    /**
+     * @var integer data to delete.
+     */
     protected $recordedDays;
 
-    public function __construct(BackendSystemLog $log)
+    /**
+     * BackendLogMonologEventListener constructor.
+     * @param SystemLogsBackend $sysLog BackendSystemLog.
+     */
+    public function __construct(SystemLogsBackend $sysLog)
     {
-        $this->log = $log;
+        $this->sysLog = $sysLog;
     }
 
     /**
-     * @param $event
+     * @param BackendLogMonologEvent $event EventObj.
+     * @return void
      */
-    public function onLog($event): void
+    public function onLog(BackendLogMonologEvent $event): void
     {
-        $log = new $this->log;
+        $sysLog             = new $this->sysLog();
         $this->recordedDays = config('logsetting.day');
         //7天以上的数据都删掉
-        $date = Carbon::now()->subDays($this->recordedDays)->format('Y-m-d H:i:s');
-        $logEloq = $log->where('created_at', '<', $date)->get();
+        $date    = Carbon::now()->subDays($this->recordedDays)->format('Y-m-d H:i:s');
+        $logEloq = $sysLog->where('created_at', '<', $date)->get();
         if (!$logEloq->isEmpty()) {
             foreach ($logEloq as $items) {
                 $items->delete();
             }
         }
         //记录日志
-        $log->fill($event->records['formatted']);
-        $log->save();
+        $sysLog->fill($event->records['formatted']);
+        $sysLog->save();
     }
 
     /**
-     * Register the listeners for the subscriber.
-     * @param $events
+     * @param Dispatcher $events Register the listeners for the subscriber.
+     * @return void
      */
-    public function subscribe($events): void
+    public function subscribe(Dispatcher $events): void
     {
         try {
             $events->listen(
                 BackendLogMonologEvent::class,
-                'App\Listeners\BackendLogMonologEventListener@onLog'
+                'App\Listeners\BackendLogMonologEventListener@onLog',
             );
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             Log::channel('daily')->error(
                 $e->getMessage(),
-                array_merge($this->context(), ['exception' => $e])
+                array_merge($this->context(), ['exception' => $e]),
             );
         }
     }
