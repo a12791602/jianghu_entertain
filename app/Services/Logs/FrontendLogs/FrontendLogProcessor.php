@@ -9,7 +9,7 @@
 
 namespace App\Services\Logs\FrontendLogs;
 
-use App\Models\Systems\FrontendSystemLog;
+use App\Models\Systems\SystemLogsFrontend;
 use Jenssegers\Agent\Agent;
 
 /**
@@ -79,17 +79,17 @@ class FrontendLogProcessor
     private function _prepareType(Agent $agent): int
     {
         if ($agent->isRobot()) {
-            $type = FrontendSystemLog::ROBOT;
+            $type = SystemLogsFrontend::ROBOT;
         } elseif ($agent->isDesktop()) {
-            $type = FrontendSystemLog::DESKSTOP;
+            $type = SystemLogsFrontend::DESKSTOP;
         } elseif ($agent->isTablet()) {
-            $type = FrontendSystemLog::TABLET;
+            $type = SystemLogsFrontend::TABLET;
         } elseif ($agent->isMobile()) {
-            $type = FrontendSystemLog::MOBILE;
+            $type = SystemLogsFrontend::MOBILE;
         } elseif ($agent->isPhone()) {
-            $type = FrontendSystemLog::PHONE;
+            $type = SystemLogsFrontend::PHONE;
         } else {
-            $type = FrontendSystemLog::OTHER;
+            $type = SystemLogsFrontend::OTHER;
         }
         return $type;
     }
