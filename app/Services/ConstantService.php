@@ -37,6 +37,10 @@ class ConstantService
     public const NOTICE_OF_WITHDRAW_AUDIT = 'notice_of_withdraw_audit';
     //出款订单通知
     public const NOTICE_OF_WITHDRAW = 'notice_of_withdraw';
+    //会员余额更新通知
+    public const NOTICE_OF_BALANCE_UPDATE = 'notice_of_balance_update';
+    //系统通知
+    public const NOTICE_OF_SYSTEM = 'notice_of_system';
 
     public const NOTICE_MESSAGES = [
                                     self::NOTICE_OF_EMAIL          => '您有新的邮件,请注意查看!',
