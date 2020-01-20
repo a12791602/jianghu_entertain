@@ -20,8 +20,11 @@ class GameListResource extends JsonResource
     public function toArray($request): array
     {
         $result = [
-                   'type_id' => optional($this->games)->type_id,
-                   'name'    => optional($this->games)->name,
+                   'game_id'   => optional($this->games)->id,
+                   'name'      => optional($this->games)->name,
+                   'game_sign' => optional($this->games)->sign,
+                   'type_id'   => optional($this->games)->type_id,
+                   'type_sign' => optional($this->games)->type->sign,
                   ];
         return $result;
     }
