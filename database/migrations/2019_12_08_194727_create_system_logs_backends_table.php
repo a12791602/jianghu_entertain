@@ -56,7 +56,7 @@ class CreateSystemLogsBackendsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `system_logs_backend` comment '后台操作日志'");
+        DB::statement("ALTER TABLE `system_logs_backends` comment '后台操作日志'");
     }
 
     /**
@@ -66,6 +66,6 @@ class CreateSystemLogsBackendsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_logs_backend');
+        Schema::dropIfExists('system_logs_backends');
     }
 }
