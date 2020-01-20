@@ -27,4 +27,26 @@ class ConstantService
     public const STATUS_NORMAL = 1;
     //禁用状态
     public const STATUS_DISABLE = 0;
+    //邮件通知
+    public const NOTICE_OF_EMAIL = 'notice_of_email';
+    //线下入款通知
+    public const NOTICE_OF_RECHARGE_OFF = 'notice_of_recharge_off';
+    //线上入款通知
+    public const NOTICE_OF_RECHARGE_ON = 'notice_of_recharge_on';
+    //出款审核通知
+    public const NOTICE_OF_WITHDRAW_AUDIT = 'notice_of_withdraw_audit';
+    //出款订单通知
+    public const NOTICE_OF_WITHDRAW = 'notice_of_withdraw';
+
+    public const NOTICE_MESSAGES = [
+                                    self::NOTICE_OF_EMAIL          => '您有新的邮件,请注意查看!',
+                                    self::NOTICE_OF_RECHARGE_OFF   => '您有新的线下入款订单,请注意查看!',
+                                    self::NOTICE_OF_RECHARGE_ON    => '您有新的线上入款订单,请注意查看!',
+                                    self::NOTICE_OF_WITHDRAW_AUDIT => '您有新的出款审核订单,请注意查看!',
+                                    self::NOTICE_OF_WITHDRAW       => '您有新的出款订单,请注意查看!',
+                                   ];
+
+    public const FRONTEND    = 'frontend';
+    public const MERCHANT    = 'merchant';
+    public const HEADQUARTER = 'headquarter';
 }

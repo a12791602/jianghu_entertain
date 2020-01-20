@@ -85,4 +85,18 @@ class FactoryService
         $serviceInstence = self::_generateClass($className);
         return $serviceInstence;
     }
+
+    /**
+     * 获取游戏类实例.
+     *
+     * @param string $vendor 所属厂商.
+     * @param string $game   游戏.
+     * @return object
+     */
+    public function generateGame(string $vendor, string $game): object
+    {
+        $className    = 'App\Game\\' . ucfirst($vendor) . 'Games\\' . ucfirst($game) . 'Game';
+        $gameInstence = self::_generateClass($className);
+        return $gameInstence;
+    }
 }

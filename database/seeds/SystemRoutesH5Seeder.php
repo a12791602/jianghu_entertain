@@ -92,6 +92,11 @@ class SystemRoutesH5Seeder extends Seeder
               'method'     => 'grades',
               'is_open'    => 0,
              ],
+             [
+              'route_name' => 'h5-api.games-lobby.in-game',
+              'method'     => 'inGame',
+              'is_open'    => 0,
+             ],
             ],
         );
     }

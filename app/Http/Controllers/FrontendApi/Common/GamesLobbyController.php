@@ -5,11 +5,13 @@ namespace App\Http\Controllers\FrontendApi\Common;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\GameListRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\GameCategoryRequest;
+use App\Http\Requests\Frontend\Common\GamesLobby\InGameRequest;
 use App\Http\Requests\Frontend\Common\SlidesRequest;
 use App\Http\SingleActions\Common\GamesLobby\GameCategoryAction;
 use App\Http\SingleActions\Common\GamesLobby\GameListAction;
 use App\Http\SingleActions\Common\GamesLobby\RichListAction;
 use App\Http\SingleActions\Common\GamesLobby\SlidesAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\InGameAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -68,6 +70,21 @@ class GamesLobbyController extends FrontendApiMainController
     {
         $validated = $request->validated();
         $result    = $action->execute($validated);
+        return $result;
+    }
+
+    /**
+     * 进入游戏.
+     *
+     * @param InGameAction  $action  Action.
+     * @param InGameRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function inGame(InGameAction $action, InGameRequest $request): JsonResponse
+    {
+        $validated = $request->validated();
+        $result    = $action->execute($this, $validated);
         return $result;
     }
 }

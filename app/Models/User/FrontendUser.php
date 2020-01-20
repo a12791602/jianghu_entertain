@@ -22,6 +22,9 @@ class FrontendUser extends BaseAuthModel
      */
     use Notifiable;
 
+    public const IS_TESTER_YES = 1;
+    public const IS_TESTER_NO  = 0;
+
     /**
      * @var array $guarded
      */
