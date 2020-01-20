@@ -55,7 +55,7 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `system_logs_frontend` comment '前台操作日志'");
+        DB::statement("ALTER TABLE `system_logs_frontends` comment '前台操作日志'");
     }
 
     /**
@@ -65,6 +65,6 @@ class CreateSystemLogsFrontendsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_logs_frontend');
+        Schema::dropIfExists('system_logs_frontends');
     }
 }

@@ -82,7 +82,7 @@ class BackendLogMonologEventListener implements ShouldQueue
         } catch (\Throwable $e) {
             Log::channel('daily')->error(
                 $e->getMessage(),
-                array_merge($this->context(), ['exception' => $e]),
+                ['exception' => $e],
             );
         }
     }
