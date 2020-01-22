@@ -817,6 +817,30 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.email.send',
+              'controller'    => null,
+              'method'        => 'send',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.email.send-index',
+              'controller'    => null,
+              'method'        => 'sendIndex',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.email.received-index',
+              'controller'    => null,
+              'method'        => 'receivedIndex',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

@@ -780,6 +780,20 @@ class SystemRoutesBackendSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'headquarters-api.email.send-index',
+              'method'        => 'sendIndex',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.email.received-index',
+              'method'        => 'receivedIndex',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }
