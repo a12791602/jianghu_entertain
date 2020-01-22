@@ -42,14 +42,7 @@ class SendSystemEmailCommand extends Command
         )->where('send_time', '<=', Carbon::now())->get();
         try {
             foreach ($delayEmails as $delayEmail) {
-                event(
-                    new SystemEmailEvent(
-                        $delayEmail->id,
-                        $delayEmail->receiver_type,
-                        json_decode($delayEmail->receivers, true),
-                        $delayEmail->platform_sign ?? '',
-                    ),
-                );
+                event(new SystemEmailEvent($delayEmail->id));
             }
             return true;
         } catch (\Throwable $exception) {

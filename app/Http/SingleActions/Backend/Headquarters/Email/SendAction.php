@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
 use App\Events\SystemEmailEvent;
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
 
@@ -22,23 +23,16 @@ class SendAction extends BaseAction
      */
     public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
     {
-        $receivers                   = $inputDatas['receivers'];
-        $inputDatas['receivers']     = json_encode($inputDatas['receivers']);
-        $inputDatas['sender_type']   = SystemEmail::SENDER_TYPE_HEADQUARTERS;
-        $inputDatas['sender_id']     = $contll->currentAdmin->id;
-        $inputDatas['platform_sign'] = '';
+        $inputDatas['receiver_ids'] = MerchantAdminUser::whereIn('email', $inputDatas['receivers'])
+            ->get()->pluck('id')->toJson();
+        $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
+        $inputDatas['sender_id']    = $contll->currentAdmin->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');
         }
         if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
-            event(
-                new SystemEmailEvent(
-                    $this->model->id,
-                    $inputDatas['receiver_type'],
-                    $receivers,
-                ),
-            );
+            event(new SystemEmailEvent($this->model->id));
         }
         $msgOut = msgOut();
         return $msgOut;

@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
@@ -26,10 +27,11 @@ class CreateSystemEmailsTable extends Migration
                 $table->string('title')->default(' ')->comment('邮件标题');
                 $table->binary('content')->nullable()->default(null)->comment('邮件内容');
                 $table->timestamp('send_time')->useCurrent()->comment('发送时间');
-                $table->tinyInteger('sender_type')->default('1')->comment('发送人类型 1 总控 2 厅主 3 会员');
-                $table->tinyInteger('receiver_type')->default('0')->comment('接收人类型 3会员 2 厅主 1总控');
-                $table->integer('sender_id')->default('0');
-                $table->text('receivers')->nullable()->default(null)->comment('接收人');
+                $table->tinyInteger('type')->default('1')->comment('邮件类型 1 厅主到总控 2 厅主到会员 3 总控到厅主');
+                $table->text('receiver_ids')->nullable()->comment('接收人id');
+                $table->integer('sender_id')->default('0')->comment('发送人id');
+                $table->text('receivers')->nullable()->comment('接收人');
+                $table->string('platform_sign')->default(' ')->comment('平台标记');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent();
             },
