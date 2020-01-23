@@ -14,11 +14,6 @@ class AccountLocker
 {
 
     /**
-     * @var string
-     */
-    public static $tagName = 'account_lock';
-
-    /**
      * 缓存
      * @var string
      */
@@ -56,21 +51,25 @@ class AccountLocker
      */
     protected $sleepSeconds = 500000;
 
-
     /**
      * @param integer $userId        用户ID.
      * @param integer $cacheTimeout  CacheTimeout.
      * @param integer $lockerTimeout LockerTimeout.
      * @param integer $sleepSeconds  SleepSeconds.
      */
-    public function __construct(int $userId, int $cacheTimeout = 5, int $lockerTimeout = 15, int $sleepSeconds = 500000)
-    {
+    public function __construct(
+        int $userId,
+        int $cacheTimeout = 5,
+        int $lockerTimeout = 15,
+        int $sleepSeconds = 500000
+    ) {
         $this->memKey        = $this->prefix . $userId;
         $this->memValue      = $userId . '_' . date('Y-m-d H:i:s');
         $this->cacheTimeout  = $cacheTimeout;
         $this->lockerTimeout = $lockerTimeout;
         $this->sleepSeconds  = $sleepSeconds;
     }
+
 
     /**
      * 获取锁
@@ -116,6 +115,11 @@ class AccountLocker
     {
         $this->context = $context;
     }
+
+    /**
+     * @var string
+     */
+    public static $tagName = 'account_lock';
 
     /**
      * 释放所有

@@ -118,6 +118,8 @@ class Handler extends ExceptionHandler
         }
     }
 
+    // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
+
     /**
      * Render
      *
@@ -128,6 +130,7 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e): Response
     {
+        // phpcs:enable Squiz.Commenting.FunctionComment.TypeHintMissing
         $response = $this->_generateExceptionResponse($request, $e);
         $this->_sendToTg($e, $request, $response);
         if ($this->config['add_cors_headers']) {
@@ -178,11 +181,12 @@ class Handler extends ExceptionHandler
             }
             $formatterInstance = new $formatter($this->config, $this->debug);
             $formatterInstance->format($response, $e, $this->reportResponses);
-
             break;
         }
         return $response;
     }
+
+    // phpcs:disable Squiz.Commenting.FunctionComment.TypeHintMissing
 
     /**
      * @param Request                 $request   Request.
@@ -192,6 +196,7 @@ class Handler extends ExceptionHandler
      */
     protected function unauthenticated($request, AuthenticationException $exception): Response
     {
+        // phpcs:enable Squiz.Commenting.FunctionComment.TypeHintMissing
         if ($request->expectsJson()) {
             $message = $exception->getMessage();
             if ($message === 'Unauthenticated.') {
