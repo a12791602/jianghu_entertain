@@ -46,8 +46,10 @@ class LoginAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll, LoginVerificationRequest $request): JsonResponse
-    {
+    public function execute(
+        FrontendApiMainController $contll,
+        LoginVerificationRequest $request
+    ): JsonResponse {
         $this->userAgent = $contll->userAgent;
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->sendLockoutResponse($request);

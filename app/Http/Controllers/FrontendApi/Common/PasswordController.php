@@ -26,8 +26,10 @@ class PasswordController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function password(ResetPasswordAction $action, ResetPasswordRequest $request): JsonResponse
-    {
+    public function password(
+        ResetPasswordAction $action,
+        ResetPasswordRequest $request
+    ): JsonResponse {
         $result = $action->execute($request);
         return $result;
     }
@@ -39,8 +41,10 @@ class PasswordController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function passwordCode(RPVerificationCodeAction $action, PVerificationCodeRequest $request): JsonResponse
-    {
+    public function passwordCode(
+        RPVerificationCodeAction $action,
+        PVerificationCodeRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $result     = $action->execute($this, $inputDatas);
         return $result;
@@ -53,8 +57,10 @@ class PasswordController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function security(SecurityCodeAction $action, SecurityCodeRequest $request): JsonResponse
-    {
+    public function security(
+        SecurityCodeAction $action,
+        SecurityCodeRequest $request
+    ): JsonResponse {
         $result = $action->execute($request);
         return $result;
     }

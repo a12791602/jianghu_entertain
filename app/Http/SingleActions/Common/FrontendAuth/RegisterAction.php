@@ -25,8 +25,10 @@ class RegisterAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $controller, RegisterRequest $request): JsonResponse
-    {
+    public function execute(
+        FrontendApiMainController $controller,
+        RegisterRequest $request
+    ): JsonResponse {
         $platform_sign    = $controller->currentPlatformEloq->sign;
         $redis            = app('redis_user_unique_id');
         $register_user_id = $redis->spop($platform_sign . '_' . config('web.main.frontend_user_unique_id'))[0];
@@ -51,7 +53,6 @@ class RegisterAction
         event(new FrontendLoginEvent($user));
         $result = msgOut($data);
         Cache::forget($verification_key);
-
         return $result;
     }
 
@@ -62,8 +63,11 @@ class RegisterAction
      * @param RegisterRequest           $request    Frontend RegisterRequest.
      * @return mixed[]
      */
-    public function token(FrontendApiMainController $controller, FrontendUser $user, RegisterRequest $request): array
-    {
+    public function token(
+        FrontendApiMainController $controller,
+        FrontendUser $user,
+        RegisterRequest $request
+    ): array {
         $token          = $controller->currentAuth->login($user);
         $expireInMinute = $controller->currentAuth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
@@ -86,7 +90,6 @@ class RegisterAction
                    'token_type'   => 'Bearer',
                    'expires_at'   => $expireAt,
                   ];
-
         return $result;
     }
 

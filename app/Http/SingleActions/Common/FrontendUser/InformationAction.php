@@ -24,7 +24,6 @@ class InformationAction
     {
         $user   = $request->user();
         $result = msgOut(PersonalInformationResource::make($user));
-
         return $result;
     }
 
@@ -38,7 +37,6 @@ class InformationAction
     {
         $user   = $request->user();
         $result = msgOut(DynamicInformationResource::make($user));
-
         return $result;
     }
 
@@ -55,7 +53,6 @@ class InformationAction
         $user->specificInfo()->update($item);
         $info   = $user->specificInfo->only(['avatar', 'nickname']);
         $result = msgOut($info);
-
         return $result;
     }
 }

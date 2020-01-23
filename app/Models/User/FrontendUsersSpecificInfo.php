@@ -33,7 +33,6 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
         } else {
             $result = config('image_domain.' . $appEnvironment) . SystemUserPublicAvatar::first()->pic_path;
         }
-
         return $result;
     }
 }

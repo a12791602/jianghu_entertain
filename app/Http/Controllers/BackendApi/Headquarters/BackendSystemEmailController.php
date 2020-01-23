@@ -59,8 +59,10 @@ class BackendSystemEmailController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function receivedIndex(ReceivedIndexAction $action, ReceivedIndexRequest $request): JsonResponse
-    {
+    public function receivedIndex(
+        ReceivedIndexAction $action,
+        ReceivedIndexRequest $request
+    ): JsonResponse {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);
         return $outputDatas;

@@ -159,8 +159,10 @@ class DoAddAction
      * @throws \Exception Exception.
      * @return void
      */
-    private function _checkBeforePercent(UsersCommissionConfig $beforeConfig, array $percentArr): void
-    {
+    private function _checkBeforePercent(
+        UsersCommissionConfig $beforeConfig,
+        array $percentArr
+    ): void {
         $beforeDetail = $beforeConfig->configDetail;
         foreach ($percentArr as $gradeExp => $percent) {
             $beforeData = $beforeDetail->where('grade_exp_max', $gradeExp)->first();
@@ -179,8 +181,10 @@ class DoAddAction
      * @throws \Exception Exception.
      * @return void
      */
-    private function _checkAfterPercent(UsersCommissionConfig $afterConfig, array $percentArr): void
-    {
+    private function _checkAfterPercent(
+        UsersCommissionConfig $afterConfig,
+        array $percentArr
+    ): void {
         $afterDetail = $afterConfig->configDetail;
         foreach ($percentArr as $gradeExp => $percent) {
             $afterData = $afterDetail->where('grade_exp_max', $gradeExp)->first();

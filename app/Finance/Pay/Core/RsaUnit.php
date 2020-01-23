@@ -111,8 +111,11 @@ trait RsaUnit
      * @param string  $mode        模式.
      * @return string
      */
-    protected function formatPrivateKey(string $privateKey, int $splitLength = 64, string $mode = ''): string
-    {
+    protected function formatPrivateKey(
+        string $privateKey,
+        int $splitLength = 64,
+        string $mode = ''
+    ): string {
         $header = '-----BEGIN PRIVATE KEY-----';
         $footer = '-----END PRIVATE KEY-----';
         if ($mode === 'RSA') {
@@ -211,8 +214,10 @@ trait RsaUnit
      * @return RsaUnit
      * @throws \Exception Exception.
      */
-    public function decryptByPrivateKey(string $data, int $padding = OPENSSL_PKCS1_PADDING): RsaUnit
-    {
+    public function decryptByPrivateKey(
+        string $data,
+        int $padding = OPENSSL_PKCS1_PADDING
+    ): RsaUnit {
         if (!isset($this->privateKeySource)) {
             $this->writeLog('finance-recharge-system', $this->payInfo['orderNo'], '私钥资源不存在!');
             throw new \Exception('100304');
@@ -237,8 +242,10 @@ trait RsaUnit
      * @return RsaUnit
      * @throws \Exception Exception.
      */
-    public function grantSignByPrivateKey(string $signStr, int $signature_alg = OPENSSL_ALGO_SHA1): RsaUnit
-    {
+    public function grantSignByPrivateKey(
+        string $signStr,
+        int $signature_alg = OPENSSL_ALGO_SHA1
+    ): RsaUnit {
         if (!isset($this->privateKeySource)) {
             $this->writeLog('finance-recharge-system', $this->payInfo['orderNo'], '私钥资源不存在!');
             throw new \Exception('100304');

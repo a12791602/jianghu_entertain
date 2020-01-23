@@ -43,8 +43,10 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param UpdateAdminGroupAction  $action  Action.
      * @return JsonResponse
      */
-    public function updateAdminGroup(UpdateAdminGroupRequest $request, UpdateAdminGroupAction $action): JsonResponse
-    {
+    public function updateAdminGroup(
+        UpdateAdminGroupRequest $request,
+        UpdateAdminGroupAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -56,8 +58,10 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param DeleteAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function deleteAdmin(DeleteAdminRequest $request, DeleteAdminAction $action): JsonResponse
-    {
+    public function deleteAdmin(
+        DeleteAdminRequest $request,
+        DeleteAdminAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -69,8 +73,10 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param UpdatePasswordAction  $action  Action.
      * @return JsonResponse
      */
-    public function updatePassword(UpdatePasswordRequest $request, UpdatePasswordAction $action): JsonResponse
-    {
+    public function updatePassword(
+        UpdatePasswordRequest $request,
+        UpdatePasswordAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -97,8 +103,10 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param SearchAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function searchAdmin(SearchAdminRequest $request, SearchAdminAction $action): JsonResponse
-    {
+    public function searchAdmin(
+        SearchAdminRequest $request,
+        SearchAdminAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -110,8 +118,10 @@ class BackendAdminUserController extends BackEndApiMainController
      * @param  SwitchAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function switchAdmin(SwitchAdminRequest $request, SwitchAdminAction $action): JsonResponse
-    {
+    public function switchAdmin(
+        SwitchAdminRequest $request,
+        SwitchAdminAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;

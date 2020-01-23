@@ -50,7 +50,6 @@ class AesCrypt
         if (!$enAesData) {
             throw new \Exception('100613');
         }
-
         return $enAesData;
     }
 
@@ -71,7 +70,6 @@ class AesCrypt
         if (!$deAesData) {
             throw new \Exception('100605');
         }
-
         return $deAesData;
     }
 }

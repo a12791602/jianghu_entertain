@@ -39,7 +39,6 @@ class BaseAction
         if (!app()->environment('production')) {
             $item['verification_code'] = $code;
         }
-
         return $item;
     }
 }

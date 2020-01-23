@@ -11,10 +11,10 @@ use App\Models\BaseModel;
 class SystemFePageBanner extends BaseModel
 {
 
+    public const STATUS_OPEN = 1;
+
     /**
      * @var array $guarded
      */
     protected $guarded = ['id'];
-
-    public const STATUS_OPEN = 1;
 }

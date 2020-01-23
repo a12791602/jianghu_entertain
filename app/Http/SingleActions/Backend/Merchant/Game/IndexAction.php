@@ -25,8 +25,11 @@ class IndexAction extends BaseAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas, int $device): JsonResponse
-    {
+    public function execute(
+        BackEndApiMainController $contll,
+        array $inputDatas,
+        int $device
+    ): JsonResponse {
         $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
         $inputDatas['device']        = $device;
         $datas                       = $this->model::with(['games:id,name,sign', 'vendor'])

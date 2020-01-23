@@ -18,11 +18,6 @@ class SystemEmail extends BaseModel
 {
 
     /**
-     * @var array
-     */
-    protected $guarded = ['id'];
-
-    /**
      * 立即发送
      *
      */
@@ -63,6 +58,11 @@ class SystemEmail extends BaseModel
      *
      */
     public const TYPE_HEAD_TO_MER = 3;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @param string $value Value.

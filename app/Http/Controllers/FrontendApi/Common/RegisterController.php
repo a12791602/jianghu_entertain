@@ -36,8 +36,10 @@ class RegisterController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function code(RegisterVerificationCodeAction $action, RegisterVerificationCodeRequest $request): JsonResponse
-    {
+    public function code(
+        RegisterVerificationCodeAction $action,
+        RegisterVerificationCodeRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $result     = $action->execute($this, $inputDatas);
         return $result;

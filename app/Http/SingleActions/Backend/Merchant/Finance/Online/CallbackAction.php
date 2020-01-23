@@ -160,8 +160,12 @@ class CallbackAction
      * @param array  $data    具体数据.
      * @return void
      */
-    private function _writeLog(string $channel, string $orderNo, string $msgs, array $data = []): void
-    {
+    private function _writeLog(
+        string $channel,
+        string $orderNo,
+        string $msgs,
+        array $data = []
+    ): void {
         Log::channel($channel)->info(['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
     }
 }

@@ -27,7 +27,6 @@ class DynamicInformationResource extends JsonResource
                     'balance'    => optional($this->account)->balance,
                     'rich_rank'  => $rank + 1,
                    ];
-
         return $result;
     }
 }

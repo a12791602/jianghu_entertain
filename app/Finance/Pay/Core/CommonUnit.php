@@ -85,8 +85,12 @@ trait CommonUnit
      * @param array  $data    具体数据.
      * @return void
      */
-    public function writeLog(string $channel, string $orderNo, string $msgs, array $data = []): void
-    {
+    public function writeLog(
+        string $channel,
+        string $orderNo,
+        string $msgs,
+        array $data = []
+    ): void {
         Log::channel($channel)->info(['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
     }
 }

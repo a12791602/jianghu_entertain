@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class NoticeCarousel extends BaseModel
 {
 
+    public const TYPE_INSIDE = 1;
+    public const TYPE_OUTER  = 2;
+
     /**
      * @var mixed[]
      */
     protected $guarded = ['id'];
-
-    public const TYPE_INSIDE = 1;
-    public const TYPE_OUTER  = 2;
 
     /**
      * @return BelongsTo

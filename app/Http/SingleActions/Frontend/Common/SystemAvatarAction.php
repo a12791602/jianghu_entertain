@@ -21,7 +21,6 @@ class SystemAvatarAction
     {
         $item   = SystemUserPublicAvatar::get(['id', 'pic_path']);
         $result = msgOut(SystemAvatarResource::collection($item));
-
         return $result;
     }
 }

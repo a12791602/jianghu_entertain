@@ -40,8 +40,12 @@ class CustomUnique implements Rule
      * @param string          $field   Field.
      * @param integer         $myId    MyId.
      */
-    public function __construct(BaseFormRequest $request, string $table, string $field, int $myId = 0)
-    {
+    public function __construct(
+        BaseFormRequest $request,
+        string $table,
+        string $field,
+        int $myId = 0
+    ) {
         $this->request = $request;
         $this->table   = $table;
         $this->myId    = $myId;

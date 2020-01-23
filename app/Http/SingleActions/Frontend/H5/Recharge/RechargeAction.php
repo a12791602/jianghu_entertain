@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Cache;
 class RechargeAction
 {
 
+    public const STUTAS_NO = 0;
+
     /**
      * @var array $inputDatas
      */
@@ -37,8 +39,6 @@ class RechargeAction
      * @var array $order
      */
     protected $order;
-
-    public const STUTAS_NO = 0;
 
     /**
      * @param FrontendApiMainController $contll     Contll.

@@ -14,16 +14,16 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class SystemFinanceOnlineInfo extends BaseModel
 {
 
-    /**
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     public const ENCRYPT_MODE_SECRET = 1;
     public const ENCRYPT_MODE_CERT   = 2;
 
     public const STATUS_YES = 1;
     public const STATUS_NO  = 0;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsTo

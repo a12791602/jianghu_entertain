@@ -15,22 +15,22 @@ use Illuminate\Support\Str;
 class SeederCommand extends GeneratorCommand
 {
 
+    public const SPACE = ' ';
+
+    public const MODE_APPEND = 'append'; //附加模式
+    public const MODE_COVER  = 'cover';
+
     /**
      * 上一次编辑的内容
      * @var string $content
      */
     protected $content;
 
-    public const SPACE = ' ';
-
     /**
      * 最大执行条数
      * @var integer $maxLimit
      */
-    protected $maxLimit = 10000;
-
-    public const MODE_APPEND = 'append'; //附加模式
-    public const MODE_COVER  = 'cover';  //覆盖模式
+    protected $maxLimit = 10000;  //覆盖模式
 
     /**
      * @var string $signature

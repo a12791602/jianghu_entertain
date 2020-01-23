@@ -15,16 +15,16 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class SystemFinanceType extends BaseModel
 {
 
-    /**
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     public const IS_ONLINE_YES = 1;
     public const IS_ONLINE_NO  = 0;
 
     public const STATUS_YES = 1;
     public const STATUS_NO  = 0;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsTo

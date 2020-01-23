@@ -17,14 +17,14 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 class GamesPlatform extends BaseModel
 {
 
+    public const IS_HOT_YES  = 1;
+    public const IS_HOT_NO   = 0;
+    public const STATUS_OPEN = 1;
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
-
-    public const IS_HOT_YES  = 1;
-    public const IS_HOT_NO   = 0;
-    public const STATUS_OPEN = 1;
 
     /**
      * @return BelongsTo

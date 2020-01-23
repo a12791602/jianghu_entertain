@@ -15,13 +15,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SystemBank extends BaseModel
 {
 
+    public const STATUS_OPEN  = 1;
+    public const STATUS_CLOSE = 0;
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
-
-    public const STATUS_OPEN  = 1;
-    public const STATUS_CLOSE = 0;
 
     /**
      * @return BelongsTo

@@ -112,8 +112,10 @@ class PlatformController extends BackEndApiMainController
      * @param  DomainDetailAction  $action  Action.
      * @return JsonResponse
      */
-    public function domainDetail(DomainDetailRequest $request, DomainDetailAction $action): JsonResponse
-    {
+    public function domainDetail(
+        DomainDetailRequest $request,
+        DomainDetailAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -141,8 +143,10 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function assignGames(AssignGamesAction $action, AssignGamesRequest $request): JsonResponse
-    {
+    public function assignGames(
+        AssignGamesAction $action,
+        AssignGamesRequest $request
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
         return $msgOut;
@@ -189,8 +193,9 @@ class PlatformController extends BackEndApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function getSearchDataOfAssignGame(GetSearchDataOfAssignGameAction $action): JsonResponse
-    {
+    public function getSearchDataOfAssignGame(
+        GetSearchDataOfAssignGameAction $action
+    ): JsonResponse {
         $msgOut = $action->execute();
         return $msgOut;
     }

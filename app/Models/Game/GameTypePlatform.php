@@ -13,15 +13,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class GameTypePlatform extends BaseModel
 {
 
-    /**
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     public const DEVICE_H5  = 2;
     public const DEVICE_APP = 3;
     public const DEVICE_PC  = 1;
     public const STATUS     = 1;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @return BelongsTo

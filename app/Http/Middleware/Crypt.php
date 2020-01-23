@@ -45,7 +45,6 @@ class Crypt
             if (isset($request['data'])) {
                 throw new \Exception('100607');
             }
-            
             return $next($request);
         }
         //空参放行
@@ -55,7 +54,6 @@ class Crypt
 
         //数据解密处理
         $this->_dataHandle($request);
-
         return $next($request);
     }
 

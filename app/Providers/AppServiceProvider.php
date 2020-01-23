@@ -29,7 +29,6 @@ class AppServiceProvider extends ServiceProvider
             'redis_user_unique_id',
             static function () {
                 $result = Redis::connection();
-
                 return $result;
             },
         );
@@ -80,7 +79,6 @@ class AppServiceProvider extends ServiceProvider
                     },
                 );
                 // Return the $query, so you can call other methods like ->get(), ->first(), ->where(), etc
-
                 return $this;
             },
         );

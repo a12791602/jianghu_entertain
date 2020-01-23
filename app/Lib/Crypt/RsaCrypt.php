@@ -58,7 +58,6 @@ class RsaCrypt
         if ($flag === false) {
             throw new \Exception('100603');
         }
-
         return $deRsaCryptData;
     }
 
@@ -74,7 +73,6 @@ class RsaCrypt
         if ($encrypt === false) {
             throw new \Exception('100612');
         }
-
         return $encrypted;
     }
 
@@ -86,12 +84,15 @@ class RsaCrypt
      * @param  string $splitFlag 随机组合字符串.
      * @return string
      */
-    public function pack(string $encrypted, string $rsaKey, string $rsaIv, string $splitFlag): string
-    {
+    public function pack(
+        string $encrypted,
+        string $rsaKey,
+        string $rsaIv,
+        string $splitFlag
+    ): string {
         $rsaKey  = $this->rsaEncrypt($rsaKey);
         $rsaIv   = $this->rsaEncrypt($rsaIv);
         $resData = $encrypted . $splitFlag . $rsaIv . $splitFlag . $rsaKey;
-
         return $resData;
     }
 }

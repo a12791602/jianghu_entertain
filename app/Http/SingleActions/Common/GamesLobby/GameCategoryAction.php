@@ -23,8 +23,10 @@ class GameCategoryAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $controller, GameCategoryRequest $request): JsonResponse
-    {
+    public function execute(
+        FrontendApiMainController $controller,
+        GameCategoryRequest $request
+    ): JsonResponse {
         $condition = $request->validated();
 
         $condition['status']      = GameTypePlatform::STATUS;

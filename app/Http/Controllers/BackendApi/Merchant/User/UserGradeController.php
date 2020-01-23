@@ -27,8 +27,10 @@ class UserGradeController extends BackEndApiMainController
      * @param  GradeConfigAction  $action  Action.
      * @return JsonResponse
      */
-    public function gradeConfig(GradeConfigRequest $request, GradeConfigAction $action): JsonResponse
-    {
+    public function gradeConfig(
+        GradeConfigRequest $request,
+        GradeConfigAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($this, $inputDatas);
         return $msgOut;

@@ -112,26 +112,6 @@ trait MerchantMenuLogics
     }
 
     /**
-     *
-     * @return mixed.
-     */
-    public static function getAllFirstLevelList()
-    {
-        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
-        return $allFirstLevelList;
-    }
-
-    /**
-     * @param  array $adminAccessGroupDetail 管理员组权限.
-     * @return mixed
-     */
-    public static function getFirstLevelList(array $adminAccessGroupDetail)
-    {
-        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
-        return $firstLevelList;
-    }
-
-    /**
      * @param  array $parseDatas 修改的数据.
      * @return mixed[]
      */
@@ -159,5 +139,25 @@ trait MerchantMenuLogics
             $menuEloq->refreshStar();
         }
         return $itemProcess;
+    }
+
+    /**
+     *
+     * @return mixed.
+     */
+    public static function getAllFirstLevelList()
+    {
+        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
+        return $allFirstLevelList;
+    }
+
+    /**
+     * @param  array $adminAccessGroupDetail 管理员组权限.
+     * @return mixed
+     */
+    public static function getFirstLevelList(array $adminAccessGroupDetail)
+    {
+        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
+        return $firstLevelList;
     }
 }

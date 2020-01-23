@@ -54,6 +54,18 @@ class Configure
     }
 
     /**
+     * clean the cache
+     *
+     * @param string $platformSign 平台标识.
+     * @return void
+     */
+    public function flush(string $platformSign): void
+    {
+        $tags = self::getTags($platformSign);
+        Cache::tags($tags)->flush();
+    }
+
+    /**
      * Setting Data into the Config
      *
      * @param string $platformSign 平台标识.
@@ -77,18 +89,6 @@ class Configure
             ],
         )->update(['value' => $value]);
         Cache::tags($tags)->forget($configKey);
-    }
-
-    /**
-     * clean the cache
-     *
-     * @param string $platformSign 平台标识.
-     * @return void
-     */
-    public function flush(string $platformSign): void
-    {
-        $tags = self::getTags($platformSign);
-        Cache::tags($tags)->flush();
     }
 
     /**

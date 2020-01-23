@@ -8,5 +8,4 @@
  */
 
 $config = ['day' => 1];//获取一天以上的日志清理
-
 return $config;

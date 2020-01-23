@@ -1,5 +1,4 @@
 <?php
-
 return [
         'input_name' => 'file', //表单键的 name
         'max_size'   => '1000000', //最大文件大小 单位 kb

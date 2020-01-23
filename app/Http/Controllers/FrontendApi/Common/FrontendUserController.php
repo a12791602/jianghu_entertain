@@ -48,8 +48,10 @@ class FrontendUserController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function updateInformation(InformationAction $action, UpdateInformationRequest $request): JsonResponse
-    {
+    public function updateInformation(
+        InformationAction $action,
+        UpdateInformationRequest $request
+    ): JsonResponse {
         $result = $action->update($request);
         return $result;
     }

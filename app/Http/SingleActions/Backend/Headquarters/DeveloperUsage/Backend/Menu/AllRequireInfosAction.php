@@ -72,7 +72,6 @@ class AllRequireInfosAction
             $routeInfo[]                            = $routeShortData[$dataKey];
             //$routeInfo[$r->action['as']] = $r->uri;
         }
-
         return $routeInfo;
     }
 

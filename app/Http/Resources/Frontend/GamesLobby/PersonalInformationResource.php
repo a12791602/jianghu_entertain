@@ -23,7 +23,6 @@ class PersonalInformationResource extends JsonResource
                    'avatar'   => $this->specificInfo->avatar_full,
                    'nickname' => $this->specificInfo->nickname,
                   ];
-
         return $result;
     }
 }

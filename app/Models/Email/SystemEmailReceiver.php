@@ -13,10 +13,6 @@ class SystemEmailReceiver extends BaseModel
 {
 
     /**
-     * @var array
-     */
-    protected $guarded = ['id'];
-    /**
      * 接收者类型 总后台
      *
      */
@@ -31,4 +27,9 @@ class SystemEmailReceiver extends BaseModel
      *
      */
     public const RECEIVER_TYPE_PLAYER = 3;
+
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 }

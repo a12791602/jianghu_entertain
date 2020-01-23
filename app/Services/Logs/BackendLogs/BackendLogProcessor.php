@@ -21,6 +21,28 @@ class BackendLogProcessor
 {
 
     /**
+     * @param Agent $agent AgentObj.
+     * @return integer
+     */
+    private function _prepareType(Agent $agent): int
+    {
+        if ($agent->isRobot()) {
+            $type = SystemLogsBackend::ROBOT;
+        } elseif ($agent->isDesktop()) {
+            $type = SystemLogsBackend::DESKSTOP;
+        } elseif ($agent->isTablet()) {
+            $type = SystemLogsBackend::TABLET;
+        } elseif ($agent->isMobile()) {
+            $type = SystemLogsBackend::MOBILE;
+        } elseif ($agent->isPhone()) {
+            $type = SystemLogsBackend::PHONE;
+        } else {
+            $type = SystemLogsBackend::OTHER;
+        }
+        return $type;
+    }
+
+    /**
      * @param array $record Records.
      * @return mixed[]
      */
@@ -72,27 +94,5 @@ class BackendLogProcessor
             $record['message'] = '网络操作信息';
         }
         return $record;
-    }
-
-    /**
-     * @param Agent $agent AgentObj.
-     * @return integer
-     */
-    private function _prepareType(Agent $agent): int
-    {
-        if ($agent->isRobot()) {
-            $type = SystemLogsBackend::ROBOT;
-        } elseif ($agent->isDesktop()) {
-            $type = SystemLogsBackend::DESKSTOP;
-        } elseif ($agent->isTablet()) {
-            $type = SystemLogsBackend::TABLET;
-        } elseif ($agent->isMobile()) {
-            $type = SystemLogsBackend::MOBILE;
-        } elseif ($agent->isPhone()) {
-            $type = SystemLogsBackend::PHONE;
-        } else {
-            $type = SystemLogsBackend::OTHER;
-        }
-        return $type;
     }
 }

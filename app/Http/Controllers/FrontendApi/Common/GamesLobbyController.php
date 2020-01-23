@@ -40,8 +40,10 @@ class GamesLobbyController extends FrontendApiMainController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function category(GameCategoryAction $action, GameCategoryRequest $request): JsonResponse
-    {
+    public function category(
+        GameCategoryAction $action,
+        GameCategoryRequest $request
+    ): JsonResponse {
         $result = $action->execute($this, $request);
         return $result;
     }

@@ -23,8 +23,10 @@ class GameListAction
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $controller, GameListRequest $request): JsonResponse
-    {
+    public function execute(
+        FrontendApiMainController $controller,
+        GameListRequest $request
+    ): JsonResponse {
         $condition = [];
 
         $condition['platform_sign'] = $controller->currentPlatformEloq->sign;

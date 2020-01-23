@@ -13,13 +13,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SystemFinanceChannel extends BaseModel
 {
 
+    public const STATUS_YES = 1;
+    public const STATUS_NO  = 0;
+
     /**
      * @var array
      */
     protected $guarded = ['id'];
-
-    public const STATUS_YES = 1;
-    public const STATUS_NO  = 0;
 
     /**
      * @return BelongsTo

@@ -29,7 +29,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
         $eloq = $this->where('id', $dataId);
         return $eloq;
     }
-    
+
     /**
      * 用户UID
      *

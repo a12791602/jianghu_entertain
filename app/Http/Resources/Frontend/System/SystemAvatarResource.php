@@ -22,7 +22,6 @@ class SystemAvatarResource extends JsonResource
                    'id'       => $this->id,
                    'pic_path' => $this->avatar_full,
                   ];
-
         return $result;
     }
 }
