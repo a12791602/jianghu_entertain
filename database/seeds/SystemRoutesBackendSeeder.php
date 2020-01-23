@@ -794,6 +794,34 @@ class SystemRoutesBackendSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'headquarters-api.platform.assign-activities',
+              'method'        => 'assignActivities',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.platform.assigned-activities',
+              'method'        => 'assignedActivities',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.platform.unassign-activities',
+              'method'        => 'unassignActivities',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.platform.assigned-activity-cancel',
+              'method'        => 'assignedActivityCancel',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

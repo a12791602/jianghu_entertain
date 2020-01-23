@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignActivitiesRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivitiesRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivityCancelRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGameCancelRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
@@ -13,7 +16,11 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\MaintainRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignActivitiesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignActivitiesAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedActivitiesAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedActivityCancelAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGameCancelAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedGamesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAction;
@@ -25,6 +32,7 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\MaintainAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignActivitiesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
 use Illuminate\Http\JsonResponse;
 
@@ -49,9 +57,10 @@ class PlatformController extends BackEndApiMainController
 
     /**
      * 站点配置
-     * @param  EditRequest $request Request.
-     * @param  EditAction  $action  Action.
+     * @param EditRequest $request Request.
+     * @param EditAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
@@ -124,9 +133,10 @@ class PlatformController extends BackEndApiMainController
     /**
      * 添加运营商域名
      *
-     * @param  DomainAddRequest $request Request.
-     * @param  DomainAddAction  $action  Action.
+     * @param DomainAddRequest $request Request.
+     * @param DomainAddAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
     {
@@ -211,6 +221,74 @@ class PlatformController extends BackEndApiMainController
     public function assignedGameCancel(
         AssignedGameCancelAction $action,
         AssignedGameCancelRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 为运营商分配活动.
+     *
+     * @param  AssignActivitiesAction  $action  Action.
+     * @param  AssignActivitiesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignActivities(
+        AssignActivitiesAction $action,
+        AssignActivitiesRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 已分配给运营商的活动
+     *
+     * @param AssignedActivitiesAction  $action  Action.
+     * @param AssignedActivitiesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignedActivities(
+        AssignedActivitiesAction $action,
+        AssignedActivitiesRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 未分配给运营商的活动.
+     *
+     * @param UnassignActivitiesAction  $action  Action.
+     * @param UnassignActivitiesRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function unassignActivities(
+        UnassignActivitiesAction $action,
+        UnassignActivitiesRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 移除已分配的活动.
+     *
+     * @param AssignedActivityCancelAction  $action  Action.
+     * @param AssignedActivityCancelRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function assignedActivityCancel(
+        AssignedActivityCancelAction $action,
+        AssignedActivityCancelRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);

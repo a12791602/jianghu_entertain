@@ -106,5 +106,40 @@ Route::group(
              'getSearchDataOfAssignGame',
             ],
         )->name($namePrefix . 'get-search-data-of-assign-game');
+        //分配活动
+        Route::post(
+            'assign-activities',
+            [
+             PlatformController::class,
+             'assignActivities',
+            ],
+        )->name($namePrefix . 'assign-activities');
+
+        //已分配的活动
+        Route::get(
+            'assigned-activities',
+            [
+             PlatformController::class,
+             'assignedActivities',
+            ],
+        )->name($namePrefix . 'assigned-activities');
+
+        //未分配的活动
+        Route::get(
+            'unassign-activities',
+            [
+             PlatformController::class,
+             'unassignActivities',
+            ],
+        )->name($namePrefix . 'unassign-activities');
+
+        //删除已分配的活动
+        Route::post(
+            'assigned-activity-cancel',
+            [
+             PlatformController::class,
+             'assignedActivityCancel',
+            ],
+        )->name($namePrefix . 'assigned-activity-cancel');
     },
 );
