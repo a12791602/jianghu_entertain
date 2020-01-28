@@ -841,6 +841,30 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.activity-dyn.index',
+              'controller'    => null,
+              'method'        => 'index',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.activity-dyn.status',
+              'controller'    => null,
+              'method'        => 'status',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.activity-dyn.save-pic',
+              'controller'    => null,
+              'method'        => 'savePic',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

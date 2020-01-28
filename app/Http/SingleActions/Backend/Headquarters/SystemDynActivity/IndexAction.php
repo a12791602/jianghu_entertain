@@ -24,7 +24,8 @@ class IndexAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $pageSize    = $this->model::getPageSize();
-        $outputDatas = $this->model::filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
+        $outputDatas = $this->model::with('lastEditor:id,name')
+            ->filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
         $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }

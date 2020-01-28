@@ -2,8 +2,10 @@
 
 namespace App\Models\Activity;
 
+use App\ModelFilters\Activity\SystemDynActivityFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class SystemDynActivity
@@ -18,17 +20,21 @@ class SystemDynActivity extends BaseModel
      */
     protected $guarded = ['id'];
 
+    /**
+     * @return BelongsTo
+     */
+    public function lastEditor(): BelongsTo
+    {
+        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
+        return $object;
+    }
 
     /**
-     * @param  integer $value Value.
-     * @return string
+     * @return mixed
      */
-    public function getLastEditorIdAttribute(int $value): string
+    public function modelFilter()
     {
-        if (!empty($value)) {
-            $name = BackendAdminUser::find($value)->name;
-            return $name;
-        }
-        return '';
+        $object = $this->provideFilter(SystemDynActivityFilter::class);
+        return $object;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackendApi\Merchant\Activity\ActivityDynController;
 use App\Http\Controllers\BackendApi\Merchant\Activity\ActivityStaticController;
 
 Route::group(
@@ -46,5 +47,36 @@ Route::group(
              'status',
             ],
         )->name($namePrefix . 'status');
+    },
+);
+
+Route::group(
+    ['prefix' => 'activity-dyn'],
+    static function (): void {
+        $namePrefix = 'merchant-api.activity-dyn.';
+        //列表
+        Route::get(
+            'index',
+            [
+             ActivityDynController::class,
+             'index',
+            ],
+        )->name($namePrefix . 'index');
+        //改变状态
+        Route::post(
+            'status',
+            [
+             ActivityDynController::class,
+             'status',
+            ],
+        )->name($namePrefix . 'status');
+        //保存图片
+        Route::post(
+            'save-pic',
+            [
+             ActivityDynController::class,
+             'savePic',
+            ],
+        )->name($namePrefix . 'save-pic');
     },
 );
