@@ -27,6 +27,14 @@ class GamesPlatform extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'device' => '设备类型',
+                                      'is_hot' => '是否热门',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function games(): BelongsTo

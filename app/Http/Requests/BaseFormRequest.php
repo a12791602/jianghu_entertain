@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: Harris
@@ -8,57 +9,57 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
-use Waavi\Sanitizer\Laravel\SanitizesInput;
-
 /**
- * Class for base form request.
+ * Class BaseFormRequest
+ * @package App\Http\Requests
  */
-abstract class BaseFormRequest extends FormRequest
+class BaseFormRequest extends BaseFormAbstractRequest
 {
-    use SanitizesInput;
 
     /**
-     * validateResolved
-     * @return void
+     * @var array 需要依赖模型中的字段备注信息
      */
-    public function validateResolved():void
-    {
-        {
-            $this->sanitize();
-            parent::validateResolved();
-        }
-    }
+    protected $dependentModels = [];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [];
 
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    abstract public function rules(): array;
+    public function rules(): array
+    {
+        return [];
+    }
 
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
      */
-    abstract public function authorize(): bool;
+    public function authorize(): bool
+    {
+        return true;
+    }
 
-//    /**
-//     * @param Validator $validator Validator.
-//     * @throws HttpResponseException HttpResponseException.
-//     * @return void
-//     */
-//    protected function failedValidation(Validator $validator): void
-//    {
-//        $datas = [
-//            'success' => false,
-//            'code' => 400,
-//            'data' => [],
-//            'message' => $validator->errors()->first(),
-//        ];
-//        throw new HttpResponseException(response()->json($datas));
-//    }
+    /**
+     * @return mixed[] attributes set for request.
+     */
+    public function attributes(): array
+    {
+        $attribute = [];
+        foreach ($this->dependentModels as $dependentModel) {
+            if (!isset($dependentModel::$fieldDefinition)) {
+                continue;
+            }
+            $tmpVar    = $dependentModel::$fieldDefinition;
+            $attribute = array_merge($tmpVar, $attribute);
+        }
+        $attribute = array_merge($attribute, $this->extraDefinition);
+        return $attribute;
+    }
 }
