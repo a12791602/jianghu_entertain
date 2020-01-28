@@ -20,6 +20,7 @@ class RichListResource extends JsonResource
     {
         $result = [
                    'name'    => optional($this->frontendUser->specificInfo)->nickname,
+                   'guid'    => $this->frontendUser->guid,
                    'balance' => $this->balance,
                   ];
         return $result;

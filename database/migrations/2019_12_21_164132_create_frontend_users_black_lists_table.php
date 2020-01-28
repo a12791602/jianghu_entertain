@@ -22,7 +22,7 @@ class CreateFrontendUsersBlackListsTable extends Migration
                 $table->increments('id');
                 $table->string('platform_sign', 20)->nullable()->default(null)->comment('平台标识');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
-                $table->string('uid', 10)->nullable()->default(null)->comment('用户UID');
+                $table->string('guid', 16)->nullable()->default(null)->comment('客户游戏唯一标识id');
                 $table->decimal('account', 18, 4)->nullable()->default(null)->comment('当前余额');
                 $table->timestamp('last_login_time')->nullable()->default(null)->comment('最后登录时间');
                 $table->timestamp('register_time')->nullable()->default(null)->comment('注册时间');

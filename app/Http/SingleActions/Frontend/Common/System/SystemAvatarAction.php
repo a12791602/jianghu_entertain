@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Frontend\Common;
+namespace App\Http\SingleActions\Frontend\Common\System;
 
 use App\Http\Resources\Frontend\System\SystemAvatarResource;
 use App\Models\Systems\SystemUserPublicAvatar;

@@ -21,6 +21,14 @@ class SystemUserPublicAvatarSeeder extends Seeder
               'id'       => 1,
               'pic_path' => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
              ],
+             [
+              'id'       => 2,
+              'pic_path' => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
+             ],
+             [
+              'id'       => 3,
+              'pic_path' => 'uploads/test/avatar/2020-01-08/7c0a218b4f651a9c6aeded81fc032ef6.png',
+             ],
             ],
         );
     }

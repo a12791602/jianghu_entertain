@@ -50,7 +50,6 @@ class CreateSystemLogsBackendsTable extends Migration
                 $table->unsignedInteger('admin_id')->nullable()->default(null)
                     ->comment('管理员id');
                 $table->string('admin_name', 64)->nullable()->default(null)->comment('管理员名称');
-                $table->string('username', 64)->nullable()->default(null)->comment('用户名');
                 $table->integer('menu_id')->nullable()->default(null)->comment('菜单id');
                 $table->string('menu_label', 64)->nullable()->default(null)->comment('菜单名称');
                 $table->text('menu_path')->nullable()->default(null)->comment('菜单路径');

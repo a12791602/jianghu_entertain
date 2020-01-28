@@ -8,6 +8,7 @@ use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailOfHead;
 use App\Models\Email\SystemEmailOfMerchant;
 use App\Models\Email\SystemEmailOfUser;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -82,6 +83,8 @@ class SystemEmailEventListener
             $tmpData['email_id']      = $event->emailId;
             $tmpData['merchant_id']   = $receiver->id;
             $tmpData['platform_sign'] = $receiver->platform->sign ?? '';
+            $tmpData['created_at']    = Carbon::now();
+            $tmpData['updated_at']    = Carbon::now();
             $data[]                   = $tmpData;
         }
         SystemEmailOfMerchant::insert($data);
@@ -104,6 +107,8 @@ class SystemEmailEventListener
             $tmpData['email_id']      = $event->emailId;
             $tmpData['user_id']       = $receiverId;
             $tmpData['platform_sign'] = $platformSign;
+            $tmpData['created_at']    = Carbon::now();
+            $tmpData['updated_at']    = Carbon::now();
             $data[]                   = $tmpData;
         }
         SystemEmailOfUser::insert($data);
@@ -117,7 +122,11 @@ class SystemEmailEventListener
      */
     private function _toSaveEmailOfHead(SystemEmailEvent $event): void
     {
-        $data = ['email_id' => $event->emailId];
+        $data = [
+                 'email_id'   => $event->emailId,
+                 'created_at' => Carbon::now(),
+                 'updated_at' => Carbon::now(),
+                ];
         SystemEmailOfHead::insert($data);
     }
 }

@@ -19,7 +19,7 @@ class PersonalInformationResource extends JsonResource
     public function toArray($request): array
     {
         $result = [
-                   'uid'      => $this->uid,
+                   'guid'     => $this->guid,
                    'avatar'   => $this->specificInfo->avatar_full,
                    'nickname' => $this->specificInfo->nickname,
                   ];

@@ -16,5 +16,11 @@ Route::group(
         //已收邮件
         Route::get('received-index', [BackendSystemEmailController::class, 'receivedIndex'])
             ->name($namePrefix . 'received-index');
+        //最近联系人
+        Route::get('recent-contact', [BackendSystemEmailController::class, 'recentContact'])
+            ->name($namePrefix . 'recent-contact');
+        //联系人
+        Route::get('contact', [BackendSystemEmailController::class, 'contact'])
+            ->name($namePrefix . 'contact');
     },
 );

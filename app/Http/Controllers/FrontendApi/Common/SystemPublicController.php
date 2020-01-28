@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\SingleActions\Frontend\Common\SystemAvatarAction;
+use App\Http\SingleActions\Frontend\Common\System\SystemAvatarAction;
 use Illuminate\Http\JsonResponse;
 
 /**

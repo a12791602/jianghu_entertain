@@ -822,6 +822,20 @@ class SystemRoutesBackendSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'headquarters-api.email.recent-contact',
+              'method'        => 'recentContact',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.email.contact',
+              'method'        => 'contact',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

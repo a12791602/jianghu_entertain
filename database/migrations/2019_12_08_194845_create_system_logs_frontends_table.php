@@ -23,6 +23,7 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('log_uuid', 45)->nullable()->default(null)->comment('唯一标识');
+                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
                 $table->text('description')->nullable()->default(null)->comment('描述');
                 $table->string('origin', 200)->nullable()->default(null)->comment('起源');
                 $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型');
@@ -46,12 +47,7 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->text('inputs')->nullable()->default(null)->comment('传递的参数');
                 $table->text('route')->nullable()->default(null)->comment('路由');
                 $table->unsignedInteger('route_id')->nullable()->default(null)->comment('路由id');
-                $table->integer('admin_id')->nullable()->default(null)->comment('管理员id');
-                $table->string('admin_name', 64)->nullable()->default(null)->comment('管理员名称');
-                $table->string('username', 64)->nullable()->default(null)->comment('用户名');
-                $table->integer('menu_id')->nullable()->default(null)->comment('菜单id');
-                $table->string('menu_label', 64)->nullable()->default(null)->comment('菜单标题');
-                $table->text('menu_path')->nullable()->default(null)->comment('菜单路径');
+                $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
                 $table->nullableTimestamps();
             },
         );

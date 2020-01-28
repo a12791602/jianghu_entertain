@@ -2,6 +2,7 @@
 
 namespace App\Models\Email;
 
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -24,6 +25,15 @@ class SystemEmailOfMerchant extends BaseModel
     public function email(): BelongsTo
     {
         $object = $this->belongsTo(SystemEmail::class, 'email_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function merchant(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'merchant_id', 'id');
         return $object;
     }
 }

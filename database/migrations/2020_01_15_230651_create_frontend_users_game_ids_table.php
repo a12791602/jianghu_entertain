@@ -23,7 +23,7 @@ class CreateFrontendUsersGameIdsTable extends Migration
                 $table->unsignedInteger('user_id');
             },
         );
-        DB::statement("ALTER TABLE `frontend_users_game_ids` comment '前端用户唯一ID'");
+        DB::statement("ALTER TABLE `frontend_users_game_ids` comment '客户游戏唯一标识id'");
     }
 
     /**

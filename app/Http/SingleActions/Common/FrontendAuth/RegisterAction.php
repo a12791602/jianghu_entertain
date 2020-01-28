@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
-use App\Events\FrontendLoginEvent;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Models\User\FrontendUser;
@@ -40,7 +39,7 @@ class RegisterAction
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
             throw new \Exception('100503', 401);
         }
-        $user = $this->user(
+        $user   = $this->user(
             $verifyData['mobile'],
             $register_user_id,
             bcrypt($request['password']),
@@ -49,8 +48,7 @@ class RegisterAction
             $controller->currentPlatformEloq->id,
             $platform_sign,
         );
-        $data = $this->token($controller, $user, $request);
-        event(new FrontendLoginEvent($user));
+        $data   = $this->token($controller, $user, $request);
         $result = msgOut($data);
         Cache::forget($verification_key);
         return $result;
@@ -96,7 +94,7 @@ class RegisterAction
     /**
      * Frontend User Model
      * @param string  $mobile      Mobile.
-     * @param string  $user_id     User_id.
+     * @param string  $guid        Game_user_id.
      * @param string  $password    Password.
      * @param string  $invite_code Invite_code.
      * @param string  $register_ip Register_ip.
@@ -106,7 +104,7 @@ class RegisterAction
      */
     public function user(
         string $mobile,
-        string $user_id,
+        string $guid,
         string $password,
         string $invite_code,
         string $register_ip,
@@ -115,7 +113,7 @@ class RegisterAction
     ): FrontendUser {
         $item = [
                  'mobile'        => $mobile,
-                 'uid'           => $user_id,
+                 'guid'          => $guid,
                  'password'      => $password,
                  'invite_code'   => $invite_code,
                  'register_ip'   => $register_ip,

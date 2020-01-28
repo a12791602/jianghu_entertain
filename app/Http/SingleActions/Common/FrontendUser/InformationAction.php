@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\FrontendUser;
 
-use App\Http\Requests\Frontend\Common\FrontendUser\UpdateInformationRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
 use App\Http\Resources\Frontend\GamesLobby\PersonalInformationResource;
 use Illuminate\Http\JsonResponse;
@@ -42,13 +42,13 @@ class InformationAction
 
     /**
      * Update personal information.
-     * @param UpdateInformationRequest $request Update personal InformationRequest.
+     * @param InformationUpdateRequest $request Update personal InformationRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function update(UpdateInformationRequest $request): JsonResponse
+    public function update(InformationUpdateRequest $request): JsonResponse
     {
-        $item = $request->only(['avatar', 'nickname']);
+        $item = $request->validated();
         $user = $request->user();
         $user->specificInfo()->update($item);
         $info   = $user->specificInfo->only(['avatar', 'nickname']);

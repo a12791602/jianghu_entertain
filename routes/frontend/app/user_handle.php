@@ -3,7 +3,6 @@
 use App\Http\Controllers\FrontendApi\Common\FrontendAuthController;
 use App\Http\Controllers\FrontendApi\Common\FrontendUserController;
 use App\Http\Controllers\FrontendApi\Common\PasswordController;
-use App\Http\Controllers\FrontendApi\Common\SystemPublicController;
 
 Route::post('login', [FrontendAuthController::class, 'login'])->name('app-api.login');
 
@@ -23,6 +22,5 @@ Route::group(
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
         Route::get('grades', [FrontendUserController::class, 'grades'])->name($namePrefix . 'grades');
-        Route::get('system-avatar', [SystemPublicController::class, 'avatar'])->name($namePrefix . 'system-avatar');
     },
 );

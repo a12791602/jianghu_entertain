@@ -2,12 +2,12 @@
 
 namespace App\Http\SingleActions\Common\FrontendAuth;
 
-use App\Events\FrontendLoginEvent;
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -54,8 +54,12 @@ class LoginAction
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->sendLockoutResponse($request);
         }
-        $credentials = request(['mobile', 'password']);
-        $token       = $contll->currentAuth->attempt($credentials);
+        $validated   = $request->validated();
+        $credentials = Arr::only($validated, ['mobile', 'password']);
+
+        $credentials['platform_sign'] = $contll->currentPlatformEloq->sign;
+
+        $token = $contll->currentAuth->attempt($credentials);
         if (!$token) {
             $this->incrementLoginAttempts($request);
             throw new \Exception('100002');
@@ -82,12 +86,11 @@ class LoginAction
         $user->last_login_ip   = request()->ip();
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
-        $data = [
-                 'access_token' => $token,
-                 'token_type'   => 'Bearer',
-                 'expires_at'   => $expireAt,
-                ];
-        event(new FrontendLoginEvent($user));
+        $data   = [
+                   'access_token' => $token,
+                   'token_type'   => 'Bearer',
+                   'expires_at'   => $expireAt,
+                  ];
         $result = msgOut($data);
         return $result;
     }

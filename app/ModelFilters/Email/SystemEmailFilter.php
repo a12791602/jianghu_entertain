@@ -67,11 +67,11 @@ class SystemEmailFilter extends ModelFilter
         $object = $this;
         $number = (int) count($crated_at);
         if ($number === 1) {
-            $object = $this->where('created_at', '>=', $crated_at[0]);
+            $object = $this->where('send_time', '>=', $crated_at[0]);
         } elseif ($number === 2) {
             $object = $this
-                ->where('created_at', '>=', $crated_at[0])
-                ->where('created_at', '<=', $crated_at[1]);
+                ->where('send_time', '>=', $crated_at[0])
+                ->where('send_time', '<=', $crated_at[1]);
         }
         return $object;
     }
