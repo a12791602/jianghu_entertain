@@ -23,9 +23,13 @@ class DynamicInformationResource extends JsonResource
         $balance = $this->account->balance;
         $rank    = FrontendUsersAccount::where('balance', '>', $balance)->count();
         $result  = [
-                    'level_deep' => $this->level_deep,
-                    'balance'    => optional($this->account)->balance,
-                    'rich_rank'  => $rank + 1,
+                    'score'          => 1440,
+                    'grade'          => 'VIP8',
+                    'experience'     => 5200,
+                    'weekly_gift'    => $this->specificInfo->weekly_gift,
+                    'promotion_gift' => $this->specificInfo->promotion_gift,
+                    'balance'        => $this->account->balance,
+                    'rich_rank'      => $rank + 1,
                    ];
         return $result;
     }

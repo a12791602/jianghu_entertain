@@ -15,6 +15,26 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
 {
 
     /**
+     * 状态开启
+     */
+    public const PROMOTION_GIFT_OPEN = 1;
+
+    /**
+     * 状态关闭
+     */
+    public const PROMOTION_GIFT_CLOSE = 0;
+
+    /**
+     * 状态开启
+     */
+    public const WEEKLY_GIFT_OPEN = 1;
+
+    /**
+     * 状态关闭
+     */
+    public const WEEKLY_GIFT_CLOSE = 0;
+
+    /**
      * @var array $guarded
      */
     protected $guarded = ['id'];

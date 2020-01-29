@@ -50,5 +50,9 @@ $data = [
          '100613' => 'AES加密失败',
          //GamesLobbyController
          '100700' => '对不起,游戏已关闭!',
+         //FrontendUserController
+         '100800' => '领取成功',
+         '100801' => '已领取过晋级赠金',
+         '100802' => '已领取过每周赠金',
         ];
 return $data;

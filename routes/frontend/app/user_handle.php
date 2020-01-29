@@ -22,5 +22,9 @@ Route::group(
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
         Route::get('grades', [FrontendUserController::class, 'grades'])->name($namePrefix . 'grades');
+        Route::post('promotion-gifts', [FrontendUserController::class, 'promotionGift'])
+            ->name($namePrefix . 'promotion-gifts');
+        Route::post('weekly-gifts', [FrontendUserController::class, 'weeklyGift'])
+            ->name($namePrefix . 'weekly-gifts');
     },
 );

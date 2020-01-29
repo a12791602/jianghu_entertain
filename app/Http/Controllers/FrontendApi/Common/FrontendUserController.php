@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Controllers\FrontendApi\FrontendApiMainController;
-use App\Http\Requests\Frontend\Common\FrontendUser\UpdateInformationRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
 use App\Http\SingleActions\Common\FrontendUser\GradesAction;
 use App\Http\SingleActions\Common\FrontendUser\InformationAction;
+use App\Http\SingleActions\Common\FrontendUser\PromotionGiftAction;
+use App\Http\SingleActions\Common\FrontendUser\WeeklyGiftAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -44,13 +46,13 @@ class FrontendUserController extends FrontendApiMainController
     /**
      * Update personal information.
      * @param InformationAction        $action  Action.
-     * @param UpdateInformationRequest $request Update personal InformationRequest.
+     * @param InformationUpdateRequest $request Update personal InformationRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function updateInformation(
         InformationAction $action,
-        UpdateInformationRequest $request
+        InformationUpdateRequest $request
     ): JsonResponse {
         $result = $action->update($request);
         return $result;
@@ -64,6 +66,32 @@ class FrontendUserController extends FrontendApiMainController
      * @throws \Exception Exception.
      */
     public function grades(GradesAction $action, Request $request): JsonResponse
+    {
+        $result = $action->execute($request);
+        return $result;
+    }
+
+    /**
+     * Receive promotional gift.
+     * @param PromotionGiftAction $action  GradesAction.
+     * @param Request             $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function promotionGift(PromotionGiftAction $action, Request $request): JsonResponse
+    {
+        $result = $action->execute($request);
+        return $result;
+    }
+
+    /**
+     * Receive weekly gift .
+     * @param WeeklyGiftAction $action  WeeklyGiftAction.
+     * @param Request          $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function weeklyGift(WeeklyGiftAction $action, Request $request): JsonResponse
     {
         $result = $action->execute($request);
         return $result;
