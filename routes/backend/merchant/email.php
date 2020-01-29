@@ -16,5 +16,8 @@ Route::group(
         //已收邮件
         Route::get('received-index', [SystemEmailController::class, 'receivedIndex'])
             ->name($namePrefix . 'received-index');
+        //读邮件
+        Route::post('read-email', [SystemEmailController::class, 'readEmail'])
+            ->name($namePrefix . 'read-email');
     },
 );

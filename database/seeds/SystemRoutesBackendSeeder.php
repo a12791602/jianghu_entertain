@@ -836,6 +836,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'headquarters-api.email.read-email',
+              'method'        => 'readEmail',
+              'menu_group_id' => 5,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

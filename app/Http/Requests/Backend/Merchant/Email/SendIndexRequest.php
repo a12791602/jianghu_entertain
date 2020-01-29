@@ -11,6 +11,12 @@ use App\Models\Email\SystemEmail;
  */
 class SendIndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemEmail::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,9 +35,9 @@ class SendIndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'title'        => 'string',
-                'name'         => 'string',
-                'is_send'      => 'in:' . SystemEmail::IS_SEND_NO . ',' . SystemEmail::IS_SEND_YES,
+                'title'        => 'string|min:1|max:16',
+                'name'         => 'string|min:1|max:32',
+                'is_send'      => 'integer|in:' . SystemEmail::IS_SEND_NO . ',' . SystemEmail::IS_SEND_YES,
                 'created_at'   => 'array',
                 'created_at.*' => 'date',
                ];

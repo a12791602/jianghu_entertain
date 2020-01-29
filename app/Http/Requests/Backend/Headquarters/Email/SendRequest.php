@@ -12,6 +12,12 @@ use App\Models\Email\SystemEmail;
  */
 class SendRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemEmail::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -21,6 +27,7 @@ class SendRequest extends BaseFormRequest
     {
         return true;
     }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -28,37 +35,14 @@ class SendRequest extends BaseFormRequest
      */
     public function rules(): array
     {
+        $reveiverRule = 'required|string|min:1|max:64|distinct|email:rfc,dns|exists:merchant_admin_users,email';
         return [
                 'receivers'   => 'required|array',
-                'receivers.*' => 'required|distinct|email:rfc,dns|exists:merchant_admin_users,email',
-                'title'       => 'required|string',
-                'content'     => 'required|string',
-                'is_timing'   => 'required|in:' . SystemEmail::IS_TIMING_NO . ',' . SystemEmail::IS_TIMING_YES,
+                'receivers.*' => $reveiverRule,
+                'title'       => 'required|string|min:1|max:16',
+                'content'     => 'required|string|min:1|max:1000',
+                'is_timing'   => 'required|integer|in:' . SystemEmail::IS_TIMING_NO . ',' . SystemEmail::IS_TIMING_YES,
                 'send_time'   => 'required_if:is_timing,' . SystemEmail::IS_TIMING_YES . '|date|after:now',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'receivers.required'    => '请填写收件人',
-                'receivers.array'       => '收件人格式错误',
-                'receivers.*.required'  => '请填写收件人',
-                'receivers.*.email'     => '收件人格式错误',
-                'receivers.*.exists'    => ' 收件人不存在',
-                'receivers.*.distinct'  => ' 收件人不能重覆',
-                'title.required'        => '请填写邮件标题',
-                'title.string'          => '邮件标题格式错误',
-                'content.required'      => '请输入邮件内容',
-                'content.string'        => '邮件内容格式错误',
-                'is_timing.required'    => '请选择邮件发送方式',
-                'is_timing.in'          => '所选邮件发送方式不在范围内',
-                'send_time.required_if' => '请填写延时发送时间',
-                'send_time.date'        => '延时发送时间格式不正确',
-                'send_time.after'       => '延时发送时间必须晚于当前时间',
                ];
     }
 

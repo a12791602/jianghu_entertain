@@ -118,5 +118,6 @@ $data = [
          //BackendSystemEmailController
          '303000' => '邮件保存失败!',
          '303001' => '邮件发送失败!',
+         '303002' => '读邮件失败!',
         ];
 return $data;

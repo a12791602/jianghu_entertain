@@ -22,5 +22,8 @@ Route::group(
         //联系人
         Route::get('contact', [BackendSystemEmailController::class, 'contact'])
             ->name($namePrefix . 'contact');
+        //读邮件
+        Route::post('read-email', [BackendSystemEmailController::class, 'readEmail'])
+            ->name($namePrefix . 'read-email');
     },
 );

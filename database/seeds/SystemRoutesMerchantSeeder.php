@@ -865,6 +865,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.email.read-email',
+              'controller'    => null,
+              'method'        => 'readEmail',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

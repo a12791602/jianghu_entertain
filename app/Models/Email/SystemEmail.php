@@ -42,6 +42,16 @@ class SystemEmail extends BaseModel
     public const IS_SEND_NO = 0;
 
     /**
+     * 已读
+     */
+    public const IS_READ_YES = 1;
+
+    /**
+     * 未读
+     */
+    public const IS_READ_NO = 0;
+
+    /**
      * 厅主发往总控
      *
      */
@@ -63,6 +73,24 @@ class SystemEmail extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'is_timing'     => '是否定时发送',
+                                      'is_send'       => '是否发送',
+                                      'title'         => '邮件标题',
+                                      'content'       => '邮件内容',
+                                      'send_time'     => '发送时间',
+                                      'type'          => '邮件类型',
+                                      'receiver_ids'  => '接收人IDs',
+                                      'receivers'     => '接收人',
+                                      'sender_id'     => '发送人ID',
+                                      'platform_sign' => '平台标记',
+                                      'created_at'    => '创建时间',
+                                      'updated_at'    => '更新时间',
+                                     ];
 
     /**
      * @param string $value Value.

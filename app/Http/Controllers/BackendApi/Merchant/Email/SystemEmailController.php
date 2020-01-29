@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Email;
 
 use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Merchant\Email\ReadEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\ReceivedIndexRequest;
 use App\Http\Requests\Backend\Merchant\Email\SendIndexRequest;
 use App\Http\Requests\Backend\Merchant\Email\SendRequest;
+use App\Http\SingleActions\Backend\Merchant\Email\ReadEmailAction;
 use App\Http\SingleActions\Backend\Merchant\Email\ReceivedIndexAction;
 use App\Http\SingleActions\Backend\Merchant\Email\SendAction;
 use App\Http\SingleActions\Backend\Merchant\Email\SendIndexAction;
@@ -61,6 +63,21 @@ class SystemEmailController extends BackEndApiMainController
     ): JsonResponse {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($this, $inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 读邮件.
+     *
+     * @param ReadEmailAction  $action  Action.
+     * @param ReadEmailRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function readEmail(ReadEmailAction $action, ReadEmailRequest $request): JsonResponse
+    {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

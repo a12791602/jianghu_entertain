@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\Email;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Email\SystemEmail;
 
 /**
  * Class ReceivedIndexRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class ReceivedIndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemEmail::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,8 +35,8 @@ class ReceivedIndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'title'         => 'string',
-                'platform_sign' => 'string',
+                'title'         => 'string|min:1|max:16',
+                'platform_sign' => 'string|min:1|max:64',
                 'created_at'    => 'array',
                 'created_at.*'  => 'date',
                ];
