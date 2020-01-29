@@ -27,7 +27,12 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
                 $table->string('email', 32)->nullable()->default(null)->comment('邮箱');
                 $table->string('zip_code', 6)->nullable()->default(null)->comment('邮编');
                 $table->string('address', 128)->nullable()->default(null)->comment('地址');
-                $table->tinyInteger('register_type')->default('0')->comment('注册类型：0.普通注册1.人工开户注册2.链接开户注册3.扫码开户注册');
+                $table->tinyInteger('weekly_gift')->default(1)
+                    ->comment('每周礼金状态 0.已领取 1.可领取');
+                $table->tinyInteger('promotion_gift')->default(1)
+                    ->comment('晋级礼金状态 0.已领取 1.可领取');
+                $table->tinyInteger('register_type')->default('0')
+                    ->comment('注册类型：0.普通注册1.人工开户注册2.链接开户注册3.扫码开户注册');
                 $table->integer('total_members')->nullable()->default('0')->comment('用户发展客户总数');
                 $table->integer('user_id')->default('0')->comment('用户id');
                 $table->string('domain')->nullable()->default(null)->comment('所属域名');

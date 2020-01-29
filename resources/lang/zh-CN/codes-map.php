@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * author: Harris
@@ -12,18 +13,16 @@
 
 use Illuminate\Support\Facades\Config;
 
-$errorCodeDir = base_path().'/resources/lang/'.Config::get('app.locale').'/codes-and-messages/';
-$aErrorCodeFiles = glob($errorCodeDir.'*.php');
-$data = [];
+$errorCodeDir    = base_path() . '/resources/lang/' . Config::get('app.locale') . '/codes-and-messages/';
+$aErrorCodeFiles = glob($errorCodeDir . '*.php');
+$exception       = [];
 foreach ($aErrorCodeFiles as $skey => $sErrcodeFile) {
-    ${'arrError'.$skey} = include $sErrcodeFile;
-    if (!empty(${'arrError'.$skey})) {
-        if (empty($data)) {
-            $data = ${'arrError'.$skey};
-        } else {
-            $data += ${'arrError'.$skey};
-        }
+    ${'arrError' . $skey} = include $sErrcodeFile;
+    if (empty($exception)) {
+        $exception = ${'arrError' . $skey};
+    } else {
+        $exception += ${'arrError' . $skey};
     }
 }
 unset($aErrorCodeFiles, $skey);
-return $data;
+return $exception;

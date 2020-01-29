@@ -210,7 +210,7 @@ class SeederCommand extends GeneratorCommand
         } catch (\Throwable $exception) {
             $message = $exception->getMessage();
             $this->error($message);
-            die(0);
+            return '';
         }
         $data   = \json_decode($data, true);
         $number = count($data);
@@ -222,7 +222,7 @@ class SeederCommand extends GeneratorCommand
             );
             if (!$flag) {
                 $this->error('Canceled generation of Seeder!');
-                die(0);
+                return '';
             }
         }
         if ($number > 0) {

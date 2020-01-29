@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
              FrontendUserAccountSeeder::class,
              FrontendUserAccountTypeSeeder::class,
              FrontendUserAccountTypeParamSeeder::class,
-             FrontendUserSpecificInfoSeeder::class,
+             FrontendUsersSpecificInfoSeeder::class,
              MerchantSystemMenuSeeder::class,
              MerchantAdminAccessGroupSeeder::class,
              MerchantAdminUserSeeder::class,
