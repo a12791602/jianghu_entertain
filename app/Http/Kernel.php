@@ -53,22 +53,26 @@ class Kernel extends HttpKernel
                                                                'bindings',
                                                                'cors',
                                                                'crypt',
+                                                               'route-auth',
                                                               ],
                                    'frontend-h5-api'       => [
                                                                'throttle:300,1',
                                                                'bindings',
                                                                'cors',
                                                                'crypt',
+                                                               'route-auth',
                                                               ],
                                    'backend-api'           => [
                                                                'throttle:500,1',
                                                                'bindings',
                                                                'cors',
+                                                               'route-auth',
                                                               ],
                                    'merchant-api'          => [
                                                                'throttle:500,1',
                                                                'bindings',
                                                                'cors',
+                                                               'route-auth',
                                                               ],
                                    /**
                                     * verification code
@@ -103,6 +107,7 @@ class Kernel extends HttpKernel
                                   'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
                                   'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
                                   'crypt'            => \App\Http\Middleware\Crypt::class,//全局加密
+                                  'route-auth'       => \App\Http\Middleware\RouteAuth::class,//路由权限
                                  ];
 
     /**

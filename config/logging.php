@@ -100,12 +100,12 @@ $config = [
                                                         'driver'  => 'monolog',
                                                         'handler' => NullHandler::class,
                                                        ],
-                          'frontend-by-queue'       => [
+                          'frontend'                => [
                                                         'driver' => 'custom',
                                                         'via'    => FrontendLogMonolog::class,
                                                        ],
 
-                          'apibyqueue'              => [
+                          'backend'                 => [
                                                         'driver' => 'custom',
                                                         'via'    => BackendLogMonolog::class,
                                                        ],
