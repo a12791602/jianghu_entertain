@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 
@@ -10,29 +10,28 @@ use Illuminate\Http\JsonResponse;
  * Class RPVerificationCodeAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class RPVerificationCodeAction extends BaseAction
+class RPVerificationCodeAction extends MainAction
 {
 
     /**
      * Send security verification code.
-     * @param FrontendApiMainController $controller FrontendApiMainController.
-     * @param array                     $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $controller, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $mobile = $inputDatas['mobile'];
 
         $condition = [];
 
         $condition['mobile']        = $mobile;
-        $condition['platform_sign'] = $controller->currentPlatformEloq->sign;
+        $condition['platform_sign'] = $this->currentPlatformEloq->sign;
 
         if (FrontendUser::where($condition)->get()->isEmpty()) {
             throw new \Exception('100505');
         }
-        $code   = $this->sendVerificationCode($mobile);
+        $code   = sendVerificationCode($mobile);
         $result = msgOut($code);
         return $result;
     }

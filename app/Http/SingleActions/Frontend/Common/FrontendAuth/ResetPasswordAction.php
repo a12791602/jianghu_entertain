@@ -1,26 +1,26 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Requests\Frontend\Common\SecurityCodeRequest;
+use App\Http\Requests\Frontend\Common\ResetPasswordRequest;
 use App\Models\User\FrontendUser;
 use Cache;
 use Illuminate\Http\JsonResponse;
 
 /**
- * Class SecurityCodeAction
+ * Class ResetPasswordAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class SecurityCodeAction
+class ResetPasswordAction
 {
 
     /**
-     * Change front-end user security code.
-     * @param SecurityCodeRequest $request SecurityCodeRequest.
+     * Reset frontend-user password.
+     * @param ResetPasswordRequest $request ResetPasswordRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(SecurityCodeRequest $request): JsonResponse
+    public function execute(ResetPasswordRequest $request): JsonResponse
     {
         $verification_key = $request['verification_key'];
         $verifyData       = Cache::get($verification_key);
@@ -31,8 +31,7 @@ class SecurityCodeAction
             throw new \Exception('100503', 401);
         }
 
-        FrontendUser::where('mobile', $verifyData['mobile'])
-            ->update(['security_code' => bcrypt($request['security_code'])]);
+        FrontendUser::where('mobile', $verifyData['mobile'])->update(['password' => bcrypt($request['password'])]);
         Cache::forget($verification_key);
         $result = msgOut();
         return $result;

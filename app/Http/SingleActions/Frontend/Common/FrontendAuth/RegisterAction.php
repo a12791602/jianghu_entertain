@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Cache;
 use Illuminate\Http\JsonResponse;
@@ -15,20 +15,17 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  * Class RegisterAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class RegisterAction
+class RegisterAction extends MainAction
 {
     /**
      * Frontend registration action.
-     * @param FrontendApiMainController $controller FrontendApiMainController.
-     * @param RegisterRequest           $request    Frontend RegisterRequest.
+     * @param RegisterRequest $request Frontend RegisterRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(
-        FrontendApiMainController $controller,
-        RegisterRequest $request
-    ): JsonResponse {
-        $platform_sign    = $controller->currentPlatformEloq->sign;
+    public function execute(RegisterRequest $request): JsonResponse
+    {
+        $platform_sign    = $this->currentPlatformEloq->sign;
         $redis            = app('redis_user_unique_id');
         $register_user_id = $redis->spop($platform_sign . '_' . config('web.main.frontend_user_unique_id'))[0];
         $verification_key = $request['verification_key'];
@@ -45,10 +42,10 @@ class RegisterAction
             bcrypt($request['password']),
             $request->post('invite_code', '0'),
             $request->ip(),
-            $controller->currentPlatformEloq->id,
+            $this->currentPlatformEloq->id,
             $platform_sign,
         );
-        $data   = $this->token($controller, $user, $request);
+        $data   = $this->token($user, $request);
         $result = msgOut($data);
         Cache::forget($verification_key);
         return $result;
@@ -56,20 +53,16 @@ class RegisterAction
 
     /**
      * Generate token.
-     * @param FrontendApiMainController $controller FrontendApiMainController.
-     * @param FrontendUser              $user       Frontend User Model.
-     * @param RegisterRequest           $request    Frontend RegisterRequest.
+     * @param FrontendUser    $user    Frontend User Model.
+     * @param RegisterRequest $request Frontend RegisterRequest.
      * @return mixed[]
      */
-    public function token(
-        FrontendApiMainController $controller,
-        FrontendUser $user,
-        RegisterRequest $request
-    ): array {
-        $token          = $controller->currentAuth->login($user);
-        $expireInMinute = $controller->currentAuth->factory()->getTTL();
+    public function token(FrontendUser $user, RegisterRequest $request): array
+    {
+        $token          = $this->auth->login($user);
+        $expireInMinute = $this->auth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
-        $user           = $controller->currentAuth->user();
+        $user           = $this->auth->user();
 
         if ($user->remember_token !== null) {
             try {

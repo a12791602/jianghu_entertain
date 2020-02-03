@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,20 +16,12 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 /**
  * Class for login action.
  */
-class LoginAction
+class LoginAction extends MainAction
 {
     use AuthenticatesUsers;
 
     /**
-     * Agent
-     *
-     * @var object $userAgent
-     */
-    protected $userAgent;
-
-    /**
      * Get the maximum number of attempts to allow.
-     *
      * @return integer
      */
     public function maxAttempts(): int
@@ -41,39 +33,35 @@ class LoginAction
     /**
      * Login user and create token
      *
-     * @param FrontendApiMainController $contll  Controller.
-     * @param LoginVerificationRequest  $request Request.
+     * @param LoginVerificationRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(
-        FrontendApiMainController $contll,
-        LoginVerificationRequest $request
-    ): JsonResponse {
-        $this->userAgent = $contll->userAgent;
+    public function execute(LoginVerificationRequest $request): JsonResponse
+    {
         if ($this->hasTooManyLoginAttempts($request)) {
             $this->sendLockoutResponse($request);
         }
         $validated   = $request->validated();
         $credentials = Arr::only($validated, ['mobile', 'password']);
 
-        $credentials['platform_sign'] = $contll->currentPlatformEloq->sign;
+        $credentials['platform_sign'] = $this->currentPlatformEloq->sign;
 
-        $token = $contll->currentAuth->attempt($credentials);
+        $token = $this->auth->attempt($credentials);
         if (!$token) {
             $this->incrementLoginAttempts($request);
             throw new \Exception('100002');
         }
-        if ($contll->currentAuth->user()->frozen_type === 1) {
+        if ($this->auth->user()->frozen_type === 1) {
             throw new \Exception('100014');
         }
         if ($request->hasSession()) {
             $request->session()->regenerate();
             $this->clearLoginAttempts($request);
         }
-        $expireInMinute = $contll->currentAuth->factory()->getTTL();
+        $expireInMinute = $this->auth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
-        $user           = $contll->currentAuth->user();
+        $user           = $this->auth->user();
         if ($user->remember_token !== null) {
             try {
                 JWTAuth::setToken($user->remember_token);
@@ -101,11 +89,11 @@ class LoginAction
      */
     protected function throttleKey(Request $request): ?string
     {
-        if ($this->userAgent->isDesktop()) {
+        if ($this->agent->isDesktop()) {
             $return = Str::lower($request->input($this->username())) . '|Desktop|' . $request->ip();
         } else {
             $return = Str::lower($request->input($this->username())) .
-                '|' . $this->userAgent->device() .
+                '|' . $this->agent->device() .
                 '|' . $request->ip();
         }
         return $return;

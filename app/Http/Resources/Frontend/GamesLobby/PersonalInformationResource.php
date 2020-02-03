@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -13,7 +14,7 @@ class PersonalInformationResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request Request.
+     * @param  Request $request Request.
      * @return mixed[]
      */
     public function toArray($request): array

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\GamesLobby;
+namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\Resources\Frontend\GamesLobby\RichListResource;
 use App\Models\User\FrontendUsersAccount;

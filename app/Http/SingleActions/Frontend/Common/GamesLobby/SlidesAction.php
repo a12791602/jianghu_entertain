@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Common\GamesLobby;
+namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\Resources\Frontend\GamesLobby\SystemSlidesResource;
 use App\ModelFilters\System\SystemFePageBannerFilter;
@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class SlidesAction
- * @package App\Http\SingleActions\Common\GamesLobby
+ * @package App\Http\SingleActions\Frontend\Common\GamesLobby
  */
 class SlidesAction
 {

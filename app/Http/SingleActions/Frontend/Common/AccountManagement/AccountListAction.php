@@ -3,25 +3,23 @@
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\Resources\Frontend\AccountManagement\AccountListResource;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class AccountListAction
  * @package App\Http\SingleActions\Common\FrontendUser
  */
-class AccountListAction
+class AccountListAction extends MainAction
 {
     /**
      * Get user bank list.
-     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function execute(): JsonResponse
     {
-        $user   = $request->user();
-        $card   = $user->bankCard;
+        $card   = $this->user->bankCard;
         $result = msgOut(AccountListResource::collection($card));
         return $result;
     }

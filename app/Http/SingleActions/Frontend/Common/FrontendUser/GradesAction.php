@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendUser;
+namespace App\Http\SingleActions\Frontend\Common\FrontendUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class GradesAction
  * @package App\Http\SingleActions\Common\FrontendUser
  */
-class GradesAction
+class GradesAction extends MainAction
 {
     /**
      * Get user grade rules.
-     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function execute(): JsonResponse
     {
-        $grade = UsersGrade::where('platform_sign', $request->user()->platform_sign)
+        $grade = UsersGrade::where('platform_sign', $this->user->platform_sign)
             ->get(['name', 'experience_min', 'experience_max', 'grade_gift', 'week_gift']);
 
         $result = msgOut($grade);

@@ -1,42 +1,39 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendUser;
+namespace App\Http\SingleActions\Frontend\Common\FrontendUser;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
 use App\Http\Resources\Frontend\GamesLobby\PersonalInformationResource;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class InformationAction
  * @package App\Http\SingleActions\Common\FrontendUser
  */
-class InformationAction
+class InformationAction extends MainAction
 {
+
     /**
      * Personal information.
-     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function information(Request $request): JsonResponse
+    public function information(): JsonResponse
     {
-        $user   = $request->user();
-        $result = msgOut(PersonalInformationResource::make($user));
+        $result = msgOut(PersonalInformationResource::make($this->user));
         return $result;
     }
 
     /**
      * Dynamic information.
-     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function dynamicInformation(Request $request): JsonResponse
+    public function dynamicInformation(): JsonResponse
     {
-        $user   = $request->user();
-        $result = msgOut(DynamicInformationResource::make($user));
+        $result = msgOut(DynamicInformationResource::make($this->user));
         return $result;
     }
 
@@ -49,10 +46,8 @@ class InformationAction
     public function update(InformationUpdateRequest $request): JsonResponse
     {
         $item = $request->validated();
-        $user = $request->user();
-        $user->specificInfo()->update($item);
-        $info   = $user->specificInfo->only(['avatar', 'nickname']);
-        $result = msgOut($info);
+        $this->user->specificInfo()->update($item);
+        $result = msgOut();
         return $result;
     }
 }

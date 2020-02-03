@@ -20,7 +20,7 @@ class GameListRequest extends BaseFormRequest
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
-    protected $extraDefinition = ['aa' => '自定义字段'];
+    //protected $extraDefinition = ['aa' => '自定义字段'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -43,7 +43,6 @@ class GameListRequest extends BaseFormRequest
                 'device'  => 'integer|required',
                 'type_id' => 'integer',
                 'is_hot'  => 'integer',
-                'aa'      => 'required',
                ];
     }
 

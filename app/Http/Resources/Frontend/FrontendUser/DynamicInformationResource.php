@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Frontend\FrontendUser;
 
 use App\Models\User\FrontendUsersAccount;
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
 
@@ -15,7 +16,7 @@ class DynamicInformationResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param  \Illuminate\Http\Request $request Request.
+     * @param  Request $request Request.
      * @return mixed[]
      */
     public function toArray($request): array
@@ -24,8 +25,8 @@ class DynamicInformationResource extends JsonResource
         $rank    = FrontendUsersAccount::where('balance', '>', $balance)->count();
         $result  = [
                     'score'          => 1440,
-                    'grade'          => 'VIP8',
-                    'experience'     => 5200,
+                    'grade'          => 6,
+                    'experience'     => 1500,
                     'weekly_gift'    => $this->specificInfo->weekly_gift,
                     'promotion_gift' => $this->specificInfo->promotion_gift,
                     'balance'        => $this->account->balance,

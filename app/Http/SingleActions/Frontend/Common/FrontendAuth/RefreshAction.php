@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 
@@ -10,17 +10,16 @@ use Illuminate\Support\Carbon;
  * Class RefreshAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class RefreshAction
+class RefreshAction extends MainAction
 {
     /**
-     * @param FrontendApiMainController $frontend Frontend.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $frontend): JsonResponse
+    public function execute(): JsonResponse
     {
-        $token          = $frontend->currentAuth->refresh();
-        $expireInMinute = $frontend->currentAuth->factory()->getTTL();
+        $token          = $this->auth->refresh();
+        $expireInMinute = $this->auth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $data           = [
                            'access_token' => $token,

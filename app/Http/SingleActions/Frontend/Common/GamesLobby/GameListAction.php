@@ -1,35 +1,33 @@
 <?php
 
-namespace App\Http\SingleActions\Common\GamesLobby;
+namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\GameListRequest;
 use App\Http\Resources\Frontend\GamesLobby\GameListResource;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Platform\GamesPlatformFilter;
 use App\Models\Platform\GamesPlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class GameListAction
- * @package App\Http\SingleActions\Common\GamesLobby
+ * @package App\Http\SingleActions\Frontend\Common\GamesLobby
  */
-class GameListAction
+class GameListAction extends MainAction
 {
 
     /**
      * Game list.
-     * @param FrontendApiMainController $controller FrontendApiMainController.
-     * @param GameListRequest           $request    GameListRequest.
+     * @param GameListRequest $request GameListRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function execute(
-        FrontendApiMainController $controller,
         GameListRequest $request
     ): JsonResponse {
         $condition = [];
 
-        $condition['platform_sign'] = $controller->currentPlatformEloq->sign;
+        $condition['platform_sign'] = $this->currentPlatformEloq->sign;
 
         $condition           = $request->validated();
         $condition['status'] = GamesPlatform::STATUS_OPEN;

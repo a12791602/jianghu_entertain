@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendAuth;
+namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 
@@ -10,18 +10,17 @@ use Illuminate\Http\JsonResponse;
  * Class RegisterVerificationCodeAction
  * @package App\Http\SingleActions\Common\FrontendAuth
  */
-class RegisterVerificationCodeAction extends BaseAction
+class RegisterVerificationCodeAction extends MainAction
 {
     /**
-     * @param FrontendApiMainController $controller FrontendApiMainController.
-     * @param array                     $inputDatas InputDatas.
+     * @param array $inputData InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $controller, array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $sign   = $controller->currentPlatformEloq->sign;
-        $mobile = $inputDatas['mobile'];
+        $sign   = $this->currentPlatformEloq->sign;
+        $mobile = $inputData['mobile'];
 
         $condition = [];
 
@@ -31,7 +30,7 @@ class RegisterVerificationCodeAction extends BaseAction
         if (!FrontendUser::where($condition)->get()->isEmpty()) {
             throw new \Exception('100504');
         }
-        $code   = $this->sendVerificationCode($mobile);
+        $code   = sendVerificationCode($mobile);
         $result = msgOut($code);
         return $result;
     }

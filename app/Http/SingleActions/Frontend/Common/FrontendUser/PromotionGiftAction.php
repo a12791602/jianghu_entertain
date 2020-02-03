@@ -1,26 +1,25 @@
 <?php
 
-namespace App\Http\SingleActions\Common\FrontendUser;
+namespace App\Http\SingleActions\Frontend\Common\FrontendUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUsersSpecificInfo;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class PromotionGiftsAction
  * @package App\Http\SingleActions\Common\FrontendUser
  */
-class PromotionGiftAction
+class PromotionGiftAction extends MainAction
 {
     /**
      * Promotion gifts money.
-     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(Request $request): JsonResponse
+    public function execute(): JsonResponse
     {
-        $specificInfo = $request->user()->specificInfo;
+        $specificInfo = $this->user->specificInfo;
         if (!$specificInfo->promotion_gift) {
             throw new \Exception('100801');
         }
