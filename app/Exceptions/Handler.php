@@ -2,17 +2,15 @@
 
 namespace App\Exceptions;
 
+use App\Jobs\Telegram\ErrorHandleTG;
 use App\Lib\ErrorsHandler\Formatters\BaseFormatter;
 use App\Lib\ErrorsHandler\Reporters\ReporterInterface;
-use App\Lib\TGMSG;
 use Asm89\Stack\CorsService;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 use Jenssegers\Agent\Agent;
 use ReflectionClass;
@@ -95,6 +93,17 @@ class Handler extends ExceptionHandler
         if ($this->shouldntReport($e)) {
             return;
         }
+        $this->_checkReporter($e);
+    }
+
+    /**
+     * Handle Reporter
+     * @param Exception $e Exception.
+     * @return void
+     * @throws Exception|InvalidArgumentException Exception.
+     */
+    private function _checkReporter(Exception $e): void
+    {
         $reporters = $this->config['reporters'];
         foreach ($reporters as $rpKey => $reporter) {
             $class           = $reporter['class'] ?? null;
@@ -131,8 +140,10 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e): Response
     {
         // phpcs:enable Squiz.Commenting.FunctionComment.TypeHintMissing
-        $response = $this->_generateExceptionResponse($request, $e);
-        $this->_sendToTg($e, $request, $response);
+        $response     = $this->_generateExceptionResponse($request, $e);
+        $agent        = new Agent();
+        $currentRoute = Route::getCurrentRoute();
+        dispatch(new ErrorHandleTG($e, $request, $response, $agent, $currentRoute));
         if ($this->config['add_cors_headers']) {
             if (!class_exists(CorsService::class)) {
                 throw new InvalidArgumentException(
@@ -209,64 +220,5 @@ class Handler extends ExceptionHandler
         }
         $redirect = redirect()->guest($exception->redirectTo() ?? route('login'));
         return $redirect;
-    }
-
-    /**
-     * @param Exception    $e        Exception.
-     * @param Request      $request  Requset.
-     * @param JsonResponse $response JsonResponse.
-     * @return void
-     * @throws \Telegram\Bot\Exceptions\TelegramSDKException TelegramSDKException.
-     */
-    private function _sendToTg(Exception $e, Request $request, JsonResponse $response): void
-    {
-        //###### sending errors to tg //Harris ############
-        $appEnvironment = App::environment();
-        $agent          = new Agent();
-        $requestOs      = $agent->platform();
-        $osVersion      = $agent->version($requestOs);
-        $browser        = $agent->browser();
-        $bsVersion      = $agent->version($browser);
-        $robot          = $agent->robot();
-        if ($agent->isRobot()) {
-            $type = 'robot';
-        } elseif ($agent->isDesktop()) {
-            $type = 'desktop';
-        } elseif ($agent->isTablet()) {
-            $type = 'tablet';
-        } elseif ($agent->isMobile()) {
-            $type = 'mobile';
-        } elseif ($agent->isPhone()) {
-            $type = 'phone';
-        } else {
-            $type = 'other';
-        }
-        $currentRoute = Route::getCurrentRoute();
-        $route        = empty($currentRoute) ? null : $currentRoute->uri();
-        $error        = [
-                         'environment'   => $appEnvironment,
-                         'route'         => $route,
-                         'origin'        => $agent->getHttpHeaders(),
-                         'ips'           => $request->ips(), //array
-                         'user_agent'    => $agent->getUserAgent(),
-                         'lang'          => $agent->languages(), //array
-                         'device'        => $agent->device(),
-                         'os'            => $requestOs,
-                         'browser'       => $browser,
-                         'bs_version'    => $bsVersion,
-                         'os_version'    => $osVersion,
-                         'device_type'   => $type,
-                         'robot'         => $robot,
-                         'inputs'        => $request->all(),                   //array
-                         'data'          => $request->get('crypt_data') ?? '', //加密的data
-                         'file'          => $e->getFile(),
-                         'line'          => $e->getLine(),
-                         'code'          => $e->getCode(),
-                         'message'       => $e->getMessage(),
-                         'previous'      => $e->getPrevious(),
-                         'TraceAsString' => $e->getTraceAsString(),
-                        ];
-        $telegram     = new TGMSG($response);
-        $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
     }
 }
