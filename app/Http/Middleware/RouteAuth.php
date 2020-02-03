@@ -31,7 +31,7 @@ class RouteAuth
 
     /**
      * Agent
-     * @var object $userAgent
+     * @var Agent $userAgent
      */
     public $userAgent;
 
@@ -40,32 +40,33 @@ class RouteAuth
      * @var array
      */
     protected $routeModel = [
-                             'app-api'      => SystemRoutesMobile::class,
-                             'h5-api'       => SystemRoutesH5::class,
-                             'pc-api'       => SystemRoutesWeb::class,
-                             'merchant-api' => SystemRoutesMerchant::class,
-                            ];
+        'app-api'          => SystemRoutesMobile::class,
+        'h5-api'           => SystemRoutesH5::class,
+        'pc-api'           => SystemRoutesWeb::class,
+        'merchant-api'     => SystemRoutesMerchant::class,
+        'headquarters-api' => SystemRoutesBackend::class,
+    ];
 
     /**
      * @var array
      */
     protected $headquarters = [
-                               'portPrefix'    => 'headquarters-api',
-                               'current_guard' => 'backend',
-                               'route'         => SystemRoutesBackend::class,
-                               'menu'          => BackendSystemMenu::class,
-                              ];
+        'portPrefix'    => 'headquarters-api',
+        'current_guard' => 'backend',
+        'route'         => SystemRoutesBackend::class,
+        'menu'          => BackendSystemMenu::class,
+    ];
 
     /**
      * @var array
      */
     protected $merchant = [
-                           'portPrefix'    => 'merchant-api',
-                           'current_guard' => 'merchant',
-                           'route'         => SystemRoutesMerchant::class,
-                           'menu'          => MerchantSystemMenu::class,
-                           'platform'      => SystemPlatform::class,
-                          ];
+        'portPrefix'    => 'merchant-api',
+        'current_guard' => 'merchant',
+        'route'         => SystemRoutesMerchant::class,
+        'menu'          => MerchantSystemMenu::class,
+        'platform'      => SystemPlatform::class,
+    ];
 
     /**
      * Model
@@ -78,28 +79,28 @@ class RouteAuth
      * @var array
      */
     protected $routeGuard = [
-                             'app-api'          => 'frontend-mobile',
-                             'pc-api'           => 'frontend-pc',
-                             'h5-api'           => 'frontend-h5',
-                             'merchant-api'     => 'merchant',
-                             'headquarters-api' => 'backend',
-                            ];
+        'app-api'          => 'frontend-mobile',
+        'pc-api'           => 'frontend-pc',
+        'h5-api'           => 'frontend-h5',
+        'merchant-api'     => 'merchant',
+        'headquarters-api' => 'backend',
+    ];
 
     /**
      * Log Channels
      * @var array Logger.
      */
     protected $logger = [
-                         'frontend' => [
-                                        'app-api',
-                                        'pc-api',
-                                        'h5-api',
-                                       ],
-                         'backend'  => [
-                                        'merchant-api',
-                                        'headquarters-api',
-                                       ],
-                        ];
+        'frontend' => [
+            'app-api',
+            'pc-api',
+            'h5-api',
+        ],
+        'backend'  => [
+            'merchant-api',
+            'headquarters-api',
+        ],
+    ];
 
     /**
      * RouteAuth constructor.
