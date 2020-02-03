@@ -24,7 +24,7 @@ class FrontendLogMonolog
      */
     public function __invoke(): Logger
     {
-        $logger = new Logger('frontend-by-queue');
+        $logger = new Logger('frontend');
         $logger->pushHandler(new FrontendLogHandler());
         $logger->pushProcessor(new FrontendLogProcessor());
         return $logger;

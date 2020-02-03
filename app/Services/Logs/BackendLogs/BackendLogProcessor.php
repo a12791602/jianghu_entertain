@@ -49,6 +49,7 @@ class BackendLogProcessor
     public function __invoke(array $record): array
     {
         $agent           = new Agent();
+        $request         = request();
         $clientOs        = $agent->platform();
         $osVersion       = $agent->version($clientOs);
         $browser         = $agent->browser();
@@ -56,14 +57,14 @@ class BackendLogProcessor
         $robot           = $agent->robot();
         $type            = $this->_prepareType($agent);
         $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
-        $adminUser       = auth()->user() ? auth()->user()->id : null;
+        $auth            = auth($request->get('guard'))->user();
         $record['extra'] = [
-                            'admin_id'    => $adminUser,
-                            'admin_name'  => $adminUser !== null ? auth()->user()->name : null,
-                            'origin'      => request()->headers->get('origin'),
-                            'ip'          => request()->ip(),
-                            'ips'         => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
-                            'user_agent'  => request()->server('HTTP_USER_AGENT'),
+                            'admin_id'    => optional($auth)->id,
+                            'admin_name'  => optional($auth)->name,
+                            'origin'      => $request->headers->get('origin'),
+                            'ip'          => $request->ip(),
+                            'ips'         => json_encode($request->ips(), JSON_THROW_ON_ERROR, 512),
+                            'user_agent'  => $request->server('HTTP_USER_AGENT'),
                             'lang'        => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
                             'device'      => $agent->device(),
                             'os'          => $clientOs,

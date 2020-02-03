@@ -59,14 +59,14 @@ class FrontendLogProcessor
     ): array {
         $item = [];
         if ($auth->check()) {
-            $item['user_id'] = auth()->user()->id;
-            $item['mobile']  = auth()->user()->mobile;
+            $item['user_id'] = $auth->user()->id;
+            $item['mobile']  = $auth->user()->mobile;
         } elseif ($route_name === 'login') {
             $item['mobile']             = $messageArr['input']['mobile'];
             $condition                  = [];
             $condition['mobile']        = $item['mobile'];
             $condition['platform_sign'] = $platform_sign;
-            $item['user_id']            = FrontendUser::where($condition)->first(['id'])->id;
+            $item['user_id']            = optional(FrontendUser::where($condition)->first(['id']))->id ?? null;
         } else {
             $item['user_id'] = null;
             $item['mobile']  = null;
@@ -81,8 +81,9 @@ class FrontendLogProcessor
      */
     public function __invoke(array $record): array
     {
+        $request       = request();
         $agent         = new Agent();
-        $baseUrl       = explode('/', request()->root());
+        $baseUrl       = explode('/', $request->root());
         $domain        = array_pop($baseUrl);
         $system_domain = SystemDomain::where('domain', $domain)->first(['platform_sign']);
         if (!$system_domain) {
@@ -96,17 +97,17 @@ class FrontendLogProcessor
         $robot           = $agent->robot();
         $type            = $this->_prepareType($agent);
         $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
-        $route_path      = explode('/', request()->path());
+        $route_path      = explode('/', $request->path());
         $route_name      = array_pop($route_path);
-        $user_info       = $this->information(auth(), $platform_sign, $route_name, $messageArr);
+        $user_info       = $this->information(auth($request->get('guard')), $platform_sign, $route_name, $messageArr);
         $record['extra'] = [
                             'user_id'       => $user_info['user_id'],
                             'mobile'        => $user_info['mobile'],
                             'platform_sign' => $platform_sign,
-                            'origin'        => request()->headers->get('origin'),
-                            'ip'            => request()->ip(),
-                            'ips'           => json_encode(request()->ips(), JSON_THROW_ON_ERROR, 512),
-                            'user_agent'    => request()->server('HTTP_USER_AGENT'),
+                            'origin'        => $request->headers->get('origin'),
+                            'ip'            => $request->ip(),
+                            'ips'           => json_encode($request->ips(), JSON_THROW_ON_ERROR, 512),
+                            'user_agent'    => $request->server('HTTP_USER_AGENT'),
                             'lang'          => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
                             'device'        => $agent->device(),
                             'os'            => $clientOs,

@@ -32,7 +32,6 @@ class CreateSystemLogsBackendsTable extends Migration
                 $table->string('token', 100)->nullable()->default(null)->comment('token');
                 $table->string('ip', 45)->nullable()->default(null)->comment('IP地址');
                 $table->string('ips', 200)->nullable()->default(null)->comment('IP地址');
-                $table->integer('user_id')->nullable()->default(null)->comment('用户id');
                 $table->string('session', 100)->nullable()->default(null);
                 $table->string('lang', 50)->nullable()->default(null);
                 $table->string('device', 20)->nullable()->default(null)->comment('设备');

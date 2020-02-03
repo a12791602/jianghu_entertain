@@ -24,7 +24,7 @@ class BackendLogMonolog
      */
     public function __invoke(): Logger
     {
-        $logger = new Logger('apibyqueue');
+        $logger = new Logger('backend');
         $logger->pushHandler(new BackendLogHandler());
         $logger->pushProcessor(new BackendLogProcessor());
         return $logger;
