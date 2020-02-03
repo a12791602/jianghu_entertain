@@ -11,6 +11,12 @@ use App\Models\Finance\SystemFinanceType;
  */
 class TypesRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceType::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,16 +34,7 @@ class TypesRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'is_online' => 'in:' . SystemFinanceType::IS_ONLINE_NO . ',' . SystemFinanceType::IS_ONLINE_YES,
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return ['is_online.in' => '参数错误'];
+        $isOnlineRule = 'integer|in:' . SystemFinanceType::IS_ONLINE_NO . ',' . SystemFinanceType::IS_ONLINE_YES;
+        return ['is_online' => $isOnlineRule];
     }
 }

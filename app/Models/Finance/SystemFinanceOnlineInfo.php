@@ -5,6 +5,7 @@ namespace App\Models\Finance;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
@@ -57,7 +58,23 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function type(): HasOneThrough
     {
-        $object = $this->hasOneThrough(SystemFinanceType::class, SystemFinanceChannel::class, 'channel_id', 'type_id');
+        $object = $this->hasOneThrough(
+            SystemFinanceType::class,
+            SystemFinanceChannel::class,
+            'id',
+            'id',
+            'channel_id',
+            'type_id',
+        );
+        return $object;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tags(): HasMany
+    {
+        $object = $this->hasMany(SystemFinanceUserTag::class, 'finance_id', 'id');
         return $object;
     }
 }

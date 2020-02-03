@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\H5\Recharge;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceChannel;
 
 /**
  * Class ChannelsRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class ChannelsRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceChannel::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,17 +34,6 @@ class ChannelsRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['type_id' => 'required|exists:system_finance_types,id'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'type_id.required' => '请选择分类',
-                'type_id.exists'   => '所选分类不存在',
-               ];
+        return ['type_id' => 'required|integer|min:1|exists:system_finance_types,id'];
     }
 }

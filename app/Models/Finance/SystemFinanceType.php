@@ -27,6 +27,21 @@ class SystemFinanceType extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'name'           => '金流分类名称',
+                                      'sign'           => '金流分类标记',
+                                      'is_online'      => '是否是线上金流',
+                                      'direction'      => '金流方向',
+                                      'status'         => '金流分类状态',
+                                      'author_id'      => '创建人ID',
+                                      'last_editor_id' => '最后编辑人ID',
+                                      'created_at'     => '创建时间',
+                                      'updated_at'     => '更新时间',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo

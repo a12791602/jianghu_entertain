@@ -22,6 +22,25 @@ class SystemFinanceChannel extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'type_id'        => '所属金流分类ID',
+                                      'vendor_id'      => '所属金流厂商ID',
+                                      'name'           => '金流通道名称',
+                                      'sign'           => '金流通道标记',
+                                      'request_mode'   => '金流通道请求模式',
+                                      'request_url'    => '金流通道请求地址',
+                                      'banks_code'     => '金流通道银行码',
+                                      'status'         => '金流通道状态',
+                                      'desc'           => '金流通道描述',
+                                      'author_id'      => '创建人ID',
+                                      'last_editor_id' => '最后编辑人ID',
+                                      'created_at'     => '创建时间',
+                                      'updated_at'     => '更新时间',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo

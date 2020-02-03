@@ -5,6 +5,7 @@ namespace App\Models\Finance;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class SystemFinanceOfflineInfo
@@ -45,6 +46,15 @@ class SystemFinanceOfflineInfo extends BaseModel
     public function bank(): BelongsTo
     {
         $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function tags(): HasMany
+    {
+        $object = $this->hasMany(SystemFinanceUserTag::class, 'finance_id', 'id');
         return $object;
     }
 }
