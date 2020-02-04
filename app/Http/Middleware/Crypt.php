@@ -40,6 +40,7 @@ class Crypt
 
         //系统配置为不加密传输数据时直接放行
         $isCryptData = configure($this->currentPlatformEloq->sign, 'is_crypt_data');
+        $request->attributes->add(['is_crypt_data' => $isCryptData]);
         if (!$isCryptData) {
             //配置为不加密数据时传递的数据还是加密的，则返回100607让前端刷新该加密配置
             if (isset($request['data'])) {
@@ -86,6 +87,7 @@ class Crypt
             throw new \Exception('100602');
         }
         $request->attributes->add(['current_platform_eloq' => $this->currentPlatformEloq]);
+        $request->attributes->add(['current_platform_ssl' => $this->currentSSL]);
     }
 
     /**

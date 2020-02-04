@@ -9,7 +9,7 @@ class AesCrypt
 {
 
     /**
-     * 秘钥
+     * 加密Key
      * @var string
      */
     private $aesKey;
@@ -20,9 +20,11 @@ class AesCrypt
      */
     private $aesIv;
 
+
     /**
      * @param string $aesKey 加密Key.
      * @param string $aesIv  偏移量.
+     * @return void
      */
     public function __construct(string $aesKey, string $aesIv)
     {
@@ -32,7 +34,7 @@ class AesCrypt
 
     /**
      * AES加密
-     * @param  string $data 需要加密的数据.
+     * @param string $data 需要加密的数据.
      * @throws \Exception Exception.
      * @return string
      */

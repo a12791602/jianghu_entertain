@@ -7,6 +7,7 @@
  * Time: 5:25 PM
  */
 
+use App\Lib\Crypt\DataCrypt;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
@@ -49,14 +50,15 @@ function msgOut(
     } else {
         $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
     }
-    $datas  = [
-               'status'  => true,
-               'code'    => $code,
-               'data'    => $data,
-               'message' => $message,
-              ];
-    $return = Response::json($datas);
-    return $return;
+    $datas       = [
+                    'status'  => true,
+                    'code'    => $code,
+                    'data'    => $data,
+                    'message' => $message,
+                   ];
+    $handledData = DataCrypt::handle($datas);
+    $jsonData    = Response::json($handledData);
+    return $jsonData;
 }
 
 /**
