@@ -124,7 +124,7 @@ class MainAction
         $this->auth                = auth($this->guard);
         $this->user                = $this->auth->user();
         $this->route               = $request->route();
-        $this->currentPlatformEloq = $request->get('current_platform_eloq');
+        $this->currentPlatformEloq = getCurrentPlatform($request);
         if ($request->get('logger') !== 'backend') {
             return;
         }
@@ -154,10 +154,6 @@ class MainAction
         if ($this->routeAccessible === false) {
             throw new Exception('100001');
         }
-        if ($this->entry['portPrefix'] !== 'merchant-api') {
-            return;
-        }
-        $this->currentPlatformEloq = $this->auth->user()->platform;
     }
 
     /**
