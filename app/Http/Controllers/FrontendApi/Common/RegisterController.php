@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Http\Requests\Frontend\Common\RegisterVerificationCodeRequest;
-use App\Http\SingleActions\Common\FrontendAuth\RegisterAction;
-use App\Http\SingleActions\Common\FrontendAuth\RegisterVerificationCodeAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterVerificationCodeAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class RegisterController
  * @package App\Http\Controllers\FrontendApi\App
  */
-class RegisterController extends FrontendApiMainController
+class RegisterController
 {
 
     /**
@@ -25,7 +24,7 @@ class RegisterController extends FrontendApiMainController
      */
     public function store(RegisterAction $action, RegisterRequest $request): JsonResponse
     {
-        $result = $action->execute($this, $request);
+        $result = $action->execute($request);
         return $result;
     }
 
@@ -41,7 +40,7 @@ class RegisterController extends FrontendApiMainController
         RegisterVerificationCodeRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $result     = $action->execute($this, $inputDatas);
+        $result     = $action->execute($inputDatas);
         return $result;
     }
 }

@@ -57,4 +57,13 @@ class SystemFinanceOfflineInfo extends BaseModel
         $object = $this->hasMany(SystemFinanceUserTag::class, 'finance_id', 'id');
         return $object;
     }
+
+    /**
+     * @return BelongsTo
+     */
+    public function type(): BelongsTo
+    {
+        $object = $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
+        return $object;
+    }
 }

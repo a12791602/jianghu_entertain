@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Frontend\H5\Recharge;
+namespace App\Http\SingleActions\Frontend\App\Recharge;
 
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 
 /**
  * Class ChannelsAction
- * @package App\Http\SingleActions\Frontend\H5\Recharge
+ * @package App\Http\SingleActions\Frontend\App\Recharge
  */
 class ChannelsAction extends MainAction
 {

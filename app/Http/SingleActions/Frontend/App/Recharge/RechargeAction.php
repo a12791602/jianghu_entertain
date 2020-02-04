@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\SingleActions\Frontend\H5\Recharge;
+namespace App\Http\SingleActions\Frontend\App\Recharge;
 
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 /**
  * Class RechargeAction
- * @package App\Http\SingleActions\Frontend\H5\Recharge
+ * @package App\Http\SingleActions\Frontend\App\Recharge
  */
 class RechargeAction extends MainAction
 {

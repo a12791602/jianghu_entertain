@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers\FrontendApi\Test;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\Request;
 
 /**
  * Class TestController
  * @package App\Http\Controllers\FrontendApi\Test
  */
-class TestController extends FrontendApiMainController
+class TestController extends MainAction
 {
 
     /**
      * 测试帐变接口
-     * @param  Request $request Request.
+     * @param Request $request Request.
      * @return mixed
+     * @throws \Exception Exception.
      */
     public function accountChange(Request $request)
     {
         $inputDatas = $request->all();
-        $user       = $this->frontendUser;
+        $user       = $this->user;
         if (!$user) {
             return;
         }

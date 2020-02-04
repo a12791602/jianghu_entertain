@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\FrontendApi\H5;
+namespace App\Http\Controllers\FrontendApi\App;
 
-use App\Http\Requests\Frontend\H5\Recharge\ChannelsRequest;
-use App\Http\Requests\Frontend\H5\Recharge\RechargeRequest;
-use App\Http\Requests\Frontend\H5\Recharge\TypesRequest;
-use App\Http\SingleActions\Frontend\H5\Recharge\ChannelsAction;
-use App\Http\SingleActions\Frontend\H5\Recharge\RechargeAction;
-use App\Http\SingleActions\Frontend\H5\Recharge\TypesAction;
+use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\Requests\Frontend\App\Recharge\ChannelsRequest;
+use App\Http\Requests\Frontend\App\Recharge\RechargeRequest;
+use App\Http\Requests\Frontend\App\Recharge\TypesRequest;
+use App\Http\SingleActions\Frontend\App\Recharge\ChannelsAction;
+use App\Http\SingleActions\Frontend\App\Recharge\RechargeAction;
+use App\Http\SingleActions\Frontend\App\Recharge\TypesAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class RechargeController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class RechargeController
+class RechargeController extends FrontendApiMainController
 {
     /**
      * 获取分类

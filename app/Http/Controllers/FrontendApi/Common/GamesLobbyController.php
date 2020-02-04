@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\GameListRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\GameCategoryRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\InGameRequest;
 use App\Http\Requests\Frontend\Common\SlidesRequest;
-use App\Http\SingleActions\Common\GamesLobby\GameCategoryAction;
-use App\Http\SingleActions\Common\GamesLobby\GameListAction;
-use App\Http\SingleActions\Common\GamesLobby\RichListAction;
-use App\Http\SingleActions\Common\GamesLobby\SlidesAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\GameCategoryAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\GameListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\InGameAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\RichListAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\SlidesAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class GamesLobbyController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class GamesLobbyController extends FrontendApiMainController
+class GamesLobbyController
 {
 
     /**
@@ -44,7 +43,7 @@ class GamesLobbyController extends FrontendApiMainController
         GameCategoryAction $action,
         GameCategoryRequest $request
     ): JsonResponse {
-        $result = $action->execute($this, $request);
+        $result = $action->execute($request);
         return $result;
     }
 
@@ -57,7 +56,7 @@ class GamesLobbyController extends FrontendApiMainController
      */
     public function gameList(GameListAction $action, GameListRequest $request): JsonResponse
     {
-        $result = $action->execute($this, $request);
+        $result = $action->execute($request);
         return $result;
     }
 
@@ -86,7 +85,7 @@ class GamesLobbyController extends FrontendApiMainController
     public function inGame(InGameAction $action, InGameRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $result    = $action->execute($this, $validated);
+        $result    = $action->execute($validated);
         return $result;
     }
 }

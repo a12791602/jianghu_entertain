@@ -2,21 +2,20 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\PVerificationCodeRequest;
 use App\Http\Requests\Frontend\Common\ResetPasswordRequest;
 use App\Http\Requests\Frontend\Common\SecurityCodeRequest;
-use App\Http\SingleActions\Common\FrontendAuth\ResetPasswordAction;
-use App\Http\SingleActions\Common\FrontendAuth\RPVerificationCodeAction;
-use App\Http\SingleActions\Common\FrontendAuth\SecurityCodeAction;
-use App\Http\SingleActions\Common\FrontendAuth\SecurityVerificationCodeAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\ResetPasswordAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\RPVerificationCodeAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\SecurityCodeAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\SecurityVerificationCodeAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class ResetPasswordController
  * @package App\Http\Controllers\FrontendApi\Common
  */
-class PasswordController extends FrontendApiMainController
+class PasswordController
 {
 
     /**
@@ -46,7 +45,7 @@ class PasswordController extends FrontendApiMainController
         PVerificationCodeRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $result     = $action->execute($this, $inputDatas);
+        $result     = $action->execute($inputDatas);
         return $result;
     }
 
@@ -73,7 +72,7 @@ class PasswordController extends FrontendApiMainController
      */
     public function securityCode(SecurityVerificationCodeAction $action): JsonResponse
     {
-        $result = $action->execute($this);
+        $result = $action->execute();
         return $result;
     }
 }

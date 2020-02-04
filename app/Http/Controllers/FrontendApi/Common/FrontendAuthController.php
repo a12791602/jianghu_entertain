@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
-use App\Http\SingleActions\Common\FrontendAuth\LoginAction;
-use App\Http\SingleActions\Common\FrontendAuth\LogoutAction;
-use App\Http\SingleActions\Common\FrontendAuth\RefreshAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\LoginAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\LogoutAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\RefreshAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -15,35 +14,31 @@ use Illuminate\Http\Request;
  *
  * @package App\Http\Controllers\FrontendApi
  */
-class FrontendAuthController extends FrontendApiMainController
+class FrontendAuthController
 {
 
     /**
-     * @var string $eloqM
-     */
-    public $eloqM = 'User\FrontendUser';
-
-    /**
      * Login user and create token
-     * @param LoginAction              $action  验证登录.
      * @param LoginVerificationRequest $request 请求.
+     * @param LoginAction              $action  验证登录.
      * @return JsonResponse [string]  access_token
      * @throws \Exception Exception.
      */
-    public function login(LoginAction $action, LoginVerificationRequest $request): JsonResponse
+    public function login(LoginVerificationRequest $request, LoginAction $action): JsonResponse
     {
-        $result = $action->execute($this, $request);
+        $result = $action->execute($request);
         return $result;
     }
 
     /**
-     * @param  Request      $request 请求.
-     * @param  LogoutAction $action  用户退出.
+     * @param Request      $request 请求.
+     * @param LogoutAction $action  用户退出.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse
     {
-        $result = $action->execute($this, $request);
+        $result = $action->execute($request);
         return $result;
     }
 
@@ -55,7 +50,7 @@ class FrontendAuthController extends FrontendApiMainController
      */
     public function refreshToken(RefreshAction $action): JsonResponse
     {
-        $result = $action->execute($this);
+        $result = $action->execute();
         return $result;
     }
 }

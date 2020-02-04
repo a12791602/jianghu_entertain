@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
 use App\Http\SingleActions\Frontend\Common\System\SystemAvatarAction;
 use Illuminate\Http\JsonResponse;
 
@@ -10,7 +9,7 @@ use Illuminate\Http\JsonResponse;
  * Class System PublicController
  * @package App\Http\Controllers\FrontendApi\Common
  */
-class SystemPublicController extends FrontendApiMainController
+class SystemPublicController
 {
 
     /**

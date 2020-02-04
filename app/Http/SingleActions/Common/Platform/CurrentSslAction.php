@@ -2,22 +2,22 @@
 
 namespace App\Http\SingleActions\Common\Platform;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * 获取当前平台SSL
  */
-class CurrentSslAction
+class CurrentSslAction extends MainAction
 {
 
     /**
-     * @param  FrontendApiMainController $contll Controller.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(FrontendApiMainController $contll): JsonResponse
+    public function execute(): JsonResponse
     {
-        $currentSSL = $contll->currentPlatformEloq->sslKey;
+        $currentSSL = $this->currentPlatformEloq->sslKey;
         $data       = [
                        'public_key'   => $currentSSL->public_key ?? null,
                        'interval_str' => $currentSSL->interval_str ?? null,
