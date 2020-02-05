@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Login;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Notice\NoticeLogin;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Notice\Login
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,15 @@ class BaseAction
      */
     public $model;
 
-    /**
-     * BaseAction constructor.
-     * @param NoticeLogin $noticeLogin NoticeLogin.
-     */
-    public function __construct(NoticeLogin $noticeLogin)
+     /**
+      * MainAction constructor.
+      * @param NoticeLogin $noticeLogin NoticeLogin.
+      * @param Request     $request     Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(NoticeLogin $noticeLogin, Request $request)
     {
+        parent::__construct($request);
         $this->model = $noticeLogin;
     }
 }

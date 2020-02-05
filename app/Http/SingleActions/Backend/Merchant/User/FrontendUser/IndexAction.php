@@ -28,6 +28,7 @@ class IndexAction
     /**
      * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {

@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Events\SystemEmailEvent;
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Email\SystemEmail;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
@@ -15,23 +14,22 @@ use Illuminate\Http\JsonResponse;
 class SendAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         if ((int) $inputDatas['is_head'] === 0) {
             $inputDatas['receiver_ids'] = FrontendUser::whereIn('uid', $inputDatas['receivers'])
-                ->where('platform_sign', $contll->currentPlatformEloq->sign)->get()->pluck('id')->toJson();
+                ->where('platform_sign', $this->currentPlatformEloq->sign)->get()->pluck('id')->toJson();
             $inputDatas['type']         = SystemEmail::TYPE_MER_TO_USER;
         } elseif ((int) $inputDatas['is_head'] === 1) {
             $inputDatas['type'] = SystemEmail::TYPE_MER_TO_HEAD;
         }
         unset($inputDatas['is_head']);
-        $inputDatas['sender_id']     = $contll->currentAdmin->id;
-        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['sender_id']     = $this->user->id;
+        $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');

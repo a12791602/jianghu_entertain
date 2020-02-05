@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Dynamic;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\ModelFilters\Platform\SystemDynActivityPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -19,14 +18,14 @@ class IndexAction extends BaseAction
     protected $model;
 
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * ***
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model::with('lastEditor:id,name', 'activity:id,sign,name')
             ->filter($inputDatas, SystemDynActivityPlatformFilter::class)
             ->withCacheCooldownSeconds(86400)->get();

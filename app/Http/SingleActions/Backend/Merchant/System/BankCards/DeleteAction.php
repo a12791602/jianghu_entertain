@@ -2,15 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\System\BankCards;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\FrontendUsersBankCardFilter;
 use App\Models\Systems\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 银行卡反查-删除
  */
-class DeleteAction
+class DeleteAction extends MainAction
 {
 
     /**
@@ -20,23 +21,25 @@ class DeleteAction
 
     /**
      * @param FrontendUsersBankCard $frontendUsersBankCard 用户银行卡Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(FrontendUsersBankCard $frontendUsersBankCard)
+    public function __construct(FrontendUsersBankCard $frontendUsersBankCard, Request $request)
     {
+        parent::__construct($request);
         $this->model = $frontendUsersBankCard;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $filterArr = [
                       'dataId' => $inputDatas['id'],
-                      'sign'   => $contll->currentPlatformEloq->sign,
+                      'sign'   => $this->currentPlatformEloq->sign,
                      ];
         $bankCards = $this->model
             ->filter($filterArr, FrontendUsersBankCardFilter::class)

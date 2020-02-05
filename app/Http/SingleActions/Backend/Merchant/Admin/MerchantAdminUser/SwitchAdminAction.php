@@ -2,15 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\MerchantAdminUserFilter;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 修改管理员状态
  */
-class SwitchAdminAction
+class SwitchAdminAction extends MainAction
 {
 
     /**
@@ -21,23 +22,25 @@ class SwitchAdminAction
 
     /**
      * @param MerchantAdminUser $merchantAdminUser 代理商管理员Model.
+     * @param Request           $request           Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(MerchantAdminUser $merchantAdminUser)
+    public function __construct(MerchantAdminUser $merchantAdminUser, Request $request)
     {
+        parent::__construct($request);
         $this->model = $merchantAdminUser;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $filterArr = [
                       'dataId'   => $inputDatas['id'],
-                      'platform' => $contll->currentPlatformEloq->sign,
+                      'platform' => $this->currentPlatformEloq->sign,
                      ];
         $adminUser = $this->model->filter($filterArr, MerchantAdminUserFilter::class)->first();
         if (!$adminUser) {

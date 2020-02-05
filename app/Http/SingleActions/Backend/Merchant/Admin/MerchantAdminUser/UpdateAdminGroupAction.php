@@ -2,16 +2,17 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for update admin group action.
  */
-class UpdateAdminGroupAction
+class UpdateAdminGroupAction extends MainAction
 {
 
     /**
@@ -21,21 +22,23 @@ class UpdateAdminGroupAction
 
     /**
      * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
+     * @param Request           $request           Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(MerchantAdminUser $merchantAdminUser)
+    public function __construct(MerchantAdminUser $merchantAdminUser, Request $request)
     {
+        parent::__construct($request);
         $this->model = $merchantAdminUser;
     }
 
     /**
      * 修改管理员的归属组
      *
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 传递的参数.
+     * @param array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         //验证管理员
         $AdminUserEloq = $this->model->find($inputDatas['id']);
@@ -47,7 +50,7 @@ class UpdateAdminGroupAction
         }
         //更改的权限组是否合法
         $filterArr            = [
-                                 'platform' => $contll->currentPlatformEloq->sign,
+                                 'platform' => $this->currentPlatformEloq->sign,
                                  'super'    => MerchantAdminAccessGroup::NO_SUPER,
                                 ];
         $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)

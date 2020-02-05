@@ -2,15 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\System\HelpCenter;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\SystemUsersHelpCenterFilter;
 use App\Models\Systems\SystemUsersHelpCenter;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 帮助设置-列表
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -20,20 +21,23 @@ class IndexAction
 
     /**
      * @param SystemUsersHelpCenter $systemUsersHelpCenter 帮助中心Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(SystemUsersHelpCenter $systemUsersHelpCenter)
+    public function __construct(SystemUsersHelpCenter $systemUsersHelpCenter, Request $request)
     {
+        parent::__construct($request);
         $this->model = $systemUsersHelpCenter;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $data               = $this->model
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
             ->get()

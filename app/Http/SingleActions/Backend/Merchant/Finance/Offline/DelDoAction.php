@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
 use Illuminate\Http\JsonResponse;
@@ -15,18 +14,18 @@ use Illuminate\Support\Facades\DB;
 class DelDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * ***
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         try {
             DB::beginTransaction();
             $offlineDel  = $this->model->where('id', $inputDatas['id'])->delete();
             $userTagsDel = SystemFinanceUserTag::where('finance_id', $inputDatas['id'])
-                ->where('platform_id', $contll->currentPlatformEloq->id)
+                ->where('platform_id', $this->currentPlatformEloq->id)
                 ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
                 ->delete();
             $flag        = $offlineDel && $userTagsDel;

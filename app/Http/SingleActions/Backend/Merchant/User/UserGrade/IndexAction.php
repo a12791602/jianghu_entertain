@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 用户等级-列表
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -18,18 +20,22 @@ class IndexAction
 
     /**
      * @param UsersGrade $usersGrade 用户等级Model.
+     * @param Request    $request    Request.
+     * @throws \Exception  Exception.
      */
-    public function __construct(UsersGrade $usersGrade)
+    public function __construct(UsersGrade $usersGrade, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersGrade;
     }
 
     /**
-     * @param  string $sign 平台标识.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(string $sign): JsonResponse
+    public function execute(): JsonResponse
     {
+        $sign   = $this->currentPlatformEloq->sign;
         $data   = $this->model
                      ->select('id', 'name', 'experience_min', 'experience_max', 'grade_gift', 'week_gift', 'updated_at')
                      ->where('platform_sign', $sign)

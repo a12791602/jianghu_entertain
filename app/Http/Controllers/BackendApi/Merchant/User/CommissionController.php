@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\Commission\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\Commission\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\Commission\EditRequest;
@@ -16,7 +15,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 洗码设置
  */
-class CommissionController extends BackEndApiMainController
+class CommissionController
 {
 
     /**
@@ -29,7 +28,7 @@ class CommissionController extends BackEndApiMainController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -43,7 +42,7 @@ class CommissionController extends BackEndApiMainController
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -57,7 +56,7 @@ class CommissionController extends BackEndApiMainController
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 

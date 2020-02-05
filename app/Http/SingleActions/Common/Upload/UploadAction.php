@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\Upload;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Services\UploadService;
 use Illuminate\Http\JsonResponse;
 
@@ -10,19 +10,18 @@ use Illuminate\Http\JsonResponse;
  * Class UploadAction
  * @package App\Http\SingleActions\Backend\Merchant\Upload
  */
-class UploadAction
+class UploadAction extends MainAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $path = $contll->currentPlatformEloq->sign;
+        $path = $this->currentPlatformEloq->sign;
         if (isset($inputDatas['basket']) && !empty($inputDatas['basket'])) {
-            $path = $contll->currentPlatformEloq->sign . '/' . $inputDatas['basket'];
+            $path = $this->currentPlatformEloq->sign . '/' . $inputDatas['basket'];
         }
         $file = (new UploadService())->setSavePath($path)->upload()->getFileInfo();
         if (!$file['status']) {

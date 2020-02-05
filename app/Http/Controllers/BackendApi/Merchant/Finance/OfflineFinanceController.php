@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\EditRequest;
@@ -20,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class OfflineFinanceController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class OfflineFinanceController extends BackEndApiMainController
+class OfflineFinanceController
 {
     /**
      * 添加线下支付
@@ -32,7 +31,7 @@ class OfflineFinanceController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -46,7 +45,7 @@ class OfflineFinanceController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -72,7 +71,7 @@ class OfflineFinanceController extends BackEndApiMainController
     public function delDo(DelDoAction $action, DelDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -86,7 +85,7 @@ class OfflineFinanceController extends BackEndApiMainController
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -101,7 +100,7 @@ class OfflineFinanceController extends BackEndApiMainController
     {
         $inputDatas           = $request->validated();
         $inputDatas['method'] = $request->method();
-        $outputDatas          = $action->execute($this, $inputDatas);
+        $outputDatas          = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

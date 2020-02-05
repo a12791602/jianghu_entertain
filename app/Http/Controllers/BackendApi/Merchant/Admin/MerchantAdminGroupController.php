@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\CreateRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\DestroyRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup\EditRequest;
@@ -17,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员角色组
  */
-class MerchantAdminGroupController extends BackEndApiMainController
+class MerchantAdminGroupController
 {
     /**
      * Display a listing of the resource.
@@ -27,8 +26,7 @@ class MerchantAdminGroupController extends BackEndApiMainController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        $platformSign = $this->currentPlatformEloq->sign;
-        $msgOut       = $action->execute($platformSign);
+        $msgOut = $action->execute();
         return $msgOut;
     }
 
@@ -44,7 +42,7 @@ class MerchantAdminGroupController extends BackEndApiMainController
         CreateAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -60,7 +58,7 @@ class MerchantAdminGroupController extends BackEndApiMainController
         EditAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 

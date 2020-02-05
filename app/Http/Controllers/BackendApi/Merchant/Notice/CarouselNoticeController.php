@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Notice;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\EditRequest;
@@ -19,7 +18,7 @@ use Illuminate\Http\JsonResponse;
  * Class CarouselNoticeController
  * @package App\Http\Controllers\BackendApi\Merchant\Notice
  */
-class CarouselNoticeController extends BackEndApiMainController
+class CarouselNoticeController
 {
     /**
      * 系统公告添加.
@@ -32,7 +31,7 @@ class CarouselNoticeController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -47,7 +46,7 @@ class CarouselNoticeController extends BackEndApiMainController
     public function edit(EditAction $action, EditRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -62,7 +61,7 @@ class CarouselNoticeController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -92,7 +91,7 @@ class CarouselNoticeController extends BackEndApiMainController
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

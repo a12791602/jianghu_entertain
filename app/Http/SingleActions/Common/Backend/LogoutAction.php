@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\Backend;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -11,26 +11,26 @@ use Illuminate\Support\Str;
 /**
  * Class for backend auth logout action.
  */
-class LogoutAction
+class LogoutAction extends MainAction
 {
     use AuthenticatesUsers;
 
     /**
      * Logout user (Revoke the token)
      *
-     * @param  BackEndApiMainController $contll  Controller.
-     * @param  Request                  $request Request.
+     * @param Request $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, Request $request): JsonResponse
+    public function execute(Request $request): JsonResponse
     {
-        $throtleKey = Str::lower($contll->currentAdmin->email . '|' . $request->ip());
+        $throtleKey = Str::lower($this->user->email . '|' . $request->ip());
         if ($request->hasSession()) {
             $request->session()->invalidate();
         }
         $this->limiter()->clear($throtleKey);
-        $contll->currentAuth->logout();
-        $contll->currentAuth->invalidate();
+        $this->auth->logout();
+        $this->auth->invalidate();
         $msgOut = msgOut([], '302100');
         return $msgOut;
     }

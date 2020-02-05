@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Carousel;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Notice\NoticeCarousel;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Notice\Carousel
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,15 @@ class BaseAction
      */
     public $model;
 
-    /**
-     * BaseAction constructor.
-     * @param NoticeCarousel $noticeCarousel NoticeCarousel.
-     */
-    public function __construct(NoticeCarousel $noticeCarousel)
+     /**
+      * MainAction constructor.
+      * @param NoticeCarousel $noticeCarousel NoticeCarousel.
+      * @param Request        $request        Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(NoticeCarousel $noticeCarousel, Request $request)
     {
+        parent::__construct($request);
         $this->model = $noticeCarousel;
     }
 }

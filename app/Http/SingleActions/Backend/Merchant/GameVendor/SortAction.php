@@ -6,7 +6,7 @@ use Illuminate\Http\JsonResponse;
 class SortAction extends BaseAction
 {
    /**
-    * @param array $inputDatas     InputDatas.
+    * @param array $inputDatas InputDatas.
     * @return JsonResponse
     * @throws \Exception Exception.
     */

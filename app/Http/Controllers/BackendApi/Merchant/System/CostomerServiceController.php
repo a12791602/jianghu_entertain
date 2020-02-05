@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\System;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\System\CostomerService\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\System\CostomerService\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\System\CostomerService\EditRequest;
@@ -16,7 +15,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 客服设置
  */
-class CostomerServiceController extends BackEndApiMainController
+class CostomerServiceController
 {
 
     /**
@@ -29,7 +28,7 @@ class CostomerServiceController extends BackEndApiMainController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -43,7 +42,7 @@ class CostomerServiceController extends BackEndApiMainController
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -57,7 +56,7 @@ class CostomerServiceController extends BackEndApiMainController
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -71,7 +70,7 @@ class CostomerServiceController extends BackEndApiMainController
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

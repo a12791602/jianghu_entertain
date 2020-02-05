@@ -69,11 +69,13 @@ class RsaCrypt
      */
     public function rsaEncrypt($data): string
     {
-        $encrypt = openssl_public_encrypt($data, $encrypted, $this->publicKey);
-        if ($encrypt === false) {
-            throw new \Exception('100612');
+        $returnData = '';
+        $dataArray  = str_split($data, 117); //如果长度超过限制需要分段加密
+        foreach ($dataArray as $value) {
+            openssl_public_encrypt($value, $encryptedTemp, $this->publicKey);//公钥加密
+            $returnData .= base64_encode($encryptedTemp);
         }
-        return $encrypted;
+        return $returnData;
     }
 
     /**

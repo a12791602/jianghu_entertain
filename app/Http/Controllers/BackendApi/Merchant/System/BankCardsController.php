@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\System;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\System\BankCards\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\System\BankCards\IndexRequest;
 use App\Http\SingleActions\Backend\Merchant\System\BankCards\DeleteAction;
@@ -12,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 银行卡反查
  */
-class BankCardsController extends BackEndApiMainController
+class BankCardsController
 {
 
     /**
@@ -25,7 +24,7 @@ class BankCardsController extends BackEndApiMainController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -39,7 +38,7 @@ class BankCardsController extends BackEndApiMainController
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

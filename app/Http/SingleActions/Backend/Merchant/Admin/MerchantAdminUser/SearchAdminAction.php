@@ -2,15 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\MerchantAdminUserFilter;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for search admin action.
  */
-class SearchAdminAction
+class SearchAdminAction extends MainAction
 {
 
     /**
@@ -20,20 +21,23 @@ class SearchAdminAction
 
     /**
      * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
+     * @param Request           $request           Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(MerchantAdminUser $merchantAdminUser)
+    public function __construct(MerchantAdminUser $merchantAdminUser, Request $request)
     {
+        parent::__construct($request);
         $this->model = $merchantAdminUser;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 接收的参数.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['platform'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['platform'] = $this->currentPlatformEloq->sign;
         $data                   = $this->model->filter($inputDatas, MerchantAdminUserFilter::class)->get()->toArray();
         $msgOut                 = msgOut($data);
         return $msgOut;

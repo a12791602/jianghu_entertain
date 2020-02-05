@@ -2,16 +2,17 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\UsersCommissionConfigDetail;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 用户等级-删除
  */
-class DeleteAction
+class DeleteAction extends MainAction
 {
 
     /**
@@ -21,19 +22,21 @@ class DeleteAction
 
     /**
      * @param UsersGrade $usersGrade 用户等级Model.
+     * @param Request    $request    Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersGrade $usersGrade)
+    public function __construct(UsersGrade $usersGrade, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersGrade;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 接收的数据.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的数据.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         //检查当前平台的这条数据是否存在。
         $currentUsersGrade = $this->model->where(
@@ -44,7 +47,7 @@ class DeleteAction
              ],
              [
               'platform_sign',
-              $contll->currentPlatformEloq->sign,
+              $this->currentPlatformEloq->sign,
              ],
             ],
         )->first();

@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\ModelFilters\Email\SystemEmailFilter;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
@@ -18,16 +17,16 @@ class SendIndexAction extends BaseAction
      * @var object $model
      */
     protected $model;
+
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $pageSize                    = $this->model::getPageSize();
-        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
+        $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $outputDatas                 = $this->model::with('merchant:id,name')
             ->filter($inputDatas, SystemEmailFilter::class)
             ->whereIn(

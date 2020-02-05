@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\ModelFilters\Platform\GamesPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -19,18 +18,14 @@ class IndexAction extends BaseAction
     protected $model;
 
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
-     * @param integer                  $device     Device.
+     * @param array   $inputDatas InputDatas.
+     * @param integer $device     Device.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(
-        BackEndApiMainController $contll,
-        array $inputDatas,
-        int $device
-    ): JsonResponse {
-        $inputDatas['platform_sign'] = $contll->currentPlatformEloq->sign;
+    public function execute(array $inputDatas, int $device): JsonResponse
+    {
+        $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $inputDatas['device']        = $device;
         $datas                       = $this->model::with(['games:id,name,sign', 'vendor'])
                                             ->orderByDesc('sort')

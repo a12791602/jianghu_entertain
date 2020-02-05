@@ -2,16 +2,17 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\UsersCommissionConfigDetail;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 用户等级-编辑
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -21,19 +22,21 @@ class EditAction
 
     /**
      * @param UsersGrade $usersGrade 用户等级Model.
+     * @param Request    $request    Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersGrade $usersGrade)
+    public function __construct(UsersGrade $usersGrade, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersGrade;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 接收的数据.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的数据.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         //检查当前平台的这条数据是否存在。
         $currentUsersGrade = $this->model->where(
@@ -44,7 +47,7 @@ class EditAction
              ],
              [
               'platform_sign',
-              $contll->currentPlatformEloq->sign,
+              $this->currentPlatformEloq->sign,
              ],
             ],
         )->first();
@@ -52,12 +55,12 @@ class EditAction
             throw new \Exception('200704');
         }
         //当前平台的所有等级设置数据，用于后面验证经验值是否合法。
-        $usersGrades = $this->model->where('platform_sign', $contll->currentPlatformEloq->sign)->get();
+        $usersGrades = $this->model->where('platform_sign', $this->currentPlatformEloq->sign)->get();
         //验证最小经验值与其他等级设定是否有冲突。
         $checkMinExp = $this->_checkExp(
             $usersGrades,
             $inputDatas['id'],
-            $contll->currentPlatformEloq->sign,
+            $this->currentPlatformEloq->sign,
             $inputDatas['experience_min'],
         );
         if ($checkMinExp->isNotEmpty()) {
@@ -67,7 +70,7 @@ class EditAction
         $checkMaxExp = $this->_checkExp(
             $usersGrades,
             $inputDatas['id'],
-            $contll->currentPlatformEloq->sign,
+            $this->currentPlatformEloq->sign,
             $inputDatas['experience_max'],
         );
         if ($checkMaxExp->isNotEmpty()) {

@@ -2,17 +2,18 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\User\UsersCommissionConfigFilter;
 use App\Models\User\UsersCommissionConfig;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 洗码设置-编辑
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -37,26 +38,28 @@ class EditAction
 
     /**
      * @param UsersCommissionConfig $usersCommissionConfig 洗码Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersCommissionConfig $usersCommissionConfig)
+    public function __construct(UsersCommissionConfig $usersCommissionConfig, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersCommissionConfig;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $this->inputDatas       = $inputDatas;
         $this->commissionConfig = $this->model->find($this->inputDatas['id']);
         if (!$this->commissionConfig) {
             throw new \Exception('200811');
         }
-        $platformSign    = $contll->currentPlatformEloq->sign;
+        $platformSign    = $this->currentPlatformEloq->sign;
         $this->userGrade = UsersGrade::where('platform_sign', $platformSign)->get();
         //验证数据是否合法
         $percentArr = $this->_dataValidation($platformSign);

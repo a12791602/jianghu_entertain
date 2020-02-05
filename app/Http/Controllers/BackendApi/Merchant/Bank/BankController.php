@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Bank;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Bank\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Bank\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Bank\GetSystemBanksAction;
@@ -14,7 +13,7 @@ use Illuminate\Http\JsonResponse;
  * Class BankController
  * @package App\Http\Controllers\BackendApi\Merchant\Bank
  */
-class BankController extends BackEndApiMainController
+class BankController
 {
     /**
      * 获取银行列表
@@ -39,7 +38,7 @@ class BankController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\GameVendor\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\SortRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\StatusRequest;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameVendorController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameVendorController extends BackEndApiMainController
+class GameVendorController
 {
     /**
      * 列表
@@ -27,7 +26,7 @@ class GameVendorController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 

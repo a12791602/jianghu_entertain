@@ -2,17 +2,18 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class for delete admin action.
  */
-class DeleteAdminAction
+class DeleteAdminAction extends MainAction
 {
 
     /**
@@ -22,27 +23,29 @@ class DeleteAdminAction
 
     /**
      * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
+     * @param Request           $request           Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(MerchantAdminUser $merchantAdminUser)
+    public function __construct(MerchantAdminUser $merchantAdminUser, Request $request)
     {
+        parent::__construct($request);
         $this->model = $merchantAdminUser;
     }
 
     /**
      * 删除管理员
      *
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 传递的参数.
+     * @param array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $adminEloq = $this->model->find($inputDatas['id']);
         if ($adminEloq === null) {
             throw new \Exception('201000');
         }
-        if ($adminEloq->platform_sign !== $contll->currentPlatformEloq->sign) {
+        if ($adminEloq->platform_sign !== $this->currentPlatformEloq->sign) {
             throw new \Exception('201001');
         }
         if ($adminEloq->accessGroup->is_super === MerchantAdminAccessGroup::IS_SUPER) {

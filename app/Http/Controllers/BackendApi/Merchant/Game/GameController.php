@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Game\DoHotRequest;
 use App\Http\Requests\Backend\Merchant\Game\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Game\MaintainRequest;
@@ -23,7 +22,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameController extends BackEndApiMainController
+class GameController
 {
     /**
      * app端游戏列表
@@ -35,7 +34,7 @@ class GameController extends BackEndApiMainController
     public function appIndex(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas, GameVendorPlatform::DEVICE_APP);
+        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_APP);
         return $outputDatas;
     }
     /**
@@ -48,7 +47,7 @@ class GameController extends BackEndApiMainController
     public function pcIndex(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas, GameVendorPlatform::DEVICE_PC);
+        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_PC);
         return $outputDatas;
     }
     /**
@@ -61,7 +60,7 @@ class GameController extends BackEndApiMainController
     public function h5Index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas, GameVendorPlatform::DEVICE_H5);
+        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_H5);
         return $outputDatas;
     }
     /**

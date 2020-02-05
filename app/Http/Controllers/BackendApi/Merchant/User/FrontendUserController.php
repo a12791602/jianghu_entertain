@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\IndexRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\LoginLogRequest;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\IndexAction;
@@ -12,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户相关
  */
-class FrontendUserController extends BackEndApiMainController
+class FrontendUserController
 {
 
     /**
@@ -37,7 +36,7 @@ class FrontendUserController extends BackEndApiMainController
     public function loginLog(LoginLogRequest $request, LoginLogAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas, $this->currentPlatformEloq->sign);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

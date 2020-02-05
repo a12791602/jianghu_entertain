@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\GameType;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Game\GameTypePlatform;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\GameType
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,15 @@ class BaseAction
      */
     protected $model;
 
-    /**
-     * BaseAction constructor.
-     * @param GameTypePlatform $gameTypePlatform GameTypePlatform.
-     */
-    public function __construct(GameTypePlatform $gameTypePlatform)
+     /**
+      * MainAction constructor.
+      * @param GameTypePlatform $gameTypePlatform GameTypePlatform.
+      * @param Request          $request          Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(GameTypePlatform $gameTypePlatform, Request $request)
     {
+        parent::__construct($request);
         $this->model = $gameTypePlatform;
     }
 }

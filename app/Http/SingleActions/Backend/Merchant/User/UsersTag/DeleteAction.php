@@ -2,16 +2,17 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\UsersTag;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersTag;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 用户标签-删除
  */
-class DeleteAction
+class DeleteAction extends MainAction
 {
 
     /**
@@ -21,22 +22,22 @@ class DeleteAction
 
     /**
      * @param UsersTag $usersTag 用户标签Model.
+     * @param Request  $request  Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersTag $usersTag)
+    public function __construct(UsersTag $usersTag, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersTag;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 接收的参数.
+     * @param  array $inputDatas 接收的参数.
      * @throws \Exception Exception.
      * @return JsonResponse
      */
-    public function execute(
-        BackEndApiMainController $contll,
-        array $inputDatas
-    ): JsonResponse {
+    public function execute(array $inputDatas): JsonResponse
+    {
         $usersTagEloq = $this->model->where(
             [
              [
@@ -45,7 +46,7 @@ class DeleteAction
              ],
              [
               'platform_sign',
-              $contll->currentPlatformEloq->sign,
+              $this->currentPlatformEloq->sign,
              ],
             ],
         )->first();

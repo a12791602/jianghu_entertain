@@ -22,9 +22,9 @@ class FrontendUserFilter extends ModelFilter
      * 手机号查询
      *
      * @param  string $mobile 手机号码.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function mobile(string $mobile)
+    public function mobile(string $mobile): FrontendUserFilter
     {
         $eloq = $this->where('mobile', $mobile);
         return $eloq;
@@ -34,9 +34,9 @@ class FrontendUserFilter extends ModelFilter
      * 用户UID查询
      *
      * @param  string $userUid 用户唯一ID.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function userUid(string $userUid)
+    public function userUid(string $userUid): FrontendUserFilter
     {
         $eloq = $this->where('uid', $userUid);
         return $eloq;
@@ -46,9 +46,9 @@ class FrontendUserFilter extends ModelFilter
      * 是否测试用户
      *
      * @param  string $isTester 是否测试用户.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function isTester(string $isTester)
+    public function isTester(string $isTester): FrontendUserFilter
     {
         $eloq = $this->where('is_tester', $isTester);
         return $eloq;
@@ -58,9 +58,9 @@ class FrontendUserFilter extends ModelFilter
      * 上级查询
      *
      * @param  string $parentId 上级ID.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function parentId(string $parentId)
+    public function parentId(string $parentId): FrontendUserFilter
     {
         $eloq = $this->where('parent_id', $parentId);
         return $eloq;
@@ -70,9 +70,9 @@ class FrontendUserFilter extends ModelFilter
      * 在线状态查询
      *
      * @param  string $isOnline 用户唯一ID.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function isOnline(string $isOnline)
+    public function isOnline(string $isOnline): FrontendUserFilter
     {
         $eloq = $this->where('is_online', $isOnline);
         return $eloq;
@@ -82,9 +82,9 @@ class FrontendUserFilter extends ModelFilter
      * 最后登陆IP查询
      *
      * @param  string $lastLoginIp 最后登陆IP.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function lastLoginIp(string $lastLoginIp)
+    public function lastLoginIp(string $lastLoginIp): FrontendUserFilter
     {
         $eloq = $this->where('last_login_ip', $lastLoginIp);
         return $eloq;
@@ -94,9 +94,9 @@ class FrontendUserFilter extends ModelFilter
      * 注册IP查询
      *
      * @param  string $registerIp 注册IP.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function registerIp(string $registerIp)
+    public function registerIp(string $registerIp): FrontendUserFilter
     {
         $eloq = $this->where('register_ip', $registerIp);
         return $eloq;
@@ -106,9 +106,9 @@ class FrontendUserFilter extends ModelFilter
      * 注册时间查询
      *
      * @param  string $createAt 注册时间.
-     * @return $this
+     * @return FrontendUserFilter
      */
-    public function createAt(string $createAt)
+    public function createAt(string $createAt): FrontendUserFilter
     {
         $createTime = json_decode($createAt, true);
         $eloq       = $this;
@@ -117,6 +117,18 @@ class FrontendUserFilter extends ModelFilter
                 $eloq = $this->whereBetween('created_at', $createTime);
             }
         }
+        return $eloq;
+    }
+
+    /**
+     * 按会员id搜索.
+     *
+     * @param string $guid 会员ID.
+     * @return FrontendUserFilter
+     */
+    public function guid(string $guid): FrontendUserFilter
+    {
+        $eloq = $this->where('guid', $guid);
         return $eloq;
     }
 }

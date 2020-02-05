@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Activity;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\SavePicRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\StatusRequest;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class ActivityDynController
  * @package App\Http\Controllers\BackendApi\Merchant\Activity
  */
-class ActivityDynController extends BackEndApiMainController
+class ActivityDynController
 {
     /**
      * 动态活动列表.
@@ -28,7 +27,7 @@ class ActivityDynController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -43,7 +42,7 @@ class ActivityDynController extends BackEndApiMainController
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -58,7 +57,7 @@ class ActivityDynController extends BackEndApiMainController
     public function savePic(SavePicAction $action, SavePicRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\SingleActions\Common\Backend;
 
-use App\Http\Controllers\BackendApi\Headquarters\BackendAuthController;
 use App\Http\Resources\Backend\LoginResource;
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\Systems\BackendLoginLog;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -15,7 +15,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 /**
  * Class for backend auth login action.
  */
-class LoginAction
+class LoginAction extends MainAction
 {
     use AuthenticatesUsers;
 
@@ -33,12 +33,11 @@ class LoginAction
     /**
      * Login user and create token
      *
-     * @param  BackendAuthController $contll  Controller.
-     * @param  Request               $request Request.
+     * @param Request $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackendAuthController $contll, Request $request): JsonResponse
+    public function execute(Request $request): JsonResponse
     {
         $request->validate(
             [
@@ -48,7 +47,7 @@ class LoginAction
             ],
         );
         $credentials = request(['email', 'password']);
-        $token       = $contll->currentAuth->attempt($credentials);
+        $token       = $this->auth->attempt($credentials);
         if (!$token) {
             throw new \Exception('302101');
         }
@@ -58,7 +57,7 @@ class LoginAction
         }
 
         $this->incrementLoginAttempts($request);
-        $user = $contll->currentAuth->user();
+        $user = $this->auth->user();
         if ($user->status === BackendAdminUser::STATUS_CLOSE) {
             throw new \Exception('302102');
         }

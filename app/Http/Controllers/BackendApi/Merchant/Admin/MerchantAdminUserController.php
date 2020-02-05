@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Admin;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\CreateRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\DeleteAdminRequest;
 use App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser\SearchAdminRequest;
@@ -19,7 +18,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Controls the data flow into a merchant admin user object and updates the view whenever data changes.
  */
-class MerchantAdminUserController extends BackEndApiMainController
+class MerchantAdminUserController
 {
     /**
      * create api
@@ -31,7 +30,7 @@ class MerchantAdminUserController extends BackEndApiMainController
     public function create(CreateRequest $request, CreateAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -43,7 +42,7 @@ class MerchantAdminUserController extends BackEndApiMainController
      */
     public function allAdmins(AllAdminsAction $action): JsonResponse
     {
-        $msgOut = $action->execute($this);
+        $msgOut = $action->execute();
         return $msgOut;
     }
 
@@ -59,7 +58,7 @@ class MerchantAdminUserController extends BackEndApiMainController
         UpdateAdminGroupAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -75,7 +74,7 @@ class MerchantAdminUserController extends BackEndApiMainController
         DeleteAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -89,7 +88,7 @@ class MerchantAdminUserController extends BackEndApiMainController
         SearchAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -104,7 +103,7 @@ class MerchantAdminUserController extends BackEndApiMainController
         SwitchAdminAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Email;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Email\ReadEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\ReceivedIndexRequest;
 use App\Http\Requests\Backend\Merchant\Email\SendIndexRequest;
@@ -17,7 +16,7 @@ use Illuminate\Http\JsonResponse;
  * Class SystemEmailController
  * @package App\Http\Controllers\BackendApi\Merchant\Email
  */
-class SystemEmailController extends BackEndApiMainController
+class SystemEmailController
 {
     /**
      * 发送邮件.
@@ -30,7 +29,7 @@ class SystemEmailController extends BackEndApiMainController
     public function send(SendAction $action, SendRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -45,7 +44,7 @@ class SystemEmailController extends BackEndApiMainController
     public function sendIndex(SendIndexAction $action, SendIndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -62,7 +61,7 @@ class SystemEmailController extends BackEndApiMainController
         ReceivedIndexRequest $request
     ): JsonResponse {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 

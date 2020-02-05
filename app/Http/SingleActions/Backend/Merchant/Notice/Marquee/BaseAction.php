@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Marquee;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Notice\NoticeMarquee;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Notice\Marquee
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -18,12 +20,15 @@ class BaseAction
      */
     protected $model;
 
-    /**
-     * BaseAction constructor.
-     * @param NoticeMarquee $noticeMarquee NoticeMarquee.
-     */
-    public function __construct(NoticeMarquee $noticeMarquee)
+     /**
+      * MainAction constructor.
+      * @param NoticeMarquee $noticeMarquee NoticeMarquee.
+      * @param Request       $request       Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(NoticeMarquee $noticeMarquee, Request $request)
     {
+        parent::__construct($request);
         $this->model = $noticeMarquee;
     }
 }

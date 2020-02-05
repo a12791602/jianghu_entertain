@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\System;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Notice\NoticeSystem;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Notice\System
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,15 @@ class BaseAction
      */
     public $model;
 
-    /**
-     * BaseAction constructor.
-     * @param NoticeSystem $noticeSystem NoticeSystem.
-     */
-    public function __construct(NoticeSystem $noticeSystem)
+     /**
+      * MainAction constructor.
+      * @param NoticeSystem $noticeSystem NoticeSystem.
+      * @param Request      $request      Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(NoticeSystem $noticeSystem, Request $request)
     {
+        parent::__construct($request);
         $this->model = $noticeSystem;
     }
 }

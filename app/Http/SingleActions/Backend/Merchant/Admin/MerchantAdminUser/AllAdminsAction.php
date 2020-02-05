@@ -2,23 +2,23 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Admin\MerchantAdminUser;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class for all admins action.
  */
-class AllAdminsAction
+class AllAdminsAction extends MainAction
 {
     /**
      * 获取所有当前平台的商户管理员用户
      *
-     * @param  BackEndApiMainController $contll Controller.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll): JsonResponse
+    public function execute(): JsonResponse
     {
-        $data   = $contll->currentPlatformEloq->adminUsers->toArray();
+        $data   = $this->currentPlatformEloq->adminUsers->toArray();
         $msgOut = msgOut($data);
         return $msgOut;
     }

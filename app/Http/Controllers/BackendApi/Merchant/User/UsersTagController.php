@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\EditRequest;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户标签管理
  */
-class UsersTagController extends BackEndApiMainController
+class UsersTagController
 {
 
     /**
@@ -26,8 +25,7 @@ class UsersTagController extends BackEndApiMainController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        $sign   = $this->currentPlatformEloq->sign;
-        $msgOut = $action->execute($sign);
+        $msgOut = $action->execute();
         return $msgOut;
     }
 
@@ -43,7 +41,7 @@ class UsersTagController extends BackEndApiMainController
         DoAddAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -74,7 +72,7 @@ class UsersTagController extends BackEndApiMainController
         DeleteAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

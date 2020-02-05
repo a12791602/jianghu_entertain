@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOnlineInfo;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Finance\Online
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,15 @@ class BaseAction
      */
     protected $model;
 
-    /**
-     * BaseAction constructor.
-     * @param SystemFinanceOnlineInfo $systemFinanceOnlineInfo SystemFinanceOnline.
-     */
-    public function __construct(SystemFinanceOnlineInfo $systemFinanceOnlineInfo)
+     /**
+      * MainAction constructor.
+      * @param SystemFinanceOnlineInfo $systemFinanceOnlineInfo SystemFinanceOnline.
+      * @param Request                 $request                 Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(SystemFinanceOnlineInfo $systemFinanceOnlineInfo, Request $request)
     {
+        parent::__construct($request);
         $this->model = $systemFinanceOnlineInfo;
     }
 }

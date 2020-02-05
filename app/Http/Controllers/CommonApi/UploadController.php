@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\CommonApi;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Common\Upload\UploadRequest;
 use App\Http\SingleActions\Common\Upload\UploadAction;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  * Class UploadController
  * @package App\Http\Controllers\CommonApi
  */
-class UploadController extends BackEndApiMainController
+class UploadController
 {
     /**
      * 上传
@@ -23,7 +22,7 @@ class UploadController extends BackEndApiMainController
     public function upload(UploadAction $action, UploadRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

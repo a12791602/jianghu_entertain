@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\ModelFilters\Finance\SystemFinanceOfflineInfoFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -19,15 +18,15 @@ class IndexAction extends BaseAction
     protected $model;
 
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * ***
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $pageSize                  = $this->model::getPageSize();
-        $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
+        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $datas                     = $this->model::with('lastEditor:id,name', 'author:id,name', 'bank:id,name')
             ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
             ->paginate($pageSize);

@@ -2,14 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\System\HelpCenter;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Systems\SystemUsersHelpCenter;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 帮助设置-添加
  */
-class DoAddAction
+class DoAddAction extends MainAction
 {
 
     /**
@@ -19,23 +20,25 @@ class DoAddAction
 
     /**
      * @param SystemUsersHelpCenter $systemUsersHelpCenter 帮助设置Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(SystemUsersHelpCenter $systemUsersHelpCenter)
+    public function __construct(SystemUsersHelpCenter $systemUsersHelpCenter, Request $request)
     {
+        parent::__construct($request);
         $this->model = $systemUsersHelpCenter;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['platform_sign']   = $contll->currentPlatformEloq->sign;
-        $inputDatas['add_admin_id']    = $contll->currentAdmin->id;
-        $inputDatas['update_admin_id'] = $contll->currentAdmin->id;
+        $inputDatas['platform_sign']   = $this->currentPlatformEloq->sign;
+        $inputDatas['add_admin_id']    = $this->user->id;
+        $inputDatas['update_admin_id'] = $this->user->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('201300');

@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\ModelFilters\User\FrontendUserFilter;
 use App\Models\BaseAuthModel;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Platform\GamesPlatform;
@@ -39,7 +40,6 @@ class FrontendUser extends BaseAuthModel
                          'password',
                          'remember_token',
                          'fund_password',
-                         'mobile',
                         ];
 
     /**
@@ -51,6 +51,37 @@ class FrontendUser extends BaseAuthModel
                         'register_time'   => 'datetime',
                         'last_login_time' => 'datetime',
                        ];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'username'         => '用户名',
+                                      'mobile'           => '手机号码',
+                                      'guid'             => '用户唯一标识UID',
+                                      'top_id'           => '最上级id',
+                                      'parent_id'        => '上级id',
+                                      'platform_id'      => '平台id',
+                                      'platform_sign'    => '平台标识',
+                                      'account_id'       => 'account表id',
+                                      'type'             => '用户类型',
+                                      'grade_id'         => 'vip等级id',
+                                      'is_tester'        => '是否测试用户',
+                                      'password'         => '密码',
+                                      'fund_password'    => '资金密码',
+                                      'security_code'    => '',
+                                      'remember_token'   => 'token',
+                                      'level_deep'       => '用户等级深度',
+                                      'register_ip'      => '注册IP',
+                                      'last_login_ip'    => '最后登陆IP',
+                                      'last_login_time'  => '最后登陆时间',
+                                      'user_specific_id' => '用户扩展信息表id',
+                                      'user_tag_id'      => '用户标签id',
+                                      'status'           => '状态',
+                                      'invite_code'      => '邀请码',
+                                      'is_online'        => '是否在线',
+                                      'device_code'      => '设备',
+                                     ];
 
     /**
      * 找子级
@@ -141,5 +172,14 @@ class FrontendUser extends BaseAuthModel
     {
         $result = $this->hasOne(GamesPlatform::class, 'id', 'platform_id');
         return $result;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function modelFilter()
+    {
+        $object = $this->provideFilter(FrontendUserFilter::class);
+        return $object;
     }
 }

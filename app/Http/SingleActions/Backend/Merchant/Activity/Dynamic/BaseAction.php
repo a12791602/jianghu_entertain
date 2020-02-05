@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Dynamic;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Platform\SystemDynActivityPlatform;
+use Illuminate\Http\Request;
 
 /**
- * Class BaseAction
+ * Class MainAction
  * @package App\Http\SingleActions\Backend\Merchant\Activity\Dyn
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -16,12 +18,17 @@ class BaseAction
      */
     protected $model;
 
-    /**
-     * BaseAction constructor.
-     * @param SystemDynActivityPlatform $systemDynActivityPlatform SystemDynActivityPlatform.
-     */
-    public function __construct(SystemDynActivityPlatform $systemDynActivityPlatform)
-    {
+     /**
+      * MainAction constructor.
+      * @param SystemDynActivityPlatform $systemDynActivityPlatform SystemDynActivityPlatform.
+      * @param Request                   $request                   Request.
+      * @throws \Exception Exception.
+      */
+    public function __construct(
+        SystemDynActivityPlatform $systemDynActivityPlatform,
+        Request $request
+    ) {
+        parent::__construct($request);
         $this->model = $systemDynActivityPlatform;
     }
 }

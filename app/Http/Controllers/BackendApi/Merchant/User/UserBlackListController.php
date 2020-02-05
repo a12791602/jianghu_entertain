@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\DetailRequest;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\IndexRequest;
 use App\Http\Requests\Backend\Merchant\User\UserBlackList\RemoveRequest;
@@ -14,33 +13,32 @@ use Illuminate\Http\JsonResponse;
 /**
  * 黑名单管理
  */
-class UserBlackListController extends BackEndApiMainController
+class UserBlackListController
 {
-
     /**
      * 黑名单列表
-     * @param  IndexRequest $request Request.
-     * @param  IndexAction  $action  Action.
+     * @param IndexRequest $request Request.
+     * @param IndexAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
-        $inputDatas                 = $request->validated();
-        $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
-        $msgOut                     = $action->execute($inputDatas);
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
     /**
-     * @param  DetailRequest $request Request.
-     * @param  DetailAction  $action  Action.
+     * @param DetailRequest $request Request.
+     * @param DetailAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function detail(DetailRequest $request, DetailAction $action): JsonResponse
     {
-        $inputDatas                 = $request->validated();
-        $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
-        $msgOut                     = $action->execute($inputDatas);
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -48,6 +46,7 @@ class UserBlackListController extends BackEndApiMainController
      * @param RemoveRequest $request Request.
      * @param RemoveAction  $action  Action.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function remove(RemoveRequest $request, RemoveAction $action): JsonResponse
     {

@@ -2,15 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\System\CostomerService;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\SystemCostomerServiceFilter;
 use App\Models\Systems\SystemCostomerService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 客服设置-编辑
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -20,23 +21,25 @@ class EditAction
 
     /**
      * @param SystemCostomerService $systemCostomerService 洗码Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(SystemCostomerService $systemCostomerService)
+    public function __construct(SystemCostomerService $systemCostomerService, Request $request)
     {
+        parent::__construct($request);
         $this->model = $systemCostomerService;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $filterArr       = [
                             'dataId' => $inputDatas['id'],
-                            'sign'   => $contll->currentPlatformEloq->sign,
+                            'sign'   => $this->currentPlatformEloq->sign,
                            ];
         $costomerService = $this->model
             ->filter($filterArr, SystemCostomerServiceFilter::class)

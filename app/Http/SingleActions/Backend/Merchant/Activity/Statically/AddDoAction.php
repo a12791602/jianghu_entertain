@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Statically;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,15 +11,14 @@ use Illuminate\Http\JsonResponse;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['author_id']   = $contll->currentAdmin->id;
-        $inputDatas['platform_id'] = $contll->currentPlatformEloq->id;
+        $inputDatas['author_id']   = $this->user->id;
+        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $this->model->fill($inputDatas);
         $result = $this->model->save();
         if ($result) {

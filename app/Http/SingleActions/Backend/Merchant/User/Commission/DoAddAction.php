@@ -2,19 +2,20 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\User\UsersCommissionConfigFilter;
 use App\Models\User\UsersCommissionConfig;
 use App\Models\User\UsersCommissionConfigDetail;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 洗码设置-添加
  */
-class DoAddAction
+class DoAddAction extends MainAction
 {
 
     /**
@@ -29,22 +30,24 @@ class DoAddAction
 
     /**
      * @param UsersCommissionConfig $usersCommissionConfig 洗码Model.
+     * @param Request               $request               Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersCommissionConfig $usersCommissionConfig)
+    public function __construct(UsersCommissionConfig $usersCommissionConfig, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersCommissionConfig;
     }
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 接收的参数.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $this->inputDatas = $inputDatas;
-        $sign             = $contll->currentPlatformEloq->sign;
+        $sign             = $this->currentPlatformEloq->sign;
         $userGrade        = UsersGrade::where('platform_sign', $sign)->get();
 
         //获取当前游戏平台的洗码设置

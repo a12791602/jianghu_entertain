@@ -2,17 +2,18 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\User\UsersCommissionConfig;
 use App\Models\User\UsersCommissionConfigDetail;
 use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 用户等级-添加
  */
-class DoAddAction
+class DoAddAction extends MainAction
 {
 
     /**
@@ -22,25 +23,27 @@ class DoAddAction
 
     /**
      * @param UsersGrade $usersGrade 用户等级Model.
+     * @param Request    $request    Request.
+     * @throws \Exception Exception.
      */
-    public function __construct(UsersGrade $usersGrade)
+    public function __construct(UsersGrade $usersGrade, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersGrade;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 接收的数据.
-     * @throws \Exception Exception.
+     * @param array $inputDatas 接收的数据.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        $usersGrades = $this->model->where('platform_sign', $contll->currentPlatformEloq->sign)->get();
+        $usersGrades = $this->model->where('platform_sign', $this->currentPlatformEloq->sign)->get();
         //验证最小经验值与其他等级设定是否有冲突
         $checkMinExp = $this->_checkExp(
             $usersGrades,
-            $contll->currentPlatformEloq->sign,
+            $this->currentPlatformEloq->sign,
             (int) $inputDatas['experience_min'],
         );
         if ($checkMinExp->isNotEmpty()) {
@@ -49,7 +52,7 @@ class DoAddAction
         //验证最大经验值与其他等级设定是否有冲突
         $checkMaxExp = $this->_checkExp(
             $usersGrades,
-            $contll->currentPlatformEloq->sign,
+            $this->currentPlatformEloq->sign,
             (int) $inputDatas['experience_max'],
         );
         if ($checkMaxExp->isNotEmpty()) {
@@ -58,9 +61,9 @@ class DoAddAction
 
         DB::beginTransaction();
         //插入用户等级
-        $this->_insertUserGrade($inputDatas, $contll->currentPlatformEloq->sign);
+        $this->_insertUserGrade($inputDatas, $this->currentPlatformEloq->sign);
         //插入用户洗码设置数据
-        $this->_insertUsersCommission($contll->currentPlatformEloq->sign);
+        $this->_insertUsersCommission($this->currentPlatformEloq->sign);
         DB::commit();
 
         $msgOut = msgOut(['name' => $this->model->name]);

@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
 use Illuminate\Http\JsonResponse;
@@ -15,18 +14,17 @@ use Illuminate\Support\Facades\DB;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $flag = false;
         try {
-            $platformId                = $contll->currentPlatformEloq->id;
+            $platformId                = $this->currentPlatformEloq->id;
             $inputDatas['platform_id'] = $platformId;
-            $inputDatas['author_id']   = $contll->currentAdmin->id;
+            $inputDatas['author_id']   = $this->user->id;
             $tags                      = [];
             if (isset($inputDatas['tags'])) {
                 $tags = $inputDatas['tags'];

@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
 use Illuminate\Http\JsonResponse;
@@ -15,12 +14,12 @@ use Illuminate\Support\Facades\DB;
 class EditAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * ***
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $method = strtolower($inputDatas['method']);
         if ($method === 'get') {
@@ -31,8 +30,8 @@ class EditAction extends BaseAction
         }
         $flag = false;
         try {
-            $inputDatas['platform_id']    = $contll->currentPlatformEloq->id;
-            $inputDatas['last_editor_id'] = $contll->currentAdmin->id;
+            $inputDatas['platform_id']    = $this->currentPlatformEloq->id;
+            $inputDatas['last_editor_id'] = $this->user->id;
             $tags                         = [];
             if (isset($inputDatas['tags'])) {
                 $tags = $inputDatas['tags'];
@@ -46,14 +45,14 @@ class EditAction extends BaseAction
                 $tmpData = [];
                 $data    = [];
                 foreach ($tags as $tagId) {
-                    $tmpData['platform_id'] = $contll->currentPlatformEloq->id;
+                    $tmpData['platform_id'] = $this->currentPlatformEloq->id;
                     $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_NO;
                     $tmpData['finance_id']  = $inputDatas['id'];
                     $tmpData['tag_id']      = $tagId;
                     $data[]                 = $tmpData;
                 }
                 if (!empty($data)) {
-                    SystemFinanceUserTag::where('platform_id', $contll->currentPlatformEloq->id)
+                    SystemFinanceUserTag::where('platform_id', $this->currentPlatformEloq->id)
                         ->where('finance_id', $inputDatas['id'])->where('is_online', SystemFinanceType::IS_ONLINE_NO)
                         ->delete();
                     SystemFinanceUserTag::insert($data);

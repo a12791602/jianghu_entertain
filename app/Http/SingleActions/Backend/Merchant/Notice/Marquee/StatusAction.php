@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Marquee;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,16 +11,16 @@ use Illuminate\Http\JsonResponse;
 class StatusAction extends BaseAction
 {
     /**
-     * @param BackEndApiMainController $contll     Contll.
-     * @param array                    $inputDatas InputDatas.
+     * ***
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $result = $this->model->where('id', $inputDatas['id'])->update(
             [
-             'last_editor_id' => $contll->currentAdmin->id,
+             'last_editor_id' => $this->user->id,
              'status'         => $inputDatas['status'],
             ],
         );

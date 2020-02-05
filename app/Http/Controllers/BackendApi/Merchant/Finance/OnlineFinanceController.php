@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Merchant\Finance\Online\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\EditRequest;
@@ -21,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  * Class OnlineFinanceController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class OnlineFinanceController extends BackEndApiMainController
+class OnlineFinanceController
 {
 
     /**
@@ -46,7 +45,7 @@ class OnlineFinanceController extends BackEndApiMainController
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -60,7 +59,7 @@ class OnlineFinanceController extends BackEndApiMainController
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -75,7 +74,7 @@ class OnlineFinanceController extends BackEndApiMainController
     {
         $inputDatas           = $request->validated();
         $inputDatas['method'] = $request->method();
-        $outputDatas          = $action->execute($this, $inputDatas);
+        $outputDatas          = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -89,7 +88,7 @@ class OnlineFinanceController extends BackEndApiMainController
     public function delDo(DelDoAction $action, DelDoRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
@@ -103,7 +102,7 @@ class OnlineFinanceController extends BackEndApiMainController
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($this, $inputDatas);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 
