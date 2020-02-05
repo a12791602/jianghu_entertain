@@ -23,7 +23,7 @@ class DataCrypt
                 $cryptKey   = Str::random(16);
                 $cryptIv    = Str::random(16);
                 $aesCrypt   = new AesCrypt($cryptKey, $cryptIv);
-                $data = json_encode($data, JSON_THROW_ON_ERROR, 512);
+                $data       = json_encode($data, JSON_THROW_ON_ERROR, 512);
                 $enAesData  = $aesCrypt->aesEncrypt($data);
                 $rsaCrypt   = new RsaCrypt();
                 $rsaCrypt->setPublicKey($currentSsl->public_key_second);
