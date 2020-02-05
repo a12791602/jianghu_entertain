@@ -155,7 +155,7 @@ class RouteAuth
                 break;
             }
         }
-        $request->attributes->add(['guard' => $this->guard]);
+        $request->attributes->add(['guard' => $this->guard, 'prefix' => $prefix]);
         return $next($request);
     }
 }

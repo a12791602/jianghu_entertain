@@ -119,12 +119,19 @@ class MainAction
     public function __construct(Request $request)
     {
         new SystemPublicLogService($request, $request->get('logger'));
-        $this->agent               = new Agent();
-        $this->guard               = $request->get('guard');
-        $this->auth                = auth($this->guard);
-        $this->user                = $this->auth->user();
-        $this->route               = $request->route();
-        $this->currentPlatformEloq = getCurrentPlatform($request);
+        $this->agent = new Agent();
+        $this->guard = $request->get('guard');
+        $this->auth  = auth($this->guard);
+        $this->user  = $this->auth->user();
+        $this->route = $request->route();
+
+        /**
+         * $request->get('prefix') #在RouteAuth中间件中传入了当前的URL的前缀
+         * 如果是总控不需要获取当前平台.
+         */
+        if ($request->get('prefix') !== 'headquarters-api') {
+            $this->currentPlatformEloq = getCurrentPlatform($request);
+        }
         if ($request->get('logger') !== 'backend') {
             return;
         }
