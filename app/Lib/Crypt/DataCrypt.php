@@ -16,14 +16,14 @@ class DataCrypt
      */
     public static function handle($data)
     {
-        $data = json_encode($data);
-        if ($data) {
+        if (!empty($data)) {
             $isCryptData = Request::get('is_crypt_data');
             if ((bool) $isCryptData === true) {
                 $currentSsl = Request::get('current_platform_ssl');
                 $cryptKey   = Str::random(16);
                 $cryptIv    = Str::random(16);
                 $aesCrypt   = new AesCrypt($cryptKey, $cryptIv);
+                $data = json_encode($data, JSON_THROW_ON_ERROR, 512);
                 $enAesData  = $aesCrypt->aesEncrypt($data);
                 $rsaCrypt   = new RsaCrypt();
                 $rsaCrypt->setPublicKey($currentSsl->public_key_second);
