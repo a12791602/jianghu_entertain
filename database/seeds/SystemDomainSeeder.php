@@ -60,6 +60,14 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'test',
               'admin_id'      => null,
+              'domain'        => '10.10.50.194:8081',
+              'status'        => 1,
+              'type'          => null,
+              'is_default'    => 0,
+             ],
+             [
+              'platform_sign' => 'test',
+              'admin_id'      => null,
               'domain'        => '10.10.40.196:7456',
               'status'        => 1,
               'type'          => null,

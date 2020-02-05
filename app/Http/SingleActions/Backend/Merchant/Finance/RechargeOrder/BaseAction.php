@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Order\UsersRechargeOrder;
+use Illuminate\Http\Request;
 
 /**
  * Class BaseAction
  * @package App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**
@@ -19,9 +21,11 @@ class BaseAction
     /**
      * BaseAction constructor.
      * @param UsersRechargeOrder $usersRechargeOrder 订单模型.
+     * @param Request            $request            Request.
      */
-    public function __construct(UsersRechargeOrder $usersRechargeOrder)
+    public function __construct(UsersRechargeOrder $usersRechargeOrder, Request $request)
     {
+        parent::__construct($request);
         $this->model = $usersRechargeOrder;
     }
 }

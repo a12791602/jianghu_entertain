@@ -17,7 +17,7 @@ class SystemDynActivityPlatformFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = ['activity' => ['name']];
+    public $relations = ['activity' => ['name']]; //SystemDynActivityFilter
 
     /**
      * 根据平台标记查询

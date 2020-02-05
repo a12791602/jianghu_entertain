@@ -881,6 +881,22 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.recharge-order.get-finance-types',
+              'controller'    => null,
+              'method'        => 'getFinanceTypes',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.recharge-order.handle-success',
+              'controller'    => null,
+              'method'        => 'handleSuccess',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

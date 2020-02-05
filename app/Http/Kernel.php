@@ -77,13 +77,17 @@ class Kernel extends HttpKernel
                                    /**
                                     * verification code
                                     */
-                                   'frontend-verification' => ['crypt'],//'throttle:1,1',
+                                   'frontend-verification' => [
+                                                               'crypt',
+                                                               'route-auth',
+                                                              ],//'throttle:1,1',
                                    /**
                                     * login / registration
                                     */
                                    'frontend-registration' => [
                                                                'throttle:5,1',
                                                                'crypt',
+                                                               'route-auth',
                                                               ],
                                   ];
 

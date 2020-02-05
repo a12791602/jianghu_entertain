@@ -18,9 +18,9 @@ class GamesPlatformFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-                         'games'  => ['name'],
-                         'vendor' => ['vendor_id'],
-                         'type'   => ['type_id'],
+                         'games'  => ['name'], //GameFilter
+                         'vendor' => ['vendor_id'], //GameVendorFilter
+                         'type'   => ['type_id'], //GameTypeFilter
                         ];
 
     /**

@@ -155,5 +155,21 @@ Route::group(
              'index',
             ],
         )->name($namePrefix . 'index');
+        //获取支付方式
+        Route::get(
+            'get-finance-types',
+            [
+             RechargeOrderController::class,
+             'getFinanceTypes',
+            ],
+        )->name($namePrefix . 'get-finance-types');
+        //手动入款
+        Route::post(
+            'handle-success',
+            [
+             RechargeOrderController::class,
+             'handleSuccess',
+            ],
+        )->name($namePrefix . 'handle-success');
     },
 );

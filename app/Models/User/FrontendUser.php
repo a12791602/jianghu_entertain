@@ -69,7 +69,7 @@ class FrontendUser extends BaseAuthModel
                                       'is_tester'        => '是否测试用户',
                                       'password'         => '密码',
                                       'fund_password'    => '资金密码',
-                                      'security_code'    => '',
+                                      'security_code'    => '安全码',
                                       'remember_token'   => 'token',
                                       'level_deep'       => '用户等级深度',
                                       'register_ip'      => '注册IP',
