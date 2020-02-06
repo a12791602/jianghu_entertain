@@ -897,6 +897,22 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.recharge-order.check-pass',
+              'controller'    => null,
+              'method'        => 'checkPass',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.recharge-order.check-refuse',
+              'controller'    => null,
+              'method'        => 'checkRefuse',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

@@ -171,5 +171,21 @@ Route::group(
              'handleSuccess',
             ],
         )->name($namePrefix . 'handle-success');
+        //审核通过
+        Route::post(
+            'check-pass',
+            [
+             RechargeOrderController::class,
+             'checkPass',
+            ],
+        )->name($namePrefix . 'check-pass');
+        //审核拒绝
+        Route::post(
+            'check-refuse',
+            [
+             RechargeOrderController::class,
+             'checkRefuse',
+            ],
+        )->name($namePrefix . 'check-refuse');
     },
 );

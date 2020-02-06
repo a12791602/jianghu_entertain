@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Class HandleSuccessAction
+ * Class CheckPassAction
  * @package App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder
  */
-class HandleSuccessAction extends BaseAction
+class CheckPassAction extends BaseAction
 {
     /**
      * @param array $inputDatas InputDatas.
@@ -22,11 +22,11 @@ class HandleSuccessAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $order = $this->model::find($inputDatas['id']);
-        if ($order->is_online !== SystemFinanceType::IS_ONLINE_YES) {
+        if ($order->is_online !== SystemFinanceType::IS_ONLINE_NO) {
             throw new \Exception('202300');
         }
-        if ($order->status !== UsersRechargeOrder::STATUS_INIT) {
-            throw new \Exception('202301');
+        if ($order->status !== UsersRechargeOrder::STATUS_CONFIRM) {
+            throw new \Exception('202303');
         }
         DB::beginTransaction();
         try {
@@ -49,12 +49,12 @@ class HandleSuccessAction extends BaseAction
                        ];
             $logData = [
                         'orderNo' => $order->order_no,
-                        'msg'     => '手动入款失败!',
+                        'msg'     => '审核通过失败!',
                         'data'    => $data,
                        ];
             Log::channel('finance-callback-system')->info(json_encode($logData));
         }
         DB::rollBack();
-        throw new \Exception('202302');
+        throw new \Exception('202304');
     }
 }

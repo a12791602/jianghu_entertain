@@ -28,13 +28,15 @@ class IndexAction extends BaseAction
         $pageSize                    = $this->model::getPageSize();
         $data                        = $this->model::with(
             [
-             'user:id,username,mobile,guid,parent_id,is_tester',
-             'user.parent:id,username,mobile,guid',
+             'user:id,mobile,guid,parent_id,is_tester',
+             'user.parent:id,mobile,guid',
+             'admin:id,name',
             ],
         )->filter($inputDatas, UsersRechargeOrderFilter::class)->select(
             [
              'id',
              'user_id',
+             'admin_id',
              'is_online',
              'order_no',
              'platform_no',

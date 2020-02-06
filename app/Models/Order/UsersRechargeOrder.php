@@ -2,6 +2,7 @@
 
 namespace App\Models\Order;
 
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\User\FrontendUser;
@@ -14,14 +15,35 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  */
 class UsersRechargeOrder extends BaseModel
 {
-    
-    public const STATUS_INIT    = 0; //初始化的订单状态 线下订单代表 审核中 线上订单代表 未支付
-    public const STATUS_SUCCESS = 1; //成功的订单状态 线下订单代表 审核通过 线上订单代表 已支付
-    public const STATUS_REFUSE  = -1; //拒绝的订单状态 线下订单代表 审核拒绝 此状态线下仅有
-    public const STATUS_EXPIRED = -2; //过期的订单状态
-    public const STATUS_CONFIRM = 3; //用户确认付款
 
-    public const EXPIRED = 15; //订单有效期 单位分钟
+    /**
+     * 这是当有一个新订单时初始化的订单状态
+     * 对于线下订单此状态代表 审核中
+     * 对于线上订单此状态代表 未支付
+     */
+    public const STATUS_INIT = 0;
+    /**
+     * 成功上分的订单状态
+     * 对于线下订单此状态代表 审核通过
+     * 对于线上订单此状态代表 已支付
+     */
+    public const STATUS_SUCCESS = 1;
+    /**
+     * 线下订单状态 审核拒绝
+     */
+    public const STATUS_REFUSE = -1;
+    /**
+     * 线下订单状态 订单过期
+     */
+    public const STATUS_EXPIRED = -2;
+    /**
+     * 线下订单状态 客户确认付款
+     */
+    public const STATUS_CONFIRM = 3;
+    /**
+     * 线下订单有效期 单位 分钟
+     */
+    public const EXPIRED = 15;
 
     /**
      * @var array
@@ -73,6 +95,15 @@ class UsersRechargeOrder extends BaseModel
     public function user(): BelongsTo
     {
         $object = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function admin(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
         return $object;
     }
 }
