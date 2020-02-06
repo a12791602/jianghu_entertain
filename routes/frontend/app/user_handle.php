@@ -12,7 +12,10 @@ Route::group(
     static function (): void {
         $namePrefix = 'app-api.user.';
         Route::get('logout', [FrontendAuthController::class, 'logout'])->name($namePrefix . 'logout');
-        Route::put('reset-password', [PasswordController::class, 'password'])->name($namePrefix . 'reset-password');
+        Route::put('password-reset', [PasswordController::class, 'passwordReset'])
+            ->name($namePrefix . 'password.reset');
+        Route::put('password-change', [PasswordController::class, 'passwordChange'])
+            ->name($namePrefix . 'password.change');
         Route::post('security-code', [PasswordController::class, 'security'])->name($namePrefix . 'security-code');
         Route::put('refresh-token', [FrontendAuthController::class, 'refreshToken'])
             ->name($namePrefix . 'refresh-token');

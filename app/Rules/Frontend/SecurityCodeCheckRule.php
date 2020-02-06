@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
  * Class CheckSecurityCode
  * @package App\Rules
  */
-class CheckSecurityCode implements Rule
+class SecurityCodeCheckRule implements Rule
 {
 
     /**
@@ -36,9 +36,9 @@ class CheckSecurityCode implements Rule
     public function passes($attribute, $value): bool
     {
         unset($attribute);
-        $request               = $this->request;
-        $already_security_code = $request->user()->security_code;
-        $checked               = Hash::check($value, $already_security_code);
+        $request       = $this->request;
+        $security_code = $request->user($request->get('guard'))->security_code;
+        $checked       = Hash::check($value, $security_code);
         return $checked === true;
     }
 

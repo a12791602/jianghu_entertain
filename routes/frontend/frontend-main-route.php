@@ -28,8 +28,10 @@ Route::group(
         $namePrefix = 'h5-api.';
         Route::post('register/verification-code', [RegisterController::class, 'code'])
             ->name($namePrefix . 'register.verification-code');
-        Route::post('reset-password/verification-code', [PasswordController::class, 'passwordCode'])
+        Route::post('password-reset-code/verification-code', [PasswordController::class, 'passwordResetCode'])
             ->name($namePrefix . 'reset-password.verification-code');
+        Route::get('password/change-code', [PasswordController::class, 'passwordChangeCode'])
+            ->name($namePrefix . 'password.change-code');
         Route::post('security-verification-code', [PasswordController::class, 'securityCode'])
             ->name($namePrefix . 'security-verification-code');
     },
@@ -43,8 +45,10 @@ Route::group(
         $namePrefix = 'app-api.';
         Route::post('register/verification-code', [RegisterController::class, 'code'])
             ->name($namePrefix . 'register.verification-code');
-        Route::post('reset-password/verification-code', [PasswordController::class, 'passwordCode'])
+        Route::post('password-reset/verification-code', [PasswordController::class, 'passwordResetCode'])
             ->name($namePrefix . 'reset-password.verification-code');
+        Route::get('password/change-code', [PasswordController::class, 'passwordChangeCode'])
+            ->name($namePrefix . 'password.change-code');
         Route::post('security-verification-code', [PasswordController::class, 'securityCode'])
             ->name($namePrefix . 'security-verification-code');
     },

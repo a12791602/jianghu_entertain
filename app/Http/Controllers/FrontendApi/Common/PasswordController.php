@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Requests\Frontend\Common\PasswordChangeRequest;
 use App\Http\Requests\Frontend\Common\PVerificationCodeRequest;
 use App\Http\Requests\Frontend\Common\ResetPasswordRequest;
 use App\Http\Requests\Frontend\Common\SecurityCodeRequest;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\PasswordChangeAction;
+use App\Http\SingleActions\Frontend\Common\FrontendAuth\PasswordChangeCodeAction;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\ResetPasswordAction;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\RPVerificationCodeAction;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\SecurityCodeAction;
@@ -25,7 +28,7 @@ class PasswordController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function password(
+    public function passwordReset(
         ResetPasswordAction $action,
         ResetPasswordRequest $request
     ): JsonResponse {
@@ -40,12 +43,39 @@ class PasswordController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function passwordCode(
+    public function passwordResetCode(
         RPVerificationCodeAction $action,
         PVerificationCodeRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $result     = $action->execute($inputDatas);
+        return $result;
+    }
+
+    /**
+     * Frontend-user change password.
+     * @param PasswordChangeAction  $action  PasswordChangeAction.
+     * @param PasswordChangeRequest $request PasswordChangeRequest.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function passwordChange(
+        PasswordChangeAction $action,
+        PasswordChangeRequest $request
+    ): JsonResponse {
+        $result = $action->execute($request);
+        return $result;
+    }
+
+    /**
+     * Get change password verification code.
+     * @param PasswordChangeCodeAction $action PasswordChangeCodeAction.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function passwordChangeCode(PasswordChangeCodeAction $action): JsonResponse
+    {
+        $result = $action->execute();
         return $result;
     }
 
