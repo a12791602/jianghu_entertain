@@ -63,14 +63,14 @@ class ErrorHandleTG implements ShouldQueue
      * @param Request      $request      Requset.
      * @param JsonResponse $response     JsonResponse.
      * @param Agent        $agent        Agent.
-     * @param Route        $currentRoute Current Route.
+     * @param Route|null   $currentRoute Current Route.
      */
     public function __construct(
         Exception $e,
         Request $request,
         JsonResponse $response,
         Agent $agent,
-        Route $currentRoute
+        ?Route $currentRoute
     ) {
         $this->_doInit($e, $request, $response, $agent, $currentRoute);
     }
@@ -82,7 +82,7 @@ class ErrorHandleTG implements ShouldQueue
      * @param Request      $request      Requset.
      * @param JsonResponse $response     JsonResponse.
      * @param Agent        $agent        Agent.
-     * @param Route        $currentRoute Current Route.
+     * @param Route|null   $currentRoute Current Route.
      * @return void
      */
     private function _doInit(
@@ -90,7 +90,7 @@ class ErrorHandleTG implements ShouldQueue
         Request $request,
         JsonResponse $response,
         Agent $agent,
-        Route $currentRoute
+        ?Route $currentRoute
     ): void {
         $requestData = [
                         'ips'        => $request->ips(),
