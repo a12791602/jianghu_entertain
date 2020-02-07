@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\FinanceVendor;
 
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceVendor;
+use Illuminate\Http\Request;
 
 /**
  * Class BaseAction
@@ -21,10 +22,14 @@ class BaseAction extends MainAction
     /**
      * BaseAction constructor.
      *
+     * @param Request             $request             Request.
      * @param SystemFinanceVendor $systemFinanceVendor SystemFinanceVendor.
      */
-    public function __construct(SystemFinanceVendor $systemFinanceVendor)
-    {
+    public function __construct(
+        Request $request,
+        SystemFinanceVendor $systemFinanceVendor
+    ) {
+        parent::__construct($request);
         $this->model = $systemFinanceVendor;
     }
 }
