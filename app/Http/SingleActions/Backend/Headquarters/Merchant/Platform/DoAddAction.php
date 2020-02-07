@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
@@ -19,7 +19,7 @@ use Illuminate\Support\Str;
 /**
  * Class for merchant admin user do add action .
  */
-class DoAddAction
+class DoAddAction extends MainAction
 {
     
     /**
@@ -28,20 +28,19 @@ class DoAddAction
     private $platformEloq;
 
     /**
-     * @param BackEndApiMainController $contll     Controller.
-     * @param array                    $inputDatas 传递的参数.
+     * @param array $inputDatas 传递的参数.
      * @throws \Exception Exception.
      * @return JsonResponse
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         DB::beginTransaction();
         //生成平台
-        $this->_createPlatform($inputDatas, $contll->currentAdmin->id);
+        $this->_createPlatform($inputDatas, $this->user->id);
         //生成平台加密数据用的证书
         $this->_createSSL();
         //平台绑定域名
-        $this->_createPlatformDomain($inputDatas['domains'], $contll->currentAdmin->id);
+        $this->_createPlatformDomain($inputDatas['domains'], $this->user->id);
         //生成平台银行配置
         $this->_createBanks();
         //生成超级管理员组

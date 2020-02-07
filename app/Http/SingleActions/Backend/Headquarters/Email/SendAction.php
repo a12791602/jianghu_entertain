@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
 use App\Events\SystemEmailEvent;
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
@@ -15,18 +14,18 @@ use Illuminate\Http\JsonResponse;
  */
 class SendAction extends BaseAction
 {
+    
     /**
-     * @param  BackEndApiMainController $contll     Contll.
-     * @param  array                    $inputDatas InputDatas.
+     * @param  array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['receiver_ids'] = MerchantAdminUser::whereIn('email', $inputDatas['receivers'])
             ->get()->pluck('id')->toJson();
         $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
-        $inputDatas['sender_id']    = $contll->currentAdmin->id;
+        $inputDatas['sender_id']    = $this->user->id;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');

@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
-use App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminUserController;
+use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -10,26 +10,26 @@ use Illuminate\Support\Facades\Hash;
 /**
  * 管理员自己修改密码
  */
-class SelfUpdatePasswordAction
+class SelfUpdatePasswordAction extends MainAction
 {
+
     /**
-     * @param BackendAdminUserController $contll     Controller.
-     * @param array                      $inputDatas 传递的参数.
+     * @param array $inputDatas 传递的参数.
      * @throws \Exception Exception.
      * @return JsonResponse
      */
-    public function execute(BackendAdminUserController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
-        if (!Hash::check($inputDatas['old_password'], $contll->currentAdmin->password)) {
+        if (!Hash::check($inputDatas['old_password'], $this->user->password)) {
             throw new \Exception('301102');
         }
-        $token                                = $contll->currentAuth->refresh();
-        $contll->currentAdmin->password       = Hash::make($inputDatas['password']);
-        $contll->currentAdmin->remember_token = $token;
-        if (!$contll->currentAdmin->save()) {
+        $token                      = $this->user->refresh();
+        $this->user->password       = Hash::make($inputDatas['password']);
+        $this->user->remember_token = $token;
+        if (!$this->user->save()) {
             throw new \Exception('301103');
         }
-        $expireInMinute = $contll->currentAuth->factory()->getTTL();
+        $expireInMinute = $this->user->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $data           = [
                            'access_token' => $token,

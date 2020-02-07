@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\SystemDynActivity\IndexRequest;
 use App\Http\Requests\Backend\Headquarters\SystemDynActivity\StatusRequest;
 use App\Http\SingleActions\Backend\Headquarters\SystemDynActivity\IndexAction;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendSystemDynActivityController extends BackEndApiMainController
+class BackendSystemDynActivityController
 {
     /**
      * 动态活动列表
@@ -47,7 +46,7 @@ class BackendSystemDynActivityController extends BackEndApiMainController
         StatusRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

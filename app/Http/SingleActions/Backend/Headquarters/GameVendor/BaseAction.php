@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameVendor;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Game\GamesVendor;
 
 /**
@@ -9,7 +10,7 @@ use App\Models\Game\GamesVendor;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\GameVendor
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**

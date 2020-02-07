@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
 use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
@@ -24,7 +23,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendGameController extends BackEndApiMainController
+class BackendGameController
 {
     /**
      * 添加游戏
@@ -39,7 +38,7 @@ class BackendGameController extends BackEndApiMainController
         AddRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -56,7 +55,7 @@ class BackendGameController extends BackEndApiMainController
         EditRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -73,7 +72,7 @@ class BackendGameController extends BackEndApiMainController
         OptEditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
     /**
@@ -136,7 +135,7 @@ class BackendGameController extends BackEndApiMainController
         StatusDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

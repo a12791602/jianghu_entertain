@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\EditRequest;
@@ -15,7 +14,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 路由
  */
-class RouteController extends BackEndApiMainController
+class RouteController
 {
     /**
      * 路由-列表

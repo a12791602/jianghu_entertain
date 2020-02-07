@@ -19,12 +19,13 @@ class TypesAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['status'] = SystemFinanceType::STATUS_YES;
-        $datas                = SystemFinanceType::filter($inputDatas, SystemFinanceTypeFilter::class)
+        $inputDatas['status']    = SystemFinanceType::STATUS_YES;
+        $inputDatas['direction'] = SystemFinanceType::DIRECTION_IN;
+        $datas                   = SystemFinanceType::filter($inputDatas, SystemFinanceTypeFilter::class)
             ->select(['id', 'name', 'sign', 'is_online'])
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $msgOut               = msgOut($datas);
+        $msgOut                  = msgOut($datas);
         return $msgOut;
     }
 }

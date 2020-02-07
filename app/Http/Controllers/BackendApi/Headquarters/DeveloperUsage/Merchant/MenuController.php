@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\EditRequest;
@@ -16,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 菜单
  */
-class MenuController extends BackEndApiMainController
+class MenuController
 {
     /**
      * Gets all menu.
@@ -78,12 +78,16 @@ class MenuController extends BackEndApiMainController
     }
 
     /**
-     * @param  ChangeParentAction $action Action.
+     * @param  ChangeParentRequest $request Request.
+     * @param  ChangeParentAction  $action  Action.
      * @return JsonResponse
      */
-    public function changeParent(ChangeParentAction $action): JsonResponse
-    {
-        $msgOut = $action->execute($this->inputs);
+    public function changeParent(
+        ChangeParentRequest $request,
+        ChangeParentAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

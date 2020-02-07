@@ -2,18 +2,19 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Class for edit action.
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -22,20 +23,23 @@ class EditAction
     protected $model;
 
     /**
+     * @param Request                 $request                 Request.
      * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminAccessGroup $backendAdminAccessGroup
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminAccessGroup;
     }
 
     /**
-     * @param  BackEndApiMainController $contll     Controller.
-     * @param  array                    $inputDatas 传递的参数.
+     * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(BackEndApiMainController $contll, array $inputDatas): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $id = $inputDatas['id'];
         if ((int) $id === 1) {
@@ -52,7 +56,7 @@ class EditAction
             //只提取当前登录管理员也拥有的权限
             BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
             $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($contll->adminAccessGroupDetail, $role);
+            $role = array_intersect($this->adminAccessGroupDetail, $role);
             //添加AdminGroupDetails数据
             $data = ['group_id' => $id];
             foreach ($role as $roleId) {

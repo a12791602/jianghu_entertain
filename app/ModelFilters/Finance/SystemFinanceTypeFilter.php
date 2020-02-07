@@ -52,4 +52,16 @@ class SystemFinanceTypeFilter extends ModelFilter
         $object = $this->where('is_online', $is_online);
         return $object;
     }
+
+    /**
+     * 按资金方向搜索.
+     *
+     * @param integer $direction 资金方向.
+     * @return SystemFinanceTypeFilter
+     */
+    public function direction(int $direction): SystemFinanceTypeFilter
+    {
+        $object = $this->where('direction', $direction);
+        return $object;
+    }
 }

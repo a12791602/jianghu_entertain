@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\SystemBank\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\SystemBank\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\SystemBank\EditRequest;
@@ -21,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendSystemBankController extends BackEndApiMainController
+class BackendSystemBankController
 {
     /**
      * 系统银行添加
@@ -36,7 +35,7 @@ class BackendSystemBankController extends BackEndApiMainController
         AddDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -70,7 +69,7 @@ class BackendSystemBankController extends BackEndApiMainController
         EditRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -100,7 +99,7 @@ class BackendSystemBankController extends BackEndApiMainController
         StatusRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

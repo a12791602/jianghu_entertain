@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\SystemBank;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemBank;
 
 /**
@@ -9,7 +10,7 @@ use App\Models\Finance\SystemBank;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\SystemBank
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**

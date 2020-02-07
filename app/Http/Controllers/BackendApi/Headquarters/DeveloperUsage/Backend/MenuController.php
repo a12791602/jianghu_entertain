@@ -2,40 +2,43 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditRequest;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\CurrentAdminMenuAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\GetAllMenuAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * 菜单
  */
-class MenuController extends BackEndApiMainController
+class MenuController
 {
     /**
      * Gets all menu.
-     *
+     * @param GetAllMenuAction $action Action.
      * @return JsonResponse
      */
-    public function getAllMenu(): JsonResponse
+    public function getAllMenu(GetAllMenuAction $action): JsonResponse
     {
-        $msgOut = msgOut($this->fullMenuLists);
+        $msgOut = $action->execute();
         return $msgOut;
     }
 
     /**
+     * @param CurrentAdminMenuAction $action Action.
      * @return JsonResponse
      */
-    public function currentAdminMenu(): JsonResponse
+    public function currentAdminMenu(CurrentAdminMenuAction $action): JsonResponse
     {
-        $msgOut = msgOut($this->menuLists);
+        $msgOut = $action->execute();
         return $msgOut;
     }
 
@@ -101,12 +104,16 @@ class MenuController extends BackEndApiMainController
     }
 
     /**
-     * @param  ChangeParentAction $action Action.
+     * @param ChangeParentRequest $request Request.
+     * @param ChangeParentAction  $action  Action.
      * @return JsonResponse
      */
-    public function changeParent(ChangeParentAction $action): JsonResponse
-    {
-        $msgOut = $action->execute($this->inputs);
+    public function changeParent(
+        ChangeParentRequest $request,
+        ChangeParentAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 }

@@ -21,6 +21,9 @@ class SystemFinanceType extends BaseModel
     public const STATUS_YES = 1;
     public const STATUS_NO  = 0;
 
+    public const DIRECTION_IN  = 1;
+    public const DIRECTION_OUT = 0;
+
     /**
      * @var array
      */

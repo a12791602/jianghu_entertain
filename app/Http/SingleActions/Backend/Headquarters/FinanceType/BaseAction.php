@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\FinanceType;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceType;
 
 /**
@@ -9,7 +10,7 @@ use App\Models\Finance\SystemFinanceType;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\FinanceType
  */
-class BaseAction
+class BaseAction extends MainAction
 {
 
     /**

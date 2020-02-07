@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignActivitiesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivitiesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivityCancelRequest;
@@ -39,7 +38,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 运营商
  */
-class PlatformController extends BackEndApiMainController
+class PlatformController
 {
     /**
      * 运营商平台列表
@@ -80,7 +79,7 @@ class PlatformController extends BackEndApiMainController
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
@@ -141,7 +140,7 @@ class PlatformController extends BackEndApiMainController
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 

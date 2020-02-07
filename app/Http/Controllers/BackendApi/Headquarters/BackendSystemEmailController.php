@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Controllers\BackendApi\BackEndApiMainController;
 use App\Http\Requests\Backend\Headquarters\Email\ReadEmailRequest;
 use App\Http\Requests\Backend\Headquarters\Email\ReceivedIndexRequest;
 use App\Http\Requests\Backend\Headquarters\Email\SendIndexRequest;
@@ -21,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendSystemEmailController extends BackEndApiMainController
+class BackendSystemEmailController
 {
     /**
      * 发送邮件
@@ -36,7 +35,7 @@ class BackendSystemEmailController extends BackEndApiMainController
         SendRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($this, $inputDatas);
+        $msgOut     = $action->execute($inputDatas);
         return $msgOut;
     }
 
