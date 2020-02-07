@@ -76,6 +76,14 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'test',
               'admin_id'      => null,
+              'domain'        => '10.10.50.209:8081',
+              'status'        => 1,
+              'type'          => null,
+              'is_default'    => 0,
+             ],
+             [
+              'platform_sign' => 'test',
+              'admin_id'      => null,
               'domain'        => 'api.jianghu.ethan',
               'status'        => 1,
               'type'          => null,
