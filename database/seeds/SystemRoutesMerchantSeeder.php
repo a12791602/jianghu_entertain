@@ -913,6 +913,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.handle-save-buckle.handle-save',
+              'controller'    => null,
+              'method'        => 'handleSave',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

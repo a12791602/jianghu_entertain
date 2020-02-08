@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BackendApi\Merchant\Finance\HandleSaveBuckleRecordController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\RechargeOrderController;
@@ -187,5 +188,19 @@ Route::group(
              'checkRefuse',
             ],
         )->name($namePrefix . 'check-refuse');
+    },
+);
+
+Route::group(
+    ['prefix' => 'handle-save-buckle'],
+    static function (): void {
+        $namePrefix = 'merchant-api.handle-save-buckle.';
+        Route::post(
+            'handle-save',
+            [
+             HandleSaveBuckleRecordController::class,
+             'handleSave',
+            ],
+        )->name($namePrefix . 'handle-save');
     },
 );
