@@ -46,10 +46,11 @@ class DestroyAction
         if ($datas === null) {
             throw new \Exception('300100');
         }
+        $groupName = $datas->group_name;
         if (!$datas->delete()) {
             throw new \Exception('300104');
         }
-        $msgOut = msgOut();
+        $msgOut = msgOut(['group_name' => $groupName]);
         return $msgOut;
     }
 }

@@ -69,7 +69,7 @@ class EditAction extends MainAction
             //更新管理员组菜单权限缓存
             $backendSystemMenu = new BackendSystemMenu();
             $backendSystemMenu->createMenuDatas($id, $role);
-            $msgOut = msgOut($datas->toArray());
+            $msgOut = msgOut(['group_name' => $datas->group_name]);
             return $msgOut;
         } catch (\Throwable $e) {
             DB::rollBack();

@@ -32,6 +32,7 @@ class IndexAction
     public function execute(): JsonResponse
     {
         $data   = $this->model
+            ->select(['id', 'group_name', 'created_at'])
             ->with('detail:group_id,menu_id')
             ->get()
             ->toArray();

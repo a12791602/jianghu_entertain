@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Arr;
 
 /**
  * 创建后台管理员
@@ -21,13 +20,7 @@ class CreateAction extends MainAction
     {
         $inputDatas['password'] = bcrypt($inputDatas['password']);
         $user                   = BackendAdminUser::create($inputDatas);
-        $credentials            = Arr::only($inputDatas, ['email', 'password']);
-        $token                  = $this->auth->attempt($credentials);
-        $success                = [
-                                   'token' => $token,
-                                   'name'  => $user->name,
-                                  ];
-        $msgOut                 = msgOut($success);
+        $msgOut                 = msgOut(['name' => $user->name]);
         return $msgOut;
     }
 }

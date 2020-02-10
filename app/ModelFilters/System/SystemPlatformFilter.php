@@ -48,4 +48,21 @@ class SystemPlatformFilter extends ModelFilter
         }
         return $eloq;
     }
+
+    /**
+     * 维护状态查询
+     *
+     * @param  string $maintain 状态.
+     * @return $this
+     */
+    public function maintain(string $maintain): SystemPlatformFilter
+    {
+        $eloq = $this;
+        if ((int) $maintain === 0) {
+            $eloq = $this->where([['maintain_start', null], ['maintain_end', null]]);
+        } elseif ((int) $maintain === 1) {
+            $eloq = $this->where([['maintain_start', '!=', null], ['maintain_end', '!=', null]]);
+        }
+        return $eloq;
+    }
 }

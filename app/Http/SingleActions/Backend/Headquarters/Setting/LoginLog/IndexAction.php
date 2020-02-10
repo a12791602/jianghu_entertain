@@ -35,6 +35,7 @@ class IndexAction
     {
         $data = $this->model
             ->filter($inputDatas, BackendLoginLogFilter::class)
+            ->select(['email', 'ip', 'created_at'])
             ->paginate($this->model::getPageSize());
             
         $msgOut = msgOut($data);

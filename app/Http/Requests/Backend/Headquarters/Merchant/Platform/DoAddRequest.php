@@ -27,18 +27,18 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'email'         => 'required|email|unique:merchant_admin_users', //超管邮箱
-                'password'      => 'required|string',                            //密码
-                'platform_name' => 'required|unique:system_platforms,name',      //平台名称
-                'platform_sign' => 'required|unique:system_platforms,sign',      //平台标识
-                'agency_method' => 'required|string',                            //代理方式
-                'domains'       => 'required|array',                             //域名
-                'domains.*'     => 'unique:system_domains,domain',               //域名
-                'role'          => 'required|string',                            //权限
-                'sms_num'       => 'required|integer|gte:0',                     //短信条数
-                'status'        => 'required|integer|in:0,1',                    //开启状态
-                'start_time'    => 'required|date_format:Y-m-d H:i:s',           //开始时间
-                'end_time'      => 'required|date_format:Y-m-d H:i:s',           //结束时间
+                'email'         => 'required|email|max:64|unique:merchant_admin_users', //超管邮箱
+                'password'      => 'required|string',                                   //密码
+                'platform_name' => 'required|unique:system_platforms,name',             //平台名称
+                'platform_sign' => 'required|unique:system_platforms,sign',             //平台标识
+                'agency_method' => 'required|string',                                   //代理方式
+                'domains'       => 'required|array',                                    //域名
+                'domains.*'     => 'unique:system_domains,domain',                      //域名
+                'role'          => 'required|string',                                   //权限
+                'sms_num'       => 'required|integer|gte:0',                            //短信条数
+                'status'        => 'required|integer|in:0,1',                           //开启状态
+                'start_time'    => 'required|date_format:Y-m-d H:i:s',                  //开始时间
+                'end_time'      => 'required|date_format:Y-m-d H:i:s',                  //结束时间
                ];
     }
 
@@ -53,6 +53,7 @@ class DoAddRequest extends BaseFormRequest
                 'username.max'           => '厅主名称不能超过32个字符',
                 'email.required'         => '缺少厅主邮箱',
                 'email.email'            => '厅主邮箱格式不正确',
+                'email.max'              => '厅主邮箱不能超过64个字符',
                 'email.unique'           => '厅主邮箱已存在',
                 'password.required'      => '缺少厅主密码',
                 'password.string'        => '厅主密码必须是字符串',

@@ -29,9 +29,10 @@ class DetailRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'email'     => 'email',  //邮箱
-                'status'    => 'in:0,1', //状态
-                'createdAt' => 'string', //生成时间
+                'email'     => 'email|max:64',  //邮箱
+                'maintain'  => 'in:0,1',        //维护状态
+                'status'    => 'in:0,1',        //状态
+                'createdAt' => 'string',        //生成时间
                ];
     }
 
@@ -42,6 +43,8 @@ class DetailRequest extends BaseFormRequest
     {
         return [
                 'email.email'      => '邮箱格式不正确',
+                'email.max'        => '邮箱不能超过64个字符',
+                'maintain.in'      => '维护状态数据非法',
                 'status.in'        => '站点状态数据非法',
                 'createdAt.string' => '站点添加时间数据格式不正确',
                ];

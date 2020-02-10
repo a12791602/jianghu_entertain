@@ -46,7 +46,7 @@ class DoAddAction
             $menuEloq->level = $inputDatas['level'];
         }
         $menuEloq->save();
-        $msgOut = msgOut($menuEloq->toArray());
+        $msgOut = msgOut(['label' => $menuEloq->label]);
         return $msgOut;
     }
 }

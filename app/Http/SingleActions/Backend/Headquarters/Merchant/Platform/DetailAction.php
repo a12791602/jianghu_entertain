@@ -35,9 +35,24 @@ class DetailAction
     {
         $platformData = $this->model
             ->filter($inputDatas, SystemPlatformFilter::class)
-            ->with('owner')
-            ->get()
-            ->toArray();
+            ->select(
+                [
+                 'id',
+                 'name',
+                 'sign',
+                 'agency_method',
+                 'start_time',
+                 'end_time',
+                 'sms_num',
+                 'maintain_start',
+                 'maintain_end',
+                 'status',
+                 'created_at',
+                 'owner_id',
+                ],
+            )
+            ->with('owner:id,email')
+            ->get();
         $msgOut       = msgOut($platformData);
         return $msgOut;
     }
