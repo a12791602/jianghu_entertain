@@ -82,22 +82,22 @@ class MainAction
      * @var array
      */
     protected $backend = [
-                          'portPrefix'    => 'headquarters-api',
-                          'current_guard' => 'backend',
-                          'route'         => SystemRoutesBackend::class,
-                          'menu'          => BackendSystemMenu::class,
-                         ];
+        'portPrefix'    => 'headquarters-api',
+        'current_guard' => 'backend',
+        'route'         => SystemRoutesBackend::class,
+        'menu'          => BackendSystemMenu::class,
+    ];
 
     /**
      * @var array
      */
     protected $merchant = [
-                           'portPrefix'    => 'merchant-api',
-                           'current_guard' => 'merchant',
-                           'route'         => SystemRoutesMerchant::class,
-                           'menu'          => MerchantSystemMenu::class,
-                           'platform'      => SystemPlatform::class,
-                          ];
+        'portPrefix'    => 'merchant-api',
+        'current_guard' => 'merchant',
+        'route'         => SystemRoutesMerchant::class,
+        'menu'          => MerchantSystemMenu::class,
+        'platform'      => SystemPlatform::class,
+    ];
 
     /**
      * 路由权限
@@ -118,12 +118,14 @@ class MainAction
      */
     public function __construct(Request $request)
     {
-        new SystemPublicLogService($request, $request->get('logger'));
-        $this->agent = new Agent();
-        $this->guard = $request->get('guard');
-        $this->auth  = auth($this->guard);
-        $this->user  = $this->auth->user();
-        $this->route = $request->route();
+        if ($request->get('logger')){
+            new SystemPublicLogService($request, $request->get('logger'));
+        }
+        $this->agent               = new Agent();
+        $this->guard               = $request->get('guard');
+        $this->auth                = auth($this->guard);
+        $this->user                = $this->auth->user();
+        $this->route               = $request->route();
 
         /**
          * $request->get('prefix') #在RouteAuth中间件中传入了当前的URL的前缀
@@ -176,7 +178,7 @@ class MainAction
         $this->menuLists = $menuModel->getUserMenuDatas(
             $this->currentAccessAdminGroup->id,
             $this->adminAccessGroupDetail,
-        );
+            );
     }
 
     /**
