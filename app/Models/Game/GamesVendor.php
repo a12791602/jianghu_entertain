@@ -51,6 +51,18 @@ class GamesVendor extends BaseModel
     }
 
     /**
+     * @param string|null $value Value.
+     * @return mixed[]|null
+     */
+    public function getWhitelistIpsAttribute(?string $value): ?array
+    {
+        if (!empty($value)) {
+            $value = json_decode($value, true);
+        }
+        return $value;
+    }
+
+    /**
      * @return mixed
      */
     public function modelFilter()

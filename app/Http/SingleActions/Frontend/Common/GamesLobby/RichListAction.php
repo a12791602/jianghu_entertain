@@ -21,7 +21,7 @@ class RichListAction
     public function execute(): JsonResponse
     {
         $outputDatas = FrontendUsersAccount::with(['frontendUser.specificInfo'])
-            ->orderBy('balance', 'desc')->limit(100)->get();
+            ->orderBy('balance', 'desc')->limit(config('games_lobby.rich_rank_within'))->get();
         $result      = msgOut(RichListResource::collection($outputDatas));
         return $result;
     }

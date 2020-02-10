@@ -15,5 +15,9 @@ Route::group(
              'accountChange',
             ],
         )->name($namePrefix . 'account-change');
+        Route::post('users-generate', [TestController::class, 'userGenerate'])
+            ->name($namePrefix . 'users-generate');
+        Route::post('balance-generate', [TestController::class, 'balanceGenerate'])
+            ->name($namePrefix . 'balance-generate');
     },
 );

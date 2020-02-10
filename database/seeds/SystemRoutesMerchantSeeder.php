@@ -921,6 +921,30 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '',
               'is_open'       => 0,
              ],
+             [
+              'route_name'    => 'merchant-api.handle-save-buckle.save-index',
+              'controller'    => null,
+              'method'        => 'saveIndex',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.handle-save-buckle.handle-buckle',
+              'controller'    => null,
+              'method'        => 'handleBuckle',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'merchant-api.handle-save-buckle.buckle-index',
+              'controller'    => null,
+              'method'        => 'buckleIndex',
+              'menu_group_id' => 2,
+              'title'         => '',
+              'is_open'       => 0,
+             ],
             ],
         );
     }

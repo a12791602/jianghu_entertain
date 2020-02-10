@@ -127,5 +127,6 @@ $data = [
          //HandleSaveBuckleRecordController
          '202400' => '用户不存在!',
          '202401' => '系统异常,存款失败!',
+         '202402' => '系统异常,扣款失败!',
         ];
 return $data;

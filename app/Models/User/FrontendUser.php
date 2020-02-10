@@ -25,6 +25,8 @@ class FrontendUser extends BaseAuthModel
 
     public const IS_TESTER_YES = 1;
     public const IS_TESTER_NO  = 0;
+    public const TYPE_USER     = 1;
+    public const TYPE_AGENCY   = 2;
 
     /**
      * @var array $guarded
@@ -117,6 +119,16 @@ class FrontendUser extends BaseAuthModel
     }
 
     /**
+     * Front-end user's bank card.
+     * @return HasMany
+     */
+    public function bankCard(): HasMany
+    {
+        $result = $this->hasMany(FrontendUsersBankCard::class, 'user_id', 'id');
+        return $result;
+    }
+
+    /**
      *  specific info
      *
      * @return HasOne
@@ -171,6 +183,16 @@ class FrontendUser extends BaseAuthModel
     public function gamesPlatform(): HasOne
     {
         $result = $this->hasOne(GamesPlatform::class, 'id', 'platform_id');
+        return $result;
+    }
+
+    /**
+     * get user withdraw order.
+     * @return HasMany
+     */
+    public function withdraw(): HasMany
+    {
+        $result = $this->hasMany(UsersWithdrawOrder::class, 'user_id', 'id');
         return $result;
     }
 

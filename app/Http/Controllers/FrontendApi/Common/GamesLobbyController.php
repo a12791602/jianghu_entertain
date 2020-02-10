@@ -9,6 +9,7 @@ use App\Http\Requests\Frontend\Common\SlidesRequest;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\GameCategoryAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\GameListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\InGameAction;
+use App\Http\SingleActions\Frontend\Common\GamesLobby\ProfitListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\RichListAction;
 use App\Http\SingleActions\Frontend\Common\GamesLobby\SlidesAction;
 use Illuminate\Http\JsonResponse;
@@ -22,11 +23,23 @@ class GamesLobbyController
 
     /**
      * Rich list.
-     * @param  RichListAction $action Action.
+     * @param  RichListAction $action RichListAction.
      * @return JsonResponse.
      * @throws \Exception Exception.
      */
     public function richList(RichListAction $action): JsonResponse
+    {
+        $result = $action->execute();
+        return $result;
+    }
+
+    /**
+     * Game lobby profit list.
+     * @param ProfitListAction $action ProfitListAction.
+     * @return JsonResponse.
+     * @throws \Exception Exception.
+     */
+    public function profitList(ProfitListAction $action): JsonResponse
     {
         $result = $action->execute();
         return $result;

@@ -6,21 +6,16 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Finance\SystemFinanceHandleSaveBuckleRecord;
 
 /**
- * Class HandleSaveRequest
+ * Class SaveIndexRequest
  * @package App\Http\Requests\Backend\Merchant\Finance\HandleSaveBuckle
  */
-class HandleSaveRequest extends BaseFormRequest
+class SaveIndexRequest extends BaseFormRequest
 {
 
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
     protected $dependentModels = [SystemFinanceHandleSaveBuckleRecord::class];
-
-    /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
-     */
-    protected $extraDefinition = ['user' => '会员帐号或会员ID'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -39,14 +34,23 @@ class HandleSaveRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $types = array_keys(SystemFinanceHandleSaveBuckleRecord::$saveTypes);
-        $types = implode(',', $types);
+        $type  = array_keys(SystemFinanceHandleSaveBuckleRecord::$saveTypes);
         $rules = [
-                  'user'   => 'required|string|min:1|max:32',
-                  'type'   => 'required|integer|in:' . $types,
-                  'money'  => 'required|numeric|gt:0',
-                  'remark' => 'string|min:1|max:256',
+                  'mobile'       => 'string|size:11|regex:/^1[345789]\d{9}$/',
+                  'guid'         => 'string|size:7',
+                  'is_tester'    => 'integer|in:0,1',
+                  'type'         => 'integer|in:' . implode(',', $type),
+                  'created_at'   => 'array',
+                  'created_at.*' => 'required|date',
                  ];
         return $rules;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['created_at' => 'cast:array'];
     }
 }

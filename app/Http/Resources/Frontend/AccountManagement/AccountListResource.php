@@ -20,6 +20,7 @@ class AccountListResource extends JsonResource
     public function toArray($request): array
     {
         $result = [
+                   'id'                 => $this->id,
                    'code'               => $this->code,         // 银行编码
                    'owner_name'         => $this->owner_name,   // 名称
                    'card_number_hidden' => $this->card_number_hidden, // 卡号

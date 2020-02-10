@@ -195,6 +195,7 @@ Route::group(
     ['prefix' => 'handle-save-buckle'],
     static function (): void {
         $namePrefix = 'merchant-api.handle-save-buckle.';
+        //人工充值
         Route::post(
             'handle-save',
             [
@@ -202,5 +203,29 @@ Route::group(
              'handleSave',
             ],
         )->name($namePrefix . 'handle-save');
+        //人工充值列表
+        Route::get(
+            'save-index',
+            [
+             HandleSaveBuckleRecordController::class,
+             'saveIndex',
+            ],
+        )->name($namePrefix . 'save-index');
+        //人工扣款
+        Route::post(
+            'handle-buckle',
+            [
+             HandleSaveBuckleRecordController::class,
+             'handleBuckle',
+            ],
+        )->name($namePrefix . 'handle-buckle');
+        //人工扣款列表
+        Route::get(
+            'buckle-index',
+            [
+             HandleSaveBuckleRecordController::class,
+             'buckleIndex',
+            ],
+        )->name($namePrefix . 'buckle-index');
     },
 );

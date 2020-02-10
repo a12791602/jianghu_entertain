@@ -6,10 +6,10 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Finance\SystemFinanceHandleSaveBuckleRecord;
 
 /**
- * Class HandleSaveRequest
+ * Class HandleBuckleRequest
  * @package App\Http\Requests\Backend\Merchant\Finance\HandleSaveBuckle
  */
-class HandleSaveRequest extends BaseFormRequest
+class HandleBuckleRequest extends BaseFormRequest
 {
 
     /**
@@ -39,7 +39,7 @@ class HandleSaveRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $types = array_keys(SystemFinanceHandleSaveBuckleRecord::$saveTypes);
+        $types = array_keys(SystemFinanceHandleSaveBuckleRecord::$buckleTypes);
         $types = implode(',', $types);
         $rules = [
                   'user'   => 'required|string|min:1|max:32',

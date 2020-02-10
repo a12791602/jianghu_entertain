@@ -33,6 +33,7 @@ class RegisterAction extends MainAction
         if (!$verifyData) {
             throw new \Exception('100502');
         }
+
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
             throw new \Exception('100503', 401);
         }
@@ -100,7 +101,7 @@ class RegisterAction extends MainAction
         string $guid,
         string $password,
         string $invite_code,
-        string $register_ip,
+        ?string $register_ip,
         int $platform_id,
         string $sign
     ): FrontendUser {
@@ -112,6 +113,7 @@ class RegisterAction extends MainAction
                  'register_ip'   => $register_ip,
                  'platform_id'   => $platform_id,
                  'platform_sign' => $sign,
+                 'type'          => FrontendUser::TYPE_USER,
                 ];
 
         $result = FrontendUser::create($item);

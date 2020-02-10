@@ -21,17 +21,23 @@ class DynamicInformationResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $balance = $this->account->balance;
-        $rank    = FrontendUsersAccount::where('balance', '>', $balance)->count();
-        $result  = [
-                    'score'          => 1440,
-                    'grade'          => 6,
-                    'experience'     => 1500,
-                    'weekly_gift'    => $this->specificInfo->weekly_gift,
-                    'promotion_gift' => $this->specificInfo->promotion_gift,
-                    'balance'        => $this->account->balance,
-                    'rich_rank'      => $rank + 1,
-                   ];
+        $balance    = $this->account->balance;
+        $rank_count = FrontendUsersAccount::where('balance', '>', $balance)->count();
+        $rank       = 0;
+        if ($rank_count < config('games_lobby.rich_rank_within')) {
+            $rank = $rank_count + 1;
+        }
+
+        $result = [
+                   'score'          => 1440,
+                   'grade'          => 6,
+                   'experience'     => 1500,
+                   'weekly_gift'    => $this->specificInfo->weekly_gift,
+                   'promotion_gift' => $this->specificInfo->promotion_gift,
+                   'balance'        => $this->account->balance,
+                   'rich_rank'      => $rank,
+                   'profit_rank'    => $rank,
+                  ];
         return $result;
     }
 }

@@ -25,7 +25,7 @@ class IndexDoAction extends BaseAction
     {
         $pageSize = $this->model::getPageSize();
         $outputDatas = $this->model::with(
-            ['lastEditor', 'author'],
+            ['lastEditor:id,name', 'author:id,name'],
         )->filter($inputDatas, GamesVendorFilter::class)->paginate($pageSize);
         return msgOut($outputDatas);
     }

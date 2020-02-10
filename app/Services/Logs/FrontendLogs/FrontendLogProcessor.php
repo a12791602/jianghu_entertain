@@ -81,14 +81,11 @@ class FrontendLogProcessor
      */
     public function __invoke(array $record): array
     {
-        $request       = request();
-        $agent         = new Agent();
-        $baseUrl       = explode('/', $request->root());
-        $domain        = array_pop($baseUrl);
-        $system_domain = SystemDomain::where('domain', $domain)->first(['platform_sign']);
-        if (!$system_domain) {
-            throw new \Exception('100609');
-        }
+        $request         = request();
+        $agent           = new Agent();
+        $baseUrl         = explode('/', $request->root());
+        $domain          = array_pop($baseUrl);
+        $system_domain   = SystemDomain::where('domain', $domain)->first(['platform_sign']);
         $platform_sign   = $system_domain->platform_sign;
         $clientOs        = $agent->platform();
         $osVersion       = $agent->version($clientOs);

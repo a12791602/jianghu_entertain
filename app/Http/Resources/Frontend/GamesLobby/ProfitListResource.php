@@ -5,10 +5,10 @@ namespace App\Http\Resources\Frontend\GamesLobby;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class RichListResource
- * @package App\Http\Resources
+ * Class ProfitListResource
+ * @package App\Http\Resources\Frontend\GamesLobby
  */
-class RichListResource extends JsonResource
+class ProfitListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.

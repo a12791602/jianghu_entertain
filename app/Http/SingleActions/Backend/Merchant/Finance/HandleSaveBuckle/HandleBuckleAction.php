@@ -7,10 +7,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class HandleSaveAction
+ * Class HandleBuckleAction
  * @package App\Http\SingleActions\Backend\Merchant\Finance\HandleSaveBuckle
  */
-class HandleSaveAction extends BaseAction
+class HandleBuckleAction extends BaseAction
 {
     /**
      * @param array $inputDatas InputDatas.
@@ -34,15 +34,15 @@ class HandleSaveAction extends BaseAction
         $data['money']         = $inputDatas['money'];
         $data['remark']        = $inputDatas['remark'] ?? '';
         $data['admin_id']      = $this->user->id;
-        $data['balance']       = $user->account->balance + $inputDatas['money'];
-        $data['direction']     = $this->model::DIRECTION_IN;
+        $data['balance']       = $user->account->balance - $inputDatas['money'];
+        $data['direction']     = $this->model::DIRECTION_OUT;
         DB::beginTransaction();
         try {
             $this->model->fill($data);
             if ($this->model->save()) {
                 $user->account->operateAccount(
                     ['amount' => $inputDatas['money']],
-                    'artificial_recharge',
+                    'artificial_deduction',
                 );
                 DB::commit();
                 $msgOut = msgOut();
@@ -52,6 +52,6 @@ class HandleSaveAction extends BaseAction
             $this->writeLog($exception, $data['order_no']);
         }
         DB::rollBack();
-        throw new \Exception('202401');
+        throw new \Exception('202402');
     }
 }
