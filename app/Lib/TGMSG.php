@@ -26,10 +26,10 @@ class TGMSG
 
     /**
      * TGMSG constructor.
-     * @param integer $responseStatus Status Code like 403,401 etc..
-     * @param string  $prefixs        Route prefix app-api etc..
+     * @param integer     $responseStatus Status Code like 403,401 etc..
+     * @param string|null $prefixs        Route prefix app-api etc..
      */
-    public function __construct(int $responseStatus, string $prefixs)
+    public function __construct(int $responseStatus, ?string $prefixs = 'other')
     {
         $this->tgObj = new Api('823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM');
         $environment = App::environment();
