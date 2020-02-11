@@ -144,7 +144,7 @@ class RouteAuth
 
         if ($auth_check) {
             if (!auth()->guard($this->guard)->check()) {
-                throw new Exception('100004');
+                throw new Exception('100004', 401);
             }
         }
 
