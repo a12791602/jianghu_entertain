@@ -8,7 +8,6 @@ use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Cache;
 use Faker\Factory;
-use Faker\Provider\zh_CN\PhoneNumber;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -52,10 +51,10 @@ class TestController extends MainAction
      */
     public function userGenerate(RegisterAction $action)
     {
-        $request           = new RegisterRequest();
-        $request->password = '12345Eth';
-        $mobile            = 18844440000;
-        $already_user      = FrontendUser::where('mobile', $mobile + 1)->exists();
+        $request             = new RegisterRequest();
+        $request['password'] = '12345Eth';
+        $mobile              = 18844440000;
+        $already_user        = FrontendUser::where('mobile', $mobile)->exists();
         if ($already_user) {
             return;
         }
@@ -80,7 +79,6 @@ class TestController extends MainAction
     public function balanceGenerate(): JsonResponse
     {
         $faker = Factory::create('zh_CN');
-        $faker->addProvider(new PhoneNumber($faker));
         FrontendUser::all()->map(
             static function ($item) use ($faker): void {
                 $balance                = 1000000000;

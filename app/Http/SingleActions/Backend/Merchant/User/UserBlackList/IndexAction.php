@@ -40,8 +40,21 @@ class IndexAction extends MainAction
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $inputDatas['status']       = $this->model::STATUS_BLACK;
         $data                       = $this->model
-                                            ->filter($inputDatas, FrontendUsersBlackListFilter::class)
-                                            ->paginate($this->model::getPageSize());
+            ->filter($inputDatas, FrontendUsersBlackListFilter::class)
+            ->select(
+                [
+                 'id',
+                 'mobile',
+                 'guid',
+                 'account',
+                 'register_time',
+                 'last_login_time',
+                 'created_at',
+                 'last_login_ip',
+                 'remark',
+                ],
+            )
+            ->paginate($this->model::getPageSize());
         $msgOut                     = msgOut($data);
         return $msgOut;
     }

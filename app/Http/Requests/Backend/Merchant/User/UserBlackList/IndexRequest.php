@@ -28,8 +28,8 @@ class IndexRequest extends BaseFormRequest
     {
         return [
                 'mobile'   => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
-                'uniqueId' => 'string', //用户UID
-                'createAt' => 'string', //进入黑名单日期
+                'guid'     => 'string',                                //用户UID
+                'createAt' => 'string',                                //进入黑名单日期
                ];
     }
 

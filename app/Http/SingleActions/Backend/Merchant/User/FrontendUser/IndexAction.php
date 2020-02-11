@@ -39,8 +39,47 @@ class IndexAction
                 $inputDatas['parentId'] = $parentId->id;
             }
         }
-        $data   = $this->model->filter($inputDatas, FrontendUserFilter::class)->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
+        $datas = $this->model->filter($inputDatas, FrontendUserFilter::class)
+            ->select(
+                [
+                 'id',
+                 'mobile',
+                 'parent_id',
+                 'is_online',
+                 'is_tester',
+                 'guid',
+                 'user_tag_id',
+                 'register_ip',
+                 'last_login_ip',
+                 'created_at',
+                ],
+            )
+            ->with(
+                [
+                 'userTag:id,title',
+                 'specificInfo:user_id,total_members',
+                 'parent:id,mobile',
+                 'account:user_id,balance',
+                ],
+            )
+            ->paginate($this->model::getPageSize())->toArray();
+        foreach ($datas['data'] as $userKey => $user) {
+            $datas['data'][$userKey] = [
+                                        'id'            => $user['id'],
+                                        'mobile'        => $user['mobile_hidden'],
+                                        'guid'          => $user['guid'],
+                                        'is_online'     => $user['is_online'],
+                                        'is_tester'     => $user['is_tester'],
+                                        'register_ip'   => $user['register_ip'],
+                                        'last_login_ip' => $user['last_login_ip'],
+                                        'created_at'    => $user['created_at'],
+                                        'user_tag'      => $user['user_tag']['title'] ?? null,
+                                        'total_members' => $user['specific_info']['total_members'] ?? 0,
+                                        'parent_mobile' => $user['parent']['mobile'] ?? null,
+                                        'balance'       => $user['account']['balance'] ?? 0,
+                                       ];
+        }
+        $msgOut = msgOut($datas);
         return $msgOut;
     }
 }

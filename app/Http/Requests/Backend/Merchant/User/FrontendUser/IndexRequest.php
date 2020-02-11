@@ -28,7 +28,7 @@ class IndexRequest extends BaseFormRequest
     {
         return [
                 'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
-                'userUid'       => 'string', //用户UID
+                'guid'          => 'string', //用户UID
                 'parent_mobile' => ['regex' => 'regex:/^1[345789]\d{9}$/'], //上级手机号码
                 'isOnline'      => 'integer|in:0,1', //0离线 1在线
                 'lastLoginIp'   => 'ip', //最后登陆IP

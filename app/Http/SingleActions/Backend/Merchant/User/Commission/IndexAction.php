@@ -38,12 +38,30 @@ class IndexAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
-        $data                       = $this->model
+        $datas                      = $this->model
             ->filter($inputDatas, UsersCommissionConfigFilter::class)
+            ->select('id', 'game_type_id', 'game_vendor_id', 'bet')
             ->with('configDetail.userGrade')
-            ->get()
-            ->toArray();
-        $msgOut                     = msgOut($data);
+            ->get();
+
+        $returnData = [];
+        foreach ($datas as $dataKey => $item) {
+            $returnData[$dataKey] = [
+                                     'id'             => $item->id,
+                                     'game_type_id'   => $item->game_type_id,
+                                     'game_vendor_id' => $item->game_vendor_id,
+                                     'bet'            => $item->bet,
+                                    ];
+            $percentData          = [];
+            foreach ($item->configDetail as $config) {
+                $percentData[] = [
+                                  'grade_name' => $config->userGrade->name,
+                                  'percent'    => $config->percent,
+                                 ];
+            }
+            $returnData[$dataKey]['percent_data'] = $percentData;
+        }
+        $msgOut = msgOut($returnData);
         return $msgOut;
     }
 }

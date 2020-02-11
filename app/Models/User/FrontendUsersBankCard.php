@@ -3,6 +3,8 @@
 namespace App\Models\User;
 
 use App\Models\BaseModel;
+use App\Models\Finance\SystemBank;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 用户银行卡
@@ -34,5 +36,15 @@ class FrontendUsersBankCard extends BaseModel
             $result = substr_replace($this->card_number, ' **** ', 3, 4);
         }
         return $result;
+    }
+
+    /**
+     * 银行信息
+     * @return BelongsTo
+     */
+    public function bank(): BelongsTo
+    {
+        $bank = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        return $bank;
     }
 }

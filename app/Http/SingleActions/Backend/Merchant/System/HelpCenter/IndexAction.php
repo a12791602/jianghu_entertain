@@ -40,8 +40,21 @@ class IndexAction extends MainAction
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $data               = $this->model
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
-            ->get()
-            ->toArray();
+            ->select(
+                [
+                 'id',
+                 'title',
+                 'pic',
+                 'type',
+                 'status',
+                 'created_at',
+                 'updated_at',
+                 'add_admin_id',
+                 'update_admin_id',
+                ],
+            )
+            ->with(['author:id,name', 'newer:id,name'])
+            ->get();
         $msgOut             = msgOut($data);
         return $msgOut;
     }

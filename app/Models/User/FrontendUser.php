@@ -7,6 +7,7 @@ use App\Models\BaseAuthModel;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Platform\GamesPlatform;
 use App\Models\Systems\SystemPlatform;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
@@ -32,6 +33,13 @@ class FrontendUser extends BaseAuthModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['mobile_hidden'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -140,13 +148,6 @@ class FrontendUser extends BaseAuthModel
     }
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    //    protected $appends = ['mobile_hidden'];
-
-    /**
      * 隐藏手机号中间四位 ****
      * @return string
      */
@@ -203,5 +204,15 @@ class FrontendUser extends BaseAuthModel
     {
         $object = $this->provideFilter(FrontendUserFilter::class);
         return $object;
+    }
+
+    /**
+     * 用户标签
+     * @return BelongsTo
+     */
+    public function userTag(): BelongsTo
+    {
+        $userTag = $this->belongsTo(UsersTag::class, 'user_tag_id', 'id');
+        return $userTag;
     }
 }

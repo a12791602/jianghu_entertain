@@ -19,14 +19,14 @@ class FrontendUsersBlackListFilter extends ModelFilter
     public $relations = [];
 
     /**
-     * 用户UID查询
+     * 用户guid查询
      *
-     * @param  string $uniqueId 用户UID.
+     * @param  string $guid 用户guid.
      * @return FrontendUsersBlackListFilter
      */
-    public function uniqueId(string $uniqueId): FrontendUsersBlackListFilter
+    public function guid(string $guid): FrontendUsersBlackListFilter
     {
-        $eloq = $this->where('uid', $uniqueId);
+        $eloq = $this->where('guid', $guid);
         return $eloq;
     }
 

@@ -3,8 +3,8 @@
 namespace App\Http\SingleActions\Backend\Merchant\System\BankCards;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\FrontendUsersBankCardFilter;
-use App\Models\Systems\FrontendUsersBankCard;
+use App\ModelFilters\User\FrontendUsersBankCardFilter;
+use App\Models\User\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

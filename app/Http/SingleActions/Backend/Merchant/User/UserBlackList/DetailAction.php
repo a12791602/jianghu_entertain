@@ -40,8 +40,21 @@ class DetailAction extends MainAction
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
 
         $data   = $this->model
-                     ->filter($inputDatas, FrontendUsersBlackListFilter::class)
-                     ->paginate($this->model::getPageSize());
+            ->filter($inputDatas, FrontendUsersBlackListFilter::class)
+            ->select(
+                [
+                 'mobile',
+                 'guid',
+                 'account',
+                 'register_time',
+                 'last_login_time',
+                 'created_at',
+                 'remove_time',
+                 'last_login_ip',
+                 'remark',
+                ],
+            )
+            ->paginate($this->model::getPageSize());
         $msgOut = msgOut($data);
         return $msgOut;
     }
