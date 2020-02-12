@@ -191,25 +191,25 @@ class AccountChange
     ): bool {
         // 保存帐变记录
         $report = [
-            'parent_id'             => $user->parent_id,
-            'serial_number'         => self::getSerialNumber(),
-            'activity_sign'         => $inputDatas['activity_sign'] ?? 0,
-            'desc'                  => $inputDatas['desc'] ?? 0,
-            'frozen_type'           => $typeConfig['frozen_type'],
-            'process_time'          => time(),
-            'platform_sign'         => $user->platform_sign,
-            'top_id'                => $user->top_id,
-            'type_name'             => $typeConfig['name'],
-            'type_sign'             => $typeConfig['sign'],
-            'in_out'                => $typeConfig['in_out'],
-            'username'              => $user->username,
-            'before_balance'        => $beforeBalance,
-            'balance'               => $this->account->balance,
-            'frozen_balance'        => $this->account->frozen,
-            'before_frozen_balance' => $beforeFrozen,
-            'params'                => json_encode($params),
-            'amount'                => $amount,
-        ];
+                   'parent_id'             => $user->parent_id,
+                   'serial_number'         => self::getSerialNumber(),
+                   'activity_sign'         => $inputDatas['activity_sign'] ?? 0,
+                   'desc'                  => $inputDatas['desc'] ?? 0,
+                   'frozen_type'           => $typeConfig['frozen_type'],
+                   'process_time'          => time(),
+                   'platform_sign'         => $user->platform_sign,
+                   'top_id'                => $user->top_id,
+                   'type_name'             => $typeConfig['name'],
+                   'type_sign'             => $typeConfig['sign'],
+                   'in_out'                => $typeConfig['in_out'],
+                   'username'              => $user->username,
+                   'before_balance'        => $beforeBalance,
+                   'balance'               => $this->account->balance,
+                   'frozen_balance'        => $this->account->frozen,
+                   'before_frozen_balance' => $beforeFrozen,
+                   'params'                => json_encode($params),
+                   'amount'                => $amount,
+                  ];
 
         $accountsReport = new FrontendUsersAccountsReport();
         $accountsReport->fill($report);
