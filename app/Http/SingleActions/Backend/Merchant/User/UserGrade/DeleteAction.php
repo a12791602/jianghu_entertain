@@ -65,11 +65,7 @@ class DeleteAction extends MainAction
             }
         }
         //删除该等级的洗码设置数据
-        $deleteCommissionDetail = UsersCommissionConfigDetail::where('grade_id', $currentUsersGrade->id)->delete();
-        if (!$deleteCommissionDetail) {
-            DB::rollback();
-            throw new \Exception('200709');
-        }
+        UsersCommissionConfigDetail::where('grade_id', $currentUsersGrade->id)->delete();
         //删除这条等级数据。
         if (!$currentUsersGrade->delete()) {
             DB::rollback();
