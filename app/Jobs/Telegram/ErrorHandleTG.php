@@ -132,7 +132,6 @@ class ErrorHandleTG implements ShouldQueue
                                  'line'          => $e->getLine(),
                                  'code'          => $e->getCode(),
                                  'message'       => $e->getMessage(),
-                                 'previous'      => $e->getPrevious(),
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();
@@ -171,7 +170,6 @@ class ErrorHandleTG implements ShouldQueue
                            'line'          => $this->exception['line'],
                            'code'          => $this->exception['code'],
                            'message'       => $this->exception['message'],
-                           'previous'      => $this->exception['previous'],
                            'TraceAsString' => $this->exception['TraceAsString'],
                           ];
         $telegram       = new TGMSG($this->responseStatus, $this->routePrefix);
