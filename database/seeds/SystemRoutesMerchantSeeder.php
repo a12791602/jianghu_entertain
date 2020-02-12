@@ -642,7 +642,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.marquee-notice.add-do',
+              'route_name'    => 'merchant-api.system-notice.add-do',
               'controller'    => null,
               'method'        => 'addDo',
               'menu_group_id' => 2,
@@ -650,7 +650,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.marquee-notice.index',
+              'route_name'    => 'merchant-api.system-notice.index',
               'controller'    => null,
               'method'        => 'index',
               'menu_group_id' => 2,
@@ -658,7 +658,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.marquee-notice.edit',
+              'route_name'    => 'merchant-api.system-notice.edit',
               'controller'    => null,
               'method'        => 'edit',
               'menu_group_id' => 2,
@@ -666,7 +666,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.marquee-notice.del-do',
+              'route_name'    => 'merchant-api.system-notice.del-do',
               'controller'    => null,
               'method'        => 'delDo',
               'menu_group_id' => 2,
@@ -674,7 +674,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.marquee-notice.status',
+              'route_name'    => 'merchant-api.systems-notice.status',
               'controller'    => null,
               'method'        => 'delDo',
               'menu_group_id' => 2,
