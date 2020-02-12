@@ -377,6 +377,18 @@ class SystemRoutesMobileSeeder extends Seeder
               'created_at'        => null,
               'updated_at'        => null,
              ],
+             [
+              'id'                => 31,
+              'route_name'        => 'app-api.recharge.get-finance-info',
+              'controller'        => null,
+              'method'            => 'getFinanceInfo',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+              'created_at'        => null,
+              'updated_at'        => null,
+             ],
             ],
         );
     }

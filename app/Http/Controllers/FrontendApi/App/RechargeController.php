@@ -7,6 +7,7 @@ use App\Http\Requests\Frontend\App\Recharge\ChannelsRequest;
 use App\Http\Requests\Frontend\App\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\App\Recharge\TypesRequest;
 use App\Http\SingleActions\Frontend\App\Recharge\ChannelsAction;
+use App\Http\SingleActions\Frontend\App\Recharge\GetFinanceInfoAction;
 use App\Http\SingleActions\Frontend\App\Recharge\RechargeAction;
 use App\Http\SingleActions\Frontend\App\Recharge\TypesAction;
 use Illuminate\Http\JsonResponse;
@@ -57,6 +58,19 @@ class RechargeController extends FrontendApiMainController
         $inputDatas       = $request->validated();
         $inputDatas['ip'] = $request->ip();
         $outputs          = $action->execute($inputDatas);
+        return $outputs;
+    }
+
+    /**
+     * 获取分类与渠道.
+     *
+     * @param GetFinanceInfoAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function getFinanceInfo(GetFinanceInfoAction $action): JsonResponse
+    {
+        $outputs = $action->execute();
         return $outputs;
     }
 }

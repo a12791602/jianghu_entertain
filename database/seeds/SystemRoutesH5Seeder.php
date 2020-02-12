@@ -97,6 +97,11 @@ class SystemRoutesH5Seeder extends Seeder
               'method'     => 'inGame',
               'is_open'    => 0,
              ],
+             [
+              'route_name' => 'h5-api.recharge.get-finance-info',
+              'method'     => 'getFinanceInfo',
+              'is_open'    => 0,
+             ],
             ],
         );
     }

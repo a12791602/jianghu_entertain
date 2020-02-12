@@ -30,5 +30,13 @@ Route::group(
              'recharge',
             ],
         )->name($namePrefix . 'recharge');
+        //获取分类与渠道
+        Route::get(
+            'get-finance-info',
+            [
+             RechargeController::class,
+             'getFinanceInfo',
+            ],
+        )->name($namePrefix . 'get-finance-info');
     },
 );

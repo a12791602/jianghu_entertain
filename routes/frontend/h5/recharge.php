@@ -7,10 +7,36 @@ Route::group(
     static function (): void {
         $namePrefix = 'h5-api.recharge.';
         //获取充值分类
-        Route::post('types', [RechargeController::class, 'types'])->name($namePrefix . 'types');
+        Route::post(
+            'types',
+            [
+             RechargeController::class,
+             'types',
+            ],
+        )->name($namePrefix . 'types');
         //获取充值渠道
-        Route::post('channels', [RechargeController::class, 'channels'])->name($namePrefix . 'channels');
+        Route::post(
+            'channels',
+            [
+             RechargeController::class,
+             'channels',
+            ],
+        )->name($namePrefix . 'channels');
         //发起充值
-        Route::post('recharge', [RechargeController::class, 'recharge'])->name($namePrefix . 'recharge');
+        Route::post(
+            'recharge',
+            [
+             RechargeController::class,
+             'recharge',
+            ],
+        )->name($namePrefix . 'recharge');
+        //获取分类与渠道
+        Route::get(
+            'get-finance-info',
+            [
+             RechargeController::class,
+             'getFinanceInfo',
+            ],
+        )->name($namePrefix . 'get-finance-info');
     },
 );
