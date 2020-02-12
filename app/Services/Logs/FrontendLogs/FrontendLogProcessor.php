@@ -83,7 +83,7 @@ class FrontendLogProcessor
     {
         $request         = request();
         $agent           = new Agent();
-        $baseUrl         = explode('/', $request->root());
+        $baseUrl         = explode('/', $request->headers->get('origin'));
         $domain          = array_pop($baseUrl);
         $system_domain   = SystemDomain::where('domain', $domain)->first(['platform_sign']);
         $platform_sign   = $system_domain->platform_sign;
