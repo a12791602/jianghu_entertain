@@ -31,6 +31,7 @@ class CreateNoticeSystemsTable extends Migration
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');
                 $table->integer('author_id')->default(0)->comment('创建人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
+                $table->tinyInteger('status')->default(0)->comment('状态 0 禁用 1 启用');
                 $table->timestamps();
                 $table->index('title');
             },
