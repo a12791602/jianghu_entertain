@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Frontend\Common\FrontendUser;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Rules\Frontend\CheckSecurityCode;
+use App\Rules\Frontend\SecurityCodeCheckRule;
 
 /**
  * Class AccountDestroyRequest
@@ -29,17 +29,11 @@ class AccountDestroyRequest extends BaseFormRequest
     public function rules(): array
     {
         $result = [
-                   'owner_name'    => [
-                                       'string',
-                                       'required',
-                                       'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',
-                                      ],
-                   'card_number'   => 'required',
+                   'card_id'       => 'required',
                    'security_code' => [
-                                       'string',
                                        'required',
                                        'digits:6',
-                                       new CheckSecurityCode($this),
+                                       new SecurityCodeCheckRule($this),
                                       ],
                   ];
         return $result;

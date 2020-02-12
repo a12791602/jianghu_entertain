@@ -36,7 +36,7 @@ class AccountUnique implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        $user      = $this->request->user();
+        $user      = $this->request->user($this->request->get('guard'));
         $condition = $user->bankCard->where($attribute, $value)->isEmpty();
         return $condition === true;
     }

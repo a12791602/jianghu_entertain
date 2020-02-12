@@ -7,6 +7,7 @@ use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class AliPaySaveAction
@@ -24,11 +25,15 @@ class AliPaySaveAction extends MainAction
     public function execute(AliPaySaveRequest $request): JsonResponse
     {
         $validated             = $request->validated();
-        $item                  = Arr::only($validated, ['card_number', 'owner_name', 'code', 'type']);
-        $item['platform_sign'] = $this->currentPlatformEloq->sign;
+        $item                  = Arr::only($validated, ['card_number', 'owner_name']);
         $item['status']        = FrontendUsersBankCard::STATUS_OPEN;
-        $this->user->bankCard()->create($item);
-        $result = msgOut();
+        $item['type']          = FrontendUsersBankCard::TYPE_ALIPAY;
+        $item['platform_sign'] = $this->currentPlatformEloq->sign;
+        $user                  = $this->user;
+        $user->fund_password   = Hash::make($validated['fund_password']);
+        $user->save();
+        $user->bankCard()->create($item);
+        $result = msgOut([], '100900');
         return $result;
     }
 }

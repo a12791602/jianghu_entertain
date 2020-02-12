@@ -7,6 +7,7 @@ use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Class BankCardSaveAction
@@ -22,14 +23,15 @@ class BankCardSaveAction extends MainAction
      */
     public function execute(BankCardSaveRequest $request): JsonResponse
     {
-        $validated = $request->validated();
-
-        $item = Arr::only($validated, ['branch', 'owner_name', 'card_number', 'code', 'bank_id', 'type']);
-
-        $item['platform_sign'] = $this->currentPlatformEloq->sign;
-        $item['status']        = FrontendUsersBankCard::STATUS_OPEN;
+        $validated                 = $request->validated();
+        $item                      = Arr::only($validated, ['branch', 'owner_name', 'card_number', 'code', 'bank_id']);
+        $item['type']              = FrontendUsersBankCard::TYPE_DEBIT;
+        $item['status']            = FrontendUsersBankCard::STATUS_OPEN;
+        $item['platform_sign']     = $this->currentPlatformEloq->sign;
+        $this->user->fund_password = Hash::make($validated['fund_password']);
+        $this->user->save();
         $this->user->bankCard()->create($item);
-        $result = msgOut();
+        $result = msgOut([], '100900');
         return $result;
     }
 }

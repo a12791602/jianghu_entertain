@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 use App\Http\Requests\Frontend\Common\FrontendUser\AccountDestroyRequest;
 use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Arr;
 
 /**
  * Class AccountDestroyAction
@@ -22,12 +21,11 @@ class AccountDestroyAction extends MainAction
     public function execute(AccountDestroyRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $condition = Arr::only($validated, ['card_number', 'owner_name']);
-        $item      = $this->user->bankCard()->where($condition)->delete();
+        $item      = $this->user->bankCard()->where('id', $validated['card_id'])->delete();
         if (!$item) {
-            throw new \Exception('100801');
+            throw new \Exception('100902');
         }
-        $result = msgOut();
+        $result = msgOut([], '100901');
         return $result;
     }
 }

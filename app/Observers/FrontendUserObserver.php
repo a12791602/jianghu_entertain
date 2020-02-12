@@ -2,9 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\Systems\SystemUserPublicAvatar;
+use App\Models\Systems\Traits\SystemUserAvatar;
 use App\Models\User\FrontendUser;
-use Illuminate\Support\Arr;
 
 /**
  * Class FrontendUserObserver
@@ -12,6 +11,8 @@ use Illuminate\Support\Arr;
  */
 class FrontendUserObserver
 {
+    use SystemUserAvatar;
+
     /**
      * Handle the frontend user "created" event.
      *
@@ -21,10 +22,8 @@ class FrontendUserObserver
     public function created(FrontendUser $frontendUser): void
     {
         $frontendUser->account()->create(['status' => 1]);
-
         // Generate random avatars for users.
-        $systemAvatars = SystemUserPublicAvatar::pluck('id')->toArray();
-        $avatar        = Arr::random(Arr::wrap($systemAvatars));
+        $avatar = $this->avatarRandom();
         $frontendUser->specificInfo()->create(['avatar' => $avatar]);
     }
 }

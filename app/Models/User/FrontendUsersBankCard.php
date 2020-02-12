@@ -17,6 +17,12 @@ class FrontendUsersBankCard extends BaseModel
      */
     public const STATUS_OPEN = 1;
 
+    // 银行卡
+    public const TYPE_DEBIT = 1;
+
+    //支付宝
+    public const TYPE_ALIPAY = 2;
+
     /**
      * @var array $guarded
      */

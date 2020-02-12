@@ -4,7 +4,6 @@ namespace App\Http\Requests\Frontend\Common\FrontendUser;
 
 use App\Http\Requests\BaseFormRequest;
 use App\Rules\Frontend\AccountManagement\AccountUnique;
-use App\Rules\Frontend\CheckSecurityCode;
 
 /**
  * Class BankCardAddRequest
@@ -45,15 +44,12 @@ class BankCardSaveRequest extends BaseFormRequest
                                        'digits_between:13,19',
                                        new AccountUnique($this),
                                       ],
-                   'type'          => 'integer:required',// 1 储蓄卡 2 支付宝
-                   'code'          => 'alpha:required',  // 银行编码
-                   'bank_id'       => 'integer:required',
-                   'security_code' => [
-                                       'string',
+                   'code'          => 'alpha|required',  // 银行编码
+                   'bank_id'       => 'integer|required', // 银行 id
+                   'fund_password' => [
                                        'required',
-                                       'digits:6',
+                                       'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
                                        'confirmed',
-                                       new CheckSecurityCode($this),
                                       ],
                   ];
         return $result;
@@ -70,7 +66,9 @@ class BankCardSaveRequest extends BaseFormRequest
                    'branch.regex'               => '开户行输入有误，请重新输入。',
                    'card_number.digits_between' => '卡号输入有误，请重新输入。',
                    'owner_name.regex'           => '姓名输入有误，请重新输入。',
-                   'security_code.confirmed'    => '安全码两次输入不一致。',
+                   'fund_password.required'     => '取款密码不能为空。',
+                   'fund_password.regex'        => '取款密码不符合规则。',
+                   'fund_password.confirmed'    => '取款密码两次输入不一致。',
                   ];
         return $result;
     }

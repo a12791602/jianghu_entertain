@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\SingleActions\Frontend\Common\System\SystemAvatarAction;
+use App\Http\SingleActions\Frontend\Common\System\SystemSupportedBanksAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -19,6 +20,18 @@ class SystemPublicController
      * @throws \Exception Exception.
      */
     public function avatar(SystemAvatarAction $action): JsonResponse
+    {
+        $result = $action->execute();
+        return $result;
+    }
+
+    /**
+     * System supported banks.
+     * @param SystemSupportedBanksAction $action System supported banks.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function bank(SystemSupportedBanksAction $action): JsonResponse
     {
         $result = $action->execute();
         return $result;
