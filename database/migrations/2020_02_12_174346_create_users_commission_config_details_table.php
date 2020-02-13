@@ -20,6 +20,7 @@ class CreateUsersCommissionConfigDetailsTable extends Migration
             'users_commission_config_details',
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('config_id')->default(0)->comment('所属洗码配置ID');
                 $table->integer('grade_id')->default(0)->comment('用户等级ID');
                 $table->decimal('percent', 5, 2)->nullable()->default(null)->comment('洗码比例');

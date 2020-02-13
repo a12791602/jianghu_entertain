@@ -1,5 +1,6 @@
 <?php
 
+// phpcs:disable Generic.Files.LineLength.TooLong
 $config = [
     /*
     |--------------------------------------------------------------------------
@@ -68,12 +69,12 @@ $config = [
                                                               'human'            => -1001479716542,
                                                              ],
                                      'testonline-jianghu' => [
-                                                              'app-api'          => -1001202373755,
-                                                              'h5-api'           => -1001301424599,
-                                                              'merchant-api'     => -1001478401589,
-                                                              'headquarters-api' => -1001465761233,
-                                                              'other'            => -1001343161867,
-                                                              'human'            => -1001479716542,
+                                                              'app-api'          => -1001202373755,//江湖-外网测-App端 php 报错通知
+                                                              'h5-api'           => -1001301424599,//江湖-外网测-H5端 php 报错通知
+                                                              'merchant-api'     => -1001478401589,//江湖-外网测-商户后台 php 报错通知
+                                                              'headquarters-api' => -1001465761233,//江湖-外网测-总后台 php 报错通知
+                                                              'other'            => -1001343161867,//江湖-外网测-系统报错通知
+                                                              'human'            => -1001306829479,//江湖-外网测-403与人为 报错通知
                                                              ],
                                     ],
            'http-group'          => [
@@ -82,3 +83,4 @@ $config = [
                                     ],
           ];
 return $config;
+// phpcs:enable Generic.Files.LineLength.TooLong

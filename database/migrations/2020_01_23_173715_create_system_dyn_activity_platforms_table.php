@@ -20,6 +20,7 @@ class CreateSystemDynActivityPlatformsTable extends Migration
             'system_dyn_activity_platforms',
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign')->default(' ')->comment('平台标记');
                 $table->string('activity_sign')->default(' ')->comment('活动标记');
                 $table->tinyInteger('status')->default(0)->comment('状态  0.关闭 1.开启');

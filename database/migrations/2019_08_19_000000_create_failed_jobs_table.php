@@ -20,7 +20,7 @@ class CreateFailedJobsTable extends Migration
             'failed_jobs',
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
-
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->text('connection')->nullable();
                 $table->text('queue')->nullable();
                 $table->longText('payload')->nullable();

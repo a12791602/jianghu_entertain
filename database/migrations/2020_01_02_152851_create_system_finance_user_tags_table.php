@@ -20,6 +20,7 @@ class CreateSystemFinanceUserTagsTable extends Migration
             'system_finance_user_tags',
             static function (Blueprint $table): void {
                 $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->tinyInteger('is_online')->default(0)->comment('是否是线上支付');
                 $table->integer('finance_id')->default(0)->comment('金流id');

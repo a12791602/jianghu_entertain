@@ -20,6 +20,7 @@ class CreateGameVendorPlatformsTable extends Migration
             'game_vendor_platforms',
             static function (Blueprint $table): void {
                 $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->integer('vendor_id')->default(0)->comment('厂商id');
                 $table->integer('sort')->default(0)->comment('排序');

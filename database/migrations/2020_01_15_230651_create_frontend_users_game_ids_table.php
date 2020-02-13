@@ -20,6 +20,7 @@ class CreateFrontendUsersGameIdsTable extends Migration
             'frontend_users_game_ids',
             static function (Blueprint $table): void {
                 $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->unsignedInteger('user_id');
             },
         );

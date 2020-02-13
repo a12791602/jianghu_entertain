@@ -20,6 +20,7 @@ class CreateUsersGradesRulesTable extends Migration
             'users_grades_rules',
             static function (Blueprint $table): void {
                 $table->increments('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 20)->nullable()->default(null)->comment('平台标识');
                 $table->decimal('recharge', 18, 4)->nullable()->default(null)->comment('充值');
                 $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('打码量');

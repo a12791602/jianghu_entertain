@@ -21,6 +21,7 @@ class CreateSystemEmailOfMerchantsTable extends Migration
             'system_email_of_merchants',
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
+                $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('email_id')->default('0')->comment('邮件id');
                 $table->integer('merchant_id')->default('0')->comment('商户id');
                 $table->tinyInteger('is_read')->default('0')->comment('是否已读 0 未读 1 已读');

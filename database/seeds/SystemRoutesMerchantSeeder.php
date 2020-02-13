@@ -674,9 +674,9 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
-              'route_name'    => 'merchant-api.systems-notice.status',
+              'route_name'    => 'merchant-api.system-notice.status',
               'controller'    => null,
-              'method'        => 'delDo',
+              'method'        => 'status',
               'menu_group_id' => 2,
               'title'         => '',
               'is_open'       => 0,
