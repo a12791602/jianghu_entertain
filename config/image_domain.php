@@ -1,10 +1,10 @@
 <?php
 
-/**
- * jianghu-entertain image domain.
- */
-
-return [
-        'test-jianghu'       => 'http://pic.jianghu.local/',
-        'testonline-jianghu' => 'http://pic.397017.com/',
-       ];
+$result = [
+            /**
+             * jianghu-entertain image domain.
+             */
+           'test-jianghu'       => 'http://pic.jianghu.local/',
+           'testonline-jianghu' => 'http://pic.397017.com/',
+          ];
+return $result;

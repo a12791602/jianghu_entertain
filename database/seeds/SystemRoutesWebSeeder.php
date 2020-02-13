@@ -14,5 +14,6 @@ class SystemRoutesWebSeeder extends Seeder
      */
     public function run(): void
     {
+        // Not used temporarily.
     }
 }
