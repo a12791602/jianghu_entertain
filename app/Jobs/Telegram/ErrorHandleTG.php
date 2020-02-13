@@ -84,6 +84,7 @@ class ErrorHandleTG implements ShouldQueue
      * @param Agent        $agent        Agent.
      * @param Route|null   $currentRoute Current Route.
      * @return void
+     * @throws \JsonException For JsonEncodeException.
      */
     private function _doInit(
         Exception $e,
@@ -92,28 +93,16 @@ class ErrorHandleTG implements ShouldQueue
         Agent $agent,
         ?Route $currentRoute
     ): void {
-        $requestData = [
-                        'ips'        => $request->ips(),
-                        'inputs'     => $request->all(),
-                        'crypt_data' => $request->get('crypt_data') ?? '', //加密的data
-                       ];
-        $requestOs   = $agent->platform();
-        $osVersion   = $agent->version($requestOs);
-        $browser     = $agent->browser();
-        $bsVersion   = $agent->version($browser);
-        if ($agent->isRobot()) {
-            $type = 'robot';
-        } elseif ($agent->isDesktop()) {
-            $type = 'desktop';
-        } elseif ($agent->isTablet()) {
-            $type = 'tablet';
-        } elseif ($agent->isMobile()) {
-            $type = 'mobile';
-        } elseif ($agent->isPhone()) {
-            $type = 'phone';
-        } else {
-            $type = 'other';
-        }
+        $requestData          = [
+                                 'ips'        => $request->ips(),
+                                 'inputs'     => $request->all(),
+                                 'crypt_data' => $request->get('crypt_data') ?? '', //加密的data
+                                ];
+        $requestOs            = $agent->platform();
+        $osVersion            = $agent->version($requestOs);
+        $browser              = $agent->browser();
+        $bsVersion            = $agent->version($browser);
+        $type                 = $this->_getDeviceType($agent);
         $this->agent          = [
                                  'origin'      => $agent->getHttpHeaders(),
                                  'user_agent'  => $agent->getUserAgent(),
@@ -127,16 +116,44 @@ class ErrorHandleTG implements ShouldQueue
                                  'robot'       => $agent->robot(),
                                 ];
         $this->request        = $requestData;
+        $errormsg             = json_encode(
+            $response->getData(),
+            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT,
+            512,
+        );
         $this->exception      = [
                                  'file'          => $e->getFile(),
                                  'line'          => $e->getLine(),
                                  'code'          => $e->getCode(),
-                                 'message'       => $response->content() . ' ' . $e->getMessage(),
+                                 'message'       => $errormsg . ' ' . $e->getMessage(),
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();
         $this->currentRoute   = empty($currentRoute) ? null : $currentRoute->uri();
         $this->routePrefix    = empty($currentRoute) ? null : trim($currentRoute->getPrefix(), '/');
+    }
+
+    /**
+     * 获取当前设备的信息
+     * @param Agent $agent Agent.
+     * @return string
+     */
+    private function _getDeviceType(Agent $agent): string
+    {
+        if ($agent->isRobot()) {
+            $type = 'robot';
+        } elseif ($agent->isDesktop()) {
+            $type = 'desktop';
+        } elseif ($agent->isTablet()) {
+            $type = 'tablet';
+        } elseif ($agent->isMobile()) {
+            $type = 'mobile';
+        } elseif ($agent->isPhone()) {
+            $type = 'phone';
+        } else {
+            $type = 'other';
+        }
+        return $type;
     }
 
     /**
