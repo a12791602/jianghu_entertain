@@ -116,11 +116,8 @@ class ErrorHandleTG implements ShouldQueue
                                  'robot'       => $agent->robot(),
                                 ];
         $this->request        = $requestData;
-        $errormsg             = json_encode(
-            $response->getData(),
-            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT,
-            512,
-        );
+        $errormsgObj          = json_decode($response->content(), true, 512, JSON_THROW_ON_ERROR);
+        $errormsg             = json_encode($errormsgObj, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
         $this->exception      = [
                                  'file'          => $e->getFile(),
                                  'line'          => $e->getLine(),
