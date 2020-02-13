@@ -93,39 +93,42 @@ class ErrorHandleTG implements ShouldQueue
         Agent $agent,
         ?Route $currentRoute
     ): void {
-        $requestData          = [
-                                 'ips'        => $request->ips(),
-                                 'inputs'     => $request->all(),
-                                 'crypt_data' => $request->get('crypt_data') ?? '', //加密的data
-                                ];
-        $requestOs            = $agent->platform();
-        $osVersion            = $agent->version($requestOs);
-        $browser              = $agent->browser();
-        $bsVersion            = $agent->version($browser);
-        $type                 = $this->_getDeviceType($agent);
-        $this->agent          = [
-                                 'origin'      => $agent->getHttpHeaders(),
-                                 'user_agent'  => $agent->getUserAgent(),
-                                 'lang'        => $agent->languages(), //array
-                                 'device'      => $agent->device(),
-                                 'os'          => $requestOs,
-                                 'browser'     => $browser,
-                                 'bs_version'  => $bsVersion,
-                                 'os_version'  => $osVersion,
-                                 'device_type' => $type,
-                                 'robot'       => $agent->robot(),
-                                ];
-        $this->request        = $requestData;
-        $errormsg             = json_encode(
-            $response->getOriginalContent(),
-            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
-            512,
-        );
+        $requestData   = [
+                          'ips'        => $request->ips(),
+                          'inputs'     => $request->all(),
+                          'crypt_data' => $request->get('crypt_data') ?? '', //加密的data
+                         ];
+        $requestOs     = $agent->platform();
+        $osVersion     = $agent->version($requestOs);
+        $browser       = $agent->browser();
+        $bsVersion     = $agent->version($browser);
+        $type          = $this->_getDeviceType($agent);
+        $this->agent   = [
+                          'origin'      => $agent->getHttpHeaders(),
+                          'user_agent'  => $agent->getUserAgent(),
+                          'lang'        => $agent->languages(), //array
+                          'device'      => $agent->device(),
+                          'os'          => $requestOs,
+                          'browser'     => $browser,
+                          'bs_version'  => $bsVersion,
+                          'os_version'  => $osVersion,
+                          'device_type' => $type,
+                          'robot'       => $agent->robot(),
+                         ];
+        $this->request = $requestData;
+        $errorRspMsg   = '';
+        if (isset($response->unCryptedData)) {
+            $errorRspMsg = json_encode(
+                $response->unCryptedData,
+                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+                512,
+            );
+        }
         $this->exception      = [
                                  'file'          => $e->getFile(),
                                  'line'          => $e->getLine(),
                                  'code'          => $e->getCode(),
-                                 'message'       => $errormsg . ' ' . $e->getMessage(),
+                                 'message'       => $errorRspMsg . ' ' . $e->getMessage(),
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();

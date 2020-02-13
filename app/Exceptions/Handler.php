@@ -195,8 +195,10 @@ class Handler extends ExceptionHandler
             $formatterInstance->format($response, $e, $this->reportResponses);
             break;
         }
-        $handledData = DataCrypt::handle($response->getData());
+        $originData  = $response->getData();
+        $handledData = DataCrypt::handle($originData);
         $response->setData($handledData);
+        $response->unCryptedData = $originData;
         return $response;
     }
 
