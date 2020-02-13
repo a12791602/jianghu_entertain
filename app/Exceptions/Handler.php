@@ -2,8 +2,8 @@
 
 namespace App\Exceptions;
 
-use App\Lib\Crypt\DataCrypt;
 use App\Jobs\Telegram\ErrorHandleTG;
+use App\Lib\Crypt\DataCrypt;
 use App\Lib\ErrorsHandler\Formatters\BaseFormatter;
 use App\Lib\ErrorsHandler\Reporters\ReporterInterface;
 use Asm89\Stack\CorsService;
