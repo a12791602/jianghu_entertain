@@ -196,6 +196,12 @@ class ErrorHandleTG implements ShouldQueue
         if ($telegram->chatId === null) {
             return;
         }
-        $telegram->sendMessage((string) json_encode($error, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
+        $telegram->sendMessage(
+            (string) json_encode(
+                $error,
+                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+                512,
+            ),
+        );
     }
 }
