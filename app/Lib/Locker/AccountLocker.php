@@ -52,6 +52,11 @@ class AccountLocker
     protected $sleepSeconds = 500000;
 
     /**
+     * @var string
+     */
+    public static $tagName = 'account_lock';
+
+    /**
      * @param integer $userId        用户ID.
      * @param integer $cacheTimeout  CacheTimeout.
      * @param integer $lockerTimeout LockerTimeout.
@@ -115,11 +120,6 @@ class AccountLocker
     {
         $this->context = $context;
     }
-
-    /**
-     * @var string
-     */
-    public static $tagName = 'account_lock';
 
     /**
      * 释放所有
