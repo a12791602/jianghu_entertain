@@ -117,7 +117,11 @@ class ErrorHandleTG implements ShouldQueue
                                 ];
         $this->request        = $requestData;
         $errormsgObj          = json_decode($response->content(), true, 512, JSON_THROW_ON_ERROR);
-        $errormsg             = json_encode($errormsgObj, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+        $errormsg             = json_encode(
+            $errormsgObj,
+            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+            512,
+        );
         $this->exception      = [
                                  'file'          => $e->getFile(),
                                  'line'          => $e->getLine(),
