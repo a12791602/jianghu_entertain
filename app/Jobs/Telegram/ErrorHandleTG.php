@@ -131,7 +131,7 @@ class ErrorHandleTG implements ShouldQueue
                                  'file'          => $e->getFile(),
                                  'line'          => $e->getLine(),
                                  'code'          => $e->getCode(),
-                                 'message'       => $e->getMessage(),
+                                 'message'       => $response->content() . ' ' . $e->getMessage(),
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();
