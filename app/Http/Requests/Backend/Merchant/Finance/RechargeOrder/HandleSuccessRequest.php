@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\RechargeOrder;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Order\UsersRechargeOrder;
 
 /**
  * Class HandleSuccessRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class HandleSuccessRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [UsersRechargeOrder::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,6 +34,9 @@ class HandleSuccessRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|min:1|exists:users_recharge_orders,id'];
+        return [
+                'id'     => 'required|min:1|exists:users_recharge_orders,id',
+                'remark' => 'required|string|min:1|max:128',
+               ];
     }
 }

@@ -31,6 +31,7 @@ class HandleSuccessAction extends BaseAction
         DB::beginTransaction();
         try {
             $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
+            $order->remark   = $inputDatas['remark'];
             $order->admin_id = $this->user->id;
             if ($order->save()) {
                 $order->user->account->operateAccount(
