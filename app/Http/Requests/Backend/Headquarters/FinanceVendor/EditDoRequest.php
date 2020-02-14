@@ -16,7 +16,7 @@ class EditDoRequest extends BaseFormRequest
      *
      * @return boolean
      */
-    public function authorize():bool
+    public function authorize(): bool
     {
         return true;
     }
@@ -24,46 +24,45 @@ class EditDoRequest extends BaseFormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return mixed[]
      */
-    public function rules():array
+    public function rules(): array
     {
+        $myId = $this->get('ids');
         return [
-            'id' => 'required|exists:system_finance_vendors,id',
-            'name' => 'required|unique:system_finance_vendors,name,'.$this->input('id'),
-            'sign' => ['required', 'unique:system_finance_vendors,sign,'.$this->input('id'), 'regex:/\w+/'],
-            'whitelist_ips' => 'array',
-            'whitelist_ips.*' => 'ip',
-            'status' => 'required|in:0,1',
-        ];
+                'id'              => 'required|exists:system_finance_vendors,id',
+                'name'            => 'required|unique:system_finance_vendors,name,' . $myId,
+                'sign'            => 'required|unique:system_finance_vendors,sign,' . $myId . '|regex:/\w+/',
+                'whitelist_ips'   => 'array',
+                'whitelist_ips.*' => 'ip',
+                'status'          => 'required|in:0,1',
+               ];
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function messages():array
+    public function messages(): array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'name.required' => '请填写厂商名称',
-            'name.unique' => '厂商名称已存在',
-            'sign.required' => '请填写厂商标记',
-            'sign.unique' => '厂商标记已存在',
-            'sign.regex' => '厂商标记只能包含数字,字母,下划线',
-            'whitelist_ips.array' => 'ip白名单格式不正确',
-            'whitelist_ips.*.ip' => 'ip格式不正确',
-            'status.required' => '请选择状态',
-            'status.in' => '所选择状态不存在',
-        ];
+                'id.required'         => 'ID不存在',
+                'id.exists'           => 'ID不存在',
+                'name.required'       => '请填写厂商名称',
+                'name.unique'         => '厂商名称已存在',
+                'sign.required'       => '请填写厂商标记',
+                'sign.unique'         => '厂商标记已存在',
+                'sign.regex'          => '厂商标记只能包含数字,字母,下划线',
+                'whitelist_ips.array' => 'ip白名单格式不正确',
+                'whitelist_ips.*.ip'  => 'ip格式不正确',
+                'status.required'     => '请选择状态',
+                'status.in'           => '所选择状态不存在',
+               ];
     }
     /**
-     * @return array
+     * @return mixed[]
      */
-    public function filters():array
+    public function filters(): array
     {
-        return [
-            'whitelist_ips' => 'cast:array',
-        ];
+        return ['whitelist_ips' => 'cast:array'];
     }
 }

@@ -26,8 +26,8 @@ class IndexDoAction extends BaseAction
         $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::with(
             [
-             'lastEditor',
-             'author',
+             'lastEditor:id,name',
+             'author:id,name',
             ],
         )->filter($inputDatas, SystemFinanceTypeFilter::class)->paginate($pageSize);
         $msgOut      = msgOut($outputDatas);
