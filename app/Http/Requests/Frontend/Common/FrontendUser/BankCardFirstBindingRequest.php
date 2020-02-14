@@ -6,10 +6,10 @@ use App\Http\Requests\BaseFormRequest;
 use App\Rules\Frontend\AccountManagement\AccountUnique;
 
 /**
- * Class BankCardAddRequest
+ * Class BankCardFirstBindingRequest
  * @package App\Http\Requests\Frontend\Common\FrontendUser
  */
-class BankCardSaveRequest extends BaseFormRequest
+class BankCardFirstBindingRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

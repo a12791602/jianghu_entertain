@@ -56,6 +56,7 @@ class DatabaseSeeder extends Seeder
              SystemPlatformSslSeeder::class,
              SystemConfigurationSeeder::class,
              SystemUserPublicAvatarSeeder::class,
+             FrontendUsersBankCardSeeder::class,
             ],
         );
     }

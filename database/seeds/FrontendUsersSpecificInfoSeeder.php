@@ -58,7 +58,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'address'        => 'test city',
               'register_type'  => 0,
               'total_members'  => 15,
-              'user_id'        => 49,
+              'user_id'        => 3,
               'promotion_gift' => 1,
               'weekly_gift'    => 1,
               'domain'         => null,

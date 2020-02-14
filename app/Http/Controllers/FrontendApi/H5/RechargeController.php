@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers\FrontendApi\H5;
 
+use App\Http\Requests\Frontend\H5\Recharge\CancelRequest;
 use App\Http\Requests\Frontend\H5\Recharge\ChannelsRequest;
+use App\Http\Requests\Frontend\H5\Recharge\ConfirmRequest;
 use App\Http\Requests\Frontend\H5\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\H5\Recharge\TypesRequest;
+use App\Http\SingleActions\Frontend\H5\Recharge\CancelAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\ChannelsAction;
+use App\Http\SingleActions\Frontend\H5\Recharge\ConfirmAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\GetFinanceInfoAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\RechargeAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\TypesAction;
@@ -70,6 +74,40 @@ class RechargeController
     public function getFinanceInfo(GetFinanceInfoAction $action): JsonResponse
     {
         $outputs = $action->execute();
+        return $outputs;
+    }
+
+    /**
+     * 撤销订单.
+     *
+     * @param CancelAction  $action  Action.
+     * @param CancelRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function cancel(
+        CancelAction $action,
+        CancelRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $outputs    = $action->execute($inputDatas);
+        return $outputs;
+    }
+
+    /**
+     * 确认付款.
+     *
+     * @param ConfirmAction  $action  Action.
+     * @param ConfirmRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function confirm(
+        ConfirmAction $action,
+        ConfirmRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $outputs    = $action->execute($inputDatas);
         return $outputs;
     }
 }

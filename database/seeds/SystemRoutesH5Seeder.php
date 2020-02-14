@@ -102,6 +102,16 @@ class SystemRoutesH5Seeder extends Seeder
               'method'     => 'getFinanceInfo',
               'is_open'    => 0,
              ],
+             [
+              'route_name' => 'h5-api.recharge.cancel',
+              'method'     => 'cancel',
+              'is_open'    => 0,
+             ],
+             [
+              'route_name' => 'h5-api.recharge.confirm',
+              'method'     => 'confirm',
+              'is_open'    => 0,
+             ],
             ],
         );
     }

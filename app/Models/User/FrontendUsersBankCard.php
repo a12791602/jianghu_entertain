@@ -22,6 +22,7 @@ class FrontendUsersBankCard extends BaseModel
 
     //支付宝
     public const TYPE_ALIPAY = 2;
+    public const CODE_ALIPAY = 'ALIPAY';
 
     /**
      * @var array $guarded

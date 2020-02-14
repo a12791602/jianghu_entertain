@@ -38,7 +38,7 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->decimal('before_frozen_balance', 18, 4)->default('0.0000')->comment('变动前的冻结资金')->unsigned();
                 $table->decimal('frozen_balance', 18, 4)->default('0.0000')->comment('变动后的冻结资金')->unsigned();
                 $table->decimal('amount', 18, 4)->default('0.0000')->comment('金额')->unsigned();
-                $table->tinyInteger('frsozen_type')->default('0')->comment('冻结类型');
+                $table->tinyInteger('frozen_type')->default('0')->comment('冻结类型');
                 $table->integer('process_time')->default('0')->comment('处理时间');
                 $table->text('params')->nullable()->default(null)->comment('扩展的数据');
                 $table->string('desc')->nullable()->default(null)->comment('备注');

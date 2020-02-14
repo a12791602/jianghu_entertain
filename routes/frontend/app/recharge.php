@@ -38,5 +38,21 @@ Route::group(
              'getFinanceInfo',
             ],
         )->name($namePrefix . 'get-finance-info');
+        //撤销订单
+        Route::post(
+            'cancel',
+            [
+             RechargeController::class,
+             'cancel',
+            ],
+        )->name($namePrefix . 'cancel');
+        //确认付款
+        Route::post(
+            'confirm',
+            [
+             RechargeController::class,
+             'confirm',
+            ],
+        )->name($namePrefix . 'confirm');
     },
 );

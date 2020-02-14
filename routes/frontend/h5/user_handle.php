@@ -3,7 +3,6 @@
 use App\Http\Controllers\FrontendApi\Common\FrontendAuthController;
 use App\Http\Controllers\FrontendApi\Common\FrontendUserController;
 use App\Http\Controllers\FrontendApi\Common\PasswordController;
-use App\Http\Controllers\FrontendApi\Common\SystemPublicController;
 
 Route::post('login', [FrontendAuthController::class, 'login'])->name('h5-api.login');
 
@@ -26,6 +25,9 @@ Route::group(
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
             ->name($namePrefix . 'information');
         Route::get('grades', [FrontendUserController::class, 'grades'])->name($namePrefix . 'grades');
-        Route::get('system-avatar', [SystemPublicController::class, 'avatar'])->name($namePrefix . 'system-avatar');
+        Route::post('promotion-gifts', [FrontendUserController::class, 'promotionGift'])
+            ->name($namePrefix . 'promotion-gifts');
+        Route::post('weekly-gifts', [FrontendUserController::class, 'weeklyGift'])
+            ->name($namePrefix . 'weekly-gifts');
     },
 );

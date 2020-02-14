@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\FrontendApi\App;
 
-use App\Http\Controllers\FrontendApi\FrontendApiMainController;
+use App\Http\Requests\Frontend\App\Recharge\CancelRequest;
 use App\Http\Requests\Frontend\App\Recharge\ChannelsRequest;
+use App\Http\Requests\Frontend\App\Recharge\ConfirmRequest;
 use App\Http\Requests\Frontend\App\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\App\Recharge\TypesRequest;
+use App\Http\SingleActions\Frontend\App\Recharge\CancelAction;
 use App\Http\SingleActions\Frontend\App\Recharge\ChannelsAction;
+use App\Http\SingleActions\Frontend\App\Recharge\ConfirmAction;
 use App\Http\SingleActions\Frontend\App\Recharge\GetFinanceInfoAction;
 use App\Http\SingleActions\Frontend\App\Recharge\RechargeAction;
 use App\Http\SingleActions\Frontend\App\Recharge\TypesAction;
@@ -16,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class RechargeController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class RechargeController extends FrontendApiMainController
+class RechargeController
 {
     /**
      * 获取分类
@@ -71,6 +74,40 @@ class RechargeController extends FrontendApiMainController
     public function getFinanceInfo(GetFinanceInfoAction $action): JsonResponse
     {
         $outputs = $action->execute();
+        return $outputs;
+    }
+
+    /**
+     * 撤销订单.
+     *
+     * @param CancelAction  $action  Action.
+     * @param CancelRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function cancel(
+        CancelAction $action,
+        CancelRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $outputs    = $action->execute($inputDatas);
+        return $outputs;
+    }
+
+    /**
+     * 确认付款.
+     *
+     * @param ConfirmAction  $action  Action.
+     * @param ConfirmRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function confirm(
+        ConfirmAction $action,
+        ConfirmRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $outputs    = $action->execute($inputDatas);
         return $outputs;
     }
 }

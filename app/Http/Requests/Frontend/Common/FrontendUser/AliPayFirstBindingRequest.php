@@ -6,10 +6,10 @@ use App\Http\Requests\BaseFormRequest;
 use App\Rules\Frontend\AccountManagement\AccountUnique;
 
 /**
- * Class AliPayAddRequest
+ * Class AliPayFirstBindingRequest
  * @package App\Http\Requests\Frontend\Common\FrontendUser
  */
-class AliPaySaveRequest extends BaseFormRequest
+class AliPayFirstBindingRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

@@ -43,7 +43,7 @@ class UsersRechargeOrder extends BaseModel
     /**
      * 线下订单状态 客户撤销订单
      */
-    public const STATUS_CONCEL = -3;
+    public const STATUS_CANCEL = -3;
     /**
      * 线下订单有效期 单位 分钟
      */
