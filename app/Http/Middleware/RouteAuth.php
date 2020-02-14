@@ -143,10 +143,14 @@ class RouteAuth
         $auth_check     = in_array($action[1], $route);
 
         if ($auth_check) {
-            if (!auth()->guard($this->guard)->check()) {
+            if (!auth($this->guard)->check()) {
                 throw new Exception('100004', 401);
             }
         }
+
+        $request->setUserResolver(function () {
+            return auth($this->guard)->user();
+        });
 
         foreach ($this->logger as $keys => $item) {
             $prefix_check = in_array($prefix, $item);
