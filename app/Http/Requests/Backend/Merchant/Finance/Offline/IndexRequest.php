@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceOfflineInfo;
 
 /**
  * Class IndexRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceOfflineInfo::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,28 +35,16 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'             => 'string',
-                'account'          => 'string',
-                'username'         => 'string',
-                'author_name'      => 'string',
+                'type_id'          => 'integer|exists:system_finance_types,id',
+                'name'             => 'string|min:1|max:128',
+                'account'          => 'string|min:1|max:128',
+                'username'         => 'string|min:1|max:128',
+                'author_name'      => 'string|min:1|max:128',
                 'created_at'       => 'array',
                 'created_at.*'     => 'date',
-                'last_editor_name' => 'string',
+                'last_editor_name' => 'string|min:1|max:128',
                 'updated_at'       => 'array',
                 'updated_at.*'     => 'date',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'created_at.array'  => '添加时间格式不正确',
-                'created_at.*.date' => '添加时间格式必须是时间类型',
-                'updated_at.array'  => '更新时间格式不正确',
-                'updated_at.*.date' => '更新时间格式必须是时间类型',
                ];
     }
     /**

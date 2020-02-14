@@ -27,6 +27,38 @@ class SystemFinanceOnlineInfo extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'              => 'ID',
+                                      'frontend_name'   => '前台备注',
+                                      'frontend_remark' => '前台备注',
+                                      'backend_name'    => '后台名称',
+                                      'backend_remark'  => '后台备注',
+                                      'platform_sign'   => '平台标识',
+                                      'channel_id'      => '所属通道id',
+                                      'min'             => '最小入款金额',
+                                      'max'             => '最大入款金额',
+                                      'handle_fee'      => '手续费',
+                                      'rebate_fee'      => '返利',
+                                      'request_url'     => '请求地址',
+                                      'back_url'        => '返回地址',
+                                      'merchant_code'   => '商户号',
+                                      'merchant_secret' => '商户密钥',
+                                      'public_key'      => '第三方公钥',
+                                      'private_key'     => '第三方私钥',
+                                      'app_ip'          => '终端号',
+                                      'vendor_url'      => '第三方域名',
+                                      'status'          => '状态',
+                                      'merchant_no'     => '商户编号',
+                                      'desc'            => '充值说明',
+                                      'encrypt_mode'    => '加密方式',
+                                      'certificate'     => '证书',
+                                      'author_id'       => '创建人id',
+                                      'last_editor_id'  => '最后编辑人id',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function channel(): BelongsTo

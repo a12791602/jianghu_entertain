@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Rules\CustomUnique;
 
 /**
@@ -11,6 +12,17 @@ use App\Rules\CustomUnique;
  */
 class EditRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceOfflineInfo::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['tags' => '会员标签'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,23 +44,24 @@ class EditRequest extends BaseFormRequest
         $unique = new CustomUnique($this, 'system_finance_offline_infos', 'platform_id', $myId);
         if ($this->isMethod('post')) {
             return [
-                    'id'       => 'required|exists:system_finance_offline_infos,id',
-                    'type_id'  => 'required|exists:system_finance_types,id',
+                    'id'       => 'required|integer|exists:system_finance_offline_infos,id',
+                    'type_id'  => 'required|integer|exists:system_finance_types,id',
                     'bank_id'  => 'exists:system_banks,id|unique:system_finance_offline_infos,bank_id,' . $myId,
                     'name'     => [
                                    'required',
+                                   'string',
                                    $unique,
                                   ],
-                    'username' => 'required',
-                    'qrcode'   => 'string',
-                    'account'  => 'required|unique:system_finance_offline_infos,account,' . $myId,
-                    'branch'   => 'string',
+                    'username' => 'required|string|min:1|max:128',
+                    'qrcode'   => 'string|min:1',
+                    'account'  => 'required|string|min:1|max:256|unique:system_finance_offline_infos,account,' . $myId,
+                    'branch'   => 'string|min:1|max:128',
                     'min'      => 'required|integer|min:1',
                     'max'      => 'required|integer|gt:min',
                     'fee'      => 'numeric|min:0',
                     'tags'     => 'array',
                     'tags.*'   => 'exists:users_tags,id',
-                    'remark'   => 'string',
+                    'remark'   => 'string|min:1|max:256',
                    ];
         }
         return ['id' => 'required|exists:system_finance_offline_infos,id'];

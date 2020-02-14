@@ -29,15 +29,4 @@ class DelDoRequest extends BaseFormRequest
     {
         return ['id' => 'required|exists:system_finance_online_infos,id'];
     }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required' => 'ID不存在',
-                'id.exists'   => 'ID不存在',
-               ];
-    }
 }

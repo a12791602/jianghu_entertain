@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceOfflineInfo;
 
 /**
  * Class DelDoRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class DelDoRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceOfflineInfo::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,17 +34,6 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:system_finance_offline_infos,id'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required' => 'ID不存在',
-                'id.exists'   => 'ID不存在',
-               ];
+        return ['id' => 'required|integer|exists:system_finance_offline_infos,id'];
     }
 }

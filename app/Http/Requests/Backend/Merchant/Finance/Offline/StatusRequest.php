@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Offline;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceOfflineInfo;
 
 /**
  * Class StatusRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class StatusRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceOfflineInfo::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,21 +35,8 @@ class StatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_finance_offline_infos,id',
-                'status' => 'required|in:0,1',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'     => 'ID不存在',
-                'id.exists'       => 'ID不存在',
-                'status.required' => '请选择状态',
-                'status.in'       => '所选状态不在范围内',
+                'id'     => 'required|integer|exists:system_finance_offline_infos,id',
+                'status' => 'required|integer|in:0,1',
                ];
     }
 }

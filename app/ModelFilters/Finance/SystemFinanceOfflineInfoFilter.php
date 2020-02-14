@@ -97,4 +97,16 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
         }
         return $object;
     }
+
+    /**
+     * 按入款类型.
+     *
+     * @param integer $type_id 类型id.
+     * @return SystemFinanceOfflineInfoFilter
+     */
+    public function type(int $type_id): SystemFinanceOfflineInfoFilter
+    {
+        $object = $this->where('type_id', $type_id);
+        return $object;
+    }
 }

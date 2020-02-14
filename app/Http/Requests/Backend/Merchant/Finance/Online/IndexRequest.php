@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Finance\Online;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceOnlineInfo;
 
 /**
  * Class IndexRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemFinanceOnlineInfo::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -40,18 +47,6 @@ class IndexRequest extends BaseFormRequest
                ];
     }
 
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'created_at.array'  => '添加时间格式不正确',
-                'created_at.*.date' => '添加时间格式必须是时间类型',
-                'updated_at.array'  => '更新时间格式不正确',
-                'updated_at.*.date' => '更新时间格式必须是时间类型',
-               ];
-    }
     /**
      * @return mixed[]
      */
