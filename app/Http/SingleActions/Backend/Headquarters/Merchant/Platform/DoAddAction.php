@@ -8,6 +8,8 @@ use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemPlatformBank;
+use App\Models\Systems\SystemConfiguration;
+use App\Models\Systems\SystemConfigurationStandard;
 use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemPlatform;
 use App\Models\Systems\SystemPlatformSsl;
@@ -39,6 +41,8 @@ class DoAddAction extends MainAction
         $this->_createPlatform($inputDatas, $this->user->id);
         //生成平台加密数据用的证书
         $this->_createSSL();
+        //生成平台默认配置
+        $this->_createConfig();
         //平台绑定域名
         $this->_createPlatformDomain($inputDatas['domains'], $this->user->id);
         //生成平台银行配置
@@ -132,6 +136,27 @@ class DoAddAction extends MainAction
                       'interval_str' => Str::random(11),
                      ];
         return $data;
+    }
+
+    /**
+     * 生成平台系统默认配置
+     * @return void
+     */
+    private function _createConfig(): void
+    {
+        $platformSign = $this->platformEloq->sign;
+        SystemConfigurationStandard::get()->each(
+            static function ($config) use ($platformSign): void {
+                $addData                  = $config->toArray();
+                $configEloq               = new SystemConfiguration();
+                $addData['platform_sign'] = $platformSign;
+                $configEloq->fill($addData);
+                if (!$configEloq->save()) {
+                    DB::rollback();
+                    throw new \Exception('300717');
+                }
+            },
+        );
     }
 
     /**

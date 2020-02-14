@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateSystemConfigurationsTable
+ * Class CreateSystemConfigurationStandardsTable
  */
-class CreateSystemConfigurationsTable extends Migration
+class CreateSystemConfigurationStandardsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,11 +18,10 @@ class CreateSystemConfigurationsTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'system_configurations',
+            'system_configuration_standards',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('pid')->nullable()->default(0)->comment('父类id, 顶级为0');
                 $table->string('sign', 32)->nullable()->default(null)->comment('标识');
                 $table->string('name', 32)->nullable()->default(null)->comment('名称');
@@ -32,7 +31,7 @@ class CreateSystemConfigurationsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `system_configurations` comment '系统配置'");
+        DB::statement("ALTER TABLE `system_configuration_standards` comment '系统配置默认标准'");
     }
 
     /**
@@ -42,6 +41,6 @@ class CreateSystemConfigurationsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_configurations');
+        Schema::dropIfExists('system_configuration_standards');
     }
 }

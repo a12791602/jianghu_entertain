@@ -18,5 +18,6 @@ Route::group(
         Route::get('fund-password/check', [AccountManagementController::class, 'fundPasswordCheck'])
             ->name($namePrefix . 'fund-password.check');
         Route::post('destroy', [AccountManagementController::class, 'accountDestroy'])->name($namePrefix . 'destroy');
+        Route::post('withdraw', [AccountManagementController::class, 'withdraw'])->name($namePrefix . 'withdraw');
     },
 );
