@@ -130,5 +130,9 @@ $data = [
          //ConfigController
          '202500' => '参数错误或缺少平台配置数据!',
          '202501' => '修改配置数据时发生错误!',
+         //CameController
+         '202600' => '游戏,图片保存失败!',
+         //GameVendorController
+         '202700' => '游戏厂商,图片保存失败!',
         ];
 return $data;

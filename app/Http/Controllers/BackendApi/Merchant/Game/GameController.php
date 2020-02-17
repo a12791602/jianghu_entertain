@@ -8,6 +8,7 @@ use App\Http\Requests\Backend\Merchant\Game\MaintainRequest;
 use App\Http\Requests\Backend\Merchant\Game\RecommendRequest;
 use App\Http\Requests\Backend\Merchant\Game\SortRequest;
 use App\Http\Requests\Backend\Merchant\Game\StatusRequest;
+use App\Http\Requests\Backend\Merchant\Game\UploadRequest;
 use App\Http\SingleActions\Backend\Merchant\Game\DoHotAction;
 use App\Http\SingleActions\Backend\Merchant\Game\GetSearchConditionDataAction;
 use App\Http\SingleActions\Backend\Merchant\Game\IndexAction;
@@ -15,6 +16,7 @@ use App\Http\SingleActions\Backend\Merchant\Game\MaintainAction;
 use App\Http\SingleActions\Backend\Merchant\Game\RecommendAction;
 use App\Http\SingleActions\Backend\Merchant\Game\SortAction;
 use App\Http\SingleActions\Backend\Merchant\Game\StatusAction;
+use App\Http\SingleActions\Backend\Merchant\Game\UploadAction;
 use App\Models\Game\GameVendorPlatform;
 use Illuminate\Http\JsonResponse;
 
@@ -142,6 +144,21 @@ class GameController
     public function getSearchConditionData(GetSearchConditionDataAction $action): JsonResponse
     {
         $outputDatas = $action->execute();
+        return $outputDatas;
+    }
+
+    /**
+     * 上传图片.
+     *
+     * @param UploadAction  $action  Action.
+     * @param UploadRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function upload(UploadAction $action, UploadRequest $request): JsonResponse
+    {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
 }

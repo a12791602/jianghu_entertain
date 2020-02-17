@@ -27,11 +27,15 @@ class IndexAction extends BaseAction
     {
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $inputDatas['device']        = $device;
-        $datas                       = $this->model::with(['games:id,name,sign', 'vendor'])
-                                            ->orderByDesc('sort')
-                                            ->filter($inputDatas, GamesPlatformFilter::class)
-                                            ->withCacheCooldownSeconds(86400)
-                                            ->get();
+        $datas                       = $this->model::with(
+            [
+             'games:id,name,sign',
+             'vendor:games_vendors.id,games_vendors.name,games_vendors.sign',
+            ],
+        )->orderByDesc('sort')
+         ->filter($inputDatas, GamesPlatformFilter::class)
+         ->withCacheCooldownSeconds(86400)
+         ->get();
         $result                      = msgOut($datas);
         return $result;
     }

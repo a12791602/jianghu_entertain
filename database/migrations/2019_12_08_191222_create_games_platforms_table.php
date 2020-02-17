@@ -30,6 +30,7 @@ class CreateGamesPlatformsTable extends Migration
                 $table->tinyInteger('device')->default(0)->comment('设备  1.PC  2.H5 3.APP');
                 $table->tinyInteger('is_maintain')->default(0)->comment('是否维护 0 否 1 是');
                 $table->tinyInteger('is_recommend')->default(0)->comment('是否推荐 0 否 1 是');
+                $table->string('icon', 128)->nullable()->default(null)->comment('图标');
                 $table->nullableTimestamps();
             },
         );

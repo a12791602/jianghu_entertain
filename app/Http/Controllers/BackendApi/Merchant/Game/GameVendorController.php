@@ -5,9 +5,11 @@ namespace App\Http\Controllers\BackendApi\Merchant\Game;
 use App\Http\Requests\Backend\Merchant\GameVendor\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\SortRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\StatusRequest;
+use App\Http\Requests\Backend\Merchant\GameVendor\UploadRequest;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\IndexAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\SortAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\StatusAction;
+use App\Http\SingleActions\Backend\Merchant\GameVendor\UploadAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -51,6 +53,21 @@ class GameVendorController
      * @throws \Exception Exception.
      */
     public function sort(SortAction $action, SortRequest $request): JsonResponse
+    {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 上传图片.
+     *
+     * @param UploadAction  $action  Action.
+     * @param UploadRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function upload(UploadAction $action, UploadRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);

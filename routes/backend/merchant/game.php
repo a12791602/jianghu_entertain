@@ -28,7 +28,7 @@ Route::group(
 );
 
 
-//游戏种类
+//游戏厂商
 Route::group(
     ['prefix' => 'game-vendor'],
     static function (): void {
@@ -54,6 +54,14 @@ Route::group(
              'sort',
             ],
         )->name($namePrefix . 'sort');
+        //上传图片
+        Route::post(
+            'upload',
+            [
+             GameVendorController::class,
+             'upload',
+            ],
+        )->name($namePrefix . 'upload');
     },
 );
 
@@ -135,6 +143,16 @@ Route::group(
              'getSearchConditionData',
             ],
         )->name($namePrefix . 'get-search-condition-data');
+
+        //图片上传
+        Route::post(
+            'upload',
+            [
+             GameController::class,
+             'upload',
+            ],
+        )->name($namePrefix . 'upload');
+
 
         Route::match(['post', 'get'], 'acknowledge-in', [AcknowledgementController::class, 'ackIn'])
             ->name($namePrefix . 'ackIn');

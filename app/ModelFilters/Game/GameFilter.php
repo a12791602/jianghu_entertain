@@ -55,6 +55,18 @@ class GameFilter extends ModelFilter
     }
 
     /**
+     * 按名称.
+     *
+     * @param string $name Name.
+     * @return GameFilter
+     */
+    public function name(string $name): GameFilter
+    {
+        $object = $this->where('name', $name);
+        return $object;
+    }
+
+    /**
      * 未分配给平台的游戏
      * @param  string $unassign_platform_sign Unassign_platform_sign.
      * @return GameFilter
