@@ -47,8 +47,14 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->string('snap_user_grade', 64)->nullable()->default(null)->comment('会员等级快照');
                 $table->string('snap_account', 128)->nullable()->default(null)->comment('收款账户快照');
                 $table->string('snap_bank', 64)->nullable()->default(null)->comment('收款银行快照');
-
+                $table->integer('snap_user_grade_id')->default(0)->comment('用户vip等级快照');
                 $table->nullableTimestamps();
+                $table->index('platform_sign');
+                $table->index('platform_no');
+                $table->index('order_no');
+                $table->index('snap_merchant_no');
+                $table->index('snap_merchant_code');
+                $table->index('snap_merchant');
             },
         );
         DB::statement("ALTER TABLE `users_recharge_orders` comment '用户入款订单表'");

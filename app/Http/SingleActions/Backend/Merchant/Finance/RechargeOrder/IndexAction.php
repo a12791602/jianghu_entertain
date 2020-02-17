@@ -41,6 +41,7 @@ class IndexAction extends BaseAction
              'order_no',
              'platform_no',
              'snap_merchant_no',
+             'snap_user_grade',
              'snap_merchant_code',
              'snap_merchant',
              'snap_merchant',

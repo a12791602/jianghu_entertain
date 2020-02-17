@@ -219,9 +219,11 @@ class RechargeAction extends MainAction
             $data['snap_account']      = $this->model->account;
             $data['snap_bank']         = $this->model->name;
         }
-        $data['status']    = UsersRechargeOrder::STATUS_INIT;
-        $data['is_online'] = $this->inputDatas['is_online'];
-        $data['client_ip'] = $this->inputDatas['ip'];
+        $data['status']             = UsersRechargeOrder::STATUS_INIT;
+        $data['is_online']          = $this->inputDatas['is_online'];
+        $data['client_ip']          = $this->inputDatas['ip'];
+        $data['snap_user_grade']    = $this->user->grade->name;
+        $data['snap_user_grade_id'] = $this->user->grade_id;
         return $data;
     }
 

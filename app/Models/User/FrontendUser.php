@@ -215,4 +215,13 @@ class FrontendUser extends BaseAuthModel
         $userTag = $this->belongsTo(UsersTag::class, 'user_tag_id', 'id');
         return $userTag;
     }
+
+    /**
+     * @return HasOne
+     */
+    public function grade(): HasOne
+    {
+        $object = $this->hasOne(UsersGrade::class, 'id', 'grade_id');
+        return $object;
+    }
 }
