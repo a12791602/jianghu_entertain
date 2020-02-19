@@ -6,6 +6,7 @@ use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -19,6 +20,8 @@ class AccountChange
 {
     public const FROZEN_STATUS_OUT  = 1; //冻结
     public const FROZEN_STATUS_BACK = 2; //解冻
+    public const FROZEN_STATUS_TO_PLAYER = 3;
+    public const FROZEN_STATUS_TO_SYSTEM = 4; //消耗冻结资金
 
     /**
      * @var FrontendUsersAccount
@@ -96,6 +99,9 @@ class AccountChange
             case self::FROZEN_STATUS_BACK:
                 $return = $this->unFrozen($amount);
                 break;
+            case self::FROZEN_STATUS_TO_SYSTEM:
+                $return = $this->costFrozen($amount);
+                break;
             default:
                 if ($typeConfig['in_out'] === 1) {
                     $return = $this->doAdd($amount);
@@ -170,6 +176,22 @@ class AccountChange
     }
 
     /**
+     * 消耗冻结资金
+     * @param float $money 金额.
+     * @return boolean
+     */
+    public function costFrozen(float $money): bool
+    {
+        if ($money > $this->account->frozen) {
+            DB::rollback();
+            throw new \Exception('100205');
+        }
+        $this->account->frozen -= $money;
+        $save                   = $this->account->save();
+        return $save;
+    }
+
+    /**
      *
      * @param  array        $inputDatas    接收的数据.
      * @param  array        $params        参数.
@@ -192,7 +214,7 @@ class AccountChange
         // 保存帐变记录
         $report = [
                    'parent_id'             => $user->parent_id,
-                   'serial_number'         => self::getSerialNumber(),
+                   'serial_number'         => $this->_getSerialNumber(),
                    'activity_sign'         => $inputDatas['activity_sign'] ?? 0,
                    'desc'                  => $inputDatas['desc'] ?? 0,
                    'frozen_type'           => $typeConfig['frozen_type'],
@@ -221,9 +243,23 @@ class AccountChange
      * 生成帐变编号
      * @return string
      */
-    public static function getSerialNumber(): string
+    public function _getSerialNumber(): string
     {
-        $serialNumber = 'JHHY' . Str::orderedUuid()->getNodeHex();
+        $sign = $this->_getCurrentPlatformSign();
+        $serialNumber = $sign . Str::orderedUuid()->getNodeHex();
         return $serialNumber;
+    }
+
+    /**
+     * 获取平台Sign
+     * @return string
+     */
+    public function _getCurrentPlatformSign(): string
+    {
+        $currentPlatform = Request::get('current_platform_eloq');
+        if ($currentPlatform) {
+            return $currentPlatform->sign;
+        }
+        return 'JHHY';
     }
 }
