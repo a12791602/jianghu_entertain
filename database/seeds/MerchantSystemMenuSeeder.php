@@ -24,7 +24,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -34,7 +34,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 1,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -44,7 +44,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -54,7 +54,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -64,7 +64,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -74,7 +74,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -84,7 +84,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -94,7 +94,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -104,7 +104,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 3,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -114,7 +114,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -124,7 +124,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 10,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -134,7 +134,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 10,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -144,7 +144,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 10,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -154,7 +154,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 10,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -164,7 +164,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 10,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -174,7 +174,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -184,7 +184,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 16,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -194,7 +194,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 16,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -204,7 +204,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 16,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -214,7 +214,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 16,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -224,7 +224,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -234,7 +234,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 21,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -244,7 +244,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 21,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -254,7 +254,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 21,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -264,7 +264,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 21,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -274,7 +274,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -284,7 +284,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -294,7 +294,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -304,7 +304,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -314,7 +314,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -324,7 +324,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -334,7 +334,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -344,7 +344,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 26,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 7,
               'type'    => 1,
              ],
              [
@@ -354,7 +354,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 7,
               'type'    => 1,
              ],
              [
@@ -364,7 +364,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 34,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -374,7 +374,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 34,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -384,7 +384,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 34,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -394,7 +394,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 34,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -404,7 +404,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 34,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -414,7 +414,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 8,
               'type'    => 1,
              ],
              [
@@ -424,7 +424,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 40,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -434,7 +434,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 40,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -444,7 +444,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 9,
               'type'    => 1,
              ],
              [
@@ -454,7 +454,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 43,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -464,7 +464,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 43,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -474,7 +474,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 43,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -484,7 +484,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 10,
               'type'    => 1,
              ],
              [
@@ -494,7 +494,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 47,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -504,7 +504,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 47,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -514,7 +514,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 1,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 11,
               'type'    => 1,
              ],
              [
@@ -524,7 +524,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -534,7 +534,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -544,7 +544,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -554,7 +554,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -564,7 +564,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -574,7 +574,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 50,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 0,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -584,7 +584,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'pid'     => 0,
               'display' => 0,
               'level'   => 1,
-              'sort'    => 0,
+              'sort'    => 12,
               'type'    => 1,
              ],
             ],

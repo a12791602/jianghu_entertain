@@ -30,7 +30,6 @@ class CreateRequest extends BaseFormRequest
                 'name'     => 'required|unique:merchant_admin_users',
                 'email'    => 'required|email|unique:merchant_admin_users',
                 'password' => 'required|string',
-                'is_test'  => 'required|integer',
                 'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
                ];
     }

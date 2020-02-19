@@ -27,25 +27,17 @@ class DoAddAction
     /**
      * @param  array $inputDatas 传递的参数.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $parent = false;
-        if (isset($inputDatas['is_parent']) && (int) $inputDatas['is_parent'] === 1) {
-            $parent = true;
+        $currentMaxSort     = $this->model->where(['pid' => $inputDatas['pid']])->max('sort');
+        $inputDatas['sort'] = $currentMaxSort + 1;
+        $menuEloq           = new BackendSystemMenu();
+        $menuEloq->fill($inputDatas);
+        if (!$menuEloq->save()) {
+            throw new \Exception('300003');
         }
-        $menuEloq          = new BackendSystemMenu();
-        $menuEloq->label   = $inputDatas['label'];
-        $menuEloq->en_name = $inputDatas['en_name'];
-        $menuEloq->route   = $inputDatas['route'];
-        $menuEloq->display = $inputDatas['display'];
-        $menuEloq->icon    = $inputDatas['icon'] ?? null;
-        $menuEloq->sort    = $inputDatas['sort'];
-        if ($parent === false) {
-            $menuEloq->pid   = $inputDatas['parent_id'];
-            $menuEloq->level = $inputDatas['level'];
-        }
-        $menuEloq->save();
         $msgOut = msgOut(['label' => $menuEloq->label]);
         return $msgOut;
     }

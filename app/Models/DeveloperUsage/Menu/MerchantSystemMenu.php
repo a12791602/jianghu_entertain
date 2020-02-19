@@ -17,6 +17,11 @@ class MerchantSystemMenu extends BaseModel
      * RedisKey
      */
     public const ALL_MENU_REDIS_KEY = '*';
+    
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @var string

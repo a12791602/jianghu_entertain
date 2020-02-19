@@ -21,7 +21,7 @@ class CreateUsersStationOrderTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('user_id')->nullable()->default(null)->comment('用户ID');
                 $table->string('game_sign', 32)->nullable()->default(null)->comment('游戏标识');
                 $table->string('game_vendor_sign', 32)->nullable()->default(null)->comment('游戏厂商标识');

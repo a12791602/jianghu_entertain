@@ -22,7 +22,7 @@ class CreateUsersLogoutLogsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('user_id')->nullable()->default(null)->comment('用户id');
                 $table->integer('last_login_id')->nullable()->default(null)->comment('最后一次登录id');
                 $table->timestamp('logout_time')->nullable()->default(null)->comment('退出登录时间');

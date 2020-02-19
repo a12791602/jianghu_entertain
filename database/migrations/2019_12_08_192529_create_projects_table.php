@@ -28,7 +28,7 @@ class CreateProjectsTable extends Migration
                 $table->integer('top_id')->comment('最上级id');
                 $table->integer('parent_id')->comment('上级id');
                 $table->tinyInteger('is_tester')->default('0')->comment('是否测试用户 0否 1是');
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('所属平台标记');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('所属平台标记');
                 $table->string('vip_level_id', 25)->nullable()->default(null)->comment('用户vip等级id');
                 $table->string('game_sign', 32)->nullable()->default(null)->comment('所属游戏标记');
                 $table->string('game_vendor_sign', 32)->nullable()->default(null)->comment('所属游戏厂商');

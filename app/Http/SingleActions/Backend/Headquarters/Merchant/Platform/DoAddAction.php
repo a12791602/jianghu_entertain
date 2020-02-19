@@ -73,7 +73,7 @@ class DoAddAction extends MainAction
     {
         $this->platformEloq = new SystemPlatform();
         $platformData       = [
-                               'name'           => $inputDatas['platform_name'],
+                               'cn_name'        => $inputDatas['platform_name'],
                                'sign'           => $inputDatas['platform_sign'],
                                'agency_method'  => $inputDatas['agency_method'],
                                'start_time'     => $inputDatas['start_time'],

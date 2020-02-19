@@ -81,4 +81,28 @@ class MerchantAdminUserFilter extends ModelFilter
         $object = $this->where('email', $email);
         return $object;
     }
+
+    /**
+     * 按名称搜索.
+     *
+     * @param string $reviewer 名称.
+     * @return MerchantAdminUserFilter
+     */
+    public function reviewer(string $reviewer): MerchantAdminUserFilter
+    {
+        $object = $this->where('name', $reviewer);
+        return $object;
+    }
+
+    /**
+     * 按名称搜索.
+     *
+     * @param string $admin 名称.
+     * @return MerchantAdminUserFilter
+     */
+    public function admin(string $admin): MerchantAdminUserFilter
+    {
+        $object = $this->where('name', $admin);
+        return $object;
+    }
 }

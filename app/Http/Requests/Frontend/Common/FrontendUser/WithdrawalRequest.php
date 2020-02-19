@@ -6,10 +6,10 @@ use App\Http\Requests\BaseFormRequest;
 use App\Rules\Frontend\AccountManagement\FundPasswordCheckRule;
 
 /**
- * Class WithdrawRequest
+ * Class WithdrawalRequest
  * @package App\Http\Requests\Frontend\Common\FrontendUser
  */
-class WithdrawRequest extends BaseFormRequest
+class WithdrawalRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -29,16 +29,16 @@ class WithdrawRequest extends BaseFormRequest
     public function rules(): array
     {
         $result = [
-                   'bank_id'       => 'integer:required',
+                   'bank_id'       => 'integer:required', // 收款账户 ID
                    'amount'        => [
                                        'required',
                                        'regex:/^([1-9][0-9]*)+(.[0-9]{1,2})?$/',
-                                      ],
+                                      ], // 提现金额
                    'fund_password' => [
                                        'required',
-                                       'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
+                                       'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/', // 大小写字母加数字 8,16位
                                        new FundPasswordCheckRule($this),
-                                      ],
+                                      ], // 资金密码
                   ];
         return $result;
     }

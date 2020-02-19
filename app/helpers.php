@@ -125,3 +125,22 @@ function getCurrentPlatform(Request $request): SystemPlatform
     }
     return $currentPlatformEloq;
 }
+
+if (!function_exists('isJson')) {
+    /**
+     * 检测给定的字符串是不是json格式.
+     *
+     * @param string|null $string 待检测的字符串.
+     * @return boolean
+     */
+    function isJson(?string $string): bool
+    {
+        try {
+            $jObject = json_decode($string);
+        } catch (\Throwable $exception) {
+            return false;
+        }
+        $result = is_object($jObject);
+        return $result;
+    }
+}

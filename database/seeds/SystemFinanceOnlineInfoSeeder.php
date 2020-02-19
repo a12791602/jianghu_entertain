@@ -20,7 +20,7 @@ class SystemFinanceOnlineInfoSeeder extends Seeder
              [
               'frontend_name'   => '支付宝扫码1',
               'backend_remark'  => '第三方：天道支付 通道：支付宝扫码',
-              'platform_sign'   => 'test',
+              'platform_sign'   => 'jhhy',
               'channel_id'      => 1,
               'min'             => '200.00',
               'max'             => '10000.00',

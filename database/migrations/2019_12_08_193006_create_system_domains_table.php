@@ -22,7 +22,7 @@ class CreateSystemDomainsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 64)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('admin_id')->nullable()->default(null)->comment('管理员id');
                 $table->string('domain')->nullable()->default(null)->comment('域名');
                 $table->tinyInteger('status')->default(1)->comment('是否启用,默认启用');

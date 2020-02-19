@@ -22,7 +22,7 @@ class CreateUsersCommissionRulesTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->decimal('bet_min', 18, 4)->nullable()->default(null)->comment('打码量范围下限');
                 $table->decimal('bet_max', 18, 4)->nullable()->default(null)->comment('打码量范围上限');
                 $table->string('rule_details')->nullable()->default(null)->comment('规则');

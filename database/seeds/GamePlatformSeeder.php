@@ -19,7 +19,7 @@ class GamePlatformSeeder extends Seeder
             [
              [
               'id'            => 1,
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'game_sign'     => 'kxxxq',
               'status'        => 1,
               'sort'          => 1,
@@ -28,7 +28,7 @@ class GamePlatformSeeder extends Seeder
              ],
              [
               'id'            => 2,
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'game_sign'     => 'ddz',
               'status'        => 1,
               'sort'          => 3,
@@ -37,7 +37,7 @@ class GamePlatformSeeder extends Seeder
              ],
              [
               'id'            => 3,
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'game_sign'     => 'bjpk',
               'status'        => 1,
               'sort'          => 1,

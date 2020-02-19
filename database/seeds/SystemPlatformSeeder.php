@@ -18,8 +18,9 @@ class SystemPlatformSeeder extends Seeder
         SystemPlatform::insert(
             [
              'id'         => 1,
-             'name'       => '测试平台',
-             'sign'       => 'test',
+             'cn_name'    => '江湖互娱',
+             'en_name'    => 'jh_entertainment',
+             'sign'       => 'jhhy',
              'owner_id'   => 1,
              'status'     => 1,
              'created_at' => '2020-01-01 00:00:00',

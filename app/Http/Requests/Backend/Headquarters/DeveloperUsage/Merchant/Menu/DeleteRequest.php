@@ -26,18 +26,15 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'toDelete'   => 'required|array',
-                  'toDelete.*' => 'int|exists:merchant_system_menus,id',
-                 ];
+        $rules = ['id' => 'required|integer|exists:merchant_system_menus'];
         return $rules;
     }
 
     /**
      * @return mixed[]
      */
-    public function messages(): array
-    {
-        return ['toDelete.*.exists' => '需要删除的菜单不存在!'];
-    }
+    // public function messages(): array
+    // {
+    //     return [];
+    // }
 }

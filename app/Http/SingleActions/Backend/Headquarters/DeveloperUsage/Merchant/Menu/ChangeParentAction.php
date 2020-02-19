@@ -31,13 +31,8 @@ class ChangeParentAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $parseDatas  = json_decode($inputDatas['drag_result'], true);
-        $itemProcess = [];
-        if (!empty($parseDatas)) {
-            $itemProcess = $this->model->changeParent($parseDatas);
-            $msgOut      = msgOut($itemProcess);
-            return $msgOut;
-        }
-        throw new \Exception('300001');
+        $menuLabel = $this->model::changeParent($inputDatas);
+        $msgOut    = msgOut(['label' => $menuLabel]);
+        return $msgOut;
     }
 }

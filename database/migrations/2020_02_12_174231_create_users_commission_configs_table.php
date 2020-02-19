@@ -21,7 +21,7 @@ class CreateUsersCommissionConfigsTable extends Migration
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('game_type_id')->default(0)->comment('游戏类型ID');
                 $table->integer('game_vendor_id')->default(0)->comment('游戏厂商ID');
                 $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('打码量');

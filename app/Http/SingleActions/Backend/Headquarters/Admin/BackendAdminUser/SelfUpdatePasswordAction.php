@@ -29,7 +29,7 @@ class SelfUpdatePasswordAction extends MainAction
         if (!$this->user->save()) {
             throw new \Exception('301103');
         }
-        $expireInMinute = $this->user->factory()->getTTL();
+        $expireInMinute = $this->auth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
         $data           = [
                            'access_token' => $token,

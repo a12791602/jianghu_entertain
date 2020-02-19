@@ -40,8 +40,8 @@ class IndexAction extends MainAction
         $filterArr = ['platformSign' => $sign];
         $data      = $this->model
                           ->filter($filterArr, UsersTagFilter::class)
-                          ->get()
-                          ->toArray();
+                          ->select('id', 'title', 'no_withdraw', 'no_login', 'no_play', 'no_promote', 'created_at')
+                          ->paginate($this->model::getPageSize());
         $msgOut    = msgOut($data);
         return $msgOut;
     }

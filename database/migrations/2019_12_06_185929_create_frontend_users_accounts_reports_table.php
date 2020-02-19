@@ -23,7 +23,7 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('serial_number', 64)->nullable()->default(null)->comment('序列号');
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('top_id')->nullable()->default(null)->comment('最上级id');
                 $table->integer('parent_id')->nullable()->default(null)->comment('上级id');
                 $table->integer('user_id')->nullable()->default(null)->comment('用户ID');

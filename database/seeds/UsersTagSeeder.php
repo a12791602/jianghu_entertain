@@ -18,7 +18,7 @@ class UsersTagSeeder extends Seeder
         UsersTag::insert(
             [
              [
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'title'         => '普通会员',
               'no_withdraw'   => 0,
               'no_login'      => 1,
@@ -28,7 +28,7 @@ class UsersTagSeeder extends Seeder
               'updated_at'    => '2019-12-28 13:29:07',
              ],
              [
-              'platform_sign' => 'test',
+              'platform_sign' => 'jhhy',
               'title'         => '风险会员',
               'no_withdraw'   => 0,
               'no_login'      => 0,

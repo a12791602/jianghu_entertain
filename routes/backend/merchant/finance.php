@@ -4,6 +4,7 @@ use App\Http\Controllers\BackendApi\Merchant\Finance\HandleSaveBuckleRecordContr
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\RechargeOrderController;
+use App\Http\Controllers\BackendApi\Merchant\Finance\WithdrawOrderController;
 
 //线下金流
 Route::group(
@@ -227,5 +228,61 @@ Route::group(
              'buckleIndex',
             ],
         )->name($namePrefix . 'buckle-index');
+    },
+);
+
+//出款审核
+Route::group(
+    ['prefix' => 'withdraw-order'],
+    static function (): void {
+        $namePrefix = 'merchant-api.withdraw-order.';
+        //出款审核列表
+        Route::get(
+            'check-index',
+            [
+             WithdrawOrderController::class,
+             'checkIndex',
+            ],
+        )->name($namePrefix . 'check-index');
+        //审核通过
+        Route::post(
+            'check-pass',
+            [
+             WithdrawOrderController::class,
+             'checkPass',
+            ],
+        )->name($namePrefix . 'check-pass');
+        //审核通过
+        Route::post(
+            'check-refuse',
+            [
+             WithdrawOrderController::class,
+             'checkRefuse',
+            ],
+        )->name($namePrefix . 'check-refuse');
+        //出款列表
+        Route::get(
+            'out-index',
+            [
+             WithdrawOrderController::class,
+             'outIndex',
+            ],
+        )->name($namePrefix . 'out-index');
+        //出款成功
+        Route::post(
+            'out-success',
+            [
+             WithdrawOrderController::class,
+             'outSuccess',
+            ],
+        )->name($namePrefix . 'out-success');
+        //出款拒绝
+        Route::post(
+            'out-refuse',
+            [
+             WithdrawOrderController::class,
+             'outRefuse',
+            ],
+        )->name($namePrefix . 'out-refuse');
     },
 );

@@ -29,7 +29,7 @@ class DoAddRequest extends BaseFormRequest
         return [
                 'email'         => 'required|email|max:64|unique:merchant_admin_users', //超管邮箱
                 'password'      => 'required|string',                                   //密码
-                'platform_name' => 'required|unique:system_platforms,name',             //平台名称
+                'platform_name' => 'required|unique:system_platforms,cn_name',          //平台名称
                 'platform_sign' => 'required|unique:system_platforms,sign',             //平台标识
                 'agency_method' => 'required|string',                                   //代理方式
                 'domains'       => 'required|array',                                    //域名

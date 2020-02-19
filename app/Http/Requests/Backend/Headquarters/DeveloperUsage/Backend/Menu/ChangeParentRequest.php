@@ -26,7 +26,12 @@ class ChangeParentRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['dragResult' => 'required|string'];
+        $rules = [
+                  'id'    => 'required|integer|exists:backend_system_menus', //ID
+                  'pid'   => 'required|integer',                             //上级ID
+                  'sort'  => 'required|integer|gte:0',                       //排序
+                  'level' => 'required|integer|gte:0',                       //层级
+                 ];
         return $rules;
     }
 

@@ -26,7 +26,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -38,7 +38,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -50,7 +50,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -62,7 +62,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -74,7 +74,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -86,7 +86,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -98,7 +98,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -110,7 +110,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -122,7 +122,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -134,7 +134,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -146,7 +146,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -158,7 +158,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -170,7 +170,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -182,7 +182,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -194,7 +194,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -206,7 +206,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -218,7 +218,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -230,7 +230,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -242,7 +242,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -254,7 +254,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -266,7 +266,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 7,
               'type'    => 1,
              ],
              [
@@ -278,7 +278,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -290,7 +290,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -302,7 +302,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -314,7 +314,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 8,
               'type'    => 1,
              ],
              [
@@ -326,7 +326,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 5,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -338,7 +338,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -350,7 +350,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -362,7 +362,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 9,
               'type'    => 1,
              ],
              [
@@ -374,7 +374,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 1,
               'type'    => 1,
              ],
              [
@@ -386,7 +386,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 2,
               'type'    => 1,
              ],
              [
@@ -398,7 +398,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 3,
               'type'    => 1,
              ],
              [
@@ -410,7 +410,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -422,7 +422,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -434,7 +434,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -446,7 +446,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 7,
               'type'    => 1,
              ],
              [
@@ -458,7 +458,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 8,
               'type'    => 1,
              ],
              [
@@ -470,7 +470,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => null,
+              'sort'    => 9,
               'type'    => 1,
              ],
              [
@@ -482,7 +482,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 0,
               'level'   => 1,
-              'sort'    => null,
+              'sort'    => 10,
               'type'    => 1,
              ],
             ],

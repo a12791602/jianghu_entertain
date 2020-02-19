@@ -26,10 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'toDelete'   => 'required|array',
-                  'toDelete.*' => 'int',
-                 ];
+        $rules = ['id' => 'required|integer|exists:backend_system_menus'];
         return $rules;
     }
 

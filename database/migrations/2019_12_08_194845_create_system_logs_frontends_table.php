@@ -23,7 +23,7 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('log_uuid', 45)->nullable()->default(null)->comment('唯一标识');
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->text('description')->nullable()->default(null)->comment('描述');
                 $table->string('origin', 200)->nullable()->default(null)->comment('起源');
                 $table->enum('type', ['log', 'store', 'change', 'delete'])->comment('类型');

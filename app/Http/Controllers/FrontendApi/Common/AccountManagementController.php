@@ -7,13 +7,13 @@ use App\Http\Requests\Frontend\Common\FrontendUser\AliPayBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\AliPayFirstBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\BankCardBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\BankCardFirstBindingRequest;
-use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountDestroyAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountListAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AliPayBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\BankCardBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\FundPasswordCheckAction;
-use App\Http\SingleActions\Frontend\Common\AccountManagement\WithdrawAction;
+use App\Http\SingleActions\Frontend\Common\AccountManagement\WithdrawalAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -124,12 +124,12 @@ class AccountManagementController
 
     /**
      * Account withdraw.
-     * @param WithdrawAction  $action  WithdrawAction.
-     * @param WithdrawRequest $request WithdrawRequest.
+     * @param WithdrawalAction  $action  WithdrawalAction.
+     * @param WithdrawalRequest $request WithdrawalRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function withdraw(WithdrawAction $action, WithdrawRequest $request): JsonResponse
+    public function withdraw(WithdrawalAction $action, WithdrawalRequest $request): JsonResponse
     {
         $result = $action->execute($request);
         return $result;

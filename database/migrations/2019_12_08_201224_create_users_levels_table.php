@@ -22,7 +22,7 @@ class CreateUsersLevelsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('name', 64)->nullable()->default(null)->comment('名称');
                 $table->string('allow_opts', 128)->nullable()->default(null)->comment('操作');
                 $table->nullableTimestamps();

@@ -33,7 +33,7 @@ class PasswordChangeAction extends MainAction
 
         $this->user->update(['password' => bcrypt($request['password'])]);
         Cache::forget($verification_key);
-        $result = msgOut();
+        $result = msgOut([], '102001');
         return $result;
     }
 }

@@ -21,7 +21,7 @@ class CreateSystemPlatformBanksTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->default(' ')->comment('运营商标记');
+                $table->string('platform_sign', 10)->default(' ')->comment('运营商标记');
                 $table->integer('bank_id')->default('0')->comment('银行id');
                 $table->tinyInteger('status')->default('0')->comment('状态 0 禁用 1 启用');
                 $table->timestamp('created_at')->useCurrent();

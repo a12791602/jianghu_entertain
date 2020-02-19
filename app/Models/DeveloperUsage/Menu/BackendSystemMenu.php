@@ -17,6 +17,11 @@ class BackendSystemMenu extends BaseModel
      * RedisKey
      */
     public const ALL_MENU_REDIS_KEY = '1';
+    
+    /**
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
      * @var string

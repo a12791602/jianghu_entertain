@@ -22,8 +22,9 @@ class CreateSystemPlatformsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('name', 20)->nullable()->default(null)->comment('名称');
-                $table->string('sign', 20)->nullable()->default(null)->comment('标识');
+                $table->string('cn_name', 64)->nullable()->default(null)->comment('中文名称');
+                $table->string('en_name', 64)->nullable()->default(null)->comment('英文名称');
+                $table->string('sign', 15)->nullable()->default(null)->comment('标识');
                 $table->string('games_types')->nullable()->default(null)->comment('游戏类型设置');
                 $table->string('finance_types')->nullable()->default(null)->comment('金流类型设置');
                 $table->string('agency_method', 20)->nullable()->default(null)->comment('代理方式  1.PC  2.H5 3.APP');

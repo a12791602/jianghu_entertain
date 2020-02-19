@@ -23,7 +23,7 @@ class CreateUsersLoginLogsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('pid')->comment('父类id, 顶级为0');
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('用户手机号码');
                 $table->string('uid', 10)->nullable()->default(null)->comment('用户UID');
                 $table->timestamp('last_login_time')->nullable()->default(null)->comment('最后登陆时间');

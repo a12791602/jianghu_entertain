@@ -21,7 +21,7 @@ class CreateSystemFinanceHandleSaveBuckleRecordsTable extends Migration
             static function (Blueprint $table): void {
                 $table->bigIncrements('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('order_no', 128)->nullable()->default(null)->comment('订单号');
                 $table->integer('user_id')->default(0)->comment('用户ID');
                 $table->tinyInteger('type')->default(0)->comment('资金类型');

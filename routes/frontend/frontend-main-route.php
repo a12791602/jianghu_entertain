@@ -28,7 +28,7 @@ Route::group(
         $namePrefix = 'h5-api.';
         Route::post('register/verification-code', [RegisterController::class, 'code'])
             ->name($namePrefix . 'register.verification-code');
-        Route::post('password-reset-code/verification-code', [PasswordController::class, 'passwordResetCode'])
+        Route::post('password-reset/verification-code', [PasswordController::class, 'passwordResetCode'])
             ->name($namePrefix . 'reset-password.verification-code');
         Route::get('password/change-code', [PasswordController::class, 'passwordChangeCode'])
             ->name($namePrefix . 'password.change-code');

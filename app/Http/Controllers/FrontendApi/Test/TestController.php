@@ -4,6 +4,7 @@ namespace App\Http\Controllers\FrontendApi\Test;
 
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterAction;
+use App\Http\SingleActions\Frontend\Test\AccountChangeAction;
 use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Cache;
@@ -19,27 +20,14 @@ class TestController extends MainAction
 {
     /**
      * 测试帐变接口
-     * @param Request $request Request.
+     * @param Request             $request Request.
+     * @param AccountChangeAction $action  Action.
      * @return mixed
      * @throws \Exception Exception.
      */
-    public function accountChange(Request $request)
+    public function accountChange(Request $request, AccountChangeAction $action)
     {
-        $inputDatas = $request->all();
-        $user       = $this->user;
-        if (!$user) {
-            return;
-        }
-        $account = $user->account;
-        if (!$account) {
-            return;
-        }
-        $inputDatas['params'] = json_decode($inputDatas['params'], true);
-        if (!$inputDatas['params']) {
-            $inputDatas['params'] = [];
-        }
-        $data   = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
-        $msgOut = msgOut($data);
+        $msgOut = $action->execute($request);
         return $msgOut;
     }
 

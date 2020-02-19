@@ -39,7 +39,7 @@ class IndexAction
                 $inputDatas['parentId'] = $parentId->id;
             }
         }
-        $datas = $this->model->filter($inputDatas, FrontendUserFilter::class)
+        $datas  = $this->model->filter($inputDatas, FrontendUserFilter::class)
             ->select(
                 [
                  'id',
@@ -51,6 +51,7 @@ class IndexAction
                  'user_tag_id',
                  'register_ip',
                  'last_login_ip',
+                 'last_login_time',
                  'created_at',
                 ],
             )
@@ -63,23 +64,35 @@ class IndexAction
                 ],
             )
             ->paginate($this->model::getPageSize())->toArray();
-        foreach ($datas['data'] as $userKey => $user) {
-            $datas['data'][$userKey] = [
-                                        'id'            => $user['id'],
-                                        'mobile'        => $user['mobile_hidden'],
-                                        'guid'          => $user['guid'],
-                                        'is_online'     => $user['is_online'],
-                                        'is_tester'     => $user['is_tester'],
-                                        'register_ip'   => $user['register_ip'],
-                                        'last_login_ip' => $user['last_login_ip'],
-                                        'created_at'    => $user['created_at'],
-                                        'user_tag'      => $user['user_tag']['title'] ?? null,
-                                        'total_members' => $user['specific_info']['total_members'] ?? 0,
-                                        'parent_mobile' => $user['parent']['mobile'] ?? null,
-                                        'balance'       => $user['account']['balance'] ?? 0,
-                                       ];
-        }
+        $datas  = $this->_handleData($datas);
         $msgOut = msgOut($datas);
         return $msgOut;
+    }
+
+    /**
+     * handleData description
+     * @param  array $datas 需要处理的会员列表数据.
+     * @return mixed[]
+     */
+    private function _handleData(array $datas): array
+    {
+        foreach ($datas['data'] as $userKey => $user) {
+            $datas['data'][$userKey] = [
+                                        'id'              => $user['id'],
+                                        'mobile'          => $user['mobile_hidden'],
+                                        'guid'            => $user['guid'],
+                                        'is_online'       => $user['is_online'],
+                                        'is_tester'       => $user['is_tester'],
+                                        'register_ip'     => $user['register_ip'],
+                                        'last_login_ip'   => $user['last_login_ip'],
+                                        'last_login_time' => $user['last_login_time'],
+                                        'created_at'      => $user['created_at'],
+                                        'user_tag'        => $user['user_tag']['title'] ?? null,
+                                        'total_members'   => $user['specific_info']['total_members'] ?? 0,
+                                        'parent_mobile'   => $user['parent']['mobile'] ?? null,
+                                        'balance'         => $user['account']['balance'] ?? 0,
+                                       ];
+        }
+        return $datas;
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models\DeveloperUsage\Menu\Traits;
 
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Created by PhpStorm.
@@ -112,29 +113,48 @@ trait MenuLogics
 
     /**
      * @param array $parseDatas 修改的数据.
-     * @return mixed[]
+     * @throws \Exception Exception.
+     * @return string
      */
-    public function changeParent(array $parseDatas): array
+    public static function changeParent(array $parseDatas): string
     {
-        $atLeastOne  = false;
-        $itemProcess = [];
-        foreach ($parseDatas as $value) {
-            $menuEloq       = self::find($value['currentId']);
-            $menuEloq->pid  = $value['currentParent'] === '#' ? 0 : (int) $value['currentParent'];
-            $menuEloq->sort = $value['currentSort'];
-            if ($menuEloq->save()) {
-                $pass          = ['pass' => $value['currentText']];
-                $itemProcess[] = $pass;
-                $atLeastOne    = true;
-            } else {
-                $fail          = ['fail' => $value['currentText']];
-                $itemProcess[] = $fail;
-            }
+        DB::beginTransaction();
+        $menuEloq = self::find($parseDatas['id']);
+        self::where(
+            [
+             [
+              'pid',
+              $menuEloq->pid,
+             ],
+             [
+              'sort',
+              '>',
+              $menuEloq->sort,
+             ],
+            ],
+        )->decrement('sort');
+
+        self::where(
+            [
+             [
+              'pid',
+              $parseDatas['pid'],
+             ],
+             [
+              'sort',
+              '>=',
+              $parseDatas['sort'],
+             ],
+            ],
+        )->increment('sort');
+
+        $menuEloq->fill($parseDatas);
+        if (!$menuEloq->save()) {
+            DB::rollback();
+            throw new \Exception('300005');
         }
-        if ($atLeastOne === true && isset($menuEloq)) {
-            $menuEloq->refreshStar();
-        }
-        return $itemProcess;
+        DB::commit();
+        return $menuEloq->label;
     }
 
     /**

@@ -21,7 +21,7 @@ class CreateFrontendUsersBlackListsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 20)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
                 $table->string('guid', 16)->nullable()->default(null)->comment('客户游戏唯一标识id');
                 $table->decimal('account', 18, 4)->nullable()->default(null)->comment('当前余额');

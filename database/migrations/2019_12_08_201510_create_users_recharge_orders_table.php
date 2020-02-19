@@ -22,7 +22,7 @@ class CreateUsersRechargeOrdersTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('platform_sign', 32)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('platform_no', 128)->nullable()->default(null)->comment('第三方订单号');
                 $table->string('platform_need_no', 128)->nullable()->default(null)->comment('第三方需要的订单号');
                 $table->string('order_no', 128)->nullable()->default(null)->comment('订单号');
