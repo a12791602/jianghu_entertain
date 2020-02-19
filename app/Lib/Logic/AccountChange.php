@@ -6,8 +6,8 @@ use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -18,8 +18,8 @@ use Illuminate\Support\Str;
  */
 class AccountChange
 {
-    public const FROZEN_STATUS_OUT  = 1; //冻结
-    public const FROZEN_STATUS_BACK = 2; //解冻
+    public const FROZEN_STATUS_OUT       = 1; //冻结
+    public const FROZEN_STATUS_BACK      = 2; //解冻
     public const FROZEN_STATUS_TO_PLAYER = 3;
     public const FROZEN_STATUS_TO_SYSTEM = 4; //消耗冻结资金
 
@@ -178,6 +178,7 @@ class AccountChange
     /**
      * 消耗冻结资金
      * @param float $money 金额.
+     * @throws \Exception Exception.
      * @return boolean
      */
     public function costFrozen(float $money): bool
@@ -243,9 +244,9 @@ class AccountChange
      * 生成帐变编号
      * @return string
      */
-    public function _getSerialNumber(): string
+    private function _getSerialNumber(): string
     {
-        $sign = $this->_getCurrentPlatformSign();
+        $sign         = $this->_getCurrentPlatformSign();
         $serialNumber = $sign . Str::orderedUuid()->getNodeHex();
         return $serialNumber;
     }
@@ -254,7 +255,7 @@ class AccountChange
      * 获取平台Sign
      * @return string
      */
-    public function _getCurrentPlatformSign(): string
+    private function _getCurrentPlatformSign(): string
     {
         $currentPlatform = Request::get('current_platform_eloq');
         if ($currentPlatform) {
