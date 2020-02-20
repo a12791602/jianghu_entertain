@@ -37,6 +37,7 @@ class CreateNoticeCarouselsTable extends Migration
                 $table->index('device');
             },
         );
+        DB::statement("ALTER TABLE `notice_carousels` comment '轮播公告表'");
     }
 
     /**

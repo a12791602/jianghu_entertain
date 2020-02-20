@@ -33,6 +33,7 @@ class CreateSystemDynActivityPlatformsTable extends Migration
                 $table->timestamps();
             },
         );
+        DB::statement("ALTER TABLE `system_dyn_activity_platforms` comment '动态活动与平台关联表'");
     }
 
     /**

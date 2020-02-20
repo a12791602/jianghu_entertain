@@ -33,6 +33,7 @@ class CreateSystemFinanceHandleSaveBuckleRecordsTable extends Migration
                 $table->timestamps();
             },
         );
+        DB::statement("ALTER TABLE `system_finance_handle_save_buckle_records` comment '人工存取记录表'");
     }
 
     /**
