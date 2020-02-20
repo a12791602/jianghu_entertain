@@ -50,5 +50,12 @@ Route::group(
              'delete',
             ],
         )->name($namePrefix . 'delete');
+        Route::post(
+            'display',
+            [
+             MenuController::class,
+             'display',
+            ],
+        )->name($namePrefix . 'display');
     },
 );

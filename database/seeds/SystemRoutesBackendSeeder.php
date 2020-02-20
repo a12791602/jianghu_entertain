@@ -81,6 +81,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.menu.display',
+              'method'        => 'display',
+              'menu_group_id' => 30,
+              'title'         => '总后台菜单-是否显示',
+              'is_open'       => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.backend-admin-group.detail',
               'method'        => 'detail',
               'menu_group_id' => 5,
@@ -148,6 +155,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => '',
               'menu_group_id' => 5,
               'title'         => '代理后台菜单-修改上级',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.merchant-menu.display',
+              'method'        => 'display',
+              'menu_group_id' => 5,
+              'title'         => '代理后台菜单-是否显示',
               'is_open'       => 0,
              ],
              [

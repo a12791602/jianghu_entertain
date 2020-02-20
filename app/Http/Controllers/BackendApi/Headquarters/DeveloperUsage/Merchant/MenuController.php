@@ -4,10 +4,12 @@ namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant;
 
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DisplayRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\EditRequest;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\ChangeParentAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DisplayAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu\GetAllMenuAction;
@@ -85,6 +87,20 @@ class MenuController
     public function changeParent(
         ChangeParentRequest $request,
         ChangeParentAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * @param DisplayRequest $request Request.
+     * @param DisplayAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function display(
+        DisplayRequest $request,
+        DisplayAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);

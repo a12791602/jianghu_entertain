@@ -5,12 +5,14 @@ namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DisplayRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditRequest;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\CurrentAdminMenuAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DisplayAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu\GetAllMenuAction;
@@ -111,6 +113,20 @@ class MenuController
     public function changeParent(
         ChangeParentRequest $request,
         ChangeParentAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * @param DisplayRequest $request Request.
+     * @param DisplayAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function display(
+        DisplayRequest $request,
+        DisplayAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
