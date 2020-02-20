@@ -234,6 +234,15 @@ class SystemRoutesMobileSeeder extends Seeder
               'is_open'           => 0,
              ],
              [
+              'route_name'        => 'app-api.recharge.confirm',
+              'controller'        => null,
+              'method'            => 'confirm',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+             ],
+             [
               'route_name'        => 'app-api.account.destroy',
               'controller'        => null,
               'method'            => 'accountDestroy',
