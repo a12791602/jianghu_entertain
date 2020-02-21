@@ -9,14 +9,6 @@ namespace App\Services;
 class ConstantService
 {
 
-    /**
-     * 私有化 __clone 方法 禁止克隆
-     * @return void
-     */
-    private function __clone()
-    {
-    }
-
     //pc端
     public const DEVICE_PC = 1;
     //h5端
@@ -53,4 +45,13 @@ class ConstantService
     public const FRONTEND    = 'frontend';
     public const MERCHANT    = 'merchant';
     public const HEADQUARTER = 'headquarter';
+
+    /**
+     * 私有化 __clone 方法 禁止克隆
+     * @return void
+     */
+    private function __clone()
+    {
+        //临时性为了避免克隆
+    }
 }
