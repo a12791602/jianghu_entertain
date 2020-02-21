@@ -38,6 +38,7 @@ class DoAddAction
         if (!$menuEloq->save()) {
             throw new \Exception('202800');
         }
+        $this->model->deleteCache();
         $msgOut = msgOut(['label' => $menuEloq->label]);
         return $msgOut;
     }

@@ -45,6 +45,19 @@ class CreateFrontendUsersTable extends Migration
                 $table->string('invite_code', 64)->nullable()->default(null)->comment('邀请码');
                 $table->tinyInteger('is_online')->nullable()->default('0')->comment('是否在线 1 是 0 否');
                 $table->string('device_code', 128)->nullable()->default(null)->comment('设备');
+
+                $table->index('mobile');
+                $table->index('guid');
+                $table->index('parent_id');
+                $table->index('platform_id');
+                $table->index('platform_sign');
+                $table->index('grade_id');
+                $table->index('register_ip');
+                $table->index('last_login_ip');
+                $table->index('user_tag_id');
+                $table->index('is_online');
+                $table->index('created_at');
+
                 $table->nullableTimestamps();
             },
         );

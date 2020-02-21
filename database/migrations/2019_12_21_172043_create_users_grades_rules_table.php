@@ -25,6 +25,7 @@ class CreateUsersGradesRulesTable extends Migration
                 $table->decimal('recharge', 18, 4)->nullable()->default(null)->comment('充值');
                 $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('打码量');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1.充值  2.打码  3.充值或打码任一满足  4.充值和打码同时满足');
+                $table->index('platform_sign');
                 $table->timestamps();
             },
         );

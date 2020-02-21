@@ -26,6 +26,11 @@ class CreateBackendLoginLogsTable extends Migration
                 $table->string('ip', 16)->nullable()->default(null)->comment('IP地址');
                 $table->string('ips')->nullable()->default(null);
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1.总后台   2.代理后台');
+
+                $table->index('email');
+                $table->index('ip');
+                $table->index('created_at');
+
                 $table->nullableTimestamps();
             },
         );

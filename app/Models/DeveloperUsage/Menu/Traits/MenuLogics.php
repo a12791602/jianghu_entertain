@@ -176,4 +176,13 @@ trait MenuLogics
         $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
         return $firstLevelList;
     }
+
+    /**
+     * delete menu cache
+     * @return void
+     */
+    public function deleteCache(): void
+    {
+        Cache::tags($this->redisFirstTag)->flush();
+    }
 }

@@ -33,6 +33,15 @@ class CreateFrontendUsersBankCardsTable extends Migration
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1 储蓄卡 2 支付宝');
                 $table->timestamp('created_at')->nullable();
                 $table->timestamp('updated_at')->nullable();
+                
+                $table->index('platform_sign');
+                $table->index('user_id');
+                $table->index('bank_id');
+                $table->index('owner_name');
+                $table->index('card_number');
+                $table->index('code');
+                $table->index('status');
+                $table->index('type');
             },
         );
         DB::statement("ALTER TABLE `frontend_users_bank_cards` comment '用户银行卡'");

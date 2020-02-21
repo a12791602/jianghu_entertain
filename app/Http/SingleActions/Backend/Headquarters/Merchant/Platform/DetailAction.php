@@ -38,7 +38,7 @@ class DetailAction
             ->select(
                 [
                  'id',
-                 'name',
+                 'cn_name',
                  'sign',
                  'agency_method',
                  'start_time',

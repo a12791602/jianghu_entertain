@@ -58,6 +58,7 @@ class DeleteAction
             throw new \Exception('300002');
         }
         DB::commit();
+        $this->model->deleteCache();
         $msgOut = msgOut(['label' => $menuLabel]);
         return $msgOut;
     }

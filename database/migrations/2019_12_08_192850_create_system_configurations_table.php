@@ -29,6 +29,10 @@ class CreateSystemConfigurationsTable extends Migration
                 $table->string('value', 128)->nullable()->default(null)->comment('配置的值');
                 $table->integer('last_update_admin_id')->default('0')->comment('上次更改人id');
                 $table->tinyInteger('status')->default('0')->comment('0 禁用 1 启用');
+                $table->index('platform_sign');
+                $table->index('pid');
+                $table->index('sign');
+                $table->index('status');
                 $table->nullableTimestamps();
             },
         );

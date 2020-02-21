@@ -29,6 +29,9 @@ class CreateFrontendUsersAccountsTypesTable extends Migration
                 $table->tinyInteger('frozen_type')->default('1')->comment('冻结类型');
                 $table->tinyInteger('activity_sign')->default('1')->comment('活动标识');
                 $table->integer('admin_id')->default('0')->comment('管理员id');
+
+                $table->index('sign');
+
                 $table->nullableTimestamps();
             },
         );

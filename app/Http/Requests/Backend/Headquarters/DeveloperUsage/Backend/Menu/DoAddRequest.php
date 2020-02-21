@@ -34,7 +34,7 @@ class DoAddRequest extends BaseFormRequest
                                 'regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/',
                                ], //英文名
                   'display' => 'required|numeric|in:0,1', //是否显示  0否 1是
-                  'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由
+                  'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z0-9\/-]+$/', //路由
                   'icon'    => 'required|regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',//图标
                   'pid'     => 'required|integer',//父级ID
                   'level'   => 'required|integer',//层级

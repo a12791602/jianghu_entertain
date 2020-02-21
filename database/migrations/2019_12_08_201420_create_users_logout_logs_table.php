@@ -27,6 +27,8 @@ class CreateUsersLogoutLogsTable extends Migration
                 $table->integer('last_login_id')->nullable()->default(null)->comment('最后一次登录id');
                 $table->timestamp('logout_time')->nullable()->default(null)->comment('退出登录时间');
                 $table->integer('online_time')->nullable()->default(null)->comment('在线时长 单位秒');
+                $table->index('platform_sign');
+                $table->index('user_id');
                 $table->nullableTimestamps();
             },
         );

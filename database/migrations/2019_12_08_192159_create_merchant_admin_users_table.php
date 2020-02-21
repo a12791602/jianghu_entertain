@@ -30,6 +30,10 @@ class CreateMerchantAdminUsersTable extends Migration
                 $table->tinyInteger('status')->nullable()->default('1')->comment('状态 0关闭 1开启');
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台id');
                 $table->decimal('chargeable_fund', 10, 2)->nullable()->default(null)->comment('后台管理员手中拥有的 可以充值的余额');
+                $table->index('platform_sign');
+                $table->index('email');
+                $table->index('group_id');
+                $table->index('status');
                 $table->nullableTimestamps();
             },
         );

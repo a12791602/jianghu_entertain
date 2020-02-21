@@ -32,7 +32,8 @@ class ChangeParentAction
     public function execute(array $inputDatas): JsonResponse
     {
         $menuLabel = $this->model::changeParent($inputDatas);
-        $msgOut    = msgOut(['label' => $menuLabel]);
+        $this->model->deleteCache();
+        $msgOut = msgOut(['label' => $menuLabel]);
         return $msgOut;
     }
 }

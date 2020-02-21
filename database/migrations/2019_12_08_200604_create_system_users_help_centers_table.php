@@ -29,6 +29,8 @@ class CreateSystemUsersHelpCentersTable extends Migration
                 $table->tinyInteger('status')->nullable()->default(null)->comment('开启状态 0关闭 1开启');
                 $table->integer('add_admin_id')->nullable()->default(null)->comment('添加的管理员id');
                 $table->integer('update_admin_id')->nullable()->default(null)->comment('最后修改的管理员id');
+                $table->index('title');
+                $table->index('status');
                 $table->nullableTimestamps();
             },
         );

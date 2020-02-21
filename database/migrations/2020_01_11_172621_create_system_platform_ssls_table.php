@@ -28,6 +28,7 @@ class CreateSystemPlatformSslsTable extends Migration
                 $table->text('private_key_second')->nullable()->default(null)->comment('私钥二（前端解密使用）');
                 $table->text('public_key_second')->nullable()->default(null)->comment('公钥二（后端加密使用）');
                 $table->string('interval_str_second', 32)->nullable()->default(null)->comment('间隔字符串二（前端解密&后端加密）');
+                $table->index('platform_sign');
                 $table->timestamps();
             },
         );

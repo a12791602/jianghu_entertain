@@ -39,6 +39,7 @@ class EditAction
         if (!$menuEloq->save()) {
             throw new \Exception('202804');
         }
+        $this->model->deleteCache();
         $msgOut = msgOut(['label' => $menuEloq->label]);
         return $msgOut;
     }

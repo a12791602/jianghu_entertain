@@ -27,6 +27,8 @@ class CreateUsersLoginGameLogsTable extends Migration
                 $table->integer('game_vendor_id')->nullable()->default(null)->comment('游戏厂商id');
                 $table->integer('game_id')->nullable()->default(null)->comment('游戏id');
                 $table->string('login_ip', 16)->nullable()->default(null)->comment('IP');
+                $table->index('platform_sign');
+                $table->index('user_id');
                 $table->nullableTimestamps();
             },
         );

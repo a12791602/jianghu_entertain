@@ -25,6 +25,9 @@ class CreateUsersCommissionConfigsTable extends Migration
                 $table->integer('game_type_id')->default(0)->comment('游戏类型ID');
                 $table->integer('game_vendor_id')->default(0)->comment('游戏厂商ID');
                 $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('打码量');
+                $table->index('platform_sign');
+                $table->index('game_type_id');
+                $table->index('game_vendor_id');
                 $table->timestamps();
             },
         );

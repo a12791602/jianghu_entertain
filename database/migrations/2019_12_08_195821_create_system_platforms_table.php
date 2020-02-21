@@ -37,6 +37,10 @@ class CreateSystemPlatformsTable extends Migration
                 $table->tinyInteger('status')->nullable()->default('1')->comment('状态 0关闭 1开启');
                 $table->integer('author_id')->nullable()->default(null)->comment('管理员id');
                 $table->integer('last_editor_id')->nullable()->default(null)->comment('最后修改的管理员id');
+
+                $table->index('sign');
+                $table->index('status');
+                $table->index('created_at');
                 $table->nullableTimestamps();
             },
         );

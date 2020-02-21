@@ -28,6 +28,8 @@ class CreateUsersCommissionRulesTable extends Migration
                 $table->string('rule_details')->nullable()->default(null)->comment('规则');
                 $table->string('game_type_sign', 64)->nullable()->default(null)->comment('游戏类型标识');
                 $table->string('game_vendor_sign', 64)->nullable()->default(null)->comment('游戏厂商标识');
+                $table->index('game_type_sign');
+                $table->index('game_vendor_sign');
                 $table->nullableTimestamps();
             },
         );

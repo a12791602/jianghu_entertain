@@ -31,6 +31,9 @@ class CreateFrontendUsersBlackListsTable extends Migration
                 $table->string('remark')->nullable()->default(null)->comment('备注');
                 $table->timestamp('remove_time')->nullable()->default(null);
                 $table->tinyInteger('status')->default(0)->comment('0黑名单状态 1已洗白状态');
+                $table->index('platform_sign');
+                $table->index('guid');
+                $table->index('status');
                 $table->timestamps();
             },
         );

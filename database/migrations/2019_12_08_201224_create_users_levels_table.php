@@ -25,6 +25,7 @@ class CreateUsersLevelsTable extends Migration
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('name', 64)->nullable()->default(null)->comment('名称');
                 $table->string('allow_opts', 128)->nullable()->default(null)->comment('操作');
+                $table->index('platform_sign');
                 $table->nullableTimestamps();
             },
         );

@@ -28,6 +28,7 @@ class CreateUsersGradesTable extends Migration
                 $table->decimal('experience_max', 18, 4)->nullable()->default(null)->comment('级别最大经验值');
                 $table->decimal('grade_gift', 18, 4)->nullable()->default(null)->comment('晋级礼金');
                 $table->decimal('week_gift', 18, 4)->nullable()->default(null)->comment('周礼金');
+                $table->index('platform_sign');
                 $table->nullableTimestamps();
             },
         );

@@ -28,6 +28,9 @@ class CreateSystemDomainsTable extends Migration
                 $table->tinyInteger('status')->default(1)->comment('是否启用,默认启用');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('类型');
                 $table->tinyInteger('is_default')->default(0)->comment('是否默认');
+                $table->index('platform_sign');
+                $table->index('status');
+                $table->index('type');
                 $table->nullableTimestamps();
             },
         );

@@ -29,7 +29,7 @@ class IndexRequest extends BaseFormRequest
         return [
                 'email'    => 'email:rfc,dns',
                 'name'     => 'string',
-                'ip'       => 'ip',
+                'loginIp'  => 'ip',
                 'createAt' => 'string',
                ];
     }

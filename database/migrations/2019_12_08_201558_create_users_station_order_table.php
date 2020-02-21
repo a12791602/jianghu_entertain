@@ -35,6 +35,12 @@ class CreateUsersStationOrderTable extends Migration
                 $table->string('game_no', 128)->nullable()->default(null)->comment('游戏局号');
                 $table->integer('grade_id')->nullable()->default(null)->comment('当前等级');
                 $table->decimal('commission', 18, 4)->nullable()->default(null)->comment('洗码');
+                $table->index('platform_sign');
+                $table->index('user_id');
+                $table->index('game_sign');
+                $table->index('game_vendor_sign');
+                $table->index('station_order_no');
+                $table->index('order_no');
                 $table->nullableTimestamps();
             },
         );

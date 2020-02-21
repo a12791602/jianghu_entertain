@@ -27,6 +27,7 @@ class CreateUsersTagsTable extends Migration
                 $table->tinyInteger('no_login')->nullable()->default(null)->comment('是否禁止登陆  0否 1是');
                 $table->tinyInteger('no_play')->nullable()->default(null)->comment('是否禁止游戏  0否 1是');
                 $table->tinyInteger('no_promote')->nullable()->default(null)->comment('是否禁止推广  0否 1是');
+                $table->index('platform_sign');
                 $table->timestamps();
             },
         );

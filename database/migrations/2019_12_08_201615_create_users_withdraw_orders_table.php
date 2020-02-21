@@ -43,6 +43,11 @@ class CreateUsersWithdrawOrdersTable extends Migration
                 $table->tinyInteger('admin_id')->nullable()->default(null)->comment('操作人ID');
                 $table->timestamp('operation_at')->nullable()->default(null)->comment('操作时间');
                 $table->timestamp('review_at')->nullable()->default(null)->comment('审核时间');
+                $table->index('platform_sign');
+                $table->index('order_no');
+                $table->index('mobile');
+                $table->index('user_id');
+                $table->index('status');
                 $table->timestamps();
             },
         );

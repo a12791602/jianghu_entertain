@@ -42,6 +42,15 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->integer('process_time')->default('0')->comment('处理时间');
                 $table->text('params')->nullable()->default(null)->comment('扩展的数据');
                 $table->string('desc')->nullable()->default(null)->comment('备注');
+
+                $table->index('serial_number');
+                $table->index('platform_sign');
+                $table->index('parent_id');
+                $table->index('user_id');
+                $table->index('type_sign');
+                $table->index('in_out');
+                $table->index('created_at');
+                
                 $table->nullableTimestamps();
             },
         );
