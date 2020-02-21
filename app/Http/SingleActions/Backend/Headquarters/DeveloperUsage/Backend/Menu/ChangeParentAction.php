@@ -33,7 +33,7 @@ class ChangeParentAction
     {
         $menuLabel = $this->model::changeParent($inputDatas);
         $this->model->deleteCache();
-        $msgOut    = msgOut(['label' => $menuLabel]);
+        $msgOut = msgOut(['label' => $menuLabel]);
         return $msgOut;
     }
 }
