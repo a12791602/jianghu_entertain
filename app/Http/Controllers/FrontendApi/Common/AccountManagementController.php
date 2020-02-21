@@ -14,6 +14,7 @@ use App\Http\SingleActions\Frontend\Common\AccountManagement\AliPayBindingAction
 use App\Http\SingleActions\Frontend\Common\AccountManagement\BankCardBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\FundPasswordCheckAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\WithdrawalAction;
+use App\Http\SingleActions\Frontend\Common\VerificationCode\PrivateVerificationCodeAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -132,6 +133,19 @@ class AccountManagementController
     public function withdraw(WithdrawalAction $action, WithdrawalRequest $request): JsonResponse
     {
         $result = $action->execute($request);
+        return $result;
+    }
+
+    /**
+     * Get verification code when deleting account.
+     * @param PrivateVerificationCodeAction $action PrivateVerificationCodeAction.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function accountDestroyVerificationCode(
+        PrivateVerificationCodeAction $action
+    ): JsonResponse {
+        $result = $action->execute();
         return $result;
     }
 }

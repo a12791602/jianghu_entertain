@@ -3,15 +3,17 @@
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\AccountDestroyRequest;
-use App\Http\SingleActions\MainAction;
+use App\Http\SingleActions\Frontend\Common\VerificationCode\VerificationCodeCheckAction;
+use Cache;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class AccountDestroyAction
  * @package App\Http\SingleActions\Frontend\Common\AccountManagement
  */
-class AccountDestroyAction extends MainAction
+class AccountDestroyAction extends VerificationCodeCheckAction
 {
+
     /**
      * Destroy user account.
      * @param AccountDestroyRequest $request AccountDestroyRequest.
@@ -20,11 +22,16 @@ class AccountDestroyAction extends MainAction
      */
     public function execute(AccountDestroyRequest $request): JsonResponse
     {
-        $validated = $request->validated();
-        $item      = $this->user->bankCard()->where('id', $validated['card_id'])->delete();
+        $validated               = $request->validated();
+        $verification_key        = $this->checkVerificationCode($validated);
+        $condition               = [];
+        $condition['id']         = $validated['card_id'];
+        $condition['owner_name'] = $validated['owner_name'];
+        $item                    = $this->user->bankCard()->where($condition)->delete();
         if (!$item) {
             throw new \Exception('100902');
         }
+        Cache::forget($verification_key);
         $result = msgOut([], '100901');
         return $result;
     }

@@ -22,14 +22,6 @@ class FactoryService
     private static $container;
 
     /**
-     * 私有化 __clone 方法 禁止克隆
-     * @return void
-     */
-    private function __clone()
-    {
-    }
-
-    /**
      * 采用单例模式.
      *
      * @return FactoryService
@@ -40,21 +32,6 @@ class FactoryService
             self::$instence = new self();
         }
         return self::$instence;
-    }
-
-    /**
-     * 获取对象实例.
-     *
-     * @param string $className ClassName.
-     * @return object
-     */
-    private static function _generateClass(string $className): object
-    {
-        // 采用对象池模式 对已存在的对象不再从新创建 以减少内存的开销
-        if (!isset(self::$container[$className])) {
-            self::$container[$className] = new $className();
-        }
-        return self::$container[$className];
     }
 
     /**
@@ -98,5 +75,29 @@ class FactoryService
         $className    = 'App\Game\\' . ucfirst($vendor) . 'Games\\' . ucfirst($game) . 'Game';
         $gameInstence = self::_generateClass($className);
         return $gameInstence;
+    }
+
+    /**
+     * 获取对象实例.
+     *
+     * @param string $className ClassName.
+     * @return object
+     */
+    private static function _generateClass(string $className): object
+    {
+        // 采用对象池模式 对已存在的对象不再从新创建 以减少内存的开销
+        if (!isset(self::$container[$className])) {
+            self::$container[$className] = new $className();
+        }
+        return self::$container[$className];
+    }
+
+    /**
+     * 私有化 __clone 方法 禁止克隆
+     * @return void
+     */
+    private function __clone()
+    {
+        //临时性为了避免克隆
     }
 }

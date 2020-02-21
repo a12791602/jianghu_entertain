@@ -359,6 +359,15 @@ class SystemRoutesMobileSeeder extends Seeder
               'description'       => null,
               'is_open'           => 0,
              ],
+             [
+              'route_name'        => 'app-api.account.destroy.verification-code',
+              'controller'        => null,
+              'method'            => 'accountDestroyVerificationCode',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+             ],
             ],
         );
     }
