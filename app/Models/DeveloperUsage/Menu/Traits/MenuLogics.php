@@ -63,12 +63,12 @@ trait MenuLogics
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
         }
-        foreach ($menuLists as $firstMenu) {
-            $menuForFE[$firstMenu->id] = $firstMenu->toArray();
+        foreach ($menuLists as $firstKey => $firstMenu) {
+            $menuForFE[$firstKey] = $firstMenu->toArray();
             if (!$firstMenu->childs()->exists()) {
                 continue;
             }
-            $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+            $menuForFE[$firstKey]['child'] = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu);
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
@@ -78,28 +78,26 @@ trait MenuLogics
      * Gets menu childs.
      * @param array             $adminAccessGroupDetail 管理员组权限.
      * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
-     * @param array             $menuForFE              整理后的管理员组权限.
      *
      * @return mixed[]
      */
     private function _getMenuChilds(
         array $adminAccessGroupDetail,
-        BackendSystemMenu $firstMenu,
-        array $menuForFE
+        BackendSystemMenu $firstMenu
     ): array {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
+        $data        = [];
         foreach ($firstChilds as $secondMenu) {
-            $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
             if (!$secondMenu->childs()->exists()) {
+                $data[] = $secondMenu->toArray();
                 continue;
             }
             $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-            foreach ($secondChilds as $thirdMenu) {
-                $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id]
-                    = $thirdMenu->toArray();
+            foreach ($secondChilds as $thirdKey => $thirdMenu) {
+                $data['child'][$thirdKey] = $thirdMenu->toArray();
             }
         }
-        return $menuForFE;
+        return $data;
     }
 
     /**
