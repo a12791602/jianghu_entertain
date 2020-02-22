@@ -62,4 +62,15 @@ class BaseFormRequest extends BaseFormAbstractRequest
         $attribute = array_merge($attribute, $this->extraDefinition);
         return $attribute;
     }
+
+    /**
+     * Get data to be validated from the request.
+     *
+     * @return BaseFormRequest[]
+     */
+    public function validationData(): array
+    {
+        $params = array_merge($this->all(), $this->route()->parameters());
+        return $params;
+    }
 }
