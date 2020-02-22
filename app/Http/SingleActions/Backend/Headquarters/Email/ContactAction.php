@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
  * Class ContactAction
  * @package App\Http\SingleActions\Backend\Headquarters\Email
  */
-class ContactAction
+class ContactAction extends BaseAction
 {
     /**
      * @return JsonResponse

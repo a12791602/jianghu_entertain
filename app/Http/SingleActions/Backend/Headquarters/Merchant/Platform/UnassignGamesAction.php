@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Game\GameFilter;
 use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  * Class UnassignGamesAction
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
-class UnassignGamesAction
+class UnassignGamesAction extends MainAction
 {
     /**
      * @param array $inputDatas InputDatas.

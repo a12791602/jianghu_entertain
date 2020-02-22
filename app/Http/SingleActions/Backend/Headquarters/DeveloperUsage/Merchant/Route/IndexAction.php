@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Route;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Merchant\SystemRoutesMerchant;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 路由-列表
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class IndexAction
     protected $model;
 
     /**
+     * @param Request              $request              Request.
      * @param SystemRoutesMerchant $systemRoutesMerchant Model.
      */
-    public function __construct(SystemRoutesMerchant $systemRoutesMerchant)
-    {
+    public function __construct(
+        Request $request,
+        SystemRoutesMerchant $systemRoutesMerchant
+    ) {
+        parent::__construct($request);
         $this->model = $systemRoutesMerchant;
     }
 

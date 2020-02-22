@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\SmsConfig;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\SystemSmsConfigFilter;
 use App\Models\Systems\SystemSmsConfig;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 短信配置-列表
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -19,10 +21,14 @@ class IndexAction
     protected $model;
 
     /**
+     * @param Request         $request         Request.
      * @param SystemSmsConfig $systemSmsConfig 短信配置Model.
      */
-    public function __construct(SystemSmsConfig $systemSmsConfig)
-    {
+    public function __construct(
+        Request $request,
+        SystemSmsConfig $systemSmsConfig
+    ) {
+        parent::__construct($request);
         $this->model = $systemSmsConfig;
     }
 

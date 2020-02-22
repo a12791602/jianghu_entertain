@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for menu change parent action.
  */
-class ChangeParentAction
+class ChangeParentAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class ChangeParentAction
     protected $model;
 
     /**
+     * @param Request            $request            Request.
      * @param MerchantSystemMenu $merchantSystemMenu Model.
      */
-    public function __construct(MerchantSystemMenu $merchantSystemMenu)
-    {
+    public function __construct(
+        Request $request,
+        MerchantSystemMenu $merchantSystemMenu
+    ) {
+        parent::__construct($request);
         $this->model = $merchantSystemMenu;
     }
 

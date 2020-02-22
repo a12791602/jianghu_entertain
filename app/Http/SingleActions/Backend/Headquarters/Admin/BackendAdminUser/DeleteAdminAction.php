@@ -2,8 +2,10 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Tymon\JWTAuth\Facades\JWTAuth;
@@ -11,7 +13,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 /**
  * Class for delete admin action.
  */
-class DeleteAdminAction
+class DeleteAdminAction extends MainAction
 {
 
     /**
@@ -20,10 +22,14 @@ class DeleteAdminAction
     protected $model;
 
     /**
+     * @param Request          $request          Request.
      * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminUser $backendAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminUser $backendAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminUser;
     }
 

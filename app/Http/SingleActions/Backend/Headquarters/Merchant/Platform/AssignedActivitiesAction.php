@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Activity\SystemDynActivityFilter;
 use App\Models\Activity\SystemDynActivity;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  * Class AssignedActivitiesAction
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
-class AssignedActivitiesAction
+class AssignedActivitiesAction extends MainAction
 {
     /**
      * @param array $inputDatas InputDatas.

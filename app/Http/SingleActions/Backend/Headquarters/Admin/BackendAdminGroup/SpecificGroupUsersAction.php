@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for specific group users action.
  */
-class SpecificGroupUsersAction
+class SpecificGroupUsersAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class SpecificGroupUsersAction
     protected $model;
 
     /**
+     * @param Request          $request          Request.
      * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminUser $backendAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminUser $backendAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminUser;
     }
 

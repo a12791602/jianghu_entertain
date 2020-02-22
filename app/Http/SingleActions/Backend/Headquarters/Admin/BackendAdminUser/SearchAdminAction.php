@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\BackendAdminUserFilter;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for search admin action.
  */
-class SearchAdminAction
+class SearchAdminAction extends MainAction
 {
 
     /**
@@ -18,10 +20,14 @@ class SearchAdminAction
     protected $model;
 
     /**
+     * @param Request           $request           Request.
      * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
      */
-    public function __construct(MerchantAdminUser $merchantAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        MerchantAdminUser $merchantAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $merchantAdminUser;
     }
 

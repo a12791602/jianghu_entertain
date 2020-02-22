@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 修改管理员状态
  */
-class SwitchAdminAction
+class SwitchAdminAction extends MainAction
 {
 
     /**
@@ -18,10 +20,14 @@ class SwitchAdminAction
     protected $model;
 
     /**
-     * @param BackendAdminUser $backendAdminUser 总后台管理员Model.
+     * @param Request          $request          Request.
+     * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminUser $backendAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminUser $backendAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminUser;
     }
 

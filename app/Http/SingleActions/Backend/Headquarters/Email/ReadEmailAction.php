@@ -10,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  * Class ReadEmailAction
  * @package App\Http\SingleActions\Backend\Headquarters\Email
  */
-class ReadEmailAction
+class ReadEmailAction extends BaseAction
 {
     /**
      * @param array $inputDatas InputDatas.

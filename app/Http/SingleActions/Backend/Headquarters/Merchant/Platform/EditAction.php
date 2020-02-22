@@ -2,18 +2,20 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\ModelFilters\Admin\MerchantAdminAccessGroupsHasBackendSystemMenuFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * 站点配置
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -24,10 +26,14 @@ class EditAction
     protected $model;
 
     /**
+     * @param Request        $request        Request.
      * @param SystemPlatform $systemPlatform 代理商平台.
      */
-    public function __construct(SystemPlatform $systemPlatform)
-    {
+    public function __construct(
+        Request $request,
+        SystemPlatform $systemPlatform
+    ) {
+        parent::__construct($request);
         $this->model = $systemPlatform;
     }
 

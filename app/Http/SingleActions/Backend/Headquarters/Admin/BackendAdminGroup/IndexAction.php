@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminGroup;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for index action.
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class IndexAction
     protected $model;
 
     /**
+     * @param Request                 $request                 Request.
      * @param BackendAdminAccessGroup $backendAdminAccessGroup BackendAdminAccessGroup.
      */
-    public function __construct(BackendAdminAccessGroup $backendAdminAccessGroup)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminAccessGroup $backendAdminAccessGroup
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminAccessGroup;
     }
 

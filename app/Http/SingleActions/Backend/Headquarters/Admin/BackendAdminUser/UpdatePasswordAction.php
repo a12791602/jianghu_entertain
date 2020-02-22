@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 /**
  * 修改管理员密码
  */
-class UpdatePasswordAction
+class UpdatePasswordAction extends MainAction
 {
 
     /**
@@ -19,10 +21,14 @@ class UpdatePasswordAction
     protected $model;
 
     /**
-     * @param BackendAdminUser $backendAdminUser 总后台管理员Model.
+     * @param Request          $request          Request.
+     * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminUser $backendAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminUser $backendAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminUser;
     }
 

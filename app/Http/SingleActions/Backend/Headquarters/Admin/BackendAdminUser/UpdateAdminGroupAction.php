@@ -2,15 +2,17 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\BackendAdminAccessGroupFilter;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 修改管理员所属组
  */
-class UpdateAdminGroupAction
+class UpdateAdminGroupAction extends MainAction
 {
 
     /**
@@ -19,10 +21,14 @@ class UpdateAdminGroupAction
     protected $model;
 
     /**
+     * @param Request          $request          Request.
      * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
-    public function __construct(BackendAdminUser $backendAdminUser)
-    {
+    public function __construct(
+        Request $request,
+        BackendAdminUser $backendAdminUser
+    ) {
+        parent::__construct($request);
         $this->model = $backendAdminUser;
     }
 

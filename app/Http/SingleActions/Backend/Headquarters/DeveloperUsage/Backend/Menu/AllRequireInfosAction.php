@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Class for menu all require infos action.
  */
-class AllRequireInfosAction
+class AllRequireInfosAction extends MainAction
 {
     /**
      * @param  array $inputDatas 传递的参数.

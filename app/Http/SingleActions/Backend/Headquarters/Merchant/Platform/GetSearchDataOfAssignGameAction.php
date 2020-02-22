@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
 use App\Models\Game\GamesVendor;
 use Illuminate\Http\JsonResponse;
@@ -11,7 +12,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
-class GetSearchDataOfAssignGameAction
+class GetSearchDataOfAssignGameAction extends MainAction
 {
     /**
      * @return JsonResponse

@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Platform\GamesPlatform;
 use Illuminate\Http\JsonResponse;
 
@@ -9,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  * Class AssignGamesAction
  * @package App\Http\SingleActions\Backend\Headquarters\Merchant\Platform
  */
-class AssignGamesAction
+class AssignGamesAction extends MainAction
 {
     /**
      * @param array $inputDatas InputDatas.

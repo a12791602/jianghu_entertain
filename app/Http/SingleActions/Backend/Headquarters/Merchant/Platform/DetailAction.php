@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\SystemPlatformFilter;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for merchant admin user do add action.
  */
-class DetailAction
+class DetailAction extends MainAction
 {
 
     /**
@@ -20,10 +22,14 @@ class DetailAction
     protected $model;
 
     /**
+     * @param Request        $request        Request.
      * @param SystemPlatform $systemPlatform 代理商平台.
      */
-    public function __construct(SystemPlatform $systemPlatform)
-    {
+    public function __construct(
+        Request $request,
+        SystemPlatform $systemPlatform
+    ) {
+        parent::__construct($request);
         $this->model = $systemPlatform;
     }
 

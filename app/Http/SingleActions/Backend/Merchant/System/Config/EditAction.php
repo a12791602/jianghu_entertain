@@ -6,7 +6,6 @@ use App\Http\SingleActions\MainAction;
 use App\Models\Systems\SystemConfiguration;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -38,29 +37,23 @@ class EditAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $param        = $inputDatas['param'][0] ?? [];
         $platformSign = $this->currentPlatformEloq->sign;
-        DB::beginTransaction();
-        foreach ($param as $sign => $item) {
-            $configEloq = $this->model->where(
-                [
-                 'platform_sign' => $platformSign,
-                 'sign'          => $sign,
-                ],
-            )->first();
-            if (!$configEloq) {
-                DB::rollback();
-                throw new \Exception('202500');
-            }
-            $editData = Arr::only($item, ['value', 'status']);
-            $configEloq->fill($editData);
-            if (!$configEloq->save()) {
-                DB::rollback();
-                throw new \Exception('202501');
-            }
+        $configEloq   = $this->model->where(
+            [
+             'platform_sign' => $platformSign,
+             'sign'          => $inputDatas['sign'],
+            ],
+        )->first();
+        if (!$configEloq) {
+            DB::rollback();
+            throw new \Exception('202500');
         }
-        DB::commit();
-        $msgOut = msgOut();
+        $editData = [$inputDatas['key'] => $inputDatas['value']];
+        $configEloq->fill($editData);
+        if (!$configEloq->save()) {
+            throw new \Exception('202501');
+        }
+        $msgOut = msgOut(['key' => $inputDatas['key'], 'value' => $inputDatas['value']]);
         return $msgOut;
     }
 }

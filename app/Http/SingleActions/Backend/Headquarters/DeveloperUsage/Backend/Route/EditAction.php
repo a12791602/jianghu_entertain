@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 路由-编辑
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class EditAction
     protected $model;
 
     /**
+     * @param Request             $request             Request.
      * @param SystemRoutesBackend $systemRoutesBackend Model.
      */
-    public function __construct(SystemRoutesBackend $systemRoutesBackend)
-    {
+    public function __construct(
+        Request $request,
+        SystemRoutesBackend $systemRoutesBackend
+    ) {
+        parent::__construct($request);
         $this->model = $systemRoutesBackend;
     }
 

@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for menu edit action.
  */
-class EditAction
+class EditAction extends MainAction
 {
 
     /**
@@ -17,10 +19,14 @@ class EditAction
     protected $model;
 
     /**
+     * @param Request           $request           Request.
      * @param BackendSystemMenu $backendSystemMenu Model.
      */
-    public function __construct(BackendSystemMenu $backendSystemMenu)
-    {
+    public function __construct(
+        Request $request,
+        BackendSystemMenu $backendSystemMenu
+    ) {
+        parent::__construct($request);
         $this->model = $backendSystemMenu;
     }
 

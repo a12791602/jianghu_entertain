@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\LoginLog;
 
+use App\Http\SingleActions\MainAction;
 use App\ModelFilters\System\BackendLoginLogFilter;
 use App\Models\Systems\BackendLoginLog;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 管理员登录日志
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -19,10 +21,14 @@ class IndexAction
     protected $model;
 
     /**
+     * @param Request         $request         Request.
      * @param BackendLoginLog $backendLoginLog 管理员登陆日志.
      */
-    public function __construct(BackendLoginLog $backendLoginLog)
-    {
+    public function __construct(
+        Request $request,
+        BackendLoginLog $backendLoginLog
+    ) {
+        parent::__construct($request);
         $this->model = $backendLoginLog;
     }
 

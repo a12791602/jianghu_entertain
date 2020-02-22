@@ -2,14 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Class for menu delete action.
  */
-class DeleteAction
+class DeleteAction extends MainAction
 {
 
     /**
@@ -18,10 +20,14 @@ class DeleteAction
     protected $model;
 
     /**
+     * @param Request            $request            Request.
      * @param MerchantSystemMenu $merchantSystemMenu Model.
      */
-    public function __construct(MerchantSystemMenu $merchantSystemMenu)
-    {
+    public function __construct(
+        Request $request,
+        MerchantSystemMenu $merchantSystemMenu
+    ) {
+        parent::__construct($request);
         $this->model = $merchantSystemMenu;
     }
 

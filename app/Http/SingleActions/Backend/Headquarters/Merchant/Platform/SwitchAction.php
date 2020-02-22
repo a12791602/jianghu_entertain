@@ -2,13 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * Class for system platform switch action.
  */
-class SwitchAction
+class SwitchAction extends MainAction
 {
 
     /**
@@ -19,10 +21,14 @@ class SwitchAction
     protected $model;
 
     /**
+     * @param Request        $request        Request.
      * @param SystemPlatform $systemPlatform 代理商平台.
      */
-    public function __construct(SystemPlatform $systemPlatform)
-    {
+    public function __construct(
+        Request $request,
+        SystemPlatform $systemPlatform
+    ) {
+        parent::__construct($request);
         $this->model = $systemPlatform;
     }
 
