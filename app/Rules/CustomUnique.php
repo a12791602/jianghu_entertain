@@ -61,8 +61,7 @@ class CustomUnique implements Rule
      */
     public function passes($attribute, $value): bool
     {
-        $auth          = auth($this->request->currentGuard);
-        $user          = $auth->user();
+        $user          = $this->request->user();
         $platform_sign = $user->platform->sign;
         if ($this->field === 'platform_id') {
             $platform_sign = $user->platform->id;
