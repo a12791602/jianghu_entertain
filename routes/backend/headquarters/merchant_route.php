@@ -39,5 +39,13 @@ Route::group(
              'delete',
             ],
         )->name($namePrefix . 'delete');
+        //路由-是否开放
+        Route::post(
+            'is-open',
+            [
+             RouteController::class,
+             'isOpen',
+            ],
+        )->name($namePrefix . 'is-open');
     },
 );

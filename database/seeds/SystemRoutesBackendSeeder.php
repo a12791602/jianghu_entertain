@@ -291,6 +291,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_open'       => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.headquarters-route.is-open',
+              'method'        => '',
+              'menu_group_id' => 5,
+              'title'         => '总后台路由-是否开放',
+              'is_open'       => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.merchant-route.index',
               'method'        => '',
               'menu_group_id' => 5,
@@ -316,6 +323,13 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => '',
               'menu_group_id' => 5,
               'title'         => '代理后台路由-删除',
+              'is_open'       => 0,
+             ],
+             [
+              'route_name'    => 'headquarters-api.merchant-route.is-open',
+              'method'        => '',
+              'menu_group_id' => 5,
+              'title'         => '代理后台路由-是否开放',
               'is_open'       => 0,
              ],
              [

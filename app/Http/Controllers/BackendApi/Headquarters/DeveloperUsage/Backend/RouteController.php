@@ -5,10 +5,12 @@ namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\EditRequest;
+use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route\IsOpenRequest;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route\DeleteAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route\IndexAction;
+use App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\Backend\Route\IsOpenAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -60,6 +62,19 @@ class RouteController
      * @return JsonResponse
      */
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 路由-是否开放
+     * @param  IsOpenRequest $request Request.
+     * @param  IsOpenAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function isOpen(IsOpenRequest $request, IsOpenAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
