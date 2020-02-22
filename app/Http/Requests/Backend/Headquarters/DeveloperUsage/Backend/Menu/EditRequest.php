@@ -31,12 +31,12 @@ class EditRequest extends BaseFormRequest
                   'id'      => 'required|numeric|exists:backend_system_menus,id',//ID
                   'label'   => [
                                 'required',
-                                Rule::unique('backend_system_menus')->ignore($this->get('menu_id')),
+                                Rule::unique('backend_system_menus')->ignore($this->get('id')),
                                 'regex:/[\x{4e00}-\x{9fa5}]+/u',
                                ], //菜单名称
                   'en_name' => [
                                 'required',
-                                Rule::unique('backend_system_menus')->ignore($this->get('menu_id')),
+                                Rule::unique('backend_system_menus')->ignore($this->get('id')),
                                 'regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/',
                                ], //英文名
                   'display' => 'required|numeric|in:0,1',//是否显示  0否 1是
