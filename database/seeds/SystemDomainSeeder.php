@@ -60,7 +60,7 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'jhhy',
               'admin_id'      => null,
-              'domain'        => '10.10.50.194:8081',
+              'domain'        => '10.10.50.198:8081',
               'status'        => 1,
               'type'          => null,
               'is_default'    => 0,

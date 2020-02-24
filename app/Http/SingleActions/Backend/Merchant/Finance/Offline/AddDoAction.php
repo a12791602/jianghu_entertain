@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
+use Arr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
 
@@ -22,29 +23,34 @@ class AddDoAction extends BaseAction
     {
         $flag = false;
         try {
-            $platformId                = $this->currentPlatformEloq->id;
-            $inputDatas['platform_id'] = $platformId;
-            $inputDatas['author_id']   = $this->user->id;
-            $tags                      = [];
-            if (isset($inputDatas['tags'])) {
-                $tags = $inputDatas['tags'];
-                unset($inputDatas['tags']);
-            }
+            $platformId = $this->currentPlatformEloq->id;
+            $dataToSave = Arr::only(
+                $inputDatas,
+                [
+                 'type_id',
+                 'name',
+                 'username',
+                 'account',
+                 'qrcode',
+                 'branch',
+                 'min',
+                 'max',
+                 'fee',
+                 'remark',
+                 'bank_id',
+                ],
+            );
+
             DB::beginTransaction();
-            $this->model->fill($inputDatas);
+            $this->model->fill($dataToSave);
             if ($this->model->save()) {
-                $tmpData = [];
-                $data    = [];
-                foreach ($tags as $tagId) {
-                    $tmpData['platform_id'] = $platformId;
-                    $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_NO;
-                    $tmpData['finance_id']  = $this->model->id;
-                    $tmpData['tag_id']      = $tagId;
-                    $data[]                 = $tmpData;
-                }
-                if (!empty($data)) {
-                    SystemFinanceUserTag::insert($data);
-                }
+                $userTags                       = [];
+                $userTags['platform_id']        = $platformId;
+                $userTags['is_online']          = SystemFinanceType::IS_ONLINE_NO;
+                $userTags['offline_finance_id'] = $this->model->id;
+                $userTags['tag_id']             = $inputDatas['tags'];
+
+                SystemFinanceUserTag::create($userTags);
                 $flag = true;
             }
         } catch (\Throwable $exception) {

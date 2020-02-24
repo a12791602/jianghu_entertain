@@ -15,4 +15,11 @@ class SystemFinanceUserTag extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['tag_id' => 'array'];
 }

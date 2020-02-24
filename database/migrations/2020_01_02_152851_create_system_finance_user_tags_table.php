@@ -23,8 +23,9 @@ class CreateSystemFinanceUserTagsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->tinyInteger('is_online')->default(0)->comment('是否是线上支付');
-                $table->integer('finance_id')->default(0)->comment('金流id');
-                $table->integer('tag_id')->default(0)->comment('会员标签id');
+                $table->integer('online_finance_id')->default(0)->comment('线上金流id');
+                $table->integer('offline_finance_id')->default(0)->comment('线下金流id');
+                $table->string('tag_id')->nullable()->default(null)->comment('会员标签id');
                 $table->timestamps();
             },
         );
