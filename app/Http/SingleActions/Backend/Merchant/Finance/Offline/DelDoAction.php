@@ -24,7 +24,7 @@ class DelDoAction extends BaseAction
         try {
             DB::beginTransaction();
             $offlineDel  = $this->model->where('id', $inputDatas['id'])->delete();
-            $userTagsDel = SystemFinanceUserTag::where('finance_id', $inputDatas['id'])
+            $userTagsDel = SystemFinanceUserTag::where('offline_finance_id', $inputDatas['id'])
                 ->where('platform_id', $this->currentPlatformEloq->id)
                 ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
                 ->delete();

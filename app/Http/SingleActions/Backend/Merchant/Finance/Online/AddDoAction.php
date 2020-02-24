@@ -37,11 +37,11 @@ class AddDoAction extends BaseAction
                 $tmpData = [];
                 $data    = [];
                 foreach ($tags as $tagId) {
-                    $tmpData['platform_id'] = $platformId;
-                    $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_YES;
-                    $tmpData['finance_id']  = $this->model->id;
-                    $tmpData['tag_id']      = $tagId;
-                    $data[]                 = $tmpData;
+                    $tmpData['platform_id']       = $platformId;
+                    $tmpData['is_online']         = SystemFinanceType::IS_ONLINE_YES;
+                    $tmpData['online_finance_id'] = $this->model->id;
+                    $tmpData['tag_id']            = $tagId;
+                    $data[]                       = $tmpData;
                 }
                 if (!empty($data)) {
                     SystemFinanceUserTag::insert($data);

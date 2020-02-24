@@ -24,7 +24,7 @@ class EditAction extends BaseAction
         $method = strtolower($inputDatas['method']);
         if ($method === 'get') {
             $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_NO)
-                ->where('finance_id', $inputDatas['id'])->select('tag_id')->get();
+                ->where('offline_finance_id', $inputDatas['id'])->select('tag_id')->get();
             $result   = msgOut($userTags);
             return $result;
         }
@@ -45,15 +45,16 @@ class EditAction extends BaseAction
                 $tmpData = [];
                 $data    = [];
                 foreach ($tags as $tagId) {
-                    $tmpData['platform_id'] = $this->currentPlatformEloq->id;
-                    $tmpData['is_online']   = SystemFinanceType::IS_ONLINE_NO;
-                    $tmpData['finance_id']  = $inputDatas['id'];
-                    $tmpData['tag_id']      = $tagId;
-                    $data[]                 = $tmpData;
+                    $tmpData['platform_id']        = $this->currentPlatformEloq->id;
+                    $tmpData['is_online']          = SystemFinanceType::IS_ONLINE_NO;
+                    $tmpData['offline_finance_id'] = $inputDatas['id'];
+                    $tmpData['tag_id']             = $tagId;
+                    $data[]                        = $tmpData;
                 }
                 if (!empty($data)) {
                     SystemFinanceUserTag::where('platform_id', $this->currentPlatformEloq->id)
-                        ->where('finance_id', $inputDatas['id'])->where('is_online', SystemFinanceType::IS_ONLINE_NO)
+                        ->where('offline_finance_id', $inputDatas['id'])
+                        ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
                         ->delete();
                     SystemFinanceUserTag::insert($data);
                 }

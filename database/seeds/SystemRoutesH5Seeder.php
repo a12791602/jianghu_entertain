@@ -69,7 +69,7 @@ class SystemRoutesH5Seeder extends Seeder
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
-              'is_open'           => 0,
+              'is_open'           => 1,
              ],
              [
               'route_name'        => 'h5-api.games-lobby.slides',
@@ -78,7 +78,7 @@ class SystemRoutesH5Seeder extends Seeder
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
-              'is_open'           => 0,
+              'is_open'           => 1,
              ],
              [
               'route_name'        => 'h5-api.user.information',
@@ -96,7 +96,7 @@ class SystemRoutesH5Seeder extends Seeder
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
-              'is_open'           => 0,
+              'is_open'           => 1,
              ],
              [
               'route_name'        => 'h5-api.register',

@@ -70,7 +70,7 @@ trait MenuLogics
             }
             $menuForFE[$firstKey]['child'] = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu);
         }
-        Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
+        // Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
     }
 
@@ -87,14 +87,14 @@ trait MenuLogics
     ): array {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
         $data        = [];
-        foreach ($firstChilds as $secondMenu) {
+        foreach ($firstChilds as $secondKey => $secondMenu) {
+            $data[$secondKey] = $secondMenu->toArray();
             if (!$secondMenu->childs()->exists()) {
-                $data[] = $secondMenu->toArray();
                 continue;
             }
             $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
             foreach ($secondChilds as $thirdKey => $thirdMenu) {
-                $data['child'][$thirdKey] = $thirdMenu->toArray();
+                $data[$secondKey]['child'][$thirdKey] = $thirdMenu->toArray();
             }
         }
         return $data;
