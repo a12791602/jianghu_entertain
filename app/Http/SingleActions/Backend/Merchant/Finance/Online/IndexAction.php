@@ -31,6 +31,7 @@ class IndexAction extends BaseAction
              'channel:id,name,sign',
              'author:id,name',
              'lastEditor:id,name',
+             'tags:online_finance_id,tag_id',
             ],
         )->filter($inputDatas, SystemFinanceOnlineInfoFilter::class)->paginate($pageSize);
         $msgOut                      = msgOut($data);

@@ -5,6 +5,7 @@ namespace App\Models\Finance;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
@@ -97,6 +98,15 @@ class SystemFinanceOnlineInfo extends BaseModel
             'channel_id',
             'type_id',
         );
+        return $object;
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function tags(): HasOne
+    {
+        $object = $this->hasOne(SystemFinanceUserTag::class, 'online_finance_id', 'id');
         return $object;
     }
 }
