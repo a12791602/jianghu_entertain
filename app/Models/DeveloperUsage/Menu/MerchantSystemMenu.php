@@ -3,7 +3,7 @@
 namespace App\Models\DeveloperUsage\Menu;
 
 use App\Models\BaseModel;
-use App\Models\DeveloperUsage\Menu\Traits\MerchantMenuLogics;
+use App\Models\DeveloperUsage\Menu\Logics\MerchantMenuLogics;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**

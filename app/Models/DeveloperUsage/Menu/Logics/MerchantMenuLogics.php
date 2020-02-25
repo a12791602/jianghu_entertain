@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Models\DeveloperUsage\Menu\Traits;
+namespace App\Models\DeveloperUsage\Menu\Logics;
 
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -12,32 +12,31 @@ use Illuminate\Support\Facades\DB;
  * Date: 5/23/2019
  * Time: 10:02 PM
  */
-trait MenuLogics
+trait MerchantMenuLogics
 {
     /**
      * @return mixed[]
      */
     public function forStar(): array
     {
-        $adminAccessGroupDetail = $this->find(self::ALL_MENU_REDIS_KEY)->pluck('id')->toArray();
-        $menuData               = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
-        return $menuData;
+        $menuDatas = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
+        return $menuDatas;
     }
 
     /**
-     * @param integer $accessGroupId          管理员组id.
-     * @param array   $adminAccessGroupDetail 用户拥有的菜单权限.
+     * @param  integer $accessGroupId          管理员组id.
+     * @param  array   $adminAccessGroupDetail 用户拥有的菜单权限.
      * @return mixed
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        $userMenuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
-        return $userMenuDatas;
+        $menuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
+        return $menuDatas;
     }
 
     /**
-     * @param string|integer $redisKey               RedisKey.
-     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
+     * @param  string|integer $redisKey               RedisKey.
+     * @param  array          $adminAccessGroupDetail 管理员拥有的菜单权限.
      * @return mixed[]
      */
     public function getMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
@@ -51,53 +50,57 @@ trait MenuLogics
     }
 
     /**
-     * @param string|integer $redisKey               RedisKey.
-     * @param array          $adminAccessGroupDetail 管理员拥有的菜单权限.
+     * @param  string|integer $redisKey               RedisKey.
+     * @param  array          $adminAccessGroupDetail 管理员组权限.
      * @return mixed[]
      */
     public function createMenuDatas($redisKey, array $adminAccessGroupDetail = []): array
     {
         $menuForFE = [];
         if ($redisKey === self::ALL_MENU_REDIS_KEY) {
-            $menuLists = self::getAllFirstLevelList();
+            $menuLists              = self::getAllFirstLevelList();
+            $adminAccessGroupDetail = $this->pluck('id')->toArray();
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
         }
-        foreach ($menuLists as $firstKey => $firstMenu) {
-            $menuForFE[$firstKey] = $firstMenu->toArray();
+        foreach ($menuLists as $firstMenu) {
+            $menuForFE[$firstMenu->id] = $firstMenu->toArray();
             if (!$firstMenu->childs()->exists()) {
                 continue;
             }
-            $menuForFE[$firstKey]['child'] = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu);
+            $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
         }
-        // Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
+        Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
     }
 
     /**
      * Gets menu childs.
-     * @param array             $adminAccessGroupDetail 管理员组权限.
-     * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
+     *
+     * @param array              $adminAccessGroupDetail 管理员组权限.
+     * @param MerchantSystemMenu $firstMenu              BackendSystemMenu.
+     * @param array              $menuForFE              整理后的管理员组权限.
      *
      * @return mixed[]
      */
     private function _getMenuChilds(
         array $adminAccessGroupDetail,
-        BackendSystemMenu $firstMenu
+        MerchantSystemMenu $firstMenu,
+        array $menuForFE
     ): array {
         $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-        $data        = [];
-        foreach ($firstChilds as $secondKey => $secondMenu) {
-            $data[$secondKey] = $secondMenu->toArray();
+        foreach ($firstChilds as $secondMenu) {
+            $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
             if (!$secondMenu->childs()->exists()) {
                 continue;
             }
             $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-            foreach ($secondChilds as $thirdKey => $thirdMenu) {
-                $data[$secondKey]['child'][$thirdKey] = $thirdMenu->toArray();
+            foreach ($secondChilds as $thirdMenu) {
+                $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id]
+                    = $thirdMenu->toArray();
             }
         }
-        return $data;
+        return $menuForFE;
     }
 
     /**
@@ -119,7 +122,7 @@ trait MenuLogics
     }
 
     /**
-     * @param array $parseDatas 修改的数据.
+     * @param  array $parseDatas 修改的数据.
      * @throws \Exception Exception.
      * @return string
      */
@@ -158,7 +161,7 @@ trait MenuLogics
         $menuEloq->fill($parseDatas);
         if (!$menuEloq->save()) {
             DB::rollback();
-            throw new \Exception('300005');
+            throw new \Exception('202803');
         }
         DB::commit();
         return $menuEloq->label;
@@ -175,7 +178,7 @@ trait MenuLogics
     }
 
     /**
-     * @param array $adminAccessGroupDetail 管理员组权限.
+     * @param  array $adminAccessGroupDetail 管理员组权限.
      * @return mixed
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)

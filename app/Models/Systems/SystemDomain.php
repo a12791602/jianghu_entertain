@@ -3,7 +3,7 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
-use App\Models\Systems\Traits\SystemDomainLogics;
+use App\Models\Systems\Logics\SystemDomainLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**

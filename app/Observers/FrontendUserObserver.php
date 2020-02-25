@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Systems\Traits\SystemUserAvatar;
+use App\Models\Systems\Logics\SystemUserAvatar;
 use App\Models\User\FrontendUser;
 
 /**

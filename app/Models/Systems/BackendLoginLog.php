@@ -3,7 +3,7 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
-use App\Models\Systems\Traits\BackendLoginLogLogics;
+use App\Models\Systems\Logics\BackendLoginLogLogics;
 
 /**
  * 管理员登录记录
