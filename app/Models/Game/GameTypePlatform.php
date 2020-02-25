@@ -28,7 +28,7 @@ class GameTypePlatform extends BaseModel
      */
     public function gameType(): BelongsTo
     {
-        $object = $this->belongsTo(GamesType::class, 'type_id', 'id');
+        $object = $this->belongsTo(GameType::class, 'type_id', 'id');
         return $object;
     }
 }

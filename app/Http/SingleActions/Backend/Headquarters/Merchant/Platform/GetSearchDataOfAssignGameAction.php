@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
-use App\Models\Game\GamesVendor;
+use App\Models\Game\GameVendor;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -21,7 +21,7 @@ class GetSearchDataOfAssignGameAction extends MainAction
     public function execute(): JsonResponse
     {
         $games   = Game::select(['id', 'type_id', 'vendor_id as ven_id', 'name'])->get();
-        $vendors = GamesVendor::select(['id', 'name'])->get();
+        $vendors = GameVendor::select(['id', 'name'])->get();
         $datas   = [
                     'games'   => $games,
                     'vendors' => $vendors,

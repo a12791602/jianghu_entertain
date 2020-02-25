@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use Illuminate\Database\Seeder;
 
 /**
@@ -15,7 +15,7 @@ class GamePlatformSeeder extends Seeder
      */
     public function run(): void
     {
-        GamesPlatform::insert(
+        GamePlatform::insert(
             [
              [
               'id'            => 1,

@@ -2,7 +2,7 @@
 
 namespace App\ModelFilters\Game;
 
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -73,7 +73,7 @@ class GameFilter extends ModelFilter
      */
     public function unassignPlatformSign(string $unassign_platform_sign): GameFilter
     {
-        $assignedGames = GamesPlatform::where('platform_sign', $unassign_platform_sign)
+        $assignedGames = GamePlatform::where('platform_sign', $unassign_platform_sign)
             ->get()
             ->pluck('game_sign')
             ->toArray();
@@ -88,7 +88,7 @@ class GameFilter extends ModelFilter
      */
     public function assignedPlatformSign(string $assigned_platform_sign): GameFilter
     {
-        $assignedGames = GamesPlatform::where('platform_sign', $assigned_platform_sign)
+        $assignedGames = GamePlatform::where('platform_sign', $assigned_platform_sign)
             ->get()
             ->pluck('game_sign')
             ->toArray();

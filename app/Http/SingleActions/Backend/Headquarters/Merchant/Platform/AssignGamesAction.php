@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -27,7 +27,7 @@ class AssignGamesAction extends MainAction
             $data[]                   = $tmpData;
         }
         try {
-            GamesPlatform::insert($data);
+            GamePlatform::insert($data);
             $msgOut = msgOut();
             return $msgOut;
         } catch (\Throwable $exception) {

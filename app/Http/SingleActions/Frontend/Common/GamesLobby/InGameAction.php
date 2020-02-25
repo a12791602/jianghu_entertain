@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use App\Services\FactoryService;
 use Illuminate\Http\JsonResponse;
 
@@ -21,7 +21,7 @@ class InGameAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $const        = FactoryService::getInstence()->generateService('constant');
-        $gamePlatform = GamesPlatform::with(
+        $gamePlatform = GamePlatform::with(
             [
              'games' => static function ($query) use ($const) {
                     $query = $query->where('games.status', $const::STATUS_NORMAL);

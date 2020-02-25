@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\GameVendor;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Game\GamesVendor;
+use App\Models\Game\GameVendor;
 use Illuminate\Http\Request;
 
 /**
@@ -15,7 +15,7 @@ class BaseAction extends MainAction
 {
 
     /**
-     * @var GamesVendor Model.
+     * @var GameVendor Model.
      */
     protected $model;
 
@@ -23,11 +23,11 @@ class BaseAction extends MainAction
      * BaseAction constructor.
      *
      * @param Request     $request     Request.
-     * @param GamesVendor $gamesVendor GamesVendor.
+     * @param GameVendor $gamesVendor GameVendor.
      */
     public function __construct(
         Request $request,
-        GamesVendor $gamesVendor
+        GameVendor $gamesVendor
     ) {
         parent::__construct($request);
         $this->model = $gamesVendor;

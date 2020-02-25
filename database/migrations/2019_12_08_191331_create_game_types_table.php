@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateGamesTable
+ * Class CreateGameTypesTable
  */
-class CreateGamesTable extends Migration
+class CreateGameTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,22 +18,22 @@ class CreateGamesTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'games',
+            'game_types',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->integer('type_id')->nullable()->default(null)->comment('所属种类ID');
-                $table->integer('vendor_id')->nullable()->default(null)->comment('所属厂商ID');
                 $table->string('name', 64)->nullable()->default(null)->comment('游戏名称');
                 $table->string('sign', 64)->nullable()->default(null)->comment('游戏标识');
-                $table->tinyInteger('request_mode')->nullable()->default(null)->comment('请求方式');
-                $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
+                $table->tinyInteger('status')->comment('状态 0 禁用 1 启用');
                 $table->integer('author_id')->default('0')->comment('添加人id');
                 $table->integer('last_editor_id')->default('0')->comment('最后编辑人id');
                 $table->nullableTimestamps();
+                $table->index('name');
+                $table->index('sign');
+                $table->index('status');
             },
         );
-        DB::statement("ALTER TABLE `games` comment '游戏表'");
+        DB::statement("ALTER TABLE `game_types` comment '游戏种类表'");
     }
 
     /**
@@ -43,6 +43,6 @@ class CreateGamesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('games');
+        Schema::dropIfExists('game_types');
     }
 }

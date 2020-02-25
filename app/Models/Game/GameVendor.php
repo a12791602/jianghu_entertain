@@ -2,16 +2,16 @@
 
 namespace App\Models\Game;
 
-use App\ModelFilters\Game\GameFilter;
+use App\ModelFilters\Game\GamesVendorFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Game
+ * Class GameVendor
  * @package App\Models\Game
  */
-class Game extends BaseModel
+class GameVendor extends BaseModel
 {
 
     /**
@@ -38,21 +38,28 @@ class Game extends BaseModel
     }
 
     /**
-     * @return BelongsTo
+     * @param array $value Value.
+     * @return void
      */
-    public function vendor(): BelongsTo
+    public function setWhitelistIpsAttribute(array $value): void
     {
-        $object = $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
-        return $object;
+        if (!empty($value)) {
+            $this->attributes['whitelist_ips'] = json_encode($value);
+        } else {
+            $this->attributes['whitelist_ips'] = null;
+        }
     }
 
     /**
-     * @return BelongsTo
+     * @param string|null $value Value.
+     * @return mixed[]|null
      */
-    public function type(): BelongsTo
+    public function getWhitelistIpsAttribute(?string $value): ?array
     {
-        $object = $this->belongsTo(GameType::class, 'type_id', 'id');
-        return $object;
+        if (!empty($value)) {
+            $value = json_decode($value, true);
+        }
+        return $value;
     }
 
     /**
@@ -60,7 +67,7 @@ class Game extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(GameFilter::class);
+        $object = $this->provideFilter(GamesVendorFilter::class);
         return $object;
     }
 }

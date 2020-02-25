@@ -26,7 +26,7 @@ class GameVendorPlatform extends BaseModel
      */
     public function gameVendor(): BelongsTo
     {
-        $object = $this->belongsTo(GamesVendor::class, 'vendor_id', 'id');
+        $object = $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
         return $object;
     }
 }

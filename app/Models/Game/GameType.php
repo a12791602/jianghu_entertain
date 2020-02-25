@@ -2,16 +2,16 @@
 
 namespace App\Models\Game;
 
-use App\ModelFilters\Game\GameFilter;
+use App\ModelFilters\Game\GamesTypeFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class Game
+ * Class GameType
  * @package App\Models\Game
  */
-class Game extends BaseModel
+class GameType extends BaseModel
 {
 
     /**
@@ -38,29 +38,11 @@ class Game extends BaseModel
     }
 
     /**
-     * @return BelongsTo
-     */
-    public function vendor(): BelongsTo
-    {
-        $object = $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
-        return $object;
-    }
-
-    /**
-     * @return BelongsTo
-     */
-    public function type(): BelongsTo
-    {
-        $object = $this->belongsTo(GameType::class, 'type_id', 'id');
-        return $object;
-    }
-
-    /**
      * @return mixed
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(GameFilter::class);
+        $object = $this->provideFilter(GamesTypeFilter::class);
         return $object;
     }
 }

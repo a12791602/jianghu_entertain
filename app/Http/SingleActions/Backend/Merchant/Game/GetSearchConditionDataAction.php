@@ -2,8 +2,8 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
-use App\Models\Game\GamesType;
-use App\Models\Game\GamesVendor;
+use App\Models\Game\GameType;
+use App\Models\Game\GameVendor;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,10 +18,10 @@ class GetSearchConditionDataAction extends BaseAction
      */
     public function execute(): JsonResponse
     {
-        $gameVendors = GamesVendor::select(['id', 'name', 'sign'])
+        $gameVendors = GameVendor::select(['id', 'name', 'sign'])
             ->withCacheCooldownSeconds(86400)
             ->get();
-        $gameTypes   = GamesType::select(['id', 'name', 'sign'])
+        $gameTypes   = GameType::select(['id', 'name', 'sign'])
             ->withCacheCooldownSeconds(86400)
             ->get();
         $datas       = [

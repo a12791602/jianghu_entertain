@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -20,7 +20,7 @@ class AssignedGameCancelAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result = GamesPlatform::where('platform_sign', $inputDatas['platform_sign'])
+        $result = GamePlatform::where('platform_sign', $inputDatas['platform_sign'])
             ->whereIn('game_sign', $inputDatas['game_signs'])->delete();
         if ($result) {
             $msgOut = msgOut();

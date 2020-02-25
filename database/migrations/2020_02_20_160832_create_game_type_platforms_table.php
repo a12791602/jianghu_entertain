@@ -21,13 +21,16 @@ class CreateGameTypePlatformsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->integer('platform_id')->nullable()->default(0)->comment('平台ID');
+                $table->integer('platform_id')->nullable()->default(0)->comment('平台ID')->unsigned();
                 $table->integer('type_id')->nullable()->default(0)->comment('分类ID')->unsigned();
                 $table->string('device', 8)->nullable()->default(null)->comment('设备 1 pc 2 H5 3 APP');
                 $table->integer('status')->nullable()->default(0)->comment('状态 0 禁用 1 启用');
                 $table->nullableTimestamps();
-                $table->foreign('type_id', 'fk_game_type_platforms_1')
-                    ->references('id')->on('games_types')->onDelete('cascade')->onUpdate('cascade');
+                $table->foreign('type_id', 'fk_system_platforms_has_game_types_game_types_idx')
+                    ->references('id')->on('game_types')->onDelete('cascade')->onUpdate('cascade');
+
+                $table->foreign('platform_id', 'fk_system_platforms_has_game_types_system_platforms_idx')
+                    ->references('id')->on('system_platforms')->onDelete('cascade')->onUpdate('cascade');
             },
         );
         DB::statement("ALTER TABLE `game_type_platforms` comment '代理平台和游戏类型关联表'");

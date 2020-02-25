@@ -5,7 +5,7 @@ namespace App\Models\User;
 use App\ModelFilters\User\FrontendUserFilter;
 use App\Models\BaseAuthModel;
 use App\Models\Game\GameTypePlatform;
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -183,7 +183,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function gamesPlatform(): HasOne
     {
-        $result = $this->hasOne(GamesPlatform::class, 'id', 'platform_id');
+        $result = $this->hasOne(GamePlatform::class, 'id', 'platform_id');
         return $result;
     }
 

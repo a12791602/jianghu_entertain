@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Game\GamesType;
+use App\Models\Game\GameType;
 use Illuminate\Http\Request;
 
 /**
@@ -15,19 +15,20 @@ class BaseAction extends MainAction
 {
 
     /**
-     * @var GamesType Model.
+     * @var GameType Model.
      */
     protected $model;
 
     /**
      * BaseAction constructor.
      *
-     * @param Request   $request   Request.
-     * @param GamesType $gamesType GamesType.
+     * @param Request  $request   Request.
+     * @param GameType $gamesType GameType.
+     * @throws \Exception Exception.
      */
     public function __construct(
         Request $request,
-        GamesType $gamesType
+        GameType $gamesType
     ) {
         parent::__construct($request);
         $this->model = $gamesType;

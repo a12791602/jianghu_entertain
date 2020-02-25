@@ -47,7 +47,7 @@ class InformationAction extends MainAction
     {
         $item = $request->validated();
         $this->user->specificInfo()->update($item);
-        $result = msgOut();
+        $result = msgOut([], '100803');
         return $result;
     }
 }
