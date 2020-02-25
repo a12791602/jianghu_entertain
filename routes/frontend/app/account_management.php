@@ -21,5 +21,7 @@ Route::group(
         Route::post('destroy/verification-code', [AccountManagementController::class, 'accountDestroyVerificationCode'])
             ->name($namePrefix . 'destroy.verification-code');
         Route::post('withdraw', [AccountManagementController::class, 'withdraw'])->name($namePrefix . 'withdraw');
+        //用户报表（账变明细 充值记录 提现记录）
+        Route::post('report', [AccountManagementController::class, 'report'])->name($namePrefix . 'report');
     },
 );

@@ -7,12 +7,14 @@ use App\Http\Requests\Frontend\Common\FrontendUser\AliPayBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\AliPayFirstBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\BankCardBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\BankCardFirstBindingRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\ReportRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountDestroyAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountListAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AliPayBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\BankCardBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\FundPasswordCheckAction;
+use App\Http\SingleActions\Frontend\Common\AccountManagement\ReportAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\WithdrawalAction;
 use App\Http\SingleActions\Frontend\Common\VerificationCode\PrivateVerificationCodeAction;
 use Illuminate\Http\JsonResponse;
@@ -146,6 +148,20 @@ class AccountManagementController
         PrivateVerificationCodeAction $action
     ): JsonResponse {
         $result = $action->execute();
+        return $result;
+    }
+
+    /**
+     * Account report.
+     * @param ReportRequest $request ReportRequest.
+     * @param ReportAction  $action  ReportAction.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function report(ReportRequest $request, ReportAction $action): JsonResponse
+    {
+        $validated = $request->validated();
+        $result    = $action->execute($validated);
         return $result;
     }
 }
