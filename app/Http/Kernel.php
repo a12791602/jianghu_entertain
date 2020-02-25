@@ -51,27 +51,23 @@ class Kernel extends HttpKernel
                                    'frontend-api'          => [
                                                                'throttle:300,1',
                                                                'bindings',
-                                                               'cors',
                                                                'crypt',
                                                                'route-auth',
                                                               ],
                                    'frontend-h5-api'       => [
                                                                'throttle:300,1',
                                                                'bindings',
-                                                               'cors',
                                                                'crypt',
                                                                'route-auth',
                                                               ],
                                    'backend-api'           => [
                                                                'throttle:500,1',
                                                                'bindings',
-                                                               'cors',
                                                                'route-auth',
                                                               ],
                                    'merchant-api'          => [
                                                                'throttle:500,1',
                                                                'bindings',
-                                                               'cors',
                                                                'route-auth',
                                                               ],
                                    /**
@@ -99,7 +95,6 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-                                  'cors'             => \Fruitcake\Cors\HandleCors::class,
                                   'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
                                   'bindings'         => \Illuminate\Routing\Middleware\SubstituteBindings::class,
                                   'cache.headers'    => \Illuminate\Http\Middleware\SetCacheHeaders::class,
