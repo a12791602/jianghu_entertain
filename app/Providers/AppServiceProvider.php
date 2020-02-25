@@ -4,8 +4,11 @@ namespace App\Providers;
 
 use App\Models\User\FrontendUser;
 use App\Observers\FrontendUserObserver;
+use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
@@ -83,5 +86,64 @@ class AppServiceProvider extends ServiceProvider
             },
         );
         FrontendUser::observe(FrontendUserObserver::class);
+        $this->_loggingDBQuery();
+    }
+
+    /**
+     * logging DB qery
+     * @return void
+     */
+    private function _loggingDBQuery(): void
+    {
+        DB::listen(
+            function (QueryExecuted $query): void {
+                $sqlWithPlaceholders = str_replace(['%', '?'], ['%%', '%s'], $query->sql);
+
+                $bindings      = $query->connection->prepareBindings($query->bindings);
+                $pdoConnection = $query->connection->getPdo();
+                $realSql       = vsprintf(
+                    $sqlWithPlaceholders,
+                    array_map(
+                        [
+                         $pdoConnection,
+                         'quote',
+                        ],
+                        $bindings,
+                    ),
+                );
+                $duration      = $this->_formatDuration($query->time / 1000);
+
+                Log::debug(
+                    sprintf(
+                        '[%s] %s | %s: %s',
+                        $duration,
+                        $realSql,
+                        request()->method(),
+                        request()->getRequestUri(),
+                    ),
+                );
+            },
+        );
+    }
+    /**
+     * Format duration.
+     *
+     * @param float $seconds Seconds.
+     *
+     * @return string
+     */
+    private function _formatDuration(float $seconds): string
+    {
+        if ($seconds < 0.001) {
+            $result = round($seconds * 1000000) . 'μs';
+            return $result;
+        }
+
+        if ($seconds < 1) {
+            $result = round($seconds * 1000, 2) . 'ms';
+            return $result;
+        }
+        $result = round($seconds, 2) . 's';
+        return $result;
     }
 }
