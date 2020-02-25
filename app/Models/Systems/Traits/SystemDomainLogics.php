@@ -19,7 +19,6 @@ trait SystemDomainLogics
         $typePrefix = $this->typePrefix;
         DB::beginTransaction();
         foreach ($typePrefix as $type => $prefix) {
-            $domain  = $prefix . $domain;
             $addData = [
                         'platform_sign' => $platformSign,
                         'admin_id'      => $adminId,
