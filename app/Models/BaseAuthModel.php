@@ -29,9 +29,9 @@ class BaseAuthModel extends Authenticatable implements JWTSubject
     /**
      * Return a key value array, containing any custom claims to be added to the JWT.
      *
-     * @return mixed[]
+     * @return mixed
      */
-    public function getJWTCustomClaims(): array
+    public function getJWTCustomClaims()
     {
         $claim = [];
         return $claim;
