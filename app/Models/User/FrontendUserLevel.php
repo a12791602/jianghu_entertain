@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 /**
  * 用户等级
  */
-class UsersGrade extends BaseAuthModel
+class FrontendUserLevel extends BaseAuthModel
 {
 
     /**

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
-use App\Http\SingleActions\Frontend\Common\FrontendUser\GradesAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\InformationAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\PromotionGiftAction;
+use App\Http\SingleActions\Frontend\Common\FrontendUser\UserLevelAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\WeeklyGiftAction;
 use Illuminate\Http\JsonResponse;
 
@@ -56,11 +56,11 @@ class FrontendUserController
 
     /**
      * Get user grade rules.
-     * @param GradesAction $action GradesAction.
+     * @param UserLevelAction $action UserLevelAction.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function grades(GradesAction $action): JsonResponse
+    public function grades(UserLevelAction $action): JsonResponse
     {
         $result = $action->execute();
         return $result;
@@ -68,7 +68,7 @@ class FrontendUserController
 
     /**
      * Receive promotional gift.
-     * @param PromotionGiftAction $action GradesAction.
+     * @param PromotionGiftAction $action UserLevelAction.
      * @return JsonResponse
      * @throws \Exception Exception.
      */

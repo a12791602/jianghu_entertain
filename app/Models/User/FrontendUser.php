@@ -221,7 +221,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function grade(): HasOne
     {
-        $object = $this->hasOne(UsersGrade::class, 'id', 'grade_id');
+        $object = $this->hasOne(FrontendUserLevel::class, 'id', 'grade_id');
         return $object;
     }
 }

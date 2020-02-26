@@ -27,11 +27,10 @@ class DynamicInformationResource extends JsonResource
         if ($rank_count < config('games_lobby.rich_rank_within')) {
             $rank = $rank_count + 1;
         }
-
         $result = [
                    'score'          => 1440,
-                   'grade'          => 6,
-                   'experience'     => 1500,
+                   'level'          => $this->specificInfo->level,
+                   'experience'     => $this->specificInfo->experience,
                    'weekly_gift'    => $this->specificInfo->weekly_gift,
                    'promotion_gift' => $this->specificInfo->promotion_gift,
                    'balance'        => $this->account->balance,

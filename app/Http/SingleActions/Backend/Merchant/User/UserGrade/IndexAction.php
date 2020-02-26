@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersGrade;
+use App\Models\User\FrontendUserLevel;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,11 +19,11 @@ class IndexAction extends MainAction
     protected $model;
 
     /**
-     * @param UsersGrade $usersGrade 用户等级Model.
-     * @param Request    $request    Request.
+     * @param FrontendUserLevel $usersGrade 用户等级Model.
+     * @param Request           $request    Request.
      * @throws \Exception  Exception.
      */
-    public function __construct(UsersGrade $usersGrade, Request $request)
+    public function __construct(FrontendUserLevel $usersGrade, Request $request)
     {
         parent::__construct($request);
         $this->model = $usersGrade;

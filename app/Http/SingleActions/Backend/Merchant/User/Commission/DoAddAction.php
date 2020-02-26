@@ -4,9 +4,9 @@ namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
 use App\Http\SingleActions\MainAction;
 use App\ModelFilters\User\UsersCommissionConfigFilter;
+use App\Models\User\FrontendUserLevel;
 use App\Models\User\UsersCommissionConfig;
 use App\Models\User\UsersCommissionConfigDetail;
-use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -48,7 +48,7 @@ class DoAddAction extends MainAction
     {
         $this->inputDatas = $inputDatas;
         $sign             = $this->currentPlatformEloq->sign;
-        $userGrade        = UsersGrade::where('platform_sign', $sign)->get();
+        $userGrade        = FrontendUserLevel::where('platform_sign', $sign)->get();
 
         //获取当前游戏平台的洗码设置
         $filterArr        = [

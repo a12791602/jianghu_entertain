@@ -4,8 +4,8 @@ namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
 use App\Http\SingleActions\MainAction;
 use App\ModelFilters\User\UsersCommissionConfigFilter;
+use App\Models\User\FrontendUserLevel;
 use App\Models\User\UsersCommissionConfig;
-use App\Models\User\UsersGrade;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -60,7 +60,7 @@ class EditAction extends MainAction
             throw new \Exception('200811');
         }
         $platformSign    = $this->currentPlatformEloq->sign;
-        $this->userGrade = UsersGrade::where('platform_sign', $platformSign)->get();
+        $this->userGrade = FrontendUserLevel::where('platform_sign', $platformSign)->get();
         //验证数据是否合法
         $percentArr = $this->_dataValidation($platformSign);
         //开始修改数据

@@ -29,13 +29,11 @@ class CreateFrontendUsersTable extends Migration
                 $table->integer('platform_id')->nullable()->default(null)->comment('平台id');
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->tinyInteger('type')->default('3')->comment('用户类型:1会员 2代理');
-                $table->integer('grade_id')->nullable()->default('0')->comment('vip等级id');
                 $table->tinyInteger('is_tester')->nullable()->default('0')->comment('是否测试用户 0否 1是');
                 $table->string('password', 64)->nullable()->default(null)->comment('密码');
                 $table->string('fund_password', 64)->nullable()->default(null)->comment('资金密码');
                 $table->string('security_code', 64)->nullable()->default(null)->comment('安全码');
                 $table->text('remember_token')->nullable()->default(null)->comment('token');
-                $table->integer('level_deep')->nullable()->default('0')->comment('用户等级深度');
                 $table->char('register_ip', 15)->nullable()->default(null)->comment('注册IP');
                 $table->char('last_login_ip', 15)->nullable()->default(null)->comment('最后登陆IP');
                 $table->timestamp('last_login_time')->nullable()->default(null)->comment('最后登陆时间');
@@ -51,7 +49,6 @@ class CreateFrontendUsersTable extends Migration
                 $table->index('parent_id');
                 $table->index('platform_id');
                 $table->index('platform_sign');
-                $table->index('grade_id');
                 $table->index('register_ip');
                 $table->index('last_login_ip');
                 $table->index('user_tag_id');
