@@ -23,7 +23,7 @@ $config = [
      */
            'paths'                    => [
                                           'app-api/*',//for application ends apk and app etc.
-                                          'backend-api/*',//for web-ends
+                                          'merchant-api/*',//for web-ends
                                           'headquarters-api/*',//for web-ends
                                           'h5-api/*',//for web-end
                                          ],
