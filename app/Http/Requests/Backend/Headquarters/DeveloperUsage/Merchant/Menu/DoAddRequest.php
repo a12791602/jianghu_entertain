@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 
 /**
  * Class for menu do add request.
  */
 class DoAddRequest extends BaseFormRequest
 {
+  
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantSystemMenu::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,13 +44,4 @@ class DoAddRequest extends BaseFormRequest
                  ];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

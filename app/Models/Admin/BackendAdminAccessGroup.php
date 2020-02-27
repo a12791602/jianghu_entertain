@@ -18,6 +18,14 @@ class BackendAdminAccessGroup extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'         => '管理员组ID',
+                                      'group_name' => '管理员组名称',
+                                     ];
+
+    /**
      * Gets the table columns.
      *
      * @return mixed

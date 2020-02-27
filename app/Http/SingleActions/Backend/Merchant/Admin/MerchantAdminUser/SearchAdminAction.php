@@ -38,7 +38,11 @@ class SearchAdminAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['platform'] = $this->currentPlatformEloq->sign;
-        $data                   = $this->model->filter($inputDatas, MerchantAdminUserFilter::class)->get()->toArray();
+        $data                   = $this->model
+            ->filter($inputDatas, MerchantAdminUserFilter::class)
+            ->select(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
+            ->get()
+            ->toArray();
         $msgOut                 = msgOut($data);
         return $msgOut;
     }

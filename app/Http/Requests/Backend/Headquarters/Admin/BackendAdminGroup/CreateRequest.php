@@ -3,12 +3,24 @@
 namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
  * Class for create request.
  */
 class CreateRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [BackendAdminAccessGroup::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['role' => '权限'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,13 +44,4 @@ class CreateRequest extends BaseFormRequest
                  ];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

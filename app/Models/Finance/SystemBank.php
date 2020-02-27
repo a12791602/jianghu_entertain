@@ -24,6 +24,16 @@ class SystemBank extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'     => '银行ID',
+                                      'name'   => '银行名称',
+                                      'code'   => '银行编码',
+                                      'status' => '状态',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo

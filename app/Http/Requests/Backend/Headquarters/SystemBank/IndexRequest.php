@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\SystemBank;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemBank;
 
 /**
  * Class IndexRequest
@@ -11,6 +12,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemBank::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,17 +38,6 @@ class IndexRequest extends BaseFormRequest
         return [
                 'status' => 'in:0,1',
                 'name'   => 'string',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'status.in'   => '所选状态不存在',
-                'name.string' => '银行名称不符合规则',
                ];
     }
 }

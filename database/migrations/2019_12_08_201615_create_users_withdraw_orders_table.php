@@ -33,7 +33,9 @@ class CreateUsersWithdrawOrdersTable extends Migration
                 $table->decimal('amount_received', 18, 4)->nullable()->default(null)->comment('到账金额');
                 $table->tinyInteger('account_type')->default(1)->comment('收款账户类型 1 银行卡, 2 支付宝');
                 $table->tinyInteger('is_audit')->default(0)->comment('是否稽核扣款 0否 1是');
-                $table->tinyInteger('status')->default(0)->comment('审核状态 0 未审核 1 已通过 2 已拒绝');
+                $table->tinyInteger('status')
+                    ->default(0)
+                    ->comment('提款状态0申请中/待处理/待审核1处理中2拒绝/审核不通过/拒绝审核/手动失败3已审核4提款成功/线上提款成功5手动成功/已人工转正6回调失败/线上提款失败/三方提款失败');
                 $table->decimal('month_total', 18, 4)->nullable()->default(null)->comment('当月存款总额');
                 $table->tinyInteger('num_withdrawal')->default(0)->comment('今日出款次数');
                 $table->tinyInteger('num_top_up')->default(0)->comment('今日存款次数');

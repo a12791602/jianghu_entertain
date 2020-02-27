@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Admin\BackendAdminUser;
 
 use App\Http\SingleActions\MainAction;
 use App\ModelFilters\Admin\BackendAdminUserFilter;
-use App\Models\Admin\MerchantAdminUser;
+use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -15,20 +15,20 @@ class SearchAdminAction extends MainAction
 {
 
     /**
-     * @var object $model MerchantAdminUser.
+     * @var object $model BackendAdminUser.
      */
     protected $model;
 
     /**
-     * @param Request           $request           Request.
-     * @param MerchantAdminUser $merchantAdminUser MerchantAdminUser.
+     * @param Request          $request          Request.
+     * @param BackendAdminUser $backendAdminUser BackendAdminUser.
      */
     public function __construct(
         Request $request,
-        MerchantAdminUser $merchantAdminUser
+        BackendAdminUser $backendAdminUser
     ) {
         parent::__construct($request);
-        $this->model = $merchantAdminUser;
+        $this->model = $backendAdminUser;
     }
 
     /**
@@ -37,7 +37,11 @@ class SearchAdminAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data   = $this->model->filter($inputDatas, BackendAdminUserFilter::class)->get()->toArray();
+        $data   = $this->model
+            ->filter($inputDatas, BackendAdminUserFilter::class)
+            ->select(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
+            ->get()
+            ->toArray();
         $msgOut = msgOut($data);
         return $msgOut;
     }

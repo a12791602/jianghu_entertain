@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 
 /**
  * Class for menu delete request.
  */
 class DeleteRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantSystemMenu::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,12 +36,4 @@ class DeleteRequest extends BaseFormRequest
         $rules = ['id' => 'required|integer|exists:merchant_system_menus'];
         return $rules;
     }
-
-    /**
-     * @return mixed[]
-     */
-    // public function messages(): array
-    // {
-    //     return [];
-    // }
 }

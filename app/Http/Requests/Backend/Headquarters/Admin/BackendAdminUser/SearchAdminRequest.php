@@ -9,6 +9,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class SearchAdminRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['searchStr' => '搜索条件'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,13 +35,4 @@ class SearchAdminRequest extends BaseFormRequest
         $rules = ['searchStr' => 'required|string'];//搜索的字符串
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

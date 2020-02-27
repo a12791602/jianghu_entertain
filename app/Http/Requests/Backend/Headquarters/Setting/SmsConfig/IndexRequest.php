@@ -3,12 +3,24 @@
 namespace App\Http\Requests\Backend\Headquarters\Setting\SmsConfig;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Systems\SystemSmsConfig;
 
 /**
  * 短信配置-列表
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemSmsConfig::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['updatedAt' => '更新时间'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,18 +42,6 @@ class IndexRequest extends BaseFormRequest
                 'name'      => 'string', //最后更新人名称
                 'updatedAt' => 'string', //更新时间
                 'status'    => 'in:0,1', //状态 0禁用 1启用
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'editorId.integer' => '更新人ID必须是整数',
-                'updatedAt.string' => '更新时间区间必须是字符串',
-                'status.in'        => '启用状态数据非法',
                ];
     }
 }

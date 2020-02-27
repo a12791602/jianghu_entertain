@@ -14,9 +14,10 @@ interface Game
     /**
      * 进入游戏.
      *
+     * @param \App\Models\Game\Game $gameObj GameObj.
      * @return mixed[]
      */
-    public function game(): array;
+    public function game(\App\Models\Game\Game $gameObj): array;
 
     /**
      * 上分.

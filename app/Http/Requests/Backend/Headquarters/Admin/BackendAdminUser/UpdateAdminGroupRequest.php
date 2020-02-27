@@ -3,12 +3,24 @@
 namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\BackendAdminUser;
 
 /**
  * 更改管理员用户组
  */
 class UpdateAdminGroupRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [BackendAdminUser::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['group_name' => '管理员组名称'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,13 +45,4 @@ class UpdateAdminGroupRequest extends BaseFormRequest
                  ];
         return $rules;
     }
-
-    // public function messages()
-    // {
-    // return [
-    // 'lottery_sign.required' => 'lottery_sign is required!',
-    // 'trace_issues.required' => 'trace_issues is required!',
-    // 'balls.required' => 'balls is required!'
-    // ];
-    // }
 }

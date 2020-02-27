@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Route;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Merchant\SystemRoutesMerchant;
 
 /**
  * 路由-是否开放
  */
 class IsOpenRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemRoutesMerchant::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *

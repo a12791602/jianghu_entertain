@@ -18,6 +18,21 @@ class SystemSmsConfig extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'                 => '短信配置ID',
+                                      'name'               => '商户名称',
+                                      'sign'               => '商户标识',
+                                      'merchant_code'      => '商户号',
+                                      'merchant_secret'    => '商户密钥',
+                                      'public_key'         => '商户公钥',
+                                      'sms_num'            => '短信数量',
+                                      'authorization_code' => '授权码',
+                                      'status'             => '状态',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function admin(): BelongsTo

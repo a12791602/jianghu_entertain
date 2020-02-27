@@ -10,6 +10,15 @@ use App\Http\Requests\BaseFormRequest;
  */
 class AssignedActivitiesRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'platform_sign' => '平台标识',
+                                  'name'          => '活动名称',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,19 +39,6 @@ class AssignedActivitiesRequest extends BaseFormRequest
         return [
                 'platform_sign' => 'required|exists:system_platforms,sign',
                 'name'          => 'string|min:1|max:16',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'platform_sign.required' => '请选择平台',
-                'platform_sign.exists'   => '所选择平台不存在',
-                'name.min'               => '活动名称最少1个字符',
-                'name.max'               => '活动名称最多16个字符',
                ];
     }
 }

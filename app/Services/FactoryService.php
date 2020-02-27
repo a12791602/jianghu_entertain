@@ -2,6 +2,8 @@
 
 namespace App\Services;
 
+use App\Models\Game\GameVendor;
+use App\Models\User\FrontendUser;
 use Illuminate\Support\Str;
 
 /**
@@ -66,15 +68,38 @@ class FactoryService
     /**
      * 获取游戏类实例.
      *
-     * @param string $vendor 所属厂商.
-     * @param string $game   游戏.
+     * @param GameVendor|null $vendor 厂商信息.
+     * @param FrontendUser    $user   用户信息.
+     * @return mixed
+     */
+    public function generateGame(?GameVendor $vendor, FrontendUser $user)
+    {
+        if ($vendor !== null) {
+            $className    = 'App\Game\\' . ucfirst($vendor->sign) . '\\' . ucfirst($vendor->sign) . 'Game';
+            $gameInstence = self::_generateGameClass($className, $vendor, $user);
+            return $gameInstence;
+        }
+        return false;
+    }
+
+    /**
+     * 获取对象实例.
+     *
+     * @param string       $className ClassName.
+     * @param GameVendor   $vendor    厂商信息.
+     * @param FrontendUser $user      用户信息.
      * @return object
      */
-    public function generateGame(string $vendor, string $game): object
-    {
-        $className    = 'App\Game\\' . ucfirst($vendor) . 'Games\\' . ucfirst($game) . 'Game';
-        $gameInstence = self::_generateClass($className);
-        return $gameInstence;
+    private static function _generateGameClass(
+        string $className,
+        GameVendor $vendor,
+        FrontendUser $user
+    ): object {
+        // 采用对象池模式 对已存在的对象不再从新创建 以减少内存的开销
+        if (!isset(self::$container[$className])) {
+            self::$container[$className] = new $className($vendor, $user);
+        }
+        return self::$container[$className];
     }
 
     /**

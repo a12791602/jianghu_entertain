@@ -21,6 +21,15 @@ class SystemDynActivity extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'     => '活动ID',
+                                      'status' => '状态',
+                                      'name'   => '活动名称',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo

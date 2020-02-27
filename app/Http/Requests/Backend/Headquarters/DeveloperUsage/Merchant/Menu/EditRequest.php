@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Validation\Rule;
 
 /**
@@ -10,6 +11,12 @@ use Illuminate\Validation\Rule;
  */
 class EditRequest extends BaseFormRequest
 {
+  
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantSystemMenu::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -46,13 +53,4 @@ class EditRequest extends BaseFormRequest
                  ];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

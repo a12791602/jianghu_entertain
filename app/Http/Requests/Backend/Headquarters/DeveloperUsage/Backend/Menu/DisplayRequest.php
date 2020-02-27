@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 
 /**
  * Class for menu display request.
  */
 class DisplayRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [BackendSystemMenu::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,13 +39,4 @@ class DisplayRequest extends BaseFormRequest
                  ];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

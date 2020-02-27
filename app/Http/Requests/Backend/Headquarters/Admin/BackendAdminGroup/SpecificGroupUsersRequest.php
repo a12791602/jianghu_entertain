@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\Admin\BackendAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
  * Class for specific group users request.
  */
 class SpecificGroupUsersRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [BackendAdminAccessGroup::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,13 +36,4 @@ class SpecificGroupUsersRequest extends BaseFormRequest
         $rules = ['id' => 'required|numeric|exists:backend_admin_access_groups,id'];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

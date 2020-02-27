@@ -4,6 +4,8 @@ namespace App\Models\Systems;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
+use App\Models\Game\GameType;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -49,5 +51,21 @@ class SystemPlatform extends BaseModel
     {
         $sslKey = $this->hasOne(SystemPlatformSsl::class, 'platform_sign', 'sign');
         return $sslKey;
+    }
+
+    /**
+     * The games types that belong to the platforms.
+     *
+     * @return BelongsToMany
+     */
+    public function gameTypes(): BelongsToMany
+    {
+        $gameTypes = $this->belongsToMany(
+            GameType::class,
+            'game_type_platforms',
+            'platform_id',
+            'type_id',
+        );
+        return $gameTypes;
     }
 }

@@ -40,12 +40,13 @@ class MerchantAdminUserFilter extends ModelFilter
 
     /**
      * @param string $string 搜索的字符串.
+     *
      * @return MerchantAdminUserFilter
      */
-    public function searchNameEmail(string $string): MerchantAdminUserFilter
+    public function searchStr(string $string): MerchantAdminUserFilter
     {
-        $object = $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
-        return $object;
+        $adminUser = $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
+        return $adminUser;
     }
 
     /**

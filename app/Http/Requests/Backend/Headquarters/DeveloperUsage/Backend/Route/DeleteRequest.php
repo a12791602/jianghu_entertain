@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 
 /**
  * 路由-删除
  */
 class DeleteRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemRoutesBackend::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,17 +35,5 @@ class DeleteRequest extends BaseFormRequest
     {
         $rules = ['id' => 'required|exists:system_routes_backends'];//ID
         return $rules;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        $messages = [
-                     'id.required' => '缺少路由ID',
-                     'id.exists'   => '当前路由不存在',
-                    ];
-        return $messages;
     }
 }

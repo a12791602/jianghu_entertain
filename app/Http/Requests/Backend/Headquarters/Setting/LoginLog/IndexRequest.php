@@ -3,12 +3,27 @@
 namespace App\Http\Requests\Backend\Headquarters\Setting\LoginLog;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\BackendAdminUser;
 
 /**
  * 管理员登录日志
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [BackendAdminUser::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'loginIp'  => 'ip',
+                                  'createAt' => '登录时间',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,14 +48,4 @@ class IndexRequest extends BaseFormRequest
                 'createAt' => 'string',
                ];
     }
-
-    // /**
-    //  * @return array
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

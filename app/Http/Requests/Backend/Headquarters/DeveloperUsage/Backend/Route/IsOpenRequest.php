@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Route;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 
 /**
  * 路由-是否开放
  */
 class IsOpenRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemRoutesBackend::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
