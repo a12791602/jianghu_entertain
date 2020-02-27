@@ -22,10 +22,10 @@ $config = [
      * Example: ['api/*']
      */
            'paths'                    => [
-//                                          'app-api/*',
-                                          'backend-api/*',
-                                          'merchant-api/*',
-                                          'h5-api/*',
+                                          'app-api/*',//for application ends apk and app etc.
+                                          'backend-api/*',//for web-ends
+                                          'headquarters-api/*',//for web-ends
+                                          'h5-api/*',//for web-end
                                          ],
 
            /*
