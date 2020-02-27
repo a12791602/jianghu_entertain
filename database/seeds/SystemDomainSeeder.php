@@ -52,6 +52,14 @@ class SystemDomainSeeder extends Seeder
              [
               'platform_sign' => 'jhhy',
               'admin_id'      => null,
+              'domain'        => 'madmin.397017.com',
+              'status'        => 1,
+              'type'          => null,
+              'is_default'    => 0,
+             ],
+             [
+              'platform_sign' => 'jhhy',
+              'admin_id'      => null,
               'domain'        => 'api.jianghu.local',
               'status'        => 1,
               'type'          => null,

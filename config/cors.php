@@ -45,7 +45,8 @@ $config = [
                                           'http://h5.jianghu.local',
                                           'http://app.jianghu.com',
                                           'http://madmin.jianghu.local',
-                                          'http://cadmin.397017.com/',
+                                          'http://cadmin.397017.com',
+                                          'http://madmin.397017.com',
                                           'http://cadmin.jianghu.local',
                                           'http://10.10.50.127:8080',// Marsh
                                           'http://m.jianghu.com',// Marsh
