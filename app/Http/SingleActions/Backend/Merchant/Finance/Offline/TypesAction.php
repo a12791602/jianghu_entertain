@@ -20,9 +20,8 @@ class TypesAction
         $model  = new SystemFinanceType();
         $data   = $model->where('status', SystemFinanceType::STATUS_YES)
             ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
-            ->select(['id', 'name', 'sign'])
             ->withCacheCooldownSeconds(86400)
-            ->get();
+            ->get(['id', 'name', 'sign']);
         $result = msgOut($data);
         return $result;
     }

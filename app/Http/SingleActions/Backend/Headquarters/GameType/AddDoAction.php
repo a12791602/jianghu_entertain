@@ -51,7 +51,7 @@ class AddDoAction extends BaseAction
     private function _getFormatDataForTypePlatform(int $typeId): array
     {
         $data      = [];
-        $platforms = SystemPlatform::select('id')->get()->toArray();
+        $platforms = SystemPlatform::get(['id'])->toArray();
         foreach ($platforms as $platform) {
             $tmpData           = [
                                   'type_id'     => $typeId,

@@ -41,9 +41,8 @@ class IndexAction extends MainAction
         $filterArr = ['platform' => $this->currentPlatformEloq->sign];
         $data      = $this->model
             ->filter($filterArr, MerchantAdminAccessGroupFilter::class)
-            ->select('id', 'group_name', 'created_at')
             ->with('detail:group_id,menu_id')
-            ->get();
+            ->get(['id', 'group_name', 'created_at']);
 
         $msgOut = msgOut($data);
         return $msgOut;

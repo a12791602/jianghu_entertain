@@ -39,8 +39,7 @@ class SearchAdminAction extends MainAction
     {
         $data   = $this->model
             ->filter($inputDatas, BackendAdminUserFilter::class)
-            ->select(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
-            ->get()
+            ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
         $msgOut = msgOut($data);
         return $msgOut;

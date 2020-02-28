@@ -19,8 +19,7 @@ class RecentContactAction extends BaseAction
     {
         $data   = SystemEmailOfMerchant::with('merchant:id,email')
             ->limit(4)
-            ->select('merchant_id')
-            ->get();
+            ->get(['merchant_id']);
         $msgOut = msgOut($data);
         return $msgOut;
     }

@@ -51,7 +51,7 @@ class AddDoAction extends BaseAction
     private function _getFormatDataForVendorPlatform(int $vendorId): array
     {
         $data      = [];
-        $platforms = SystemPlatform::select('id')->get()->toArray();
+        $platforms = SystemPlatform::get(['id'])->toArray();
         foreach ($platforms as $platform) {
             $tmpData           = [
                 'vendor_id'     => $vendorId,

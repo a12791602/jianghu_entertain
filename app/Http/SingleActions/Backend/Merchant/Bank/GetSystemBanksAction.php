@@ -20,8 +20,7 @@ class GetSystemBanksAction
         $model  = new SystemBank();
         $banks  = $model->where('status', SystemBank::STATUS_OPEN)
             ->withCacheCooldownSeconds(86400)
-            ->select(['id', 'name', 'code'])
-            ->get();
+            ->get(['id', 'name', 'code']);
         $result = msgOut($banks);
         return $result;
     }

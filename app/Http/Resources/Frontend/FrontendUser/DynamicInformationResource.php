@@ -28,14 +28,12 @@ class DynamicInformationResource extends JsonResource
             $rank = $rank_count + 1;
         }
         $result = [
-                   'score'          => 1440,
-                   'level'          => $this->specificInfo->level,
-                   'experience'     => $this->specificInfo->experience,
-                   'weekly_gift'    => $this->specificInfo->weekly_gift,
-                   'promotion_gift' => $this->specificInfo->promotion_gift,
-                   'balance'        => $this->account->balance,
-                   'rich_rank'      => $rank,
-                   'profit_rank'    => $rank,
+                   'score'       => 1440,
+                   'level'       => $this->specificInfo->level,
+                   'experience'  => $this->specificInfo->experience,
+                   'balance'     => $this->account->balance,
+                   'rich_rank'   => $rank,
+                   'profit_rank' => $rank,
                   ];
         return $result;
     }

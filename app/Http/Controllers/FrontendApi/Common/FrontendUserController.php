@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\FrontendApi\Common;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
+use App\Http\Requests\Frontend\Common\GamesLobby\ClaimGiftRequest;
+use App\Http\SingleActions\Frontend\Common\FrontendUser\CheckBenefitsAction;
+use App\Http\SingleActions\Frontend\Common\FrontendUser\ClaimBenefitsAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\InformationAction;
-use App\Http\SingleActions\Frontend\Common\FrontendUser\PromotionGiftAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\UserLevelAction;
-use App\Http\SingleActions\Frontend\Common\FrontendUser\WeeklyGiftAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -67,24 +68,25 @@ class FrontendUserController
     }
 
     /**
-     * Receive promotional gift.
-     * @param PromotionGiftAction $action UserLevelAction.
+     * Claim a gift.
+     * @param ClaimBenefitsAction $action  ClaimBenefitsAction.
+     * @param ClaimGiftRequest    $request ClaimGiftRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function promotionGift(PromotionGiftAction $action): JsonResponse
+    public function claimGift(ClaimBenefitsAction $action, ClaimGiftRequest $request): JsonResponse
     {
-        $result = $action->execute();
+        $result = $action->execute($request->validated());
         return $result;
     }
 
     /**
-     * Receive weekly gift .
-     * @param WeeklyGiftAction $action WeeklyGiftAction.
+     * 查询对应等级的权益状态.
+     * @param CheckBenefitsAction $action CheckBenefitsAction.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function weeklyGift(WeeklyGiftAction $action): JsonResponse
+    public function checkGift(CheckBenefitsAction $action): JsonResponse
     {
         $result = $action->execute();
         return $result;

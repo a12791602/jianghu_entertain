@@ -22,9 +22,8 @@ class TypesAction
         $inputDatas['status']    = SystemFinanceType::STATUS_YES;
         $inputDatas['direction'] = SystemFinanceType::DIRECTION_IN;
         $datas                   = SystemFinanceType::filter($inputDatas, SystemFinanceTypeFilter::class)
-            ->select(['id', 'name', 'sign', 'is_online'])
             ->withCacheCooldownSeconds(86400)
-            ->get();
+            ->get(['id', 'name', 'sign', 'is_online']);
         $msgOut                  = msgOut($datas);
         return $msgOut;
     }

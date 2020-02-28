@@ -23,17 +23,13 @@ class CreateFrontendUsersSpecificInfosTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('user_id')->comment('用户id');
-                $table->integer('level')->nullable()->default(1)->comment('vip等级');
+                $table->tinyInteger('level')->nullable()->default(0)->comment('vip等级');
                 $table->string('nickname', 16)->nullable()->default(null)->comment('昵称');
                 $table->integer('experience')->default(0)->comment('经验值');
-                $table->string('avatar', 128)->nullable()->default(null)->comment('头像路径');
+                $table->tinyInteger('avatar')->nullable()->default(null)->comment('头像ID');
                 $table->string('email', 128)->nullable()->default(null)->comment('邮箱');
                 $table->string('zip_code', 6)->nullable()->default(null)->comment('邮编');
                 $table->string('address', 128)->nullable()->default(null)->comment('地址');
-                $table->tinyInteger('weekly_gift')->default(1)
-                    ->comment('每周礼金状态 0.已领取 1.可领取');
-                $table->tinyInteger('promotion_gift')->default(1)
-                    ->comment('晋级礼金状态 0.已领取 1.可领取');
                 $table->tinyInteger('register_type')->default('0')
                     ->comment('注册类型：0.普通注册1.人工开户注册2.链接开户注册3.扫码开户注册');
                 $table->integer('total_members')->nullable()->default('0')->comment('用户发展客户总数');

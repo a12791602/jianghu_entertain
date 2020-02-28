@@ -38,9 +38,8 @@ class IndexAction extends MainAction
     public function execute(): JsonResponse
     {
         $data   = $this->model
-            ->select(['id', 'group_name', 'created_at'])
             ->with('detail:group_id,menu_id')
-            ->get()
+            ->get(['id', 'group_name', 'created_at'])
             ->toArray();
         $msgOut = msgOut($data);
         return $msgOut;

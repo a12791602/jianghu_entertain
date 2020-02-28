@@ -18,9 +18,8 @@ class GetChannelsAction
     public function execute(): JsonResponse
     {
         $financeChannels = SystemFinanceChannel::where('status', SystemFinanceChannel::STATUS_YES)
-            ->select(['id', 'name', 'sign', 'request_url'])
             ->withCacheCooldownSeconds(86400)
-            ->get();
+            ->get(['id', 'name', 'sign', 'request_url']);
         $msgOut          = msgOut($financeChannels);
         return $msgOut;
     }

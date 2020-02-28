@@ -41,7 +41,8 @@ class DetailAction extends MainAction
     {
         $platformData = $this->model
             ->filter($inputDatas, SystemPlatformFilter::class)
-            ->select(
+            ->with('owner:id,email')
+            ->get(
                 [
                  'id',
                  'cn_name',
@@ -56,9 +57,7 @@ class DetailAction extends MainAction
                  'created_at',
                  'owner_id',
                 ],
-            )
-            ->with('owner:id,email')
-            ->get();
+            );
         $msgOut       = msgOut($platformData);
         return $msgOut;
     }

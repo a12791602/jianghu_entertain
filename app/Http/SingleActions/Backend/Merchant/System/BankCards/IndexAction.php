@@ -40,9 +40,8 @@ class IndexAction extends MainAction
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $data               = $this->model
             ->filter($inputDatas, FrontendUsersBankCardFilter::class)
-            ->select('id', 'mobile', 'owner_name', 'bank_id', 'card_number', 'created_at')
             ->with('bank:id,name')
-            ->get();
+            ->get(['id', 'mobile', 'owner_name', 'bank_id', 'card_number', 'created_at']);
         $msgOut             = msgOut($data);
         return $msgOut;
     }

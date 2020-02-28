@@ -217,11 +217,11 @@ class FrontendUser extends BaseAuthModel
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function grade(): HasOne
+    public function levelBenefits(): HasMany
     {
-        $object = $this->hasOne(FrontendUserLevel::class, 'id', 'grade_id');
+        $object = $this->hasMany(FrontendUserLevelBenefit::class, 'user_id', 'id');
         return $object;
     }
 }

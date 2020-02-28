@@ -29,7 +29,7 @@ class AddDoAction extends BaseAction
             $this->model->fill($inputDatas);
             if ($this->model->save()) {
                 $lastId    = $this->model->id;
-                $platforms = SystemPlatform::select('sign as platform_sign')->get()->toArray();
+                $platforms = SystemPlatform::get(['sign as platform_sign'])->toArray();
                 $data      = [];
                 foreach ($platforms as $platform) {
                     $platform['bank_id'] = $lastId;

@@ -40,9 +40,8 @@ class IndexAction extends MainAction
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $datas                      = $this->model
             ->filter($inputDatas, UsersCommissionConfigFilter::class)
-            ->select('id', 'game_type_id', 'game_vendor_id', 'bet')
             ->with('configDetail.userGrade')
-            ->get();
+            ->get(['id', 'game_type_id', 'game_vendor_id', 'bet']);
 
         $returnData = [];
         foreach ($datas as $dataKey => $item) {

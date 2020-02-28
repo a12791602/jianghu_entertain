@@ -24,10 +24,9 @@ Route::group(
             ->name($namePrefix . 'information');
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
-        Route::get('grades', [FrontendUserController::class, 'grades'])->name($namePrefix . 'grades');
-        Route::post('promotion-gifts', [FrontendUserController::class, 'promotionGift'])
-            ->name($namePrefix . 'promotion-gifts');
-        Route::post('weekly-gifts', [FrontendUserController::class, 'weeklyGift'])
-            ->name($namePrefix . 'weekly-gifts');
+        Route::post('claim-gifts', [FrontendUserController::class, 'claimGift'])
+            ->name($namePrefix . 'claim-gifts');
+        Route::post('check-gifts', [FrontendUserController::class, 'checkGift'])
+            ->name($namePrefix . 'check-gifts');
     },
 );

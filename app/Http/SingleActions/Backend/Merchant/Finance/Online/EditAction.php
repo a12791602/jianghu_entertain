@@ -23,7 +23,7 @@ class EditAction extends BaseAction
         $method = strtolower($inputDatas['method']);
         if ($method === 'get') {
             $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_YES)
-                ->where('online_finance_id', $inputDatas['id'])->select('tag_id')->get();
+                ->where('online_finance_id', $inputDatas['id'])->get(['tag_id']);
             $result   = msgOut($userTags);
             return $result;
         }

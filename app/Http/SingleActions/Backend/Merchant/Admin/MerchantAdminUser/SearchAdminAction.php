@@ -40,8 +40,7 @@ class SearchAdminAction extends MainAction
         $inputDatas['platform'] = $this->currentPlatformEloq->sign;
         $data                   = $this->model
             ->filter($inputDatas, MerchantAdminUserFilter::class)
-            ->select(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
-            ->get()
+            ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
         $msgOut                 = msgOut($data);
         return $msgOut;

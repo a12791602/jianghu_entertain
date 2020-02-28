@@ -19,9 +19,9 @@ class GetSearchConditionAction extends BaseAction
      */
     public function execute(): JsonResponse
     {
-        $games   = $this->model->select(['id', 'type_id', 'vendor_id', 'name'])->get();
-        $vendors = GameVendor::select(['id', 'name'])->get();
-        $types   = GameType::select(['id', 'name'])->get();
+        $games   = $this->model->get(['id', 'type_id', 'vendor_id', 'name']);
+        $vendors = GameVendor::get(['id', 'name']);
+        $types   = GameType::get(['id', 'name']);
         $datas   = [
                     'games'   => $games,
                     'vendors' => $vendors,

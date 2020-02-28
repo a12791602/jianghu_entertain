@@ -38,9 +38,8 @@ class GetFinanceInfoAction extends MainAction
              },
             ],
         )->filter($data, SystemFinanceTypeFilter::class)
-         ->select(['id', 'name', 'sign', 'is_online'])
          ->withCacheCooldownSeconds(86400)
-         ->get();
+         ->get(['id', 'name', 'sign', 'is_online']);
         $msgOut                = msgOut($datas);
         return $msgOut;
     }

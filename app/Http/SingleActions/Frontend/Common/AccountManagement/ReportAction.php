@@ -91,7 +91,7 @@ class ReportAction extends MainAction
 
         $data = $this->model
             ->filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
-            ->select(['serial_number', 'in_out', 'amount', 'type_name', 'balance', 'created_at'])
+            ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])
             ->paginate($this->model::getPageSize())
             ->toArray();
         return $data;

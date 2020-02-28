@@ -20,8 +20,8 @@ class GetSearchDataOfAssignGameAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $games   = Game::select(['id', 'type_id', 'vendor_id as ven_id', 'name'])->get();
-        $vendors = GameVendor::select(['id', 'name'])->get();
+        $games   = Game::get(['id', 'type_id', 'vendor_id as ven_id', 'name']);
+        $vendors = GameVendor::get(['id', 'name']);
         $datas   = [
                     'games'   => $games,
                     'vendors' => $vendors,

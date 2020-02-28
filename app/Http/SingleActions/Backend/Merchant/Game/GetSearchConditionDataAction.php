@@ -18,12 +18,8 @@ class GetSearchConditionDataAction extends BaseAction
      */
     public function execute(): JsonResponse
     {
-        $gameVendors = GameVendor::select(['id', 'name', 'sign'])
-            ->withCacheCooldownSeconds(86400)
-            ->get();
-        $gameTypes   = GameType::select(['id', 'name', 'sign'])
-            ->withCacheCooldownSeconds(86400)
-            ->get();
+        $gameVendors = GameVendor::withCacheCooldownSeconds(86400)->get(['id', 'name', 'sign']);
+        $gameTypes   = GameType::withCacheCooldownSeconds(86400)->get(['id', 'name', 'sign']);
         $datas       = [
                         'gameVendors' => $gameVendors,
                         'gameTypes'   => $gameTypes,

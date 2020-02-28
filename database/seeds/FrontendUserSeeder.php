@@ -18,7 +18,7 @@ class FrontendUserSeeder extends Seeder
         FrontendUser::insert(
             [
              [
-              'guid'             => 189673,
+              'guid'             => 189671,
               'mobile'           => 13880628809,
               'top_id'           => 0,
               'parent_id'        => 0,
@@ -35,7 +35,7 @@ class FrontendUserSeeder extends Seeder
               'invite_code'      => null,
              ],
              [
-              'guid'             => 189673,
+              'guid'             => 189672,
               'mobile'           => 18844446666,
               'top_id'           => 0,
               'parent_id'        => 0,
@@ -53,11 +53,11 @@ class FrontendUserSeeder extends Seeder
              ],
              [
               'guid'             => 189673,
-              'mobile'           => 18844446666,
+              'mobile'           => 18822223333,
               'top_id'           => 0,
               'parent_id'        => 0,
               'platform_id'      => 2,
-              'platform_sign'    => 'test_2',
+              'platform_sign'    => 'jhhy',
               'type'             => 2,
               'is_tester'        => 0,
               'password'         => '$2y$10$gNYXCLhuwCnb3wIE.JgCx.X2nrbEZejM9GE3IXUQPFsfRsFMYH/u2',
