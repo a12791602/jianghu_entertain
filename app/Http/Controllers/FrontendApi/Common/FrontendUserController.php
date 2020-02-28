@@ -74,9 +74,12 @@ class FrontendUserController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function claimGift(ClaimBenefitsAction $action, ClaimGiftRequest $request): JsonResponse
-    {
-        $result = $action->execute($request->validated());
+    public function claimBenefits(
+        ClaimBenefitsAction $action,
+        ClaimGiftRequest $request
+    ): JsonResponse {
+        $validated = $request->validated();
+        $result    = $action->execute($validated);
         return $result;
     }
 
@@ -86,7 +89,7 @@ class FrontendUserController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function checkGift(CheckBenefitsAction $action): JsonResponse
+    public function checkBenefits(CheckBenefitsAction $action): JsonResponse
     {
         $result = $action->execute();
         return $result;

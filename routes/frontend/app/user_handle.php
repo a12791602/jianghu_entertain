@@ -24,9 +24,9 @@ Route::group(
             ->name($namePrefix . 'information');
         Route::post('information', [FrontendUserController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
-        Route::post('claim-gifts', [FrontendUserController::class, 'claimGift'])
-            ->name($namePrefix . 'claim-gifts');
-        Route::post('check-gifts', [FrontendUserController::class, 'checkGift'])
-            ->name($namePrefix . 'check-gifts');
+        Route::post('claim-benefits', [FrontendUserController::class, 'claimBenefits'])
+            ->name($namePrefix . 'claim-benefits');
+        Route::post('check-benefits', [FrontendUserController::class, 'checkBenefits'])
+            ->name($namePrefix . 'check-benefits');
     },
 );
