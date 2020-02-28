@@ -6,6 +6,7 @@ use App\Game\Core\Base;
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
 use App\Models\User\FrontendUser;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
@@ -132,9 +133,7 @@ class KyGame extends Base
                        'url'    => $redireUrl,
                       ];
         Log::channel('game')->info('准备参数', $logInfo);
-        //        $result = curl_get_content($redireUrl);
-        //        return $result;
-        $result = [];
+        $result = $this->sender($redireUrl);
         return $result;
     }
 
@@ -255,5 +254,34 @@ class KyGame extends Base
         }
         $result = substr($text, 0, -1 * $padding);
         return $result;
+    }
+
+    /**
+     * @param string $redireUrl Redirect Url.
+     * @return mixed[]
+     */
+    protected function sender(string $redireUrl): array
+    {
+        $client        = new Client();
+        $redirectParam = [
+                          'allow_redirects' => [
+                                                'max'             => 10,        // allow at most 10 redirects.
+                                                'strict'          => true,      // use "strict" RFC compliant redirects.
+                                                'referer'         => true,      // add a Referer header
+                                                'track_redirects' => true,
+                                               ],
+                         ];
+        $result        = $client->request(
+            'GET',
+            $redireUrl,
+            $redirectParam,
+        );
+        $return        = [
+                          'status' => $result->getStatusCode(),
+                          'header' => $result->getHeader('content-type')[0],
+                          'body'   => $result->getBody(),
+                         ];
+        Log::channel('game')->info('返回数据', $return);
+        return $return;
     }
 }
