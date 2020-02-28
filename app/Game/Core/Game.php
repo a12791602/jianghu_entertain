@@ -2,6 +2,8 @@
 
 namespace App\Game\Core;
 
+use App\Http\SingleActions\MainAction;
+
 /**
  * 对接游戏的契约
  *
@@ -14,10 +16,11 @@ interface Game
     /**
      * 进入游戏.
      *
-     * @param \App\Models\Game\Game $gameObj GameObj.
+     * @param \App\Models\Game\Game $gameObj   GameObj.
+     * @param MainAction            $systemObj MainAction Datas.
      * @return mixed[]
      */
-    public function game(\App\Models\Game\Game $gameObj): array;
+    public function game(\App\Models\Game\Game $gameObj, MainAction $systemObj): array;
 
     /**
      * 上分.

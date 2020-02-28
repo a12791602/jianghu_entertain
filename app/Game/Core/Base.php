@@ -23,6 +23,16 @@ abstract class Base implements Game
     protected $gameUser;
 
     /**
+     * @var \App\Models\Game\Game
+     */
+    protected $gameItem;
+
+    /**
+     * @var \App\Http\SingleActions\MainAction
+     */
+    protected $sysObj;
+
+    /**
      * Base constructor.
      * @param GameVendor   $vendor GameVendor.
      * @param FrontendUser $user   FrontendUser.

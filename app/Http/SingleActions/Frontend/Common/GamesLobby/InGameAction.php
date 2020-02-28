@@ -67,7 +67,7 @@ class InGameAction extends MainAction
         }
         $curentVendorObj = $currentGameVendorEloq->first();
         $gameClass       = $factoryInstance->generateGame($curentVendorObj, $this->user);
-        $result          = $gameClass->game($curentGameObj);
+        $result          = $gameClass->game($curentGameObj, $this);
         $msgOut          = msgOut($result);
         return $msgOut;
     }
