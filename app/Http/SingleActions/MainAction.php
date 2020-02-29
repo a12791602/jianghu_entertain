@@ -18,6 +18,21 @@ use Jenssegers\Agent\Agent;
  */
 class MainAction
 {
+    /**
+     * @return object
+     */
+    public function getAgent(): object
+    {
+        return $this->agent;
+    }
+
+    /**
+     * @return object
+     */
+    public function getRoute(): object
+    {
+        return $this->route;
+    }
 
     /**
      * User Agent

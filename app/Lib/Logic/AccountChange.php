@@ -214,6 +214,7 @@ class AccountChange
     ): bool {
         // 保存帐变记录
         $report = [
+                   'user_id'               => $user->id,
                    'parent_id'             => $user->parent_id,
                    'serial_number'         => $this->_getSerialNumber(),
                    'activity_sign'         => $inputDatas['activity_sign'] ?? 0,
@@ -225,7 +226,7 @@ class AccountChange
                    'type_name'             => $typeConfig['name'],
                    'type_sign'             => $typeConfig['sign'],
                    'in_out'                => $typeConfig['in_out'],
-                   'username'              => $user->username,
+                   'username'              => $user->specificInfo->nickname,
                    'before_balance'        => $beforeBalance,
                    'balance'               => $this->account->balance,
                    'frozen_balance'        => $this->account->frozen,
