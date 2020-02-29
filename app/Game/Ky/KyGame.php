@@ -5,7 +5,6 @@ namespace App\Game\Ky;
 use App\Game\Core\Base;
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
-use App\Models\User\FrontendUser;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
@@ -39,7 +38,8 @@ class KyGame extends Base
         $this->gameItem = $gameObj;
         $this->sysObj   = $systemObj;
         $result         = $this->_main();
-        return $result;
+        $data           = ['url' => $result];
+        return $data;
     }
 
     /**
@@ -111,11 +111,10 @@ class KyGame extends Base
         $timestamp  = (int) $timeObj->getPreciseTimestamp(3);
         $time_str   = $timeObj->format('YmdHis');
         $ipAddress  = Request::ip();
-        $agent      = $this->gameUser->parent_id;
-        $agent      = empty($agent) ? FrontendUser::first()->guid : $agent;
+        $agent      = $this->gameVendor->merchant_id;
         $orderId    = $agent . $time_str . $account;
-        $param      = $this->_createParams($series, $account, $money, $ipAddress, $orderId);
-        $param      = http_build_query($param);
+        $paramArr   = $this->_createParams($series, $account, $money, $ipAddress, $orderId);
+        $param      = http_build_query($paramArr);
         $redireUrl  = $series !== 6 ? $this->apiUrl : $this->recordUrl;
         $desKey     = $this->gameVendor->des_key;
         $md5Key     = $this->gameVendor->md5_key;
@@ -257,11 +256,22 @@ class KyGame extends Base
     }
 
     /**
+     * "status": 200,
+     * "header": "text/plain;charset=utf8",
+     * "body": {
+     * "m": "/channelHandle",
+     * "s": 100,
+     * "d": {
+     * "code": 0,
+     * "url": "https://qdh5.ky8068.com/index.html?account=64421_1896731&token=eyJkYXRhIjoiNjQ0MjFfMTg5NjczMSIsImNyZWF0ZWQiOjE1ODI5NTU5MTAsImV4cCI6MTUwfQ==.LvQ7pw3Rnrzk8zA44W/D8UjRS/cLpCRolsmqEdIoLPU=&lang=zh-CN&route=hwss.ky039.com:443,wss.ky039.com:443&ld=https://loudou.ky039.com/statisticsHandle"
+     * }
+     * }
      * @param string $redireUrl Redirect Url.
-     * @return mixed[]
+     * @return \Illuminate\Support\Optional|mixed
      */
-    protected function sender(string $redireUrl): array
+    protected function sender(string $redireUrl)
     {
+        $agent         = $this->sysObj->getAgent()->getUserAgent();
         $client        = new Client();
         $redirectParam = [
                           'allow_redirects' => [
@@ -270,18 +280,28 @@ class KyGame extends Base
                                                 'referer'         => true,      // add a Referer header
                                                 'track_redirects' => true,
                                                ],
+                          'headers'         => [
+                                                'User-Agent'      => $agent,
+                                                'Accept'          => 'application/json',
+                                                'Accept-Encoding' => 'deflate,sdch',
+                                                'Accept-Charset'  => 'utf-8;q=1',
+                                               ],
                          ];
         $result        = $client->request(
             'GET',
             $redireUrl,
             $redirectParam,
         );
-        $return        = [
-                          'status' => $result->getStatusCode(),
+        $retLog        = [
+                          'status' => $result->getStatusCode(),//todo 后面需要处理错误码
                           'header' => $result->getHeader('content-type')[0],
-                          'body'   => $result->getBody(),
+                          'body'   => \GuzzleHttp\json_decode($result->getBody()->getContents(), true),
                          ];
-        Log::channel('game')->info('返回数据', $return);
+        Log::channel('game')->info('返回数据', $retLog);
+        $return = [];
+        if (isset($retLog['body']['d']['url'])) {
+            $return = $retLog['body']['d']['url'];
+        }
         return $return;
     }
 }
