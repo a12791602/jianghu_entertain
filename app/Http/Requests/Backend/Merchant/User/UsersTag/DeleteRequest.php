@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\User\UsersTag;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\UsersTag;
 
 /**
  * 用户标签-删除
  */
 class DeleteRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [UsersTag::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,14 +36,4 @@ class DeleteRequest extends BaseFormRequest
         $rules = ['id' => 'required|exists:users_tags']; //ID
         return $rules;
     }
-
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

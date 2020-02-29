@@ -3,12 +3,23 @@
 namespace App\Http\Requests\Backend\Merchant\User\Commission;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\UsersCommissionConfig;
+use App\Models\User\UsersCommissionConfigDetail;
 
 /**
  * 洗码设置-添加
  */
 class DoAddRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [
+                                  UsersCommissionConfig::class,
+                                  UsersCommissionConfigDetail::class,
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,18 +42,6 @@ class DoAddRequest extends BaseFormRequest
                 'game_vendor_id' => 'required|integer|exists:games_vendors,id', //游戏平台ID
                 'bet'            => 'required|numeric|gte:0',                   //打码量
                 'percent'        => 'required|string',                          //洗码比例
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'bet.required' => '缺少打码量',
-                'bet.numeric'  => '打码量必须是数字',
-                'bet.gte'      => '打码量必须大于等于0',
                ];
     }
 }

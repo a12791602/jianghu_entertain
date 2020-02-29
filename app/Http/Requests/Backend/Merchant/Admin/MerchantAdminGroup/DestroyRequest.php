@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminAccessGroup;
 
 /**
  * Class for destroy request.
  */
 class DestroyRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminAccessGroup::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,13 +38,4 @@ class DestroyRequest extends BaseFormRequest
                 'group_name' => 'required|exists:merchant_admin_access_groups',
                ];
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

@@ -9,6 +9,15 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'gameTypeId'   => '游戏类型ID',
+                                  'gameVendorId' => '游戏平台ID',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,14 +40,4 @@ class IndexRequest extends BaseFormRequest
                 'gameVendorId' => 'required|integer', //游戏平台ID
                ];
     }
-
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

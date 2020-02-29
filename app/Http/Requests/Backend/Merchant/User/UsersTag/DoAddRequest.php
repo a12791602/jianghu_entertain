@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\User\UsersTag;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\UsersTag;
 
 /**
  * 用户标签-添加
  */
 class DoAddRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [UsersTag::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,14 +41,4 @@ class DoAddRequest extends BaseFormRequest
                 'no_promote'  => 'required|integer|in:0,1', //是否禁止推广 0否 1是
                ];
     }
-
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

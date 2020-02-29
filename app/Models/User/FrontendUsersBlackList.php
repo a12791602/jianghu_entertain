@@ -24,6 +24,16 @@ class FrontendUsersBlackList extends BaseAuthModel
      * @var array $appends
      */
     protected $appends = ['black_num'];
+    
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'     => '黑名单ID',
+                                      'mobile' => '会员账号',
+                                      'guid'   => '用户UID',
+                                      'status' => '黑名单状态',
+                                     ];
 
     /**
      * 黑名单次数

@@ -31,6 +31,15 @@ class SystemPlatformBank extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'     => '银行ID',
+                                      'name'   => '银行名称',
+                                      'status' => '银行状态',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function bank(): BelongsTo

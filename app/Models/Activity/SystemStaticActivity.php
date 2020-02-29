@@ -18,6 +18,19 @@ class SystemStaticActivity extends BaseModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+    
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'         => '活动ID',
+                                      'title'      => '活动标题',
+                                      'pic'        => '活动图片',
+                                      'start_time' => '活动开始时间',
+                                      'end_time'   => '活动结束时间',
+                                      'status'     => '活动状态',
+                                      'device'     => '所属设备',
+                                     ];
 
     /**
      * @return BelongsTo

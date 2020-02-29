@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminUser;
 
 /**
  * 修改管理员状态
  */
 class SwitchAdminRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminUser::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,13 +38,4 @@ class SwitchAdminRequest extends BaseFormRequest
                 'status' => 'required|integer|in:0,1',             //状态
                ];
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

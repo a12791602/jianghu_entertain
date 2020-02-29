@@ -18,6 +18,16 @@ class UsersCommissionConfig extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'             => '洗码配置ID',
+                                      'game_type_id'   => '游戏类型ID',
+                                      'game_vendor_id' => '洗码厂商ID',
+                                      'bet'            => '打码量',
+                                     ];
+
+    /**
      * 洗码设置详情
      * @return HasMany
      */

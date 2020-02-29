@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\User\UsersTag;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\UsersTag;
 
 /**
  * 用户标签-编辑
  */
 class EditRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [UsersTag::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *

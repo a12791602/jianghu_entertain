@@ -19,6 +19,14 @@ class MerchantAdminAccessGroup extends BaseModel
      * @var array
      */
     protected $guarded = ['id'];
+    
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'         => '管理员组ID',
+                                      'group_name' => '管理员组名称',
+                                     ];
 
     /**
      * 管理员组权限

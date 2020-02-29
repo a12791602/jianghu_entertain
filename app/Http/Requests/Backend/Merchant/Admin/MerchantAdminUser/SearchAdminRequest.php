@@ -35,13 +35,4 @@ class SearchAdminRequest extends BaseFormRequest
         $rules = ['searchStr' => 'required|string'];//搜索的字符串
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

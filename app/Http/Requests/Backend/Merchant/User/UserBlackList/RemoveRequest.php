@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\User\UserBlackList;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\FrontendUsersBlackList;
 
 /**
  * 解除黑名单
  */
 class RemoveRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [FrontendUsersBlackList::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,14 +36,4 @@ class RemoveRequest extends BaseFormRequest
         $rules = ['id' => 'required|exists:frontend_users_black_lists'];//ID
         return $rules;
     }
-
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

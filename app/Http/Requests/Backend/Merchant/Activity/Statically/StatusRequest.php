@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Statically;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Activity\SystemStaticActivity;
 use App\Services\FactoryService;
 
 /**
@@ -11,6 +12,12 @@ use App\Services\FactoryService;
  */
 class StatusRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemStaticActivity::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,19 +39,6 @@ class StatusRequest extends BaseFormRequest
         return [
                 'id'     => 'required|exists:system_static_activities,id',
                 'status' => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'     => 'ID不存在',
-                'id.exists'       => 'ID不存在',
-                'status.required' => '请选择状态',
-                'status.in'       => '所选状态不在范围内',
                ];
     }
 }

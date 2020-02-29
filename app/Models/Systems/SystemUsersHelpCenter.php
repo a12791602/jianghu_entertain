@@ -18,6 +18,17 @@ class SystemUsersHelpCenter extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'     => '帮助设置ID',
+                                      'title'  => '帮助设置标题',
+                                      'pic'    => '帮助设置图片',
+                                      'type'   => '帮助设置所属客户端',
+                                      'status' => '帮助设置状态',
+                                     ];
+
+    /**
      * 作者
      * @return BelongsTo
      */

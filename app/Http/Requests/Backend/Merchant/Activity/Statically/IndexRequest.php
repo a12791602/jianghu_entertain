@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Statically;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Activity\SystemStaticActivity;
 use App\Services\FactoryService;
 
 /**
@@ -11,6 +12,12 @@ use App\Services\FactoryService;
  */
 class IndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemStaticActivity::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,17 +39,6 @@ class IndexRequest extends BaseFormRequest
         return [
                 'title'  => 'string',
                 'device' => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'device.required' => '请选择设备',
-                'device.in'       => '所选设备不在范围内',
                ];
     }
 }

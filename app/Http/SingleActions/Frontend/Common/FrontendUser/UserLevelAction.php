@@ -21,7 +21,7 @@ class UserLevelAction extends MainAction
     public function execute(): JsonResponse
     {
         $grade = FrontendUserLevel::where('platform_sign', $this->user->platform_sign)
-            ->get(['level', 'experience_min', 'experience_max', 'grade_gift', 'week_gift']);
+            ->get(['level', 'experience_min', 'experience_max', 'level_gift', 'weekly_gift']);
 
         $result = msgOut(LevelGiftResource::collection($grade));
         return $result;

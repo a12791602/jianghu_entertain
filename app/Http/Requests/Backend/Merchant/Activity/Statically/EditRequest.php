@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Statically;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Activity\SystemStaticActivity;
 use App\Services\FactoryService;
 
 /**
@@ -11,6 +12,12 @@ use App\Services\FactoryService;
  */
 class EditRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemStaticActivity::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -37,29 +44,6 @@ class EditRequest extends BaseFormRequest
                 'end_time'   => 'required|date|after:start_time',
                 'status'     => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
                 'device'     => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'         => 'ID不存在',
-                'id.exists'           => 'ID不存在',
-                'title.required'      => '请填写活动标题',
-                'title.max'           => '活动标题不能超过5个字',
-                'pic.required'        => '请上传活动图片',
-                'start_time.required' => '请选择开始时间',
-                'start_time.date'     => '开始时间格式不正确',
-                'end_time.required'   => '请选择结束时间',
-                'end_time.date'       => '结束时间格式不正确',
-                'end_time.after'      => '结束时间必须大于开始时间',
-                'status.required'     => '请选择状态',
-                'status.in'           => '所选状态不在范围内',
-                'device.required'     => '请选择设备',
-                'device.in'           => '所选设备不在范围内',
                ];
     }
 }

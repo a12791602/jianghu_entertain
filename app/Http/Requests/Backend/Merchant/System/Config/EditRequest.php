@@ -32,14 +32,4 @@ class EditRequest extends BaseFormRequest
                 'value' => 'required|string',          //表字段值
                ];
     }
-
-    /**
-     * @return mixed[]
-     */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //            ];
-    // }
 }

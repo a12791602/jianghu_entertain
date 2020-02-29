@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\System\HelpCenter;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Systems\SystemUsersHelpCenter;
 
 /**
  * 帮助设置-列表
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemUsersHelpCenter::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Bank;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemPlatformBank;
 use App\Services\FactoryService;
 
 /**
@@ -11,6 +12,12 @@ use App\Services\FactoryService;
  */
 class StatusRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemPlatformBank::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *

@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminUser;
 
 /**
  * Class for update admin group request.
  */
 class UpdateAdminGroupRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminUser::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,21 +36,6 @@ class UpdateAdminGroupRequest extends BaseFormRequest
         return [
                 'id'       => 'required|integer|exists:merchant_admin_users,id',
                 'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'       => '缺少管理员ID',
-                'id.integer'        => '管理员ID只能是整数',
-                'id.exists'         => '管理员不存在',
-                'group_id.required' => '缺少角色组ID',
-                'group_id.integer'  => '角色组ID只能是整数',
-                'group_id.exists'   => '角色组不存在',
                ];
     }
 }

@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminUser;
 
 /**
  * Class for create request.
  */
 class CreateRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminUser::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,13 +40,4 @@ class CreateRequest extends BaseFormRequest
                 'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
                ];
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

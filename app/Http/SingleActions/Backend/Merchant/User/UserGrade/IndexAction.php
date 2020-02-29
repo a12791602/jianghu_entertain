@@ -37,10 +37,20 @@ class IndexAction extends MainAction
     {
         $sign   = $this->currentPlatformEloq->sign;
         $data   = $this->model
-                     ->where('platform_sign', $sign)
-                     ->orderBy('experience_max', 'asc')
-                     ->get(['id', 'name', 'experience_min', 'experience_max', 'grade_gift', 'week_gift', 'updated_at'])
-                     ->toArray();
+                    ->where('platform_sign', $sign)
+                    ->orderBy('experience_max', 'asc')
+                    ->get(
+                        [
+                         'id',
+                         'name',
+                         'experience_min',
+                         'experience_max',
+                         'level_gift',
+                         'weekly_gift',
+                         'updated_at',
+                        ],
+                    )
+                    ->toArray();
         $msgOut = msgOut($data);
         return $msgOut;
     }

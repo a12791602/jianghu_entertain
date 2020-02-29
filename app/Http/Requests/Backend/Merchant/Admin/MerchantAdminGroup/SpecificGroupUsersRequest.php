@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminGroup;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminAccessGroup;
 
 /**
  * Class for specific group users request.
  */
 class SpecificGroupUsersRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminAccessGroup::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,13 +36,4 @@ class SpecificGroupUsersRequest extends BaseFormRequest
         $rules = ['id' => 'required|numeric|exists:merchant_admin_access_groups'];
         return $rules;
     }
-
-    /*public function messages()
-    {
-    return [
-    'lottery_sign.required' => 'lottery_sign is required!',
-    'trace_issues.required' => 'trace_issues is required!',
-    'balls.required' => 'balls is required!'
-    ];
-    }*/
 }

@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Admin\MerchantAdminUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Admin\MerchantAdminUser;
 
 /**
  * Class for delete admin request.
  */
 class DeleteAdminRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [MerchantAdminUser::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,16 +34,5 @@ class DeleteAdminRequest extends BaseFormRequest
     public function rules(): array
     {
         return ['id' => 'required|exists:merchant_admin_users'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required' => '缺少管理员ID',
-                'id.exists'   => '管理员不存在',
-               ];
     }
 }

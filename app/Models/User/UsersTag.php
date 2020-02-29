@@ -18,6 +18,18 @@ class UsersTag extends BaseAuthModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'          => '标签ID',
+                                      'title'       => '标签名称',
+                                      'no_withdraw' => '禁止出款选项',
+                                      'no_login'    => '禁止登录选项',
+                                      'no_play'     => '禁止游戏选项',
+                                      'no_promote'  => '禁止推广选项',
+                                     ];
+
+    /**
      * 标签下的会员
      * @return HasMany
      */

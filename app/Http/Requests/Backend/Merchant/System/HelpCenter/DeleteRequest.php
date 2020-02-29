@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\System\HelpCenter;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Systems\SystemUsersHelpCenter;
 
 /**
  * 帮助设置-删除
  */
 class DeleteRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemUsersHelpCenter::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,17 +35,5 @@ class DeleteRequest extends BaseFormRequest
     {
         $rules = ['id' => 'required|exists:system_users_help_centers']; //ID
         return $rules;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        $messages = [
-                     'id.required' => '缺少客帮助设置ID',
-                     'id.exists'   => '需要删除的帮助设置不存在',
-                    ];
-        return $messages;
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Dynamic;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Activity\SystemDynActivity;
 
 /**
  * Class IndexRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemDynActivity::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,17 +35,5 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return ['name' => 'string|min:1|max:16'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'name.string' => '名称格式错误',
-                'name.min'    => '名称最少1个字符',
-                'name.max'    => '名称最多16个字符',
-               ];
     }
 }

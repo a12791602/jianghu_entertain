@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Bank;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemPlatformBank;
 use App\Services\FactoryService;
 
 /**
@@ -11,6 +12,12 @@ use App\Services\FactoryService;
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemPlatformBank::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,13 +40,5 @@ class IndexRequest extends BaseFormRequest
                 'name'   => 'string',
                 'status' => 'in:' . $const::STATUS_NORMAL . ',' . $const::STATUS_DISABLE,
                ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return ['status.in' => '所选状态不在范围内'];
     }
 }

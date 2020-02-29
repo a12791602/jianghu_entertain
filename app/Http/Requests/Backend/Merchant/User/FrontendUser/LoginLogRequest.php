@@ -9,6 +9,17 @@ use App\Http\Requests\BaseFormRequest;
  */
 class LoginLogRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'mobile'      => '会员账号',
+                                  'uniqueId'    => '会员UID',
+                                  'createAt'    => '登录日期',
+                                  'lastLoginIp' => '登录IP',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,14 +44,4 @@ class LoginLogRequest extends BaseFormRequest
                 'lastLoginIp' => 'ip', //登陆IP
                ];
     }
-
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
 }

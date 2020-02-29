@@ -41,6 +41,18 @@ class MerchantAdminUser extends BaseAuthModel
     protected $casts = ['email_verified_at' => 'datetime'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'       => '管理员ID',
+                                      'name'     => '管理员名称',
+                                      'email'    => '管理员帐号',
+                                      'password' => '管理员密码',
+                                      'group_id' => '管理员组ID',
+                                      'status'   => '管理员状态',
+                                     ];
+
+    /**
      * 平台
      *
      * @return HasOne

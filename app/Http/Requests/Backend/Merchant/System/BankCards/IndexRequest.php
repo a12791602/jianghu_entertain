@@ -9,6 +9,17 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexRequest extends BaseFormRequest
 {
+    
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'uniqid'    => '用户UID',
+                                  'mobile'    => '用户手机号',
+                                  'bankId'    => '银行ID',
+                                  'createdAt' => '绑定时间',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *

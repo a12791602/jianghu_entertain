@@ -17,6 +17,11 @@ class UsersCommissionConfigDetail extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = ['percent' => '洗码比例'];
+
+    /**
      * @return mixed
      */
     public function userGrade()
