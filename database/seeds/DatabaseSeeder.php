@@ -60,6 +60,7 @@ class DatabaseSeeder extends Seeder
              SystemUserPublicAvatarSeeder::class,
              FrontendUsersBankCardSeeder::class,
              SystemConfigurationStandardSeeder::class,
+             GameVendorSeeder::class,
             ],
         );
     }

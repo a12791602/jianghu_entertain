@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Game\GameVendor;
 use Illuminate\Database\Seeder;
 
 /**
