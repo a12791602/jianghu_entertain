@@ -18,21 +18,6 @@ use Jenssegers\Agent\Agent;
  */
 class MainAction
 {
-    /**
-     * @return object
-     */
-    public function getAgent(): object
-    {
-        return $this->agent;
-    }
-
-    /**
-     * @return object
-     */
-    public function getRoute(): object
-    {
-        return $this->route;
-    }
 
     /**
      * User Agent
@@ -97,22 +82,22 @@ class MainAction
      * @var array
      */
     protected $backend = [
-        'portPrefix'    => 'headquarters-api',
-        'current_guard' => 'backend',
-        'route'         => SystemRoutesBackend::class,
-        'menu'          => BackendSystemMenu::class,
-    ];
+                          'portPrefix'    => 'headquarters-api',
+                          'current_guard' => 'backend',
+                          'route'         => SystemRoutesBackend::class,
+                          'menu'          => BackendSystemMenu::class,
+                         ];
 
     /**
      * @var array
      */
     protected $merchant = [
-        'portPrefix'    => 'merchant-api',
-        'current_guard' => 'merchant',
-        'route'         => SystemRoutesMerchant::class,
-        'menu'          => MerchantSystemMenu::class,
-        'platform'      => SystemPlatform::class,
-    ];
+                           'portPrefix'    => 'merchant-api',
+                           'current_guard' => 'merchant',
+                           'route'         => SystemRoutesMerchant::class,
+                           'menu'          => MerchantSystemMenu::class,
+                           'platform'      => SystemPlatform::class,
+                          ];
 
     /**
      * 路由权限
@@ -133,14 +118,14 @@ class MainAction
      */
     public function __construct(Request $request)
     {
-        if ($request->get('logger')){
+        if ($request->get('logger')) {
             new SystemPublicLogService($request, $request->get('logger'));
         }
-        $this->agent               = new Agent();
-        $this->guard               = $request->get('guard');
-        $this->auth                = auth($this->guard);
-        $this->user                = $this->auth->user();
-        $this->route               = $request->route();
+        $this->agent = new Agent();
+        $this->guard = $request->get('guard');
+        $this->auth  = auth($this->guard);
+        $this->user  = $this->auth->user();
+        $this->route = $request->route();
 
         /**
          * $request->get('prefix') #在RouteAuth中间件中传入了当前的URL的前缀
@@ -153,6 +138,30 @@ class MainAction
             return;
         }
         $this->_initial();
+    }
+
+    /**
+     * @return object
+     */
+    public function getAgent(): object
+    {
+        return $this->agent;
+    }
+
+    /**
+     * @return object
+     */
+    public function getRoute(): object
+    {
+        return $this->route;
+    }
+
+    /**
+     * @return object
+     */
+    public function getUser(): object
+    {
+        return $this->user;
     }
 
     /**
@@ -193,7 +202,7 @@ class MainAction
         $this->menuLists = $menuModel->getUserMenuDatas(
             $this->currentAccessAdminGroup->id,
             $this->adminAccessGroupDetail,
-            );
+        );
     }
 
     /**
