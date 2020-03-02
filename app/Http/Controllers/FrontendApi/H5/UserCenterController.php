@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\FrontendApi\Common;
+namespace App\Http\Controllers\FrontendApi\H5;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\ClaimGiftRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\CheckBenefitsAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\ClaimBenefitsAction;
-use App\Http\SingleActions\Frontend\Common\FrontendUser\InformationAction;
-use App\Http\SingleActions\Frontend\Common\FrontendUser\UserLevelAction;
+use App\Http\SingleActions\Frontend\H5\UserCenter\InformationAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Front-end user center.
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class FrontendUserController
+class UserCenterController
 {
+
     /**
      * Personal information.
      * @param InformationAction $action Action.
@@ -52,18 +52,6 @@ class FrontendUserController
         InformationUpdateRequest $request
     ): JsonResponse {
         $result = $action->update($request);
-        return $result;
-    }
-
-    /**
-     * Get user grade rules.
-     * @param UserLevelAction $action UserLevelAction.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function grades(UserLevelAction $action): JsonResponse
-    {
-        $result = $action->execute();
         return $result;
     }
 

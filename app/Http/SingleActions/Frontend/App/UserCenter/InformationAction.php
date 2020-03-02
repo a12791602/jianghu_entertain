@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\SingleActions\Frontend\Common\FrontendUser;
+namespace App\Http\SingleActions\Frontend\App\UserCenter;
 
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
+use App\Http\Resources\Frontend\App\UserCenter\PersonalInfoResource;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
-use App\Http\Resources\Frontend\GamesLobby\PersonalInformationResource;
 use App\Http\SingleActions\MainAction;
 use Illuminate\Http\JsonResponse;
 
@@ -22,7 +22,7 @@ class InformationAction extends MainAction
      */
     public function information(): JsonResponse
     {
-        $result = msgOut(PersonalInformationResource::make($this->user));
+        $result = msgOut(PersonalInfoResource::make($this->user));
         return $result;
     }
 

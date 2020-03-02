@@ -25,9 +25,10 @@ class CreateSystemPlatformsTable extends Migration
                 $table->string('cn_name', 64)->nullable()->default(null)->comment('中文名称');
                 $table->string('en_name', 64)->nullable()->default(null)->comment('英文名称');
                 $table->string('sign', 15)->nullable()->default(null)->comment('标识');
-                $table->string('games_types')->nullable()->default(null)->comment('游戏类型设置');
-                $table->string('finance_types')->nullable()->default(null)->comment('金流类型设置');
                 $table->string('agency_method', 20)->nullable()->default(null)->comment('代理方式  1.PC  2.H5 3.APP');
+                $table->integer('pc_skin_id')->nullable()->default(null)->comment('PC皮肤');
+                $table->integer('h5_skin_id')->nullable()->default(null)->comment('H5皮肤');
+                $table->integer('app_skin_id')->nullable()->default(null)->comment('APP皮肤');
                 $table->integer('owner_id')->nullable()->default(null)->comment('所属人id');
                 $table->timestamp('start_time')->nullable()->default(null)->comment('开始时间');
                 $table->timestamp('end_time')->nullable()->default(null)->comment('结束时间');

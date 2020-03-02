@@ -51,19 +51,25 @@ class EditAction extends MainAction
             throw new \Exception('302004');
         }
         //基本信息修改
-        $platformELoq->agency_method = $inputDatas['agency_method'];
-        $platformELoq->start_time    = $inputDatas['start_time'];
-        $platformELoq->end_time      = $inputDatas['end_time'];
+        $editData = [
+                     'agency_method' => $inputDatas['agency_method'],
+                     'start_time'    => $inputDatas['start_time'],
+                     'end_time'      => $inputDatas['end_time'],
+                     'pc_skin_id'    => $inputDatas['pc_skin_id'],
+                     'h5_skin_id'    => $inputDatas['h5_skin_id'],
+                     'app_skin_id'   => $inputDatas['app_skin_id'],
+                    ];
         if (isset($inputDatas['sms_num']) && isset($inputDatas['type'])) {
             if ((int) $inputDatas['type'] === 0) {
-                $platformELoq->sms_num -= $inputDatas['sms_num'];
-                if ($platformELoq->sms_num < 0) {
-                    $platformELoq->sms_num = 0;
+                $editData['sms_num'] = $platformELoq->sms_num - $inputDatas['sms_num'];
+                if ($editData['sms_num'] < 0) {
+                    $editData['sms_num'] = 0;
                 }
             } elseif ((int) $inputDatas['type'] === 1) {
-                $platformELoq->sms_num += $inputDatas['sms_num'];
+                $editData['sms_num'] = $platformELoq->sms_num + $inputDatas['sms_num'];
             }
         }
+        $platformELoq->fill($editData);
         if (!$platformELoq->save()) {
             DB::rollback();
             throw new \Exception('302004');

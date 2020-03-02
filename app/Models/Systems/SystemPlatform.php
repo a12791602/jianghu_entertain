@@ -25,6 +25,17 @@ class SystemPlatform extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'            => '平台ID',
+                                      'agency_method' => '代理方式',
+                                      'pc_skin_id'    => 'PC皮肤',
+                                      'h5_skin_id'    => 'H5皮肤',
+                                      'app_skin_id'   => 'APP皮肤',
+                                     ];
+
+    /**
      * @return HasMany
      */
     public function adminUsers(): HasMany

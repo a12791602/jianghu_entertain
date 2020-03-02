@@ -17,13 +17,17 @@ class SystemPlatformSeeder extends Seeder
     {
         SystemPlatform::insert(
             [
-             'id'         => 1,
-             'cn_name'    => '江湖互娱',
-             'en_name'    => 'jh_entertainment',
-             'sign'       => 'jhhy',
-             'owner_id'   => 1,
-             'status'     => 1,
-             'created_at' => '2020-01-01 00:00:00',
+             'id'            => 1,
+             'cn_name'       => '江湖互娱',
+             'en_name'       => 'jh_entertainment',
+             'sign'          => 'jhhy',
+             'agency_method' => '1,2',
+             'start_time'    => '2019-12-01 00:00:00',
+             'end_time'      => '2022-12-01 00:00:00',
+             'owner_id'      => 1,
+             'status'        => 1,
+             'sms_num'       => 10000,
+             'created_at'    => '2020-01-01 00:00:00',
             ],
         );
     }

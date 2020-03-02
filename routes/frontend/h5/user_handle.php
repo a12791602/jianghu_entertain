@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\FrontendApi\Common\FrontendAuthController;
-use App\Http\Controllers\FrontendApi\Common\FrontendUserController;
 use App\Http\Controllers\FrontendApi\Common\PasswordController;
+use App\Http\Controllers\FrontendApi\H5\UserCenterController;
 
 Route::post('login', [FrontendAuthController::class, 'login'])->name('h5-api.login');
 
@@ -19,14 +19,14 @@ Route::group(
         Route::post('security-code', [PasswordController::class, 'security'])->name($namePrefix . 'security-code');
         Route::put('refresh-token', [FrontendAuthController::class, 'refreshToken'])
             ->name($namePrefix . 'refresh-token');
-        Route::get('information', [FrontendUserController::class, 'information'])->name($namePrefix . 'information');
-        Route::get('dynamic-information', [FrontendUserController::class, 'dynamicInformation'])
+        Route::get('information', [UserCenterController::class, 'information'])->name($namePrefix . 'information');
+        Route::get('dynamic-information', [UserCenterController::class, 'dynamicInformation'])
             ->name($namePrefix . 'information');
-        Route::post('information', [FrontendUserController::class, 'updateInformation'])
+        Route::post('information', [UserCenterController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
-        Route::post('claim-benefits', [FrontendUserController::class, 'claimBenefits'])
+        Route::post('claim-benefits', [UserCenterController::class, 'claimBenefits'])
             ->name($namePrefix . 'claim-benefits');
-        Route::post('check-benefits', [FrontendUserController::class, 'checkBenefits'])
+        Route::post('check-benefits', [UserCenterController::class, 'checkBenefits'])
             ->name($namePrefix . 'check-gifts');
     },
 );
