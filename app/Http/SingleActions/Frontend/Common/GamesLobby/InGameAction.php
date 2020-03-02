@@ -66,7 +66,7 @@ class InGameAction extends MainAction
             throw new \Exception('100704');//'对不起,游戏厂商不存在!'
         }
         $curentVendorObj = $currentGameVendorEloq->first();
-        $gameClass       = $factoryInstance->generateGame($curentVendorObj, $this->user);
+        $gameClass       = $factoryInstance->generateGame($curentVendorObj);
         $result          = $gameClass->game($curentGameObj, $this);
         $msgOut          = msgOut($result);
         return $msgOut;

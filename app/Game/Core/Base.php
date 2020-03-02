@@ -3,7 +3,6 @@
 namespace App\Game\Core;
 
 use App\Models\Game\GameVendor;
-use App\Models\User\FrontendUser;
 
 /**
  * Class Base
@@ -18,11 +17,6 @@ abstract class Base implements Game
     protected $gameVendor;
 
     /**
-     * @var FrontendUser
-     */
-    protected $gameUser;
-
-    /**
      * @var \App\Models\Game\Game
      */
     protected $gameItem;
@@ -34,12 +28,10 @@ abstract class Base implements Game
 
     /**
      * Base constructor.
-     * @param GameVendor   $vendor GameVendor.
-     * @param FrontendUser $user   FrontendUser.
+     * @param GameVendor $vendor GameVendor.
      */
-    public function __construct(GameVendor $vendor, FrontendUser $user)
+    public function __construct(GameVendor $vendor)
     {
         $this->gameVendor = $vendor;
-        $this->gameUser   = $user;
     }
 }

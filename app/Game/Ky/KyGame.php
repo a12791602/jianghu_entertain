@@ -105,8 +105,9 @@ class KyGame extends Base
         $this->apiUrl    = 'https://api.ky039.com:443/channelHandle';
         $this->recordUrl = 'https://record.ky039.com:443/getRecordHandle';
 
-        $account    = $this->gameUser->guid;
-        $money      = 0.00;//$this->gameUser->account->balance
+        $gameUser   = $this->sysObj->getUser();
+        $account    = $gameUser->guid;
+        $money      = 0.00;//$gameUser->account->balance
         $timeObj    = now();
         $timestamp  = (int) $timeObj->getPreciseTimestamp(3);
         $time_str   = $timeObj->format('YmdHis');
@@ -159,6 +160,7 @@ class KyGame extends Base
                           'account'  => $account,
                           'money'    => $money,
                           'lineCode' => $this->sysObj->currentPlatformEloq->sign,
+                          'KindID'   => $this->gameItem->sign,
                           'ip'       => $ipAddress,
                           'orderid'  => $orderId,
                           'lang'     => 'zh-CN',
