@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Game\GameVendor;
 
 /**
  * Class AddRequest
@@ -11,6 +12,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class AddRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [GameVendor::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,12 +37,14 @@ class AddRequest extends BaseFormRequest
     {
         $result = [
                    'name'               => 'required|unique:game_vendors,name',
-                   'sign'               => ['required', 'regex:/\w+/', 'unique:game_vendors,sign'],
+                   'sign'               => 'required|string|unique:game_vendors,sign|max:6',
                    'whitelist_ips'      => 'array',
                    'whitelist_ips.*'    => 'ip',
                    'type_id'            => 'required|integer',
                    'urls'               => 'array',
+                   'urls.*'             => 'url',
                    'test_urls'          => 'array',
+                   'test_urls.*'        => 'url',
                    'app_id'             => 'string|nullable',
                    'authorization_code' => 'string',
                    'merchant_id'        => 'string',
@@ -50,21 +59,14 @@ class AddRequest extends BaseFormRequest
     }
 
     /**
-     * @return array
+     * @return mixed[]
      */
     public function messages(): array
     {
         $message = [
-                    'name.required'       => '请填写游戏厂商名称',
-                    'name.unique'         => '游戏厂商名称已存在',
-                    'sign.required'       => '请填写游戏厂商标记',
-                    'sign.regex'          => '游戏厂商标记只能包含数字,字母,下划线',
-                    'sign.unique'         => '游戏厂商标记已存在',
-                    'whitelist_ips.array' => 'ip白名单格式不正确',
-                    'whitelist_ips.*.ip'  => 'ip格式不正确',
-                    'status.required'     => '请选择状态',
-                    'status.in'           => '所选择状态不存在',
-                   ];
+            'whitelist_ips.*.ip' => 'ip格式不正确',
+        ];
+
         return $message;
     }
 

@@ -30,6 +30,37 @@ class GameVendor extends BaseModel
                        ];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'name'                             => '厂商名称',
+                                      'sign'                             => '厂商标识',
+                                      'type_id'                          => '游戏类型id',
+                                      'whitelist_ips'                    => '白名单',
+                                      'sort'                             => '排序',
+                                      'status'                           => '厂商状态',
+                                      'urls'                             => '存放三方调用urls',
+                                      'test_urls'                        => '存放三方调用测试urls',
+                                      'app_id'                           => '终端号',
+                                      'merchant_id'                      => '商户号',
+                                      'merchant_secret'                  => '商户密钥',
+                                      'public_key'                       => '公钥',
+                                      'private_key'                      => '私钥',
+                                      'des_key'                          => 'des 密钥',
+                                      'md5_key'                          => 'md5 密钥',
+                                      'urls.login'                       => '登录接口',
+                                      'urls.account_query_url'           => '查询余额接口',
+                                      'urls.top_up_url'                  => '上分接口',
+                                      'urls.draw_out_url'                => '下分接口',
+                                      'urls.order_query_url'             => '查询订单接口',
+                                      'urls.user_active_query_url'       => '查询玩家在线状态接口',
+                                      'urls.game_order_query_url'        => '查询游戏注单接口',
+                                      'urls.user_total_status_query_url' => '查询玩家总分接口',
+                                      'urls.kick_out_url'                => '踢玩家接口',
+                                      'urls.agent_account_query_url'     => '查询代理余额接口',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo

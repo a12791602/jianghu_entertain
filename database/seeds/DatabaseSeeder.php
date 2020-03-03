@@ -37,10 +37,11 @@ class DatabaseSeeder extends Seeder
              SystemRoutesH5Seeder::class,
              SystemRoutesMerchantSeeder::class,
              SystemRoutesMobileSeeder::class,
-             GamePlatformSeeder::class,
-             GameSeeder::class,
              GameTypeSeeder::class,
+             GameVendorSeeder::class,
+             GameSeeder::class,
              GameTypePlatformSeeder::class,
+             GamePlatformSeeder::class,
              GameVendorUrlFieldSeeder::class,
              SystemDomainSeeder::class,
              SystemFePageBannerSeeder::class,
@@ -60,7 +61,6 @@ class DatabaseSeeder extends Seeder
              SystemUserPublicAvatarSeeder::class,
              FrontendUsersBankCardSeeder::class,
              SystemConfigurationStandardSeeder::class,
-             GameVendorSeeder::class,
             ],
         );
     }
