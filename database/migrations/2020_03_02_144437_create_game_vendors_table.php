@@ -29,8 +29,8 @@ class CreateGameVendorsTable extends Migration
                 $table->string('whitelist_ips')->nullable()->comment('白名单');
                 $table->integer('sort')->nullable()->comment('排序');
                 $table->tinyInteger('status')->comment('状态 0 禁用 1 启用');
-                $table->text('url')->nullable()->comment('存放三方调用urls');
-                $table->text('test_url')->nullable()->comment('存放三方调用测试urls');
+                $table->text('urls')->nullable()->comment('存放三方调用urls');
+                $table->text('test_urls')->nullable()->comment('存放三方调用测试urls');
                 $table->string('app_id', 128)->nullable()->comment('终端号');
                 $table->string('merchant_id', 50)->nullable()->comment('商户号');
                 $table->text('merchant_secret')->nullable()->comment('商户密钥');

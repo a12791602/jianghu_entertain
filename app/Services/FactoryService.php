@@ -67,10 +67,10 @@ class FactoryService
     /**
      * 获取游戏类实例.
      *
-     * @param GameVendor|null $vendor 厂商信息.
+     * @param GameVendor $vendor 厂商信息.
      * @return mixed
      */
-    public function generateGame(?GameVendor $vendor)
+    public function generateGame(GameVendor $vendor)
     {
         if ($vendor !== null) {
             $className    = 'App\Game\\' . ucfirst($vendor->sign) . '\\' . ucfirst($vendor->sign) . 'Game';

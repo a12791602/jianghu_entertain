@@ -4,6 +4,7 @@ namespace App\Models\Systems;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
+use App\Models\Game\Game;
 use App\Models\Game\GameType;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -78,5 +79,21 @@ class SystemPlatform extends BaseModel
             'type_id',
         );
         return $gameTypes;
+    }
+
+    /**
+     * platforms has games distrubed
+     *
+     * @return BelongsToMany
+     */
+    public function games(): BelongsToMany
+    {
+        $games = $this->belongsToMany(
+            Game::class,
+            'game_platforms',
+            'platform_id',
+            'game_id',
+        );
+        return $games;
     }
 }

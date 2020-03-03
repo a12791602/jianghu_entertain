@@ -3,6 +3,8 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
+use App\JHHYLibs\JHHYCnst;
+use App\Models\Game\Game;
 use App\Services\FactoryService;
 use Illuminate\Http\JsonResponse;
 
@@ -31,8 +33,59 @@ class InGameAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $factoryInstance  = FactoryService::getInstence();
-        $const            = $factoryInstance->generateService('constant');
+        $curentVendorObj = '';
+        $curentGameObj   = '';
+        $factoryInstance = FactoryService::getInstence();
+        $result          = $this->_checkcriteria($inputDatas);
+        /**
+         * @var GameVendor $curentVendorObj
+         * @var Game $curentGameObj
+         */
+        extract($result);
+        $curentGameObj   = $this->_string2null($curentGameObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
+        $curentVendorObj = $this->_string2null($curentVendorObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
+        $gameClass       = $factoryInstance->generateGame($curentVendorObj);
+        if ($gameClass === false) {
+            throw new \Exception('100708');//'游戏服务出错!'
+        }
+        $result = $gameClass->game($curentGameObj, $this);
+        $msgOut = msgOut($result);
+        return $msgOut;
+    }
+
+    /**
+     * @param array $inputDatas InputDatas.
+     * @return mixed[]
+     * @throws \Exception Exception.
+     */
+    private function _checkcriteria(array $inputDatas): array
+    {
+        $curentGameObj   = null;
+        $curentVendorObj = null;
+        $result          = $this->_checkCriterial4Games($inputDatas);
+        /**
+         * @var GameVendor $curentVendorObj
+         * @var Game $curentGameObj
+         */
+        extract($result);
+        $curentGameObj   = $this->_null2String($curentGameObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
+        $curentVendorObj = $this->_null2String($curentVendorObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
+        $this->_checkCriteria4InternalTB($curentGameObj, $inputDatas);
+        $data = [
+                 'curentGameObj'   => $curentGameObj,
+                 'curentVendorObj' => $curentVendorObj,
+                ];
+        return $data;
+    }
+
+    /**
+     * ##############################[检查游戏与厂商]##############################
+     * @param array $inputDatas InputDatas.
+     * @return mixed[]
+     * @throws \Exception Exception.
+     */
+    private function _checkCriterial4Games(array $inputDatas): array
+    {
         $allGameTypesEloq = $this->currentPlatformEloq->gameTypes();
         if (!$allGameTypesEloq->exists()) {
             throw new \Exception('100700');//'对不起,平台游戏类型未被分配!'
@@ -53,7 +106,7 @@ class InGameAction extends MainAction
              ],
              [
               'games.status',
-              $const::STATUS_NORMAL,
+              JHHYCnst::STATUS_NORMAL,
              ],
             ],
         );
@@ -66,9 +119,56 @@ class InGameAction extends MainAction
             throw new \Exception('100704');//'对不起,游戏厂商不存在!'
         }
         $curentVendorObj = $currentGameVendorEloq->first();
-        $gameClass       = $factoryInstance->generateGame($curentVendorObj);
-        $result          = $gameClass->game($curentGameObj, $this);
-        $msgOut          = msgOut($result);
-        return $msgOut;
+        $data            = [
+                            'curentGameObj'   => $curentGameObj,
+                            'curentVendorObj' => $curentVendorObj,
+                           ];
+        return $data;
+    }
+
+
+    /**
+     * ##############################[检查平台已分配的游戏]##############################
+     * @param Game  $curentGameObj GameObj.
+     * @param array $inputDatas    InputDatas.
+     * @return void
+     * @throws \Exception Exception.
+     */
+    private function _checkCriteria4InternalTB(Game $curentGameObj, array $inputDatas): void
+    {
+        $pfDistributedGamesEloq = $this->currentPlatformEloq->games();
+        if (!$pfDistributedGamesEloq->exists()) {
+            throw new \Exception('100705');//'对不起,平台还未被分配游戏!'
+        }
+        $pfDistributedGames = $pfDistributedGamesEloq->wherePivot('game_id', $inputDatas['game_series_id'])
+            ->wherePivot('status', 1)
+            ->first();
+        if ($pfDistributedGames === null) {
+            throw new \Exception('100706');//'对不起,平台游戏未开启!'
+        }
+        //############################【检查平台已分配的游戏 是否与 总控已有开启中的游戏 匹配】#######
+        if ($curentGameObj->id !== $pfDistributedGames->id) {
+            throw new \Exception('100707');//'对不起,平台已分配游戏与原游戏不匹配!'
+        }
+    }
+
+    /**
+     * @param object|null $variable Variable To Cast.
+     * @return object|string
+     */
+    private function _null2String(?object $variable)
+    {
+        $variable = $variable ?? '';
+        return $variable;
+    }
+
+    /**
+     * @param object|string|null $variable Variable To Cast.
+     * @return object|null
+     */
+    private function _string2null($variable): ?object
+    {
+        $variable = $variable === '' ? null : $variable;
+        return $variable;
     }
 }

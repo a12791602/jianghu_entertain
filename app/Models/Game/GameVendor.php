@@ -20,6 +20,16 @@ class GameVendor extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+                        'urls'      => 'array',
+                        'test_urls' => 'array',
+                       ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo
