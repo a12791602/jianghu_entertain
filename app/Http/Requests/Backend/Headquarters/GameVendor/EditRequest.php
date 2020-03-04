@@ -4,6 +4,7 @@ namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 
 use App\Http\Requests\BaseFormRequest;
 use App\Models\Game\GameVendor;
+use Illuminate\Http\Request;
 
 /**
  * Class EditRequest
@@ -17,6 +18,13 @@ class EditRequest extends BaseFormRequest
      * @var array 需要依赖模型中的字段备注信息
      */
     protected $dependentModels = [GameVendor::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+        'whitelist_ips.*' => '白名单',
+    ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -40,9 +48,9 @@ class EditRequest extends BaseFormRequest
                   'id'                 => 'required|exists:game_vendors,id',
                   'name'               => 'required|unique:game_vendors,name,' . $myId,
                   'sign'               => 'required|string|max:6|unique:game_vendors,sign,' . $myId,
-                  'whitelist_ips'      => 'array',
+                  'whitelist_ips'      => 'required|array',
                   'whitelist_ips.*'    => 'ip',
-                  'urls'               => 'array',
+                  'urls'               => 'required|array',
                   'urls.*'             => 'url',
                   'test_urls'          => 'array',
                   'test_urls.*'        => 'url',
@@ -58,18 +66,6 @@ class EditRequest extends BaseFormRequest
                  ];
 
         return $rules;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        $message = [
-            'whitelist_ips.*.ip' => 'ip格式不正确',
-        ];
-
-        return $message;
     }
 
     /**

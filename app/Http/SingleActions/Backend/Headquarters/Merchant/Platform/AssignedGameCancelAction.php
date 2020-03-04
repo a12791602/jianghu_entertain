@@ -20,8 +20,8 @@ class AssignedGameCancelAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result = GamePlatform::where('platform_sign', $inputDatas['platform_sign'])
-            ->whereIn('game_sign', $inputDatas['game_signs'])->delete();
+        $result = GamePlatform::where('platform_id', $inputDatas['platform_id'])
+            ->whereIn('game_id', $inputDatas['game_ids'])->delete();
         if ($result) {
             $msgOut = msgOut();
             return $msgOut;

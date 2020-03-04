@@ -29,12 +29,12 @@ class AssignedGameCancelRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign',
-                'game_signs'    => 'required|array',
-                'game_signs.*'  => [
-                                    'required',
-                                    'exists:games_platforms,game_sign',
-                                   ],
+                'platform_id' => 'required|exists:system_platforms,id',
+                'game_ids'    => 'required|array',
+                'game_ids.*'  => [
+                                  'required',
+                                  'exists:game_platforms,game_id',
+                                 ],
                ];
     }
 
@@ -44,12 +44,12 @@ class AssignedGameCancelRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-                'platform_sign.required' => '请选择厅主',
-                'platform_sign.exists'   => '所选厅主不存在',
-                'game_signs.required'    => '请选择游戏',
-                'game_signs.array'       => '游戏格式不正确',
-                'game_signs.*.required'  => '请选择游戏',
-                'game_signs.*.exists'    => '所选游戏尚未分配',
+                'platform_id.required' => '请选择厅主',
+                'platform_id.exists'   => '所选厅主不存在',
+                'game_ids.required'    => '请选择游戏',
+                'game_ids.array'       => '游戏格式不正确',
+                'game_ids.*.required'  => '请选择游戏',
+                'game_ids.*.exists'    => '所选游戏尚未分配',
                ];
     }
 
@@ -58,6 +58,6 @@ class AssignedGameCancelRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['game_signs' => 'cast:array'];
+        return ['game_ids' => 'cast:array'];
     }
 }

@@ -19,6 +19,13 @@ class AddRequest extends BaseFormRequest
     protected $dependentModels = [GameVendor::class];
 
     /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+        'whitelist_ips.*' => '白名单',
+    ];
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
@@ -41,7 +48,7 @@ class AddRequest extends BaseFormRequest
                    'whitelist_ips'      => 'array',
                    'whitelist_ips.*'    => 'ip',
                    'type_id'            => 'required|integer',
-                   'urls'               => 'array',
+                   'urls'               => 'required|array',
                    'urls.*'             => 'url',
                    'test_urls'          => 'array',
                    'test_urls.*'        => 'url',
@@ -56,18 +63,6 @@ class AddRequest extends BaseFormRequest
                    'status'             => 'required|in:0,1',
                   ];
         return $result;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        $message = [
-            'whitelist_ips.*.ip' => 'ip格式不正确',
-        ];
-
-        return $message;
     }
 
     /**

@@ -28,7 +28,8 @@ class DelRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:games_types,id'];
+        $rules = ['id' => 'required|exists:game_types,id'];
+        return $rules;
     }
 
     /**
@@ -36,9 +37,10 @@ class DelRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-                'id.required' => 'ID不存在',
-                'id.exists'   => 'ID不存在',
-               ];
+        $messages = [
+                     'id.required' => 'ID不存在',
+                     'id.exists'   => 'ID不存在',
+                    ];
+        return $messages;
     }
 }

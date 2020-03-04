@@ -28,12 +28,13 @@ class EditRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $myId = $this->get('id');
-        return [
-                'id'   => 'required|exists:games_types,id',
-                'name' => 'required|unique:games_types,name,' . $myId,
-                'sign' => 'required|regex:/\w+/|unique:games_types,sign,' . $myId,
-               ];
+        $myId  = $this->get('id');
+        $rules = [
+                  'id'   => 'required|exists:game_types,id',
+                  'name' => 'required|unique:game_types,name,' . $myId,
+                  'sign' => 'required|regex:/\w+/|unique:game_types,sign,' . $myId,
+                 ];
+        return $rules;
     }
 
     /**
@@ -41,14 +42,15 @@ class EditRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-                'id.required'   => 'ID不存在',
-                'id.exists'     => 'ID不存在',
-                'name.required' => '请填写游戏种类名称',
-                'name.unique'   => '游戏种类名称已存在',
-                'sign.required' => '请填写游戏种类标记',
-                'sign.regex'    => '游戏种类标记只能包含数字,字母,下划线',
-                'sign.unique'   => '游戏种类标记已存在',
-               ];
+        $message = [
+                    'id.required'   => 'ID不存在',
+                    'id.exists'     => 'ID不存在',
+                    'name.required' => '请填写游戏种类名称',
+                    'name.unique'   => '游戏种类名称已存在',
+                    'sign.required' => '请填写游戏种类标记',
+                    'sign.regex'    => '游戏种类标记只能包含数字,字母,下划线',
+                    'sign.unique'   => '游戏种类标记已存在',
+                   ];
+        return $message;
     }
 }

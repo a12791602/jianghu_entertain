@@ -2,7 +2,6 @@
 
 namespace App\ModelFilters\Game;
 
-use App\Models\Platform\GamePlatform;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -63,36 +62,6 @@ class GameFilter extends ModelFilter
     public function name(string $name): GameFilter
     {
         $object = $this->where('name', $name);
-        return $object;
-    }
-
-    /**
-     * 未分配给平台的游戏
-     * @param  string $unassign_platform_sign Unassign_platform_sign.
-     * @return GameFilter
-     */
-    public function unassignPlatformSign(string $unassign_platform_sign): GameFilter
-    {
-        $assignedGames = GamePlatform::where('platform_sign', $unassign_platform_sign)
-            ->get()
-            ->pluck('game_sign')
-            ->toArray();
-        $object        = $this->whereNotIn('sign', $assignedGames);
-        return $object;
-    }
-
-    /**
-     * 已分配给平台的游戏
-     * @param  string $assigned_platform_sign Assigned_platform_sign.
-     * @return GameFilter
-     */
-    public function assignedPlatformSign(string $assigned_platform_sign): GameFilter
-    {
-        $assignedGames = GamePlatform::where('platform_sign', $assigned_platform_sign)
-            ->get()
-            ->pluck('game_sign')
-            ->toArray();
-        $object        = $this->whereIn('sign', $assignedGames);
         return $object;
     }
 }

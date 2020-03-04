@@ -29,9 +29,9 @@ class AssignedGamesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign',
-                'vendor_id'     => 'exists:games_vendors,id',
-                'game_id'       => 'exists:games,id',
+                'platform_id' => 'required|exists:system_platforms,id',
+                'vendor_id'   => 'exists:game_vendors,id',
+                'game_id'     => 'exists:games,id',
                ];
     }
 
@@ -41,10 +41,10 @@ class AssignedGamesRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-                'platform_sign.required' => '请选择平台',
-                'platform_sign.exists'   => '所选择平台不存在',
-                'vendor_id.exists'       => '所选厂商不存在',
-                'game_id.exists'         => '所选游戏不存在',
+                'platform_id.required' => '请选择平台',
+                'platform_id.exists'   => '所选择平台不存在',
+                'vendor_id.exists'     => '所选厂商不存在',
+                'game_id.exists'       => '所选游戏不存在',
                ];
     }
 }

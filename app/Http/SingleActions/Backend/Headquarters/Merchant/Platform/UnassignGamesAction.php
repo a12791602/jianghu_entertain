@@ -20,9 +20,9 @@ class UnassignGamesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                             = Game::getPageSize();
-        $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas                          = Game::filter($inputDatas, GameFilter::class)->select(
+        $pageSize                           = Game::getPageSize();
+        $inputDatas['unassign_platform_id'] = $inputDatas['platform_id'];
+        $outputDatas                        = Game::filter($inputDatas, GameFilter::class)->select(
             [
              'id',
              'name',
@@ -30,7 +30,7 @@ class UnassignGamesAction extends MainAction
              'vendor_id',
             ],
         )->paginate($pageSize);
-        $msgOut                               = msgOut($outputDatas);
+        $msgOut                             = msgOut($outputDatas);
         return $msgOut;
     }
 }

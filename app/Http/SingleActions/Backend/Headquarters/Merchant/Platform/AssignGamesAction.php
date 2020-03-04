@@ -20,11 +20,11 @@ class AssignGamesAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $data = [];
-        foreach ($inputDatas['game_signs'] as $game_sign) {
-            $tmpData                  = [];
-            $tmpData['platform_sign'] = $inputDatas['platform_sign'];
-            $tmpData['game_sign']     = $game_sign;
-            $data[]                   = $tmpData;
+        foreach ($inputDatas['game_ids'] as $game_id) {
+            $tmpData                = [];
+            $tmpData['platform_id'] = $inputDatas['platform_id'];
+            $tmpData['game_id']     = $game_id;
+            $data[]                 = $tmpData;
         }
         try {
             GamePlatform::insert($data);

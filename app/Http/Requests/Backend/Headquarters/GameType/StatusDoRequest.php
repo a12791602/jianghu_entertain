@@ -28,10 +28,11 @@ class StatusDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'id'     => 'required|exists:games_types,id',
-                'status' => 'required|in:0,1',
-               ];
+        $rules = [
+                  'id'     => 'required|exists:game_types,id',
+                  'status' => 'required|in:0,1',
+                 ];
+        return $rules;
     }
 
     /**
@@ -39,11 +40,12 @@ class StatusDoRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        return [
-                'id.required'     => 'ID不存在',
-                'id.exists'       => 'ID不存在',
-                'status.required' => '请选择状态',
-                'status.in'       => '所选状态不存在',
-               ];
+        $messages = [
+                     'id.required'     => 'ID不存在',
+                     'id.exists'       => 'ID不存在',
+                     'status.required' => '请选择状态',
+                     'status.in'       => '所选状态不存在',
+                    ];
+        return $messages;
     }
 }

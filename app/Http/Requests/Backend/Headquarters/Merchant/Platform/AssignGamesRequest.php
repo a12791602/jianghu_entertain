@@ -29,17 +29,17 @@ class AssignGamesRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $platformSign = $this->get('platform_sign');
-        $unique       = Rule::unique('games_platforms', 'game_sign')
-            ->where('platform_sign', $platformSign);
+        $platform = $this->get('platform_id');
+        $unique   = Rule::unique('game_platforms', 'game_id')
+            ->where('platform_id', $platform);
         return [
-                'platform_sign' => 'required|exists:system_platforms,sign',
-                'game_signs'    => 'required|array',
-                'game_signs.*'  => [
-                                    'required',
-                                    'exists:games,sign',
-                                    $unique,
-                                   ],
+                'platform_id' => 'required|exists:system_platforms,id',
+                'game_ids'    => 'required|array',
+                'game_ids.*'  => [
+                                  'required',
+                                  'exists:games,id',
+                                  $unique,
+                                 ],
                ];
     }
 
@@ -49,13 +49,13 @@ class AssignGamesRequest extends BaseFormRequest
     public function messages(): array
     {
         return [
-                'platform_sign.required' => '请选择厅主',
-                'platform_sign.exists'   => '所选厅主不存在',
-                'game_signs.required'    => '请选择游戏',
-                'game_signs.array'       => '游戏格式不正确',
-                'game_signs.*.required'  => '请选择游戏',
-                'game_signs.*.exists'    => '所选游戏不存在',
-                'game_signs.*.unique'    => '您所选的游戏已经分配过了',
+                'platform_id.required' => '请选择厅主',
+                'platform_id.exists'   => '所选厅主不存在',
+                'game_ids.required'    => '请选择游戏',
+                'game_ids.array'       => '游戏格式不正确',
+                'game_ids.*.required'  => '请选择游戏',
+                'game_ids.*.exists'    => '所选游戏不存在',
+                'game_ids.*.unique'    => '您所选的游戏已经分配过了',
                ];
     }
 
@@ -64,6 +64,6 @@ class AssignGamesRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['game_signs' => 'cast:array'];
+        return ['game_ids' => 'cast:array'];
     }
 }
