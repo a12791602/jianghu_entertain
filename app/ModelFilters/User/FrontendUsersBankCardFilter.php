@@ -16,7 +16,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = ['user' => ['mobile']];
 
     /**
      * ID
@@ -31,26 +31,14 @@ class FrontendUsersBankCardFilter extends ModelFilter
     }
 
     /**
-     * 用户UID
+     * 用户ID
      *
-     * @param  integer $uniqid 用户UID.
+     * @param  integer $userId 用户ID.
      * @return FrontendUsersBankCardFilter
      */
-    public function uniqid(int $uniqid): FrontendUsersBankCardFilter
+    public function userId(int $userId): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('uid', $uniqid);
-        return $eloq;
-    }
-
-    /**
-     * 用户手机号
-     *
-     * @param  integer $mobile 用户手机号.
-     * @return FrontendUsersBankCardFilter
-     */
-    public function mobile(int $mobile): FrontendUsersBankCardFilter
-    {
-        $eloq = $this->where('mobile', $mobile);
+        $eloq = $this->where('user_id', $userId);
         return $eloq;
     }
 

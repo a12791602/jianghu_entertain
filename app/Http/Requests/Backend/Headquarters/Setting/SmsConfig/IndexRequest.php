@@ -17,11 +17,6 @@ class IndexRequest extends BaseFormRequest
     protected $dependentModels = [SystemSmsConfig::class];
 
     /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
-     */
-    protected $extraDefinition = ['updatedAt' => '更新时间'];
-
-    /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
@@ -39,9 +34,9 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'      => 'string', //最后更新人名称
-                'updatedAt' => 'string', //更新时间
-                'status'    => 'in:0,1', //状态 0禁用 1启用
+                'name'       => 'string', //最后更新人名称
+                'updated_at' => 'string', //更新时间
+                'status'     => 'in:0,1', //状态 0禁用 1启用
                ];
     }
 }

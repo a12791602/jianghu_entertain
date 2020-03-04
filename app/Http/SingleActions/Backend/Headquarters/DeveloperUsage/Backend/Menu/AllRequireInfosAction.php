@@ -59,7 +59,7 @@ class AllRequireInfosAction extends MainAction
 
         $routeInfo = [];
 
-        foreach ($routeCollection as $dataKey => $route) {
+        foreach ($routeCollection as $route) {
             if (!isset($route->action['as'])
                 || $route->action['prefix'] === '_debugbar'
                 || preg_match('#^' . $routeEndKey . '#', $route->action['as']) !== 1
@@ -67,10 +67,13 @@ class AllRequireInfosAction extends MainAction
             ) {
                 continue;
             }
-            $routeShortData[$dataKey]['url']        = $route->uri;
-            $routeShortData[$dataKey]['controller'] = $route->action['controller'];
-            $routeShortData[$dataKey]['route_name'] = $route->action['as'];
-            $routeInfo[]                            = $routeShortData[$dataKey];
+
+            $routeShortData = [
+                               'url'        => $route->uri,
+                               'controller' => $route->action['controller'],
+                               'route_name' => $route->action['as'],
+                              ];
+            $routeInfo[]    = $routeShortData;
             //$routeInfo[$r->action['as']] = $r->uri;
         }
         return $routeInfo;
@@ -86,14 +89,16 @@ class AllRequireInfosAction extends MainAction
     private function _getAllRouteInfo(array $routeCollection): array
     {
         $routeInfo = [];
-        foreach ($routeCollection as $dataKey => $route) {
+        foreach ($routeCollection as $route) {
             if (!isset($route->action['as']) || $route->action['prefix'] === '_debugbar') {
                 continue;
             }
-            $routeShortData[$dataKey]['url']        = $route->uri;
-            $routeShortData[$dataKey]['controller'] = $route->action['controller'];
-            $routeShortData[$dataKey]['route_name'] = $route->action['as'];
-            $routeInfo[]                            = $routeShortData[$dataKey];
+            $routeShortData = [
+                               'url'        => $route->uri,
+                               'controller' => $route->action['controller'],
+                               'route_name' => $route->action['as'],
+                              ];
+            $routeInfo[]    = $routeShortData;
         }
         return $routeInfo;
     }

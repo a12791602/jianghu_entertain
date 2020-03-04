@@ -30,6 +30,16 @@ class FrontendUsersBankCard extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'user_id'    => '用户ID',
+                                      'mobile'     => '手机号码',
+                                      'bank_id'    => '银行名称',
+                                      'created_at' => '绑定时间',
+                                     ];
+
+    /**
      * Hide the user's bank number. ****
      * @return string
      */
@@ -53,5 +63,15 @@ class FrontendUsersBankCard extends BaseModel
     {
         $bank = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
         return $bank;
+    }
+
+    /**
+     * 所属会员
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        $user = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
+        return $user;
     }
 }

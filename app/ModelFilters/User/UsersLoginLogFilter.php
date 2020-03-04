@@ -21,12 +21,12 @@ class UsersLoginLogFilter extends ModelFilter
     /**
      * 用户UID查询
      *
-     * @param  string $uniqueId 用户UID.
+     * @param  string $guid 用户UID.
      * @return UsersLoginLogFilter
      */
-    public function uniqueId(string $uniqueId): UsersLoginLogFilter
+    public function guid(string $guid): UsersLoginLogFilter
     {
-        $eloq = $this->where('uid', $uniqueId);
+        $eloq = $this->where('guid', $guid);
         return $eloq;
     }
 

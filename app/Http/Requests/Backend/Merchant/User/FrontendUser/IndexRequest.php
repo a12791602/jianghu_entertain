@@ -21,11 +21,7 @@ class IndexRequest extends BaseFormRequest
      */
     protected $extraDefinition = [
                                   'parent_mobile' => '上级帐号',
-                                  'isOnline'      => '在线状态',
-                                  'lastLoginIp'   => '登录IP',
-                                  'registerIp'    => '注册IP',
                                   'role'          => '权限',
-                                  'createAt'      => '注册时间',
                                  ];
 
     /**
@@ -49,10 +45,10 @@ class IndexRequest extends BaseFormRequest
                 'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
                 'guid'          => 'string', //用户UID
                 'parent_mobile' => ['regex' => 'regex:/^1[345789]\d{9}$/'], //上级手机号码
-                'isOnline'      => 'integer|in:0,1', //0离线 1在线
-                'lastLoginIp'   => 'ip', //最后登陆IP
-                'registerIp'    => 'ip', //注册IP
-                'createAt'      => 'string', //注册时间
+                'is_online'     => 'integer|in:0,1', //0离线 1在线
+                'last_login_ip' => 'ip', //最后登陆IP
+                'register_ip'   => 'ip', //注册IP
+                'create_at'     => 'string', //注册时间
                ];
     }
 

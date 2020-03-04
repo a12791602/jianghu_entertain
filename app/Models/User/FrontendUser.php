@@ -89,8 +89,9 @@ class FrontendUser extends BaseAuthModel
                                       'user_tag_id'      => '用户标签id',
                                       'status'           => '状态',
                                       'invite_code'      => '邀请码',
-                                      'is_online'        => '是否在线',
+                                      'is_online'        => '在线状态',
                                       'device_code'      => '设备',
+                                      'create_at'        => '注册时间',
                                      ];
 
     /**

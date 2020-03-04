@@ -3,22 +3,18 @@
 namespace App\Http\Requests\Backend\Merchant\User\FrontendUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\UsersLoginLog;
 
 /**
- * 用户登陆几率
+ * 用户登陆记录
  */
 class LoginLogRequest extends BaseFormRequest
 {
 
     /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array 需要依赖模型中的字段备注信息
      */
-    protected $extraDefinition = [
-                                  'mobile'      => '会员账号',
-                                  'uniqueId'    => '会员UID',
-                                  'createAt'    => '登录日期',
-                                  'lastLoginIp' => '登录IP',
-                                 ];
+    protected $dependentModels = [UsersLoginLog::class];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -38,10 +34,10 @@ class LoginLogRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'mobile'      => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
-                'uniqueId'    => 'string', //用户UID
-                'createAt'    => 'string', //登陆时间
-                'lastLoginIp' => 'ip', //登陆IP
+                'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //手机号码
+                'guid'          => 'string', //用户UID
+                'create_at'     => 'string', //登陆时间
+                'last_login_ip' => 'ip', //登陆IP
                ];
     }
 }

@@ -30,6 +30,7 @@ class SystemSmsConfig extends BaseModel
                                       'sms_num'            => '短信数量',
                                       'authorization_code' => '授权码',
                                       'status'             => '状态',
+                                      'updated_at'         => '更新时间',
                                      ];
 
     /**

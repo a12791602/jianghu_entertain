@@ -474,6 +474,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'sendIndex',
              ],
              [
+              'route_name'    => 'merchant-api.report.user-audit',
+              'menu_group_id' => 34,
+              'title'         => '报表管理-会员稽核-列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Report\ReportController',
+              'method'        => 'userAudit',
+             ],
+             [
               'route_name'    => 'merchant-api.game.upload',
               'menu_group_id' => 34,
               'title'         => '游戏管理-游戏-上传图片',
