@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class CreateGamesTable
  */
-class CreateFrontendUsersAuditTable extends Migration
+class CreateFrontendUsersAuditsTable extends Migration
 {
 
     /**
