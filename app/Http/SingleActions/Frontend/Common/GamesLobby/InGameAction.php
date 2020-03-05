@@ -33,18 +33,14 @@ class InGameAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $curentVendorObj = '';
-        $curentGameObj   = '';
         $factoryInstance = FactoryService::getInstence();
         $result          = $this->_checkcriteria($inputDatas);
-        /**
-         * @var GameVendor $curentVendorObj
-         * @var Game $curentGameObj
-         */
-        extract($result);
-        $curentGameObj   = $this->_string2null($curentGameObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
-        $curentVendorObj = $this->_string2null($curentVendorObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
-        $gameClass       = $factoryInstance->generateGame($curentVendorObj);
+        /** @var Game $curentGameObj */
+        $curentGameObj = null;
+        /** @var \App\Models\Game\GameVendor $curentVendorObj */
+        $curentVendorObj = null;
+        extract($result, EXTR_OVERWRITE);
+        $gameClass = $factoryInstance->generateGame($curentVendorObj);
         if ($gameClass === false) {
             throw new \Exception('100708');//'游戏服务出错!'
         }
@@ -60,16 +56,12 @@ class InGameAction extends MainAction
      */
     private function _checkcriteria(array $inputDatas): array
     {
-        $curentGameObj   = null;
+        $result = $this->_checkCriterial4Games($inputDatas);
+        /** @var Game $curentGameObj */
+        $curentGameObj = null;
+        /** @var \App\Models\Game\GameVendor $curentVendorObj */
         $curentVendorObj = null;
-        $result          = $this->_checkCriterial4Games($inputDatas);
-        /**
-         * @var GameVendor $curentVendorObj
-         * @var Game $curentGameObj
-         */
         extract($result);
-        $curentGameObj   = $this->_null2String($curentGameObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
-        $curentVendorObj = $this->_null2String($curentVendorObj);//这里100%不会有 null 的存在 只是上面的 extract stan 无法识别
         $this->_checkCriteria4InternalTB($curentGameObj, $inputDatas);
         $data = [
                  'curentGameObj'   => $curentGameObj,
@@ -150,25 +142,5 @@ class InGameAction extends MainAction
         if ($curentGameObj->id !== $pfDistributedGames->id) {
             throw new \Exception('100707');//'对不起,平台已分配游戏与原游戏不匹配!'
         }
-    }
-
-    /**
-     * @param object|null $variable Variable To Cast.
-     * @return object|string
-     */
-    private function _null2String(?object $variable)
-    {
-        $variable = $variable ?? '';
-        return $variable;
-    }
-
-    /**
-     * @param object|string|null $variable Variable To Cast.
-     * @return object|null
-     */
-    private function _string2null($variable): ?object
-    {
-        $variable = $variable === '' ? null : $variable;
-        return $variable;
     }
 }
