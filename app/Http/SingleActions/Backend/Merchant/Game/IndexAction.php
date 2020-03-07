@@ -25,18 +25,18 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas, int $device): JsonResponse
     {
-        $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $inputDatas['device']        = $device;
-        $datas                       = $this->model::with(
+        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
+        $inputDatas['device']      = $device;
+        $datas                     = $this->model::with(
             [
              'games:id,name,sign',
-             'vendor:games_vendors.id,games_vendors.name,games_vendors.sign',
+             'vendor:game_vendors.id,game_vendors.name,game_vendors.sign',
             ],
         )->orderByDesc('sort')
          ->filter($inputDatas, GamesPlatformFilter::class)
          ->withCacheCooldownSeconds(86400)
          ->get();
-        $result                      = msgOut($datas);
+        $result                    = msgOut($datas);
         return $result;
     }
 }

@@ -25,12 +25,12 @@ class GamesPlatformFilter extends ModelFilter
 
     /**
      * 根据平台标记查询
-     * @param string $platform_sign PlatformSign.
+     * @param string $platform_id PlatformSign.
      * @return GamesPlatformFilter
      */
-    public function platformSign(string $platform_sign): GamesPlatformFilter
+    public function platformId(string $platform_id): GamesPlatformFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
+        $object = $this->where('platform_id', $platform_id);
         return $object;
     }
 
@@ -58,12 +58,12 @@ class GamesPlatformFilter extends ModelFilter
 
     /**
      * 根据是否热门查找
-     * @param integer $is_hot IsHot.
+     * @param integer $hot_new IsHot.
      * @return GamesPlatformFilter
      */
-    public function isHot(int $is_hot): GamesPlatformFilter
+    public function hotNew(int $hot_new): GamesPlatformFilter
     {
-        $object = $this->where('is_hot', $is_hot);
+        $object = $this->where('hot_new', $hot_new);
         return $object;
     }
 }

@@ -21,7 +21,7 @@ class SendAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         if ((int) $inputDatas['is_head'] === 0) {
-            $inputDatas['receiver_ids'] = FrontendUser::whereIn('uid', $inputDatas['receivers'])
+            $inputDatas['receiver_ids'] = FrontendUser::whereIn('guid', $inputDatas['receivers'])
                 ->where('platform_sign', $this->currentPlatformEloq->sign)->get()->pluck('id')->toJson();
             $inputDatas['type']         = SystemEmail::TYPE_MER_TO_USER;
         } elseif ((int) $inputDatas['is_head'] === 1) {

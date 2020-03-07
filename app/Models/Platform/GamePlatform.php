@@ -30,8 +30,8 @@ class GamePlatform extends BaseModel
      * @var array
      */
     public static $fieldDefinition = [
-                                      'device' => '设备类型',
-                                      'is_hot' => '是否热门',
+                                      'device'  => '设备类型',
+                                      'hot_new' => '是否热门',
                                      ];
 
     /**
@@ -39,7 +39,7 @@ class GamePlatform extends BaseModel
      */
     public function games(): BelongsTo
     {
-        $object = $this->belongsTo(Game::class, 'game_sign', 'sign');
+        $object = $this->belongsTo(Game::class, 'game_id', 'id');
         return $object;
     }
 
@@ -48,7 +48,7 @@ class GamePlatform extends BaseModel
      */
     public function vendor(): HasOneThrough
     {
-        $object = $this->hasOneThrough(GameVendor::class, Game::class, 'sign', 'id', 'game_sign', 'vendor_id');
+        $object = $this->hasOneThrough(GameVendor::class, Game::class, 'id', 'id', 'id', 'vendor_id');
         return $object;
     }
 
@@ -57,7 +57,7 @@ class GamePlatform extends BaseModel
      */
     public function type(): HasOneThrough
     {
-        $object = $this->hasOneThrough(GameType::class, Game::class, 'sign', 'id', 'game_sign', 'type_id');
+        $object = $this->hasOneThrough(GameType::class, Game::class, 'id', 'id', 'id', 'type_id');
         return $object;
     }
 }

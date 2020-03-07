@@ -28,7 +28,7 @@ class StatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:games_platforms,id',
+                'id'     => 'required|exists:game_platforms,id',
                 'status' => 'required|in:0,1',
                ];
     }

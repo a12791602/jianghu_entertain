@@ -130,11 +130,15 @@ class DoAddAction extends MainAction
         }
         openssl_pkey_export($resourse, $privateKey);
         $publicKey = openssl_pkey_get_details($resourse);
-        $data      = [
-                      'private_key'  => $privateKey,
-                      'public_key'   => $publicKey['key'],
-                      'interval_str' => Str::random(11),
-                     ];
+        if ($publicKey === false) {
+            DB::rollback();
+            throw new \Exception('300715');
+        }
+        $data = [
+                 'private_key'  => $privateKey,
+                 'public_key'   => $publicKey['key'],
+                 'interval_str' => Str::random(11),
+                ];
         return $data;
     }
 
@@ -145,16 +149,31 @@ class DoAddAction extends MainAction
     private function _createConfig(): void
     {
         $platformSign = $this->platformEloq->sign;
-        SystemConfigurationStandard::get()->each(
+        SystemConfigurationStandard::where('pid', 0)->get()->each(
             static function ($config) use ($platformSign): void {
                 $addData                  = $config->toArray();
                 $configEloq               = new SystemConfiguration();
                 $addData['platform_sign'] = $platformSign;
+                unset($addData['id']);
                 $configEloq->fill($addData);
                 if (!$configEloq->save()) {
                     DB::rollback();
                     throw new \Exception('300717');
                 }
+                SystemConfigurationStandard::where('pid', $config->id)->get()->each(
+                    static function ($child) use ($platformSign, $configEloq): void {
+                        $addData                  = $child->toArray();
+                        $childEloq                = new SystemConfiguration();
+                        $addData['platform_sign'] = $platformSign;
+                        $addData['pid']           = $configEloq->id;
+                        unset($addData['id']);
+                        $childEloq->fill($addData);
+                        if (!$childEloq->save()) {
+                            DB::rollback();
+                            throw new \Exception('300717');
+                        }
+                    },
+                );
             },
         );
     }

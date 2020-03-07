@@ -28,7 +28,7 @@ class UploadRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'   => 'required|integer|min:1|exists:games_platforms,id',
+                'id'   => 'required|integer|min:1|exists:game_platforms,id',
                 'icon' => 'required|string|min:1|max:256',
                ];
     }

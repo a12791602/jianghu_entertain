@@ -26,8 +26,8 @@ class CreateSystemConfigurationStandardsTable extends Migration
                 $table->string('sign', 32)->nullable()->default(null)->comment('标识');
                 $table->string('name', 32)->nullable()->default(null)->comment('名称');
                 $table->string('value', 128)->nullable()->default(null)->comment('配置的值');
-                $table->integer('last_update_admin_id')->default('0')->comment('上次更改人id');
-                $table->tinyInteger('status')->default('0')->comment('0 禁用 1 启用');
+                $table->tinyInteger('status')->default(0)->comment('状态 0禁用 1启用');
+                $table->tinyInteger('display')->default(0)->comment('是否显示 0否 1是');
                 $table->nullableTimestamps();
             },
         );

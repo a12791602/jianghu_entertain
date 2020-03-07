@@ -28,11 +28,11 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'vendor_id' => 'exists:games_vendors,id',
+                'vendor_id' => 'exists:game_vendors,id',
                 'name'      => 'string',
-                'type_id'   => 'required_unless:is_hot,1|exists:games_types,id',
+                'type_id'   => 'required_unless:hot_new,1|exists:game_types,id',
                 'status'    => 'in:0,1',
-                'is_hot'    => 'in:0,1',
+                'hot_new'   => 'in:0,1',
                ];
     }
 
@@ -47,7 +47,7 @@ class IndexRequest extends BaseFormRequest
                 'type_id.required_unless' => '请选择游戏分类',
                 'type_id.exists'          => '所选游戏分类不存在',
                 'status.in'               => '所选状态不在范围内',
-                'is_hot.in'               => '所选是否热门不在范围内',
+                'hot_new.in'              => '所选是否热门不在范围内',
                ];
     }
 }

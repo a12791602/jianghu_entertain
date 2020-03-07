@@ -29,7 +29,7 @@ class SortRequest extends BaseFormRequest
     {
         return [
                 'sorts'        => 'required|array',
-                'sorts.*.id'   => 'required|integer|exists:games_platforms,id',
+                'sorts.*.id'   => 'required|integer|exists:game_platforms,id',
                 'sorts.*.sort' => 'required|integer|min:1',
                ];
     }

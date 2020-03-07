@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\System;
 
 use App\Http\Requests\Backend\Merchant\System\Config\EditRequest;
 use App\Http\SingleActions\Backend\Merchant\System\Config\EditAction;
+use App\Http\SingleActions\Backend\Merchant\System\Config\IndexAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -11,6 +12,18 @@ use Illuminate\Http\JsonResponse;
  */
 class ConfigController
 {
+
+    /**
+     * 全域设置-列表
+     *
+     * @param  IndexAction $action Action.
+     * @return JsonResponse
+     */
+    public function index(IndexAction $action): JsonResponse
+    {
+        $msgOut = $action->execute();
+        return $msgOut;
+    }
 
     /**
      * 全域设置-编辑

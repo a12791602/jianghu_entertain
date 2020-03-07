@@ -3,13 +3,18 @@
 namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
+use App\Models\User\Logics\FrontendUsersAuditLogics;
 
 /**
  * 会员稽核
  */
 class FrontendUsersAudit extends BaseAuthModel
 {
-
+    /**
+     * 用户稽核Logics
+     */
+    use FrontendUsersAuditLogics;
+    
     /**
      * @var array $guarded
      */

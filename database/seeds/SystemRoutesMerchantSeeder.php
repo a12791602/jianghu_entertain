@@ -866,6 +866,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'switchAdmin',
              ],
              [
+              'route_name'    => 'merchant-api.config.index',
+              'menu_group_id' => 52,
+              'title'         => '设置管理-全域设置-列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\System\ConfigController',
+              'method'        => 'index',
+             ],
+             [
               'route_name'    => 'merchant-api.config.edit',
               'menu_group_id' => 52,
               'title'         => '设置管理-全域设置-修改设置',

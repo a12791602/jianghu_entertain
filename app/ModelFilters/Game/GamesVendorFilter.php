@@ -49,7 +49,7 @@ class GamesVendorFilter extends ModelFilter
      */
     public function vendor(int $vendor_id): GamesVendorFilter
     {
-        $object = $this->where('games_vendors.id', $vendor_id);
+        $object = $this->where('game_vendors.id', $vendor_id);
         return $object;
     }
 }

@@ -28,7 +28,7 @@ class RecommendRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'           => 'required|exists:games_platforms,id',
+                'id'           => 'required|exists:game_platforms,id',
                 'is_recommend' => 'required|in:0,1',
                ];
     }
