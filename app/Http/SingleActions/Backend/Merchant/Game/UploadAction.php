@@ -19,8 +19,8 @@ class UploadAction extends BaseAction
     {
         $result = $this->model::where(
             [
-             'id'            => $inputDatas['id'],
-             'platform_sign' => $this->user->platform_sign,
+             'id'          => $inputDatas['id'],
+             'platform_id' => $this->user->platform_id,
             ],
         )->update(['icon' => $inputDatas['icon']]);
         if ($result) {
