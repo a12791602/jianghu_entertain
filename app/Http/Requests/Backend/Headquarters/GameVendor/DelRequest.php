@@ -29,21 +29,11 @@ class DelRequest extends BaseFormRequest
     public function rules():array
     {
         if ($this->isMethod('post')) {
-            return [
-                'id' => 'required|exists:games_vendors,id',
+            $rules = [
+                'id' => 'required|exists:game_vendors,id',
             ];
+            return $rules;
         }
         return [];
-    }
-
-    /**
-     * @return array
-     */
-    public function messages():array
-    {
-        return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-        ];
     }
 }

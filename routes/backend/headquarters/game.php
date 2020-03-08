@@ -31,20 +31,16 @@ Route::group(
     ['prefix' => 'game-vendor'],
     static function (): void {
         $namePrefix = 'headquarters-api.game-vendor.';
-        Route::post('add-do', [BackendGameVendorController::class, 'addDo'])
-            ->name($namePrefix . 'add-do');
-        Route::post('edit-do', [BackendGameVendorController::class, 'editDo'])
-            ->name($namePrefix . 'edit-do');
-        Route::get('index-do', [BackendGameVendorController::class, 'indexDo'])
-            ->name($namePrefix . 'index-do');
+        Route::post('opt-add-do', [BackendGameVendorController::class, 'addDo'])
+            ->name($namePrefix . 'opt-add-do');
+        Route::post('opt-edit-do', [BackendGameVendorController::class, 'editDo'])
+            ->name($namePrefix . 'opt-edit-do');
         Route::get('opt-index-do', [BackendGameVendorController::class, 'indexDo'])
-            ->name($namePrefix . 'opt-index-do'); //运营使用
-        Route::post('del-do', [BackendGameVendorController::class, 'delDo'])
-            ->name($namePrefix . 'del-do');
-        Route::post('status-do', [BackendGameVendorController::class, 'statusDo'])
-            ->name($namePrefix . 'status-do');
-        Route::post('opt-status-do', [BackendGameVendorController::class, 'statusDo'])
-            ->name($namePrefix . 'opt-status-do');//运营使用
+            ->name($namePrefix . 'opt-index-do');
+        Route::get('opt-opt-index-do', [BackendGameVendorController::class, 'indexDo'])
+            ->name($namePrefix . 'opt-index-do');
+        Route::post('opt-del-do', [BackendGameVendorController::class, 'delDo'])
+            ->name($namePrefix . 'opt-del-do');
     },
 );
 
@@ -57,8 +53,6 @@ Route::group(
             ->name($namePrefix . 'add-do');
         Route::post('edit-do', [BackendGameController::class, 'editDo'])
             ->name($namePrefix . 'edit-do');
-        Route::post('opt-edit-do', [BackendGameController::class, 'optEditDo'])
-            ->name($namePrefix . 'opt-edit-do');
         Route::get('index-do', [BackendGameController::class, 'indexDo'])
             ->name($namePrefix . 'index-do');
         Route::get('opt-index-do', [BackendGameController::class, 'indexDo'])
