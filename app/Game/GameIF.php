@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Core;
+namespace App\Game;
 
 use App\Http\SingleActions\MainAction;
 
@@ -10,7 +10,7 @@ use App\Http\SingleActions\MainAction;
  * Interface Game
  * @package App\Game\Core
  */
-interface Game
+interface GameIF
 {
 
     /**

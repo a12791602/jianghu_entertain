@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
+use App\Game\GameIF;
 use App\Models\User\FrontendUser;
 use App\Observers\FrontendUserObserver;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
@@ -35,6 +37,15 @@ class AppServiceProvider extends ServiceProvider
                 return $result;
             },
         );
+        $gameClass = Config::get('games_classes');
+        if (empty($gameClass)) {
+            return;
+        }
+        $gameClass = Arr::flatten($gameClass);
+        if (empty($gameClass)) {
+            return;
+        }
+        $this->app->tag($gameClass, GameIF::class);
     }
 
     /**

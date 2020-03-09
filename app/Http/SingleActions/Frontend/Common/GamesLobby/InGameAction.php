@@ -3,9 +3,9 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
+use App\JHHYLibs\GameCommons;
 use App\JHHYLibs\JHHYCnst;
 use App\Models\Game\Game;
-use App\Services\FactoryService;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,19 +33,15 @@ class InGameAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $factoryInstance = FactoryService::getInstence();
-        $result          = $this->_checkcriteria($inputDatas);
+        $result = $this->_checkcriteria($inputDatas);
         /** @var Game $curentGameObj */
         $curentGameObj = null;
         /** @var \App\Models\Game\GameVendor $curentVendorObj */
         $curentVendorObj = null;
         extract($result, EXTR_OVERWRITE);
-        $gameClass = $factoryInstance->generateGame($curentVendorObj);
-        if ($gameClass === false) {
-            throw new \Exception('100708');//'游戏服务出错!'
-        }
-        $result = $gameClass->game($curentGameObj, $this);
-        $msgOut = msgOut($result);
+        $gameInstance = GameCommons::gameInit($curentVendorObj);
+        $result       = $gameInstance->game($curentGameObj, $this);
+        $msgOut       = msgOut($result);
         return $msgOut;
     }
 

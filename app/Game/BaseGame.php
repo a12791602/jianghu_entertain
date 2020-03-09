@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\Core;
+namespace App\Game;
 
 use App\Models\Game\GameVendor;
 
@@ -8,7 +8,7 @@ use App\Models\Game\GameVendor;
  * Class Base
  * @package App\Game\Core
  */
-abstract class Base implements Game
+abstract class BaseGame implements GameIF
 {
 
     /**
@@ -27,10 +27,11 @@ abstract class Base implements Game
     protected $sysObj;
 
     /**
-     * Base constructor.
+     * 赋值.
      * @param GameVendor $vendor GameVendor.
+     * @return void
      */
-    public function __construct(GameVendor $vendor)
+    public function setVendor(GameVendor $vendor): void
     {
         $this->gameVendor = $vendor;
     }
