@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\FinanceVendor;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceVendor;
 
 /**
  * Class IndexDoRequest
@@ -11,6 +12,13 @@ use App\Http\Requests\BaseFormRequest;
  */
 class IndexDoRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [SystemFinanceVendor::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -31,17 +39,6 @@ class IndexDoRequest extends BaseFormRequest
         return [
             'status' => 'in:0,1',
             'name' => 'string',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function messages() :array
-    {
-        return [
-            'status.in' => '所选状态不存在',
-            'name.string' => '分类名称不符合规则',
         ];
     }
 }

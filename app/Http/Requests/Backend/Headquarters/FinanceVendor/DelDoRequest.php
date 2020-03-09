@@ -29,20 +29,11 @@ class DelDoRequest extends BaseFormRequest
     public function rules():array
     {
         if ($this->isMethod('post')) {
-            return [
-                'id' => 'required|exists:system_finance_vendors,id',
-            ];
+            $rules = [
+                      'id' => 'required|exists:system_finance_vendors,id',
+                     ];
+            return $rules;
         }
         return [];
-    }
-    /**
-     * @return array
-     */
-    public function messages():array
-    {
-        return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-        ];
     }
 }

@@ -21,7 +21,6 @@ class GameVendorSeeder extends Seeder
               'name'            => '开源棋牌',
               'sign'            => 'ky',
               'type_id'         => 1,
-              'whitelist_ips'   => '["10.10.10.1"]',
               'sort'            => 1,
               'status'          => 1,
               'urls'            => '{"login":"login.third-party.com","account_query_url":"account.third-party.com","top_up_url":"top.third-party.com","draw_out_url":"draw.third-party.com","order_query_url":"order.third-party.com","user_active_query_url":"online.third-party.com","game_order_query_url":"game-order.third-party.com","user_total_status_query_url":"user_total.third-party.com","kick_out_url":"kick.third-party.com","agent_account_query_url":"agent_account.third-party.com"}',

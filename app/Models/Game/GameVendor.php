@@ -5,7 +5,9 @@ namespace App\Models\Game;
 use App\ModelFilters\Game\GamesVendorFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\Systems\SystemIpWhiteList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class GameVendor
@@ -75,6 +77,15 @@ class GameVendor extends BaseModel
     public function author(): BelongsTo
     {
         $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function whiteList(): HasOne
+    {
+        $object = $this->hasOne(SystemIpWhiteList::class, 'game_vendor_id', 'id');
         return $object;
     }
 

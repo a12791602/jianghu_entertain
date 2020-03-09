@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\FinanceVendor;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceVendor;
 
 /**
  * Class AddDoRequest
@@ -11,6 +12,21 @@ use App\Http\Requests\BaseFormRequest;
  */
 class AddDoRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [SystemFinanceVendor::class];
+
+    /**
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
+     */
+    protected $extraDefinition = [
+        'whitelist_ips.*' => '白名单',
+    ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,31 +44,14 @@ class AddDoRequest extends BaseFormRequest
      */
     public function rules():array
     {
-        return [
-            'name' => 'required|unique:system_finance_vendors,name',
-            'sign' => ['required', 'unique:system_finance_vendors,sign', 'regex:/\w+/'],
-            'whitelist_ips' => 'array',
-            'whitelist_ips.*' => 'ip',
-            'status' => 'required|in:0,1',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function messages():array
-    {
-        return [
-            'name.required' => '请填写厂商名称',
-            'name.unique' => '厂商名称已存在',
-            'sign.required' => '请填写厂商标记',
-            'sign.unique' => '厂商标记已存在',
-            'sign.regex' => '厂商标记只能包含数字,字母,下划线',
-            'whitelist_ips.array' => 'ip白名单格式不正确',
-            'whitelist_ips.*.ip' => 'ip格式不正确',
-            'status.required' => '请选择状态',
-            'status.in' => '所选择状态不存在',
-        ];
+        $rules = [
+                  'name'            => 'required|unique:system_finance_vendors,name',
+                  'sign'            => 'required|alpha_dash|unique:system_finance_vendors,sign',
+                  'whitelist_ips'   => 'array',
+                  'whitelist_ips.*' => 'ip',
+                  'status'          => 'required|in:0,1',
+                 ];
+        return $rules;
     }
 
     /**

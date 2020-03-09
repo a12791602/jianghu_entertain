@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder
              SystemFinanceOnlineInfoSeeder::class,
              SystemFinanceTypeSeeder::class,
              SystemFinanceVendorSeeder::class,
+             SystemIpWhiteListSeeder::class,
              UsersTagSeeder::class,
              SystemPlatformSslSeeder::class,
              SystemConfigurationSeeder::class,

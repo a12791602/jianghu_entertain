@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\FinanceVendor;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Finance\SystemFinanceVendor;
 
 /**
  * Class StatusDoRequest
@@ -11,6 +12,13 @@ use App\Http\Requests\BaseFormRequest;
  */
 class StatusDoRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [SystemFinanceVendor::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,22 +36,10 @@ class StatusDoRequest extends BaseFormRequest
      */
     public function rules() :array
     {
-        return [
-            'id' => 'required|exists:system_finance_vendors,id',
-            'status' => 'required|in:0,1',
-        ];
-    }
-
-    /**
-     * @return array
-     */
-    public function messages() :array
-    {
-        return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
-            'status.required' => '请选择状态',
-            'status.in' => '所选状态不存在',
-        ];
+        $rules = [
+                  'id' => 'required|exists:system_finance_vendors,id',
+                  'status' => 'required|in:0,1',
+                 ];
+        return $rules;
     }
 }

@@ -26,7 +26,6 @@ class CreateGameVendorsTable extends Migration
                 $table->string('name', 64)->nullable()->comment('厂商名称');
                 $table->string('sign', 64)->nullable()->comment('厂商标识');
                 $table->integer('type_id')->comment('游戏类型id');
-                $table->string('whitelist_ips')->nullable()->comment('白名单');
                 $table->integer('sort')->nullable()->comment('排序');
                 $table->tinyInteger('status')->comment('状态 0 禁用 1 启用');
                 $table->text('urls')->nullable()->comment('存放三方调用urls');
