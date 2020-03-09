@@ -6,6 +6,7 @@ use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
+use App\Models\User\FrontendUsersAudit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
@@ -29,6 +30,19 @@ class AccountChange
     protected $account;
 
     /**
+     * @var array
+     */
+    protected $rechargeTypes = [
+                                'recharge',
+                                'artificial_recharge',
+                               ];
+
+    /**
+     * @var array
+     */
+    protected $activityTypes = ['gift'];
+
+    /**
      * @param FrontendUsersAccount $account 账户Model.
      */
     public function __construct(FrontendUsersAccount $account)
@@ -45,7 +59,10 @@ class AccountChange
      */
     public function doChange(array $inputDatas, string $typeSign, array $params)
     {
-        $user       = $this->account->frontendUser;
+        $user = $this->account->frontendUser;
+        if (!$user) {
+            throw new \Exception('100206');
+        }
         $typeConfig = FrontendUsersAccountsType::getTypeBySign($typeSign);
         //　1. 获取帐变配置
         $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);
@@ -81,6 +98,8 @@ class AccountChange
             $beforeFrozen,
             $amount,
         );
+        //稽核处理
+        $this->_auditHandle($user, $typeConfig, $amount);
         return $saveData;
     }
 
@@ -226,7 +245,7 @@ class AccountChange
                    'type_name'             => $typeConfig['name'],
                    'type_sign'             => $typeConfig['sign'],
                    'in_out'                => $typeConfig['in_out'],
-                   'username'              => $user->specificInfo->nickname,
+                   'username'              => $user->specificInfo->nickname ?? null,
                    'before_balance'        => $beforeBalance,
                    'balance'               => $this->account->balance,
                    'frozen_balance'        => $this->account->frozen,
@@ -263,5 +282,38 @@ class AccountChange
             return $currentPlatform->sign;
         }
         return 'JHHY';
+    }
+
+    /**
+     * 稽核处理
+     * @param  FrontendUser $user   用户Eloq.
+     * @param  array        $type   账变类型Arr.
+     * @param  float        $amount 金额.
+     * @return void
+     */
+    private function _auditHandle(FrontendUser $user, array $type, float $amount): void
+    {
+        $sign      = $this->_getCurrentPlatformSign();
+        $userAudit = new FrontendUsersAudit();
+        if (in_array($type['sign'], $this->rechargeTypes)) {
+            $demandBet = $this->_getDemandBet($sign, $amount, 'recharge_audit_times');
+            $userAudit->createAudit($user, $type, $amount, $demandBet);
+        } elseif (in_array($type['sign'], $this->activityTypes)) {
+            $demandBet = $this->_getDemandBet($sign, $amount, 'activity_audit_times');
+            $userAudit->createAudit($user, $type, $amount, $demandBet);
+        }
+    }
+
+    /**
+     * @param  string $platformSign 平台标识.
+     * @param  float  $amount       金额.
+     * @param  string $configSign   系统配置标识.
+     * @return float
+     */
+    private function _getDemandBet(string $platformSign, float $amount, string $configSign): float
+    {
+        $auditTimes = configure($platformSign, $configSign);
+        $demandBet  = $amount * $auditTimes;
+        return $demandBet;
     }
 }
