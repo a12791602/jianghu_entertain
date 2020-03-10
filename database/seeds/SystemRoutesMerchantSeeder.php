@@ -963,7 +963,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.login',
-              'menu_group_id' => 57,
+              'menu_group_id' => 58,
               'title'         => '登录',
               'is_open'       => 1,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MerchantAuthController',
@@ -971,7 +971,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.logout',
-              'menu_group_id' => 57,
+              'menu_group_id' => 58,
               'title'         => '登出',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MerchantAuthController',
@@ -979,7 +979,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.menu.current-admin-menu',
-              'menu_group_id' => 57,
+              'menu_group_id' => 58,
               'title'         => '当前管理员拥有的菜单',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MenuController',
@@ -987,28 +987,28 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.upload',
-              'menu_group_id' => 57,
+              'menu_group_id' => 58,
               'title'         => '上传图片',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\CommonApi\UploadController',
               'method'        => 'upload',
              ],
-             // [
-             //  'route_name'    => 'merchant-api.game.ackIn',
-             //  'menu_group_id' => null,
-             //  'title'         => '',
-             //  'is_open'       => 1,
-             //  'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
-             //  'method'        => 'ackIn',
-             // ],
-             // [
-             //  'route_name'    => 'merchant-api.game.ackOut',
-             //  'menu_group_id' => null,
-             //  'title'         => '',
-             //  'is_open'       => 1,
-             //  'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
-             //  'method'        => 'ackOut',
-             // ],
+             [
+              'route_name'    => 'merchant-api.game.ackOut',
+              'menu_group_id' => 59,
+              'title'         => '玩家追号，投注等接受回调地址',
+              'is_open'       => 1,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
+              'method'        => 'ackOut',
+             ],
+             [
+              'route_name'    => 'merchant-api.game.ackIn',
+              'menu_group_id' => 59,
+              'title'         => '玩家撤单，余额退回平台接收地址',
+              'is_open'       => 1,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
+              'method'        => 'ackIn',
+             ],
              
              // [
              //  'route_name'    => 'merchant-api.bank.index',

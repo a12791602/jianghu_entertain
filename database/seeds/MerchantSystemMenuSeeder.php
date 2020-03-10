@@ -18,6 +18,7 @@ class MerchantSystemMenuSeeder extends Seeder
         MerchantSystemMenu::insert(
             [
              [
+              'id'      => 1,
               'label'   => '首页',
               'en_name' => '',
               'route'   => '#',
@@ -28,6 +29,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 2,
               'label'   => '首页',
               'en_name' => '',
               'route'   => '#',
@@ -38,6 +40,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 3,
               'label'   => '会员管理',
               'en_name' => '',
               'route'   => '#',
@@ -48,6 +51,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 4,
               'label'   => '会员列表',
               'en_name' => '',
               'route'   => '#',
@@ -58,6 +62,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 5,
               'label'   => '登录记录',
               'en_name' => '',
               'route'   => '#',
@@ -68,6 +73,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 6,
               'label'   => '标签管理',
               'en_name' => '',
               'route'   => '#',
@@ -78,6 +84,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 7,
               'label'   => '黑名单管理',
               'en_name' => '',
               'route'   => '#',
@@ -88,6 +95,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 8,
               'label'   => '等级设置',
               'en_name' => '',
               'route'   => '#',
@@ -98,6 +106,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 9,
               'label'   => '洗码设置',
               'en_name' => '',
               'route'   => '#',
@@ -108,6 +117,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 10,
               'label'   => '财务管理',
               'en_name' => '',
               'route'   => '#',
@@ -118,6 +128,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 11,
               'label'   => '入款订单',
               'en_name' => '',
               'route'   => '#',
@@ -128,6 +139,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 12,
               'label'   => '人工存取',
               'en_name' => '',
               'route'   => '#',
@@ -138,6 +150,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 13,
               'label'   => '出款审核',
               'en_name' => '',
               'route'   => '#',
@@ -148,6 +161,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 14,
               'label'   => '出款订单',
               'en_name' => '',
               'route'   => '#',
@@ -158,6 +172,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 15,
               'label'   => '资金帐变',
               'en_name' => '',
               'route'   => '#',
@@ -168,6 +183,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 16,
               'label'   => '公告管理',
               'en_name' => '',
               'route'   => '#',
@@ -178,6 +194,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 17,
               'label'   => '跑马灯消息',
               'en_name' => '',
               'route'   => '#',
@@ -188,6 +205,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 18,
               'label'   => '系统公告',
               'en_name' => '',
               'route'   => '#',
@@ -198,6 +216,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 19,
               'label'   => '登录弹窗公告',
               'en_name' => '',
               'route'   => '#',
@@ -208,6 +227,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 20,
               'label'   => '轮播公告',
               'en_name' => '',
               'route'   => '#',
@@ -218,6 +238,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 21,
               'label'   => '邮件系统',
               'en_name' => '',
               'route'   => '#',
@@ -228,6 +249,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 22,
               'label'   => '发邮件',
               'en_name' => '',
               'route'   => '#',
@@ -238,6 +260,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 23,
               'label'   => '收件箱',
               'en_name' => '',
               'route'   => '#',
@@ -248,6 +271,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 24,
               'label'   => '已发邮件',
               'en_name' => '',
               'route'   => '#',
@@ -258,6 +282,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 25,
               'label'   => '短信推送',
               'en_name' => '',
               'route'   => '#',
@@ -268,6 +293,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 26,
               'label'   => '报表管理',
               'en_name' => '',
               'route'   => '#',
@@ -278,6 +304,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 27,
               'label'   => '个人报表',
               'en_name' => '',
               'route'   => '#',
@@ -288,6 +315,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 28,
               'label'   => '游戏报表',
               'en_name' => '',
               'route'   => '#',
@@ -298,6 +326,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 29,
               'label'   => '公司报表',
               'en_name' => '',
               'route'   => '#',
@@ -308,6 +337,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 30,
               'label'   => '会员稽查',
               'en_name' => '',
               'route'   => '#',
@@ -318,6 +348,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 31,
               'label'   => '平台注单',
               'en_name' => '',
               'route'   => '#',
@@ -328,6 +359,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 32,
               'label'   => '活动报表',
               'en_name' => '',
               'route'   => '#',
@@ -338,6 +370,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 33,
               'label'   => '会员洗码',
               'en_name' => '',
               'route'   => '#',
@@ -348,6 +381,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 34,
               'label'   => '游戏管理',
               'en_name' => '',
               'route'   => '#',
@@ -358,6 +392,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 35,
               'label'   => 'H5游戏管理',
               'en_name' => '',
               'route'   => '#',
@@ -368,6 +403,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 36,
               'label'   => 'PC游戏管理',
               'en_name' => '',
               'route'   => '#',
@@ -378,6 +414,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 37,
               'label'   => 'APP游戏管理',
               'en_name' => '',
               'route'   => '#',
@@ -388,6 +425,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 38,
               'label'   => '平台管理',
               'en_name' => '',
               'route'   => '#',
@@ -398,6 +436,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 39,
               'label'   => '分类管理',
               'en_name' => '',
               'route'   => '#',
@@ -408,6 +447,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 40,
               'label'   => '活动管理',
               'en_name' => '',
               'route'   => '#',
@@ -418,6 +458,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 41,
               'label'   => '静态活动',
               'en_name' => '',
               'route'   => '#',
@@ -428,6 +469,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 42,
               'label'   => '动态活动',
               'en_name' => '',
               'route'   => '#',
@@ -438,6 +480,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 43,
               'label'   => '金流管理',
               'en_name' => '',
               'route'   => '#',
@@ -448,6 +491,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 44,
               'label'   => '线下支付配置',
               'en_name' => '',
               'route'   => '#',
@@ -458,6 +502,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 45,
               'label'   => '线上金流配置',
               'en_name' => '',
               'route'   => '#',
@@ -468,6 +513,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 46,
               'label'   => '出款银行管理',
               'en_name' => '',
               'route'   => '#',
@@ -478,6 +524,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 47,
               'label'   => '推广配置',
               'en_name' => '',
               'route'   => '#',
@@ -488,6 +535,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 48,
               'label'   => '推广配置',
               'en_name' => '',
               'route'   => '#',
@@ -498,6 +546,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 49,
               'label'   => '推广图片配置',
               'en_name' => '',
               'route'   => '#',
@@ -508,6 +557,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 50,
               'label'   => '设置管理',
               'en_name' => '',
               'route'   => '#',
@@ -518,6 +568,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 51,
               'label'   => '管理员分组',
               'en_name' => '',
               'route'   => '#',
@@ -528,6 +579,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 52,
               'label'   => '全域设置',
               'en_name' => '',
               'route'   => '#',
@@ -538,6 +590,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 53,
               'label'   => '客服设置',
               'en_name' => '',
               'route'   => '#',
@@ -548,6 +601,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 54,
               'label'   => '帮助设置',
               'en_name' => '',
               'route'   => '#',
@@ -558,6 +612,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 55,
               'label'   => '操作记录',
               'en_name' => '',
               'route'   => '#',
@@ -568,6 +623,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => 56,
               'label'   => '银行卡反查中心',
               'en_name' => '',
               'route'   => '#',
@@ -578,10 +634,33 @@ class MerchantSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
-              'label'   => '全域',
+              'id'      => 57,
+              'label'   => '系统设置',
               'en_name' => '',
               'route'   => '#',
               'pid'     => 0,
+              'display' => 0,
+              'level'   => 1,
+              'sort'    => 12,
+              'type'    => 1,
+             ],
+             [
+              'id'      => 58,
+              'label'   => '全域',
+              'en_name' => '',
+              'route'   => '#',
+              'pid'     => 57,
+              'display' => 0,
+              'level'   => 1,
+              'sort'    => 12,
+              'type'    => 1,
+             ],
+             [
+              'id'      => 59,
+              'label'   => '游戏回调',
+              'en_name' => '',
+              'route'   => '#',
+              'pid'     => 57,
               'display' => 0,
               'level'   => 1,
               'sort'    => 12,

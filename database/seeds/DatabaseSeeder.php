@@ -31,7 +31,6 @@ class DatabaseSeeder extends Seeder
              MerchantSystemMenuSeeder::class,
              MerchantAdminAccessGroupSeeder::class,
              MerchantAdminUserSeeder::class,
-             MerchantSystemMenuSeeder::class,
              SystemPlatformSeeder::class,
              SystemRoutesBackendSeeder::class,
              SystemRoutesH5Seeder::class,

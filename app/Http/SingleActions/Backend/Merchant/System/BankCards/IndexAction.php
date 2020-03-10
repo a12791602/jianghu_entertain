@@ -38,11 +38,32 @@ class IndexAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
-        $data               = $this->model
+        $returnData         = $this->model
             ->filter($inputDatas, FrontendUsersBankCardFilter::class)
-            ->with('bank:id,name')
-            ->get(['id', 'mobile', 'owner_name', 'bank_id', 'card_number', 'created_at']);
-        $msgOut             = msgOut($data);
+            ->with(
+                [
+                 'bank:id,name',
+                 'user:id,mobile',
+                ],
+            )
+            ->select(['id', 'user_id', 'owner_name', 'bank_id', 'card_number', 'created_at'])
+            ->paginate($this->model::getPageSize())
+            ->toArray();
+        
+        $bankCards = [];
+        foreach ($returnData['data'] as $item) {
+            $data        = [
+                            'id'          => $item['id'],
+                            'owner_name'  => $item['owner_name'],
+                            'card_number' => $item['card_number'],
+                            'bank_name'   => $item['bank']['name'] ?? null,
+                            'mobile'      => $item['user']['mobile'] ?? null,
+                            'created_at'  => $item['created_at'],
+                           ];
+            $bankCards[] = $data;
+        }
+        $returnData['data'] = $bankCards;
+        $msgOut             = msgOut($returnData);
         return $msgOut;
     }
 }

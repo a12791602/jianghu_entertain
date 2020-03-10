@@ -144,38 +144,39 @@ class DoAddAction extends MainAction
 
     /**
      * 生成平台系统默认配置
+     * @throws \Exception Exception.
      * @return void
      */
     private function _createConfig(): void
     {
         $platformSign = $this->platformEloq->sign;
-        SystemConfigurationStandard::where('pid', 0)->get()->each(
-            static function ($config) use ($platformSign): void {
-                $addData                  = $config->toArray();
-                $configEloq               = new SystemConfiguration();
-                $addData['platform_sign'] = $platformSign;
-                unset($addData['id']);
-                $configEloq->fill($addData);
-                if (!$configEloq->save()) {
+        //生成父级配置
+        $parentConfigs = SystemConfigurationStandard::where('pid', 0)->get();
+        foreach ($parentConfigs as $parentConfig) {
+            $parentData                  = $parentConfig->toArray();
+            $configEloq                  = new SystemConfiguration();
+            $parentData['platform_sign'] = $platformSign;
+            unset($parentData['id']);
+            $configEloq->fill($parentData);
+            if (!$configEloq->save()) {
+                DB::rollback();
+                throw new \Exception('300717');
+            }
+            //生成子级配置
+            $childConfigs = SystemConfigurationStandard::where('pid', $parentConfig->id)->get();
+            foreach ($childConfigs as $childConfig) {
+                $childData                  = $childConfig->toArray();
+                $childEloq                  = new SystemConfiguration();
+                $childData['platform_sign'] = $platformSign;
+                $childData['pid']           = $configEloq->id;
+                unset($childData['id']);
+                $childEloq->fill($childData);
+                if (!$childEloq->save()) {
                     DB::rollback();
                     throw new \Exception('300717');
                 }
-                SystemConfigurationStandard::where('pid', $config->id)->get()->each(
-                    static function ($child) use ($platformSign, $configEloq): void {
-                        $addData                  = $child->toArray();
-                        $childEloq                = new SystemConfiguration();
-                        $addData['platform_sign'] = $platformSign;
-                        $addData['pid']           = $configEloq->id;
-                        unset($addData['id']);
-                        $childEloq->fill($addData);
-                        if (!$childEloq->save()) {
-                            DB::rollback();
-                            throw new \Exception('300717');
-                        }
-                    },
-                );
-            },
-        );
+            }
+        }
     }
 
     /**

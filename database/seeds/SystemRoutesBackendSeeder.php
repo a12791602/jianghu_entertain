@@ -42,6 +42,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'getSearchDataOfAssignGame',
              ],
              [
+              'route_name'    => 'headquarters-api.platform.assign-games',
+              'menu_group_id' => 4,
+              'title'         => '厅主列表-游戏管理-分配游戏',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController',
+              'method'        => 'assignGames',
+             ],
+             [
               'route_name'    => 'headquarters-api.platform.assigned-game-cancel',
               'menu_group_id' => 4,
               'title'         => '厅主列表-游戏管理-移除',
