@@ -39,6 +39,7 @@ class CreateGameVendorsTable extends Migration
                 $table->string('md5_key')->nullable()->comment('md5 密钥');
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
+                $table->boolean('needCreateAcc')->nullable()->default(0)->comment('是否登录之前需要先创建账号 1 需要 0不需先要创建用户');
                 $table->timestamps();
                 $table->index('name');
                 $table->index('sign');
