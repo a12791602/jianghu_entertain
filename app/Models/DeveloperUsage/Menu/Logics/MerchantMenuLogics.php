@@ -2,7 +2,6 @@
 
 namespace App\Models\DeveloperUsage\Menu\Logics;
 
-use App\Models\DeveloperUsage\Menu\MerchantSystemMenu;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -63,43 +62,18 @@ trait MerchantMenuLogics
         } else {
             $menuLists = self::getFirstLevelList($adminAccessGroupDetail);
         }
-        foreach ($menuLists as $firstMenu) {
-            $menuForFE[$firstMenu->id] = $firstMenu->toArray();
+        foreach ($menuLists as $firstKey => $firstMenu) {
+            $menuForFE[$firstKey] = $firstMenu->toArray();
             if (!$firstMenu->childs()->exists()) {
                 continue;
             }
-            $menuForFE = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu, $menuForFE);
+            $childsMenu                    = $firstMenu->childs
+                ->whereIn('id', $adminAccessGroupDetail)
+                ->sortBy('sort')
+                ->toArray();
+            $menuForFE[$firstKey]['child'] = array_values($childsMenu);
         }
         Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
-        return $menuForFE;
-    }
-
-    /**
-     * Gets menu childs.
-     *
-     * @param array              $adminAccessGroupDetail 管理员组权限.
-     * @param MerchantSystemMenu $firstMenu              BackendSystemMenu.
-     * @param array              $menuForFE              整理后的管理员组权限.
-     *
-     * @return mixed[]
-     */
-    private function _getMenuChilds(
-        array $adminAccessGroupDetail,
-        MerchantSystemMenu $firstMenu,
-        array $menuForFE
-    ): array {
-        $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-        foreach ($firstChilds as $secondMenu) {
-            $menuForFE[$firstMenu->id]['child'][$secondMenu->id] = $secondMenu->toArray();
-            if (!$secondMenu->childs()->exists()) {
-                continue;
-            }
-            $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-            foreach ($secondChilds as $thirdMenu) {
-                $menuForFE[$firstMenu->id]['child'][$secondMenu->id]['child'][$thirdMenu->id]
-                    = $thirdMenu->toArray();
-            }
-        }
         return $menuForFE;
     }
 

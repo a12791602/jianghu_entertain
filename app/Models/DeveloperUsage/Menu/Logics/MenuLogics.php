@@ -2,7 +2,6 @@
 
 namespace App\Models\DeveloperUsage\Menu\Logics;
 
-use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
@@ -68,36 +67,14 @@ trait MenuLogics
             if (!$firstMenu->childs()->exists()) {
                 continue;
             }
-            $menuForFE[$firstKey]['child'] = $this->_getMenuChilds($adminAccessGroupDetail, $firstMenu);
+            $childsMenu                    = $firstMenu->childs
+                ->whereIn('id', $adminAccessGroupDetail)
+                ->sortBy('sort')
+                ->toArray();
+            $menuForFE[$firstKey]['child'] = array_values($childsMenu);
         }
-        // Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
+        Cache::tags([$this->redisFirstTag])->forever($redisKey, $menuForFE);
         return $menuForFE;
-    }
-
-    /**
-     * Gets menu childs.
-     * @param array             $adminAccessGroupDetail 管理员组权限.
-     * @param BackendSystemMenu $firstMenu              BackendSystemMenu.
-     *
-     * @return mixed[]
-     */
-    private function _getMenuChilds(
-        array $adminAccessGroupDetail,
-        BackendSystemMenu $firstMenu
-    ): array {
-        $firstChilds = $firstMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-        $data        = [];
-        foreach ($firstChilds as $secondKey => $secondMenu) {
-            $data[$secondKey] = $secondMenu->toArray();
-            if (!$secondMenu->childs()->exists()) {
-                continue;
-            }
-            $secondChilds = $secondMenu->childs->whereIn('id', $adminAccessGroupDetail)->sortBy('sort');
-            foreach ($secondChilds as $thirdKey => $thirdMenu) {
-                $data[$secondKey]['child'][$thirdKey] = $thirdMenu->toArray();
-            }
-        }
-        return $data;
     }
 
     /**

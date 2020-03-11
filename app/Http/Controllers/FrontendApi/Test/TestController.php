@@ -5,7 +5,6 @@ namespace App\Http\Controllers\FrontendApi\Test;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterAction;
 use App\Http\SingleActions\Frontend\Test\AccountChangeAction;
-use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Cache;
 use Faker\Factory;
@@ -16,14 +15,14 @@ use Illuminate\Http\Request;
  * Class TestController
  * @package App\Http\Controllers\FrontendApi\Test
  */
-class TestController extends MainAction
+class TestController
 {
     /**
      * 测试帐变接口
      * @param Request             $request Request.
      * @param AccountChangeAction $action  Action.
      * @return mixed
-     * @throws \Exception Exception.
+     * @throws \Throwable Throwable.
      */
     public function accountChange(Request $request, AccountChangeAction $action)
     {
@@ -35,7 +34,7 @@ class TestController extends MainAction
      * Generate users.
      * @param RegisterAction $action RegisterAction.
      * @return mixed
-     * @throws \Exception Exception.
+     * @throws \Throwable Throwable.
      */
     public function userGenerate(RegisterAction $action)
     {
@@ -52,7 +51,7 @@ class TestController extends MainAction
             $request['mobile']            = $mobile;
             $request['verification_key']  = $verification_key;
             $request['verification_code'] = strval($mobile);
-            Cache::put($verification_key, ['mobile' => $mobile, 'verification_code' => strval($mobile)]);
+            Cache::put($verification_key, ['mobile' => $mobile, 'verification_code' => strval($mobile)], 120);
             $action->execute($request);
         }
         $result = msgOut();
@@ -62,7 +61,7 @@ class TestController extends MainAction
     /**
      * Generate user information.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \Throwable Throwable.
      */
     public function balanceGenerate(): JsonResponse
     {

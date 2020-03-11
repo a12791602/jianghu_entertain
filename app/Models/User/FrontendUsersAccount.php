@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
+use App\Models\User\Logics\AccountChangeLogics;
 use App\Models\User\Logics\UserAccountLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -18,6 +19,11 @@ class FrontendUsersAccount extends BaseAuthModel
      */
     use UserAccountLogics;
 
+    /**
+     * 账变Logics
+     */
+    use AccountChangeLogics;
+
     public const FROZEN_STATUS_OUT       = 1;
     public const FROZEN_STATUS_BACK      = 2;
     public const FROZEN_STATUS_TO_PLAYER = 3;
@@ -32,6 +38,19 @@ class FrontendUsersAccount extends BaseAuthModel
      */
     protected $guarded = ['id'];
 
+    /**
+     * @var array
+     */
+    protected $rechargeTypes = [
+                                'recharge',
+                                'artificial_recharge',
+                               ];
+
+    /**
+     * @var array
+     */
+    protected $activityTypes = ['gift'];
+    
     /**
      * 用户信息
      *
