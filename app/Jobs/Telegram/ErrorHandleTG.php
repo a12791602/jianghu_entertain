@@ -3,7 +3,7 @@
 namespace App\Jobs\Telegram;
 
 use App\Lib\TGMSG;
-use Exception;
+use Throwable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -47,26 +47,26 @@ class ErrorHandleTG implements ShouldQueue
     protected $agent;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $currentRoute;
 
     /**
-     * @var string
+     * @var ?string
      */
     protected $routePrefix;
 
     /**
      * Create a new job instance.
      *
-     * @param Exception    $e            Exception.
+     * @param Throwable    $e            Exception.
      * @param Request      $request      Requset.
      * @param JsonResponse $response     JsonResponse.
      * @param Agent        $agent        Agent.
      * @param Route|null   $currentRoute Current Route.
      */
     public function __construct(
-        Exception $e,
+        Throwable $e,
         Request $request,
         JsonResponse $response,
         Agent $agent,
@@ -78,7 +78,7 @@ class ErrorHandleTG implements ShouldQueue
     /**
      * initialize a new job instance.
      *
-     * @param Exception    $e            Exception.
+     * @param Throwable    $e            Exception.
      * @param Request      $request      Requset.
      * @param JsonResponse $response     JsonResponse.
      * @param Agent        $agent        Agent.
@@ -87,7 +87,7 @@ class ErrorHandleTG implements ShouldQueue
      * @throws \JsonException For JsonEncodeException.
      */
     private function _doInit(
-        Exception $e,
+        Throwable $e,
         Request $request,
         JsonResponse $response,
         Agent $agent,
@@ -133,7 +133,7 @@ class ErrorHandleTG implements ShouldQueue
                                 ];
         $this->responseStatus = $response->getStatusCode();
         $this->currentRoute   = empty($currentRoute) ? null : $currentRoute->uri();
-        $this->routePrefix    = empty($currentRoute) ? null : trim($currentRoute->getPrefix(), '/');
+        $this->routePrefix    = empty($currentRoute) ? null : trim((string)$currentRoute->getPrefix(), '/');
     }
 
     /**

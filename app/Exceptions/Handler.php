@@ -8,6 +8,7 @@ use App\Lib\ErrorsHandler\Formatters\BaseFormatter;
 use App\Lib\ErrorsHandler\Reporters\ReporterInterface;
 use Asm89\Stack\CorsService;
 use Exception;
+use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -83,11 +84,11 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param Exception $e Exception.
+     * @param Throwable $e  Exception.
      * @return void
-     * @throws Exception|InvalidArgumentException Exception.
+     * @throws Throwable|InvalidArgumentException Exception.
      */
-    public function report(Exception $e): void
+    public function report(Throwable $e): void
     {
         parent::report($e);
         $this->reportResponses = [];
@@ -99,11 +100,11 @@ class Handler extends ExceptionHandler
 
     /**
      * Handle Reporter
-     * @param Exception $e Exception.
+     * @param Throwable $e  Exception.
      * @return void
-     * @throws Exception|InvalidArgumentException Exception.
+     * @throws Throwable|InvalidArgumentException Exception.
      */
-    private function _checkReporter(Exception $e): void
+    private function _checkReporter(Throwable $e): void
     {
         $reporters = $this->config['reporters'];
         foreach ($reporters as $rpKey => $reporter) {
@@ -134,11 +135,11 @@ class Handler extends ExceptionHandler
      * Render
      *
      * @param Request   $request Request.
-     * @param Exception $e       Exception.
+     * @param Throwable $e        Exception.
      * @return Response
-     * @throws Exception|InvalidArgumentException Exception.
+     * @throws Throwable|InvalidArgumentException Exception.
      */
-    public function render($request, Exception $e): Response
+    public function render($request, Throwable $e): Response
     {
         // phpcs:enable Squiz.Commenting.FunctionComment.TypeHintMissing
         $response     = $this->_generateExceptionResponse($request, $e);
@@ -164,11 +165,11 @@ class Handler extends ExceptionHandler
      * Generate exception response
      *
      * @param Request   $request Request.
-     * @param Exception $e       Exception.
+     * @param Throwable $e        Exception.
      * @return mixed
-     * @throws Exception|InvalidArgumentException Exception.
+     * @throws Throwable|InvalidArgumentException Exception.
      */
-    private function _generateExceptionResponse(Request $request, Exception $e)
+    private function _generateExceptionResponse(Request $request, Throwable $e)
     {
         $formatters = $this->config['formatters'];
         // :: notation will otherwise not work for PHP <= 5.6
@@ -208,7 +209,7 @@ class Handler extends ExceptionHandler
      * @param Request                 $request   Request.
      * @param AuthenticationException $exception Exception.
      * @return Response
-     * @throws Exception Exception.
+     * @throws Throwable Exception.
      */
     protected function unauthenticated($request, AuthenticationException $exception): Response
     {
