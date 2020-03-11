@@ -3,7 +3,6 @@
 namespace App\Models\User\Logics;
 
 use App\Lib\Locker\AccountLocker;
-use App\Lib\Logic\AccountChange;
 use Illuminate\Support\Facades\DB;
 
 trait UserAccountLogics
@@ -23,9 +22,8 @@ trait UserAccountLogics
             throw new \Exception('100200');
         }
         // 帐变
-        $accountChange = new AccountChange($this);
         DB::beginTransaction();
-        $resource = $accountChange->doChange($inputDatas, $type, $params);
+        $resource = $this->doChange($inputDatas, $type, $params);
         $accountLocker->release();
         if ($resource !== true) {
             DB::rollback();
