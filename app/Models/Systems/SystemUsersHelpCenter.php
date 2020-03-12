@@ -2,7 +2,7 @@
 
 namespace App\Models\Systems;
 
-use App\Models\Admin\BackendAdminUser;
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -34,7 +34,7 @@ class SystemUsersHelpCenter extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $author = $this->belongsTo(BackendAdminUser::class, 'add_admin_id', 'id');
+        $author = $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
         return $author;
     }
 
@@ -44,7 +44,7 @@ class SystemUsersHelpCenter extends BaseModel
      */
     public function newer(): BelongsTo
     {
-        $newer = $this->belongsTo(BackendAdminUser::class, 'add_admin_id', 'id');
+        $newer = $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
         return $newer;
     }
 }
