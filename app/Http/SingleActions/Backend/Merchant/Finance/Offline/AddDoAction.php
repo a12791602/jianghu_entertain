@@ -5,8 +5,9 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
 use Arr;
+use DB;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Log;
 
 /**
  * Class AddDoAction
@@ -21,7 +22,6 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $flag = false;
         try {
             $platformId = $this->currentPlatformEloq->id;
             $dataToSave = Arr::only(
@@ -42,6 +42,7 @@ class AddDoAction extends BaseAction
             );
 
             DB::beginTransaction();
+            $dataToSave['author_id'] = $this->user->id;
             $this->model->fill($dataToSave);
             if ($this->model->save()) {
                 $userTags                       = [];
@@ -51,16 +52,14 @@ class AddDoAction extends BaseAction
                 $userTags['tag_id']             = $inputDatas['tags'];
 
                 SystemFinanceUserTag::create($userTags);
-                $flag = true;
+                DB::commit();
+                $result = msgOut();
+                return $result;
             }
         } catch (\Throwable $exception) {
-            $flag = false;
+            Log::error($exception->getMessage());
         }
-        if ($flag) {
-            DB::commit();
-            $result = msgOut();
-            return $result;
-        }
+
         DB::rollBack();
         throw new \Exception('200600');
     }

@@ -2,13 +2,12 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateGameTypesTable
+ * Class CreateGameTypeChildrenTable
  */
-class CreateGameTypesTable extends Migration
+class CreateGameTypeChildrenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,10 +17,11 @@ class CreateGameTypesTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'game_types',
+            'game_type_children',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
+                $table->integer('parent_id')->nullable()->comment('父节点ID');
                 $table->string('name', 64)->nullable()->default(null)->index()->comment('游戏名称');
                 $table->string('sign', 64)->nullable()->default(null)->index()->comment('游戏标识');
                 $table->tinyInteger('status')->index()->comment('状态 0 禁用 1 启用');
@@ -31,7 +31,7 @@ class CreateGameTypesTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `game_types` comment '游戏种类表'");
+        DB::statement("ALTER TABLE `game_type_children` comment '游戏种类子分类表'");
     }
 
     /**
@@ -41,6 +41,6 @@ class CreateGameTypesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_types');
+        Schema::dropIfExists('game_type_children');
     }
 }

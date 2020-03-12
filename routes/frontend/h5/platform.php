@@ -7,6 +7,6 @@ Route::group(
     ['prefix' => 'platform'],
     static function (): void {
         $namePrefix = 'app-api.platform.';
-        Route::get('current-ssl', [PlatformController::class, 'currentSsl'])->name($namePrefix . 'current-ssl');
+        Route::get('current-ssl', [PlatformController::class, 'currentSsl'])->name($namePrefix . 'current-ssl-h5');
     },
 );

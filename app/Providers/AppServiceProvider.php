@@ -3,8 +3,12 @@
 namespace App\Providers;
 
 use App\Game\GameIF;
+use App\Models\Game\GameType;
+use App\Models\Game\GameTypeChild;
 use App\Models\User\FrontendUser;
 use App\Observers\FrontendUserObserver;
+use App\Observers\GameTypeChildObserver;
+use App\Observers\GameTypeObserver;
 use Illuminate\Database\Events\QueryExecuted;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
@@ -97,6 +101,8 @@ class AppServiceProvider extends ServiceProvider
             },
         );
         FrontendUser::observe(FrontendUserObserver::class);
+        GameType::observe(GameTypeObserver::class);
+        GameTypeChild::observe(GameTypeChildObserver::class);
         $this->_loggingDBQuery();
     }
 

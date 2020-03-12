@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use Illuminate\Http\JsonResponse;
+use Log;
 
 /**
  * Class StatusDoAction
@@ -19,16 +20,15 @@ class StatusDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $update = $this->model->where('id', $inputDatas['id'])->update(
-            [
-             'status'         => $inputDatas['status'],
-             'last_editor_id' => $this->user->id,
-            ],
-        );
-        if (!$update) {
-            throw new \Exception('300404');
+        try {
+            $model         = $inputDatas['model']::find($inputDatas['id']);
+            $model->status = $inputDatas['status'];
+            $model->save();
+            $msgOut = msgOut();
+            return $msgOut;
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage());
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        throw new \Exception('300404');
     }
 }

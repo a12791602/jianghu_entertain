@@ -4,8 +4,10 @@ namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
+use Arr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Log;
 
 /**
  * Class AddDoAction
@@ -22,26 +24,19 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $flag = false;
         try {
-            $inputDatas['author_id'] = $this->user->id;
             DB::beginTransaction();
-            $this->model->fill($inputDatas);
-            if ($this->model->save()) {
-                $insertData = $this->_getFormatDataForTypePlatform($this->model->id);
-                GameTypePlatform::insert($insertData);
-                $flag = true;
-            }
-        } catch (\Throwable $exception) {
-            $flag = false;
+            $item       = $inputDatas['model']::create(Arr::only($inputDatas, ['name', 'sign', 'status']));
+            $insertData = $this->_getFormatDataForTypePlatform($item->id);
+            GameTypePlatform::insert($insertData);
+            DB::commit();
+            $msgOut = msgOut();
+            return $msgOut;
+        } catch (\Throwable $throwable) {
+            Log::error($throwable->getMessage());
         }
-        if (!$flag) {
-            DB::rollBack();
-            throw new \Exception('300402');
-        }
-        DB::commit();
-        $msgOut = msgOut();
-        return $msgOut;
+        DB::rollBack();
+        throw new \Exception('300402');
     }
 
     /**

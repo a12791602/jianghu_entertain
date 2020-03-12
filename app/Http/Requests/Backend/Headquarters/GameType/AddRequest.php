@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\GameType;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Game\GameType;
 
 /**
  * Class AddRequest
@@ -11,6 +12,18 @@ use App\Http\Requests\BaseFormRequest;
  */
 class AddRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [GameType::class];
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = ['model' => '模型'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,27 +42,12 @@ class AddRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'name'   => 'required|unique:game_types,name',
-                  'sign'   => 'required|regex:/\w+/|unique:game_types,sign',
-                  'status' => 'required|in:0,1',
+                  'name'      => 'required|unique:game_types,name',
+                  'sign'      => 'required|regex:/\w+/|unique:game_types,sign',
+                  'status'    => 'required|in:0,1',
+                  'model'     => 'required|string',
+                  'parent_id' => 'numeric',
                  ];
         return $rules;
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        $messages = [
-                     'name.required'   => '请填写游戏种类名称',
-                     'name.unique'     => '游戏种类名称已存在',
-                     'sign.required'   => '请填写游戏种类标记',
-                     'sign.regex'      => '游戏种类标记只能包含数字,字母,下划线',
-                     'sign.unique'     => '游戏种类标记已存在',
-                     'status.required' => '请选择状态',
-                     'status.in'       => '所选择状态不存在',
-                    ];
-        return $messages;
     }
 }

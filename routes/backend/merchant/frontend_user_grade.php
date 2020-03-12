@@ -38,7 +38,7 @@ Route::group(
              UserGradeController::class,
              'edit',
             ],
-        )->name($namePrefix . 'config');
+        )->name($namePrefix . 'edit');
         //会员等级-删除
         Route::post(
             'delete',

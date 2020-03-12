@@ -1,21 +1,25 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\GameType;
+namespace App\Http\Requests\Backend\Headquarters\Sortable;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class DelRequest
+ * Class Request
  *
- * @package App\Http\Requests\Backend\Headquarters\GameType
+ * @package App\Http\Requests\Backend\Headquarters\SystemBank
  */
-class DelRequest extends BaseFormRequest
+class Request extends BaseFormRequest
 {
 
     /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
      */
-    protected $extraDefinition = ['model' => '模型'];
+    protected $extraDefinition = [
+                                  'sort'  => '排序',
+                                  'model' => '模型',
+                                 ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +39,7 @@ class DelRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'    => 'required|exists:game_types,id',
+                  'sort'  => 'required|array',
                   'model' => 'required|string',
                  ];
         return $rules;

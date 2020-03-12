@@ -60,12 +60,12 @@ Route::group(
             ],
         )->name($namePrefix . 'edit');
         Route::get(
-            'edit',
+            'edit-get',
             [
              OfflineFinanceController::class,
              'edit',
             ],
-        )->name($namePrefix . 'edit');
+        )->name($namePrefix . 'edit-get');
     },
 );
 
@@ -100,12 +100,12 @@ Route::group(
         )->name($namePrefix . 'add-do');
         //获取编辑支付方式的前置数据
         Route::get(
-            'edit',
+            'edit-get',
             [
              OnlineFinanceController::class,
              'edit',
             ],
-        )->name($namePrefix . 'edit');
+        )->name($namePrefix . 'edit-get');
         //编辑支付方式
         Route::post(
             'edit',

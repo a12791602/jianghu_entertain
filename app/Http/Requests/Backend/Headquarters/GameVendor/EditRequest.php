@@ -54,7 +54,7 @@ class EditRequest extends BaseFormRequest
                   'urls.*'             => 'url',
                   'test_urls'          => 'array',
                   'test_urls.*'        => 'url',
-                  'app_id'             => 'string|nullable',
+                  'app_id'             => 'string|max:128',
                   'authorization_code' => 'string|max:10',
                   'merchant_id'        => 'string|max:10',
                   'merchant_secret'    => 'string|max:128',

@@ -28,8 +28,9 @@ class IndexDoAction extends BaseAction
             [
              'lastEditor:id,name',
              'author:id,name',
+             'children:id,parent_id,name,sort',
             ],
-        )->filter($inputDatas, GamesTypeFilter::class)->paginate($pageSize);
+        )->ordered()->filter($inputDatas, GamesTypeFilter::class)->paginate($pageSize);
         $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }

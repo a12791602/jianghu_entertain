@@ -21,7 +21,7 @@ Route::group(
             ->name($namePrefix . 'refresh-token');
         Route::get('information', [UserCenterController::class, 'information'])->name($namePrefix . 'information');
         Route::get('dynamic-information', [UserCenterController::class, 'dynamicInformation'])
-            ->name($namePrefix . 'information');
+            ->name($namePrefix . 'dynamic-information');
         Route::post('information', [UserCenterController::class, 'updateInformation'])
             ->name($namePrefix . 'update-information');
         Route::post('claim-benefits', [UserCenterController::class, 'claimBenefits'])

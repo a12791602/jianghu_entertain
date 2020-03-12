@@ -22,7 +22,7 @@ class DelDoAction extends BaseAction
         if (!Game::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
             throw new \Exception('300400');
         }
-        if ($this->model->where('id', $inputDatas['id'])->delete()) {
+        if ($inputDatas['model']::where('id', $inputDatas['id'])->delete()) {
             $msgOut = msgOut();
             return $msgOut;
         }

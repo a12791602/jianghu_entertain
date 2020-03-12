@@ -698,6 +698,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'edit',
              ],
              [
+              'route_name'    => 'merchant-api.offline-finance.edit-get',
+              'menu_group_id' => 44,
+              'title'         => '金流管理-线下支付配置-编辑',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController',
+              'method'        => 'edit',
+             ],
+             [
               'route_name'    => 'merchant-api.offline-finance.del-do',
               'menu_group_id' => 44,
               'title'         => '金流管理-线下支付配置-删除',

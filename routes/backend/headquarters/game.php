@@ -37,8 +37,6 @@ Route::group(
             ->name($namePrefix . 'opt-edit-do');
         Route::get('opt-index-do', [BackendGameVendorController::class, 'indexDo'])
             ->name($namePrefix . 'opt-index-do');
-        Route::get('opt-opt-index-do', [BackendGameVendorController::class, 'indexDo'])
-            ->name($namePrefix . 'opt-index-do');
         Route::post('opt-del-do', [BackendGameVendorController::class, 'delDo'])
             ->name($namePrefix . 'opt-del-do');
     },
