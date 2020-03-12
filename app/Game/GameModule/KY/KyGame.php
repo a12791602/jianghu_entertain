@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\GameModule;
+namespace App\Game\GameModule\KY;
 
 use App\Game\BaseGame;
 use App\Http\SingleActions\MainAction;
@@ -94,6 +94,15 @@ class KyGame extends BaseGame
     public function saveBetOrder(): void
     {
         // TODO: Implement saveBetOrder() method.
+    }
+
+    /**
+     * 创建用户有些三方需要此操作 没有需要此操作返回 true
+     * @return boolean
+     */
+    public function createAccount(): bool
+    {
+        return true;
     }
 
     /**

@@ -56,4 +56,10 @@ interface GameIF
      * @return void
      */
     public function saveBetOrder(): void;
+
+    /**
+     * 创建用户有些三方需要此操作 没有需要此操作返回 true
+     * @return boolean
+     */
+    public function createAccount(): bool;
 }
