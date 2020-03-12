@@ -34,9 +34,9 @@ class GradeConfigRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'recharge' => 'required|numeric',            //充值金额
-                'bet'      => 'required|numeric',            //打码金额
-                'type'     => 'required|integer|in:1,2,3,4', //1.充值 2.打码 3.充值或打码任一满足 4.充值和打码同时满足
+                'recharge' => 'required_if:type,1,3,4|numeric', //充值金额
+                'bet'      => 'required_if:type,2,3,4|numeric', //打码金额
+                'type'     => 'required|integer|in:1,2,3,4',    //1.充值 2.打码 3.充值或打码任一满足 4.充值和打码同时满足
                ];
     }
 }
