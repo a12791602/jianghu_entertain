@@ -56,9 +56,9 @@ class DeleteAction extends MainAction
         }
         DB::beginTransaction();
         //修改该等级的用户等级ID = null
-        if ($currentUsersGrade->user->isNotEmpty()) {
-            $users      = $currentUsersGrade->user();
-            $updateUser = $users->update(['grade_id' => null]);
+        if ($currentUsersGrade->users->isNotEmpty()) {
+            $users      = $currentUsersGrade->users();
+            $updateUser = $users->update(['level_id' => null]);
             if (!$updateUser) {
                 DB::rollback();
                 throw new \Exception('200706');

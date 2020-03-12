@@ -24,7 +24,7 @@ class CreateFrontendUserLevelsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->string('name', 45)->nullable()->default(null)->comment('名称');
-                $table->tinyInteger('level')->comment('等级ID');
+                $table->tinyInteger('level')->nullable()->default(null)->comment('等级ID');
                 $table->integer('experience_min')->nullable()->default(null)->comment('级别最小经验值');
                 $table->integer('experience_max')->nullable()->default(null)->comment('级别最大经验值');
                 $table->decimal('promotion_gift', 18, 4)->nullable()->default(null)->comment('晋级礼金');

@@ -76,15 +76,15 @@ class EditAction extends MainAction
         if ($checkMaxExp->isNotEmpty()) {
             throw new \Exception('200702');
         }
-
         //编辑数据。
         DB::beginTransaction();
         if ($currentUsersGrade->experience_max !== $inputDatas['experience_max']) {
-            $this->_editCommissionDetail($currentUsersGrade->id, (float) $inputDatas['experience_max']);
+            UsersCommissionConfigDetail::where('grade_id', $currentUsersGrade->id)
+                ->update(['grade_exp_max' => $inputDatas['experience_max']]);
         }
         $currentUsersGrade = $this->_editUserGrade($currentUsersGrade, $inputDatas);
         DB::commit();
-
+        
         $msgOut = msgOut(['name' => $currentUsersGrade->name]);
         return $msgOut;
     }
@@ -120,21 +120,5 @@ class EditAction extends MainAction
             throw new \Exception('200703');
         }
         return $currentUsersGrade;
-    }
-
-    /**
-     * @param  integer $gradeId       等级ID.
-     * @param  float   $experienceMax 最大经验值.
-     * @throws \Exception Exception.
-     * @return void
-     */
-    private function _editCommissionDetail(int $gradeId, float $experienceMax): void
-    {
-        $updateCommissionDetail = UsersCommissionConfigDetail::where('grade_id', $gradeId)
-            ->update(['grade_exp_max' => $experienceMax]);
-        if (!$updateCommissionDetail) {
-            DB::rollback();
-            throw new \Exception('200708');
-        }
     }
 }

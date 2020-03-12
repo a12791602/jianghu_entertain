@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\UserGrade;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersGradesRule;
+use App\Models\User\FrontendUserLevelRule;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,14 +19,14 @@ class GradeConfigAction extends MainAction
     protected $model;
 
     /**
-     * @param UsersGradesRule $usersGradesRule 用户等级规则Model.
-     * @param Request         $request         Request.
+     * @param FrontendUserLevelRule $frontendUserLevelRule 用户等级规则Model.
+     * @param Request               $request               Request.
      * @throws \Exception Exception.
      */
-    public function __construct(UsersGradesRule $usersGradesRule, Request $request)
+    public function __construct(FrontendUserLevelRule $frontendUserLevelRule, Request $request)
     {
         parent::__construct($request);
-        $this->model = $usersGradesRule;
+        $this->model = $frontendUserLevelRule;
     }
 
     /**

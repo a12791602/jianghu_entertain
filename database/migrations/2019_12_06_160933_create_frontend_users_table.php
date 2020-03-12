@@ -27,6 +27,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->integer('top_id')->nullable()->default('0')->comment('最上级id');
                 $table->integer('parent_id')->nullable()->default('0')->comment('上级id');
                 $table->integer('platform_id')->nullable()->default(null)->comment('平台id');
+                $table->integer('level_id')->nullable()->default(null)->comment('等级id');
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->tinyInteger('type')->default('3')->comment('用户类型:1会员 2代理');
                 $table->tinyInteger('is_tester')->nullable()->default('0')->comment('是否测试用户 0否 1是');

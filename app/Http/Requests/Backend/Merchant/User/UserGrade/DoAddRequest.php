@@ -37,7 +37,7 @@ class DoAddRequest extends BaseFormRequest
                 'name'           => 'required|alpha_num|max:5', //等级名称
                 'experience_min' => 'required|numeric|gte:0',   //最小经验值
                 'experience_max' => 'gte:experience_min',       //最大经验值
-                'level_gift'     => 'required|numeric|gte:0',   //晋级奖励
+                'promotion_gift' => 'required|numeric|gte:0',   //晋级奖励
                 'weekly_gift'    => 'required|numeric|gte:0',   //周奖励
                ];
     }

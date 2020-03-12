@@ -45,7 +45,7 @@ class IndexAction extends MainAction
                          'name',
                          'experience_min',
                          'experience_max',
-                         'level_gift',
+                         'promotion_gift',
                          'weekly_gift',
                          'updated_at',
                         ],
