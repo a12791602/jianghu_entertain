@@ -2,12 +2,21 @@
 
 namespace App\Lib\ErrorsHandler\Formatters;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class UnprocessableEntityHttpExceptionFormatter
+ * @package App\Lib\ErrorsHandler\Formatters
+ */
 class UnprocessableEntityHttpExceptionFormatter extends BaseFormatter
 {
-    public function format(JsonResponse $response, Exception $e, array $reporterResponses)
+    /**
+     * @param JsonResponse $response Response.
+     * @param \Throwable   $e        Throwable Errors.
+     * @throws \JsonException Throw Exception.
+     * @return void
+     */
+    public function format(JsonResponse $response, \Throwable $e): void
     {
         $response->setStatusCode(422);
         // Laravel validation errors will return JSON string
@@ -19,21 +28,30 @@ class UnprocessableEntityHttpExceptionFormatter extends BaseFormatter
             $decoded = [[$e->getMessage()]];
         }
         // Laravel errors are formatted as {"field": [/*errors as strings*/]}
-        $data = array_reduce($decoded, function ($carry, $item) use ($e) {
-            return array_merge($carry, array_map(function ($current) use ($e) {
-                return [
-                    'status' => '422',
-                    'code' => $e->getCode(),
-                    'title' => 'Validation error',
-                    'detail' => $current
-                ];
-            }, $item));
-        }, []);
-
-        $response->setData([
-            'errors' => $data
-        ]);
-
-        return $response;
+        $data = array_reduce(
+            $decoded,
+            static function ($carry, $item) use ($e) {
+                $data = array_merge(
+                    $carry,
+                    array_map(
+                        static function ($current) use ($e) {
+                            $data = [
+                                     'status' => '422',
+                                     'code'   => $e->getCode(),
+                                     'title'  => 'Validation error',
+                                     'detail' => $current,
+                                    ];
+                            return $data;
+                        },
+                        $item,
+                    ),
+                );//array_merge End;
+                return $data;
+            },
+            [],
+        );
+        $response->setData(
+            ['errors' => $data],
+        );
     }
 }

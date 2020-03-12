@@ -2,19 +2,26 @@
 
 namespace App\Lib\ErrorsHandler\Formatters;
 
-use Exception;
 use Illuminate\Http\JsonResponse;
 
+/**
+ * Class HttpExceptionFormatter
+ * @package App\Lib\ErrorsHandler\Formatters
+ */
 class HttpExceptionFormatter extends ExceptionFormatter
 {
-    public function format(JsonResponse $response, Exception $e, array $reporterResponses)
+    /**
+     * @param JsonResponse $response Response.
+     * @param \Throwable   $e        Throwable Exception.
+     * @return void
+     */
+    public function format(JsonResponse $response, \Throwable $e): void
     {
-        parent::format($response, $e, $reporterResponses);
-
-        if (count($headers = $e->getHeaders())) {
+        parent::format($response, $e);
+        $headers = $e->getHeaders();
+        if (count($headers)) {
             $response->headers->add($headers);
         }
-
         $response->setStatusCode($e->getStatusCode());
     }
 }
