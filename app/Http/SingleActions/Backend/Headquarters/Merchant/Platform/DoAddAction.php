@@ -79,6 +79,7 @@ class DoAddAction extends MainAction
                                'start_time'     => $inputDatas['start_time'],
                                'end_time'       => $inputDatas['end_time'],
                                'sms_num'        => $inputDatas['sms_num'],
+                               'status'         => $inputDatas['status'],
                                'author_id'      => $adminId,
                                'last_editor_id' => $adminId,
                               ];
