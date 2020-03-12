@@ -8,7 +8,6 @@ use App\Lib\ErrorsHandler\Formatters\BaseFormatter;
 use App\Lib\ErrorsHandler\Reporters\ReporterInterface;
 use Asm89\Stack\CorsService;
 use Exception;
-use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -18,6 +17,7 @@ use Jenssegers\Agent\Agent;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Process\Exception\InvalidArgumentException;
+use Throwable;
 
 /**
  * Class Handler
@@ -84,7 +84,7 @@ class Handler extends ExceptionHandler
     }
 
     /**
-     * @param Throwable $e  Exception.
+     * @param Throwable $e Exception.
      * @return void
      * @throws Throwable|InvalidArgumentException Exception.
      */
@@ -100,7 +100,7 @@ class Handler extends ExceptionHandler
 
     /**
      * Handle Reporter
-     * @param Throwable $e  Exception.
+     * @param Throwable $e Exception.
      * @return void
      * @throws Throwable|InvalidArgumentException Exception.
      */
@@ -135,7 +135,7 @@ class Handler extends ExceptionHandler
      * Render
      *
      * @param Request   $request Request.
-     * @param Throwable $e        Exception.
+     * @param Throwable $e       Exception.
      * @return Response
      * @throws Throwable|InvalidArgumentException Exception.
      */
@@ -165,7 +165,7 @@ class Handler extends ExceptionHandler
      * Generate exception response
      *
      * @param Request   $request Request.
-     * @param Throwable $e        Exception.
+     * @param Throwable $e       Exception.
      * @return mixed
      * @throws Throwable|InvalidArgumentException Exception.
      */
@@ -209,7 +209,7 @@ class Handler extends ExceptionHandler
      * @param Request                 $request   Request.
      * @param AuthenticationException $exception Exception.
      * @return Response
-     * @throws Throwable Exception.
+     * @throws Throwable|Exception Exception.
      */
     protected function unauthenticated($request, AuthenticationException $exception): Response
     {

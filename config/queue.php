@@ -1,4 +1,5 @@
 <?php
+
 $sqs_prefix = 'https://sqs.us-east-1.amazonaws.com/your-account-id';
 $config     = [
 
