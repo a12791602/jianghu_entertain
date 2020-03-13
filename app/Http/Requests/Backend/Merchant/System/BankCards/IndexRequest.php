@@ -35,10 +35,11 @@ class IndexRequest extends BaseFormRequest
     {
         $mobile = ['regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/'];
         return [
-                'user_id'    => 'integer', //用户UID
-                'mobile'     => $mobile,   //用户手机号
-                'bank_id'    => 'integer', //银行ID
-                'created_at' => 'string',  //绑定时间
+                'user_id'     => 'integer',              //用户UID
+                'mobile'      => $mobile,                //用户手机号
+                'bank_id'     => 'integer',              //银行ID
+                'card_number' => 'digits_between:13,19', //银行卡号
+                'created_at'  => 'string',               //绑定时间
                ];
     }
 }

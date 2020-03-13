@@ -4,7 +4,7 @@ namespace App\Models\User;
 
 use App\ModelFilters\Finance\SystemPlatformBankFilter;
 use App\Models\BaseModel;
-use App\Models\Finance\SystemBank;
+use App\Models\Finance\SystemPlatformBank;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -67,7 +67,7 @@ class FrontendUsersBankCard extends BaseModel
      */
     public function bank(): BelongsTo
     {
-        $bank = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        $bank = $this->belongsTo(SystemPlatformBank::class, 'bank_id', 'id');
         return $bank;
     }
 

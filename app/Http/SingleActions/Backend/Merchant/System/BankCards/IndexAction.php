@@ -42,22 +42,23 @@ class IndexAction extends MainAction
             ->filter($inputDatas, FrontendUsersBankCardFilter::class)
             ->with(
                 [
-                 'bank:id,name',
-                 'user:id,mobile',
+                 'bank.bank',
+                 'user:id,mobile,guid',
                 ],
             )
             ->select(['id', 'platform_sign', 'user_id', 'owner_name', 'bank_id', 'card_number', 'created_at'])
             ->paginate($this->model::getPageSize())
             ->toArray();
-
+            
         $bankCards = [];
         foreach ($returnData['data'] as $item) {
             $data        = [
                             'id'          => $item['id'],
+                            'guid'        => $item['user']['guid'] ?? null,
                             'owner_name'  => $item['owner_name'],
                             'card_number' => $item['card_number'],
                             'binding_num' => $item['binding_num'],
-                            'bank_name'   => $item['bank']['name'] ?? null,
+                            'bank_name'   => $item['bank']['bank']['name'] ?? null,
                             'mobile'      => $item['user']['mobile'] ?? null,
                             'created_at'  => $item['created_at'],
                            ];

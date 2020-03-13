@@ -48,7 +48,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      * @param  integer $bankId 银行ID.
      * @return FrontendUsersBankCardFilter
      */
-    public function bankId(int $bankId): FrontendUsersBankCardFilter
+    public function bank(int $bankId): FrontendUsersBankCardFilter
     {
         $eloq = $this->where('bank_id', $bankId);
         return $eloq;
@@ -63,6 +63,18 @@ class FrontendUsersBankCardFilter extends ModelFilter
     public function sign(string $sign): FrontendUsersBankCardFilter
     {
         $eloq = $this->where('platform_sign', $sign);
+        return $eloq;
+    }
+
+    /**
+     * 银行卡号
+     *
+     * @param  string $cardNumber 银行卡号.
+     * @return FrontendUsersBankCardFilter
+     */
+    public function cardNumber(string $cardNumber): FrontendUsersBankCardFilter
+    {
+        $eloq = $this->where('card_number', $cardNumber);
         return $eloq;
     }
 
