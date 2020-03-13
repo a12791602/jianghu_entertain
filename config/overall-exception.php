@@ -16,6 +16,7 @@ $config = [
                                          PDOException::class                                      => Formatters\PDOExceptionFormatter::class,
                                          \Illuminate\Auth\AuthenticationException::class          => Formatters\AuthExceptionFormatter::class,
                                          Exception::class                                         => Formatters\ExceptionFormatter::class,
+                                         ArgumentCountError::class                                => Formatters\ExceptionFormatter::class,
                                         ],
            'response_factory'        => ResponseFactory::class,
            'reporters'               => [],
