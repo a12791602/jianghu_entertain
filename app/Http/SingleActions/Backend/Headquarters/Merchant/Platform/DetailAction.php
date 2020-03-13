@@ -39,15 +39,16 @@ class DetailAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $platformData = $this->model
-            ->filter($inputDatas, SystemPlatformFilter::class)
-            ->with('owner:id,email')
+        $platformData = $this->model->filter($inputDatas, SystemPlatformFilter::class)->with('owner.accessGroup.detail')
             ->get(
                 [
                  'id',
                  'cn_name',
                  'sign',
                  'agency_method',
+                 'pc_skin_id',
+                 'h5_skin_id',
+                 'app_skin_id',
                  'start_time',
                  'end_time',
                  'sms_num',
@@ -58,7 +59,33 @@ class DetailAction extends MainAction
                  'owner_id',
                 ],
             );
-        $msgOut       = msgOut($platformData);
+        $returnData   = [];
+        foreach ($platformData as $item) {
+            if (isset($item->owner->accessGroup->detail)) {
+                $role = $item->owner->accessGroup->detail->pluck('menu_id')->toArray();
+            } else {
+                $role = [];
+            }
+            $returnData[] = [
+                             'id'             => $item->id,
+                             'cn_name'        => $item->cn_name,
+                             'email'          => $item->owner->email,
+                             'sign'           => $item->sign,
+                             'agency_method'  => $item->agency_method,
+                             'pc_skin_id'     => $item->pc_skin_id,
+                             'h5_skin_id'     => $item->h5_skin_id,
+                             'app_skin_id'    => $item->app_skin_id,
+                             'start_time'     => $item->start_time,
+                             'end_time'       => $item->end_time,
+                             'sms_num'        => $item->sms_num,
+                             'maintain_start' => $item->maintain_start,
+                             'maintain_end'   => $item->maintain_end,
+                             'status'         => $item->status,
+                             'created_at'     => $item->created_at,
+                             'role'           => $role,
+                            ];
+        }
+        $msgOut = msgOut($returnData);
         return $msgOut;
     }
 }

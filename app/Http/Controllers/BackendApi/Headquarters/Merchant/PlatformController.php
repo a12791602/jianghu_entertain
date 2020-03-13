@@ -30,6 +30,7 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAc
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\MaintainAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SkinListAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignActivitiesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
@@ -291,6 +292,19 @@ class PlatformController
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 运营商皮肤列表
+     *
+     * @param SkinListAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function skinList(SkinListAction $action): JsonResponse
+    {
+        $msgOut = $action->execute();
         return $msgOut;
     }
 }

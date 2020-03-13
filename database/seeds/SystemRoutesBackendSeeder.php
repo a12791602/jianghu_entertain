@@ -82,6 +82,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'edit',
              ],
              [
+              'route_name'    => 'headquarters-api.platform.skin-list',
+              'menu_group_id' => 4,
+              'title'         => '厅主列表-站点管理-皮肤列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController',
+              'method'        => 'skinList',
+             ],
+             [
               'route_name'    => 'headquarters-api.platform.switch',
               'menu_group_id' => 4,
               'title'         => '厅主列表-禁用启用',

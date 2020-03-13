@@ -5,7 +5,7 @@ namespace App\Game\GameModule\KY;
 use App\Game\BaseGame;
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\Game;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 
@@ -280,40 +280,26 @@ class KyGame extends BaseGame
      * }
      * @param string $redireUrl Redirect Url.
      * @return \Illuminate\Support\Optional|mixed
+     * @throws \RuntimeException Exception.
      */
     protected function sender(string $redireUrl)
     {
-        $agent         = $this->sysObj->getAgent()->getUserAgent();
-        $client        = new Client();
-        $redirectParam = [
-                          'allow_redirects' => [
-                                                'max'             => 10,        // allow at most 10 redirects.
-                                                'strict'          => true,      // use "strict" RFC compliant redirects.
-                                                'referer'         => true,      // add a Referer header
-                                                'track_redirects' => true,
-                                               ],
-                          'headers'         => [
-                                                'User-Agent'      => $agent,
-                                                'Accept'          => 'application/json',
-                                                'Accept-Encoding' => 'deflate,sdch',
-                                                'Accept-Charset'  => 'utf-8;q=1',
-                                               ],
-                         ];
-        $result        = $client->request(
-            'GET',
-            $redireUrl,
-            $redirectParam,
-        );
-        $retLog        = [
-                          'status' => $result->getStatusCode(),//todo 后面需要处理错误码
-                          'header' => $result->getHeader('content-type')[0],
-                          'body'   => \GuzzleHttp\json_decode($result->getBody()->getContents(), true),
-                         ];
-        Log::channel('game')->info('返回数据', $retLog);
-        $return = [];
-        if (isset($retLog['body']['d']['url'])) {
-            $return = $retLog['body']['d']['url'];
+        $agent    = $this->sysObj->getAgent()->getUserAgent();
+        $response = Http::retry(3, 100)
+            ->withHeaders(
+                [
+                 'User-Agent'      => $agent,
+                 'Accept'          => 'application/json',
+                 'Accept-Encoding' => 'deflate,sdch',
+                 'Accept-Charset'  => 'utf-8;q=1',
+                ],
+            )->get($redireUrl);
+        $this->rspLog($response);
+        if (!$response->ok()) {
+            throw new \RuntimeException('ky-00');//开源游戏请求失败
         }
+        $result = $response->json();
+        $return = $result['d']['url'] ?? [];
         return $return;
     }
 }

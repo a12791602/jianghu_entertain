@@ -63,6 +63,7 @@ class DatabaseSeeder extends Seeder
              FrontendUsersBankCardSeeder::class,
              SystemConfigurationStandardSeeder::class,
              FrontendUserAccountTypesGroupSeeder::class,
+             SystemPlatformSkinSeeder::class,
             ],
         );
     }

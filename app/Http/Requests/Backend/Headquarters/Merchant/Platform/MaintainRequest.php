@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Systems\SystemPlatform;
 
 /**
  * Class for maintain request.
  */
 class MaintainRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemPlatform::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -30,20 +37,6 @@ class MaintainRequest extends BaseFormRequest
                 'id'             => 'required|exists:system_platforms',             //ID
                 'maintain_start' => 'date_format:Y-m-d H:i:s',                      //维护开始时间
                 'maintain_end'   => 'date_format:Y-m-d H:i:s|after:maintain_start', //维护结束时间
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'                => '缺少站点ID',
-                'id.exists'                  => '该站点不存在',
-                'maintain_start.date_format' => '维护时间的时间格式只能是Y-m-d H:i:s',
-                'maintain_end.date_format'   => '维护时间的时间格式只能是Y-m-d H:i:s',
-                'maintain_end.after'         => '维护结束时间必须大于开始时间',
                ];
     }
 }

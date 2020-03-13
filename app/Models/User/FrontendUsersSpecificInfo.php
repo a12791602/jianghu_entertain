@@ -25,19 +25,27 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
     protected $guarded = ['id'];
 
     /**
-     * Get the user's full avatar URL.
+     * The attributes that should be cast to native types.
      *
+     * @var array
+     */
+    protected $casts = ['g_active' => 'array'];
+
+    /**
      * @return string
      */
     public function getAvatarFullAttribute(): string
     {
-        $avatar         = optional(SystemUserPublicAvatar::find($this->avatar))->pic_path;
         $appEnvironment = App::environment();
-        if ($avatar) {
-            $result = config('image_domain.' . $appEnvironment) . $avatar;
+        $avatarClass    = SystemUserPublicAvatar::class;
+        $avatarEloq     = $avatarClass::find($this->avatar);
+        if ($avatarEloq !== null) {
+            $avatar_pic = $avatarEloq->pic_path;
         } else {
-            $result = config('image_domain.' . $appEnvironment) . SystemUserPublicAvatar::first()->pic_path;
+            $avatarEloq = $avatarClass::first();
+            $avatar_pic = optional($avatarEloq)->pic_path;
         }
+        $result = config('image_domain.' . $appEnvironment) . $avatar_pic;
         return $result;
     }
 }

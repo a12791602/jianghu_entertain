@@ -141,5 +141,14 @@ Route::group(
              'assignedActivityCancel',
             ],
         )->name($namePrefix . 'assigned-activity-cancel');
+
+        //皮肤列表
+        Route::get(
+            'skin-list',
+            [
+             PlatformController::class,
+             'skinList',
+            ],
+        )->name($namePrefix . 'skin-list');
     },
 );
