@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\ModelFilters\Finance\SystemPlatformBankFilter;
 use App\Models\BaseModel;
 use App\Models\Finance\SystemBank;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -30,6 +31,11 @@ class FrontendUsersBankCard extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array $appends
+     */
+    protected $appends = ['binding_num'];
+
+    /**
      * @var array
      */
     public static $fieldDefinition = [
@@ -41,9 +47,9 @@ class FrontendUsersBankCard extends BaseModel
 
     /**
      * Hide the user's bank number. ****
-     * @return string
+     * @return mixed
      */
-    public function getCardNumberHiddenAttribute(): string
+    public function getCardNumberHiddenAttribute()
     {
         if ($this->type === 1) {
             // User's bank card.
@@ -73,5 +79,17 @@ class FrontendUsersBankCard extends BaseModel
     {
         $user = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
         return $user;
+    }
+
+    /**
+     * 银行卡绑定次数
+     *
+     * @return integer
+     */
+    public function getBindingNumAttribute(): int
+    {
+        $filterArr = ['card_number' => $this->card_number];
+        $count     = self::filter($filterArr, SystemPlatformBankFilter::class)->count();
+        return $count;
     }
 }

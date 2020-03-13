@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\System;
 
 use App\Http\Requests\Backend\Merchant\System\BankCards\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\System\BankCards\IndexRequest;
+use App\Http\SingleActions\Backend\Merchant\System\BankCards\BankListAction;
 use App\Http\SingleActions\Backend\Merchant\System\BankCards\DeleteAction;
 use App\Http\SingleActions\Backend\Merchant\System\BankCards\IndexAction;
 use Illuminate\Http\JsonResponse;
@@ -25,6 +26,18 @@ class BankCardsController
     {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 银行-列表
+     *
+     * @param  BankListAction $action Action.
+     * @return JsonResponse
+     */
+    public function bankList(BankListAction $action): JsonResponse
+    {
+        $msgOut = $action->execute();
         return $msgOut;
     }
 

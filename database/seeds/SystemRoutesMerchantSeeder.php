@@ -954,6 +954,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'delete',
              ],
              [
+              'route_name'    => 'merchant-api.bank-cards.bank-list',
+              'menu_group_id' => 56,
+              'title'         => '设置管理-银行卡反查-银行列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\System\BankCardsController',
+              'method'        => 'bankList',
+             ],
+             [
               'route_name'    => 'merchant-api.bank-cards.index',
               'menu_group_id' => 56,
               'title'         => '设置管理-银行卡反查-列表',

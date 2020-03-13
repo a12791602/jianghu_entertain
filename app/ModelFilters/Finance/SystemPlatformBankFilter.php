@@ -43,4 +43,16 @@ class SystemPlatformBankFilter extends ModelFilter
         $object = $this->where('platform_sign', $platform_sign);
         return $object;
     }
+
+    /**
+     * 按银行卡号搜索.
+     *
+     * @param string $cardNumber 银行卡号.
+     * @return SystemPlatformBankFilter
+     */
+    public function cardNumber(string $cardNumber): SystemPlatformBankFilter
+    {
+        $object = $this->where('card_number', $cardNumber);
+        return $object;
+    }
 }

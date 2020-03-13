@@ -49,8 +49,8 @@ trait FrontendUsersAuditLogics
      */
     public static function getPlatformSign(): string
     {
-        $plarform = Request::get('current_platform_eloq');
-        return $plarform->sign;
+        $platform = Request::get('current_platform_eloq');
+        return $platform->sign;
     }
 
     /**
