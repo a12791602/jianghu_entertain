@@ -2,7 +2,6 @@
 
 namespace App\Lib;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
@@ -26,29 +25,23 @@ class TGMSG
 
     /**
      * TGMSG constructor.
-     * @param integer     $responseStatus Status Code like 403,401 etc..
-     * @param string|null $prefixs        Route prefix app-api etc..
+     * @param string $chatId TGMSG constructor.
+     * @throws \Telegram\Bot\Exceptions\TelegramSDKException TelegramSDKException.
      */
-    public function __construct(int $responseStatus, ?string $prefixs = 'other')
+    public function __construct(string $chatId)
     {
-        $this->tgObj = new Api('823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM');
-        $environment = App::environment();
-        $prefixArr   = explode('/', $prefixs);
-        $prefix      = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
-        $codeToHuman = Config::get('telegram.http-group');
-        if (in_array($responseStatus, $codeToHuman, true)) {
-            $this->chatId = Config::get('telegram.chats.' . $environment . '.human');
-        } else {
-            $this->chatId = Config::get('telegram.chats.' . $environment . '.' . $prefix);
-        }
+        $tgToken      = Config::get('telegram.bot_token');
+        $this->tgObj  = new Api($tgToken);
+        $this->chatId = $chatId;
     }
 
     /**
      * @param string $message 信息.
-     * @return \Telegram\Bot\Objects\Message|boolean
+     * @return boolean
      */
-    public function sendMessage(string $message = '江湖丁丁')
+    public function sendMessage(string $message = '江湖丁丁'): bool
     {
+        $done                 = false;
         $preMsg               = "######################[开始]######################\n";
         $tailMsg              = "######################[结束]######################\n";
         $fullmsg              = $preMsg . $message . $tailMsg;
@@ -62,18 +55,23 @@ class TGMSG
         $additionalTimes = $modulus > 0 ? 1 : 0;
         $times           = (int) floor($stringLenUtf8 / $sendAbleStringLength) + $additionalTimes;
         $start           = 0;
+        $returnMultiple  = [];
         for ($i = 1; $i <= $times; $i++) {
-            $message = mb_substr($fullmsg, $start, $sendAbleStringLength);
-            $start  += $sendAbleStringLength;
-            $this->_sendMessage($message);
+            $message          = mb_substr($fullmsg, $start, $sendAbleStringLength);
+            $start           += $sendAbleStringLength;
+            $returnMultiple[] = $this->_sendMessage($message);
         }
+        if (!in_array(false, $returnMultiple, true)) {
+            $done = true;
+        }
+        return $done;
     }
 
     /**
      * @param string $message 信息.
-     * @return boolean|\Telegram\Bot\Objects\Message
+     * @return boolean
      */
-    private function _sendMessage(string $message)
+    private function _sendMessage(string $message): bool
     {
         $params = [
                    'chat_id' => $this->chatId,
@@ -83,10 +81,9 @@ class TGMSG
             return false;
         }
         try {
-            $response = $this->tgObj->sendMessage(
+            $this->tgObj->sendMessage(
                 $params,
             );
-            return $response;
         } catch (\Throwable $e) {
             Log::channel('telegram')->error(
                 $e->getMessage(),
@@ -94,5 +91,6 @@ class TGMSG
             );
             return false;
         }
+        return true;
     }
 }

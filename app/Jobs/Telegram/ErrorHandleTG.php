@@ -3,7 +3,6 @@
 namespace App\Jobs\Telegram;
 
 use App\Lib\TGMSG;
-use Throwable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -13,7 +12,9 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Jenssegers\Agent\Agent;
+use Throwable;
 
 /**
  * Class ErrorHandleTG
@@ -47,12 +48,12 @@ class ErrorHandleTG implements ShouldQueue
     protected $agent;
 
     /**
-     * @var ?string
+     * @var string
      */
     protected $currentRoute;
 
     /**
-     * @var ?string
+     * @var string
      */
     protected $routePrefix;
 
@@ -132,8 +133,8 @@ class ErrorHandleTG implements ShouldQueue
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();
-        $this->currentRoute   = empty($currentRoute) ? null : $currentRoute->uri();
-        $this->routePrefix    = empty($currentRoute) ? null : trim((string)$currentRoute->getPrefix(), '/');
+        $this->currentRoute   = empty($currentRoute) ? '' : $currentRoute->uri();
+        $this->routePrefix    = empty($currentRoute) ? '' : trim((string) $currentRoute->getPrefix(), '/');
     }
 
     /**
@@ -192,10 +193,21 @@ class ErrorHandleTG implements ShouldQueue
                            'message'       => $this->exception['message'],
                            'TraceAsString' => $this->exception['TraceAsString'],
                           ];
-        $telegram       = new TGMSG($this->responseStatus, $this->routePrefix);
-        if ($telegram->chatId === null) {
+        //####################【 获取TG 群id 按照平台的配置 】#################################
+        $environment = App::environment();
+        $prefixArr   = explode('/', $this->routePrefix);
+        $prefix      = !empty($prefixArr[0]) ? $prefixArr[0] : 'other';
+        $codeToHuman = Config::get('telegram.http-group');
+        if (in_array($this->responseStatus, $codeToHuman, true)) {
+            $chatId = Config::get('telegram.chats.' . $environment . '.human');
+        } else {
+            $chatId = Config::get('telegram.chats.' . $environment . '.' . $prefix);
+        }
+        if ($chatId === null) {
             return;
         }
+        //################################################################################
+        $telegram = new TGMSG($chatId);
         $telegram->sendMessage(
             (string) json_encode(
                 $error,
