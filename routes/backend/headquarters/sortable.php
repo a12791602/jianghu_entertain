@@ -2,11 +2,12 @@
 
 use App\Http\Controllers\CommonApi\SortableController;
 
-// Model sort
+// 更新模型的排序
 Route::group(
     ['prefix' => 'sortable'],
     static function (): void {
         $namePrefix = 'headquarters-api.sortable.';
-        Route::post('update', [SortableController::class, 'update'])->name($namePrefix . 'update');
+        Route::post('update-sortable', [SortableController::class, 'updateSortable'])
+            ->name($namePrefix . 'update-sortable');
     },
 );

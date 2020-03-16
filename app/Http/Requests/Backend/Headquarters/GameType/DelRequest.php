@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\GameType;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Rules\Backend\Common\Sortable\CheckSortableModel;
 
 /**
  * Class DelRequest
@@ -13,9 +14,10 @@ class DelRequest extends BaseFormRequest
 {
 
     /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
      */
-    protected $extraDefinition = ['model' => '模型'];
+    protected $extraDefinition = ['category_type' => '类别类型'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,8 +37,13 @@ class DelRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'    => 'required|exists:game_types,id',
-                  'model' => 'required|string',
+                  'id'            => 'required|numeric|exists:game_types,id',
+                  'category_type' => [
+                                      'required',
+                                      'numeric',
+                                      'in:1,2',
+                                      new CheckSortableModel($this),
+                                     ],
                  ];
         return $rules;
     }

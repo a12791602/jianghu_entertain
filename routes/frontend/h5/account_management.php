@@ -20,6 +20,6 @@ Route::group(
         Route::post('destroy', [AccountManagementController::class, 'accountDestroy'])->name($namePrefix . 'destroy');
         Route::post('destroy/verification-code', [AccountManagementController::class, 'accountDestroyVerificationCode'])
             ->name($namePrefix . 'destroy.verification-code');
-        Route::post('withdraw', [AccountManagementController::class, 'withdraw'])->name($namePrefix . 'withdraw');
+        Route::post('withdrawal', [AccountManagementController::class, 'withdrawal'])->name($namePrefix . 'withdrawal');
     },
 );

@@ -39,7 +39,7 @@ if (!function_exists('configure')) {
  * @param string $placeholder Placeholder.
  * @param string $substituted Substituted.
  * @return JsonResponse
- * @throws Exception 异常.
+ * @throws RuntimeException 异常.
  */
 function msgOut(
     $data = [],
@@ -103,8 +103,11 @@ function sendVerificationCode(string $mobile): array
 function getCurrentPlatform(Request $request): SystemPlatform
 {
     //获取来源域名
-    $host   = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
-    $strArr = explode('/', $host);              // [ 0 => "http:", 1 => "", 2 => "www.learnku.com", 3 => "laravel"]
+    $host = $request->server('HTTP_REFERER', 'HTTP_REFERER'); // https://www.learnku.com/laravel
+    if (!is_string($host)) {
+        throw new \Exception('100611');
+    }
+    $strArr = explode('/', $host); // [ 0 => "http:", 1 => "", 2 => "www.learnku.com", 3 => "laravel"]
 
     if (!is_array($strArr) || !isset($strArr[2])) {
         throw new \Exception('100611');
@@ -130,10 +133,10 @@ if (!function_exists('isJson')) {
     /**
      * 检测给定的字符串是不是json格式.
      *
-     * @param string|null $string 待检测的字符串.
+     * @param string $string 待检测的字符串.
      * @return boolean
      */
-    function isJson(?string $string): bool
+    function isJson(string $string): bool
     {
         try {
             $jObject = json_decode($string);

@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
+use App\Http\Requests\Backend\Headquarters\GameType\StatusDoRequest;
 use Illuminate\Http\JsonResponse;
 use Log;
 
@@ -10,25 +11,27 @@ use Log;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
-class StatusDoAction extends BaseAction
+class StatusDoAction
 {
-    
+
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param StatusDoRequest $request StatusDoRequest.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(StatusDoRequest $request): JsonResponse
     {
         try {
-            $model         = $inputDatas['model']::find($inputDatas['id']);
-            $model->status = $inputDatas['status'];
+            $validated     = $request->validated();
+            $model         = $request->get('model');// 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
+            $model         = $model::find($validated['id']);
+            $model->status = $validated['status'];
             $model->save();
             $msgOut = msgOut();
             return $msgOut;
-        } catch (\Throwable $throwable) {
-            Log::error($throwable->getMessage());
+        } catch (\RuntimeException $exception) {
+            Log::error($exception->getMessage());
         }
-        throw new \Exception('300404');
+        throw new \RuntimeException('300404');
     }
 }

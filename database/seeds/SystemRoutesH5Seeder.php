@@ -270,9 +270,9 @@ class SystemRoutesH5Seeder extends Seeder
               'is_open'           => 0,
              ],
              [
-              'route_name'        => 'h5-api.account.withdraw',
+              'route_name'        => 'h5-api.account.withdrawal',
               'controller'        => null,
-              'method'            => 'withdraw',
+              'method'            => 'withdrawal',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
@@ -288,9 +288,9 @@ class SystemRoutesH5Seeder extends Seeder
               'is_open'           => 0,
              ],
              [
-              'route_name'        => 'h5-api.account.withdraw',
+              'route_name'        => 'h5-api.account.withdrawal',
               'controller'        => null,
-              'method'            => 'withdraw',
+              'method'            => 'withdrawal',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,

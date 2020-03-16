@@ -2,30 +2,37 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
+use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
 use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
+use Log;
 
 /**
  * Class DelDoAction
  *
  * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
-class DelDoAction extends BaseAction
+class DelDoAction
 {
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param DelRequest $request DelRequest.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(DelRequest $request): JsonResponse
     {
-        if (!Game::where('vendor_id', $inputDatas['id'])->get()->isEmpty()) {
-            throw new \Exception('300400');
-        }
-        if ($inputDatas['model']::where('id', $inputDatas['id'])->delete()) {
+        try {
+            $validated = $request->validated();
+            $model     = $request->get('model');// 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
+            if (!Game::where('vendor_id', $validated['id'])->get()->isEmpty()) {
+                throw new \RuntimeException('300400');
+            }
+            $model::find($validated['id'])->delete();
             $msgOut = msgOut();
             return $msgOut;
+        } catch (\RuntimeException $exception) {
+            Log::error($exception->getMessage());
         }
-        throw new \Exception('300401');
+        throw new \RuntimeException('300401');
     }
 }

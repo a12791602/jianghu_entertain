@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Game\GameTypeChild;
+use App\Models\Game\GameSubType;
 use Illuminate\Database\Seeder;
 
 /**
- * Class GameTypeChildSeeder
+ * Class GameSubTypeSeeder
  */
-class GameTypeChildSeeder extends Seeder
+class GameSubTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class GameTypeChildSeeder extends Seeder
      */
     public function run(): void
     {
-        GameTypeChild::insert(
+        GameSubType::insert(
             [
              [
               'parent_id'      => 1,

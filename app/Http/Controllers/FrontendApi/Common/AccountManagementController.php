@@ -132,7 +132,7 @@ class AccountManagementController
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function withdraw(WithdrawalAction $action, WithdrawalRequest $request): JsonResponse
+    public function withdrawal(WithdrawalAction $action, WithdrawalRequest $request): JsonResponse
     {
         $result = $action->execute($request);
         return $result;

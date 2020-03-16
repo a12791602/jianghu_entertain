@@ -261,9 +261,9 @@ class SystemRoutesMobileSeeder extends Seeder
               'is_open'           => 0,
              ],
              [
-              'route_name'        => 'app-api.account.withdraw',
+              'route_name'        => 'app-api.account.withdrawal',
               'controller'        => null,
-              'method'            => 'withdraw',
+              'method'            => 'withdrawal',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,
@@ -324,9 +324,9 @@ class SystemRoutesMobileSeeder extends Seeder
               'is_open'           => 0,
              ],
              [
-              'route_name'        => 'app-api.account.withdraw',
+              'route_name'        => 'app-api.account.withdrawal',
               'controller'        => null,
-              'method'            => 'withdraw',
+              'method'            => 'withdrawal',
               'frontend_model_id' => null,
               'title'             => null,
               'description'       => null,

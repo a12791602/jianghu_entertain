@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
+use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
 use Arr;
 use Illuminate\Http\JsonResponse;
 
@@ -14,16 +15,18 @@ class EditDoAction
 {
 
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param EditRequest $request EditRequest.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(EditRequest $request): JsonResponse
     {
-        $model = $inputDatas['model']::find($inputDatas['id']);
-        $model->fill(Arr::only($inputDatas, ['id', 'name', 'sign']));
-        if (!$model->save()) {
-            throw new \Exception('300403');
+        $validated = $request->validated();
+        $model     = $request->get('model');// 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
+        $item      = $model::find($validated['id']);
+        $item->fill(Arr::only($validated, ['id', 'name', 'sign']));
+        if (!$item->save()) {
+            throw new \RuntimeException('300403');
         }
         $msgOut = msgOut();
         return $msgOut;

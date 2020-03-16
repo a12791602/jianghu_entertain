@@ -5,9 +5,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateGameTypeChildrenTable
+ * Class CreateGameSubTypesTable
  */
-class CreateGameTypeChildrenTable extends Migration
+class CreateGameSubTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateGameTypeChildrenTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'game_type_children',
+            'game_sub_types',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -31,7 +31,7 @@ class CreateGameTypeChildrenTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `game_type_children` comment '游戏种类子分类表'");
+        DB::statement("ALTER TABLE `game_sub_types` comment '游戏种类子分类表'");
     }
 
     /**
@@ -41,6 +41,6 @@ class CreateGameTypeChildrenTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_type_children');
+        Schema::dropIfExists('game_sub_types');
     }
 }

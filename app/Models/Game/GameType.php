@@ -34,10 +34,9 @@ class GameType extends BaseModel implements Sortable
      * @var array
      */
     public static $fieldDefinition = [
-                                      'name'      => '名称',
-                                      'sign'      => '标记',
-                                      'status'    => '金流分类状态',
-                                      'parent_id' => '父级分类',
+                                      'name'   => '名称',
+                                      'sign'   => '标记',
+                                      'status' => '分类状态',
                                      ];
 
     /**
@@ -88,7 +87,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function children(): HasMany
     {
-        $object = $this->hasMany(GameTypeChild::class, 'parent_id', 'id')->ordered();
+        $object = $this->hasMany(GameSubType::class, 'parent_id', 'id')->ordered();
         return $object;
     }
 }

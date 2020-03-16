@@ -4,6 +4,7 @@ namespace App\Http\Requests\Backend\Headquarters\GameType;
 
 use App\Http\Requests\BaseFormRequest;
 use App\Models\Game\GameType;
+use App\Rules\Backend\Common\Sortable\CheckSortableModel;
 
 /**
  * Class AddRequest
@@ -20,9 +21,13 @@ class AddRequest extends BaseFormRequest
     protected $dependentModels = [GameType::class];
 
     /**
-     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
      */
-    protected $extraDefinition = ['model' => '模型'];
+    protected $extraDefinition = [
+                                  'category_type' => '类别类型',
+                                  'parent_id'     => '父级分类',
+                                 ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -42,11 +47,16 @@ class AddRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'name'      => 'required|unique:game_types,name',
-                  'sign'      => 'required|regex:/\w+/|unique:game_types,sign',
-                  'status'    => 'required|in:0,1',
-                  'model'     => 'required|string',
-                  'parent_id' => 'numeric',
+                  'name'          => 'required|unique:game_types,name',
+                  'sign'          => 'required|string|unique:game_types,sign|max:64',
+                  'status'        => 'required|in:0,1',
+                  'parent_id'     => 'numeric',
+                  'category_type' => [
+                                      'required',
+                                      'numeric',
+                                      'in:1,2',
+                                      new CheckSortableModel($this),
+                                     ],
                  ];
         return $rules;
     }

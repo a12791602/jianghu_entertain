@@ -770,6 +770,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'edit',
              ],
              [
+              'route_name'    => 'merchant-api.online-finance.edit-get',
+              'menu_group_id' => 45,
+              'title'         => '金流管理-线上金流配置-编辑-GET',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController',
+              'method'        => 'edit',
+             ],
+             [
               'route_name'    => 'merchant-api.online-finance.del-do',
               'menu_group_id' => 45,
               'title'         => '金流管理-线上金流配置-获取金流通道',

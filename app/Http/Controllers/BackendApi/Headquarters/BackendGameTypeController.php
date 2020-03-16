@@ -24,14 +24,13 @@ class BackendGameTypeController
      * @param AddDoAction $action  Action.
      * @param AddRequest  $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
     public function addDo(
         AddDoAction $action,
         AddRequest $request
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut = $action->execute($request);
         return $msgOut;
     }
 
@@ -39,14 +38,13 @@ class BackendGameTypeController
      * @param EditDoAction $action  Action.
      * @param EditRequest  $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
     public function editDo(
         EditDoAction $action,
         EditRequest $request
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut = $action->execute($request);
         return $msgOut;
     }
 
@@ -54,7 +52,7 @@ class BackendGameTypeController
      * @param IndexDoAction  $action  Action.
      * @param IndexDoRequest $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
     public function indexDo(
         IndexDoAction $action,
@@ -69,14 +67,13 @@ class BackendGameTypeController
      * @param DelDoAction $action  Action.
      * @param DelRequest  $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeException.
      */
     public function delDo(
         DelDoAction $action,
         DelRequest $request
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut = $action->execute($request);
         return $msgOut;
     }
 
@@ -84,14 +81,13 @@ class BackendGameTypeController
      * @param StatusDoAction  $action  Action.
      * @param StatusDoRequest $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException RuntimeRuntimeException.
      */
     public function statusDo(
         StatusDoAction $action,
         StatusDoRequest $request
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
+        $msgOut = $action->execute($request);
         return $msgOut;
     }
 }

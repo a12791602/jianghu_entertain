@@ -2,11 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
+use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Arr;
+use DB;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use Log;
 
 /**
@@ -14,29 +15,31 @@ use Log;
  *
  * @package App\Http\SingleActions\Backend\Headquarters\GameType
  */
-class AddDoAction extends BaseAction
+class AddDoAction
 {
-    
+
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param AddRequest $request AddRequest.
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(AddRequest $request): JsonResponse
     {
         try {
             DB::beginTransaction();
-            $item       = $inputDatas['model']::create(Arr::only($inputDatas, ['name', 'sign', 'status']));
+            $validated  = $request->validated();
+            $model      = $request->get('model'); // 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
+            $item       = $model::create(Arr::only($validated, ['name', 'sign', 'status']));
             $insertData = $this->_getFormatDataForTypePlatform($item->id);
             GameTypePlatform::insert($insertData);
             DB::commit();
             $msgOut = msgOut();
             return $msgOut;
-        } catch (\Throwable $throwable) {
-            Log::error($throwable->getMessage());
+        } catch (\RuntimeException $exception) {
+            Log::error($exception->getMessage());
         }
         DB::rollBack();
-        throw new \Exception('300402');
+        throw new \RuntimeException('300402');
     }
 
     /**

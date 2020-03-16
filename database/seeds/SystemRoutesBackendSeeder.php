@@ -955,12 +955,12 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'allRequireInfos',
              ],
              [
-              'route_name'    => 'headquarters-api.sortable.update',
+              'route_name'    => 'headquarters-api.sortable.update-sortable',
               'menu_group_id' => 39,
               'title'         => 'Sortable-拖拽排序',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\CommonApi\SortableController',
-              'method'        => 'update',
+              'method'        => 'updateSortable',
              ],
             ],
         );

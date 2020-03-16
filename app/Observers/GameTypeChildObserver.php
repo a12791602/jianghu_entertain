@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Game\GameTypeChild;
+use App\Models\Game\GameSubType;
 
 /**
  * Class GameTypeChildObserver
@@ -13,10 +13,10 @@ class GameTypeChildObserver
 
     /**
      * Handle the "saving" event of the GameTypeChild model.
-     * @param GameTypeChild $type GameTypeChild Model.
+     * @param GameSubType $type GameTypeChild Model.
      * @return void
      */
-    public function saving(GameTypeChild $type): void
+    public function saving(GameSubType $type): void
     {
         $type->last_editor_id = request()->user()->id;
     }

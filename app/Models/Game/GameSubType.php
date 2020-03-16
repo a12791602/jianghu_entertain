@@ -7,10 +7,10 @@ use App\Lib\EloquentSortable\Sortable;
 use App\Models\BaseModel;
 
 /**
- * Class GameTypeChild
+ * Class GameSubType
  * @package App\Models\Game
  */
-class GameTypeChild extends BaseModel implements Sortable
+class GameSubType extends BaseModel implements Sortable
 {
     use EloquentSortable;// Eloquent Sortable.
 
