@@ -36,7 +36,7 @@ class WithdrawalAction extends MainAction
         $num_withdrawal   = UsersWithdrawOrder::select('id')->where('user_id', $user->id)
             ->whereDate('created_at', date('Y-m-d'))->count();
         $day_withdraw_num = configure($this->user->platform_sign, 'day_withdraw_num');// 每日可提现次数
-        if ($num_withdrawal === (int) $day_withdraw_num) {
+        if ($num_withdrawal >= (int) $day_withdraw_num) {
             throw new RuntimeException('100904');
         }
         $total_withdrawal = UsersWithdrawOrder::where('user_id', $user->id)

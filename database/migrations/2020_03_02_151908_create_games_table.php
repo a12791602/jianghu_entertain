@@ -24,7 +24,7 @@ class CreateGamesTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('type_id')->nullable()->comment('游戏分类ID');
-                $table->integer('type_child_id')->nullable()->comment('游戏子分类ID');
+                $table->integer('sub_type_id')->nullable()->comment('游戏子分类ID');
                 $table->integer('vendor_id')->nullable()->comment('所属厂商ID');
                 $table->string('name', 64)->nullable()->comment('游戏名称');
                 $table->string('sign', 64)->nullable()->comment('游戏标识');

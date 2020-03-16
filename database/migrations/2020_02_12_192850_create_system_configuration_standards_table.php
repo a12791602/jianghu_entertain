@@ -28,6 +28,7 @@ class CreateSystemConfigurationStandardsTable extends Migration
                 $table->string('value', 128)->nullable()->default(null)->comment('配置的值');
                 $table->tinyInteger('status')->default(0)->comment('状态 0禁用 1启用');
                 $table->tinyInteger('display')->default(0)->comment('是否显示 0否 1是');
+                $table->string('editable_type', 16)->nullable()->default(null)->comment('编辑的类型1.输入框 2.开启状态 3.下拉框');
                 $table->nullableTimestamps();
             },
         );

@@ -30,6 +30,7 @@ class CreateSystemConfigurationsTable extends Migration
                 $table->integer('last_update_admin_id')->nullable()->default(null)->comment('上次更改人id');
                 $table->tinyInteger('status')->default(0)->comment('状态 0禁用 1启用');
                 $table->tinyInteger('display')->default(0)->comment('是否显示 0否 1是');
+                $table->string('editable_type', 16)->nullable()->default(null)->comment('编辑的类型1.输入框 2.开启状态 3.下拉框');
                 $table->index('platform_sign');
                 $table->index('pid');
                 $table->index('sign');

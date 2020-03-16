@@ -41,6 +41,18 @@ class MerchantAdminUserSeeder extends Seeder
               'platform_sign'   => 'jhhy',
               'chargeable_fund' => 100,
              ],
+             [
+              'id'              => '3',
+              'name'            => 'aaron',
+              'email'           => 'aaron@qq.com',
+              'password'        => '$2y$10$hKf16yCcHI3gaPT06DVOle.uRM.dOugg6zt4A91qXDptxnGZEjOqi',
+              'remember_token'  => '',
+              'group_id'        => '2',
+              'status'          => '1',
+              'platform_id'     => 1,
+              'platform_sign'   => 'jhhy',
+              'chargeable_fund' => 100,
+             ],
             ],
         );
     }

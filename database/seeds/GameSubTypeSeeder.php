@@ -45,6 +45,15 @@ class GameSubTypeSeeder extends Seeder
               'sort'           => 3,
              ],
              [
+              'parent_id'      => 5,
+              'name'           => 'VR游戏',
+              'sign'           => 'vr-game',
+              'status'         => 1,
+              'author_id'      => 0,
+              'last_editor_id' => 0,
+              'sort'           => 3,
+             ],
+             [
               'parent_id'      => 1,
               'name'           => '其他',
               'sign'           => 'other',

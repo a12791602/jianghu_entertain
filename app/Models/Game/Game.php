@@ -20,6 +20,19 @@ class Game extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'name'         => '游戏名称',
+                                      'sign'         => '标记',
+                                      'status'       => '游戏状态',
+                                      'type_id'      => '游戏分类ID',
+                                      'sub_type_id'  => '游戏子分类ID',
+                                      'vendor_id'    => '所属厂商ID',
+                                      'request_mode' => '请求方式',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo
@@ -52,6 +65,15 @@ class Game extends BaseModel
     public function type(): BelongsTo
     {
         $object = $this->belongsTo(GameType::class, 'type_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function subType(): BelongsTo
+    {
+        $object = $this->belongsTo(GameSubType::class, 'sub_type_id', 'id');
         return $object;
     }
 

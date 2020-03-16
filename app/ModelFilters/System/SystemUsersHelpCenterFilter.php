@@ -43,6 +43,18 @@ class SystemUsersHelpCenterFilter extends ModelFilter
     }
 
     /**
+     * 状态
+     *
+     * @param  integer $status 客户端类型.
+     * @return SystemUsersHelpCenterFilter
+     */
+    public function status(int $status): SystemUsersHelpCenterFilter
+    {
+        $eloq = $this->where('status', $status);
+        return $eloq;
+    }
+
+    /**
      * 平台标识
      *
      * @param  string $sign 平台标识.
@@ -51,6 +63,18 @@ class SystemUsersHelpCenterFilter extends ModelFilter
     public function sign(string $sign): SystemUsersHelpCenterFilter
     {
         $eloq = $this->where('platform_sign', $sign);
+        return $eloq;
+    }
+
+    /**
+     * 标题模糊查询
+     *
+     * @param  string $title 客户端类型.
+     * @return SystemUsersHelpCenterFilter
+     */
+    public function title(string $title): SystemUsersHelpCenterFilter
+    {
+        $eloq = $this->whereLike('title', $title);
         return $eloq;
     }
 }

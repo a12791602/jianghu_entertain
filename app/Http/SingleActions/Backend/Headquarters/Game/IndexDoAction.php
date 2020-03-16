@@ -27,6 +27,7 @@ class IndexDoAction extends BaseAction
         $outputDatas = $this->model::with(
             [
              'type:id,name',
+             'subType:id,name',
              'vendor:id,name',
              'lastEditor:id,name',
              'author:id,name',

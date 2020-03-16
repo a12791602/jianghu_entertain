@@ -2,7 +2,10 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game;
 
+use App\Models\Platform\GamePlatform;
+use DB;
 use Illuminate\Http\JsonResponse;
+use Log;
 
 /**
  * Class DelDoAction
@@ -14,14 +17,21 @@ class DelDoAction extends BaseAction
     /**
      * @param  array $inputDatas InputDatas.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \Exception|\RuntimeException Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if ($this->model->where('id', $inputDatas['id'])->delete()) {
+        try {
+            DB::beginTransaction();
+            GamePlatform::where('game_id', $inputDatas['id'])->delete();
+            $this->model->where('id', $inputDatas['id'])->delete();
+            DB::commit();
             $msgOut = msgOut();
             return $msgOut;
+        } catch (\Throwable $exception) {
+            Log::error($exception->getMessage());
         }
-        throw new \Exception('300202');
+        DB::rollBack();
+        throw new \RuntimeException('300202');
     }
 }

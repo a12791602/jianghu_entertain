@@ -26,6 +26,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 0,
+              'editable_type' => '',
              ],
              [
               'id'            => 2,
@@ -36,6 +37,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 1,
               'status'        => 1,
               'display'       => 0,
+              'editable_type' => '',
              ],
              [
               'id'            => 3,
@@ -46,6 +48,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '',
              ],
              [
               'id'            => 4,
@@ -56,6 +59,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 3,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 5,
@@ -66,6 +70,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 0,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '2',
              ],
              [
               'id'            => 6,
@@ -76,6 +81,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '',
              ],
              [
               'id'            => 7,
@@ -86,6 +92,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 0,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '2',
              ],
              [
               'id'            => 8,
@@ -96,6 +103,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 0,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '2',
              ],
              [
               'id'            => 9,
@@ -106,6 +114,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 0,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '3',
              ],
              [
               'id'            => 10,
@@ -116,6 +125,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 30,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 11,
@@ -126,6 +136,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 3,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 12,
@@ -136,6 +147,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 13,
@@ -146,6 +158,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 14,
@@ -156,6 +169,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 15,
@@ -166,6 +180,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 16,
@@ -176,6 +191,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '',
              ],
              [
               'id'            => 17,
@@ -186,6 +202,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 18,
@@ -196,6 +213,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 19,
@@ -206,6 +224,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 20,
@@ -216,6 +235,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 21,
@@ -226,6 +246,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 22,
@@ -236,6 +257,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1,2',
              ],
              [
               'id'            => 23,
@@ -246,6 +268,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => null,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '',
              ],
              [
               'id'            => 24,
@@ -256,6 +279,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 2,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 25,
@@ -266,6 +290,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 2,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 26,
@@ -276,6 +301,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 100,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 27,
@@ -286,6 +312,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 20000,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 28,
@@ -296,6 +323,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 100000,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 29,
@@ -306,6 +334,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 5,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 30,
@@ -316,6 +345,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 200,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 31,
@@ -326,6 +356,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 1,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 32,
@@ -336,6 +367,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 2,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 33,
@@ -346,6 +378,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 0,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 34,
@@ -356,6 +389,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 1,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '2',
              ],
              [
               'id'            => 35,
@@ -366,6 +400,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 500,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
              [
               'id'            => 36,
@@ -376,6 +411,7 @@ class SystemConfigurationSeeder extends Seeder
               'value'         => 2,
               'status'        => 1,
               'display'       => 1,
+              'editable_type' => '1',
              ],
             ],
         );

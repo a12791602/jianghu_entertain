@@ -33,18 +33,10 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['type' => 'required|integer|in:1,2,3'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
         return [
-                'type.required' => '缺少客户端类型',
-                'type.integer'  => '客户端类型必须是数字',
-                'type.in'       => '客户端类型数据非法',
+                'type'   => 'required|integer|in:1,2,3', //客户端类型 1.H5 2.PC 3.APP
+                'status' => 'integer|in:0,1',            //状态 0.关闭 1.开启
+                'title'  => 'string|max:32',             //标题
                ];
     }
 }

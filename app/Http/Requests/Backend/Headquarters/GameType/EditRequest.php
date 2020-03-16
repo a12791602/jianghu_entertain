@@ -15,6 +15,16 @@ class EditRequest extends BaseFormRequest
 {
 
     /**
+     * 父级分类
+     */
+    public const CATEGORY_TYPE_PARENT = 1;
+
+    /**
+     * 子级分类
+     */
+    public const CATEGORY_TYPE_SUB = 2;
+
+    /**
      * 需要依赖模型中的字段备注信息
      * @var array<int,string>
      */
@@ -43,17 +53,24 @@ class EditRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'            => 'required|numeric|exists:game_types,id',
-                  'name'          => 'required|string|max:64',
-                  'sign'          => 'required|string|max:64',
-                  'category_type' => [
-                                      'required',
-                                      'numeric',
-                                      'in:1,2',
-                                      new CheckSortableModel($this),
-                                     ],
-                 ];
+        $category_type = $this->get('category_type');
+        $thisId        = $this->get('id');
+        $rules         = [
+                          'id'            => 'required|numeric|exists:game_types,id',
+                          'category_type' => [
+                                              'required',
+                                              'integer',
+                                              'in:1,2',
+                                              new CheckSortableModel($this),
+                                             ],
+                         ];
+        if ((int) $category_type === self::CATEGORY_TYPE_PARENT) {
+            $rules['name'] = 'required|max:64|unique:game_types,name,' . $thisId;
+            $rules['sign'] = 'required|max:64|unique:game_types,sign,' . $thisId . '|regex:/\w+/';
+        } else {
+            $rules['name'] = 'required|max:64|unique:game_sub_types,name,' . $thisId;
+            $rules['sign'] = 'required|max:64|unique:game_sub_types,sign,' . $thisId . '|regex:/\w+/';
+        }
         return $rules;
     }
 }

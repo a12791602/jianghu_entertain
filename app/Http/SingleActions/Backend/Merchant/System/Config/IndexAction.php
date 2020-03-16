@@ -51,10 +51,11 @@ class IndexAction extends MainAction
               SystemConfiguration::DISPLAY_YES,
              ],
             ],
-        )->with('childs:id,pid,sign,name,status,value')->get(
+        )->with('childs:id,pid,sign,name,status,value,editable_type')->get(
             [
              'id',
              'name',
+             'editable_type',
             ],
         );
         $msgOut = msgOut($data);
