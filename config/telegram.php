@@ -14,7 +14,7 @@ $config = [
     | https://core.telegram.org/bots#botfather
     |
     */
-           'bot_token'           => env('TELEGRAM_BOT_TOKEN', 'YOUR-BOT-TOKEN'),
+           'bot_token'           => env('TELEGRAM_BOT_TOKEN', '823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM'),
 
     /*
     |--------------------------------------------------------------------------
