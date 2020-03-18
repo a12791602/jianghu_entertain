@@ -32,12 +32,12 @@ class BankCardBindingRequest extends BaseFormRequest
                    'branch'      => [
                                      'string',
                                      'required',
-                                     'regex:/^[\x{4e00}-\x{9fa5}0-9]+$/u',
+                                     'regex:/^[\x{4e00}-\x{9fa5}0-9]+$/u', //(中文+数字)
                                     ],
                    'owner_name'  => [
                                      'string',
                                      'required',
-                                     'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',
+                                     'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5位中文)
                                     ],
                    'card_number' => [
                                      'required',

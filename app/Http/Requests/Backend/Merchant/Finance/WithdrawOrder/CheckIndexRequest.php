@@ -45,7 +45,7 @@ class CheckIndexRequest extends BaseFormRequest
                   ];
         $rules  = [
                    'order_no'     => 'string|min:1|max:128|exists:users_withdraw_orders,order_no',
-                   'mobile'       => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //匹配手机号
+                   'mobile'       => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //(手机号码第一位1第二位345789总共11位数字)
                    'guid'         => 'string|size:7',
                    'created_at'   => 'array',
                    'created_at.*' => 'required|date',

@@ -29,7 +29,7 @@ class IndexAction extends BaseAction
                                           ->orderByDesc('sort')
                                           ->filter($inputDatas, GameVendorPlatformFilter::class)
                                           ->withCacheCooldownSeconds(86400)
-                                          ->get();
+                                          ->paginate($this->model::getPageSize());
         return msgOut($datas);
     }
 }

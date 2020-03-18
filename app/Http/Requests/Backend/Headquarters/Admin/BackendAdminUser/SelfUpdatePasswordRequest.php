@@ -44,7 +44,7 @@ class SelfUpdatePasswordRequest extends BaseFormRequest
                                      'required',
                                      'string',
                                      'between:6,16',
-                                     'regex:/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/',
+                                     'regex:/^(?=.*[a-zA-Z]+)(?=.*[0-9]+)[a-zA-Z0-9]+$/', //字母加数字
                                     ], //新密码
                  ];
         return $rules;

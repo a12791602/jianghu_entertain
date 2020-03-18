@@ -39,7 +39,7 @@ class IndexAction extends MainAction
         $data   = $this->model
                     ->where('platform_sign', $sign)
                     ->orderBy('experience_max', 'asc')
-                    ->get(
+                    ->select(
                         [
                          'id',
                          'name',
@@ -50,7 +50,7 @@ class IndexAction extends MainAction
                          'updated_at',
                         ],
                     )
-                    ->toArray();
+                    ->paginate($this->model::getPageSize());
         $msgOut = msgOut($data);
         return $msgOut;
     }

@@ -34,11 +34,12 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'label'   => 'required|unique:merchant_system_menus|regex:/[\x{4e00}-\x{9fa5}]+/u', //标题
+                  'label'   => 'required|unique:merchant_system_menus|regex:/[\x{4e00}-\x{9fa5}]+/u', //标题(中文)
                   'en_name' => 'required|alpha_dash|unique:merchant_system_menus',//英文名
                   'display' => 'required|numeric|in:0,1', //是否显示  0否 1是
-                  'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由
-                  'icon'    => 'regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',//图标
+                  'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由(小写+数字+“/”)
+                  //图标(小写+数字+“-”)
+                  'icon'    => 'regex:/^(?!\-)(?!.*\-$)(?!.*?\-\-)(?!\ )(?!.*\ $)(?!.*?\ \ )[a-z0-9 -]+$/',
                   'pid'     => 'required|integer',//父级ID
                   'level'   => 'required|integer',//层级
                  ];

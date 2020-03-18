@@ -50,10 +50,10 @@ class WithdrawalRequest extends BaseFormRequest
                    'amount'        => [
                                        'required',
                                        'regex:/^[0-9]+(\.[0-9]{1,2})?$/',
-                                      ], // 提现金额
+                                      ], // 提现金额(数字+小数点2位)
                    'fund_password' => [
                                        'required',
-                                       'regex:/^[0-9a-zA-Z]{8,16}$/', // 大小写字母加数字 8,16位
+                                       'regex:/^[0-9a-zA-Z]{8,16}$/', // (大小写字母加数字 8,16位)
                                        new FundPasswordCheckRule($this),
                                       ], // 资金密码
                   ];

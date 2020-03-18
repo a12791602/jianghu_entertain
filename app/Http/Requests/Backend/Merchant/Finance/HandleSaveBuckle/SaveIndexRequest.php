@@ -36,7 +36,7 @@ class SaveIndexRequest extends BaseFormRequest
     {
         $type  = array_keys(SystemFinanceHandleSaveBuckleRecord::$saveTypes);
         $rules = [
-                  'mobile'       => 'string|size:11|regex:/^1[345789]\d{9}$/',
+                  'mobile'       => 'string|size:11|regex:/^1[345789]\d{9}$/',//(手机号码第一位1第二位345789总共11位数字)
                   'guid'         => 'string|size:7',
                   'is_tester'    => 'integer|in:0,1',
                   'type'         => 'integer|in:' . implode(',', $type),

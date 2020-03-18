@@ -33,7 +33,7 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $mobile = ['regex:/^((13[0-9])|(14[5,7])|(15[0-3,5-9])|(17[0,3,5-8])|(18[0-9])|166|198|199)\d{8}$/'];
+        $mobile = ['regex:/^1[345789]\d{9}$/'];//(手机号码第一位1第二位345789总共11位数字)
         return [
                 'user_id'     => 'integer',              //用户UID
                 'mobile'      => $mobile,                //用户手机号

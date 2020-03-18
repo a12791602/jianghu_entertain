@@ -32,7 +32,7 @@ class AddDoRequest extends BaseFormRequest
                 'type_id'      => 'required|exists:system_finance_types,id',
                 'vendor_id'    => 'required|exists:system_finance_vendors,id',
                 'name'         => 'required|unique:system_finance_channels,name',
-                'sign'         => 'required|unique:system_finance_channels,sign|regex:/\w+/',
+                'sign'         => 'required|unique:system_finance_channels,sign|regex:/\w+/', //(字母+下划线)
                 'request_mode' => 'required|in:0,1',
                 'request_url'  => 'required|url',
                 'banks_code'   => 'string',

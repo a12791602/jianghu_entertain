@@ -32,12 +32,12 @@ class BankCardFirstBindingRequest extends BaseFormRequest
                    'branch'        => [
                                        'string',
                                        'required',
-                                       'regex:/^[\x{4e00}-\x{9fa5}0-9]+$/u',
+                                       'regex:/^[\x{4e00}-\x{9fa5}0-9]+$/u',//(中文+数字)
                                       ],
                    'owner_name'    => [
                                        'string',
                                        'required',
-                                       'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',
+                                       'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',//(1-5位中文)
                                       ],
                    'card_number'   => [
                                        'required',
@@ -48,6 +48,7 @@ class BankCardFirstBindingRequest extends BaseFormRequest
                    'bank_id'       => 'integer|required', // 银行 id
                    'fund_password' => [
                                        'required',
+                                       //(必须存在大写+小写+数字的7到15位)
                                        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
                                        'confirmed',
                                       ],

@@ -33,7 +33,7 @@ class InformationUpdateRequest extends BaseFormRequest
                                   'string',
                                   'min:2',
                                   'max:5',
-                                  'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',
+                                  'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5位中文)
                                  ],
                   ];
         return $result;

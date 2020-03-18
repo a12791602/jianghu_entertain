@@ -32,7 +32,7 @@ class EditDoRequest extends BaseFormRequest
         return [
                 'id'        => 'required|exists:system_finance_types,id',
                 'name'      => 'required|unique:system_finance_types,name,' . $thisId,
-                'sign'      => 'required|unique:system_finance_types,sign,' . $thisId . '|regex:/\w+/',
+                'sign'      => 'required|unique:system_finance_types,sign,' . $thisId . '|regex:/\w+/',//(字母+下划线)
                 'is_online' => 'required|in:0,1',
                 'direction' => 'required|in:0,1',
                ];

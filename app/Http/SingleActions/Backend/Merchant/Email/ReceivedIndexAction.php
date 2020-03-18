@@ -21,11 +21,35 @@ class ReceivedIndexAction extends BaseAction
     {
         $pageSize                    = SystemEmailOfMerchant::getPageSize();
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $datas                       = SystemEmailOfMerchant::with('email:id,title,content')
+        $emails                      = SystemEmailOfMerchant::with('email.headquarters')
+            ->select(
+                [
+                 'id',
+                 'email_id',
+                 'merchant_id',
+                 'is_read',
+                 'created_at',
+                ],
+            )
             ->filter($inputDatas, SystemEmailOfMerchantFilter::class)
             ->orderByDesc('created_at')
-            ->paginate($pageSize);
-        $msgOut                      = msgOut($datas);
+            ->paginate($pageSize)
+            ->toArray();
+
+        $datas = [];
+        foreach ($emails['data'] as $item) {
+            $datas[] = [
+                        'id'         => $item['id'],
+                        'is_read'    => $item['is_read'],
+                        'created_at' => $item['created_at'],
+                        'title'      => $item['email->title'] ?? '',
+                        'content'    => $item['email']['content'] ?? '',
+                        'sender'     => $item['email']['headquarters']['name'] ?? '',
+                       ];
+        }
+
+        $emails['data'] = $datas;
+        $msgOut         = msgOut($emails);
         return $msgOut;
     }
 }

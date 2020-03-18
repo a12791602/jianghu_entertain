@@ -42,7 +42,13 @@ class IndexAction extends MainAction
         $data      = $this->model
             ->filter($filterArr, MerchantAdminAccessGroupFilter::class)
             ->with('detail:group_id,menu_id')
-            ->get(['id', 'group_name', 'created_at']);
+            ->select(
+                [
+                 'id',
+                 'group_name',
+                 'created_at',
+                ],
+            )->paginate($this->model::getPageSize());
 
         $msgOut = msgOut($data);
         return $msgOut;

@@ -41,7 +41,7 @@ class IndexAction extends MainAction
         $data               = $this->model
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
             ->with(['author:id,name', 'newer:id,name'])
-            ->get(
+            ->select(
                 [
                  'id',
                  'title',
@@ -53,7 +53,7 @@ class IndexAction extends MainAction
                  'add_admin_id',
                  'update_admin_id',
                 ],
-            );
+            )->paginate($this->model::getPageSize());
         $msgOut             = msgOut($data);
         return $msgOut;
     }

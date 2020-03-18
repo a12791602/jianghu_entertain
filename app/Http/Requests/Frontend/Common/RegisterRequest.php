@@ -32,6 +32,7 @@ class RegisterRequest extends BaseFormRequest
                 'password'              => [
                                             'required',
                                             'confirmed',
+                                            //(必须存在大小写字母+数字的8-16位)
                                             'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',
                                            ],
                 'password_confirmation' => 'required',

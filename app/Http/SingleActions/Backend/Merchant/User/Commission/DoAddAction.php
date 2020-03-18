@@ -88,6 +88,14 @@ class DoAddAction extends MainAction
         if (count($percentArr) !== $userGrade->count()) {
             throw new \Exception('200802');
         }
+
+        $currentPercent = 0;
+        foreach ($percentArr as $percent) {
+            if ($percent < $currentPercent) {
+                throw new \Exception('200817');
+            }
+            $currentPercent = $percent;
+        }
         //存在洗码设置时才需要去验证数据是否合法
         if ($commissionConfig->isNotEmpty()) {
             //检查该打码量的洗码设置是否重复

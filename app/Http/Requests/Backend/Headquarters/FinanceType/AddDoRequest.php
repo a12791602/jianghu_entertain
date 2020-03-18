@@ -30,7 +30,7 @@ class AddDoRequest extends BaseFormRequest
     {
         return [
                 'name'      => 'required|unique:system_finance_types,name',
-                'sign'      => 'required|unique:system_finance_types,sign|regex:/\w+/',
+                'sign'      => 'required|unique:system_finance_types,sign|regex:/\w+/',//(字母+下划线)
                 'is_online' => 'required|in:0,1',
                 'direction' => 'required|in:0,1',
                 'status'    => 'required|in:0,1',

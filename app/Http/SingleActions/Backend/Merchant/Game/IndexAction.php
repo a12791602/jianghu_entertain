@@ -35,7 +35,7 @@ class IndexAction extends BaseAction
         )->orderByDesc('sort')
          ->filter($inputDatas, GamesPlatformFilter::class)
          ->withCacheCooldownSeconds(86400)
-         ->get();
+         ->paginate($this->model::getPageSize());
         $result                    = msgOut($datas);
         return $result;
     }

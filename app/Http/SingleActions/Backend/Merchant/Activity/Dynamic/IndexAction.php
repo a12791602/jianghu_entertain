@@ -28,7 +28,8 @@ class IndexAction extends BaseAction
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model::with('lastEditor:id,name', 'activity:id,sign,name')
             ->filter($inputDatas, SystemDynActivityPlatformFilter::class)
-            ->withCacheCooldownSeconds(86400)->get();
+            ->withCacheCooldownSeconds(86400)
+            ->paginate($this->model::getPageSize());
         $msgOut                      = msgOut($data);
         return $msgOut;
     }

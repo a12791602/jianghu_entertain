@@ -32,7 +32,7 @@ class AliPayFirstBindingRequest extends BaseFormRequest
                    'owner_name'    => [
                                        'string',
                                        'required',
-                                       'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u',
+                                       'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
                                       ],
                    'card_number'   => [
                                        'required',
@@ -40,6 +40,7 @@ class AliPayFirstBindingRequest extends BaseFormRequest
                                       ],
                    'fund_password' => [
                                        'required',
+                                       //(必须存在大写+小写+数字的7到15位)
                                        'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
                                        'confirmed',
                                       ],
