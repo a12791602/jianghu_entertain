@@ -24,9 +24,9 @@ class StatusRequest extends BaseFormRequest
     public function rules() :array
     {
         return [
-            'id' => 'required|exists:game_vendor_platforms,id',
-            'status' => 'required|in:0,1',
-            'type' => 'required|in:0,1',
+            'id'     => 'required|integer|exists:game_vendor_platforms',
+            'status' => 'required|integer|in:0,1',
+            'type'   => 'required|integer|in:0,1',
         ];
     }
 
@@ -36,12 +36,12 @@ class StatusRequest extends BaseFormRequest
     public function messages() :array
     {
         return [
-            'id.required' => 'ID不存在',
-            'id.exists' => 'ID不存在',
+            'id.required'     => 'ID不存在',
+            'id.exists'       => 'ID不存在',
             'status.required' => '请选择状态',
-            'status.in' => '所选状态不存在',
-            'type.required' => '请上传状态类型',
-            'type.in' => '状态类型不在范围内'
+            'status.in'       => '所选状态不存在',
+            'type.required'   => '请上传状态类型',
+            'type.in'         => '状态类型不在范围内',
         ];
     }
 }

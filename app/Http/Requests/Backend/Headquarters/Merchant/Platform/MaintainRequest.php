@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Systems\SystemPlatform;
 
 /**
- * Class for maintain request.
+ *  Class for maintain request.
  */
 class MaintainRequest extends BaseFormRequest
 {

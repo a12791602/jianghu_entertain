@@ -27,6 +27,6 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['title' => 'string'];
+        return ['title' => 'string|max:64'];
     }
 }

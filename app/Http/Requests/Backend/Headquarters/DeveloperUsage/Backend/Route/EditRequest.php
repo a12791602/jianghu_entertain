@@ -44,8 +44,8 @@ class EditRequest extends BaseFormRequest
                                       'max:128',
                                       Rule::unique('system_routes_backends')->ignore($this->get('id')),
                                      ],                                           //路由名称
-                  'controller'    => 'required|string|max:64', //控制器
-                  'method'        => 'required|string|max:32', //方法
+                  'controller'    => 'required|string|max:128', //控制器
+                  'method'        => 'required|string|max:32',  //方法
                  ];
         return $rules;
     }

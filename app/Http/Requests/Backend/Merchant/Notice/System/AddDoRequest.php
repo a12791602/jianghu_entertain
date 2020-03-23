@@ -30,13 +30,13 @@ class AddDoRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'title'      => 'required',
-                'h5_pic'     => 'string',
-                'app_pic'    => 'string',
-                'pc_pic'     => 'string',
+                'title'      => 'required|string|max:64',
+                'h5_pic'     => 'string|string|max:128',
+                'app_pic'    => 'string|string|max:128',
+                'pc_pic'     => 'string|string|max:128',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
-                'status'     => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status'     => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
                ];
     }
 

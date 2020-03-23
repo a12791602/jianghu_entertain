@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
- * Class for create request.
+ *  Class for create request.
  */
 class CreateRequest extends BaseFormRequest
 {

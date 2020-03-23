@@ -105,17 +105,14 @@ class FrontendUserFilter extends ModelFilter
     /**
      * 注册时间查询
      *
-     * @param  string $createAt 注册时间.
+     * @param  array $createAt 注册时间.
      * @return FrontendUserFilter
      */
-    public function createAt(string $createAt): FrontendUserFilter
+    public function createdAt(array $createAt): FrontendUserFilter
     {
-        $createTime = json_decode($createAt, true);
-        $eloq       = $this;
-        if ($createTime !== null) {
-            if (count($createTime) === 2) {
-                $eloq = $this->whereBetween('created_at', $createTime);
-            }
+        $eloq = $this;
+        if (count($createAt) === 2) {
+            $eloq = $this->whereBetween('created_at', $createAt);
         }
         return $eloq;
     }

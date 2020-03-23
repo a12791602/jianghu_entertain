@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 
 /**
- * Class for menu do add request.
+ *  Class for menu do add request.
  */
 class DoAddRequest extends BaseFormRequest
 {

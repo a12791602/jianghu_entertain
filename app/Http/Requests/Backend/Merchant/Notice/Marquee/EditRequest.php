@@ -31,8 +31,8 @@ class EditRequest extends BaseFormRequest
         $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'id'         => 'required|exists:notice_marquees,id',
-                'title'      => 'required|max:5',
-                'content'    => 'required',
+                'title'      => 'required|string|max:16',
+                'content'    => 'required|string',
                 'device'     => 'required|array',
                 'device.*'   => 'in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
                 'status'     => 'in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,

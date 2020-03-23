@@ -27,9 +27,9 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'sign'  => 'required|string|max:32',   //标识
-                'key'   => 'required|in:value,status', //表字段名
-                'value' => 'required|string',          //表字段值
+                'sign'  => 'required|string|max:32',          //标识
+                'key'   => 'required|string|in:value,status', //表字段名
+                'value' => 'required|string|max:128',         //表字段值
                ];
     }
 }

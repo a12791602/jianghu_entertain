@@ -45,17 +45,14 @@ class FrontendUsersBlackListFilter extends ModelFilter
     /**
      * 拉黑时间查询
      *
-     * @param  string $createAt 拉黑时间.
+     * @param  array $createdAt 拉黑时间.
      * @return FrontendUsersBlackListFilter
      */
-    public function createAt(string $createAt): FrontendUsersBlackListFilter
+    public function createdAt(array $createdAt): FrontendUsersBlackListFilter
     {
-        $createTime = json_decode($createAt, true);
-        $eloq       = $this;
-        if ($createTime !== null) {
-            if (count($createTime) === 2) {
-                $eloq = $this->whereBetween('created_at', $createTime);
-            }
+        $eloq = $this;
+        if (count($createdAt) === 2) {
+            $eloq = $this->whereBetween('created_at', $createdAt);
         }
         return $eloq;
     }

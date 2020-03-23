@@ -28,8 +28,8 @@ class DoHotRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'      => 'required|exists:game_platforms,id',
-                  'hot_new' => 'required|in:0,1',
+                  'id'      => 'required|integer|exists:game_platforms',
+                  'hot_new' => 'required|integer|in:0,1',
                  ];
         return $rules;
     }

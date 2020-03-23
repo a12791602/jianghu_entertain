@@ -13,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 /**
- * 站点配置
+ *  站点配置
  */
 class EditAction extends MainAction
 {

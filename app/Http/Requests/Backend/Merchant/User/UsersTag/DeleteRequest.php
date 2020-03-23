@@ -33,7 +33,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|exists:users_tags']; //ID
+        $rules = ['id' => 'required|integer|exists:users_tags']; //ID
         return $rules;
     }
 }

@@ -27,7 +27,7 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:notice_carousels,id'];
+        return ['id' => 'required|integer|exists:notice_carousels'];
     }
 
     /**

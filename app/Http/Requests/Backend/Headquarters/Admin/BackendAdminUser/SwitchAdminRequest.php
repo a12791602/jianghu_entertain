@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminUser;
 
 /**
- * 修改管理员状态
+ *  修改管理员状态
  */
 class SwitchAdminRequest extends BaseFormRequest
 {

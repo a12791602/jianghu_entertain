@@ -28,11 +28,11 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'vendor_id' => 'exists:game_vendors,id',
-                'name'      => 'string',
-                'type_id'   => 'required_unless:hot_new,1|exists:game_types,id',
-                'status'    => 'in:0,1',
-                'hot_new'   => 'in:0,1',
+                'vendor_id' => 'integer|exists:game_vendors,id',
+                'name'      => 'string|max:64',
+                'type_id'   => 'required_unless:hot_new,1|integer|exists:game_types,id',
+                'status'    => 'integer|in:0,1',
+                'hot_new'   => 'integer|in:0,1',
                ];
     }
 

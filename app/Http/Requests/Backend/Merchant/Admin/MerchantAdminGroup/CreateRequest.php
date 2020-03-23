@@ -39,9 +39,18 @@ class CreateRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'group_name' => 'required|string',
-                  'role'       => 'required',
+                  'group_name' => 'required|string|max:10',
+                  'role'       => 'required|array',
+                  'role.*'     => 'integer',
                  ];
         return $rules;
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['role' => 'cast:array'];
     }
 }

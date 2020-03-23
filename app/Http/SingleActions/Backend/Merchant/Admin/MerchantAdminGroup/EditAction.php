@@ -7,7 +7,6 @@ use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -58,8 +57,7 @@ class EditAction extends MainAction
         MerchantAdminAccessGroupsHasBackendSystemMenu::where('group_id', $inputDatas['id'])->delete();
 
         //只提取当前登录管理员也拥有的权限
-        $role = Arr::wrap(json_decode($inputDatas['role'], true));
-        $role = array_intersect($this->adminAccessGroupDetail, $role);
+        $role = array_intersect($this->adminAccessGroupDetail, $inputDatas['role']);
 
         //添加AdminGroupDetails数据
         $data = ['group_id' => $inputDatas['id']];

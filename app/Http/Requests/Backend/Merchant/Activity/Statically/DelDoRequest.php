@@ -34,6 +34,6 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:system_static_activities,id'];
+        return ['id' => 'required|integer|exists:system_static_activities,id'];
     }
 }

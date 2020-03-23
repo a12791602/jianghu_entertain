@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class UnassignActivitiesRequest
+ *  Class UnassignActivitiesRequest
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */
 class UnassignActivitiesRequest extends BaseFormRequest

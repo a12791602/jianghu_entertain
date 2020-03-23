@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminUser;
 
 /**
- * 修改管理员密码
+ *  修改管理员密码
  */
 class UpdatePasswordRequest extends BaseFormRequest
 {

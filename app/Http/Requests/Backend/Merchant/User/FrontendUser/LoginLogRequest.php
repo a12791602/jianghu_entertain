@@ -35,9 +35,9 @@ class LoginLogRequest extends BaseFormRequest
     {
         return [
                 'mobile'        => ['regex' => 'regex:/^1[345789]\d{9}$/'], //(手机号码第一位1第二位345789总共11位数字)
-                'guid'          => 'string', //用户UID
-                'create_at'     => 'string', //登陆时间
-                'last_login_ip' => 'ip', //登陆IP
+                'guid'          => 'string|max:16',                         //用户UID
+                'create_at'     => 'string',                                //登陆时间
+                'last_login_ip' => 'ip',                                    //登陆IP
                ];
     }
 }

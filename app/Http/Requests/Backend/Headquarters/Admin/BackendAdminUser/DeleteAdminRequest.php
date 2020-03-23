@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminUser;
 
 /**
- * 删除总后台管理员用户
+ *  删除总后台管理员用户
  */
 class DeleteAdminRequest extends BaseFormRequest
 {

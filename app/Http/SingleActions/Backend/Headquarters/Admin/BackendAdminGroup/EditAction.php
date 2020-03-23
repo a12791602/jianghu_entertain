@@ -8,11 +8,10 @@ use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
 use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
- * Class for edit action.
+ *  Class for edit action.
  */
 class EditAction extends MainAction
 {
@@ -45,8 +44,8 @@ class EditAction extends MainAction
         if ((int) $id === 1) {
             throw new \Exception('300101');
         }
-        $datas = $this->model::find($id);
-        if ($datas === null) {
+        $datas = $this->model->find($id);
+        if (!$datas) {
             throw new \Exception('300100');
         }
         DB::beginTransaction();
@@ -55,8 +54,7 @@ class EditAction extends MainAction
             $datas->save();
             //只提取当前登录管理员也拥有的权限
             BackendAdminAccessGroupDetail::where('group_id', $id)->delete();
-            $role = Arr::wrap(json_decode($inputDatas['role'], true));
-            $role = array_intersect($this->adminAccessGroupDetail, $role);
+            $role = array_intersect($this->adminAccessGroupDetail, $inputDatas['role']);
             //添加AdminGroupDetails数据
             $data = ['group_id' => $id];
             foreach ($role as $roleId) {

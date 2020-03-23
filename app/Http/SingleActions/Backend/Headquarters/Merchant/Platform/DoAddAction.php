@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 /**
- * Class for merchant admin user do add action .
+ *  Class for merchant admin user do add action .
  */
 class DoAddAction extends MainAction
 {

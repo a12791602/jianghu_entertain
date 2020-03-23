@@ -28,8 +28,8 @@ class MaintainRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'          => 'required|exists:game_platforms,id',
-                'is_maintain' => 'required|in:0,1',
+                'id'          => 'required|integer|exists:game_platforms',
+                'is_maintain' => 'required|integer|in:0,1',
                ];
     }
 

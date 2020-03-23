@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminUser;
 
 /**
- * 生成总后台管理员用户
+ *  生成总后台管理员用户
  */
 class CreateRequest extends BaseFormRequest
 {

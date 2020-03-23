@@ -9,7 +9,6 @@ use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 /**
@@ -70,8 +69,7 @@ class CreateAction extends MainAction
         }
 
         //只提取当前登录管理员也拥有的权限,添加AdminGroupDetails权限数据
-        $role = Arr::wrap(json_decode($inputDatas['role'], true));
-        $role = array_intersect($role, $this->adminAccessGroupDetail);
+        $role = array_intersect($inputDatas['role'], $this->adminAccessGroupDetail);
         $data = ['group_id' => $adminGroup->id];
         foreach ($role as $roleId) {
             $data['menu_id'] = $roleId;

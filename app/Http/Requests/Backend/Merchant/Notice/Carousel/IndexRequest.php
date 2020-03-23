@@ -30,7 +30,7 @@ class IndexRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'title'  => 'string',
+                'title'  => 'string|max:64',
                 'device' => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
                ];
     }

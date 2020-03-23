@@ -7,7 +7,7 @@ use App\Models\DeveloperUsage\Menu\BackendSystemMenu;
 use Illuminate\Validation\Rule;
 
 /**
- * Class for menu edit request.
+ *  Class for menu edit request.
  */
 class EditRequest extends BaseFormRequest
 {

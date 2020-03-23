@@ -5,7 +5,7 @@ namespace App\ModelFilters\System;
 use EloquentFilter\ModelFilter;
 
 /**
- * Class GameFilter
+ *  Class GameFilter
  *
  * @package App\ModelFilters\Game
  */

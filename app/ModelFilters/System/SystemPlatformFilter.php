@@ -5,7 +5,7 @@ namespace App\ModelFilters\System;
 use EloquentFilter\ModelFilter;
 
 /**
- * 运营商平台
+ *  运营商平台
  */
 class SystemPlatformFilter extends ModelFilter
 {

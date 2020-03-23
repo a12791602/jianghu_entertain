@@ -39,9 +39,18 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'mobile'   => ['regex' => 'regex:/^1[345789]\d{9}$/'], //(手机号码第一位1第二位345789总共11位数字)
-                'guid'     => 'string',                                //用户UID
-                'createAt' => 'string',                                //进入黑名单日期
+                'mobile'       => ['regex' => 'regex:/^1[345789]\d{9}$/'], //(手机号码第一位1第二位345789总共11位数字)
+                'guid'         => 'string|max:16',                         //用户UID
+                'created_at'   => 'array|size:2',                          //进入黑名单日期
+                'created_at.*' => 'date',                                  //进入黑名单日期
                ];
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['created_at' => 'cast:array'];
     }
 }

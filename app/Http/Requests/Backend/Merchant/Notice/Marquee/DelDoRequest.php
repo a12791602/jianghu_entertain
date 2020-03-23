@@ -27,17 +27,6 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:notice_marquees,id'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required' => 'ID不存在',
-                'id.exists'   => 'ID不存在',
-               ];
+        return ['id' => 'required|integer|exists:notice_marquees'];
     }
 }

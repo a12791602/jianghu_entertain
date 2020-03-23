@@ -26,7 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:frontend_users_bank_cards'];
+        return ['id' => 'required|integer|exists:frontend_users_bank_cards'];
     }
 
     /**

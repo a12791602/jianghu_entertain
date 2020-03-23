@@ -54,6 +54,11 @@ $config = [
                                           'http://10.10.40.196:7456',// Ray
                                           'http://app.397017.com',
                                           'http://10.10.50.209:8081',// Charon
+                                          'chrome-extension://jenkimcegeigaklkimboldgkpfliakpa',// Ethan
+                                          'chrome-extension://pbmmpghdpldmkehedckllojmlfaihpkk',// Charon
+                                          'chrome-extension://obakjhlbmehmopebcdcmnbaffocpdlgf',// Aaron
+                                          'http://192.168.1.30:8081',// Aaron
+                                          'http://192.168.1.29:8081',// Charon
                                          ],
 
            /*

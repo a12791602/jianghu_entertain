@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class for do add request.
+ *  Class for do add request.
  */
 class SwitchRequest extends BaseFormRequest
 {

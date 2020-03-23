@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
- * Class for edit request.
+ *  Class for edit request.
  */
 class EditRequest extends BaseFormRequest
 {

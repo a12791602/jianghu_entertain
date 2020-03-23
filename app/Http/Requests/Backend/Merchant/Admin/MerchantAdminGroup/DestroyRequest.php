@@ -34,8 +34,8 @@ class DestroyRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'         => 'required|numeric|exists:merchant_admin_access_groups',
-                'group_name' => 'required|exists:merchant_admin_access_groups',
+                'id'         => 'required|integer|exists:merchant_admin_access_groups',
+                'group_name' => 'required|string|max:10|exists:merchant_admin_access_groups',
                ];
     }
 }

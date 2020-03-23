@@ -28,7 +28,7 @@ class SavePicRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'      => 'required|exists:system_dyn_activity_platforms,id',
+                'id'      => 'required|integer|exists:system_dyn_activity_platforms,id',
                 'pc_pic'  => 'string|min:1|max:128',
                 'h5_pic'  => 'string|min:1|max:128',
                 'app_pic' => 'string|min:1|max:128',

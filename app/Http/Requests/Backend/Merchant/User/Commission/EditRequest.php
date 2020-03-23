@@ -40,7 +40,7 @@ class EditRequest extends BaseFormRequest
         return [
                 'id'      => 'required|integer|exists:users_commission_configs', //ID
                 'bet'     => 'required|numeric|gte:0',                           //打码量
-                'percent' => 'required|string',                                  //洗码比例
+                'percent' => 'required|numeric',                                 //洗码比例
                ];
     }
 }

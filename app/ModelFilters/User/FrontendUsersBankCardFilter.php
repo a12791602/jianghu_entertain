@@ -81,16 +81,15 @@ class FrontendUsersBankCardFilter extends ModelFilter
     /**
      * 绑定时间
      *
-     * @param  string $createdStr 绑定时间.
+     * @param  array $createdAt 绑定时间.
      * @return FrontendUsersBankCardFilter
      */
-    public function createdAt(string $createdStr): FrontendUsersBankCardFilter
+    public function createdAt(array $createdAt): FrontendUsersBankCardFilter
     {
-        $createdArr = json_decode($createdStr, true);
-        if (!is_array($createdArr) || count($createdArr) !== 2) {
+        if (!is_array($createdAt) || count($createdAt) !== 2) {
             $eloq = $this;
         } else {
-            $eloq = $this->whereBetween('created_at', $createdArr);
+            $eloq = $this->whereBetween('created_at', $createdAt);
         }
         return $eloq;
     }

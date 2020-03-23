@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminUser;
 
 /**
- * 更改管理员用户组
+ *  更改管理员用户组
  */
 class UpdateAdminGroupRequest extends BaseFormRequest
 {

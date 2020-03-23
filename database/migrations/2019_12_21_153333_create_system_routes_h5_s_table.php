@@ -21,8 +21,8 @@ class CreateSystemRoutesH5STable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('route_name', 64)->nullable()->default(null)->comment('路由名称');
-                $table->string('controller', 64)->nullable()->default(null)->comment('控制器');
+                $table->string('route_name', 128)->nullable()->default(null)->comment('路由名称');
+                $table->string('controller', 128)->nullable()->default(null)->comment('控制器');
                 $table->string('method', 64)->nullable()->default(null)->comment('方法');
                 $table->integer('frontend_model_id')->nullable()->default(null)->comment('模块id');
                 $table->string('title', 45)->nullable()->default(null)->comment('标题');

@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
- * Class for specific group users request.
+ *  Class for specific group users request.
  */
 class SpecificGroupUsersRequest extends BaseFormRequest
 {

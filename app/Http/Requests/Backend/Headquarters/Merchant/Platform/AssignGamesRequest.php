@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use Illuminate\Validation\Rule;
 
 /**
- * Class AssignGamesRequest
+ *  Class AssignGamesRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */

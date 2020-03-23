@@ -34,9 +34,13 @@ class CreateRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'     => 'required|unique:merchant_admin_users',
-                'email'    => 'required|email|unique:merchant_admin_users',
-                'password' => 'required|string',
+                'name'     => 'required|string|max:16|unique:merchant_admin_users',
+                'email'    => 'required|string|max:64|email|unique:merchant_admin_users',
+                'password' => [
+                               'required',
+                               'string',
+                               'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(必须存在大小写字母+数字的8-16位)
+                              ], //密码
                 'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
                ];
     }

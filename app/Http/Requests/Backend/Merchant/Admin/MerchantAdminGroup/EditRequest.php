@@ -39,9 +39,18 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'         => 'required|exists:merchant_admin_access_groups',
-                'group_name' => 'required',
-                'role'       => 'required',
+                'id'         => 'required|integer|exists:merchant_admin_access_groups',
+                'group_name' => 'required|string|max:10',
+                'role'       => 'required|array',
+                'role.*'     => 'integer',
                ];
+    }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['role' => 'cast:array'];
     }
 }

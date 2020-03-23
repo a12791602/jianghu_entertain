@@ -30,8 +30,8 @@ class StatusRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'id'     => 'required|exists:notice_carousels,id',
-                'status' => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'id'     => 'required|integer|exists:notice_carousels',
+                'status' => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
                ];
     }
 

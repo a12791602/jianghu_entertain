@@ -33,7 +33,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|exists:frontend_user_levels']; //ID
+        $rules = ['id' => 'required|integer|exists:frontend_user_levels']; //ID
         return $rules;
     }
 }

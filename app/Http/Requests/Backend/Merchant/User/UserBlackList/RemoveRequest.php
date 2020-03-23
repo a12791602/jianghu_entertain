@@ -33,7 +33,7 @@ class RemoveRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|exists:frontend_users_black_lists'];//ID
+        $rules = ['id' => 'required|integer|exists:frontend_users_black_lists'];//ID
         return $rules;
     }
 }

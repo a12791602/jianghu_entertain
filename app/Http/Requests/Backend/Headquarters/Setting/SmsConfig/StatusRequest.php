@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Systems\SystemSmsConfig;
 
 /**
- * 短信配置-禁用启用
+ *  短信配置-禁用启用
  */
 class StatusRequest extends BaseFormRequest
 {

@@ -39,19 +39,18 @@ class DetailRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'guid'     => 'required|exists:frontend_users_black_lists', //用户UID
-                'createAt' => 'string',                                     //进入黑名单日期
-                'status'   => 'integer|in:0,1',                             //状态  0拉黑 1解封
+                'guid'         => 'required|exists:frontend_users_black_lists', //用户UID
+                'status'       => 'integer|in:0,1',                             //状态  0拉黑 1解封
+                'created_at'   => 'array|size:2',                               //进入黑名单日期
+                'created_at.*' => 'date',                                       //进入黑名单日期
                ];
     }
 
-    // /**
-    //  * @return mixed[]
-    //  */
-    // public function messages(): array
-    // {
-    //     return [
-
-    //     ];
-    // }
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['created_at' => 'cast:array'];
+    }
 }

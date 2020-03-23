@@ -103,7 +103,9 @@ function sendVerificationCode(string $mobile): array
 function getCurrentPlatform(Request $request): SystemPlatform
 {
     //获取来源域名
-    $host = $request->server('HTTP_REFERER', 'HTTP_REFERER'); // https://www.learnku.com/laravel
+    //$host = $request->server('HTTP_REFERER', 'HTTP_REFERER'); // https://www.learnku.com/laravel
+    unset($request);
+    $host = 'http://api.397017.com'; // 因yapi插件获取域名问题, 暂时先开白
     if (!is_string($host)) {
         throw new \Exception('100611');
     }

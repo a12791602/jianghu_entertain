@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Admin\BackendAdminAccessGroup;
 
 /**
- * Class for destroy request.
+ *  Class for destroy request.
  */
 class DestroyRequest extends BaseFormRequest
 {

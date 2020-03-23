@@ -30,14 +30,14 @@ class EditRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'id'         => 'required|exists:notice_systems,id',
-                'title'      => 'required',
-                'h5_pic'     => 'string',
-                'app_pic'    => 'string',
-                'pc_pic'     => 'string',
+                'id'         => 'required|integer|exists:notice_systems,id',
+                'title'      => 'required|string|max:64',
+                'h5_pic'     => 'string|string|max:128',
+                'app_pic'    => 'string|string|max:128',
+                'pc_pic'     => 'string|string|max:128',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
-                'status'     => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status'     => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
                ];
     }
 

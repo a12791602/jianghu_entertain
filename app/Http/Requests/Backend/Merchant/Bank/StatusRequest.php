@@ -37,8 +37,8 @@ class StatusRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'id'     => 'required|exists:system_platform_banks,id',
-                'status' => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'id'     => 'required|integer|exists:system_platform_banks,id',
+                'status' => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
                ];
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class AssignedGameCancelRequest
+ *  lass AssignedGameCancelRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */

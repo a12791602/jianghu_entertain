@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Systems\SystemSmsConfig;
 
 /**
- * 短信配置-删除
+ *  短信配置-删除
  */
 class DeleteRequest extends BaseFormRequest
 {

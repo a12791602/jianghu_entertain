@@ -33,7 +33,7 @@ class SpecificGroupUsersRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|numeric|exists:merchant_admin_access_groups'];
+        $rules = ['id' => 'required|integer|exists:merchant_admin_access_groups'];
         return $rules;
     }
 }

@@ -33,6 +33,6 @@ class DeleteAdminRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:merchant_admin_users'];
+        return ['id' => 'required|integer|exists:merchant_admin_users'];
     }
 }

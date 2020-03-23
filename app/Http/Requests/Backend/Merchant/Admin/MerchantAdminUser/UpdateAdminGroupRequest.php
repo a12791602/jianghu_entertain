@@ -34,7 +34,7 @@ class UpdateAdminGroupRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'       => 'required|integer|exists:merchant_admin_users,id',
+                'id'       => 'required|integer|exists:merchant_admin_users',
                 'group_id' => 'required|integer|exists:merchant_admin_access_groups,id',
                ];
     }

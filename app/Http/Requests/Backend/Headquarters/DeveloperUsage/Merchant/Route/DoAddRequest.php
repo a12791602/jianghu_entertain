@@ -37,7 +37,7 @@ class DoAddRequest extends BaseFormRequest
                   'menu_group_id' => 'required|exists:merchant_system_menus,id',               //菜单ID
                   'title'         => 'required|string|max:32',                                 //标题
                   'route_name'    => 'required|string|max:128|unique:system_routes_merchants', //路由名称
-                  'controller'    => 'required|string|max:64',                                 //控制器
+                  'controller'    => 'required|string|max:128',                                //控制器
                   'method'        => 'required|string|max:32',                                 //方法
                  ];
         return $rules;

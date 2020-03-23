@@ -28,9 +28,9 @@ class IndexRequest extends BaseFormRequest
     public function rules():array
     {
         return [
-            'device' => 'required|in:1,2,3',
-            'status' => 'in:0,1',
-            'name' => 'string',
+            'device' => 'required|integer|in:1,2,3',
+            'status' => 'integer|in:0,1',
+            'name' => 'string|max:64',
         ];
     }
 

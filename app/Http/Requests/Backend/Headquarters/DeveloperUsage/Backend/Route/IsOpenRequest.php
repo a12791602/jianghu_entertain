@@ -6,7 +6,7 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 
 /**
- * 路由-是否开放
+ *  路由-是否开放
  */
 class IsOpenRequest extends BaseFormRequest
 {
