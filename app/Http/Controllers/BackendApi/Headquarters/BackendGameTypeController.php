@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameType\EditRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\AddDoRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameType\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameType\AddDoAction;
@@ -21,28 +21,28 @@ use Illuminate\Http\JsonResponse;
 class BackendGameTypeController
 {
     /**
-     * @param AddDoAction $action  Action.
-     * @param AddRequest  $request Request.
+     * @param AddDoAction  $action  Action.
+     * @param AddDoRequest $request Request.
      * @return JsonResponse
      * @throws \RuntimeException RuntimeException.
      */
     public function addDo(
         AddDoAction $action,
-        AddRequest $request
+        AddDoRequest $request
     ): JsonResponse {
         $msgOut = $action->execute($request);
         return $msgOut;
     }
 
     /**
-     * @param EditDoAction $action  Action.
-     * @param EditRequest  $request Request.
+     * @param EditDoAction  $action  Action.
+     * @param EditDoRequest $request Request.
      * @return JsonResponse
      * @throws \RuntimeException RuntimeException.
      */
     public function editDo(
         EditDoAction $action,
-        EditRequest $request
+        EditDoRequest $request
     ): JsonResponse {
         $msgOut = $action->execute($request);
         return $msgOut;
@@ -64,14 +64,14 @@ class BackendGameTypeController
     }
 
     /**
-     * @param DelDoAction $action  Action.
-     * @param DelRequest  $request Request.
+     * @param DelDoAction  $action  Action.
+     * @param DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \RuntimeException RuntimeException.
      */
     public function delDo(
         DelDoAction $action,
-        DelRequest $request
+        DelDoRequest $request
     ): JsonResponse {
         $msgOut = $action->execute($request);
         return $msgOut;

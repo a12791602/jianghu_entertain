@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
 use App\Http\Requests\Backend\Headquarters\Game\AddRequest;
-use App\Http\Requests\Backend\Headquarters\Game\DelRequest;
+use App\Http\Requests\Backend\Headquarters\Game\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Game\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\OptEditDoRequest;
@@ -95,14 +95,14 @@ class BackendGameController
     /**
      * 游戏删除
      *
-     * @param  DelDoAction $action  Action.
-     * @param  DelRequest  $request Request.
+     * @param  DelDoAction  $action  Action.
+     * @param  DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function delDo(
         DelDoAction $action,
-        DelRequest $request
+        DelDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);

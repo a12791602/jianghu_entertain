@@ -10,7 +10,7 @@ use App\Models\Game\Game;
  *
  * @package App\Http\Requests\Backend\Headquarters\Game
  */
-class AddRequest extends BaseFormRequest
+class AddDodRequest extends BaseFormRequest
 {
 
     /**

@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
-use App\Http\Requests\Backend\Headquarters\GameVendor\AddRequest;
-use App\Http\Requests\Backend\Headquarters\GameVendor\DelRequest;
-use App\Http\Requests\Backend\Headquarters\GameVendor\EditRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\AddDoRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\GameVendor\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\GameVendor\IndexDoRequest;
-use App\Http\Requests\Backend\Headquarters\GameVendor\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\GameVendor\IndexDoAction;
-use App\Http\SingleActions\Backend\Headquarters\GameVendor\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -22,14 +20,14 @@ use Illuminate\Http\JsonResponse;
 class BackendGameVendorController
 {
     /**
-     * @param  AddDoAction $action  Action.
-     * @param  AddRequest  $request Request.
+     * @param  AddDoAction  $action  Action.
+     * @param  AddDoRequest $request Request.
      * @return \Illuminate\Http\JsonResponse
      * @throws \Exception Exception.
      */
     public function addDo(
         AddDoAction $action,
-        AddRequest $request
+        AddDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
@@ -37,14 +35,14 @@ class BackendGameVendorController
     }
 
     /**
-     * @param  EditDoAction $action  Action.
-     * @param  EditRequest  $request Request.
+     * @param  EditDoAction  $action  Action.
+     * @param  EditDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function editDo(
         EditDoAction $action,
-        EditRequest $request
+        EditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
@@ -67,29 +65,14 @@ class BackendGameVendorController
     }
 
     /**
-     * @param  DelDoAction $action  Action.
-     * @param  DelRequest  $request Request.
+     * @param  DelDoAction  $action  Action.
+     * @param  DelDoRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function delDo(
         DelDoAction $action,
-        DelRequest $request
-    ): JsonResponse {
-        $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
-    }
-
-    /**
-     * @param  StatusDoAction  $action  Action.
-     * @param  StatusDoRequest $request Request.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function statusDo(
-        StatusDoAction $action,
-        StatusDoRequest $request
+        DelDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);

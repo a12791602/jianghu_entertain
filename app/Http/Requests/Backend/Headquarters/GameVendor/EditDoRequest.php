@@ -7,11 +7,11 @@ use App\Models\Game\GameVendor;
 use Illuminate\Http\Request;
 
 /**
- * Class EditRequest
+ * Class EditDoRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class EditRequest extends BaseFormRequest
+class EditDoRequest extends BaseFormRequest
 {
 
     /**

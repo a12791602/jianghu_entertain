@@ -28,6 +28,7 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
+                'device'    => 'integer|in:1,2,3',          //服务端 1.PC 2.H5 3.APP
                 'vendor_id' => 'integer|exists:game_vendors,id',
                 'name'      => 'string|max:64',
                 'type_id'   => 'required_unless:hot_new,1|integer|exists:game_types,id',

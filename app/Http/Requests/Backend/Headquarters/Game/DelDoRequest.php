@@ -9,7 +9,7 @@ use App\Http\Requests\BaseFormRequest;
  *
  * @package App\Http\Requests\Backend\Headquarters\Game
  */
-class DelRequest extends BaseFormRequest
+class DelDoRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

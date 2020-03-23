@@ -69,7 +69,7 @@ class MerchantAdminUserController
      * @param  DeleteAdminAction  $action  Action.
      * @return JsonResponse
      */
-    public function deletePartnerAdmin(
+    public function deleteAdmin(
         DeleteAdminRequest $request,
         DeleteAdminAction $action
     ): JsonResponse {
