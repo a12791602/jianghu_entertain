@@ -5,11 +5,11 @@ namespace App\Http\Requests\Backend\Headquarters\GameVendor;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class DelRequest
+ * Class DelDoRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class DelRequest extends BaseFormRequest
+class DelDoRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

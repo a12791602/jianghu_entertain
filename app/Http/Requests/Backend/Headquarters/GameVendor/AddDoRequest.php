@@ -6,11 +6,11 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Game\GameVendor;
 
 /**
- * Class AddRequest
+ * Class AddDoRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\GameVendor
  */
-class AddRequest extends BaseFormRequest
+class AddDoRequest extends BaseFormRequest
 {
 
     /**
