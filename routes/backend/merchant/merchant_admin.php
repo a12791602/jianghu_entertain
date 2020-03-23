@@ -43,7 +43,7 @@ Route::group(
             'delete-admin',
             [
              MerchantAdminUserController::class,
-             'deletePartnerAdmin',
+             'deleteAdmin',
             ],
         )->name($namePrefix . 'delete-admin');
         //查找管理员

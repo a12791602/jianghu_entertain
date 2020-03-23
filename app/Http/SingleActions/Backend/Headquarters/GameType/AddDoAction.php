@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
-use App\Http\Requests\Backend\Headquarters\GameType\AddRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\AddDoRequest;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
 use Arr;
@@ -19,11 +19,11 @@ class AddDoAction
 {
 
     /**
-     * @param AddRequest $request AddRequest.
+     * @param AddDoRequest $request AddDoRequest.
      * @return \Illuminate\Http\JsonResponse
      * @throws \RuntimeException Exception.
      */
-    public function execute(AddRequest $request): JsonResponse
+    public function execute(AddDoRequest $request): JsonResponse
     {
         try {
             DB::beginTransaction();

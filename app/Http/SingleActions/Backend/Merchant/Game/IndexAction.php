@@ -18,15 +18,13 @@ class IndexAction extends BaseAction
     protected $model;
 
     /**
-     * @param array   $inputDatas InputDatas.
-     * @param integer $device     Device.
+     * @param array $inputDatas InputDatas.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas, int $device): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $inputDatas['device']      = $device;
         $datas                     = $this->model::with(
             [
              'games:id,name,sign',

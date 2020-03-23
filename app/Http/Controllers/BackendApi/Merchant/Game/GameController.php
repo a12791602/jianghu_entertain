@@ -17,7 +17,6 @@ use App\Http\SingleActions\Backend\Merchant\Game\RecommendAction;
 use App\Http\SingleActions\Backend\Merchant\Game\SortAction;
 use App\Http\SingleActions\Backend\Merchant\Game\StatusAction;
 use App\Http\SingleActions\Backend\Merchant\Game\UploadAction;
-use App\Models\Game\GameVendorPlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -26,45 +25,21 @@ use Illuminate\Http\JsonResponse;
  */
 class GameController
 {
+
     /**
-     * app端游戏列表
+     * (app/pc/h5)端游戏列表
      * @param IndexAction  $action  Action.
      * @param IndexRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function appIndex(IndexAction $action, IndexRequest $request): JsonResponse
+    public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_APP);
+        $outputDatas = $action->execute($inputDatas);
         return $outputDatas;
     }
-    /**
-     * pc端游戏列表
-     * @param IndexAction  $action  Action.
-     * @param IndexRequest $request Request.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function pcIndex(IndexAction $action, IndexRequest $request): JsonResponse
-    {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_PC);
-        return $outputDatas;
-    }
-    /**
-     * h5端游戏列表
-     * @param IndexAction  $action  Action.
-     * @param IndexRequest $request Request.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function h5Index(IndexAction $action, IndexRequest $request): JsonResponse
-    {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas, GameVendorPlatform::DEVICE_H5);
-        return $outputDatas;
-    }
+
     /**
      * 更改游戏状态
      * @param StatusAction  $action  Action.

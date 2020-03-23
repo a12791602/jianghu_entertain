@@ -7,11 +7,11 @@ use App\Models\Game\GameType;
 use App\Rules\Backend\Common\Sortable\CheckSortableModel;
 
 /**
- * Class EditRequest
+ * Class EditDoRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\GameType
  */
-class EditRequest extends BaseFormRequest
+class EditDoRequest extends BaseFormRequest
 {
 
     /**

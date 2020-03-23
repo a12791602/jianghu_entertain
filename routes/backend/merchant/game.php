@@ -71,30 +71,14 @@ Route::group(
     ['prefix' => 'game'],
     static function (): void {
         $namePrefix = 'merchant-api.game.';
-        //app端游戏列表
+        //游戏列表
         Route::get(
-            'app-index',
+            'index',
             [
              GameController::class,
-             'appIndex',
+             'index',
             ],
-        )->name($namePrefix . 'app-index');
-        //pc端游戏列表
-        Route::get(
-            'pc-index',
-            [
-             GameController::class,
-             'pcIndex',
-            ],
-        )->name($namePrefix . 'pc-index');
-        //H5端游戏列表
-        Route::get(
-            'h5-index',
-            [
-             GameController::class,
-             'h5Index',
-            ],
-        )->name($namePrefix . 'h5-index');
+        )->name($namePrefix . 'index');
         //游戏状态改变
         Route::post(
             'status',

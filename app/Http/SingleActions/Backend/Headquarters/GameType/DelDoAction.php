@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\GameType;
 
-use App\Http\Requests\Backend\Headquarters\GameType\DelRequest;
+use App\Http\Requests\Backend\Headquarters\GameType\DelDoRequest;
 use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
 use Log;
@@ -15,11 +15,11 @@ use Log;
 class DelDoAction
 {
     /**
-     * @param DelRequest $request DelRequest.
+     * @param DelDoRequest $request DelDoRequest.
      * @return JsonResponse
      * @throws \RuntimeException RuntimeException.
      */
-    public function execute(DelRequest $request): JsonResponse
+    public function execute(DelDoRequest $request): JsonResponse
     {
         try {
             $validated = $request->validated();
