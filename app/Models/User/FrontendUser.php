@@ -30,6 +30,15 @@ class FrontendUser extends BaseAuthModel
     public const TYPE_AGENCY   = 2;
 
     /**
+     *  账户状态->正常
+     */
+    public const STATUS_NORMAL = 1;
+    /**
+     *  账户状态->禁用
+     */
+    public const STATUS_DISABLE = 0;
+
+    /**
      * @var array $guarded
      */
     protected $guarded = ['id'];
@@ -154,7 +163,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function getMobileHiddenAttribute(): string
     {
-        $result = substr_replace($this->mobile, '****', 3, 4);
+        $result = substr_replace((string) $this->mobile, '****', 3, 4);
         return $result;
     }
 

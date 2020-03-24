@@ -33,7 +33,7 @@ class LoginLogAction extends MainAction
     /**
      * @param array $inputDatas 接收的数据.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
