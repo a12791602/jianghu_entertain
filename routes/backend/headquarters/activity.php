@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\BackendSystemDynActivityController;
+use App\Http\Controllers\BackendApi\Headquarters\Activity\BackendSystemDynActivityController;
 
 //金融分类管理
 Route::group(

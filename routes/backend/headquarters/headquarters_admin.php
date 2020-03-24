@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminUserController;
 use App\Http\Controllers\BackendApi\Headquarters\BackendAuthController;
+use App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController;
 
 //登录
 Route::post('login', [BackendAuthController::class, 'login'])
@@ -9,6 +9,39 @@ Route::post('login', [BackendAuthController::class, 'login'])
 //退出登录
 Route::get('logout', [BackendAuthController::class, 'logout'])
     ->name('headquarters-api.logout');
+
+//管理员角色相关
+Route::group(
+    ['prefix' => 'backend-admin-group'],
+    static function (): void {
+        $namePrefix = 'headquarters-api.backend-admin-group.';
+        //添加管理员角色
+        Route::post('create', [AdminController::class, 'groupCreate'])
+            ->name($namePrefix . 'create');
+        //获取管理员角色
+        Route::get('detail', [AdminController::class, 'groupList'])
+            ->name($namePrefix . 'detail');
+        //编辑管理员角色
+        Route::post('edit', [AdminController::class, 'groupEdit'])
+            ->name($namePrefix . 'edit');
+        //删除管理员角色
+        Route::post(
+            'delete-access-group',
+            [
+             AdminController::class,
+             'groupDestroy',
+            ],
+        )->name($namePrefix . 'delete-access-group');
+        //获取管理员角色
+        Route::post(
+            'specific-group-users',
+            [
+             AdminController::class,
+             'specificGroupUsers',
+            ],
+        )->name($namePrefix . 'specific-group-users');
+    },
+);
 
 //管理员相关
 Route::group(
@@ -21,7 +54,7 @@ Route::group(
         Route::post(
             'create',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'create',
             ],
         )->name('headquarters-api.headquarters-admin-user.create');
@@ -29,7 +62,7 @@ Route::group(
         Route::post(
             'update-admin-group',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'updateAdminGroup',
             ],
         )->name('headquarters-api.headquarters-admin-user.update-admin-group');
@@ -37,7 +70,7 @@ Route::group(
         Route::post(
             'delete-admin',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'deleteAdmin',
             ],
         )->name('headquarters-api.headquarters-admin-user.delete-admin');
@@ -45,7 +78,7 @@ Route::group(
         Route::post(
             'update-password',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'updatePassword',
             ],
         )->name('headquarters-api.headquarters-admin-user.update-password');
@@ -53,7 +86,7 @@ Route::group(
         Route::post(
             'self-update-password',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'selfUpdatePassword',
             ],
         )->name('headquarters-api.headquarters-admin-user.self-update-password');
@@ -61,7 +94,7 @@ Route::group(
         Route::post(
             'search-admin',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'searchAdmin',
             ],
         )->name('headquarters-api.headquarters-admin-user.search-admin');
@@ -69,7 +102,7 @@ Route::group(
         Route::post(
             'switch-admin',
             [
-             BackendAdminUserController::class,
+             AdminController::class,
              'switchAdmin',
             ],
         )->name('headquarters-api.headquarters-admin-user.switch-admin');
