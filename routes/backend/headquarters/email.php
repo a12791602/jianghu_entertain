@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController;
+use App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController;
 
 //总控邮件管理
 Route::group(

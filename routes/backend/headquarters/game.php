@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\BackendApi\Headquarters\BackendGameController;
-use App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController;
-use App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController;
+use App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController;
+use App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController;
 
 //游戏种类
 Route::group(

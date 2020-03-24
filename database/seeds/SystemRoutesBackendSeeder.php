@@ -166,7 +166,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 7,
               'title'         => '游戏管理-厂商管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'indexDo',
              ],
              [
@@ -174,7 +174,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 7,
               'title'         => '游戏管理-游戏厂商-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'addDo',
              ],
              [
@@ -182,7 +182,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 7,
               'title'         => '游戏管理-游戏厂商-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'editDo',
              ],
              [
@@ -190,7 +190,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 7,
               'title'         => '游戏管理-游戏厂商-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'indexDo',
              ],
              [
@@ -198,7 +198,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 7,
               'title'         => '游戏管理-游戏厂商-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'delDo',
              ],
 
@@ -207,7 +207,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 8,
               'title'         => '游戏管理-分类设置-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'statusDo',
              ],
              [
@@ -215,7 +215,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 8,
               'title'         => '游戏管理-分类设置-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'indexDo',
              ],
              [
@@ -223,7 +223,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 9,
               'title'         => '游戏管理-游戏管理-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'statusDo',
              ],
              [
@@ -231,7 +231,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 9,
               'title'         => '游戏管理-游戏管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'indexDo',
              ],
              [
@@ -239,7 +239,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 11,
               'title'         => '活动管理-活动列表-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemDynActivityController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Activity\BackendSystemDynActivityController',
               'method'        => 'status',
              ],
              [
@@ -247,7 +247,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 11,
               'title'         => '活动管理-活动列表-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemDynActivityController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Activity\BackendSystemDynActivityController',
               'method'        => 'index',
              ],
              [
@@ -255,7 +255,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 13,
               'title'         => '邮件系统-发邮件-发送邮件',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'send',
              ],
              [
@@ -263,7 +263,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 13,
               'title'         => '邮件系统-发邮件-最近联系人',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'recentContact',
              ],
              [
@@ -271,7 +271,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 13,
               'title'         => '邮件系统-发邮件-联系人',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'contact',
              ],
              [
@@ -279,7 +279,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 14,
               'title'         => '邮件系统-收邮件-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'receivedIndex',
              ],
              [
@@ -287,7 +287,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 14,
               'title'         => '邮件系统-收邮件-读邮件',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'readEmail',
              ],
              [
@@ -295,7 +295,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 15,
               'title'         => '邮件系统-已发邮件-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemEmailController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Email\BackendSystemEmailController',
               'method'        => 'sendIndex',
              ],
              [
@@ -303,7 +303,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 22,
               'title'         => '金流配置-厂商管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'indexDo',
              ],
              [
@@ -311,7 +311,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 22,
               'title'         => '金流配置-厂商管理-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'statusDo',
              ],
              [
@@ -319,7 +319,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 23,
               'title'         => '金流配置-分类管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'indexDo',
              ],
              [
@@ -327,7 +327,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 23,
               'title'         => '金流配置-分类管理-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'statusDo',
              ],
              [
@@ -335,7 +335,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 24,
               'title'         => '金流配置-通道管理-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'statusDo',
              ],
              [
@@ -343,7 +343,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 24,
               'title'         => '金流配置-通道管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'indexDo',
              ],
              [
@@ -351,7 +351,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 24,
               'title'         => '金流配置-通道管理-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'optEditDo',
              ],
              [
@@ -359,39 +359,39 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 26,
               'title'         => '管理员分组-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupController',
-              'method'        => 'index',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController',
+              'method'        => 'groupList',
              ],
              [
               'route_name'    => 'headquarters-api.backend-admin-group.create',
               'menu_group_id' => 26,
               'title'         => '管理员分组-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupController',
-              'method'        => 'create',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController',
+              'method'        => 'groupCreate',
              ],
              [
               'route_name'    => 'headquarters-api.backend-admin-group.edit',
               'menu_group_id' => 26,
               'title'         => '管理员分组-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupController',
-              'method'        => 'edit',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController',
+              'method'        => 'groupEdit',
              ],
              [
               'route_name'    => 'headquarters-api.backend-admin-group.delete-access-group',
               'menu_group_id' => 26,
               'title'         => '管理员分组-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupController',
-              'method'        => 'destroy',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController',
+              'method'        => 'groupDestroy',
              ],
              [
               'route_name'    => 'headquarters-api.backend-admin-group.specific-group-users',
               'menu_group_id' => 26,
               'title'         => '管理员分组-管理员列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Admin\BackendAdminGroupController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\AdminController',
               'method'        => 'specificGroupUsers',
              ],
              [
@@ -663,7 +663,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 33,
               'title'         => '开发管理-游戏分类-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'addDo',
              ],
              [
@@ -671,7 +671,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 33,
               'title'         => '开发管理-游戏分类-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'editDo',
              ],
              [
@@ -679,7 +679,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 33,
               'title'         => '开发管理-游戏分类-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'indexDo',
              ],
              [
@@ -687,7 +687,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 33,
               'title'         => '开发管理-游戏分类-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'delDo',
              ],
              [
@@ -695,7 +695,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 33,
               'title'         => '开发管理-游戏分类-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController',
               'method'        => 'statusDo',
              ],
              [
@@ -703,7 +703,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'addDo',
              ],
              [
@@ -711,7 +711,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'editDo',
              ],
              [
@@ -719,7 +719,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'indexDo',
              ],
              [
@@ -727,7 +727,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'delDo',
              ],
              [
@@ -735,7 +735,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-获取游戏列表的查询条件',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'getSearchCondition',
              ],
              [
@@ -743,7 +743,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 34,
               'title'         => '开发管理-游戏管理-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendGameController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
               'method'        => 'statusDo',
              ],
              [
@@ -751,7 +751,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 35,
               'title'         => '开发管理-金流厂商-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'addDo',
              ],
              [
@@ -759,7 +759,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 35,
               'title'         => '开发管理-金流厂商-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'editDo',
              ],
              [
@@ -767,7 +767,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 35,
               'title'         => '开发管理-金流厂商-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'indexDo',
              ],
              [
@@ -775,7 +775,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 35,
               'title'         => '开发管理-金流厂商-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'delDo',
              ],
              [
@@ -783,7 +783,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 35,
               'title'         => '开发管理-金流厂商-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'statusDo',
              ],
              [
@@ -791,7 +791,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 36,
               'title'         => '开发管理-金流分类-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'addDo',
              ],
              [
@@ -799,7 +799,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 36,
               'title'         => '开发管理-金流分类-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'editDo',
              ],
              [
@@ -807,7 +807,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 36,
               'title'         => '开发管理-金流分类-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'indexDo',
              ],
              [
@@ -815,7 +815,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 36,
               'title'         => '开发管理-金流分类-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'delDo',
              ],
              [
@@ -823,7 +823,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 36,
               'title'         => '开发管理-金流分类-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController',
               'method'        => 'statusDo',
              ],
              [
@@ -831,7 +831,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'addDo',
              ],
              [
@@ -839,7 +839,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'editDo',
              ],
              [
@@ -847,7 +847,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'indexDo',
              ],
              [
@@ -855,7 +855,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'delDo',
              ],
              [
@@ -863,7 +863,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-获取金流通道列表的查询条件',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'getSearchCondition',
              ],
              [
@@ -871,7 +871,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 37,
               'title'         => '开发管理-金流通道-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
               'method'        => 'statusDo',
              ],
              [
@@ -879,7 +879,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 38,
               'title'         => '开发管理-银行卡配置-添加',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController',
               'method'        => 'addDo',
              ],
              [
@@ -887,7 +887,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 38,
               'title'         => '开发管理-银行卡配置-编辑',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController',
               'method'        => 'edit',
              ],
              [
@@ -895,7 +895,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 38,
               'title'         => '开发管理-银行卡配置-列表',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController',
               'method'        => 'index',
              ],
              [
@@ -903,7 +903,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 38,
               'title'         => '开发管理-银行卡配置-删除',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController',
               'method'        => 'delDo',
              ],
              [
@@ -911,7 +911,7 @@ class SystemRoutesBackendSeeder extends Seeder
               'menu_group_id' => 38,
               'title'         => '开发管理-银行卡配置-改变状态',
               'is_open'       => 0,
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController',
               'method'        => 'status',
              ],
              [
