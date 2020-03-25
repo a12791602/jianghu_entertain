@@ -27,7 +27,7 @@ class SystemPublicLogService
 
     /**
      * Get the route handling the request.
-     * @var object Route.
+     * @var mixed Route.
      */
     private $route;
 
@@ -44,7 +44,10 @@ class SystemPublicLogService
      */
     public function __construct(Request $request, string $logger)
     {
-        $this->log_uuid = Str::orderedUuid()->getNodeHex();
+        $uuid           = Str::orderedUuid();
+        $uuidString     = $uuid->toString();
+        $nodeHex        = Str::afterLast($uuidString, '-');
+        $this->log_uuid = $nodeHex;
         $this->input    = $request->all(); //获取所有相关的传参数据
         $this->route    = $request->route();
         $this->logger   = $logger;
