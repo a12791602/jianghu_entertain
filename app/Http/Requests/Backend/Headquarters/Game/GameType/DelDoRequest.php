@@ -37,7 +37,7 @@ class DelDoRequest extends BaseFormRequest
     public function rules(): array
     {
         $rules = [
-                  'id'            => 'required|numeric|exists:game_types,id',
+                  'id'            => 'required|integer',
                   'category_type' => [
                                       'required',
                                       'numeric',

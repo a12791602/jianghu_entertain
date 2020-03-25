@@ -90,4 +90,19 @@ class GameType extends BaseModel implements Sortable
         $object = $this->hasMany(GameSubType::class, 'parent_id', 'id')->ordered();
         return $object;
     }
+
+    /**
+     * The "booting" method of the model.
+     *
+     * @return void
+     */
+    protected static function boot(): void
+    {
+        parent::boot();
+        static::deleting(
+            static function ($model): void {
+                $model->children()->delete();
+            },
+        );
+    }
 }
