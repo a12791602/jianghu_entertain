@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\System\HelpCenterController;
+use App\Http\Controllers\BackendApi\Merchant\Setting\HelpCenterController;
 
 //帮助设置
 Route::group(
