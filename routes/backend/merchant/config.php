@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\System\ConfigController;
+use App\Http\Controllers\BackendApi\Merchant\Setting\ConfigController;
 
 //全域设置
 Route::group(
