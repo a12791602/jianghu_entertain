@@ -87,7 +87,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function tags(): HasOne
     {
-        $object = $this->hasOne(SystemFinanceUserTag::class, 'online_finance_id', 'id');
+        $object = $this->hasOne(SystemFinanceUserTag::class, 'offline_finance_id', 'id');
         return $object;
     }
 }

@@ -24,7 +24,7 @@ class IndexDoAction
             [
              'lastEditor:id,name',
              'author:id,name',
-             'children:id,parent_id,name,sort,sign,status',
+             'children:id,parent_id,name,sort,sign',
             ],
         )->ordered()->filter($inputDatas, GamesTypeFilter::class)->get();
         $msgOut      = msgOut($outputDatas);

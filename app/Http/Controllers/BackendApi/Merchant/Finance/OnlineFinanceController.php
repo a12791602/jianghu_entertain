@@ -40,7 +40,7 @@ class OnlineFinanceController
      * @param AddDoAction  $action  Action.
      * @param AddDoRequest $request Request.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
