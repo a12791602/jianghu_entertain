@@ -20,14 +20,13 @@ class IndexDoAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize    = GameType::getPageSize();
         $outputDatas = GameType::with(
             [
              'lastEditor:id,name',
              'author:id,name',
-             'children:id,parent_id,name,sort',
+             'children:id,parent_id,name,sort,sign,status',
             ],
-        )->ordered()->filter($inputDatas, GamesTypeFilter::class)->paginate($pageSize);
+        )->ordered()->filter($inputDatas, GamesTypeFilter::class)->get();
         $msgOut      = msgOut($outputDatas);
         return $msgOut;
     }

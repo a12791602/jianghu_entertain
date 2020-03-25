@@ -17,17 +17,22 @@ class SystemUserPublicAvatarSeeder extends Seeder
     {
         SystemUserPublicAvatar::insert(
             [
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/7c0a218b4f651a9c6aeded81fc032ef6.png'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/cc416c9a04bd669f21015b9a3a3be81a.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/91945f0098a9d3c9211027c6ef7c239c.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/c816334aa5429fd5ef44c064dbf9c393.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/709aa5bf32f9cd1e4be15d921079f916.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/55bdd6ac360b6728587c8a734cee8d2c.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/3882540f56da079894d0d3216db3a6ef.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/8c4278b36bdc539f862254479b79df64.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/3f5b2f8ed15e09086e0a77e98d473475.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/2f2809365646c1f57664cccc5e6f8406.jpg'],
-             ['pic_path' => 'uploads/jhhy/avatar/2020-02-25/5e2308ce7471451bc006ce32431797c8.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/1c2aceaea46e637be0cad581028defd2.png'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/80d7a0c5182a389519b3f13466cabd82.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/85aab7699c4b3d725390debd8168bcd3.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/b648c61dd2b7fbb8c4703d90d642e7e8.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/cd0512c5461a170035977c8334f7e6b4.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/f9f8a45512b1dc4fb05a8d5e4a3e9a73.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/0a2d5a4be960afd4d0f624500a611b09.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/1939c2c1f4c235984a9bd4a5b38fcc1a.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/2b9df028ecef1e782b9dd2a1bef7f80a.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/b68db717c0dd9303da1fb1b9f7b58dde.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/4ad0e98f3aa7198eb4fb6bc99cc85a55.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/c451315a1e53c05262966524fd903055.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/b18f34d1064beea0e76b3f9fed5acc02.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/287cd7c16c04c81f9011213fb6f6001d.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/f335fcd9c26d8588594ec95593753381.jpg'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/6534d5fa15bac70fe286ba00808a537a.jpg'],
             ],
         );
     }
