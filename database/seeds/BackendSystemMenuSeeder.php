@@ -390,18 +390,6 @@ class BackendSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
-              'id'      => '32',
-              'label'   => '游戏厂商配置',
-              'en_name' => '',
-              'route'   => '/dev/gamevendor',
-              'pid'     => 29,
-              'icon'    => null,
-              'display' => 1,
-              'level'   => 2,
-              'sort'    => 3,
-              'type'    => 1,
-             ],
-             [
               'id'      => '33',
               'label'   => '游戏分类配置',
               'en_name' => '',

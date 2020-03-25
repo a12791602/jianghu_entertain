@@ -1,9 +1,9 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\BackendFinanceChannelController;
-use App\Http\Controllers\BackendApi\Headquarters\BackendFinanceTypeController;
-use App\Http\Controllers\BackendApi\Headquarters\BackendFinanceVendorController;
-use App\Http\Controllers\BackendApi\Headquarters\BackendSystemBankController;
+use App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\BackendSystemBankController;
+use App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController;
+use App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceTypeController;
+use App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController;
 
 //金融分类管理
 Route::group(
