@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Headquarters\BackendGameController;
+use App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController;
 use App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameTypeController;
 use App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController;
 
