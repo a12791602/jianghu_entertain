@@ -50,7 +50,10 @@ trait FrontendUsersAuditLogics
     public static function getPlatformSign(): string
     {
         $platform = Request::get('current_platform_eloq');
-        return $platform->sign;
+        if ($platform) {
+            return $platform->sign;
+        }
+        return 'JHHY';
     }
 
     /**
