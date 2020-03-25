@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\System\CostomerServiceController;
+use App\Http\Controllers\BackendApi\Merchant\Setting\CostomerServiceController;
 
 //客服设置
 Route::group(

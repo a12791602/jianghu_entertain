@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\System\BankCardsController;
+use App\Http\Controllers\BackendApi\Merchant\Setting\BankCardsController;
 
 //银行卡反查
 Route::group(

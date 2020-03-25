@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\Admin\MerchantAdminUserController;
 use App\Http\Controllers\BackendApi\Merchant\MerchantAuthController;
+use App\Http\Controllers\BackendApi\Merchant\Setting\AdminController;
 
 //登录
 Route::post('login', [MerchantAuthController::class, 'login'])
@@ -9,6 +9,35 @@ Route::post('login', [MerchantAuthController::class, 'login'])
 //退出登录
 Route::get('logout', [MerchantAuthController::class, 'logout'])
     ->name('merchant-api.logout');
+
+//管理员角色相关
+Route::group(
+    ['prefix' => 'merchant-admin-group'],
+    static function (): void {
+        $namePrefix = 'merchant-api.merchant-admin-group.';
+        //添加管理员角色
+        Route::post('create', [AdminController::class, 'create'])
+            ->name($namePrefix . 'create');
+        //获取管理员角色
+        Route::get('detail', [AdminController::class, 'groupIndex'])
+            ->name($namePrefix . 'detail');
+        //编辑管理员角色
+        Route::post('edit', [AdminController::class, 'edit'])
+            ->name($namePrefix . 'edit');
+        //删除管理员角色
+        Route::post('delete', [AdminController::class, 'destroy'])
+            ->name($namePrefix . 'delete');
+        //获取管理员角色
+        Route::post(
+            'specific-group-users',
+            [
+             AdminController::class,
+             'specificGroupUsers',
+            ],
+        )->name($namePrefix . 'specific-group-users');
+    },
+);
+
 //管理员相关
 Route::group(
     ['prefix' => 'merchant-admin-user'],
@@ -18,7 +47,7 @@ Route::group(
         Route::post(
             'create',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'create',
             ],
         )->name($namePrefix . 'create');
@@ -26,7 +55,7 @@ Route::group(
         Route::get(
             'get-all-admins',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'allAdmins',
             ],
         )->name($namePrefix . 'get-all-admins');
@@ -34,7 +63,7 @@ Route::group(
         Route::post(
             'update-admin-group',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'updateAdminGroup',
             ],
         )->name($namePrefix . 'update-admin-group');
@@ -42,7 +71,7 @@ Route::group(
         Route::post(
             'delete-admin',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'deleteAdmin',
             ],
         )->name($namePrefix . 'delete-admin');
@@ -50,7 +79,7 @@ Route::group(
         Route::post(
             'search-admin',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'searchAdmin',
             ],
         )->name($namePrefix . 'search-admin');
@@ -58,7 +87,7 @@ Route::group(
         Route::post(
             'switch-admin',
             [
-             MerchantAdminUserController::class,
+             AdminController::class,
              'switchAdmin',
             ],
         )->name($namePrefix . 'switch-admin');
