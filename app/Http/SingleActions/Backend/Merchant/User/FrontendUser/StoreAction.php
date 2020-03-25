@@ -38,6 +38,11 @@ class StoreAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        $platform_sign = $this->currentPlatformEloq->sign;
+        $redis         = app('redis_user_unique_id');
+        $guid          = $redis->spop($platform_sign . '_' . config('web.main.frontend_user_unique_id'))[0];
+
+        $inputDatas['guid']          = $guid;
         $inputDatas['platform_id']   = $this->currentPlatformEloq->id;
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $inputDatas['password']      = bcrypt($inputDatas['password']);

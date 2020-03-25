@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
+use App\Http\Resources\Backend\Merchant\Finance\Offline\IndexResource;
 use App\ModelFilters\Finance\SystemFinanceOfflineInfoFilter;
 use Illuminate\Http\JsonResponse;
 
@@ -27,18 +28,9 @@ class IndexAction extends BaseAction
     {
         $pageSize                  = $this->model::getPageSize();
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $datas                     = $this->model::with(
-            [
-             'lastEditor:id,name',
-             'author:id,name',
-             'bank:id,name',
-             'type:id,name',
-             'tags:online_finance_id,tag_id',
-            ],
-        )
-        ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
-        ->paginate($pageSize);
-        $result                    = msgOut($datas);
+
+        $data   = $this->model::filter($inputDatas, SystemFinanceOfflineInfoFilter::class)->paginate($pageSize);
+        $result = msgOut(IndexResource::collection($data));
         return $result;
     }
 }
