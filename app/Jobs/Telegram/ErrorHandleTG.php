@@ -133,8 +133,8 @@ class ErrorHandleTG implements ShouldQueue
                                  'TraceAsString' => $e->getTraceAsString(),
                                 ];
         $this->responseStatus = $response->getStatusCode();
-        $this->currentRoute   = empty($currentRoute) ? '' : $currentRoute->uri();
-        $this->routePrefix    = empty($currentRoute) ? '' : trim((string) $currentRoute->getPrefix(), '/');
+        $this->currentRoute   = $currentRoute === null ? '' : $currentRoute->uri();
+        $this->routePrefix    = $currentRoute === null ? '' : trim((string) $currentRoute->getPrefix(), '/');
     }
 
     /**
