@@ -15,16 +15,6 @@ class EditDoRequest extends BaseFormRequest
 {
 
     /**
-     * 父级分类
-     */
-    public const CATEGORY_TYPE_PARENT = 1;
-
-    /**
-     * 子级分类
-     */
-    public const CATEGORY_TYPE_SUB = 2;
-
-    /**
      * 需要依赖模型中的字段备注信息
      * @var array<int,string>
      */
@@ -56,7 +46,6 @@ class EditDoRequest extends BaseFormRequest
         $category_type = $this->get('category_type');
         $thisId        = $this->get('id');
         $rules         = [
-                          'id'            => 'required|numeric|exists:game_types,id',
                           'category_type' => [
                                               'required',
                                               'integer',
@@ -64,10 +53,12 @@ class EditDoRequest extends BaseFormRequest
                                               new CheckSortableModel($this),
                                              ],
                          ];
-        if ((int) $category_type === self::CATEGORY_TYPE_PARENT) {
+        if ((int) $category_type === CheckSortableModel::GAME_TYPE) {
+            $rules['id']   = 'required|integer|exists:game_types,id';
             $rules['name'] = 'required|max:64|unique:game_types,name,' . $thisId;
             $rules['sign'] = 'required|max:64|unique:game_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
         } else {
+            $rules['id']   = 'required|integer|exists:game_sub_types,id';
             $rules['name'] = 'required|max:64|unique:game_sub_types,name,' . $thisId;
             $rules['sign'] = 'required|max:64|unique:game_sub_types,sign,' . $thisId . '|regex:/\w+/';//(字母+下划线)
         }

@@ -58,6 +58,15 @@ class AddDoRequest extends BaseFormRequest
                                       new CheckSortableModel($this),
                                      ],
                  ];
+
+        $category_type = $this->get('category_type');
+        if ((int) $category_type === CheckSortableModel::GAME_TYPE) {
+            $rules['name'] = 'required|max:64|unique:game_types,name';
+            $rules['sign'] = 'required|max:64|unique:game_types,sign|regex:/\w+/';//(字母+下划线)
+        } else {
+            $rules['name'] = 'required|max:64|unique:game_sub_types,name';
+            $rules['sign'] = 'required|max:64|unique:game_sub_types,sign|regex:/\w+/';//(字母+下划线)
+        }
         return $rules;
     }
 }
