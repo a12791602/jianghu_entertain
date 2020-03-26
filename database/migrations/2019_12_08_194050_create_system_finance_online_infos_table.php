@@ -38,7 +38,7 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->text('merchant_secret')->nullable()->default(null)->comment('商户密钥');
                 $table->text('public_key')->nullable()->default(null)->comment('第三方公钥');
                 $table->text('private_key')->nullable()->default(null)->comment('第三方私钥');
-                $table->string('app_ip')->nullable()->default(null)->comment('终端号');
+                $table->string('app_id')->nullable()->default(null)->comment('终端号');
                 $table->string('vendor_url')->nullable()->default(null)->comment('第三方域名');
                 $table->string('level_ids')->nullable()->default(null)->comment('可见的用户层级');
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');

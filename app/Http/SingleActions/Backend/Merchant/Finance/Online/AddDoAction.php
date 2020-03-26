@@ -4,8 +4,9 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
+use DB;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Log;
 
 /**
  * Class AddDoAction
@@ -16,11 +17,10 @@ class AddDoAction extends BaseAction
     /**
      * @param array $inputDatas InputDatas.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $flag = false;
         try {
             $platformSign                = $this->currentPlatformEloq->sign;
             $platformId                  = $this->currentPlatformEloq->id;
@@ -46,17 +46,14 @@ class AddDoAction extends BaseAction
                 if (!empty($data)) {
                     SystemFinanceUserTag::insert($data);
                 }
-                $flag = true;
             }
-        } catch (\Throwable $exception) {
-            $flag = false;
-        }
-        if ($flag) {
             DB::commit();
             $result = msgOut();
             return $result;
+        } catch (\RuntimeException $exception) {
+            Log::error($exception->getMessage());
         }
         DB::rollBack();
-        throw new \Exception('201400');
+        throw new \RuntimeException('201400');
     }
 }
