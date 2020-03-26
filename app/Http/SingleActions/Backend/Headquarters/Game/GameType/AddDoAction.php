@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Headquarters\Game\GameType;
 use App\Http\Requests\Backend\Headquarters\Game\GameType\AddDoRequest;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
+use App\Rules\Backend\Common\Sortable\CheckSortableModel;
 use Arr;
 use DB;
 use Illuminate\Http\JsonResponse;
@@ -25,13 +26,15 @@ class AddDoAction
      */
     public function execute(AddDoRequest $request): JsonResponse
     {
+        $validated = $request->validated();
+        $model     = $request->get('model'); // 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
         try {
             DB::beginTransaction();
-            $validated  = $request->validated();
-            $model      = $request->get('model'); // 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
-            $item       = $model::create(Arr::only($validated, ['name', 'sign', 'status']));
-            $insertData = $this->_getFormatDataForTypePlatform($item->id);
-            GameTypePlatform::insert($insertData);
+            $item = $model::create(Arr::only($validated, ['name', 'sign', 'status', 'parent_id']));
+            if ((int) $validated['category_type'] === CheckSortableModel::GAME_TYPE) {
+                $insertData = $this->_getFormatDataForTypePlatform($item->id);
+                GameTypePlatform::insert($insertData);
+            }
             DB::commit();
             $msgOut = msgOut();
             return $msgOut;

@@ -962,6 +962,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'controller'    => 'App\Http\Controllers\CommonApi\SortableController',
               'method'        => 'updateSortable',
              ],
+             [
+              'route_name'    => 'headquarters-api.uploads.images',
+              'menu_group_id' => 39,
+              'title'         => '上传图片',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\CommonApi\UploadController',
+              'method'        => 'upload',
+             ],
             ],
         );
     }
