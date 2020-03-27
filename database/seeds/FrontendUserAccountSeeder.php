@@ -20,7 +20,7 @@ class FrontendUserAccountSeeder extends Seeder
              [
               'user_id' => 1,
               'balance' => 999022347.8236,
-              'frozen'  => 86853.2200,
+              'frozen'  => 0.0000,
               'status'  => 1,
              ],
              [
