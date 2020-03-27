@@ -24,6 +24,7 @@ class CreateSystemPlatformBanksTable extends Migration
                 $table->string('platform_sign', 10)->default(' ')->comment('运营商标记');
                 $table->integer('bank_id')->default('0')->comment('银行id');
                 $table->tinyInteger('status')->default('0')->comment('状态 0 禁用 1 启用');
+                $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->index('platform_sign');
                 $table->index('status');
                 $table->timestamp('created_at')->useCurrent();
