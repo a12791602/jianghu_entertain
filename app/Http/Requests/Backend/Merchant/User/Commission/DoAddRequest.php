@@ -41,7 +41,7 @@ class DoAddRequest extends BaseFormRequest
                 'game_type_id'   => 'required|integer|exists:game_types,id',   //游戏类型ID
                 'game_vendor_id' => 'required|integer|exists:game_vendors,id', //游戏平台ID
                 'bet'            => 'required|numeric|gte:0',                  //打码量
-                'percent'        => 'required|numeric',                        //洗码比例
+                'percent'        => 'required|string',                         //洗码比例
                ];
     }
 }
