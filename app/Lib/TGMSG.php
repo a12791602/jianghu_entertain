@@ -2,7 +2,6 @@
 
 namespace App\Lib;
 
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Api;
 
@@ -25,13 +24,15 @@ class TGMSG
 
     /**
      * TGMSG constructor.
-     * @param string $chatId TGMSG constructor.
+     * @param string $chatId   TGMSG ChatGroupId.
+     * @param string $botToken Telegram BotToken.
      * @throws \Telegram\Bot\Exceptions\TelegramSDKException TelegramSDKException.
      */
-    public function __construct(string $chatId)
-    {
-        $tgToken      = Config::get('telegram.bot_token');
-        $this->tgObj  = new Api($tgToken);
+    public function __construct(
+        string $chatId,
+        string $botToken
+    ) {
+        $this->tgObj  = new Api($botToken);
         $this->chatId = $chatId;
     }
 

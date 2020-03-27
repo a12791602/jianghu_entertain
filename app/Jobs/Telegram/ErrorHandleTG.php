@@ -206,8 +206,9 @@ class ErrorHandleTG implements ShouldQueue
         if ($chatId === null) {
             return;
         }
+        $botToken = Config::get('telegram.bot_token');
         //################################################################################
-        $telegram = new TGMSG($chatId);
+        $telegram = new TGMSG($chatId, $botToken);
         $telegram->sendMessage(
             (string) json_encode(
                 $error,
