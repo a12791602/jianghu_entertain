@@ -20,7 +20,7 @@ class BackendAdminUserSeeder extends Seeder
              [
               'name'     => 'Harris',
               'email'    => 'harrisdt15f@gmail.com',
-              'password' => '$2y$10$Bz7/W8LEMgHnOkAtULbpbOjpjESkTihGyGJLJUsPGYquBJCP8bQfm',
+              'password' => '$2y$10$Z1XyP6L7AclsM3sG6KxRhOtqHmLi2cyhbrKiNmJjK7rBjlv.rWCEe',
               'is_test'  => 0,
               'group_id' => 1,
               'status'   => 1,
