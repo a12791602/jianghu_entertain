@@ -826,6 +826,22 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'status',
              ],
              [
+              'route_name'    => 'merchant-api.online-finance.bank.index',
+              'menu_group_id' => 45,
+              'title'         => '金流管理-线上金流配置-出款银行管理-银行列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController',
+              'method'        => 'bankIndex',
+             ],
+             [
+              'route_name'    => 'merchant-api.online-finance.bank.status',
+              'menu_group_id' => 45,
+              'title'         => '金流管理-线上金流配置-改变状态',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController',
+              'method'        => 'bankStatus',
+             ],
+             [
               'route_name'    => 'merchant-api.merchant-admin-group.detail',
               'menu_group_id' => 51,
               'title'         => '设置管理-管理员分组-列表',

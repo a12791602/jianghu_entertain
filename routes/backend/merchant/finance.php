@@ -130,6 +130,22 @@ Route::group(
              'status',
             ],
         )->name($namePrefix . 'status');
+        //银行卡列表
+        Route::post(
+            'bank/index',
+            [
+             OnlineFinanceController::class,
+             'bankIndex',
+            ],
+        )->name($namePrefix . 'bank.index');
+        //银行卡修改状态
+        Route::post(
+            'bank/status',
+            [
+             OnlineFinanceController::class,
+             'bankStatus',
+            ],
+        )->name($namePrefix . 'bank.status');
         //接收回调 platform 系统的平台 order 订单号
         Route::match(
             [
