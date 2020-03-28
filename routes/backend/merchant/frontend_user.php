@@ -39,6 +39,14 @@ Route::group(
              'password',
             ],
         )->name($namePrefix . 'password.reset');
+        //修改会员标签
+        Route::post(
+            'label',
+            [
+             FrontendUserController::class,
+             'label',
+            ],
+        )->name($namePrefix . 'label');
         //会员重置取款密码
         Route::post(
             'withdrawals-password/reset',

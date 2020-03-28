@@ -20,6 +20,11 @@ class SystemEmailOfMerchant extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = ['email_id' => '邮件ID'];
+
+    /**
      * @return BelongsTo
      */
     public function email(): BelongsTo

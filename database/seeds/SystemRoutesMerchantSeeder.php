@@ -42,6 +42,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'detail',
              ],
              [
+              'route_name'    => 'merchant-api.frontend-user.label',
+              'menu_group_id' => 4,
+              'title'         => '会员管理-会员列表-详情-修改会员标签',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\User\FrontendUserController',
+              'method'        => 'label',
+             ],
+             [
               'route_name'    => 'merchant-api.frontend-user.password.reset',
               'menu_group_id' => 4,
               'title'         => '会员管理-会员列表-重置密码',
@@ -520,6 +528,22 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Email\SystemEmailController',
               'method'        => 'sendIndex',
+             ],
+             [
+              'route_name'    => 'merchant-api.email.destroy.incoming.email',
+              'menu_group_id' => 23,
+              'title'         => '邮件系统-收件箱-删除邮件',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Email\SystemEmailController',
+              'method'        => 'destroyIncomingEmail',
+             ],
+             [
+              'route_name'    => 'merchant-api.email.destroy.sent.email',
+              'menu_group_id' => 23,
+              'title'         => '邮件系统-发件箱-删除邮件',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Email\SystemEmailController',
+              'method'        => 'destroySentEmail',
              ],
              [
               'route_name'    => 'merchant-api.report.user-audit',

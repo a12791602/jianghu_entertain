@@ -19,5 +19,8 @@ Route::group(
         //读邮件
         Route::post('read-email', [SystemEmailController::class, 'readEmail'])
             ->name($namePrefix . 'read-email');
+        //删除已收邮件
+        Route::post('destroy-incoming-email', [SystemEmailController::class, 'destroyIncomingEmail'])
+            ->name($namePrefix . 'destroy.incoming.email');
     },
 );
