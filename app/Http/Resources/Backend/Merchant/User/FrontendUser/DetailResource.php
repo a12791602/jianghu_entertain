@@ -89,7 +89,7 @@ class DetailResource extends BaseResource
                    'balance'           => $this->account->balance,
                    'type'              => $this->type,
                    'status'            => $this->status,
-                   'title'             => $this->userTag->title,
+                   'label'             => $this->userTag->title,
                    'promotion_details' => [
                                            'total_members'      => $this->specificInfo->total_members,
                                            'promotion_level'    => null,
