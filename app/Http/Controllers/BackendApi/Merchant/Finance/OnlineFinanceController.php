@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
 use App\Http\Requests\Backend\Merchant\Finance\Online\AddDoRequest;
+use App\Http\Requests\Backend\Merchant\Finance\Online\BankStatusRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\EditRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\AddDoAction;
+use App\Http\SingleActions\Backend\Merchant\Finance\Online\BankIndexAction;
+use App\Http\SingleActions\Backend\Merchant\Finance\Online\BankStatusAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\CallbackAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\DelDoAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\Online\EditAction;
@@ -100,6 +103,32 @@ class OnlineFinanceController
      * @throws \Exception Exception.
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
+    {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 银行列表
+     * @param BankIndexAction $action Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function bankIndex(BankIndexAction $action): JsonResponse
+    {
+        $outputDatas = $action->execute();
+        return $outputDatas;
+    }
+
+    /**
+     * 改变银行卡状态
+     * @param BankStatusAction  $action  Action.
+     * @param BankStatusRequest $request Request.
+     * @return JsonResponse
+     * @throws \RuntimeException Exception.
+     */
+    public function bankStatus(BankStatusAction $action, BankStatusRequest $request): JsonResponse
     {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);

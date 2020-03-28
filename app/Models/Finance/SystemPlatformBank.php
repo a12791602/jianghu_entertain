@@ -2,6 +2,7 @@
 
 namespace App\Models\Finance;
 
+use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -45,6 +46,15 @@ class SystemPlatformBank extends BaseModel
     public function bank(): BelongsTo
     {
         $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
+        return $object;
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function lastEditor(): BelongsTo
+    {
+        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
         return $object;
     }
 }
