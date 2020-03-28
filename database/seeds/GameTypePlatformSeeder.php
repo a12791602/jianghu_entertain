@@ -47,12 +47,6 @@ class GameTypePlatformSeeder extends Seeder
               'device'      => 2,
               'status'      => 1,
              ],
-             [
-              'platform_id' => 1,
-              'type_id'     => 6,
-              'device'      => 2,
-              'status'      => 1,
-             ],
             ],
         );
     }
