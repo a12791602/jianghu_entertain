@@ -51,14 +51,14 @@ class BaseFormRequest extends BaseFormAbstractRequest
      */
     public function attributes(): array
     {
-        $attribute = [];
+        $tmpAttribute = [];
         foreach ($this->dependentModels as $dependentModel) {
             if (!isset($dependentModel::$fieldDefinition)) {
                 continue;
             }
-            $tmpVar    = $dependentModel::$fieldDefinition;
-            $attribute = array_merge($tmpVar, $attribute);
+            $tmpAttribute[] = $dependentModel::$fieldDefinition;
         }
+        $attribute = array_merge([], ...$tmpAttribute);
         $attribute = array_merge($attribute, $this->extraDefinition);
         return $attribute;
     }
