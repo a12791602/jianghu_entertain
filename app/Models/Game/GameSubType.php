@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class GameSubType extends BaseModel implements Sortable
 {
     use EloquentSortable;// Eloquent Sortable.
+    
+    public const STATUS_CLOSE = 0;
+    public const STATUS_OPEN  = 1;
 
     /**
      * @var array

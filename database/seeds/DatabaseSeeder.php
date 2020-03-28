@@ -65,6 +65,7 @@ class DatabaseSeeder extends Seeder
              SystemConfigurationStandardSeeder::class,
              FrontendUserAccountTypesGroupSeeder::class,
              SystemPlatformSkinSeeder::class,
+             GameRoomSeeder::class,
             ],
         );
     }

@@ -32,7 +32,6 @@ class CreateGamePlatformsTable extends Migration
                     ->unsigned()
                     ->nullable()
                     ->index('fk_system_platforms_has_games_games_idx_idx')
-                    ->unique()
                     ->comment('游戏id');
                 $table->tinyInteger('status')->nullable()->comment('状态 1 启用 0 禁用');
                 $table->integer('sort')->nullable()->comment('排序');
@@ -51,6 +50,7 @@ class CreateGamePlatformsTable extends Migration
                     ->on('system_platforms')
                     ->onUpdate('NO ACTION')
                     ->onDelete('NO ACTION');
+                $table->unique(['platform_id', 'game_id', 'device']);
             },
         );
         DB::statement("ALTER TABLE `game_platforms` comment '游戏与平台关联表'");

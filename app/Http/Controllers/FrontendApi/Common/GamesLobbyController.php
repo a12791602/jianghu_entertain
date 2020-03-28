@@ -62,14 +62,15 @@ class GamesLobbyController
 
     /**
      * Game list.
-     * @param GameListAction  $action  Action.
      * @param GameListRequest $request Request.
+     * @param GameListAction  $action  Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function gameList(GameListAction $action, GameListRequest $request): JsonResponse
+    public function gameList(GameListRequest $request, GameListAction $action): JsonResponse
     {
-        $result = $action->execute($request);
+        $validated = $request->validated();
+        $result    = $action->execute($validated);
         return $result;
     }
 

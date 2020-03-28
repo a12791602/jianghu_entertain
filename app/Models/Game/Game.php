@@ -6,6 +6,7 @@ use App\ModelFilters\Game\GameFilter;
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class Game
@@ -13,11 +14,21 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 class Game extends BaseModel
 {
+    
+    public const STATUS_CLOSE = 0;
+    public const STATUS_OPEN  = 1;
 
     /**
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['url'];
 
     /**
      * @var array
@@ -84,5 +95,16 @@ class Game extends BaseModel
     {
         $object = $this->provideFilter(GameFilter::class);
         return $object;
+    }
+
+    /**
+     * 游戏路径
+     * @return string
+     */
+    public function getUrlAttribute(): string
+    {
+        $prefix = Request::get('prefix');
+        $result = '/' . $prefix . '/games-lobby/in-game/' . $this->type_id . '/' . $this->sub_type_id . '/' . $this->id;
+        return $result;
     }
 }

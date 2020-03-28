@@ -44,12 +44,34 @@ class GameFilter extends ModelFilter
 
     /**
      * 分类查询
-     * @param  integer $type_id Type_id.
+     * @param  integer $typeId 分类ID.
      * @return GameFilter
      */
-    public function type(int $type_id): GameFilter
+    public function type(int $typeId): GameFilter
     {
-        $object = $this->where('type_id', $type_id);
+        $object = $this->where('type_id', $typeId);
+        return $object;
+    }
+
+    /**
+     * 分类查询
+     * @param  array $typeId 分类ID.
+     * @return GameFilter
+     */
+    public function typeIn(array $typeId): GameFilter
+    {
+        $object = $this->whereIn('type_id', $typeId);
+        return $object;
+    }
+
+    /**
+     * 子分类查询
+     * @param  array $typeId 子分类ID.
+     * @return GameFilter
+     */
+    public function subTypeIn(array $typeId): GameFilter
+    {
+        $object = $this->whereIn('sub_type_id', $typeId);
         return $object;
     }
 

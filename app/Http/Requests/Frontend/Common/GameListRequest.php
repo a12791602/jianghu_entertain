@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Frontend\Common;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Platform\GamesPlatform;
+use App\Models\Platform\GamePlatform;
 
 /**
  * Class GameListRequest
@@ -15,7 +15,7 @@ class GameListRequest extends BaseFormRequest
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [GamesPlatform::class];
+    protected $dependentModels = [GamePlatform::class];
 
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
@@ -39,23 +39,6 @@ class GameListRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'device'  => 'integer|required',
-                'type_id' => 'integer',
-                'is_hot'  => 'integer',
-               ];
+        return ['device' => 'required|integer|in:1,2,3'];
     }
-
-    /**
-     * Get custom messages for validator errors.
-     * @return mixed[]
-     */
-    //    public function messages(): array
-    //    {
-    //        return [
-    //                'device.integer'  => '设备类型不符合规则',
-    //                'type_id.integer' => '游戏分类ID不符合规则',
-    //                'is_hot.integer'  => '游戏分类是否热门不符合规则',
-    //               ];
-    //    }
 }
