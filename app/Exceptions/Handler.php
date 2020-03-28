@@ -62,6 +62,13 @@ class Handler extends ExceptionHandler
     protected $dontReport = [];
 
     /**
+     * A list of the internal exception types that should not be reported.
+     *
+     * @var array
+     */
+    protected $internalDontReport = [];
+
+    /**
      * A list of the inputs that are never flashed for validation exceptions.
      *
      * @var array
@@ -96,6 +103,11 @@ class Handler extends ExceptionHandler
             return;
         }
         $this->_checkReporter($e);
+        $request      = request();
+        $response     = $this->_generateExceptionResponse($request, $e);
+        $agent        = new Agent();
+        $currentRoute = Route::getCurrentRoute();
+        dispatch(new ErrorHandleTG($e, $request, $response, $agent, $currentRoute));
     }
 
     /**
@@ -142,10 +154,7 @@ class Handler extends ExceptionHandler
     public function render($request, Throwable $e): Response
     {
         // phpcs:enable Squiz.Commenting.FunctionComment.TypeHintMissing
-        $response     = $this->_generateExceptionResponse($request, $e);
-        $agent        = new Agent();
-        $currentRoute = Route::getCurrentRoute();
-        dispatch(new ErrorHandleTG($e, $request, $response, $agent, $currentRoute));
+        $response = $this->_generateExceptionResponse($request, $e);
         if ($this->config['add_cors_headers']) {
             if (!class_exists(CorsService::class)) {
                 throw new InvalidArgumentException(

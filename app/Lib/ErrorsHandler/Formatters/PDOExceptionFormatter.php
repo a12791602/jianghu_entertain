@@ -19,7 +19,7 @@ class PDOExceptionFormatter extends ExceptionFormatter
     public function format(JsonResponse $response, \Throwable $e): void
     {
         $data       = $response->getData(true);
-        $serverCode = 403;
+        $serverCode = 500;
         $response->setStatusCode($serverCode);//Forbidden
         $message = $e->getMessage();
         $data    = array_merge(
