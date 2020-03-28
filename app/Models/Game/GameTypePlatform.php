@@ -13,10 +13,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class GameTypePlatform extends BaseModel
 {
 
-    public const DEVICE_H5  = 2;
-    public const DEVICE_APP = 3;
-    public const DEVICE_PC  = 1;
-    public const STATUS     = 1;
+    public const DEVICE_H5    = 2;
+    public const DEVICE_APP   = 3;
+    public const DEVICE_PC    = 1;
+    public const STATUS_CLOSE = 0;
+    public const STATUS_OPEN  = 1;
 
     /**
      * @var array

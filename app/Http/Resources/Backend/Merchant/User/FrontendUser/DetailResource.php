@@ -80,15 +80,16 @@ class DetailResource extends BaseResource
     {
         // TODO 财务信息和推广信息 待处理
         $last_seen_time = Carbon::parse($this->last_login_time)->diffForHumans();
-
+        
         $result = [
                    'guid'              => $this->guid,
+                   'avatar'            => $this->specificInfo->avatar_full,
                    'name'              => $this->specificInfo->nickname,
                    'level'             => $this->specificInfo->level,
                    'balance'           => $this->account->balance,
                    'type'              => $this->type,
                    'status'            => $this->status,
-                   'title'             => $this->userTag->title,
+                   'label'             => $this->userTag->title,
                    'promotion_details' => [
                                            'total_members'      => $this->specificInfo->total_members,
                                            'promotion_level'    => null,
