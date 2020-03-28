@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Email;
 
+use App\Http\Requests\Backend\Merchant\Email\DestroyIncomingEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\ReadEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\ReceivedIndexRequest;
 use App\Http\Requests\Backend\Merchant\Email\SendIndexRequest;
 use App\Http\Requests\Backend\Merchant\Email\SendRequest;
+use App\Http\SingleActions\Backend\Merchant\Email\DestroyIncomingEmailAction;
 use App\Http\SingleActions\Backend\Merchant\Email\ReadEmailAction;
 use App\Http\SingleActions\Backend\Merchant\Email\ReceivedIndexAction;
 use App\Http\SingleActions\Backend\Merchant\Email\SendAction;
@@ -75,6 +77,22 @@ class SystemEmailController
      */
     public function readEmail(ReadEmailAction $action, ReadEmailRequest $request): JsonResponse
     {
+        $inputDatas  = $request->validated();
+        $outputDatas = $action->execute($inputDatas);
+        return $outputDatas;
+    }
+
+    /**
+     * 删除已收邮件.
+     * @param DestroyIncomingEmailAction  $action  Action.
+     * @param DestroyIncomingEmailRequest $request Request.
+     * @return JsonResponse
+     * @throws \RuntimeException Exception.
+     */
+    public function destroyIncomingEmail(
+        DestroyIncomingEmailAction $action,
+        DestroyIncomingEmailRequest $request
+    ): JsonResponse {
         $inputDatas  = $request->validated();
         $outputDatas = $action->execute($inputDatas);
         return $outputDatas;

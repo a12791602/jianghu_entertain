@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\User;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\AlipayDestroyRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\DetailRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\IndexRequest;
+use App\Http\Requests\Backend\Merchant\User\FrontendUser\LabelRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\LoginLogRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\ResetPasswordRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\StoreRequest;
@@ -13,6 +14,7 @@ use App\Http\Requests\Backend\Merchant\User\FrontendUser\WithdrawalsPasswordRequ
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\AlipayDestroyAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\DetailAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\IndexAction;
+use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\LabelAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\LoginLogAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\ResetPasswordAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\StoreAction;
@@ -62,6 +64,19 @@ class FrontendUserController
      * @throws \RuntimeException Exception.
      */
     public function detail(DetailAction $action, DetailRequest $request): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        $msgOut     = $action->execute($inputDatas);
+        return $msgOut;
+    }
+
+    /**
+     * 修改会员标签
+     * @param LabelAction  $action  DetailAction.
+     * @param LabelRequest $request DetailRequest.
+     * @return JsonResponse
+     */
+    public function label(LabelAction $action, LabelRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         $msgOut     = $action->execute($inputDatas);
