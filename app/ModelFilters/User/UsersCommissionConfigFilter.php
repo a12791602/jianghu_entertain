@@ -36,7 +36,7 @@ class UsersCommissionConfigFilter extends ModelFilter
      * @param  string $typeId 游戏类型ID.
      * @return UsersCommissionConfigFilter
      */
-    public function gameTypeId(string $typeId): UsersCommissionConfigFilter
+    public function gameType(string $typeId): UsersCommissionConfigFilter
     {
         $eloq = $this->where('game_type_id', $typeId);
         return $eloq;
@@ -48,7 +48,7 @@ class UsersCommissionConfigFilter extends ModelFilter
      * @param  string $vendorId 厂商ID.
      * @return UsersCommissionConfigFilter
      */
-    public function gameVendorId(string $vendorId): UsersCommissionConfigFilter
+    public function gameVendor(string $vendorId): UsersCommissionConfigFilter
     {
         $eloq = $this->where('game_vendor_id', $vendorId);
         return $eloq;
