@@ -39,13 +39,12 @@ class IndexAction extends MainAction
     {
         $inputDatas['sign']     = $this->currentPlatformEloq->sign;
         $inputDatas['data_pid'] = 0;
-        $data                   = $this->model
+        $result                 = $this->model
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
             ->with(
                 [
-                 'author:id,name',
-                 'newer:id,name',
-                 'childs:id,pid,title,pic,type,status,created_at,updated_at,add_admin_id,update_admin_id',
+                 'childs.author',
+                 'childs.newer',
                 ],
             )
             ->select(
@@ -53,17 +52,39 @@ class IndexAction extends MainAction
                  'id',
                  'pid',
                  'title',
-                 'pic',
                  'type',
                  'status',
                  'created_at',
                  'updated_at',
-                 'add_admin_id',
-                 'update_admin_id',
                 ],
-            )->paginate($this->model::getPageSize());
-            
-        $msgOut = msgOut($data);
+            )->paginate($this->model::getPageSize())->toArray();
+        $data                   = [];
+        foreach ($result['data'] as $helpDatas) {
+            $childs = [];
+            foreach ($helpDatas['childs'] as $item) {
+                $childs[] = [
+                             'id'         => $item['id'],
+                             'pid'        => $item['pid'],
+                             'title'      => $item['title'],
+                             'pic'        => $item['pic'],
+                             'status'     => $item['status'],
+                             'author'     => $item['author']['name'] ?? '',
+                             'newer'      => $item['newer']['name'] ?? '',
+                             'created_at' => $item['created_at'],
+                             'updated_at' => $item['updated_at'],
+                            ];
+            }
+            $data[] = [
+                       'id'         => $helpDatas['id'],
+                       'title'      => $helpDatas['title'],
+                       'status'     => $helpDatas['status'],
+                       'created_at' => $helpDatas['created_at'],
+                       'updated_at' => $helpDatas['updated_at'],
+                       'childs'     => $childs,
+                      ];
+        }
+        $result['data'] = $data;
+        $msgOut         = msgOut($result);
         return $msgOut;
     }
 }
