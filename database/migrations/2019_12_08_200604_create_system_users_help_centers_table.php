@@ -23,6 +23,7 @@ class CreateSystemUsersHelpCentersTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
+                $table->integer('pid')->nullable()->default(0)->comment('上级ID');
                 $table->string('title', 32)->nullable()->default(null)->comment('标题');
                 $table->string('pic', 128)->nullable()->default(null)->comment('图片路径');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1. H5  2. PC  3. APP');

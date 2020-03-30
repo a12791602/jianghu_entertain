@@ -34,6 +34,7 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
+                'pid'    => 'required|integer',          //上级ID
                 'title'  => 'required|string|max:32',    //标题
                 'pic'    => 'required|string|max:128',   //图片路径
                 'type'   => 'required|integer|in:1,2,3', //客户端   1. H5  2. PC  3. APP

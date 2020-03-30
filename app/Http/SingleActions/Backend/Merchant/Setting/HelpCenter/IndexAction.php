@@ -37,13 +37,21 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['sign'] = $this->currentPlatformEloq->sign;
-        $data               = $this->model
+        $inputDatas['sign']     = $this->currentPlatformEloq->sign;
+        $inputDatas['data_pid'] = 0;
+        $data                   = $this->model
             ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
-            ->with(['author:id,name', 'newer:id,name'])
+            ->with(
+                [
+                 'author:id,name',
+                 'newer:id,name',
+                 'childs:id,pid,title,pic,type,status,created_at,updated_at,add_admin_id,update_admin_id',
+                ],
+            )
             ->select(
                 [
                  'id',
+                 'pid',
                  'title',
                  'pic',
                  'type',
@@ -54,7 +62,8 @@ class IndexAction extends MainAction
                  'update_admin_id',
                 ],
             )->paginate($this->model::getPageSize());
-        $msgOut             = msgOut($data);
+            
+        $msgOut = msgOut($data);
         return $msgOut;
     }
 }
