@@ -34,8 +34,8 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'game_type_id'   => 'required|integer', //游戏类型ID
-                'game_vendor_id' => 'required|integer', //游戏平台ID
+                'game_type'   => 'required|integer', //游戏类型ID
+                'game_vendor' => 'required|integer', //游戏平台ID
                ];
     }
 }
