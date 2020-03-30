@@ -25,7 +25,7 @@ class CreateMerchantSystemMenusTable extends Migration
                 $table->string('en_name', 20)->nullable()->default(null)->comment('英文名');
                 $table->string('route', 50)->nullable()->default(null)->comment('路由');
                 $table->integer('pid')->nullable()->default(null)->comment('上级id');
-                $table->string('icon', 20)->nullable()->default(null)->comment('图标class');
+                $table->string('icon', 64)->nullable()->default(null)->comment('图标class');
                 $table->tinyInteger('display')->nullable()->default(null)->comment('是否显示：0否 1是');
                 $table->tinyInteger('level')->nullable()->default(null)->comment('层级');
                 $table->integer('sort')->nullable()->default(null)->comment('排序');

@@ -31,6 +31,18 @@ class SystemUsersHelpCenterFilter extends ModelFilter
     }
 
     /**
+     * 上级ID
+     *
+     * @param  integer $dataPid 上级ID.
+     * @return SystemUsersHelpCenterFilter
+     */
+    public function dataPid(int $dataPid): SystemUsersHelpCenterFilter
+    {
+        $eloq = $this->where('pid', $dataPid);
+        return $eloq;
+    }
+
+    /**
      * 客户端类型
      *
      * @param  integer $type 客户端类型.
