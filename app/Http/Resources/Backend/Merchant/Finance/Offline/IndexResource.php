@@ -32,11 +32,6 @@ class IndexResource extends BaseResource
     private $bank;
 
     /**
-     * @var string $name 收款名称.
-     */
-    private $name;
-
-    /**
      * @var string $remark 备注.
      */
     private $remark;
@@ -130,7 +125,6 @@ class IndexResource extends BaseResource
                 'type'        => $this->type->name,
                 'platform_id' => $this->platform_id,
                 'bank'        => optional($this->bank)->name,
-                'name'        => $this->name,
                 'remark'      => $this->remark,
                 'qrcode'      => $this->qrcode,
                 'account'     => $this->account,

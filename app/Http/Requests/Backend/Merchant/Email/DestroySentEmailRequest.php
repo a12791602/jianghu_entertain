@@ -3,19 +3,19 @@
 namespace App\Http\Requests\Backend\Merchant\Email;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Email\SystemEmailOfMerchant;
+use App\Models\Email\SystemEmailSend;
 
 /**
- * Class DestroyIncomingEmailRequest
+ * Class DestroySentEmailRequest
  * @package App\Http\Requests\Backend\Merchant\Email
  */
-class DestroyIncomingEmailRequest extends BaseFormRequest
+class DestroySentEmailRequest extends BaseFormRequest
 {
 
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [SystemEmailOfMerchant::class];
+    protected $dependentModels = [SystemEmailSend::class];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -34,7 +34,7 @@ class DestroyIncomingEmailRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['email_id' => 'required|array|min:1|exists:system_email_of_merchants,email_id'];
+        return ['email_id' => 'required|array|min:1|exists:system_email_sends,email_id'];
     }
 
     /**
