@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\AlipayDestroyRequest;
+use App\Http\Requests\Backend\Merchant\User\FrontendUser\BlackRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\DetailRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\IndexRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\LabelRequest;
@@ -12,6 +13,7 @@ use App\Http\Requests\Backend\Merchant\User\FrontendUser\StoreRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\UnlockRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\WithdrawalsPasswordRequest;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\AlipayDestroyAction;
+use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\BlackAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\DetailAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\IndexAction;
 use App\Http\SingleActions\Backend\Merchant\User\FrontendUser\LabelAction;
@@ -62,6 +64,18 @@ class FrontendUserController
      * @throws \RuntimeException Exception.
      */
     public function detail(DetailAction $action, DetailRequest $request): JsonResponse
+    {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 加入黑名单
+     * @param BlackRequest $request BlackRequest.
+     * @param BlackAction  $action  BlackAction.
+     * @return JsonResponse
+     */
+    public function black(BlackRequest $request, BlackAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
