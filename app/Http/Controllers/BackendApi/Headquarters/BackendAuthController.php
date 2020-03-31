@@ -22,8 +22,7 @@ class BackendAuthController
      */
     public function login(Request $request, LoginAction $action): JsonResponse
     {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 
     /**
@@ -35,7 +34,6 @@ class BackendAuthController
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse
     {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 }

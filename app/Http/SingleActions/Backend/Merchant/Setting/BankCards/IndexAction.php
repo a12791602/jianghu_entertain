@@ -65,7 +65,6 @@ class IndexAction extends MainAction
             $bankCards[] = $data;
         }
         $returnData['data'] = $bankCards;
-        $msgOut             = msgOut($returnData);
-        return $msgOut;
+        return msgOut($returnData);
     }
 }

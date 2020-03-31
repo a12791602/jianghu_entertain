@@ -39,7 +39,7 @@ class IndexAction
                 $inputDatas['parentId'] = $parentId->id;
             }
         }
-        $datas  = $this->model->filter($inputDatas, FrontendUserFilter::class)
+        $datas = $this->model->filter($inputDatas, FrontendUserFilter::class)
             ->select(
                 [
                  'id',
@@ -64,9 +64,8 @@ class IndexAction
                 ],
             )
             ->paginate($this->model::getPageSize())->toArray();
-        $datas  = $this->_handleData($datas);
-        $msgOut = msgOut($datas);
-        return $msgOut;
+        $datas = $this->_handleData($datas);
+        return msgOut($datas);
     }
 
     /**

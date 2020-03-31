@@ -21,8 +21,7 @@ class SavePicAction extends BaseAction
         $inputDatas['last_editor_id'] = $this->user->id;
         $result                       = $this->model->where('id', $inputDatas['id'])->update($inputDatas);
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('202201');
     }

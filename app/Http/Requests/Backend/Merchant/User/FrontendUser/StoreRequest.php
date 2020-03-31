@@ -33,11 +33,10 @@ class StoreRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'mobile'    => 'required|string|unique:frontend_users',
-                  'is_tester' => 'required|integer',
-                  'password'  => 'required|confirmed|regex:/^[0-9a-zA-Z]{8,16}$/',
-                 ];
-        return $rules;
+        return [
+                'mobile'    => 'required|string|unique:frontend_users',
+                'is_tester' => 'required|integer',
+                'password'  => 'required|confirmed|regex:/^[0-9a-zA-Z]{8,16}$/',
+               ];
     }
 }

@@ -34,8 +34,7 @@ class SystemDynActivity extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -43,7 +42,6 @@ class SystemDynActivity extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(SystemDynActivityFilter::class);
-        return $object;
+        return $this->provideFilter(SystemDynActivityFilter::class);
     }
 }

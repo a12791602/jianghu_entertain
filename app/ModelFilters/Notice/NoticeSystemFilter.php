@@ -27,8 +27,7 @@ class NoticeSystemFilter extends ModelFilter
      */
     public function platform(int $platform_id): NoticeSystemFilter
     {
-        $object = $this->where('platform_id', $platform_id);
-        return $object;
+        return $this->where('platform_id', $platform_id);
     }
 
     /**
@@ -39,7 +38,6 @@ class NoticeSystemFilter extends ModelFilter
      */
     public function title(string $title): NoticeSystemFilter
     {
-        $object = $this->where('title', $title);
-        return $object;
+        return $this->where('title', $title);
     }
 }

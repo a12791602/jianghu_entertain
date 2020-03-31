@@ -20,7 +20,6 @@ class GetChannelsAction
         $financeChannels = SystemFinanceChannel::where('status', SystemFinanceChannel::STATUS_YES)
             ->withCacheCooldownSeconds(86400)
             ->get(['id', 'name', 'sign', 'request_url']);
-        $msgOut          = msgOut($financeChannels);
-        return $msgOut;
+        return msgOut($financeChannels);
     }
 }

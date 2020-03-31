@@ -26,8 +26,7 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|integer|exists:system_costomer_services']; //ID
-        return $rules;
+        return ['id' => 'required|integer|exists:system_costomer_services'];
     }
 
     /**
@@ -35,10 +34,9 @@ class DeleteRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        $messages = [
-                     'id.required' => '缺少客服ID',
-                     'id.exists'   => '需要删除的客服不存在',
-                    ];
-        return $messages;
+        return [
+                'id.required' => '缺少客服ID',
+                'id.exists'   => '需要删除的客服不存在',
+               ];
     }
 }

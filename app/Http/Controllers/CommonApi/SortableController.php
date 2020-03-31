@@ -24,7 +24,6 @@ class SortableController
         UpdateSortAction $action,
         UpdateSortRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 }

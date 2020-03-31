@@ -34,7 +34,6 @@ class IndexAction extends BaseAction
          ->filter($inputDatas, GamesPlatformFilter::class)
          ->withCacheCooldownSeconds(86400)
          ->paginate($this->model::getPageSize());
-        $result                    = msgOut($datas);
-        return $result;
+        return msgOut($datas);
     }
 }

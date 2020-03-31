@@ -29,8 +29,7 @@ class SystemEmailOfMerchant extends BaseModel
      */
     public function email(): BelongsTo
     {
-        $object = $this->belongsTo(SystemEmail::class, 'email_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemEmail::class, 'email_id', 'id');
     }
 
     /**
@@ -38,7 +37,6 @@ class SystemEmailOfMerchant extends BaseModel
      */
     public function merchant(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'merchant_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'merchant_id', 'id');
     }
 }

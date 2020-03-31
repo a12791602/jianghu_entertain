@@ -25,8 +25,7 @@ class UsersTagController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        $msgOut = $action->execute();
-        return $msgOut;
+        return $action->execute();
     }
 
     /**
@@ -41,8 +40,7 @@ class UsersTagController
         DoAddAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -57,8 +55,7 @@ class UsersTagController
         EditAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -72,7 +69,6 @@ class UsersTagController
         DeleteAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

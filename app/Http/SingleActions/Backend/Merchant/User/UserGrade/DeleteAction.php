@@ -72,7 +72,6 @@ class DeleteAction extends MainAction
             throw new \Exception('200705');
         }
         DB::commit();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

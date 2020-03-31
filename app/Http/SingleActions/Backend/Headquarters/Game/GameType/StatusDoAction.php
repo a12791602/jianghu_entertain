@@ -27,8 +27,7 @@ class StatusDoAction
             $model         = $model::find($validated['id']);
             $model->status = $validated['status'];
             $model->save();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

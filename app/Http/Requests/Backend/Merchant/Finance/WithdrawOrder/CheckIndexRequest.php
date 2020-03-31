@@ -43,19 +43,18 @@ class CheckIndexRequest extends BaseFormRequest
                    UsersWithdrawOrder::STATUS_CHECK_PASS,
                    UsersWithdrawOrder::STATUS_CHECK_REFUSE,
                   ];
-        $rules  = [
-                   'order_no'     => 'string|min:1|max:128|exists:users_withdraw_orders,order_no',
-                   'mobile'       => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //(手机号码第一位1第二位345789总共11位数字)
-                   'guid'         => 'string|size:7',
-                   'created_at'   => 'array',
-                   'created_at.*' => 'required|date',
-                   'status'       => 'integer|in:' . implode(',', $status),
-                   'reviewer'     => 'string|min:1|max:32',
-                   'review_at'    => 'array',
-                   'review_at.*'  => 'required|date',
-                   'is_audit'     => 'integer|in:0,1',
-                  ];
-        return $rules;
+        return [
+                'order_no'     => 'string|min:1|max:128|exists:users_withdraw_orders,order_no',
+                'mobile'       => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //(手机号码第一位1第二位345789总共11位数字)
+                'guid'         => 'string|size:7',
+                'created_at'   => 'array',
+                'created_at.*' => 'required|date',
+                'status'       => 'integer|in:' . implode(',', $status),
+                'reviewer'     => 'string|min:1|max:32',
+                'review_at'    => 'array',
+                'review_at.*'  => 'required|date',
+                'is_audit'     => 'integer|in:0,1',
+               ];
     }
 
     /**

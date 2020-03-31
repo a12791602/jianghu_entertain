@@ -36,8 +36,7 @@ class GetAllMenuAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $data   = $this->model->forStar();
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $this->model->forStar();
+        return msgOut($data);
     }
 }

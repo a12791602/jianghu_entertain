@@ -26,7 +26,6 @@ class GetSearchDataOfAssignGameAction extends MainAction
                     'games'   => $games,
                     'vendors' => $vendors,
                    ];
-        $msgOut  = msgOut($datas);
-        return $msgOut;
+        return msgOut($datas);
     }
 }

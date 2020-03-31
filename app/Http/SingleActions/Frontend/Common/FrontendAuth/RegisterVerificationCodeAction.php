@@ -30,8 +30,7 @@ class RegisterVerificationCodeAction extends MainAction
         if (!FrontendUser::where($condition)->get()->isEmpty()) {
             throw new \Exception('100504');
         }
-        $code   = sendVerificationCode($mobile);
-        $result = msgOut($code);
-        return $result;
+        $code = sendVerificationCode($mobile);
+        return msgOut($code);
     }
 }

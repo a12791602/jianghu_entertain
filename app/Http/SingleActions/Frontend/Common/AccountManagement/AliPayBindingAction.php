@@ -31,8 +31,7 @@ class AliPayBindingAction extends MainAction
         $item['code']          = FrontendUsersBankCard::CODE_ALIPAY;
         $item['platform_sign'] = $this->currentPlatformEloq->sign;
         $this->user->bankCard()->create($item);
-        $result = msgOut([], '100900');
-        return $result;
+        return msgOut([], '100900');
     }
 
     /**
@@ -52,7 +51,6 @@ class AliPayBindingAction extends MainAction
         $this->user->fund_password = Hash::make($validated['fund_password']);
         $this->user->save();
         $this->user->bankCard()->create($item);
-        $result = msgOut([], '100900');
-        return $result;
+        return msgOut([], '100900');
     }
 }

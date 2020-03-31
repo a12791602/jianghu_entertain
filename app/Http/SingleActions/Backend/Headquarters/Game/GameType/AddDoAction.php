@@ -36,8 +36,7 @@ class AddDoAction
                 GameTypePlatform::insert($insertData);
             }
             DB::commit();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

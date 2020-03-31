@@ -28,8 +28,7 @@ class SystemPlatformBankFilter extends ModelFilter
      */
     public function status(int $status): SystemPlatformBankFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -40,8 +39,7 @@ class SystemPlatformBankFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): SystemPlatformBankFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 
     /**
@@ -52,7 +50,6 @@ class SystemPlatformBankFilter extends ModelFilter
      */
     public function cardNumber(string $cardNumber): SystemPlatformBankFilter
     {
-        $object = $this->where('card_number', $cardNumber);
-        return $object;
+        return $this->where('card_number', $cardNumber);
     }
 }

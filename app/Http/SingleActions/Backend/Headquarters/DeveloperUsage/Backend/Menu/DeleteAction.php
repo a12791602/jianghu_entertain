@@ -65,7 +65,6 @@ class DeleteAction extends MainAction
         }
         DB::commit();
         $this->model->deleteCache();
-        $msgOut = msgOut(['label' => $menuLabel]);
-        return $msgOut;
+        return msgOut(['label' => $menuLabel]);
     }
 }

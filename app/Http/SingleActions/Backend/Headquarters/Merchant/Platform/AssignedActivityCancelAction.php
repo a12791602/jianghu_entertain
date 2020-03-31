@@ -22,8 +22,7 @@ class AssignedActivityCancelAction extends MainAction
         $result = SystemDynActivityPlatform::where('platform_sign', $inputDatas['platform_sign'])
             ->whereIn('activity_sign', $inputDatas['activities'])->delete();
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('302008');
     }

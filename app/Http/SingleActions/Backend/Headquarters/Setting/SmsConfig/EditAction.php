@@ -48,8 +48,7 @@ class EditAction extends MainAction
             throw new \Exception('302402');
         }
 
-        $data   = ['name' => $systemSmsConfig->name];
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = ['name' => $systemSmsConfig->name];
+        return msgOut($data);
     }
 }

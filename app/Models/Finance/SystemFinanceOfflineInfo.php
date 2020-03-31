@@ -51,8 +51,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -60,8 +59,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -69,8 +67,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function bank(): BelongsTo
     {
-        $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemBank::class, 'bank_id', 'id');
     }
 
     /**
@@ -78,8 +75,7 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function type(): BelongsTo
     {
-        $object = $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
     }
 
     /**
@@ -87,7 +83,6 @@ class SystemFinanceOfflineInfo extends BaseModel
      */
     public function tags(): HasOne
     {
-        $object = $this->hasOne(SystemFinanceUserTag::class, 'offline_finance_id', 'id');
-        return $object;
+        return $this->hasOne(SystemFinanceUserTag::class, 'offline_finance_id', 'id');
     }
 }

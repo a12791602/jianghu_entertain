@@ -25,8 +25,7 @@ class RouteController
      */
     public function index(IndexAction $action): JsonResponse
     {
-        $msgOut = $action->execute();
-        return $msgOut;
+        return $action->execute();
     }
 
     /**
@@ -38,8 +37,7 @@ class RouteController
     public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -51,8 +49,7 @@ class RouteController
     public function edit(EditRequest $request, EditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -64,8 +61,7 @@ class RouteController
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -77,7 +73,6 @@ class RouteController
     public function isOpen(IsOpenRequest $request, IsOpenAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

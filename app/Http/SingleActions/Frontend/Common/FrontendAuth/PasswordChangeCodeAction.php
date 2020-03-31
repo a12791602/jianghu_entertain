@@ -19,8 +19,7 @@ class PasswordChangeCodeAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $code   = sendVerificationCode($this->user->mobile);
-        $result = msgOut($code);
-        return $result;
+        $code = sendVerificationCode($this->user->mobile);
+        return msgOut($code);
     }
 }

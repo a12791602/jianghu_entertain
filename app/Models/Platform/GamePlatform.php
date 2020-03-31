@@ -39,8 +39,7 @@ class GamePlatform extends BaseModel
      */
     public function games(): BelongsTo
     {
-        $object = $this->belongsTo(Game::class, 'game_id', 'id');
-        return $object;
+        return $this->belongsTo(Game::class, 'game_id', 'id');
     }
 
     /**
@@ -48,8 +47,7 @@ class GamePlatform extends BaseModel
      */
     public function vendor(): HasOneThrough
     {
-        $object = $this->hasOneThrough(GameVendor::class, Game::class, 'id', 'id', 'id', 'vendor_id');
-        return $object;
+        return $this->hasOneThrough(GameVendor::class, Game::class, 'id', 'id', 'id', 'vendor_id');
     }
 
     /**
@@ -57,7 +55,6 @@ class GamePlatform extends BaseModel
      */
     public function type(): HasOneThrough
     {
-        $object = $this->hasOneThrough(GameType::class, Game::class, 'id', 'id', 'id', 'type_id');
-        return $object;
+        return $this->hasOneThrough(GameType::class, Game::class, 'id', 'id', 'id', 'type_id');
     }
 }

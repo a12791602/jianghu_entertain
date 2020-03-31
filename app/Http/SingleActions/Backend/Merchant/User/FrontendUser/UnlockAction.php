@@ -34,7 +34,6 @@ class UnlockAction
         $user         = $this->model->where('guid', $inputDatas['guid'])->first();
         $user->status = FrontendUser::STATUS_NORMAL;
         $user->save();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

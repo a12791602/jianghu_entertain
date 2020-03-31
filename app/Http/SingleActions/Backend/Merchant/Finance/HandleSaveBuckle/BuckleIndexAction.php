@@ -30,7 +30,6 @@ class BuckleIndexAction extends BaseAction
         $data                    = $this->model::with('user:id,mobile,guid,is_tester', 'admin:id,name')
             ->filter($inputDatas, SystemFinanceHandleSaveBuckleRecordFilter::class)
             ->paginate($pageSize);
-        $msgOut                  = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

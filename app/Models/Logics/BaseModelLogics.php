@@ -12,8 +12,7 @@ trait BaseModelLogics
      */
     public static function getPageSize()
     {
-        $pageSize = app('request')->get('pageSize') ?? self::getDefaultPageSize();
-        return $pageSize;
+        return app('request')->get('pageSize') ?? self::getDefaultPageSize();
     }
 
     /**

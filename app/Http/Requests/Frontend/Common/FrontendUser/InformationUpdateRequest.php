@@ -27,16 +27,15 @@ class InformationUpdateRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'avatar'   => 'integer',
-                   'nickname' => [
-                                  'string',
-                                  'min:2',
-                                  'max:5',
-                                  'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5位中文)
-                                 ],
-                  ];
-        return $result;
+        return [
+                'avatar'   => 'integer',
+                'nickname' => [
+                               'string',
+                               'min:2',
+                               'max:5',
+                               'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5位中文)
+                              ],
+               ];
     }
 
     /**
@@ -45,11 +44,10 @@ class InformationUpdateRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        $result = [
-                   'nickname.min'   => '昵称最少两个字',
-                   'nickname.max'   => '昵称最多五个字',
-                   'nickname.regex' => '昵称包含特殊字符',
-                  ];
-        return $result;
+        return [
+                'nickname.min'   => '昵称最少两个字',
+                'nickname.max'   => '昵称最多五个字',
+                'nickname.regex' => '昵称包含特殊字符',
+               ];
     }
 }

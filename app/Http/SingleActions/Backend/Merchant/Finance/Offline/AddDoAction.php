@@ -53,8 +53,7 @@ class AddDoAction extends BaseAction
 
                 SystemFinanceUserTag::create($userTags);
                 DB::commit();
-                $result = msgOut();
-                return $result;
+                return msgOut();
             }
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());

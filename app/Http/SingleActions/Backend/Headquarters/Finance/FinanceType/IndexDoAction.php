@@ -30,7 +30,6 @@ class IndexDoAction extends BaseAction
              'author:id,name',
             ],
         )->filter($inputDatas, SystemFinanceTypeFilter::class)->paginate($pageSize);
-        $msgOut      = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

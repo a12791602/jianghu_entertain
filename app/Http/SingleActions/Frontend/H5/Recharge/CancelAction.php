@@ -34,8 +34,7 @@ class CancelAction extends MainAction
 
         $order->status = UsersRechargeOrder::STATUS_CANCEL;
         if ($order->save()) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('101001');
     }

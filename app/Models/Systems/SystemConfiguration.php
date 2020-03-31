@@ -31,7 +31,6 @@ class SystemConfiguration extends BaseModel
      */
     public function childs(): HasMany
     {
-        $child = $this->hasMany($this, 'pid', 'id');
-        return $child;
+        return $this->hasMany($this, 'pid', 'id');
     }
 }

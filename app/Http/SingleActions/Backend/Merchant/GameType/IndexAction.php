@@ -29,7 +29,6 @@ class IndexAction extends BaseAction
         $datas                     = $this->model::with('gameType:id,name,sign')
                                           ->filter($inputDatas, GameTypePlatformFilter::class)
                                           ->paginate($pageSize);
-        $result                    = msgOut($datas);
-        return $result;
+        return msgOut($datas);
     }
 }

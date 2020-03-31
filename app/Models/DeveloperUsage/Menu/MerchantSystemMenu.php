@@ -48,7 +48,6 @@ class MerchantSystemMenu extends BaseModel
      */
     public function childs(): HasMany
     {
-        $childs = $this->hasMany(MerchantSystemMenu::class, 'pid', 'id');
-        return $childs;
+        return $this->hasMany(MerchantSystemMenu::class, 'pid', 'id');
     }
 }

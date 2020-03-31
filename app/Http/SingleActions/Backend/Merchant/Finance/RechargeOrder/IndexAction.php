@@ -54,7 +54,6 @@ class IndexAction extends BaseAction
              'updated_at',
             ],
         )->paginate($pageSize);
-        $msgOut                      = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

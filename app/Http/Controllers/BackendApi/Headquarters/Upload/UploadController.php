@@ -24,7 +24,6 @@ class UploadController
         UploadImageAction $action,
         UploadImageRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 }

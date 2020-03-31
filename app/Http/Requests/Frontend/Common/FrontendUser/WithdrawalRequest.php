@@ -45,18 +45,17 @@ class WithdrawalRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'bank_id'       => 'integer|required', // 收款账户 ID
-                   'amount'        => [
-                                       'required',
-                                       'regex:/^[0-9]+(\.[0-9]{1,2})?$/',
-                                      ], // 提现金额(数字+小数点2位)
-                   'fund_password' => [
-                                       'required',
-                                       'regex:/^[0-9a-zA-Z]{8,16}$/', // (大小写字母加数字 8,16位)
-                                       new FundPasswordCheckRule($this),
-                                      ], // 资金密码
-                  ];
-        return $result;
+        return [
+                'bank_id'       => 'integer|required', // 收款账户 ID
+                'amount'        => [
+                                    'required',
+                                    'regex:/^[0-9]+(\.[0-9]{1,2})?$/',
+                                   ], // 提现金额(数字+小数点2位)
+                'fund_password' => [
+                                    'required',
+                                    'regex:/^[0-9a-zA-Z]{8,16}$/', // (大小写字母加数字 8,16位)
+                                    new FundPasswordCheckRule($this),
+                                   ], // 资金密码
+               ];
     }
 }

@@ -59,8 +59,7 @@ class WithdrawalAction extends MainAction
             $user->withdraw()->create($item);
             $user->account->operateAccount(['amount' => $validated['amount']], 'withdraw_frozen');
             DB::commit();
-            $result = msgOut([], '100903');
-            return $result;
+            return msgOut([], '100903');
         } catch (\RuntimeException $exception) {
             $data    = [
                         'file'    => $exception->getFile(),
@@ -99,17 +98,16 @@ class WithdrawalAction extends MainAction
         int $num_withdrawal,
         int $num_top_up
     ): array {
-        $item = [
-                 'amount'         => $amount,
-                 'account_type'   => $account_type,
-                 'mobile'         => $mobile,
-                 'before_balance' => $balance,
-                 'account_snap'   => $account_snapshot,
-                 'month_total'    => $month_total,
-                 'num_withdrawal' => $num_withdrawal,
-                 'num_top_up'     => $num_top_up,
-                 'platform_sign'  => $this->currentPlatformEloq->sign,
-                ];
-        return $item;
+        return [
+                'amount'         => $amount,
+                'account_type'   => $account_type,
+                'mobile'         => $mobile,
+                'before_balance' => $balance,
+                'account_snap'   => $account_snapshot,
+                'month_total'    => $month_total,
+                'num_withdrawal' => $num_withdrawal,
+                'num_top_up'     => $num_top_up,
+                'platform_sign'  => $this->currentPlatformEloq->sign,
+               ];
     }
 }

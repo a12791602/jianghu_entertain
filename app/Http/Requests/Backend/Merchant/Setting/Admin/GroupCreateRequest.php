@@ -38,12 +38,11 @@ class GroupCreateRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'group_name' => 'required|string|max:10',
-                  'role'       => 'required|array',
-                  'role.*'     => 'integer',
-                 ];
-        return $rules;
+        return [
+                'group_name' => 'required|string|max:10',
+                'role'       => 'required|array',
+                'role.*'     => 'integer',
+               ];
     }
 
     /**

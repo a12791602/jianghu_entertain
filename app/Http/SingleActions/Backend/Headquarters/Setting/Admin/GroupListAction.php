@@ -37,11 +37,10 @@ class GroupListAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $data   = $this->model
+        $data = $this->model
             ->with('detail:group_id,menu_id')
             ->get(['id', 'group_name', 'created_at'])
             ->toArray();
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

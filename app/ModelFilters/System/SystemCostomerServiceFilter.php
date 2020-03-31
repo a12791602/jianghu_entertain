@@ -26,8 +26,7 @@ class SystemCostomerServiceFilter extends ModelFilter
      */
     public function dataId(int $dataId): SystemCostomerServiceFilter
     {
-        $eloq = $this->where('id', $dataId);
-        return $eloq;
+        return $this->where('id', $dataId);
     }
 
     /**
@@ -38,8 +37,7 @@ class SystemCostomerServiceFilter extends ModelFilter
      */
     public function type(int $type): SystemCostomerServiceFilter
     {
-        $eloq = $this->where('type', $type);
-        return $eloq;
+        return $this->where('type', $type);
     }
 
     /**
@@ -50,7 +48,6 @@ class SystemCostomerServiceFilter extends ModelFilter
      */
     public function sign(string $sign): SystemCostomerServiceFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 }

@@ -33,8 +33,7 @@ class ConfirmAction extends MainAction
         }
         $order->status = UsersRechargeOrder::STATUS_CONFIRM;
         if ($order->save()) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('101004');
     }

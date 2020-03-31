@@ -22,7 +22,6 @@ class CurrentSslAction extends MainAction
                        'public_key'   => $currentSSL->public_key ?? null,
                        'interval_str' => $currentSSL->interval_str ?? null,
                       ];
-        $msgOut     = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

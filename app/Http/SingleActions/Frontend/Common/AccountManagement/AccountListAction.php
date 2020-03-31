@@ -19,8 +19,7 @@ class AccountListAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $card   = $this->user->bankCard->sortByDesc('created_at');
-        $result = msgOut(AccountListResource::collection($card));
-        return $result;
+        $card = $this->user->bankCard->sortByDesc('created_at');
+        return msgOut(AccountListResource::collection($card));
     }
 }

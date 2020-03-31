@@ -26,8 +26,7 @@ class FrontendUsersAuditFilter extends ModelFilter
      */
     public function guid(string $guid): FrontendUsersAuditFilter
     {
-        $eloq = $this->where('guid', $guid);
-        return $eloq;
+        return $this->where('guid', $guid);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendUsersAuditFilter extends ModelFilter
      */
     public function mobile(string $mobile): FrontendUsersAuditFilter
     {
-        $eloq = $this->where('mobile', $mobile);
-        return $eloq;
+        return $this->where('mobile', $mobile);
     }
 
 
@@ -66,8 +64,7 @@ class FrontendUsersAuditFilter extends ModelFilter
      */
     public function status(int $status): FrontendUsersAuditFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 
     /**
@@ -78,7 +75,6 @@ class FrontendUsersAuditFilter extends ModelFilter
      */
     public function platformSign(string $platformSign): FrontendUsersAuditFilter
     {
-        $eloq = $this->where('platform_sign', $platformSign);
-        return $eloq;
+        return $this->where('platform_sign', $platformSign);
     }
 }

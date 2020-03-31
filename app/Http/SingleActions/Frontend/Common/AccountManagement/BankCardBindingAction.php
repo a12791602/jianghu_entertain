@@ -29,8 +29,7 @@ class BankCardBindingAction extends MainAction
         $item['status']        = FrontendUsersBankCard::STATUS_OPEN;
         $item['platform_sign'] = $this->currentPlatformEloq->sign;
         $this->user->bankCard()->create($item);
-        $result = msgOut([], '100900');
-        return $result;
+        return msgOut([], '100900');
     }
 
     /**
@@ -49,7 +48,6 @@ class BankCardBindingAction extends MainAction
         $this->user->fund_password = Hash::make($validated['fund_password']);
         $this->user->save();
         $this->user->bankCard()->create($item);
-        $result = msgOut([], '100900');
-        return $result;
+        return msgOut([], '100900');
     }
 }

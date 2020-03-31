@@ -22,8 +22,7 @@ class InformationAction extends MainAction
      */
     public function information(): JsonResponse
     {
-        $result = msgOut(PersonalInformationResource::make($this->user));
-        return $result;
+        return msgOut(PersonalInformationResource::make($this->user));
     }
 
     /**
@@ -33,8 +32,7 @@ class InformationAction extends MainAction
      */
     public function dynamicInformation(): JsonResponse
     {
-        $result = msgOut(DynamicInformationResource::make($this->user));
-        return $result;
+        return msgOut(DynamicInformationResource::make($this->user));
     }
 
     /**
@@ -47,7 +45,6 @@ class InformationAction extends MainAction
     {
         $item = $request->validated();
         $this->user->specificInfo()->update($item);
-        $result = msgOut([], '100803');
-        return $result;
+        return msgOut([], '100803');
     }
 }

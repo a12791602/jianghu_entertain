@@ -30,7 +30,6 @@ class LogoutAction extends MainAction
         $this->limiter()->clear($throttleKey);
         $this->auth->logout();
         $this->auth->invalidate();
-        $msgOut = msgOut(); //'Successfully logged out'
-        return $msgOut;
+        return msgOut();
     }
 }

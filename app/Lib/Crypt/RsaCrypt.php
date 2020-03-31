@@ -92,9 +92,8 @@ class RsaCrypt
         string $rsaIv,
         string $splitFlag
     ): string {
-        $rsaKey  = $this->rsaEncrypt($rsaKey);
-        $rsaIv   = $this->rsaEncrypt($rsaIv);
-        $resData = $encrypted . $splitFlag . $rsaIv . $splitFlag . $rsaKey;
-        return $resData;
+        $rsaKey = $this->rsaEncrypt($rsaKey);
+        $rsaIv  = $this->rsaEncrypt($rsaIv);
+        return $encrypted . $splitFlag . $rsaIv . $splitFlag . $rsaKey;
     }
 }

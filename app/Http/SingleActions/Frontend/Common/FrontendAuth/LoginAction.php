@@ -26,8 +26,7 @@ class LoginAction extends MainAction
      */
     public function maxAttempts(): int
     {
-        $attempt = config('auth.max_attempts');
-        return $attempt;
+        return config('auth.max_attempts');
     }
 
     /**
@@ -74,13 +73,12 @@ class LoginAction extends MainAction
         $user->last_login_ip   = request()->ip();
         $user->last_login_time = Carbon::now()->timestamp;
         $user->save();
-        $data   = [
-                   'access_token' => $token,
-                   'token_type'   => 'Bearer',
-                   'expires_at'   => $expireAt,
-                  ];
-        $result = msgOut($data);
-        return $result;
+        $data = [
+                 'access_token' => $token,
+                 'token_type'   => 'Bearer',
+                 'expires_at'   => $expireAt,
+                ];
+        return msgOut($data);
     }
 
     /**

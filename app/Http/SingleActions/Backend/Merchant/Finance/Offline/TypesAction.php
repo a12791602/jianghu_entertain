@@ -17,12 +17,11 @@ class TypesAction
      */
     public function execute(): JsonResponse
     {
-        $model  = new SystemFinanceType();
-        $data   = $model->where('status', SystemFinanceType::STATUS_YES)
+        $model = new SystemFinanceType();
+        $data  = $model->where('status', SystemFinanceType::STATUS_YES)
             ->where('is_online', SystemFinanceType::IS_ONLINE_NO)
             ->withCacheCooldownSeconds(86400)
             ->get(['id', 'name', 'sign']);
-        $result = msgOut($data);
-        return $result;
+        return msgOut($data);
     }
 }

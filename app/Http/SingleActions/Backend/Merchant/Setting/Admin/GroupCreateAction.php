@@ -81,7 +81,6 @@ class GroupCreateAction extends MainAction
             }
         }
         DB::commit();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

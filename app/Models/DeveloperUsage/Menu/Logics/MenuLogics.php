@@ -19,8 +19,7 @@ trait MenuLogics
     public function forStar(): array
     {
         $adminAccessGroupDetail = $this->find(self::ALL_MENU_REDIS_KEY)->pluck('id')->toArray();
-        $menuData               = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
-        return $menuData;
+        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY, $adminAccessGroupDetail);
     }
 
     /**
@@ -30,8 +29,7 @@ trait MenuLogics
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        $userMenuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
-        return $userMenuDatas;
+        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
     }
 
     /**
@@ -147,8 +145,7 @@ trait MenuLogics
      */
     public static function getAllFirstLevelList()
     {
-        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
-        return $allFirstLevelList;
+        return self::where('pid', 0)->orderBy('sort')->get();
     }
 
     /**
@@ -157,7 +154,6 @@ trait MenuLogics
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)
     {
-        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
-        return $firstLevelList;
+        return self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
     }
 }

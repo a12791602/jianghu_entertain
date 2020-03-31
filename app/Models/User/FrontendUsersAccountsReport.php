@@ -26,7 +26,6 @@ class FrontendUsersAccountsReport extends BaseModel
      */
     public function changeType(): HasOne
     {
-        $data = $this->hasOne(FrontendUsersAccountsType::class, 'sign', 'type_sign');
-        return $data;
+        return $this->hasOne(FrontendUsersAccountsType::class, 'sign', 'type_sign');
     }
 }

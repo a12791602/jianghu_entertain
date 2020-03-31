@@ -22,8 +22,7 @@ class AddDoAction extends BaseAction
         $this->model->fill($inputDatas);
         $result = $this->model->save();
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('201800');
     }

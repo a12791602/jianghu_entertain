@@ -17,10 +17,9 @@ class RecentContactAction extends BaseAction
      */
     public function execute(): JsonResponse
     {
-        $data   = SystemEmailOfMerchant::with('merchant:id,email')
+        $data = SystemEmailOfMerchant::with('merchant:id,email')
             ->limit(4)
             ->get(['merchant_id']);
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

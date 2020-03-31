@@ -30,7 +30,6 @@ class IndexAction extends BaseAction
             ->filter($inputDatas, SystemDynActivityPlatformFilter::class)
             ->withCacheCooldownSeconds(86400)
             ->paginate($this->model::getPageSize());
-        $msgOut                      = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

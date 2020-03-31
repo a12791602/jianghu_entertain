@@ -33,10 +33,9 @@ class GroupDestroyRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
-                  'group_name' => 'required|exists:backend_admin_access_groups,group_name',
-                 ];
-        return $rules;
+        return [
+                'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
+                'group_name' => 'required|exists:backend_admin_access_groups,group_name',
+               ];
     }
 }

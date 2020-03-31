@@ -26,7 +26,6 @@ class IndexAction extends BaseAction
         $pageSize    = $this->model::getPageSize();
         $outputDatas = $this->model::with('lastEditor:id,name')
             ->filter($inputDatas, SystemDynActivityFilter::class)->paginate($pageSize);
-        $msgOut      = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

@@ -36,8 +36,7 @@ trait EloquentSortable
      */
     public function getHighestOrderNumber(): int
     {
-        $order = (int) $this->buildSortQuery()->max($this->determineOrderColumnName());
-        return $order;
+        return (int) $this->buildSortQuery()->max($this->determineOrderColumnName());
     }
 
     /**
@@ -48,8 +47,7 @@ trait EloquentSortable
      */
     public function scopeOrdered(Builder $query, string $direction = 'asc'): Builder
     {
-        $ordered = $query->orderBy($this->determineOrderColumnName(), $direction);
-        return $ordered;
+        return $query->orderBy($this->determineOrderColumnName(), $direction);
     }
 
     /**
@@ -58,8 +56,7 @@ trait EloquentSortable
      */
     public function buildSortQuery()
     {
-        $query = static::query();
-        return $query;
+        return static::query();
     }
 
     /**

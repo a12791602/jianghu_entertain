@@ -19,8 +19,7 @@ class SystemAvatarAction
      */
     public function execute(): JsonResponse
     {
-        $item   = SystemUserPublicAvatar::get(['id', 'pic_path']);
-        $result = msgOut(SystemAvatarResource::collection($item));
-        return $result;
+        $item = SystemUserPublicAvatar::get(['id', 'pic_path']);
+        return msgOut(SystemAvatarResource::collection($item));
     }
 }

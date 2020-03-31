@@ -45,8 +45,7 @@ class SystemFinanceChannel extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -54,8 +53,7 @@ class SystemFinanceChannel extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -63,8 +61,7 @@ class SystemFinanceChannel extends BaseModel
      */
     public function vendor(): BelongsTo
     {
-        $object = $this->belongsTo(SystemFinanceVendor::class, 'vendor_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemFinanceVendor::class, 'vendor_id', 'id');
     }
 
     /**
@@ -72,7 +69,6 @@ class SystemFinanceChannel extends BaseModel
      */
     public function type(): BelongsTo
     {
-        $object = $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
     }
 }

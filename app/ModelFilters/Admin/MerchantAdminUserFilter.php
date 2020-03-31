@@ -24,8 +24,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function dataId(int $dataId): MerchantAdminUserFilter
     {
-        $object = $this->where('id', $dataId);
-        return $object;
+        return $this->where('id', $dataId);
     }
 
     /**
@@ -34,8 +33,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function platform(string $platform): MerchantAdminUserFilter
     {
-        $object = $this->where('platform_sign', $platform);
-        return $object;
+        return $this->where('platform_sign', $platform);
     }
 
     /**
@@ -45,8 +43,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function searchStr(string $string): MerchantAdminUserFilter
     {
-        $adminUser = $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
-        return $adminUser;
+        return $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
     }
 
     /**
@@ -56,8 +53,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function authorName(string $author_name): MerchantAdminUserFilter
     {
-        $object = $this->where('name', $author_name);
-        return $object;
+        return $this->where('name', $author_name);
     }
 
     /**
@@ -67,8 +63,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function lastEditorName(string $last_editor_name): MerchantAdminUserFilter
     {
-        $object = $this->where('name', $last_editor_name);
-        return $object;
+        return $this->where('name', $last_editor_name);
     }
 
     /**
@@ -79,8 +74,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function email(string $email): MerchantAdminUserFilter
     {
-        $object = $this->where('email', $email);
-        return $object;
+        return $this->where('email', $email);
     }
 
     /**
@@ -91,8 +85,7 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function reviewer(string $reviewer): MerchantAdminUserFilter
     {
-        $object = $this->where('name', $reviewer);
-        return $object;
+        return $this->where('name', $reviewer);
     }
 
     /**
@@ -103,7 +96,6 @@ class MerchantAdminUserFilter extends ModelFilter
      */
     public function admin(string $admin): MerchantAdminUserFilter
     {
-        $object = $this->where('name', $admin);
-        return $object;
+        return $this->where('name', $admin);
     }
 }

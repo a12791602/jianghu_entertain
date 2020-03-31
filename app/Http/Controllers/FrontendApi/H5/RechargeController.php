@@ -31,8 +31,7 @@ class RechargeController
     public function types(TypesAction $action, TypesRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $outputs    = $action->execute($inputDatas);
-        return $outputs;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -45,8 +44,7 @@ class RechargeController
     public function channels(ChannelsAction $action, ChannelsRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $outputs    = $action->execute($inputDatas);
-        return $outputs;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -60,8 +58,7 @@ class RechargeController
     {
         $inputDatas       = $request->validated();
         $inputDatas['ip'] = $request->ip();
-        $outputs          = $action->execute($inputDatas);
-        return $outputs;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -73,8 +70,7 @@ class RechargeController
      */
     public function getFinanceInfo(GetFinanceInfoAction $action): JsonResponse
     {
-        $outputs = $action->execute();
-        return $outputs;
+        return $action->execute();
     }
 
     /**
@@ -90,8 +86,7 @@ class RechargeController
         CancelRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $outputs    = $action->execute($inputDatas);
-        return $outputs;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -107,7 +102,6 @@ class RechargeController
         ConfirmRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $outputs    = $action->execute($inputDatas);
-        return $outputs;
+        return $action->execute($inputDatas);
     }
 }

@@ -33,11 +33,10 @@ class LabelRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'guid'  => 'required|string|exists:frontend_users,guid',
-                  'label' => 'required|integer|exists:users_tags,id',
-                 ];
-        return $rules;
+        return [
+                'guid'  => 'required|string|exists:frontend_users,guid',
+                'label' => 'required|integer|exists:users_tags,id',
+               ];
     }
 
     /**

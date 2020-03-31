@@ -17,11 +17,10 @@ class GetSystemBanksAction
      */
     public function execute(): JsonResponse
     {
-        $model  = new SystemBank();
-        $banks  = $model->where('status', SystemBank::STATUS_OPEN)
+        $model = new SystemBank();
+        $banks = $model->where('status', SystemBank::STATUS_OPEN)
             ->withCacheCooldownSeconds(86400)
             ->get(['id', 'name', 'code']);
-        $result = msgOut($banks);
-        return $result;
+        return msgOut($banks);
     }
 }

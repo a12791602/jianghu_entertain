@@ -35,7 +35,6 @@ class UsersTag extends BaseAuthModel
      */
     public function user(): HasMany
     {
-        $users = $this->hasMany(FrontendUser::class, 'user_tag_id', 'id');
-        return $users;
+        return $this->hasMany(FrontendUser::class, 'user_tag_id', 'id');
     }
 }

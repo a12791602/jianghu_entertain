@@ -18,8 +18,7 @@ class AllAdminsAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $data   = $this->currentPlatformEloq->adminUsers->toArray();
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $this->currentPlatformEloq->adminUsers->toArray();
+        return msgOut($data);
     }
 }

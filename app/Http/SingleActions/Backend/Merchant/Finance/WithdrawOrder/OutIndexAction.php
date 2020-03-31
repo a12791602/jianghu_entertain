@@ -41,8 +41,7 @@ class OutIndexAction extends BaseAction
              'user.parent:id,mobile,guid',
             ],
         )->filter($inputDatas, UsersWithdrawOrderFilter::class)->select($returnField)->paginate($pageSize);
-        $msgOut                      = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 
     /**

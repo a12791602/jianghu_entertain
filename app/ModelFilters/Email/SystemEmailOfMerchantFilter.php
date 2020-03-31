@@ -47,7 +47,6 @@ class SystemEmailOfMerchantFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): SystemEmailOfMerchantFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 }

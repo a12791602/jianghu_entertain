@@ -21,7 +21,6 @@ class SecurityVerificationCodeAction extends MainAction
     {
         $mobile = $this->user->mobile;
         $code   = sendVerificationCode($mobile);
-        $result = msgOut($code);
-        return $result;
+        return msgOut($code);
     }
 }

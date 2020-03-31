@@ -25,8 +25,7 @@ class SystemFinanceVendorFilter extends ModelFilter
      */
     public function status(int $status): SystemFinanceVendorFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -35,7 +34,6 @@ class SystemFinanceVendorFilter extends ModelFilter
      */
     public function name(string $name): SystemFinanceVendorFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 }

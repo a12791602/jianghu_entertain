@@ -30,9 +30,7 @@ class AllRequireInfosAction extends MainAction
         //$data['editMenu'] = $editMenu;
         //$data['routeMatchingName'] = $routeMatchingName;
         $data = ['route_info' => $routeInfo];
-
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 
     /**

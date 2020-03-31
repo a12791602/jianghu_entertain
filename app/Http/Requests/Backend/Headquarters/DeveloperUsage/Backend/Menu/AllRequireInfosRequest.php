@@ -32,7 +32,6 @@ class AllRequireInfosRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['type' => 'required|integer|in:1,2,3,0'];
-        return $rules;
+        return ['type' => 'required|integer|in:1,2,3,0'];
     }
 }

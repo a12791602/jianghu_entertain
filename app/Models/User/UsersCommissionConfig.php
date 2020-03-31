@@ -33,7 +33,6 @@ class UsersCommissionConfig extends BaseModel
      */
     public function configDetail(): HasMany
     {
-        $detail = $this->hasMany(UsersCommissionConfigDetail::class, 'config_id', 'id');
-        return $detail;
+        return $this->hasMany(UsersCommissionConfigDetail::class, 'config_id', 'id');
     }
 }

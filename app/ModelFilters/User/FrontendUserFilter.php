@@ -26,8 +26,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function mobile(string $mobile): FrontendUserFilter
     {
-        $eloq = $this->where('mobile', $mobile);
-        return $eloq;
+        return $this->where('mobile', $mobile);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function userUid(string $userUid): FrontendUserFilter
     {
-        $eloq = $this->where('uid', $userUid);
-        return $eloq;
+        return $this->where('uid', $userUid);
     }
 
     /**
@@ -50,8 +48,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function isTester(string $isTester): FrontendUserFilter
     {
-        $eloq = $this->where('is_tester', $isTester);
-        return $eloq;
+        return $this->where('is_tester', $isTester);
     }
 
     /**
@@ -62,8 +59,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function parentId(string $parentId): FrontendUserFilter
     {
-        $eloq = $this->where('parent_id', $parentId);
-        return $eloq;
+        return $this->where('parent_id', $parentId);
     }
 
     /**
@@ -74,8 +70,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function isOnline(string $isOnline): FrontendUserFilter
     {
-        $eloq = $this->where('is_online', $isOnline);
-        return $eloq;
+        return $this->where('is_online', $isOnline);
     }
 
     /**
@@ -86,8 +81,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function lastLoginIp(string $lastLoginIp): FrontendUserFilter
     {
-        $eloq = $this->where('last_login_ip', $lastLoginIp);
-        return $eloq;
+        return $this->where('last_login_ip', $lastLoginIp);
     }
 
     /**
@@ -98,8 +92,7 @@ class FrontendUserFilter extends ModelFilter
      */
     public function registerIp(string $registerIp): FrontendUserFilter
     {
-        $eloq = $this->where('register_ip', $registerIp);
-        return $eloq;
+        return $this->where('register_ip', $registerIp);
     }
 
     /**
@@ -125,7 +118,6 @@ class FrontendUserFilter extends ModelFilter
      */
     public function guid(string $guid): FrontendUserFilter
     {
-        $eloq = $this->where('guid', $guid);
-        return $eloq;
+        return $this->where('guid', $guid);
     }
 }

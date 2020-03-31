@@ -36,7 +36,6 @@ class SendIndexAction extends BaseAction
                  SystemEmail::TYPE_MER_TO_USER,
                 ],
             )->orderByDesc('created_at')->paginate($pageSize);
-        $msgOut                      = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

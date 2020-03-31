@@ -41,7 +41,6 @@ class LoginLogAction extends MainAction
         $data                       = $this->model
                                         ->filter($inputDatas, UsersLoginLogFilter::class)
                                         ->paginate($this->model::getPageSize());
-        $msgOut                     = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

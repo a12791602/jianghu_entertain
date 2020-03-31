@@ -33,7 +33,6 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['id' => 'required|integer|exists:merchant_system_menus'];
-        return $rules;
+        return ['id' => 'required|integer|exists:merchant_system_menus'];
     }
 }

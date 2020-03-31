@@ -30,8 +30,7 @@ class BackendGameTypeController
         AddDoAction $action,
         AddDoRequest $request
     ): JsonResponse {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 
     /**
@@ -44,8 +43,7 @@ class BackendGameTypeController
         EditDoAction $action,
         EditDoRequest $request
     ): JsonResponse {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 
     /**
@@ -59,8 +57,7 @@ class BackendGameTypeController
         IndexDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -73,8 +70,7 @@ class BackendGameTypeController
         DelDoAction $action,
         DelDoRequest $request
     ): JsonResponse {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 
     /**
@@ -87,7 +83,6 @@ class BackendGameTypeController
         StatusDoAction $action,
         StatusDoRequest $request
     ): JsonResponse {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 }

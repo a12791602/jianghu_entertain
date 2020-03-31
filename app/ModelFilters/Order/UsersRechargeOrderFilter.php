@@ -34,8 +34,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): UsersRechargeOrderFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 
     /**
@@ -46,8 +45,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function status(int $status): UsersRechargeOrderFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -58,8 +56,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function isOnline(int $is_online): UsersRechargeOrderFilter
     {
-        $object = $this->where('is_online', $is_online);
-        return $object;
+        return $this->where('is_online', $is_online);
     }
 
     /**
@@ -90,8 +87,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function orderNo(string $order_no): UsersRechargeOrderFilter
     {
-        $object = $this->where('order_no', $order_no);
-        return $object;
+        return $this->where('order_no', $order_no);
     }
 
     /**
@@ -102,8 +98,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function platformNo(string $platform_no): UsersRechargeOrderFilter
     {
-        $object = $this->where('platform_no', $platform_no);
-        return $object;
+        return $this->where('platform_no', $platform_no);
     }
 
     /**
@@ -114,8 +109,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function snapMerchantNo(string $snap_merchant_no): UsersRechargeOrderFilter
     {
-        $object = $this->where('snap_merchant_no', $snap_merchant_no);
-        return $object;
+        return $this->where('snap_merchant_no', $snap_merchant_no);
     }
 
     /**
@@ -126,8 +120,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function snapMerchantCode(string $snap_merchant_code): UsersRechargeOrderFilter
     {
-        $object = $this->where('snap_merchant_code', $snap_merchant_code);
-        return $object;
+        return $this->where('snap_merchant_code', $snap_merchant_code);
     }
 
     /**
@@ -138,8 +131,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function snapMerchant(string $snap_merchant): UsersRechargeOrderFilter
     {
-        $object = $this->where('snap_merchant', 'like', '%' . $snap_merchant . '%');
-        return $object;
+        return $this->where('snap_merchant', 'like', '%' . $snap_merchant . '%');
     }
 
     /**
@@ -150,8 +142,7 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function financeType(int $finance_type_id): UsersRechargeOrderFilter
     {
-        $object = $this->where('finance_type_id', $finance_type_id);
-        return $object;
+        return $this->where('finance_type_id', $finance_type_id);
     }
 
     /**
@@ -162,7 +153,6 @@ class UsersRechargeOrderFilter extends ModelFilter
      */
     public function snapAccount(string $snap_account): UsersRechargeOrderFilter
     {
-        $object = $this->where('snap_account', $snap_account);
-        return $object;
+        return $this->where('snap_account', $snap_account);
     }
 }

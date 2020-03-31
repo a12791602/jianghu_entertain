@@ -26,8 +26,7 @@ class NoticeCarousel extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -35,7 +34,6 @@ class NoticeCarousel extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
     }
 }

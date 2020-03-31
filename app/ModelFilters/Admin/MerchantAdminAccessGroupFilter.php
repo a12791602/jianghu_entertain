@@ -25,8 +25,7 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
      */
     public function platform(string $platformSign): MerchantAdminAccessGroupFilter
     {
-        $eloq = $this->where('platform_sign', $platformSign);
-        return $eloq;
+        return $this->where('platform_sign', $platformSign);
     }
 
     /**
@@ -36,8 +35,7 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
      */
     public function groupName(string $groupName): MerchantAdminAccessGroupFilter
     {
-        $eloq = $this->where('group_name', $groupName);
-        return $eloq;
+        return $this->where('group_name', $groupName);
     }
 
     /**
@@ -47,7 +45,6 @@ class MerchantAdminAccessGroupFilter extends ModelFilter
      */
     public function super(int $super): MerchantAdminAccessGroupFilter
     {
-        $eloq = $this->where('is_super', $super);
-        return $eloq;
+        return $this->where('is_super', $super);
     }
 }

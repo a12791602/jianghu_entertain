@@ -38,8 +38,7 @@ class SystemBank extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -47,8 +46,7 @@ class SystemBank extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -56,7 +54,6 @@ class SystemBank extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(SystemBankFilter::class);
-        return $object;
+        return $this->provideFilter(SystemBankFilter::class);
     }
 }

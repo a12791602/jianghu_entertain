@@ -18,8 +18,7 @@ class SystemSupportedBanksAction
      */
     public function execute(): JsonResponse
     {
-        $item   = SystemBank::where('status', SystemBank::STATUS_OPEN)->get(['id', 'name', 'code']);
-        $result = msgOut($item);
-        return $result;
+        $item = SystemBank::where('status', SystemBank::STATUS_OPEN)->get(['id', 'name', 'code']);
+        return msgOut($item);
     }
 }

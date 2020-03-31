@@ -110,8 +110,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function children(): HasMany
     {
-        $result = $this->hasMany($this, 'parent_id', 'id');
-        return $result;
+        return $this->hasMany($this, 'parent_id', 'id');
     }
 
     /**
@@ -121,8 +120,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function parent(): HasOne
     {
-        $result = $this->hasOne($this, 'id', 'parent_id');
-        return $result;
+        return $this->hasOne($this, 'id', 'parent_id');
     }
 
     /**
@@ -132,8 +130,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function account(): HasOne
     {
-        $result = $this->hasOne(FrontendUsersAccount::class, 'user_id', 'id');
-        return $result;
+        return $this->hasOne(FrontendUsersAccount::class, 'user_id', 'id');
     }
 
     /**
@@ -142,8 +139,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function bankCard(): HasMany
     {
-        $result = $this->hasMany(FrontendUsersBankCard::class, 'user_id', 'id');
-        return $result;
+        return $this->hasMany(FrontendUsersBankCard::class, 'user_id', 'id');
     }
 
     /**
@@ -153,8 +149,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function specificInfo(): HasOne
     {
-        $result = $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
-        return $result;
+        return $this->hasOne(FrontendUsersSpecificInfo::class, 'user_id', 'id');
     }
 
     /**
@@ -163,8 +158,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function getMobileHiddenAttribute(): string
     {
-        $result = substr_replace((string) $this->mobile, '****', 3, 4);
-        return $result;
+        return substr_replace((string) $this->mobile, '****', 3, 4);
     }
 
     /**
@@ -173,8 +167,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function platform(): HasOne
     {
-        $result = $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
-        return $result;
+        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
     }
 
     /**
@@ -183,8 +176,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function gameTypePlatform(): HasMany
     {
-        $result = $this->hasMany(GameTypePlatform::class, 'platform_id', 'platform_id');
-        return $result;
+        return $this->hasMany(GameTypePlatform::class, 'platform_id', 'platform_id');
     }
 
     /**
@@ -193,8 +185,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function gamesPlatform(): HasOne
     {
-        $result = $this->hasOne(GamePlatform::class, 'id', 'platform_id');
-        return $result;
+        return $this->hasOne(GamePlatform::class, 'id', 'platform_id');
     }
 
     /**
@@ -203,8 +194,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function withdraw(): HasMany
     {
-        $result = $this->hasMany(UsersWithdrawOrder::class, 'user_id', 'id');
-        return $result;
+        return $this->hasMany(UsersWithdrawOrder::class, 'user_id', 'id');
     }
 
     /**
@@ -212,8 +202,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(FrontendUserFilter::class);
-        return $object;
+        return $this->provideFilter(FrontendUserFilter::class);
     }
 
     /**
@@ -222,8 +211,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function userTag(): BelongsTo
     {
-        $userTag = $this->belongsTo(UsersTag::class, 'user_tag_id', 'id');
-        return $userTag;
+        return $this->belongsTo(UsersTag::class, 'user_tag_id', 'id');
     }
 
     /**
@@ -231,7 +219,6 @@ class FrontendUser extends BaseAuthModel
      */
     public function levelBenefits(): HasMany
     {
-        $object = $this->hasMany(FrontendUserLevelBenefit::class, 'user_id', 'id');
-        return $object;
+        return $this->hasMany(FrontendUserLevelBenefit::class, 'user_id', 'id');
     }
 }

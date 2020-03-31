@@ -27,12 +27,11 @@ class ReportRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'type'        => 'required|integer|in:1,2,3', //类型  1.账变明细  2.充值记录 3.提现记录
-                   'createdAt'   => 'array|size:2', // 账变时间
-                   'createdAt.*' => 'date|date_format:Y-m-d H:i:s', //账变时间
-                  ];
-        return $result;
+        return [
+                'type'        => 'required|integer|in:1,2,3', //类型  1.账变明细  2.充值记录 3.提现记录
+                'createdAt'   => 'array|size:2', // 账变时间
+                'createdAt.*' => 'date|date_format:Y-m-d H:i:s', //账变时间
+               ];
     }
 
     /**

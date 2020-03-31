@@ -33,7 +33,6 @@ class UnlockRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['guid' => 'required|string|exists:frontend_users,guid'];
-        return $rules;
+        return ['guid' => 'required|string|exists:frontend_users,guid'];
     }
 }

@@ -26,7 +26,6 @@ class SystemDynActivityPlatformFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): SystemDynActivityPlatformFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 }

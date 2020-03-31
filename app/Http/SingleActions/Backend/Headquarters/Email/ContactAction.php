@@ -17,8 +17,7 @@ class ContactAction extends BaseAction
      */
     public function execute(): JsonResponse
     {
-        $data   = MerchantAdminUser::with('platform:id,name,sign')->select(['id', 'email', 'platform_sign'])->get();
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = MerchantAdminUser::with('platform:id,name,sign')->select(['id', 'email', 'platform_sign'])->get();
+        return msgOut($data);
     }
 }

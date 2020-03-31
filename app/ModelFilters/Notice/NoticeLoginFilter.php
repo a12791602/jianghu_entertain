@@ -27,8 +27,7 @@ class NoticeLoginFilter extends ModelFilter
      */
     public function platform(int $platform_id): NoticeLoginFilter
     {
-        $object = $this->where('platform_id', $platform_id);
-        return $object;
+        return $this->where('platform_id', $platform_id);
     }
 
     /**
@@ -39,8 +38,7 @@ class NoticeLoginFilter extends ModelFilter
      */
     public function title(string $title): NoticeLoginFilter
     {
-        $object = $this->where('title', $title);
-        return $object;
+        return $this->where('title', $title);
     }
 
     /**
@@ -51,7 +49,6 @@ class NoticeLoginFilter extends ModelFilter
      */
     public function device(int $device): NoticeLoginFilter
     {
-        $object = $this->where('device', $device);
-        return $object;
+        return $this->where('device', $device);
     }
 }

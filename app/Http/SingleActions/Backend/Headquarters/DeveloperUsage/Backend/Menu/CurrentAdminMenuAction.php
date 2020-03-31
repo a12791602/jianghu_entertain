@@ -17,8 +17,7 @@ class CurrentAdminMenuAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $data   = $this->menuLists;
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $this->menuLists;
+        return msgOut($data);
     }
 }

@@ -26,8 +26,7 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function email(string $email): BackendLoginLogFilter
     {
-        $eloq = $this->where('email', $email);
-        return $eloq;
+        return $this->where('email', $email);
     }
 
     /**
@@ -38,8 +37,7 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function name(string $name): BackendLoginLogFilter
     {
-        $eloq = $this->whereLike('name', $name);
-        return $eloq;
+        return $this->whereLike('name', $name);
     }
 
     /**
@@ -50,8 +48,7 @@ class BackendLoginLogFilter extends ModelFilter
      */
     public function loginIp(string $loginIp): BackendLoginLogFilter
     {
-        $eloq = $this->where('ip', $loginIp);
-        return $eloq;
+        return $this->where('ip', $loginIp);
     }
 
     /**

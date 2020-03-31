@@ -30,7 +30,6 @@ class UnassignGamesAction extends MainAction
              'vendor_id',
             ],
         )->paginate($pageSize);
-        $msgOut                             = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

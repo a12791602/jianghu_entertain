@@ -26,8 +26,7 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function dataId(int $dataId): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->where('id', $dataId);
-        return $eloq;
+        return $this->where('id', $dataId);
     }
 
     /**
@@ -38,8 +37,7 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function dataPid(int $dataPid): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->where('pid', $dataPid);
-        return $eloq;
+        return $this->where('pid', $dataPid);
     }
 
     /**
@@ -50,8 +48,7 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function type(int $type): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->where('type', $type);
-        return $eloq;
+        return $this->where('type', $type);
     }
 
     /**
@@ -62,8 +59,7 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function status(int $status): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 
     /**
@@ -74,8 +70,7 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function sign(string $sign): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 
     /**
@@ -86,7 +81,6 @@ class SystemUsersHelpCenterFilter extends ModelFilter
      */
     public function title(string $title): SystemUsersHelpCenterFilter
     {
-        $eloq = $this->whereLike('title', $title);
-        return $eloq;
+        return $this->whereLike('title', $title);
     }
 }

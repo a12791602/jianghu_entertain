@@ -36,8 +36,7 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): UsersWithdrawOrderFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 
     /**
@@ -48,8 +47,7 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function statusList(array $status_list): UsersWithdrawOrderFilter
     {
-        $object = $this->whereIn('status', $status_list);
-        return $object;
+        return $this->whereIn('status', $status_list);
     }
 
     /**
@@ -60,8 +58,7 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function orderNo(string $order_no): UsersWithdrawOrderFilter
     {
-        $object = $this->where('order_no', $order_no);
-        return $object;
+        return $this->where('order_no', $order_no);
     }
 
     /**
@@ -72,8 +69,7 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function accountType(int $account_type): UsersWithdrawOrderFilter
     {
-        $object = $this->where('account_type', $account_type);
-        return $object;
+        return $this->where('account_type', $account_type);
     }
     /**
      * 按申请时间.
@@ -102,8 +98,7 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function status(int $status): UsersWithdrawOrderFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
 
@@ -156,7 +151,6 @@ class UsersWithdrawOrderFilter extends ModelFilter
      */
     public function isAudit(int $is_audit): UsersWithdrawOrderFilter
     {
-        $object = $this->where('is_audit', $is_audit);
-        return $object;
+        return $this->where('is_audit', $is_audit);
     }
 }

@@ -28,21 +28,20 @@ class AccountDestroyRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'card_id'           => 'required',
-                   'owner_name'        => [
-                                           'required',
-                                           'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
-                                          ],
-                   'security_code'     => [
-                                           'required',
-                                           'digits:6',
-                                           new SecurityCodeCheckRule($this),
-                                          ],
-                   'verification_key'  => 'required|string',
-                   'verification_code' => 'required',
-                  ];
-        return $result;
+        return [
+                'card_id'           => 'required',
+                'owner_name'        => [
+                                        'required',
+                                        'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
+                                       ],
+                'security_code'     => [
+                                        'required',
+                                        'digits:6',
+                                        new SecurityCodeCheckRule($this),
+                                       ],
+                'verification_key'  => 'required|string',
+                'verification_code' => 'required',
+               ];
     }
 
     /**

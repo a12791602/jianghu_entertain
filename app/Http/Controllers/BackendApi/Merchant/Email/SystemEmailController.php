@@ -30,9 +30,8 @@ class SystemEmailController
      */
     public function send(SendAction $action, SendRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -45,9 +44,8 @@ class SystemEmailController
      */
     public function sendIndex(SendIndexAction $action, SendIndexRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -62,9 +60,8 @@ class SystemEmailController
         ReceivedIndexAction $action,
         ReceivedIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -77,9 +74,8 @@ class SystemEmailController
      */
     public function readEmail(ReadEmailAction $action, ReadEmailRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -93,8 +89,7 @@ class SystemEmailController
         DestroyIncomingEmailAction $action,
         DestroyIncomingEmailRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

@@ -37,11 +37,10 @@ class ClaimGiftRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'type'       => 'string|required',// 领取的VIP权益类型
-                   'other_type' => 'json|required',// 其他VIP权益领取的状态
-                   'level'      => 'integer|required',// 领取VIP权益的等级
-                  ];
-        return $result;
+        return [
+                'type'       => 'string|required',// 领取的VIP权益类型
+                'other_type' => 'json|required',// 其他VIP权益领取的状态
+                'level'      => 'integer|required',// 领取VIP权益的等级
+               ];
     }
 }

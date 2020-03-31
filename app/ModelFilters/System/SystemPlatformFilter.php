@@ -28,8 +28,7 @@ class SystemPlatformFilter extends ModelFilter
      */
     public function status(string $status): SystemPlatformFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 
     /**

@@ -84,8 +84,7 @@ class EditAction extends MainAction
             }
         }
         DB::commit();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 
     /**

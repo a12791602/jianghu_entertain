@@ -36,8 +36,7 @@ class SystemUsersHelpCenter extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $author = $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
-        return $author;
+        return $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
     }
 
     /**
@@ -46,8 +45,7 @@ class SystemUsersHelpCenter extends BaseModel
      */
     public function newer(): BelongsTo
     {
-        $newer = $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
-        return $newer;
+        return $this->belongsTo(MerchantAdminUser::class, 'add_admin_id', 'id');
     }
 
     /**
@@ -56,7 +54,6 @@ class SystemUsersHelpCenter extends BaseModel
      */
     public function childs(): HasMany
     {
-        $childs = $this->hasMany($this, 'pid', 'id');
-        return $childs;
+        return $this->hasMany($this, 'pid', 'id');
     }
 }

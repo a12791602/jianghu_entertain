@@ -68,8 +68,7 @@ class SystemFinanceHandleSaveBuckleRecord extends BaseModel
      */
     public function admin(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
     }
 
     /**
@@ -77,7 +76,6 @@ class SystemFinanceHandleSaveBuckleRecord extends BaseModel
      */
     public function user(): BelongsTo
     {
-        $object = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
-        return $object;
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 }

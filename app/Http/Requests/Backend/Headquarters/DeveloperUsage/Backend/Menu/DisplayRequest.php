@@ -33,10 +33,9 @@ class DisplayRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'      => 'required|integer|exists:backend_system_menus', // ID
-                  'display' => 'required|integer|in:0,1',                      //是否显示  0否 1是
-                 ];
-        return $rules;
+        return [
+                'id'      => 'required|integer|exists:backend_system_menus', // ID
+                'display' => 'required|integer|in:0,1',                      //是否显示  0否 1是
+               ];
     }
 }

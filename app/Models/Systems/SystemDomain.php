@@ -66,7 +66,6 @@ class SystemDomain extends BaseModel
      */
     public function platform(): BelongsTo
     {
-        $platform = $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
-        return $platform;
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
     }
 }

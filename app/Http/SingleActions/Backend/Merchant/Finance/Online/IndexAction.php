@@ -34,7 +34,6 @@ class IndexAction extends BaseAction
              'tags:online_finance_id,tag_id',
             ],
         )->filter($inputDatas, SystemFinanceOnlineInfoFilter::class)->paginate($pageSize);
-        $msgOut                      = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

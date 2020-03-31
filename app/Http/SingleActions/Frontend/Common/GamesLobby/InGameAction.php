@@ -27,7 +27,6 @@ class InGameAction extends MainAction
         extract($result, EXTR_OVERWRITE);
         $gameInstance = GameCommons::gameInit($curentVendorObj);
         $result       = $gameInstance->game($curentGameObj, $this);
-        $msgOut       = msgOut($result);
-        return $msgOut;
+        return msgOut($result);
     }
 }

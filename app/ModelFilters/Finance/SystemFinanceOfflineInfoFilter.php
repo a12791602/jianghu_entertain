@@ -30,8 +30,7 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
      */
     public function name(string $name): SystemFinanceOfflineInfoFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 
     /**
@@ -41,8 +40,7 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
      */
     public function account(string $account): SystemFinanceOfflineInfoFilter
     {
-        $object = $this->where('account', $account);
-        return $object;
+        return $this->where('account', $account);
     }
 
     /**
@@ -52,8 +50,7 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
      */
     public function username(string $username): SystemFinanceOfflineInfoFilter
     {
-        $object = $this->where('username', $username);
-        return $object;
+        return $this->where('username', $username);
     }
 
     /**
@@ -106,7 +103,6 @@ class SystemFinanceOfflineInfoFilter extends ModelFilter
      */
     public function type(int $type_id): SystemFinanceOfflineInfoFilter
     {
-        $object = $this->where('type_id', $type_id);
-        return $object;
+        return $this->where('type_id', $type_id);
     }
 }

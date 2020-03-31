@@ -1,7 +1,7 @@
 <?php
 
 $sqs_prefix = 'https://sqs.us-east-1.amazonaws.com/your-account-id';
-$config     = [
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -14,7 +14,7 @@ $config     = [
     |
     */
 
-               'default'     => env('QUEUE_CONNECTION', 'sync'),
+        'default'     => env('QUEUE_CONNECTION', 'sync'),
 
     /*
     |--------------------------------------------------------------------------
@@ -29,43 +29,43 @@ $config     = [
     |
     */
 
-               'connections' => [
+        'connections' => [
 
-                                 'sync'       => ['driver' => 'sync'],
+                          'sync'       => ['driver' => 'sync'],
 
-                                 'database'   => [
-                                                  'driver'      => 'database',
-                                                  'table'       => 'jobs',
-                                                  'queue'       => 'default',
-                                                  'retry_after' => 90,
-                                                 ],
+                          'database'   => [
+                                           'driver'      => 'database',
+                                           'table'       => 'jobs',
+                                           'queue'       => 'default',
+                                           'retry_after' => 90,
+                                          ],
 
-                                 'beanstalkd' => [
-                                                  'driver'      => 'beanstalkd',
-                                                  'host'        => env('BEANSTALKT_HOST', 'localhost'),
-                                                  'queue'       => env('BEANSTALKD_PORT', 'default'),
-                                                  'retry_after' => 300,
-                                                  'block_for'   => 0,
-                                                 ],
+                          'beanstalkd' => [
+                                           'driver'      => 'beanstalkd',
+                                           'host'        => env('BEANSTALKT_HOST', 'localhost'),
+                                           'queue'       => env('BEANSTALKD_PORT', 'default'),
+                                           'retry_after' => 300,
+                                           'block_for'   => 0,
+                                          ],
 
-                                 'sqs'        => [
-                                                  'driver' => 'sqs',
-                                                  'key'    => env('AWS_ACCESS_KEY_ID'),
-                                                  'secret' => env('AWS_SECRET_ACCESS_KEY'),
-                                                  'prefix' => env('SQS_PREFIX', $sqs_prefix),
-                                                  'queue'  => env('SQS_QUEUE', 'your-queue-name'),
-                                                  'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
-                                                 ],
+                          'sqs'        => [
+                                           'driver' => 'sqs',
+                                           'key'    => env('AWS_ACCESS_KEY_ID'),
+                                           'secret' => env('AWS_SECRET_ACCESS_KEY'),
+                                           'prefix' => env('SQS_PREFIX', $sqs_prefix),
+                                           'queue'  => env('SQS_QUEUE', 'your-queue-name'),
+                                           'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
+                                          ],
 
-                                 'redis'      => [
-                                                  'driver'      => 'redis',
-                                                  'connection'  => env('REDIS_QUEUE_CONNECTION', 'default'),
-                                                  'queue'       => env('REDIS_QUEUE', 'default'),
-                                                  'retry_after' => 90,
-                                                  'block_for'   => null,
-                                                 ],
+                          'redis'      => [
+                                           'driver'      => 'redis',
+                                           'connection'  => env('REDIS_QUEUE_CONNECTION', 'default'),
+                                           'queue'       => env('REDIS_QUEUE', 'default'),
+                                           'retry_after' => 90,
+                                           'block_for'   => null,
+                                          ],
 
-                                ],
+                         ],
 
                /*
                |--------------------------------------------------------------------------
@@ -78,11 +78,10 @@ $config     = [
                |
                */
 
-               'failed'      => [
-                                 'driver'   => env('QUEUE_FAILED_DRIVER', 'database'),
-                                 'database' => env('DB_CONNECTION', 'mysql'),
-                                 'table'    => 'failed_jobs',
-                                ],
+        'failed'      => [
+                          'driver'   => env('QUEUE_FAILED_DRIVER', 'database'),
+                          'database' => env('DB_CONNECTION', 'mysql'),
+                          'table'    => 'failed_jobs',
+                         ],
 
-              ];
-return $config;
+       ];

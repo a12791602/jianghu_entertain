@@ -47,8 +47,7 @@ class CommonLogFormatter extends NormalizerFormatter
     public function format(array $record)
     {
         $record = parent::format($record);
-        $return = $this->getDocument($record);
-        return $return;
+        return $this->getDocument($record);
     }
 
     /**

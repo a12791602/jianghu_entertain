@@ -132,8 +132,7 @@ class SystemEmail extends BaseModel
      */
     public function headquarters(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'sender_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'sender_id', 'id');
     }
 
     /**
@@ -141,8 +140,7 @@ class SystemEmail extends BaseModel
      */
     public function merchant(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'sender_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'sender_id', 'id');
     }
 
     /**
@@ -150,8 +148,7 @@ class SystemEmail extends BaseModel
      */
     public function platform(): BelongsTo
     {
-        $object = $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
-        return $object;
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
     }
 
     /**
@@ -159,7 +156,6 @@ class SystemEmail extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(SystemEmailFilter::class);
-        return $object;
+        return $this->provideFilter(SystemEmailFilter::class);
     }
 }

@@ -32,8 +32,7 @@ class PasswordController
         ResetPasswordAction $action,
         ResetPasswordRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -48,8 +47,7 @@ class PasswordController
         PVerificationCodeRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $result     = $action->execute($inputDatas);
-        return $result;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -63,8 +61,7 @@ class PasswordController
         PasswordChangeAction $action,
         PasswordChangeRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -75,8 +72,7 @@ class PasswordController
      */
     public function passwordChangeCode(PasswordChangeCodeAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -90,8 +86,7 @@ class PasswordController
         SecurityCodeAction $action,
         SecurityCodeRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -102,7 +97,6 @@ class PasswordController
      */
     public function securityCode(SecurityVerificationCodeAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

@@ -26,8 +26,7 @@ class SystemFinanceChannelFilter extends ModelFilter
      */
     public function channel(int $channel_id): SystemFinanceChannelFilter
     {
-        $object = $this->where('id', $channel_id);
-        return $object;
+        return $this->where('id', $channel_id);
     }
 
     /**
@@ -36,8 +35,7 @@ class SystemFinanceChannelFilter extends ModelFilter
      */
     public function type(int $type_id): SystemFinanceChannelFilter
     {
-        $object = $this->where('type_id', $type_id);
-        return $object;
+        return $this->where('type_id', $type_id);
     }
 
     /**
@@ -46,7 +44,6 @@ class SystemFinanceChannelFilter extends ModelFilter
      */
     public function vendor(int $vendor_id): SystemFinanceChannelFilter
     {
-        $object = $this->where('vendor_id', $vendor_id);
-        return $object;
+        return $this->where('vendor_id', $vendor_id);
     }
 }

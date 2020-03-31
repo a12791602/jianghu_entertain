@@ -33,10 +33,9 @@ class WithdrawalsPasswordRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'guid'                 => 'required|string|exists:frontend_users,guid',
-                  'withdrawals_password' => 'required|confirmed|regex:/^[0-9a-zA-Z]{8,16}$/',//(大小写字母加数字 8,16位)
-                 ];
-        return $rules;
+        return [
+                'guid'                 => 'required|string|exists:frontend_users,guid',
+                'withdrawals_password' => 'required|confirmed|regex:/^[0-9a-zA-Z]{8,16}$/',//(大小写字母加数字 8,16位)
+               ];
     }
 }

@@ -25,7 +25,6 @@ class UsersTagFilter extends ModelFilter
      */
     public function platformSign(string $sign): UsersTagFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 }

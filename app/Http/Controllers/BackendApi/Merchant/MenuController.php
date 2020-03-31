@@ -18,7 +18,6 @@ class MenuController
      */
     public function currentAdminMenu(MenuAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

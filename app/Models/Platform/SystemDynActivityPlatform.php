@@ -25,8 +25,7 @@ class SystemDynActivityPlatform extends BaseModel
      */
     public function activity(): BelongsTo
     {
-        $object = $this->belongsTo(SystemDynActivity::class, 'activity_sign', 'sign');
-        return $object;
+        return $this->belongsTo(SystemDynActivity::class, 'activity_sign', 'sign');
     }
 
     /**
@@ -34,7 +33,6 @@ class SystemDynActivityPlatform extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
     }
 }

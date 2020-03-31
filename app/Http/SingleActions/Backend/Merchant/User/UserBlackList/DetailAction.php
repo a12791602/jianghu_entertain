@@ -39,7 +39,7 @@ class DetailAction extends MainAction
     {
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
 
-        $data   = $this->model
+        $data = $this->model
             ->filter($inputDatas, FrontendUsersBlackListFilter::class)
             ->select(
                 [
@@ -55,7 +55,6 @@ class DetailAction extends MainAction
                 ],
             )
             ->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

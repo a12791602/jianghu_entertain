@@ -41,12 +41,11 @@ class HandleBuckleRequest extends BaseFormRequest
     {
         $types = array_keys(SystemFinanceHandleSaveBuckleRecord::$buckleTypes);
         $types = implode(',', $types);
-        $rules = [
-                  'user'   => 'required|string|min:1|max:32',
-                  'type'   => 'required|integer|in:' . $types,
-                  'money'  => 'required|numeric|gt:0',
-                  'remark' => 'string|min:1|max:256',
-                 ];
-        return $rules;
+        return [
+                'user'   => 'required|string|min:1|max:32',
+                'type'   => 'required|integer|in:' . $types,
+                'money'  => 'required|numeric|gt:0',
+                'remark' => 'string|min:1|max:256',
+               ];
     }
 }

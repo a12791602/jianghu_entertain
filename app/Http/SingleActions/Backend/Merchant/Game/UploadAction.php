@@ -24,8 +24,7 @@ class UploadAction extends BaseAction
             ],
         )->update(['icon' => $inputDatas['icon']]);
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('202600');
     }

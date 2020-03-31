@@ -67,9 +67,7 @@ class DoAddAction extends MainAction
         $this->_insertConfigDetail($userGrade, $percentArr);
         DB::commit();
         //插入数据成功
-
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 
     /**

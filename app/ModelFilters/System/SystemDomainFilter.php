@@ -27,8 +27,7 @@ class SystemDomainFilter extends ModelFilter
      */
     public function sign(string $sign): SystemDomainFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 
     /**
@@ -38,8 +37,7 @@ class SystemDomainFilter extends ModelFilter
      */
     public function type(int $type): SystemDomainFilter
     {
-        $eloq = $this->where('type', $type);
-        return $eloq;
+        return $this->where('type', $type);
     }
 
     /**
@@ -49,8 +47,7 @@ class SystemDomainFilter extends ModelFilter
      */
     public function status(int $status): SystemDomainFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 
     /**
@@ -60,8 +57,7 @@ class SystemDomainFilter extends ModelFilter
      */
     public function domain(string $domain): SystemDomainFilter
     {
-        $eloq = $this->where('domain', $domain);
-        return $eloq;
+        return $this->where('domain', $domain);
     }
 
     /**

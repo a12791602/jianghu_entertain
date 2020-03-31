@@ -23,8 +23,7 @@ class AssignedGameCancelAction extends MainAction
         $result = GamePlatform::where('platform_id', $inputDatas['platform_id'])
             ->whereIn('game_id', $inputDatas['game_ids'])->delete();
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('302001');
     }

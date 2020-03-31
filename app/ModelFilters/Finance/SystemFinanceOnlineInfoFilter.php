@@ -30,8 +30,7 @@ class SystemFinanceOnlineInfoFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): SystemFinanceOnlineInfoFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 
     /**
@@ -41,8 +40,7 @@ class SystemFinanceOnlineInfoFilter extends ModelFilter
      */
     public function merchantCode(string $merchant_code): SystemFinanceOnlineInfoFilter
     {
-        $object = $this->where('merchant_code', $merchant_code);
-        return $object;
+        return $this->where('merchant_code', $merchant_code);
     }
 
     /**
@@ -52,8 +50,7 @@ class SystemFinanceOnlineInfoFilter extends ModelFilter
      */
     public function frontendName(string $frontend_name): SystemFinanceOnlineInfoFilter
     {
-        $object = $this->where('frontend_name', $frontend_name);
-        return $object;
+        return $this->where('frontend_name', $frontend_name);
     }
 
     /**
@@ -63,8 +60,7 @@ class SystemFinanceOnlineInfoFilter extends ModelFilter
      */
     public function merchantNo(string $merchant_no): SystemFinanceOnlineInfoFilter
     {
-        $object = $this->where('merchant_no', $merchant_no);
-        return $object;
+        return $this->where('merchant_no', $merchant_no);
     }
 
     /**

@@ -26,7 +26,6 @@ class RefreshAction extends MainAction
                            'token_type'   => 'Bearer',
                            'expires_at'   => $expireAt,
                           ];
-        $msgOut         = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

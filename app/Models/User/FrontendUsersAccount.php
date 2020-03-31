@@ -58,7 +58,6 @@ class FrontendUsersAccount extends BaseAuthModel
      */
     public function frontendUser(): BelongsTo
     {
-        $result = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
-        return $result;
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 }

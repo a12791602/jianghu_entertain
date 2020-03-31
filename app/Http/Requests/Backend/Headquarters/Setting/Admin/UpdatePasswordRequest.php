@@ -33,11 +33,10 @@ class UpdatePasswordRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'       => 'required|numeric|exists:backend_admin_users',
-                  'name'     => 'required|string',
-                  'password' => 'required|string',
-                 ];
-        return $rules;
+        return [
+                'id'       => 'required|numeric|exists:backend_admin_users',
+                'name'     => 'required|string',
+                'password' => 'required|string',
+               ];
     }
 }

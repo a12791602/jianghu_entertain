@@ -45,7 +45,6 @@ class DoAddAction extends MainAction
             throw new \Exception('202800');
         }
         $this->model->deleteCache();
-        $msgOut = msgOut(['label' => $menuEloq->label]);
-        return $msgOut;
+        return msgOut(['label' => $menuEloq->label]);
     }
 }

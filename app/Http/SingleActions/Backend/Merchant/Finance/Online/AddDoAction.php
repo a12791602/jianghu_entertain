@@ -48,8 +48,7 @@ class AddDoAction extends BaseAction
                 }
             }
             DB::commit();
-            $result = msgOut();
-            return $result;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

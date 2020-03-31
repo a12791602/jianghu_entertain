@@ -38,7 +38,6 @@ class CreateAction extends MainAction
         $user                        = MerchantAdminUser::create($inputDatas);
 
         $success = ['name' => $user->name];
-        $msgOut  = msgOut($success);
-        return $msgOut;
+        return msgOut($success);
     }
 }

@@ -48,8 +48,7 @@ class Game extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -57,8 +56,7 @@ class Game extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -66,8 +64,7 @@ class Game extends BaseModel
      */
     public function vendor(): BelongsTo
     {
-        $object = $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
-        return $object;
+        return $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
     }
 
     /**
@@ -75,8 +72,7 @@ class Game extends BaseModel
      */
     public function type(): BelongsTo
     {
-        $object = $this->belongsTo(GameType::class, 'type_id', 'id');
-        return $object;
+        return $this->belongsTo(GameType::class, 'type_id', 'id');
     }
 
     /**
@@ -84,8 +80,7 @@ class Game extends BaseModel
      */
     public function subType(): BelongsTo
     {
-        $object = $this->belongsTo(GameSubType::class, 'sub_type_id', 'id');
-        return $object;
+        return $this->belongsTo(GameSubType::class, 'sub_type_id', 'id');
     }
 
     /**
@@ -93,8 +88,7 @@ class Game extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(GameFilter::class);
-        return $object;
+        return $this->provideFilter(GameFilter::class);
     }
 
     /**
@@ -104,7 +98,6 @@ class Game extends BaseModel
     public function getUrlAttribute(): string
     {
         $prefix = Request::get('prefix');
-        $result = '/' . $prefix . '/games-lobby/in-game/' . $this->type_id . '/' . $this->sub_type_id . '/' . $this->id;
-        return $result;
+        return '/' . $prefix . '/games-lobby/in-game/' . $this->type_id . '/' . $this->sub_type_id . '/' . $this->id;
     }
 }

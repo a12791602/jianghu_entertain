@@ -18,8 +18,7 @@ trait MerchantMenuLogics
      */
     public function forStar(): array
     {
-        $menuDatas = $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
-        return $menuDatas;
+        return $this->getMenuDatas(self::ALL_MENU_REDIS_KEY);
     }
 
     /**
@@ -29,8 +28,7 @@ trait MerchantMenuLogics
      */
     public function getUserMenuDatas(int $accessGroupId, array $adminAccessGroupDetail)
     {
-        $menuDatas = $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
-        return $menuDatas;
+        return $this->getMenuDatas($accessGroupId, $adminAccessGroupDetail);
     }
 
     /**
@@ -147,8 +145,7 @@ trait MerchantMenuLogics
      */
     public static function getAllFirstLevelList()
     {
-        $allFirstLevelList = self::where('pid', 0)->orderBy('sort')->get();
-        return $allFirstLevelList;
+        return self::where('pid', 0)->orderBy('sort')->get();
     }
 
     /**
@@ -157,7 +154,6 @@ trait MerchantMenuLogics
      */
     public static function getFirstLevelList(array $adminAccessGroupDetail)
     {
-        $firstLevelList = self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
-        return $firstLevelList;
+        return self::where('pid', 0)->whereIn('id', $adminAccessGroupDetail)->orderBy('sort')->get();
     }
 }

@@ -47,8 +47,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -56,8 +55,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -65,8 +63,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(GamesTypeFilter::class);
-        return $object;
+        return $this->provideFilter(GamesTypeFilter::class);
     }
 
     /**
@@ -74,7 +71,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function games(): HasManyThrough
     {
-        $game = $this->hasManyThrough(
+        return $this->hasManyThrough(
             Game::class,
             GameVendor::class,
             'type_id', // Foreign key on vendor table with current table...
@@ -82,7 +79,6 @@ class GameType extends BaseModel implements Sortable
             'id', // Local key on current table...
             'id', // Local key on internal table...
         );
-        return $game;
     }
 
     /**
@@ -90,8 +86,7 @@ class GameType extends BaseModel implements Sortable
      */
     public function children(): HasMany
     {
-        $object = $this->hasMany(GameSubType::class, 'parent_id', 'id')->ordered();
-        return $object;
+        return $this->hasMany(GameSubType::class, 'parent_id', 'id')->ordered();
     }
 
     /**

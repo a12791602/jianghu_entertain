@@ -26,8 +26,7 @@ class UsersLoginLogFilter extends ModelFilter
      */
     public function guid(string $guid): UsersLoginLogFilter
     {
-        $eloq = $this->where('guid', $guid);
-        return $eloq;
+        return $this->where('guid', $guid);
     }
 
     /**
@@ -38,8 +37,7 @@ class UsersLoginLogFilter extends ModelFilter
      */
     public function mobile(string $mobile): UsersLoginLogFilter
     {
-        $eloq = $this->where('mobile', $mobile);
-        return $eloq;
+        return $this->where('mobile', $mobile);
     }
 
     /**
@@ -50,8 +48,7 @@ class UsersLoginLogFilter extends ModelFilter
      */
     public function lastLoginIp(string $lastLoginIp): UsersLoginLogFilter
     {
-        $eloq = $this->where('last_login_ip', $lastLoginIp);
-        return $eloq;
+        return $this->where('last_login_ip', $lastLoginIp);
     }
 
     /**
@@ -76,7 +73,6 @@ class UsersLoginLogFilter extends ModelFilter
      */
     public function platformSign(string $sign): UsersLoginLogFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 }

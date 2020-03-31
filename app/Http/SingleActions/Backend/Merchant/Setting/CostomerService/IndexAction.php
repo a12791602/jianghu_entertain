@@ -42,7 +42,6 @@ class IndexAction extends MainAction
             ->filter($inputDatas, SystemCostomerServiceFilter::class)
             ->get()
             ->toArray();
-        $msgOut             = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }
