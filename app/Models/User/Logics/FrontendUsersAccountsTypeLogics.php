@@ -72,7 +72,6 @@ trait FrontendUsersAccountsTypeLogics
             return $data;
         }
         $paramsFlipped = array_flip($params);
-        $data          = array_fill_keys(array_keys($paramsFlipped), 'required');
-        return $data;
+        return array_fill_keys(array_keys($paramsFlipped), 'required');
     }
 }
