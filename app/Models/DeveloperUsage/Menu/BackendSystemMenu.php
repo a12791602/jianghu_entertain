@@ -17,7 +17,7 @@ class BackendSystemMenu extends BaseModel
      * RedisKey
      */
     public const ALL_MENU_REDIS_KEY = '1';
-    
+
     /**
      * @var array
      */
@@ -48,7 +48,6 @@ class BackendSystemMenu extends BaseModel
      */
     public function childs(): HasMany
     {
-        $childs = $this->hasMany(BackendSystemMenu::class, 'pid', 'id');
-        return $childs;
+        return $this->hasMany(BackendSystemMenu::class, 'pid', 'id');
     }
 }

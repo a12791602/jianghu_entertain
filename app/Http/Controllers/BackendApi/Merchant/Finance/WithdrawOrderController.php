@@ -34,9 +34,8 @@ class WithdrawOrderController
         CheckIndexAction $action,
         CheckIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -51,9 +50,8 @@ class WithdrawOrderController
         CheckPassAction $action,
         CheckPassRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -68,9 +66,8 @@ class WithdrawOrderController
         CheckRefuseAction $action,
         CheckRefuseRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -85,9 +82,8 @@ class WithdrawOrderController
         OutIndexAction $action,
         OutIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -102,9 +98,8 @@ class WithdrawOrderController
         OutSuccessAction $action,
         OutSuccessRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -119,8 +114,7 @@ class WithdrawOrderController
         OutRefuseAction $action,
         OutRefuseRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

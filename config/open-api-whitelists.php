@@ -1,6 +1,4 @@
 <?php
-
-$config = [
-           'ip' => ['172.19.0.1'],
-          ];
-return $config;
+return [
+        'ip' => ['172.19.0.1'],
+       ];

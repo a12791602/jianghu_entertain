@@ -1,6 +1,5 @@
 <?php
-
-$result = [
+return [
            /*
              |--------------------------------------------------------------------------
              | Eloquent Filter Settings
@@ -10,7 +9,7 @@ $result = [
              |
              */
 
-           'namespace'      => 'App\\ModelFilters\\',
+        'namespace'      => 'App\\ModelFilters\\',
 
            /*
             |--------------------------------------------------------------------------
@@ -33,6 +32,5 @@ $result = [
             | Set paginate limit
             |
             */
-           'paginate_limit' => env('PAGINATION_LIMIT_DEFAULT', 15),
-          ];
-return $result;
+        'paginate_limit' => env('PAGINATION_LIMIT_DEFAULT', 15),
+       ];

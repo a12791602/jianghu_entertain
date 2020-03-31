@@ -1,7 +1,6 @@
 <?php
-
 // phpcs:disable Generic.Files.LineLength.TooLong
-$config = [
+return [
     /*
     |--------------------------------------------------------------------------
     | Telegram Bot API Access Token [REQUIRED]
@@ -14,7 +13,7 @@ $config = [
     | https://core.telegram.org/bots#botfather
     |
     */
-           'bot_token'           => env('TELEGRAM_BOT_TOKEN', '823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM'),
+        'bot_token'           => env('TELEGRAM_BOT_TOKEN', '823054027:AAEY_Qcws74hMQpktd7GAsSWhO8RHN1-4UM'),
 
     /*
     |--------------------------------------------------------------------------
@@ -27,7 +26,7 @@ $config = [
     | Possible Values: (Boolean) "true" OR "false"
     |
     */
-           'async_requests'      => env('TELEGRAM_ASYNC_REQUESTS', false),
+        'async_requests'      => env('TELEGRAM_ASYNC_REQUESTS', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +39,7 @@ $config = [
     | Default: GuzzlePHP
     |
     */
-           'http_client_handler' => null,
+        'http_client_handler' => null,
 
     /*
     |--------------------------------------------------------------------------
@@ -56,31 +55,30 @@ $config = [
     | will respond with a list of available commands and description.
     |
     */
-           'commands'            => [
-                                     Telegram\Bot\Commands\HelpCommand::class,
-                                    ],
-           'chats'               => [
-                                     'test-jianghu'       => [
-                                                              'app-api'          => -372413024,
-                                                              'h5-api'           => -365070029,
-                                                              'merchant-api'     => -386162456,
-                                                              'headquarters-api' => -374337000,
-                                                              'other'            => -1001232635993,
-                                                              'human'            => -1001479716542,
-                                                             ],
-                                     'testonline-jianghu' => [
-                                                              'app-api'          => -1001202373755,//江湖-外网测-App端 php 报错通知
-                                                              'h5-api'           => -1001301424599,//江湖-外网测-H5端 php 报错通知
-                                                              'merchant-api'     => -1001478401589,//江湖-外网测-商户后台 php 报错通知
-                                                              'headquarters-api' => -1001465761233,//江湖-外网测-总后台 php 报错通知
-                                                              'other'            => -1001343161867,//江湖-外网测-系统报错通知
-                                                              'human'            => -1001306829479,//江湖-外网测-403与人为 报错通知
-                                                             ],
-                                    ],
-           'http-group'          => [
-                                     403,
-                                     401,
-                                    ],
-          ];
-return $config;
+        'commands'            => [
+                                  Telegram\Bot\Commands\HelpCommand::class,
+                                 ],
+        'chats'               => [
+                                  'test-jianghu'       => [
+                                                           'app-api'          => -372413024,
+                                                           'h5-api'           => -365070029,
+                                                           'merchant-api'     => -386162456,
+                                                           'headquarters-api' => -374337000,
+                                                           'other'            => -1001232635993,
+                                                           'human'            => -1001479716542,
+                                                          ],
+                                  'testonline-jianghu' => [
+                                                           'app-api'          => -1001202373755,//江湖-外网测-App端 php 报错通知
+                                                           'h5-api'           => -1001301424599,//江湖-外网测-H5端 php 报错通知
+                                                           'merchant-api'     => -1001478401589,//江湖-外网测-商户后台 php 报错通知
+                                                           'headquarters-api' => -1001465761233,//江湖-外网测-总后台 php 报错通知
+                                                           'other'            => -1001343161867,//江湖-外网测-系统报错通知
+                                                           'human'            => -1001306829479,//江湖-外网测-403与人为 报错通知
+                                                          ],
+                                 ],
+        'http-group'          => [
+                                  403,
+                                  401,
+                                 ],
+       ];
 // phpcs:enable Generic.Files.LineLength.TooLong
