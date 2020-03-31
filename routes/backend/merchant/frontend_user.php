@@ -31,6 +31,14 @@ Route::group(
              'detail',
             ],
         )->name($namePrefix . 'detail');
+        //加入黑名单
+        Route::post(
+            'black',
+            [
+             FrontendUserController::class,
+             'black',
+            ],
+        )->name($namePrefix . 'black');
         //会员重置密码
         Route::post(
             'password/reset',

@@ -42,6 +42,14 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'detail',
              ],
              [
+              'route_name'    => 'merchant-api.frontend-user.black',
+              'menu_group_id' => 4,
+              'title'         => '会员管理-会员列表-加入黑名单',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\User\FrontendUserController',
+              'method'        => 'black',
+             ],
+             [
               'route_name'    => 'merchant-api.frontend-user.label',
               'menu_group_id' => 4,
               'title'         => '会员管理-会员列表-详情-修改会员标签',

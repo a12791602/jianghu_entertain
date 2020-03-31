@@ -32,6 +32,7 @@ class FrontendUsersBlackList extends BaseAuthModel
                                       'id'     => '黑名单ID',
                                       'mobile' => '会员账号',
                                       'guid'   => '用户UID',
+                                      'remark' => '备注',
                                       'status' => '黑名单状态',
                                      ];
 
@@ -42,8 +43,7 @@ class FrontendUsersBlackList extends BaseAuthModel
      */
     public function getBlackNumAttribute(): int
     {
-        $filterArr = ['uniqueId' => $this->uid];
-        $count     = self::filter($filterArr, FrontendUsersBlackListFilter::class)->count();
-        return $count;
+        $filterArr = ['guid' => $this->guid];
+        return self::filter($filterArr, FrontendUsersBlackListFilter::class)->count();
     }
 }
