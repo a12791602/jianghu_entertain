@@ -18,10 +18,10 @@ class FrontendUsersGameId extends Model
 
     /**
      * Generate User Unique ID to Redis.
-     * @param string $brand Brand name.
+     * @param mixed $brand Brand name.
      * @return void
      */
-    public function generateUserUniqueID(string $brand): void
+    public function generateUserUniqueID($brand): void
     {
         $redis = app('redis_user_unique_id');
         FrontendUsersGameId::select('user_id')->chunk(

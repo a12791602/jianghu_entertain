@@ -21,7 +21,7 @@ class DetailResource extends BaseResource
     private $guid;
 
     /**
-     * @var string $last_login_time 最后登录ip.
+     * @var Carbon $last_login_time 上次登录时间.
      */
     private $last_login_time;
 
@@ -61,7 +61,7 @@ class DetailResource extends BaseResource
     private $last_login_ip;
 
     /**
-     * @var string $created_at 创建时间.
+     * @var Carbon $created_at 创建时间.
      */
     private $created_at;
 
@@ -80,34 +80,32 @@ class DetailResource extends BaseResource
     {
         // TODO 财务信息和推广信息 待处理
         $last_seen_time = Carbon::parse($this->last_login_time)->diffForHumans();
-        
-        $result = [
-                   'guid'              => $this->guid,
-                   'avatar'            => $this->specificInfo->avatar_full,
-                   'name'              => $this->specificInfo->nickname,
-                   'level'             => $this->specificInfo->level,
-                   'balance'           => $this->account->balance,
-                   'type'              => $this->type,
-                   'status'            => $this->status,
-                   'label'             => $this->userTag->title,
-                   'promotion_details' => [
-                                           'total_members'      => $this->specificInfo->total_members,
-                                           'promotion_level'    => null,
-                                           'commission_balance' => null,
-                                          ],
-                   'finance_info'      => [],
-                   'other_info'        => [
-                                           'device'             => $this->device_code,
-                                           'last_login_ip'      => $this->last_login_ip,
-                                           'last_login_address' => null,
-                                           'last_login_time'    => $this->last_login_time,
-                                           'last_seen_time'     => $last_seen_time,
-                                           'register_type'      => $this->specificInfo->register_type,
-                                           'register_ip'        => $this->register_ip,
-                                           'number_of_logins'   => null,
-                                           'created_at'         => $this->created_at,
-                                          ],
-                  ];
-        return $result;
+        return [
+                'guid'              => $this->guid,
+                'avatar'            => $this->specificInfo->avatar_full,
+                'name'              => $this->specificInfo->nickname,
+                'level'             => $this->specificInfo->level,
+                'balance'           => (float) sprintf('%.2f', $this->account->balance),
+                'type'              => $this->type,
+                'status'            => $this->status,
+                'label'             => $this->userTag->title,
+                'promotion_details' => [
+                                        'total_members'      => $this->specificInfo->total_members,
+                                        'promotion_level'    => null,
+                                        'commission_balance' => null,
+                                       ],
+                'finance_info'      => [],
+                'other_info'        => [
+                                        'device'             => $this->device_code,
+                                        'last_login_ip'      => $this->last_login_ip,
+                                        'last_login_address' => null,
+                                        'last_login_time'    => $this->last_login_time->toDateTimeString(),
+                                        'last_seen_time'     => $last_seen_time,
+                                        'register_type'      => $this->specificInfo->register_type,
+                                        'register_ip'        => $this->register_ip,
+                                        'number_of_logins'   => null,
+                                        'created_at'         => $this->created_at->toDateTimeString(),
+                                       ],
+               ];
     }
 }

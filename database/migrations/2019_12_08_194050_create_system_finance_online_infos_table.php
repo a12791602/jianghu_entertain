@@ -28,8 +28,8 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->string('backend_remark')->nullable()->default(null)->comment('后台备注');
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
                 $table->integer('channel_id')->nullable()->default(null)->comment('所属通道id');
-                $table->decimal('min', 20, 2)->nullable()->default(null)->comment('最小充值金额');
-                $table->decimal('max', 20, 2)->nullable()->default(null)->comment('最大充值金额');
+                $table->decimal('min_amount', 20, 2)->nullable()->default(null)->comment('最小充值金额');
+                $table->decimal('max_amount', 20, 2)->nullable()->default(null)->comment('最大充值金额');
                 $table->string('handle_fee', 10)->nullable()->default(null);
                 $table->string('rebate_fee', 10)->nullable()->default(null)->comment('返点');
                 $table->string('request_url')->nullable()->default(null)->comment('请求地址');
