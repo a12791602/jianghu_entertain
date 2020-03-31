@@ -27,8 +27,7 @@ class SystemStaticActivityFilter extends ModelFilter
      */
     public function title(string $title): SystemStaticActivityFilter
     {
-        $object = $this->where('title', $title);
-        return $object;
+        return $this->where('title', $title);
     }
 
     /**
@@ -39,8 +38,7 @@ class SystemStaticActivityFilter extends ModelFilter
      */
     public function platform(int $platform_id): SystemStaticActivityFilter
     {
-        $object = $this->where('platform_id', $platform_id);
-        return $object;
+        return $this->where('platform_id', $platform_id);
     }
 
     /**
@@ -51,7 +49,6 @@ class SystemStaticActivityFilter extends ModelFilter
      */
     public function device(int $device): SystemStaticActivityFilter
     {
-        $object = $this->where('device', $device);
-        return $object;
+        return $this->where('device', $device);
     }
 }

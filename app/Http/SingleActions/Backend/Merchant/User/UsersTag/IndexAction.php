@@ -42,7 +42,6 @@ class IndexAction extends MainAction
                           ->filter($filterArr, UsersTagFilter::class)
                           ->select('id', 'title', 'no_withdraw', 'no_login', 'no_play', 'no_promote', 'created_at')
                           ->paginate($this->model::getPageSize());
-        $msgOut    = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

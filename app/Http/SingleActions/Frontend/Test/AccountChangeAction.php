@@ -30,8 +30,7 @@ class AccountChangeAction extends MainAction
         if (!$inputDatas['params']) {
             $inputDatas['params'] = [];
         }
-        $data   = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
+        return msgOut($data);
     }
 }

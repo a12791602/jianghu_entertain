@@ -26,7 +26,6 @@ class SystemUserPublicAvatar extends BaseModel
     {
         $avatar         = $this->pic_path;
         $appEnvironment = App::environment();
-        $result         = config('image_domain.' . $appEnvironment) . $avatar;
-        return $result;
+        return config('image_domain.' . $appEnvironment) . $avatar;
     }
 }

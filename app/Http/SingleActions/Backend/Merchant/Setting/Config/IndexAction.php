@@ -35,8 +35,8 @@ class IndexAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $sign   = $this->currentPlatformEloq->sign;
-        $data   = SystemConfiguration::where(
+        $sign = $this->currentPlatformEloq->sign;
+        $data = SystemConfiguration::where(
             [
              [
               'platform_sign',
@@ -58,7 +58,6 @@ class IndexAction extends MainAction
              'editable_type',
             ],
         );
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

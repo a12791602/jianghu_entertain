@@ -34,8 +34,7 @@ class AccountManagementController
      */
     public function accountList(AccountListAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -49,8 +48,7 @@ class AccountManagementController
         BankCardBindingAction $action,
         BankCardBindingRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -64,8 +62,7 @@ class AccountManagementController
         BankCardBindingAction $action,
         BankCardFirstBindingRequest $request
     ): JsonResponse {
-        $result = $action->firstExecute($request);
-        return $result;
+        return $action->firstExecute($request);
     }
 
     /**
@@ -79,8 +76,7 @@ class AccountManagementController
         AliPayBindingAction $action,
         AliPayBindingRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -94,8 +90,7 @@ class AccountManagementController
         AliPayBindingAction $action,
         AliPayFirstBindingRequest $request
     ): JsonResponse {
-        $result = $action->firstExecute($request);
-        return $result;
+        return $action->firstExecute($request);
     }
 
     /**
@@ -109,8 +104,7 @@ class AccountManagementController
         AccountDestroyAction $action,
         AccountDestroyRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -121,8 +115,7 @@ class AccountManagementController
      */
     public function fundPasswordCheck(FundPasswordCheckAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -134,8 +127,7 @@ class AccountManagementController
      */
     public function withdrawal(WithdrawalAction $action, WithdrawalRequest $request): JsonResponse
     {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -147,8 +139,7 @@ class AccountManagementController
     public function accountDestroyVerificationCode(
         PrivateVerificationCodeAction $action
     ): JsonResponse {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -161,7 +152,6 @@ class AccountManagementController
     public function report(ReportRequest $request, ReportAction $action): JsonResponse
     {
         $validated = $request->validated();
-        $result    = $action->execute($validated);
-        return $result;
+        return $action->execute($validated);
     }
 }

@@ -125,29 +125,27 @@ class IndexResource extends BaseResource
     public function toArray($request): array
     {
         $userTags = UsersTag::whereIn('id', $this->tags->tag_id)->get(['id', 'title']);
-
-        $result = [
-                   'id'          => $this->id,
-                   'type'        => $this->type->name,
-                   'platform_id' => $this->platform_id,
-                   'bank'        => optional($this->bank)->name,
-                   'name'        => $this->name,
-                   'remark'      => $this->remark,
-                   'qrcode'      => $this->qrcode,
-                   'account'     => $this->account,
-                   'username'    => $this->username,
-                   'min_amount'  => (float) sprintf('%.2f', $this->min_amount),
-                   'max_amount'  => (float) sprintf('%.2f', $this->max_amount),
-                   'sort'        => (int) $this->sort,
-                   'status'      => (int) $this->status,
-                   'branch'      => $this->branch,
-                   'author'      => $this->author->name,
-                   'last_editor' => $this->lastEditor->name,
-                   'fee_cost'    => (float) $this->fee_cost,
-                   'tags'        => $userTags,
-                   'updated_at'  => $this->updated_at->toDatetimeString(),
-                   'created_at'  => $this->created_at->toDatetimeString(),
-                  ];
-        return $result;
+        return [
+                'id'          => $this->id,
+                'type'        => $this->type->name,
+                'platform_id' => $this->platform_id,
+                'bank'        => optional($this->bank)->name,
+                'name'        => $this->name,
+                'remark'      => $this->remark,
+                'qrcode'      => $this->qrcode,
+                'account'     => $this->account,
+                'username'    => $this->username,
+                'min_amount'  => (float) sprintf('%.2f', $this->min_amount),
+                'max_amount'  => (float) sprintf('%.2f', $this->max_amount),
+                'sort'        => (int) $this->sort,
+                'status'      => (int) $this->status,
+                'branch'      => $this->branch,
+                'author'      => $this->author->name,
+                'last_editor' => $this->lastEditor->name,
+                'fee_cost'    => (float) $this->fee_cost,
+                'tags'        => $userTags,
+                'updated_at'  => $this->updated_at->toDatetimeString(),
+                'created_at'  => $this->created_at->toDatetimeString(),
+               ];
     }
 }

@@ -44,8 +44,7 @@ class DoAddAction extends MainAction
             throw new \Exception('302400');
         }
 
-        $data   = ['name' => $this->model->name];
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = ['name' => $this->model->name];
+        return msgOut($data);
     }
 }

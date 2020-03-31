@@ -55,7 +55,6 @@ class IndexAction extends MainAction
                 ],
             )
             ->paginate($this->model::getPageSize());
-        $msgOut                     = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

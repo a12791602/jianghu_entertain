@@ -31,8 +31,7 @@ class CheckPassAction extends BaseAction
                           ];
         $resl           = $this->model::where($whereCondition)->update($update);
         if ($resl) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('202900');
     }

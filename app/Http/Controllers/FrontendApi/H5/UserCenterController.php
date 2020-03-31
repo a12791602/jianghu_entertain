@@ -24,8 +24,7 @@ class UserCenterController
      */
     public function information(InformationAction $action): JsonResponse
     {
-        $result = $action->information();
-        return $result;
+        return $action->information();
     }
 
     /**
@@ -36,8 +35,7 @@ class UserCenterController
      */
     public function dynamicInformation(InformationAction $action): JsonResponse
     {
-        $result = $action->dynamicInformation();
-        return $result;
+        return $action->dynamicInformation();
     }
 
     /**
@@ -51,8 +49,7 @@ class UserCenterController
         InformationAction $action,
         InformationUpdateRequest $request
     ): JsonResponse {
-        $result = $action->update($request);
-        return $result;
+        return $action->update($request);
     }
 
     /**
@@ -67,8 +64,7 @@ class UserCenterController
         ClaimGiftRequest $request
     ): JsonResponse {
         $validated = $request->validated();
-        $result    = $action->execute($validated);
-        return $result;
+        return $action->execute($validated);
     }
 
     /**
@@ -79,7 +75,6 @@ class UserCenterController
      */
     public function checkBenefits(CheckBenefitsAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

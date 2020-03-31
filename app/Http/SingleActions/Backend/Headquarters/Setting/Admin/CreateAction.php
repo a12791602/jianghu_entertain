@@ -20,7 +20,6 @@ class CreateAction extends MainAction
     {
         $inputDatas['password'] = bcrypt($inputDatas['password']);
         $user                   = BackendAdminUser::create($inputDatas);
-        $msgOut                 = msgOut(['name' => $user->name]);
-        return $msgOut;
+        return msgOut(['name' => $user->name]);
     }
 }

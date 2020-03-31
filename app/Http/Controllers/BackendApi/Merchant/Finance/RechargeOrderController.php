@@ -30,9 +30,8 @@ class RechargeOrderController
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -47,9 +46,8 @@ class RechargeOrderController
         GetFinanceTypesAction $action,
         GetFinanceTypesRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -64,9 +62,8 @@ class RechargeOrderController
         HandleSuccessAction $action,
         HandleSuccessRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -79,9 +76,8 @@ class RechargeOrderController
      */
     public function checkPass(CheckPassAction $action, CheckPassRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -96,8 +92,7 @@ class RechargeOrderController
         CheckRefuseAction $action,
         CheckRefuseRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

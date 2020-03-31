@@ -27,8 +27,7 @@ class SystemFinanceTypeFilter extends ModelFilter
      */
     public function status(int $status): SystemFinanceTypeFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -38,8 +37,7 @@ class SystemFinanceTypeFilter extends ModelFilter
      */
     public function name(string $name): SystemFinanceTypeFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 
     /**
@@ -49,8 +47,7 @@ class SystemFinanceTypeFilter extends ModelFilter
      */
     public function isOnline(int $is_online): SystemFinanceTypeFilter
     {
-        $object = $this->where('is_online', $is_online);
-        return $object;
+        return $this->where('is_online', $is_online);
     }
 
     /**
@@ -61,7 +58,6 @@ class SystemFinanceTypeFilter extends ModelFilter
      */
     public function direction(int $direction): SystemFinanceTypeFilter
     {
-        $object = $this->where('direction', $direction);
-        return $object;
+        return $this->where('direction', $direction);
     }
 }

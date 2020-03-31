@@ -26,9 +26,8 @@ class ActivityDynController
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -41,9 +40,8 @@ class ActivityDynController
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -56,8 +54,7 @@ class ActivityDynController
      */
     public function savePic(SavePicAction $action, SavePicRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

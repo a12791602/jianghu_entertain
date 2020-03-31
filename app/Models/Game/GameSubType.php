@@ -34,7 +34,6 @@ class GameSubType extends BaseModel implements Sortable
      */
     public function games(): HasMany
     {
-        $game = $this->hasMany(Game::class, 'sub_type_id', 'id');
-        return $game;
+        return $this->hasMany(Game::class, 'sub_type_id', 'id');
     }
 }

@@ -21,8 +21,7 @@ class UploadController
      */
     public function upload(UploadAction $action, UploadRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

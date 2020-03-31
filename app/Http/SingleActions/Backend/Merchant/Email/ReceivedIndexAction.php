@@ -49,7 +49,6 @@ class ReceivedIndexAction extends BaseAction
         }
 
         $emails['data'] = $datas;
-        $msgOut         = msgOut($emails);
-        return $msgOut;
+        return msgOut($emails);
     }
 }

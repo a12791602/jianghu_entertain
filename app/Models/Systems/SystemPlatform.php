@@ -43,8 +43,7 @@ class SystemPlatform extends BaseModel
      */
     public function adminUsers(): HasMany
     {
-        $adminUsers = $this->hasMany(MerchantAdminUser::class, 'platform_sign', 'sign');
-        return $adminUsers;
+        return $this->hasMany(MerchantAdminUser::class, 'platform_sign', 'sign');
     }
 
     /**
@@ -53,8 +52,7 @@ class SystemPlatform extends BaseModel
      */
     public function owner(): HasOne
     {
-        $owner = $this->hasOne(MerchantAdminUser::class, 'id', 'owner_id');
-        return $owner;
+        return $this->hasOne(MerchantAdminUser::class, 'id', 'owner_id');
     }
 
     /**
@@ -63,8 +61,7 @@ class SystemPlatform extends BaseModel
      */
     public function sslKey(): HasOne
     {
-        $sslKey = $this->hasOne(SystemPlatformSsl::class, 'platform_sign', 'sign');
-        return $sslKey;
+        return $this->hasOne(SystemPlatformSsl::class, 'platform_sign', 'sign');
     }
 
     /**
@@ -74,13 +71,12 @@ class SystemPlatform extends BaseModel
      */
     public function gameTypes(): BelongsToMany
     {
-        $gameTypes = $this->belongsToMany(
+        return $this->belongsToMany(
             GameType::class,
             'game_type_platforms',
             'platform_id',
             'type_id',
         );
-        return $gameTypes;
     }
 
     /**
@@ -90,12 +86,11 @@ class SystemPlatform extends BaseModel
      */
     public function games(): BelongsToMany
     {
-        $games = $this->belongsToMany(
+        return $this->belongsToMany(
             Game::class,
             'game_platforms',
             'platform_id',
             'game_id',
         );
-        return $games;
     }
 }

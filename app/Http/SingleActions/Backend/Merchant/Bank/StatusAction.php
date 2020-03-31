@@ -19,8 +19,7 @@ class StatusAction extends BaseAction
     {
         $result = $this->model->where('id', $inputDatas['id'])->update(['status' => $inputDatas['status']]);
         if ($result) {
-            $msgOut = msgOut(true);
-            return $msgOut;
+            return msgOut(true);
         }
         throw new \Exception('202100');
     }

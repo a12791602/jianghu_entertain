@@ -19,7 +19,6 @@ class BankIndexAction extends BaseAction
     public function execute(): JsonResponse
     {
         $result = SystemPlatformBank::with('bank')->where('platform_sign', $this->currentPlatformEloq->sign)->get();
-        $msgOut = msgOut(BankIndexResource::collection($result));
-        return $msgOut;
+        return msgOut(BankIndexResource::collection($result));
     }
 }

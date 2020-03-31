@@ -29,8 +29,7 @@ class GamesLobbyController
      */
     public function richList(RichListAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -41,8 +40,7 @@ class GamesLobbyController
      */
     public function profitList(ProfitListAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -56,8 +54,7 @@ class GamesLobbyController
         GameCategoryAction $action,
         GameCategoryRequest $request
     ): JsonResponse {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -70,8 +67,7 @@ class GamesLobbyController
     public function gameList(GameListRequest $request, GameListAction $action): JsonResponse
     {
         $validated = $request->validated();
-        $result    = $action->execute($validated);
-        return $result;
+        return $action->execute($validated);
     }
 
     /**
@@ -84,8 +80,7 @@ class GamesLobbyController
     public function slides(SlidesAction $action, SlidesRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $result    = $action->execute($validated);
-        return $result;
+        return $action->execute($validated);
     }
 
     /**
@@ -99,7 +94,6 @@ class GamesLobbyController
     public function inGame(InGameAction $action, InGameRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $result    = $action->execute($validated);
-        return $result;
+        return $action->execute($validated);
     }
 }

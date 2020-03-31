@@ -20,7 +20,6 @@ class PlatformController
      */
     public function currentSsl(CurrentSslAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

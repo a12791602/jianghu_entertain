@@ -27,7 +27,6 @@ class IndexDoAction
              'children:id,parent_id,name,sort,sign',
             ],
         )->ordered()->filter($inputDatas, GamesTypeFilter::class)->get();
-        $msgOut      = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

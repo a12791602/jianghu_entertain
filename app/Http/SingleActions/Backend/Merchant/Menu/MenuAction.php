@@ -18,7 +18,6 @@ class MenuAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $result = msgOut($this->menuLists);
-        return $result;
+        return msgOut($this->menuLists);
     }
 }

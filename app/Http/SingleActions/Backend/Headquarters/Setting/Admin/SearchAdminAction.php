@@ -37,11 +37,10 @@ class SearchAdminAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data   = $this->model
+        $data = $this->model
             ->filter($inputDatas, BackendAdminUserFilter::class)
             ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

@@ -32,7 +32,6 @@ class AccountDestroyAction extends VerificationCodeCheckAction
             throw new \Exception('100902');
         }
         Cache::forget($verification_key);
-        $result = msgOut([], '100901');
-        return $result;
+        return msgOut([], '100901');
     }
 }

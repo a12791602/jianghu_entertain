@@ -26,8 +26,7 @@ class FrontendUsersBlackListFilter extends ModelFilter
      */
     public function guid(string $guid): FrontendUsersBlackListFilter
     {
-        $eloq = $this->where('guid', $guid);
-        return $eloq;
+        return $this->where('guid', $guid);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendUsersBlackListFilter extends ModelFilter
      */
     public function mobile(string $mobile): FrontendUsersBlackListFilter
     {
-        $eloq = $this->where('mobile', $mobile);
-        return $eloq;
+        return $this->where('mobile', $mobile);
     }
 
     /**
@@ -65,8 +63,7 @@ class FrontendUsersBlackListFilter extends ModelFilter
      */
     public function status(int $status): FrontendUsersBlackListFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 
     /**
@@ -77,7 +74,6 @@ class FrontendUsersBlackListFilter extends ModelFilter
      */
     public function platformSign(string $platformSign): FrontendUsersBlackListFilter
     {
-        $eloq = $this->where('platform_sign', $platformSign);
-        return $eloq;
+        return $this->where('platform_sign', $platformSign);
     }
 }

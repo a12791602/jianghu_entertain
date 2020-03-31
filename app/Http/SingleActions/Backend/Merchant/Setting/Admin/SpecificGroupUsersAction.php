@@ -31,11 +31,10 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data   = $this->model
+        $data = $this->model
             ->select(['id', 'name', 'email', 'status'])
             ->where('group_id', $inputDatas['id'])
             ->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

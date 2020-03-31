@@ -29,8 +29,7 @@ class IndexAction extends BaseAction
         $pageSize                  = $this->model::getPageSize();
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
 
-        $data   = $this->model::filter($inputDatas, SystemFinanceOfflineInfoFilter::class)->paginate($pageSize);
-        $result = msgOut(IndexResource::collection($data));
-        return $result;
+        $data = $this->model::filter($inputDatas, SystemFinanceOfflineInfoFilter::class)->paginate($pageSize);
+        return msgOut(IndexResource::collection($data));
     }
 }

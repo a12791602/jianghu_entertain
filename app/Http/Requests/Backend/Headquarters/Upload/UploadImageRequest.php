@@ -39,10 +39,9 @@ class UploadImageRequest extends BaseFormRequest
     {
         $maxSize = config('upload.max_size', 2048);
         $mimes   = config('upload.mimes', '*');
-        $rules   = [
-                    'file' => 'required|file|max:' . $maxSize . '|mimetypes:' . $mimes,
-                    'path' => 'required|string',
-                   ];
-        return $rules;
+        return [
+                'file' => 'required|file|max:' . $maxSize . '|mimetypes:' . $mimes,
+                'path' => 'required|string',
+               ];
     }
 }

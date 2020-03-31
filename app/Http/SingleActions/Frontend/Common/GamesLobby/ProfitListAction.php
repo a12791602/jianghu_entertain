@@ -22,7 +22,6 @@ class ProfitListAction
         ProfitListResource::withoutWrapping();
         $outputDatas = FrontendUsersAccount::with(['frontendUser.specificInfo'])
             ->orderBy('balance', 'desc')->limit(config('games_lobby.show_only_users'))->get();
-        $result      = msgOut(ProfitListResource::collection($outputDatas));
-        return $result;
+        return msgOut(ProfitListResource::collection($outputDatas));
     }
 }

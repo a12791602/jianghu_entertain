@@ -38,8 +38,7 @@ class FrontendUserController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -52,8 +51,7 @@ class FrontendUserController
     public function store(StoreAction $action, StoreRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -66,8 +64,7 @@ class FrontendUserController
     public function detail(DetailAction $action, DetailRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -79,8 +76,7 @@ class FrontendUserController
     public function label(LabelAction $action, LabelRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -95,8 +91,7 @@ class FrontendUserController
         ResetPasswordRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -111,8 +106,7 @@ class FrontendUserController
         WithdrawalsPasswordRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -127,8 +121,7 @@ class FrontendUserController
         AlipayDestroyRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -143,8 +136,7 @@ class FrontendUserController
         UnlockRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -157,7 +149,6 @@ class FrontendUserController
     public function loginLog(LoginLogRequest $request, LoginLogAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

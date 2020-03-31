@@ -28,8 +28,7 @@ class SystemEmailFilter extends ModelFilter
      */
     public function isSend(int $is_send): SystemEmailFilter
     {
-        $object = $this->where('is_send', $is_send);
-        return $object;
+        return $this->where('is_send', $is_send);
     }
 
     /**
@@ -40,8 +39,7 @@ class SystemEmailFilter extends ModelFilter
      */
     public function title(string $title): SystemEmailFilter
     {
-        $object = $this->where('title', $title);
-        return $object;
+        return $this->where('title', $title);
     }
 
     /**
@@ -52,8 +50,7 @@ class SystemEmailFilter extends ModelFilter
      */
     public function name(string $name): SystemEmailFilter
     {
-        $object = $this->where('receivers', 'like', '%' . $name . '%');
-        return $object;
+        return $this->where('receivers', 'like', '%' . $name . '%');
     }
 
 
@@ -84,7 +81,6 @@ class SystemEmailFilter extends ModelFilter
      */
     public function platformSign(string $platform_sign): SystemEmailFilter
     {
-        $object = $this->where('platform_sign', $platform_sign);
-        return $object;
+        return $this->where('platform_sign', $platform_sign);
     }
 }

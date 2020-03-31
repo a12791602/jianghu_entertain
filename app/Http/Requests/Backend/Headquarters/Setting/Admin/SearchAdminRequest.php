@@ -32,7 +32,6 @@ class SearchAdminRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['searchStr' => 'required|string'];//搜索的字符串
-        return $rules;
+        return ['searchStr' => 'required|string'];
     }
 }

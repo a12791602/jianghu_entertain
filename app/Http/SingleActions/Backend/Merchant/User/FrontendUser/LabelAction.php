@@ -34,7 +34,6 @@ class LabelAction
         $user              = $this->model->where('guid', $inputDatas['guid'])->first();
         $user->user_tag_id = $inputDatas['label'];
         $user->save();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

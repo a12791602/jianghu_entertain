@@ -22,8 +22,7 @@ class ReadEmailAction extends BaseAction
         $result = SystemEmailOfHead::where('id', $inputDatas['id'])
             ->update(['is_read' => SystemEmail::IS_READ_YES]);
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('303002');
     }

@@ -65,9 +65,7 @@ class DoAddAction extends MainAction
         //插入用户洗码设置数据
         $this->_insertUsersCommission($this->currentPlatformEloq->sign);
         DB::commit();
-
-        $msgOut = msgOut(['name' => $this->model->name]);
-        return $msgOut;
+        return msgOut(['name' => $this->model->name]);
     }
 
     /**
@@ -80,10 +78,9 @@ class DoAddAction extends MainAction
      */
     private function _checkExp(object $usersGrades, string $sign, int $experience)
     {
-        $checkExp = $usersGrades->where('platform_sign', $sign)
+        return $usersGrades->where('platform_sign', $sign)
             ->where('experience_min', '>=', $experience)
             ->where('experience_min', '<=', $experience);
-        return $checkExp;
     }
 
     /**

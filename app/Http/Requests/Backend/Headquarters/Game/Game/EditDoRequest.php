@@ -37,14 +37,13 @@ class EditDoRequest extends BaseFormRequest
     public function rules(): array
     {
         $thisId = $this->get('id');
-        $rules  = [
-                   'id'           => 'required|exists:games,id',
-                   'type_id'      => 'required|exists:game_types,id',
-                   'vendor_id'    => 'required|exists:game_vendors,id',
-                   'name'         => 'required|max:64|unique:games,name,' . $thisId,
-                   'sign'         => 'required|max:64|unique:games,sign,' . $thisId . '|regex:/\w+/', //(字母+下划线)
-                   'request_mode' => 'required|integer|in:1,2',
-                  ];
-        return $rules;
+        return [
+                'id'           => 'required|exists:games,id',
+                'type_id'      => 'required|exists:game_types,id',
+                'vendor_id'    => 'required|exists:game_vendors,id',
+                'name'         => 'required|max:64|unique:games,name,' . $thisId,
+                'sign'         => 'required|max:64|unique:games,sign,' . $thisId . '|regex:/\w+/', //(字母+下划线)
+                'request_mode' => 'required|integer|in:1,2',
+               ];
     }
 }

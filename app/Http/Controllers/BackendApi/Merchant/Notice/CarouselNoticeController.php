@@ -30,9 +30,8 @@ class CarouselNoticeController
      */
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -45,9 +44,8 @@ class CarouselNoticeController
      */
     public function edit(EditAction $action, EditRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -60,9 +58,8 @@ class CarouselNoticeController
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -75,9 +72,8 @@ class CarouselNoticeController
      */
     public function delDo(DelDoAction $action, DelDoRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -90,8 +86,7 @@ class CarouselNoticeController
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

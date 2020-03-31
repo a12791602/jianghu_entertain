@@ -29,8 +29,7 @@ class BackendSystemDynActivityController
         IndexRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -46,7 +45,6 @@ class BackendSystemDynActivityController
         StatusRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

@@ -26,8 +26,7 @@ class UsersCommissionConfigFilter extends ModelFilter
      */
     public function platformSign(string $sign): UsersCommissionConfigFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 
     /**
@@ -38,8 +37,7 @@ class UsersCommissionConfigFilter extends ModelFilter
      */
     public function gameType(string $typeId): UsersCommissionConfigFilter
     {
-        $eloq = $this->where('game_type_id', $typeId);
-        return $eloq;
+        return $this->where('game_type_id', $typeId);
     }
 
     /**
@@ -50,8 +48,7 @@ class UsersCommissionConfigFilter extends ModelFilter
      */
     public function gameVendor(string $vendorId): UsersCommissionConfigFilter
     {
-        $eloq = $this->where('game_vendor_id', $vendorId);
-        return $eloq;
+        return $this->where('game_vendor_id', $vendorId);
     }
 
     /**
@@ -62,7 +59,6 @@ class UsersCommissionConfigFilter extends ModelFilter
      */
     public function notInId(int $configId): UsersCommissionConfigFilter
     {
-        $eloq = $this->where('id', '!=', $configId);
-        return $eloq;
+        return $this->where('id', '!=', $configId);
     }
 }

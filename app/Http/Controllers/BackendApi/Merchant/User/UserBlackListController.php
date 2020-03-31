@@ -25,8 +25,7 @@ class UserBlackListController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -38,8 +37,7 @@ class UserBlackListController
     public function detail(DetailRequest $request, DetailAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -51,7 +49,6 @@ class UserBlackListController
     public function remove(RemoveRequest $request, RemoveAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

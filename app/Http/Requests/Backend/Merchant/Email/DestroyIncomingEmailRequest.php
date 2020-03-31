@@ -34,7 +34,6 @@ class DestroyIncomingEmailRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = ['email_id' => 'required|integer|min:1|exists:system_email_of_merchants,email_id'];
-        return $rules;
+        return ['email_id' => 'required|integer|min:1|exists:system_email_of_merchants,email_id'];
     }
 }

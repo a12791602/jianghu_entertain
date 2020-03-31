@@ -62,7 +62,6 @@ class UpdateAdminGroupAction extends MainAction
         //更改组
         $AdminUserEloq->group_id = $inputDatas['group_id'];
         $AdminUserEloq->save();
-        $msgOut = msgOut($AdminUserEloq->toArray());
-        return $msgOut;
+        return msgOut($AdminUserEloq->toArray());
     }
 }

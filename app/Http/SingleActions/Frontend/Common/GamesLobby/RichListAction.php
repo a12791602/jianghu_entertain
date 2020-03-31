@@ -22,7 +22,6 @@ class RichListAction
     {
         $outputDatas = FrontendUsersAccount::with(['frontendUser.specificInfo'])
             ->orderBy('balance', 'desc')->limit(config('games_lobby.rich_rank_within'))->get();
-        $result      = msgOut(RichListResource::collection($outputDatas));
-        return $result;
+        return msgOut(RichListResource::collection($outputDatas));
     }
 }

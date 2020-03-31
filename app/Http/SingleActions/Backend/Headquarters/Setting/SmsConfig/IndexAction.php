@@ -58,8 +58,6 @@ class IndexAction extends MainAction
                 ],
             )->with('admin:id,name')
             ->paginate($this->model::getPageSize());
-
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

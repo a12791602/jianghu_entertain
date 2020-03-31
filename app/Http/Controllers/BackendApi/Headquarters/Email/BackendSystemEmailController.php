@@ -35,8 +35,7 @@ class BackendSystemEmailController
         SendRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -50,8 +49,7 @@ class BackendSystemEmailController
     public function sendIndex(SendIndexAction $action, SendIndexRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -66,9 +64,8 @@ class BackendSystemEmailController
         ReceivedIndexAction $action,
         ReceivedIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -80,8 +77,7 @@ class BackendSystemEmailController
      */
     public function recentContact(RecentContactAction $action): JsonResponse
     {
-        $outputDatas = $action->execute();
-        return $outputDatas;
+        return $action->execute();
     }
 
     /**
@@ -93,8 +89,7 @@ class BackendSystemEmailController
      */
     public function contact(ContactAction $action): JsonResponse
     {
-        $outputDatas = $action->execute();
-        return $outputDatas;
+        return $action->execute();
     }
 
     /**
@@ -107,8 +102,7 @@ class BackendSystemEmailController
      */
     public function readEmail(ReadEmailAction $action, ReadEmailRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

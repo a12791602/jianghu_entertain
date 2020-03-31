@@ -71,7 +71,6 @@ class EditAction extends MainAction
         }
 
         DB::commit();
-        $msgOut = msgOut($adminGroupELoq->toArray());
-        return $msgOut;
+        return msgOut($adminGroupELoq->toArray());
     }
 }

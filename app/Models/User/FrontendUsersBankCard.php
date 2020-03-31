@@ -67,8 +67,7 @@ class FrontendUsersBankCard extends BaseModel
      */
     public function bank(): BelongsTo
     {
-        $bank = $this->belongsTo(SystemPlatformBank::class, 'bank_id', 'id');
-        return $bank;
+        return $this->belongsTo(SystemPlatformBank::class, 'bank_id', 'id');
     }
 
     /**
@@ -77,8 +76,7 @@ class FrontendUsersBankCard extends BaseModel
      */
     public function user(): BelongsTo
     {
-        $user = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
-        return $user;
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 
     /**
@@ -89,7 +87,6 @@ class FrontendUsersBankCard extends BaseModel
     public function getBindingNumAttribute(): int
     {
         $filterArr = ['card_number' => $this->card_number];
-        $count     = self::filter($filterArr, SystemPlatformBankFilter::class)->count();
-        return $count;
+        return self::filter($filterArr, SystemPlatformBankFilter::class)->count();
     }
 }

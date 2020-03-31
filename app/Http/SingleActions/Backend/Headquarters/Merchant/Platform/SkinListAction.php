@@ -44,7 +44,6 @@ class SkinListAction extends MainAction
              'type',
             ],
         );
-        $msgOut   = msgOut($skinData);
-        return $msgOut;
+        return msgOut($skinData);
     }
 }

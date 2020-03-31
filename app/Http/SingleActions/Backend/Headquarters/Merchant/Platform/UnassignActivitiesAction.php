@@ -24,7 +24,6 @@ class UnassignActivitiesAction extends MainAction
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
         $outputDatas                          = SystemDynActivity::filter($inputDatas, SystemDynActivityFilter::class)
             ->paginate($pageSize);
-        $msgOut                               = msgOut($outputDatas);
-        return $msgOut;
+        return msgOut($outputDatas);
     }
 }

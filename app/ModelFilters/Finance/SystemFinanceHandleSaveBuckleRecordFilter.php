@@ -35,8 +35,7 @@ class SystemFinanceHandleSaveBuckleRecordFilter extends ModelFilter
      */
     public function type(int $type): SystemFinanceHandleSaveBuckleRecordFilter
     {
-        $object = $this->where('type', $type);
-        return $object;
+        return $this->where('type', $type);
     }
 
     /**
@@ -67,7 +66,6 @@ class SystemFinanceHandleSaveBuckleRecordFilter extends ModelFilter
      */
     public function direction(int $direction): SystemFinanceHandleSaveBuckleRecordFilter
     {
-        $object = $this->where('direction', $direction);
-        return $object;
+        return $this->where('direction', $direction);
     }
 }

@@ -25,8 +25,7 @@ class BankCardsController
     public function index(IndexRequest $request, IndexAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -37,8 +36,7 @@ class BankCardsController
      */
     public function bankList(BankListAction $action): JsonResponse
     {
-        $msgOut = $action->execute();
-        return $msgOut;
+        return $action->execute();
     }
 
     /**
@@ -51,7 +49,6 @@ class BankCardsController
     public function delete(DeleteRequest $request, DeleteAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

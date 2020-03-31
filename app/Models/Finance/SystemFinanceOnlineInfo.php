@@ -63,8 +63,7 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function channel(): BelongsTo
     {
-        $object = $this->belongsTo(SystemFinanceChannel::class, 'channel_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemFinanceChannel::class, 'channel_id', 'id');
     }
 
     /**
@@ -72,8 +71,7 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -81,8 +79,7 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -90,7 +87,7 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function type(): HasOneThrough
     {
-        $object = $this->hasOneThrough(
+        return $this->hasOneThrough(
             SystemFinanceType::class,
             SystemFinanceChannel::class,
             'id',
@@ -98,7 +95,6 @@ class SystemFinanceOnlineInfo extends BaseModel
             'channel_id',
             'type_id',
         );
-        return $object;
     }
 
     /**
@@ -106,7 +102,6 @@ class SystemFinanceOnlineInfo extends BaseModel
      */
     public function tags(): HasOne
     {
-        $object = $this->hasOne(SystemFinanceUserTag::class, 'online_finance_id', 'id');
-        return $object;
+        return $this->hasOne(SystemFinanceUserTag::class, 'online_finance_id', 'id');
     }
 }

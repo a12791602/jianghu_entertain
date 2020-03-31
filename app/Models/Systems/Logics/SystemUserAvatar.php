@@ -14,7 +14,6 @@ trait SystemUserAvatar
     public function avatarRandom(): int
     {
         $systemAvatars = SystemUserPublicAvatar::pluck('id')->toArray();
-        $avatar        = Arr::random($systemAvatars);
-        return $avatar;
+        return Arr::random($systemAvatars);
     }
 }

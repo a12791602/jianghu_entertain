@@ -87,7 +87,6 @@ trait SystemDomainLogics
      */
     public function checkDomain(string $domain): bool
     {
-        $isExists = $this->where('domain', $domain)->exists();
-        return $isExists;
+        return $this->where('domain', $domain)->exists();
     }
 }

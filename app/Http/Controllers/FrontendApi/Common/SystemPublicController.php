@@ -21,8 +21,7 @@ class SystemPublicController
      */
     public function avatar(SystemAvatarAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 
     /**
@@ -33,7 +32,6 @@ class SystemPublicController
      */
     public function bank(SystemSupportedBanksAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

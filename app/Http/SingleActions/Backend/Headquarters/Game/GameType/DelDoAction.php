@@ -32,8 +32,7 @@ class DelDoAction
         }
         try {
             $model::find($validated['id'])->delete();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

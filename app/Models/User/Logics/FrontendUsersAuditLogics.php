@@ -63,7 +63,6 @@ trait FrontendUsersAuditLogics
      */
     public static function getSerialNumber(string $sign): string
     {
-        $serialNumber = $sign . Str::orderedUuid()->getNodeHex();
-        return $serialNumber;
+        return $sign . Str::orderedUuid()->getNodeHex();
     }
 }

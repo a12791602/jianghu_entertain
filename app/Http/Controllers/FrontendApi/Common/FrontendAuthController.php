@@ -26,8 +26,7 @@ class FrontendAuthController
      */
     public function login(LoginVerificationRequest $request, LoginAction $action): JsonResponse
     {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendAuthController
      */
     public function logout(Request $request, LogoutAction $action): JsonResponse
     {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -50,7 +48,6 @@ class FrontendAuthController
      */
     public function refreshToken(RefreshAction $action): JsonResponse
     {
-        $result = $action->execute();
-        return $result;
+        return $action->execute();
     }
 }

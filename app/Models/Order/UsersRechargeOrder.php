@@ -89,8 +89,7 @@ class UsersRechargeOrder extends BaseModel
      */
     public function onlineInfo(): HasOne
     {
-        $object = $this->hasOne(SystemFinanceOnlineInfo::class, 'id', 'finance_channel_id');
-        return $object;
+        return $this->hasOne(SystemFinanceOnlineInfo::class, 'id', 'finance_channel_id');
     }
 
     /**
@@ -98,8 +97,7 @@ class UsersRechargeOrder extends BaseModel
      */
     public function user(): BelongsTo
     {
-        $object = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
-        return $object;
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 
     /**
@@ -107,7 +105,6 @@ class UsersRechargeOrder extends BaseModel
      */
     public function admin(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
     }
 }

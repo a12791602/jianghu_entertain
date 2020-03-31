@@ -27,8 +27,7 @@ class GameFilter extends ModelFilter
      */
     public function game(int $game_id): GameFilter
     {
-        $object = $this->where('id', $game_id);
-        return $object;
+        return $this->where('id', $game_id);
     }
 
     /**
@@ -38,8 +37,7 @@ class GameFilter extends ModelFilter
      */
     public function vendor(int $vendor_id): GameFilter
     {
-        $object = $this->where('vendor_id', $vendor_id);
-        return $object;
+        return $this->where('vendor_id', $vendor_id);
     }
 
     /**
@@ -49,8 +47,7 @@ class GameFilter extends ModelFilter
      */
     public function type(int $typeId): GameFilter
     {
-        $object = $this->where('type_id', $typeId);
-        return $object;
+        return $this->where('type_id', $typeId);
     }
 
     /**
@@ -60,8 +57,7 @@ class GameFilter extends ModelFilter
      */
     public function typeIn(array $typeId): GameFilter
     {
-        $object = $this->whereIn('type_id', $typeId);
-        return $object;
+        return $this->whereIn('type_id', $typeId);
     }
 
     /**
@@ -71,8 +67,7 @@ class GameFilter extends ModelFilter
      */
     public function subTypeIn(array $typeId): GameFilter
     {
-        $object = $this->whereIn('sub_type_id', $typeId);
-        return $object;
+        return $this->whereIn('sub_type_id', $typeId);
     }
 
     /**
@@ -83,7 +78,6 @@ class GameFilter extends ModelFilter
      */
     public function name(string $name): GameFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 }

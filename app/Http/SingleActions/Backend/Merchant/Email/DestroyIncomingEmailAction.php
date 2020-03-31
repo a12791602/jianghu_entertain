@@ -25,8 +25,7 @@ class DestroyIncomingEmailAction extends BaseAction
         $condition['platform_sign'] = $this->currentPlatformEloq->sign;
         try {
             SystemEmailOfMerchant::where($condition)->delete();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

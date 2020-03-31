@@ -29,7 +29,6 @@ class IndexAction extends BaseAction
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
             ->filter($inputDatas, NoticeMarqueeFilter::class)->paginate($pageSize);
-        $msgOut                    = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

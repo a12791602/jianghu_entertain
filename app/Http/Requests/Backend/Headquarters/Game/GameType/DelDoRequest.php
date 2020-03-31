@@ -36,15 +36,14 @@ class DelDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'            => 'required|integer',
-                  'category_type' => [
-                                      'required',
-                                      'numeric',
-                                      'in:1,2',
-                                      new CheckSortableModel($this),
-                                     ],
-                 ];
-        return $rules;
+        return [
+                'id'            => 'required|integer',
+                'category_type' => [
+                                    'required',
+                                    'numeric',
+                                    'in:1,2',
+                                    new CheckSortableModel($this),
+                                   ],
+               ];
     }
 }

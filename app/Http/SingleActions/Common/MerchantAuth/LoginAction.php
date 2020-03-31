@@ -26,8 +26,7 @@ class LoginAction extends MainAction
      */
     public function maxAttempts(): int
     {
-        $attempt = config('auth.max_attempts');
-        return $attempt;
+        return config('auth.max_attempts');
     }
 
     /**
@@ -74,8 +73,6 @@ class LoginAction extends MainAction
 
         $backendLoginLog = new BackendLoginLog();
         $backendLoginLog->insertData($user, $request, BackendLoginLog::TYPE_MERCHANT);
-
-        $msgOut = msgOut(LoginResource::make($user));
-        return $msgOut;
+        return msgOut(LoginResource::make($user));
     }
 }

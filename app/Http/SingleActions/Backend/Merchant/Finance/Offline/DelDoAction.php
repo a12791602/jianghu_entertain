@@ -34,8 +34,7 @@ class DelDoAction extends BaseAction
         }
         if ($flag) {
             DB::commit();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         DB::rollBack();
         throw new \Exception('200601');

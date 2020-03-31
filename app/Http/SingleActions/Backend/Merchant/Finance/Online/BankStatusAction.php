@@ -31,8 +31,7 @@ class BankStatusAction extends BaseAction
                      'last_editor_id' => $this->user->id,
                     ],
                 );
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

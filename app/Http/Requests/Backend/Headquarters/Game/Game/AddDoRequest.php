@@ -36,14 +36,13 @@ class AddDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'type_id'      => 'required|exists:game_types,id',
-                  'vendor_id'    => 'required|exists:game_vendors,id',
-                  'name'         => 'required|max:64|unique:games,name',
-                  'sign'         => 'required|max:64|unique:games,sign|regex:/\w+/',//(字母+下划线)
-                  'request_mode' => 'required|integer|in:1,2',
-                  'status'       => 'required|in:0,1',
-                 ];
-        return $rules;
+        return [
+                'type_id'      => 'required|exists:game_types,id',
+                'vendor_id'    => 'required|exists:game_vendors,id',
+                'name'         => 'required|max:64|unique:games,name',
+                'sign'         => 'required|max:64|unique:games,sign|regex:/\w+/',//(字母+下划线)
+                'request_mode' => 'required|integer|in:1,2',
+                'status'       => 'required|in:0,1',
+               ];
     }
 }

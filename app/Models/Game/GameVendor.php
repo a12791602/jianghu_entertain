@@ -67,8 +67,7 @@ class GameVendor extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -76,8 +75,7 @@ class GameVendor extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -85,8 +83,7 @@ class GameVendor extends BaseModel
      */
     public function whiteList(): HasOne
     {
-        $object = $this->hasOne(SystemIpWhiteList::class, 'game_vendor_id', 'id');
-        return $object;
+        return $this->hasOne(SystemIpWhiteList::class, 'game_vendor_id', 'id');
     }
 
     /**
@@ -119,7 +116,6 @@ class GameVendor extends BaseModel
      */
     public function modelFilter()
     {
-        $object = $this->provideFilter(GamesVendorFilter::class);
-        return $object;
+        return $this->provideFilter(GamesVendorFilter::class);
     }
 }

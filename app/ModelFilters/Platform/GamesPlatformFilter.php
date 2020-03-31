@@ -30,8 +30,7 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function platformId(string $platform_id): GamesPlatformFilter
     {
-        $object = $this->where('platform_id', $platform_id);
-        return $object;
+        return $this->where('platform_id', $platform_id);
     }
 
     /**
@@ -41,8 +40,7 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function device(int $device): GamesPlatformFilter
     {
-        $object = $this->where('device', $device);
-        return $object;
+        return $this->where('device', $device);
     }
 
     /**
@@ -52,8 +50,7 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function status(int $status): GamesPlatformFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -63,7 +60,6 @@ class GamesPlatformFilter extends ModelFilter
      */
     public function hotNew(int $hot_new): GamesPlatformFilter
     {
-        $object = $this->where('hot_new', $hot_new);
-        return $object;
+        return $this->where('hot_new', $hot_new);
     }
 }

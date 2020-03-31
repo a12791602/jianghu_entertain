@@ -24,8 +24,7 @@ class RegisterController
      */
     public function store(RegisterAction $action, RegisterRequest $request): JsonResponse
     {
-        $result = $action->execute($request);
-        return $result;
+        return $action->execute($request);
     }
 
     /**
@@ -40,7 +39,6 @@ class RegisterController
         RegisterVerificationCodeRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $result     = $action->execute($inputDatas);
-        return $result;
+        return $action->execute($inputDatas);
     }
 }

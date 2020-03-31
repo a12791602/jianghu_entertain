@@ -24,7 +24,6 @@ class ReceivedIndexAction extends BaseAction
             ->filter($inputDatas, SystemEmailOfHeadFilter::class)
             ->orderByDesc('created_at')
             ->paginate($pageSize);
-        $msgOut   = msgOut($datas);
-        return $msgOut;
+        return msgOut($datas);
     }
 }

@@ -26,8 +26,7 @@ class DelDoAction extends BaseAction
             GamePlatform::where('game_id', $inputDatas['id'])->delete();
             $this->model->where('id', $inputDatas['id'])->delete();
             DB::commit();
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
         }

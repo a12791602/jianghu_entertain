@@ -59,8 +59,6 @@ class DetailAction
                 ],
             )
             ->first();
-
-        $msgOut = msgOut(DetailResource::make($data));
-        return $msgOut;
+        return msgOut(DetailResource::make($data));
     }
 }

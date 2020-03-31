@@ -59,8 +59,7 @@ class MerchantAdminUser extends BaseAuthModel
      */
     public function platform(): HasOne
     {
-        $platform = $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
-        return $platform;
+        return $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
     }
 
     /**
@@ -70,8 +69,7 @@ class MerchantAdminUser extends BaseAuthModel
      */
     public function accessGroup(): HasOne
     {
-        $accessGroup = $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
-        return $accessGroup;
+        return $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
     }
 
     /**
@@ -79,7 +77,6 @@ class MerchantAdminUser extends BaseAuthModel
      */
     public function modelFilter(): string
     {
-        $string = $this->provideFilter(MerchantAdminUserFilter::class);
-        return $string;
+        return $this->provideFilter(MerchantAdminUserFilter::class);
     }
 }

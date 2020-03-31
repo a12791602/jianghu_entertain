@@ -63,8 +63,7 @@ class BackendAdminUser extends BaseAuthModel
      */
     public function getJWTIdentifier()
     {
-        $userKey = $this->getKey();
-        return $userKey;
+        return $this->getKey();
     }
 
     /**
@@ -84,8 +83,7 @@ class BackendAdminUser extends BaseAuthModel
      */
     public function platform(): HasOne
     {
-        $platform = $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
-        return $platform;
+        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
     }
 
     /**
@@ -95,8 +93,7 @@ class BackendAdminUser extends BaseAuthModel
      */
     public function accessGroup(): HasOne
     {
-        $accessGroup = $this->hasOne(BackendAdminAccessGroup::class, 'id', 'group_id');
-        return $accessGroup;
+        return $this->hasOne(BackendAdminAccessGroup::class, 'id', 'group_id');
     }
 
     /**
@@ -104,7 +101,6 @@ class BackendAdminUser extends BaseAuthModel
      */
     public function modelFilter(): string
     {
-        $string = $this->provideFilter(BackendAdminUserFilter::class);
-        return $string;
+        return $this->provideFilter(BackendAdminUserFilter::class);
     }
 }

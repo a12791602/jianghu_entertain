@@ -34,7 +34,6 @@ class FrontendUserLevel extends BaseAuthModel
      */
     public function users(): HasMany
     {
-        $users = $this->hasMany(FrontendUser::class, 'level_id', 'id');
-        return $users;
+        return $this->hasMany(FrontendUser::class, 'level_id', 'id');
     }
 }

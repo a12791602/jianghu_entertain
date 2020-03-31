@@ -38,13 +38,12 @@ class GroupEditRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
-                  'group_name' => 'required',
-                  'role'       => 'required|array',
-                  'role.*'     => 'integer',
-                 ];
-        return $rules;
+        return [
+                'id'         => 'required|numeric|exists:backend_admin_access_groups,id',
+                'group_name' => 'required',
+                'role'       => 'required|array',
+                'role.*'     => 'integer',
+               ];
     }
 
     /**

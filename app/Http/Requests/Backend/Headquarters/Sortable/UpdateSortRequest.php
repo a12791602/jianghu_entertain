@@ -40,17 +40,16 @@ class UpdateSortRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'sort'        => 'required|array',
-                  'sort.*.key'  => 'numeric',
-                  'sort.*.sort' => 'numeric',
-                  'model_type'  => [
-                                    'required',
-                                    'numeric',
-                                    'in:1,2',
-                                    new CheckSortableModel($this),
-                                   ],
-                 ];
-        return $rules;
+        return [
+                'sort'        => 'required|array',
+                'sort.*.key'  => 'numeric',
+                'sort.*.sort' => 'numeric',
+                'model_type'  => [
+                                  'required',
+                                  'numeric',
+                                  'in:1,2',
+                                  new CheckSortableModel($this),
+                                 ],
+               ];
     }
 }

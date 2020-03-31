@@ -30,9 +30,8 @@ class HandleSaveBuckleRecordController
         HandleSaveAction $action,
         HandleSaveRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -47,9 +46,8 @@ class HandleSaveBuckleRecordController
         SaveIndexAction $action,
         SaveIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -64,9 +62,8 @@ class HandleSaveBuckleRecordController
         HandleBuckleAction $action,
         HandleBuckleRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -81,8 +78,7 @@ class HandleSaveBuckleRecordController
         BuckleIndexAction $action,
         BuckleIndexRequest $request
     ): JsonResponse {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 }

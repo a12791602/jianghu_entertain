@@ -25,8 +25,7 @@ class BackendAdminUserFilter extends ModelFilter
      */
     public function searchStr(string $string): BackendAdminUserFilter
     {
-        $adminUser = $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
-        return $adminUser;
+        return $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
     }
 
     /**
@@ -37,7 +36,6 @@ class BackendAdminUserFilter extends ModelFilter
      */
     public function name(string $name): BackendAdminUserFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 }

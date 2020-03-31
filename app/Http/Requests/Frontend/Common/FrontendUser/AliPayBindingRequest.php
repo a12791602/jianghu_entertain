@@ -28,18 +28,17 @@ class AliPayBindingRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'owner_name'  => [
-                                     'string',
-                                     'required',
-                                     'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
-                                    ],
-                   'card_number' => [
-                                     'required',
-                                     new AccountUnique($this),
-                                    ],
-                  ];
-        return $result;
+        return [
+                'owner_name'  => [
+                                  'string',
+                                  'required',
+                                  'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
+                                 ],
+                'card_number' => [
+                                  'required',
+                                  new AccountUnique($this),
+                                 ],
+               ];
     }
 
     /**

@@ -27,8 +27,7 @@ class GamesVendorFilter extends ModelFilter
      */
     public function status(int $status): GamesVendorFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -38,8 +37,7 @@ class GamesVendorFilter extends ModelFilter
      */
     public function name(string $name): GamesVendorFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 
     /**
@@ -49,7 +47,6 @@ class GamesVendorFilter extends ModelFilter
      */
     public function vendor(int $vendor_id): GamesVendorFilter
     {
-        $object = $this->where('game_vendors.id', $vendor_id);
-        return $object;
+        return $this->where('game_vendors.id', $vendor_id);
     }
 }

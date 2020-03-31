@@ -26,8 +26,7 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      */
     public function userId(int $userId): FrontendUsersAccountsReportFilter
     {
-        $eloq = $this->where('user_id', $userId);
-        return $eloq;
+        return $this->where('user_id', $userId);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      */
     public function frozenTypeIn(array $type): FrontendUsersAccountsReportFilter
     {
-        $eloq = $this->whereIn('frozen_type', $type);
-        return $eloq;
+        return $this->whereIn('frozen_type', $type);
     }
 
     /**
@@ -65,7 +63,6 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      */
     public function typeIn(array $type): FrontendUsersAccountsReportFilter
     {
-        $eloq = $this->whereIn('type_sign', $type);
-        return $eloq;
+        return $this->whereIn('type_sign', $type);
     }
 }

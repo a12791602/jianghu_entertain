@@ -23,7 +23,6 @@ class SystemEmailOfUser extends BaseModel
      */
     public function email(): BelongsTo
     {
-        $object = $this->belongsTo(SystemEmail::class, 'email_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemEmail::class, 'email_id', 'id');
     }
 }

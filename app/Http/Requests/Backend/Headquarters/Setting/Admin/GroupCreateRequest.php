@@ -38,12 +38,11 @@ class GroupCreateRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'group_name' => 'required|unique:backend_admin_access_groups',
-                  'role'       => 'required|array',
-                  'role.*'     => 'integer',
-                 ];
-        return $rules;
+        return [
+                'group_name' => 'required|unique:backend_admin_access_groups',
+                'role'       => 'required|array',
+                'role.*'     => 'integer',
+               ];
     }
 
     /**

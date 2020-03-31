@@ -49,8 +49,7 @@ class SystemFinanceType extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 
     /**
@@ -58,8 +57,7 @@ class SystemFinanceType extends BaseModel
      */
     public function author(): BelongsTo
     {
-        $object = $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-        return $object;
+        return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
     }
 
     /**
@@ -67,13 +65,12 @@ class SystemFinanceType extends BaseModel
      */
     public function onlineInfos(): HasManyThrough
     {
-        $object = $this->hasManyThrough(
+        return $this->hasManyThrough(
             SystemFinanceOnlineInfo::class,
             SystemFinanceChannel::class,
             'type_id',
             'channel_id',
         );
-        return $object;
     }
 
     /**
@@ -81,7 +78,6 @@ class SystemFinanceType extends BaseModel
      */
     public function offlineInfos(): HasMany
     {
-        $object = $this->hasMany(SystemFinanceOfflineInfo::class, 'type_id', 'id');
-        return $object;
+        return $this->hasMany(SystemFinanceOfflineInfo::class, 'type_id', 'id');
     }
 }

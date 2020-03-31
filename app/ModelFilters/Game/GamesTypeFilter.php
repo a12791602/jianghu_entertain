@@ -27,8 +27,7 @@ class GamesTypeFilter extends ModelFilter
      */
     public function status(int $status): GamesTypeFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -38,8 +37,7 @@ class GamesTypeFilter extends ModelFilter
      */
     public function name(string $name): GamesTypeFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 
     /**
@@ -49,7 +47,6 @@ class GamesTypeFilter extends ModelFilter
      */
     public function type(int $type_id): GamesTypeFilter
     {
-        $object = $this->where('game_types.id', $type_id);
-        return $object;
+        return $this->where('game_types.id', $type_id);
     }
 }

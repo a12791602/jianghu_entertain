@@ -43,16 +43,15 @@ class StatusDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'            => 'required|numeric|exists:game_types,id',
-                  'status'        => 'required|in:0,1',
-                  'category_type' => [
-                                      'required',
-                                      'numeric',
-                                      'in:1,2',
-                                      new CheckSortableModel($this),
-                                     ],
-                 ];
-        return $rules;
+        return [
+                'id'            => 'required|numeric|exists:game_types,id',
+                'status'        => 'required|in:0,1',
+                'category_type' => [
+                                    'required',
+                                    'numeric',
+                                    'in:1,2',
+                                    new CheckSortableModel($this),
+                                   ],
+               ];
     }
 }

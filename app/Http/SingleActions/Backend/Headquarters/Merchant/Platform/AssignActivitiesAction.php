@@ -28,8 +28,7 @@ class AssignActivitiesAction extends MainAction
         }
         try {
             SystemDynActivityPlatform::insert($data);
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\Throwable $exception) {
             throw new \Exception('302007');
         }

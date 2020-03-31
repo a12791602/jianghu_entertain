@@ -27,11 +27,10 @@ class DoHotRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'      => 'required|integer|exists:game_platforms',
-                  'hot_new' => 'required|integer|in:0,1',
-                 ];
-        return $rules;
+        return [
+                'id'      => 'required|integer|exists:game_platforms',
+                'hot_new' => 'required|integer|in:0,1',
+               ];
     }
 
     /**
@@ -39,12 +38,11 @@ class DoHotRequest extends BaseFormRequest
      */
     public function messages(): array
     {
-        $messages = [
-                     'id.required'      => 'ID不存在',
-                     'id.exists'        => 'ID不存在',
-                     'hot_new.required' => '请选择是否热门',
-                     'hot_new.in'       => '所选是否热门不在范围内',
-                    ];
-        return $messages;
+        return [
+                'id.required'      => 'ID不存在',
+                'id.exists'        => 'ID不存在',
+                'hot_new.required' => '请选择是否热门',
+                'hot_new.in'       => '所选是否热门不在范围内',
+               ];
     }
 }

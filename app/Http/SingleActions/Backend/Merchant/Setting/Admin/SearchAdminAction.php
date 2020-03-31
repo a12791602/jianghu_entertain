@@ -42,7 +42,6 @@ class SearchAdminAction extends MainAction
             ->filter($inputDatas, MerchantAdminUserFilter::class)
             ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
-        $msgOut                 = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

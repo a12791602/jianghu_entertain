@@ -35,8 +35,7 @@ class IndexAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $data   = $this->model->get(['id', 'route_name', 'menu_group_id', 'title', 'description', 'is_open']);
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $this->model->get(['id', 'route_name', 'menu_group_id', 'title', 'description', 'is_open']);
+        return msgOut($data);
     }
 }

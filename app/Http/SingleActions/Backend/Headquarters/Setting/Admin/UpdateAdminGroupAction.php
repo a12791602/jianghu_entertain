@@ -58,11 +58,10 @@ class UpdateAdminGroupAction extends MainAction
         $adminEloq->group_id = $inputDatas['group_id'];
         $adminEloq->save();
         //返回信息
-        $data   = [
-                   'admin_name' => $adminEloq->name,
-                   'group_name' => $inputDatas['group_name'],
-                  ];
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = [
+                 'admin_name' => $adminEloq->name,
+                 'group_name' => $inputDatas['group_name'],
+                ];
+        return msgOut($data);
     }
 }

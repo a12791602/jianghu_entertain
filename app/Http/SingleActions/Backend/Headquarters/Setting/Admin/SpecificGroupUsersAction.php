@@ -37,8 +37,7 @@ class SpecificGroupUsersAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data   = $this->model->where('group_id', $inputDatas['id'])->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = $this->model->where('group_id', $inputDatas['id'])->paginate($this->model::getPageSize());
+        return msgOut($data);
     }
 }

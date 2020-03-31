@@ -35,8 +35,7 @@ class MerchantAdminAccessGroup extends BaseModel
      */
     public function detail(): HasMany
     {
-        $detail = $this->hasMany(MerchantAdminAccessGroupsHasBackendSystemMenu::class, 'group_id', 'id');
-        return $detail;
+        return $this->hasMany(MerchantAdminAccessGroupsHasBackendSystemMenu::class, 'group_id', 'id');
     }
 
     /**
@@ -44,7 +43,6 @@ class MerchantAdminAccessGroup extends BaseModel
      */
     public function adminUsers(): HasMany
     {
-        $adminUsers = $this->hasMany(MerchantAdminUser::class, 'group_id', 'id');
-        return $adminUsers;
+        return $this->hasMany(MerchantAdminUser::class, 'group_id', 'id');
     }
 }

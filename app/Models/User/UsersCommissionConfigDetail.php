@@ -26,7 +26,6 @@ class UsersCommissionConfigDetail extends BaseModel
      */
     public function userGrade()
     {
-        $userGrade = $this->belongsTo(FrontendUserLevel::class, 'grade_id', 'id');
-        return $userGrade;
+        return $this->belongsTo(FrontendUserLevel::class, 'grade_id', 'id');
     }
 }

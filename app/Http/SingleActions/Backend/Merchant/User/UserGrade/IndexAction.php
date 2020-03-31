@@ -35,8 +35,8 @@ class IndexAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $sign   = $this->currentPlatformEloq->sign;
-        $data   = $this->model
+        $sign = $this->currentPlatformEloq->sign;
+        $data = $this->model
                     ->where('platform_sign', $sign)
                     ->orderBy('experience_max', 'asc')
                     ->select(
@@ -51,7 +51,6 @@ class IndexAction extends MainAction
                         ],
                     )
                     ->paginate($this->model::getPageSize());
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

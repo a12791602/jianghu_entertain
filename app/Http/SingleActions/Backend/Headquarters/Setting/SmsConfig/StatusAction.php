@@ -46,8 +46,7 @@ class StatusAction extends MainAction
             throw new \Exception('302403');
         }
 
-        $data   = ['name' => $systemSmsConfig->name];
-        $msgOut = msgOut($data);
-        return $msgOut;
+        $data = ['name' => $systemSmsConfig->name];
+        return msgOut($data);
     }
 }

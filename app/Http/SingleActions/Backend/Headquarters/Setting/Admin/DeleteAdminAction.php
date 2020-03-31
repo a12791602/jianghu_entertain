@@ -52,8 +52,7 @@ class DeleteAdminAction extends MainAction
                 }
             }
             $adminEloq->delete();
-            $msgOut = msgOut(['name' => $inputDatas['name']]);
-            return $msgOut;
+            return msgOut(['name' => $inputDatas['name']]);
         }
         throw new \Exception('300701');
     }

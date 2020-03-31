@@ -34,7 +34,6 @@ class ResetPasswordAction
         $user           = $this->model->where('guid', $inputDatas['guid'])->first();
         $user->password = bcrypt($inputDatas['password']);
         $user->update();
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

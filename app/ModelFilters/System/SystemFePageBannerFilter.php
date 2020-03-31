@@ -25,8 +25,7 @@ class SystemFePageBannerFilter extends ModelFilter
      */
     public function flag(string $flag)
     {
-        $result = $this->where('flag', $flag);
-        return $result;
+        return $this->where('flag', $flag);
     }
 
     /**
@@ -35,7 +34,6 @@ class SystemFePageBannerFilter extends ModelFilter
      */
     public function status(string $status)
     {
-        $result = $this->where('status', $status);
-        return $result;
+        return $this->where('status', $status);
     }
 }

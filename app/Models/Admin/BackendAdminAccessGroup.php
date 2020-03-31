@@ -32,10 +32,9 @@ class BackendAdminAccessGroup extends BaseModel
      */
     public function getTableColumns()
     {
-        $tableColumns = $this->getConnection()
+        return $this->getConnection()
                              ->getSchemaBuilder()
                              ->getColumnListing($this->getTable());
-        return $tableColumns;
     }
 
     /**
@@ -43,8 +42,7 @@ class BackendAdminAccessGroup extends BaseModel
      */
     public function adminUsers(): HasMany
     {
-        $adminUsers = $this->hasMany(BackendAdminUser::class, 'group_id', 'id');
-        return $adminUsers;
+        return $this->hasMany(BackendAdminUser::class, 'group_id', 'id');
     }
 
     /**
@@ -54,7 +52,6 @@ class BackendAdminAccessGroup extends BaseModel
      */
     public function detail(): HasMany
     {
-        $detail = $this->hasMany(BackendAdminAccessGroupDetail::class, 'group_id', 'id');
-        return $detail;
+        return $this->hasMany(BackendAdminAccessGroupDetail::class, 'group_id', 'id');
     }
 }

@@ -48,18 +48,17 @@ class OutIndexRequest extends BaseFormRequest
                    UsersWithdrawOrder::TYPE_ALIPAY,
                    UsersWithdrawOrder::TYPE_WECHAT,
                   ];
-        $rules  = [
-                   'order_no'       => 'string|min:1|max:128|exists:users_withdraw_orders,order_no',
-                   'mobile'         => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //(手机号码第一位1第二位345789总共11位数字)
-                   'guid'           => 'string|size:7',
-                   'account_type'   => 'integer|in:' . implode(',', $type),
-                   'status'         => 'integer|in:' . implode(',', $status),
-                   'is_audit'       => 'integer|in:0,1',
-                   'admin'          => 'string|min:1|max:32',
-                   'operation_at'   => 'array',
-                   'operation_at.*' => 'required|date',
-                  ];
-        return $rules;
+        return [
+                'order_no'       => 'string|min:1|max:128|exists:users_withdraw_orders,order_no',
+                'mobile'         => 'string|min:1|max:32|regex:/^1[345789]\d{9}$/', //(手机号码第一位1第二位345789总共11位数字)
+                'guid'           => 'string|size:7',
+                'account_type'   => 'integer|in:' . implode(',', $type),
+                'status'         => 'integer|in:' . implode(',', $status),
+                'is_audit'       => 'integer|in:0,1',
+                'admin'          => 'string|min:1|max:32',
+                'operation_at'   => 'array',
+                'operation_at.*' => 'required|date',
+               ];
     }
 
     /**

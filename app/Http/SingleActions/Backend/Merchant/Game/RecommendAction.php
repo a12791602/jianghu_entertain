@@ -18,8 +18,7 @@ class RecommendAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         if ($this->model->where('id', $inputDatas['id'])->update(['is_recommend' => $inputDatas['is_recommend']])) {
-            $results = msgOut();
-            return $results;
+            return msgOut();
         }
         throw new \Exception('200202');
     }

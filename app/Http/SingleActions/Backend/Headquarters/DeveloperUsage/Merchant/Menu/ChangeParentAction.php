@@ -39,7 +39,6 @@ class ChangeParentAction extends MainAction
     {
         $menuLabel = $this->model::changeParent($inputDatas);
         $this->model->deleteCache();
-        $msgOut = msgOut(['label' => $menuLabel]);
-        return $msgOut;
+        return msgOut(['label' => $menuLabel]);
     }
 }

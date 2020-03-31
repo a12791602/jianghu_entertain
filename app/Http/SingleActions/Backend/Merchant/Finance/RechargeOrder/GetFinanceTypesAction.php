@@ -25,7 +25,6 @@ class GetFinanceTypesAction
                  'name',
                 ],
             );
-        $msgOut       = msgOut($financeTypes);
-        return $msgOut;
+        return msgOut($financeTypes);
     }
 }

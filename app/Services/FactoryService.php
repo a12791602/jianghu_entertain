@@ -43,11 +43,10 @@ class FactoryService
      */
     public function generatePay(string $platform, string $channel): object
     {
-        $platform    = ucfirst(Str::camel($platform));
-        $channel     = ucfirst(Str::camel($channel));
-        $className   = 'App\Finance\Pay\\' . $platform . 'Platform\\' . $channel . 'Pay';
-        $payInstence = self::_generateClass($className);
-        return $payInstence;
+        $platform  = ucfirst(Str::camel($platform));
+        $channel   = ucfirst(Str::camel($channel));
+        $className = 'App\Finance\Pay\\' . $platform . 'Platform\\' . $channel . 'Pay';
+        return self::_generateClass($className);
     }
 
     /**
@@ -58,9 +57,8 @@ class FactoryService
      */
     public function generateService(string $service): object
     {
-        $className       = 'App\Services\\' . ucfirst($service) . 'Service';
-        $serviceInstence = self::_generateClass($className);
-        return $serviceInstence;
+        $className = 'App\Services\\' . ucfirst($service) . 'Service';
+        return self::_generateClass($className);
     }
 
     /**

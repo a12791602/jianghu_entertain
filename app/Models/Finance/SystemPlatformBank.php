@@ -45,8 +45,7 @@ class SystemPlatformBank extends BaseModel
      */
     public function bank(): BelongsTo
     {
-        $object = $this->belongsTo(SystemBank::class, 'bank_id', 'id');
-        return $object;
+        return $this->belongsTo(SystemBank::class, 'bank_id', 'id');
     }
 
     /**
@@ -54,7 +53,6 @@ class SystemPlatformBank extends BaseModel
      */
     public function lastEditor(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'last_editor_id', 'id');
     }
 }

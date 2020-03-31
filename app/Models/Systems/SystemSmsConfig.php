@@ -38,7 +38,6 @@ class SystemSmsConfig extends BaseModel
      */
     public function admin(): BelongsTo
     {
-        $admin = $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
-        return $admin;
+        return $this->belongsTo(BackendAdminUser::class, 'last_editor_id', 'id');
     }
 }

@@ -37,7 +37,6 @@ class BackendLogHandler extends AbstractProcessingHandler
      */
     protected function getDefaultFormatter(): FormatterInterface
     {
-        $return = new CommonLogFormatter();
-        return $return;
+        return new CommonLogFormatter();
     }
 }

@@ -33,12 +33,11 @@ class ChangeParentRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $rules = [
-                  'id'    => 'required|integer|exists:merchant_system_menus',//ID
-                  'pid'   => 'required|integer',                             //上级ID
-                  'sort'  => 'required|integer|gte:0',                       //排序
-                  'level' => 'required|integer|gte:0',                       //层级
-                 ];
-        return $rules;
+        return [
+                'id'    => 'required|integer|exists:merchant_system_menus',//ID
+                'pid'   => 'required|integer',                             //上级ID
+                'sort'  => 'required|integer|gte:0',                       //排序
+                'level' => 'required|integer|gte:0',                       //层级
+               ];
     }
 }

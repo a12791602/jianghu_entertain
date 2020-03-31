@@ -49,8 +49,6 @@ class GroupIndexAction extends MainAction
                  'created_at',
                 ],
             )->paginate($this->model::getPageSize());
-
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

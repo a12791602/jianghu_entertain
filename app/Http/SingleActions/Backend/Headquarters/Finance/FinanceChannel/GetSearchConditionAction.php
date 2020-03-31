@@ -27,7 +27,6 @@ class GetSearchConditionAction extends BaseAction
                      'vendors'  => $vendors,
                      'types'    => $types,
                     ];
-        $msgOut   = msgOut($datas);
-        return $msgOut;
+        return msgOut($datas);
     }
 }

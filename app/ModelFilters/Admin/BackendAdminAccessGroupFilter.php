@@ -25,8 +25,7 @@ class BackendAdminAccessGroupFilter extends ModelFilter
      */
     public function id(int $groupId): BackendAdminAccessGroupFilter
     {
-        $eloq = $this->where('id', $groupId);
-        return $eloq;
+        return $this->where('id', $groupId);
     }
 
     /**
@@ -36,7 +35,6 @@ class BackendAdminAccessGroupFilter extends ModelFilter
      */
     public function groupName(string $groupName): BackendAdminAccessGroupFilter
     {
-        $eloq = $this->where('group_name', $groupName);
-        return $eloq;
+        return $this->where('group_name', $groupName);
     }
 }

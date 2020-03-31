@@ -27,8 +27,7 @@ class SystemDynActivityFilter extends ModelFilter
      */
     public function status(int $status): SystemDynActivityFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -37,8 +36,7 @@ class SystemDynActivityFilter extends ModelFilter
      */
     public function name(string $name): SystemDynActivityFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 
     /**
@@ -52,8 +50,7 @@ class SystemDynActivityFilter extends ModelFilter
             ->get()
             ->pluck('activity_sign')
             ->toArray();
-        $object             = $this->whereIn('sign', $assignedActivities);
-        return $object;
+        return $this->whereIn('sign', $assignedActivities);
     }
 
     /**
@@ -67,7 +64,6 @@ class SystemDynActivityFilter extends ModelFilter
             ->get()
             ->pluck('activity_sign')
             ->toArray();
-        $object             = $this->whereNotIn('sign', $assignedActivities);
-        return $object;
+        return $this->whereNotIn('sign', $assignedActivities);
     }
 }

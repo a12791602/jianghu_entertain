@@ -22,7 +22,6 @@ class ReportController
     public function userAudit(UserAuditRequest $request, UserAuditAction $action): JsonResponse
     {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

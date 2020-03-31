@@ -25,7 +25,6 @@ class FundPasswordCheckAction extends MainAction
     public function execute(): JsonResponse
     {
         $status = $this->user->fund_password ? self::IS_SET_STATUS : self::NO_SET_STATUS;
-        $result = msgOut(['status' => $status]);
-        return $result;
+        return msgOut(['status' => $status]);
     }
 }

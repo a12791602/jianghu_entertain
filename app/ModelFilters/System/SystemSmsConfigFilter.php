@@ -48,7 +48,6 @@ class SystemSmsConfigFilter extends ModelFilter
      */
     public function status(int $status): SystemSmsConfigFilter
     {
-        $eloq = $this->where('status', $status);
-        return $eloq;
+        return $this->where('status', $status);
     }
 }

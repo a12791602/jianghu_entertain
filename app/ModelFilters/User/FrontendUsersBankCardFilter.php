@@ -26,8 +26,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      */
     public function dataId(int $dataId): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('id', $dataId);
-        return $eloq;
+        return $this->where('id', $dataId);
     }
 
     /**
@@ -38,8 +37,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      */
     public function userId(int $userId): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('user_id', $userId);
-        return $eloq;
+        return $this->where('user_id', $userId);
     }
 
     /**
@@ -50,8 +48,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      */
     public function bank(int $bankId): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('bank_id', $bankId);
-        return $eloq;
+        return $this->where('bank_id', $bankId);
     }
 
     /**
@@ -62,8 +59,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      */
     public function sign(string $sign): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('platform_sign', $sign);
-        return $eloq;
+        return $this->where('platform_sign', $sign);
     }
 
     /**
@@ -74,8 +70,7 @@ class FrontendUsersBankCardFilter extends ModelFilter
      */
     public function cardNumber(string $cardNumber): FrontendUsersBankCardFilter
     {
-        $eloq = $this->where('card_number', $cardNumber);
-        return $eloq;
+        return $this->where('card_number', $cardNumber);
     }
 
     /**

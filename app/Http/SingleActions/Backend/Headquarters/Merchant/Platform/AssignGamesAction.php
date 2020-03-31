@@ -28,8 +28,7 @@ class AssignGamesAction extends MainAction
         }
         try {
             GamePlatform::insert($data);
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\Throwable $exception) {
             throw new \Exception('302000');
         }

@@ -101,12 +101,11 @@ class PlatformNoticeEvent implements ShouldBroadcast
      */
     public function broadcastWith(): array
     {
-        $data = [
-                 'message_type' => $this->messageType,
-                 'message'      => $this->message,
-                 'data'         => $this->data,
-                 'current_time' => Carbon::now()->toDateTimeString(),
-                ];
-        return $data;
+        return [
+                'message_type' => $this->messageType,
+                'message'      => $this->message,
+                'data'         => $this->data,
+                'current_time' => Carbon::now()->toDateTimeString(),
+               ];
     }
 }

@@ -46,7 +46,6 @@ class EditAction extends MainAction
             throw new \Exception('202804');
         }
         $this->model->deleteCache();
-        $msgOut = msgOut(['label' => $menuEloq->label]);
-        return $msgOut;
+        return msgOut(['label' => $menuEloq->label]);
     }
 }

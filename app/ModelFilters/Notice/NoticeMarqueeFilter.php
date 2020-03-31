@@ -27,8 +27,7 @@ class NoticeMarqueeFilter extends ModelFilter
      */
     public function title(string $title): NoticeMarqueeFilter
     {
-        $object = $this->where('title', $title);
-        return $object;
+        return $this->where('title', $title);
     }
 
     /**
@@ -39,7 +38,6 @@ class NoticeMarqueeFilter extends ModelFilter
      */
     public function platform(int $platform_id): NoticeMarqueeFilter
     {
-        $object = $this->where('platform_id', $platform_id);
-        return $object;
+        return $this->where('platform_id', $platform_id);
     }
 }

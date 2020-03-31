@@ -30,9 +30,8 @@ class OfflineFinanceController
      */
     public function addDo(AddDoAction $action, AddDoRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -44,9 +43,8 @@ class OfflineFinanceController
      */
     public function index(IndexAction $action, IndexRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -57,8 +55,7 @@ class OfflineFinanceController
      */
     public function types(TypesAction $action): JsonResponse
     {
-        $outputDatas = $action->execute();
-        return $outputDatas;
+        return $action->execute();
     }
 
     /**
@@ -70,9 +67,8 @@ class OfflineFinanceController
      */
     public function delDo(DelDoAction $action, DelDoRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -84,9 +80,8 @@ class OfflineFinanceController
      */
     public function status(StatusAction $action, StatusRequest $request): JsonResponse
     {
-        $inputDatas  = $request->validated();
-        $outputDatas = $action->execute($inputDatas);
-        return $outputDatas;
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -100,7 +95,6 @@ class OfflineFinanceController
     {
         $inputDatas           = $request->validated();
         $inputDatas['method'] = $request->method();
-        $outputDatas          = $action->execute($inputDatas);
-        return $outputDatas;
+        return $action->execute($inputDatas);
     }
 }

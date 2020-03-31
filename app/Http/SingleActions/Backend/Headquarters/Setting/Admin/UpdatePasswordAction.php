@@ -56,8 +56,7 @@ class UpdatePasswordAction extends MainAction
         if ($adminEloq !== null) {
             $adminEloq->password = Hash::make($inputDatas['password']);
             $adminEloq->save();
-            $msgOut = msgOut(['name' => $inputDatas['name']]);
-            return $msgOut;
+            return msgOut(['name' => $inputDatas['name']]);
         }
         throw new \Exception('301100');
     }

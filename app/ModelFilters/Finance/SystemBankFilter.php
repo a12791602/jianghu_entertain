@@ -27,8 +27,7 @@ class SystemBankFilter extends ModelFilter
      */
     public function status(int $status): SystemBankFilter
     {
-        $object = $this->where('status', $status);
-        return $object;
+        return $this->where('status', $status);
     }
 
     /**
@@ -38,7 +37,6 @@ class SystemBankFilter extends ModelFilter
      */
     public function name(string $name): SystemBankFilter
     {
-        $object = $this->where('name', $name);
-        return $object;
+        return $this->where('name', $name);
     }
 }

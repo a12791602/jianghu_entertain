@@ -38,8 +38,7 @@ class BackendGameController
         AddDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -55,8 +54,7 @@ class BackendGameController
         EditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -72,8 +70,7 @@ class BackendGameController
         OptEditDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
     /**
      * 游戏列表
@@ -88,8 +85,7 @@ class BackendGameController
         IndexDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -105,8 +101,7 @@ class BackendGameController
         DelDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -118,8 +113,7 @@ class BackendGameController
      */
     public function getSearchCondition(GetSearchConditionAction $action): JsonResponse
     {
-        $msgOut = $action->execute();
-        return $msgOut;
+        return $action->execute();
     }
 
     /**
@@ -135,7 +129,6 @@ class BackendGameController
         StatusDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
-        $msgOut     = $action->execute($inputDatas);
-        return $msgOut;
+        return $action->execute($inputDatas);
     }
 }

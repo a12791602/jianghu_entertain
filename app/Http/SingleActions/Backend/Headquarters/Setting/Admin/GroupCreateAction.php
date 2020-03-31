@@ -71,7 +71,6 @@ class GroupCreateAction extends MainAction
                     'group_name' => $objAdminGroup->group_name,
                     'role'       => $role,
                    ];
-        $msgOut  = msgOut($msgData);
-        return $msgOut;
+        return msgOut($msgData);
     }
 }

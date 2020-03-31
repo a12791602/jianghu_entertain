@@ -22,8 +22,6 @@ class UserLevelAction extends MainAction
     {
         $grade = FrontendUserLevel::where('platform_sign', $this->user->platform_sign)
             ->get(['level', 'experience_min', 'experience_max', 'level_gift', 'weekly_gift']);
-
-        $result = msgOut(LevelGiftResource::collection($grade));
-        return $result;
+        return msgOut(LevelGiftResource::collection($grade));
     }
 }
