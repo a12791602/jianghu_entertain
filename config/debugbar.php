@@ -1,6 +1,5 @@
 <?php
-
-$result = [
+return [
 
            /*
             |--------------------------------------------------------------------------
@@ -14,8 +13,8 @@ $result = [
             |
              */
 
-           'enabled'         => env('DEBUGBAR_ENABLED', null),
-           'except'          => ['telescope*'],
+        'enabled'         => env('DEBUGBAR_ENABLED', null),
+        'except'          => ['telescope*'],
 
            /*
             |--------------------------------------------------------------------------
@@ -29,15 +28,15 @@ $result = [
             | can also be used. For PDO, run the package migrations first.
             |
              */
-           'storage'         => [
-                                 'enabled'    => true,
-                                 'driver'     => 'file',                   // redis, file, pdo, custom
-                                 'path'       => storage_path('debugbar'), // For file driver
+        'storage'         => [
+                              'enabled'    => true,
+                              'driver'     => 'file',                   // redis, file, pdo, custom
+                              'path'       => storage_path('debugbar'), // For file driver
                                  // Leave null for default connection (Redis/PDO)
-                                 'connection' => null,
+                              'connection' => null,
                                  // Instance of StorageInterface for custom driver
-                                 'provider'   => '',
-                                ],
+                              'provider'   => '',
+                             ],
 
            /*
             |--------------------------------------------------------------------------
@@ -53,7 +52,7 @@ $result = [
             |
              */
 
-           'include_vendors' => true,
+        'include_vendors' => true,
 
            /*
             |--------------------------------------------------------------------------
@@ -66,8 +65,8 @@ $result = [
             | Optionally, you can also send ServerTiming headers on ajax requests for the Chrome DevTools.
              */
 
-           'capture_ajax'    => true,
-           'add_ajax_timing' => false,
+        'capture_ajax'    => true,
+        'add_ajax_timing' => false,
 
            /*
             |--------------------------------------------------------------------------
@@ -78,7 +77,7 @@ $result = [
             | in the Messages tab.
             |
              */
-           'error_handler'   => false,
+        'error_handler'   => false,
 
            /*
             |--------------------------------------------------------------------------
@@ -89,7 +88,7 @@ $result = [
             | Extension, without the server-side code. It uses Debugbar collectors instead.
             |
              */
-           'clockwork'       => false,
+        'clockwork'       => false,
 
            /*
             |--------------------------------------------------------------------------
@@ -100,30 +99,30 @@ $result = [
             |
              */
 
-           'collectors'      => [
-                                 'phpinfo'         => true,  // Php version
-                                 'messages'        => true,  // Messages
-                                 'time'            => true,  // Time Datalogger
-                                 'memory'          => true,  // Memory usage
-                                 'exceptions'      => true,  // Exception displayer
-                                 'log'             => true,  // Logs from Monolog (merged in messages if enabled)
-                                 'db'              => true,  // Show database (PDO) queries and bindings
-                                 'views'           => true,  // Views with their data
-                                 'route'           => true,  // Current route information
-                                 'auth'            => false, // Display Laravel authentication status
-                                 'gate'            => true,  // Display Laravel Gate checks
-                                 'session'         => true,  // Display session data
-                                 'symfony_request' => true,  // Only one can be enabled..
-                                 'mail'            => true,  // Catch mail messages
-                                 'laravel'         => false, // Laravel version and environment
-                                 'events'          => false, // All events fired
-                                 'default_request' => false, // Regular or special Symfony request logger
-                                 'logs'            => false, // Add the latest log messages
-                                 'files'           => false, // Show the included files
-                                 'config'          => false, // Display config settings
-                                 'cache'           => false, // Display cache events
-                                 'models'          => false, // Display models
-                                ],
+        'collectors'      => [
+                              'phpinfo'         => true,  // Php version
+                              'messages'        => true,  // Messages
+                              'time'            => true,  // Time Datalogger
+                              'memory'          => true,  // Memory usage
+                              'exceptions'      => true,  // Exception displayer
+                              'log'             => true,  // Logs from Monolog (merged in messages if enabled)
+                              'db'              => true,  // Show database (PDO) queries and bindings
+                              'views'           => true,  // Views with their data
+                              'route'           => true,  // Current route information
+                              'auth'            => false, // Display Laravel authentication status
+                              'gate'            => true,  // Display Laravel Gate checks
+                              'session'         => true,  // Display session data
+                              'symfony_request' => true,  // Only one can be enabled..
+                              'mail'            => true,  // Catch mail messages
+                              'laravel'         => false, // Laravel version and environment
+                              'events'          => false, // All events fired
+                              'default_request' => false, // Regular or special Symfony request logger
+                              'logs'            => false, // Add the latest log messages
+                              'files'           => false, // Show the included files
+                              'config'          => false, // Display config settings
+                              'cache'           => false, // Display cache events
+                              'models'          => false, // Display models
+                             ],
 
            /*
             |--------------------------------------------------------------------------
@@ -134,26 +133,26 @@ $result = [
             |
              */
 
-           'options'         => [
-                                 'auth'  => ['show_name' => true],// Also show the users name/email in the debugbar
-                                 'db'    => [
-                                             'with_params' => true,  // Render SQL with the parameters substituted
+        'options'         => [
+                              'auth'  => ['show_name' => true],// Also show the users name/email in the debugbar
+                              'db'    => [
+                                          'with_params' => true,  // Render SQL with the parameters substituted
                                              // Use a backtrace to find the origin of the query in your files.
-                                             'backtrace'   => true,
-                                             'timeline'    => false, // Add the queries to the timeline
-                                             'explain'     => [      // Show EXPLAIN output on queries
-                                                               'enabled' => false,
-                                                               'types'   => ['SELECT'],
-                                                              ],
-                                             'hints'       => true, // Show hints for common mistakes
-                                            ],
-                                 'mail'  => ['full_log' => false],
+                                          'backtrace'   => true,
+                                          'timeline'    => false, // Add the queries to the timeline
+                                          'explain'     => [      // Show EXPLAIN output on queries
+                                                            'enabled' => false,
+                                                            'types'   => ['SELECT'],
+                                                           ],
+                                          'hints'       => true, // Show hints for common mistakes
+                                         ],
+                              'mail'  => ['full_log' => false],
                                  //Note: Can slow down the application, because the data can be quite large..
-                                 'views' => ['data' => false],
-                                 'route' => ['label' => true],// show complete route on bar
-                                 'logs'  => ['file' => null],
-                                 'cache' => ['values' => true],
-                                ],
+                              'views' => ['data' => false],
+                              'route' => ['label' => true],// show complete route on bar
+                              'logs'  => ['file' => null],
+                              'cache' => ['values' => true],
+                             ],
 
            /*
             |--------------------------------------------------------------------------
@@ -166,7 +165,7 @@ $result = [
             |
              */
 
-           'inject'          => true,
+        'inject'          => true,
 
            /*
             |--------------------------------------------------------------------------
@@ -178,7 +177,7 @@ $result = [
             | from trying to overcome bugs like this: http://trac.nginx.org/nginx/ticket/97
             |
              */
-           'route_prefix'    => '_debugbar',
+        'route_prefix'    => '_debugbar',
 
            /*
             |--------------------------------------------------------------------------
@@ -188,6 +187,5 @@ $result = [
             | By default DebugBar route served from the same domain that request served.
             | To override default domain, specify it as a non-empty value.
              */
-           'route_domain'    => null,
-          ];
-return $result;
+        'route_domain'    => null,
+       ];

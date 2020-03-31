@@ -84,7 +84,6 @@ class IndexAction extends MainAction
                       ];
         }
         $result['data'] = $data;
-        $msgOut         = msgOut($result);
-        return $msgOut;
+        return msgOut($result);
     }
 }

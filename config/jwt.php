@@ -1,5 +1,4 @@
 <?php
-
 /*
  * This file is part of jwt-auth.
  *
@@ -8,8 +7,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
-$result = [
+return [
 
            /*
             |--------------------------------------------------------------------------
@@ -25,7 +23,7 @@ $result = [
             |
              */
 
-           'secret'                 => env('JWT_SECRET'),
+        'secret'                 => env('JWT_SECRET'),
 
            /*
             |--------------------------------------------------------------------------
@@ -44,7 +42,7 @@ $result = [
             |
              */
 
-           'keys'                   => [
+        'keys'                   => [
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -57,7 +55,7 @@ $result = [
                                         |
                                          */
 
-                                        'public'     => env('JWT_PUBLIC_KEY'),
+                                     'public'     => env('JWT_PUBLIC_KEY'),
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -70,7 +68,7 @@ $result = [
                                         |
                                          */
 
-                                        'private'    => env('JWT_PRIVATE_KEY'),
+                                     'private'    => env('JWT_PRIVATE_KEY'),
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -81,9 +79,9 @@ $result = [
                                         |
                                          */
 
-                                        'passphrase' => env('JWT_PASSPHRASE'),
+                                     'passphrase' => env('JWT_PASSPHRASE'),
 
-                                       ],
+                                    ],
 
            /*
             |--------------------------------------------------------------------------
@@ -101,7 +99,7 @@ $result = [
             |
              */
 
-           'ttl'                    => env('JWT_TTL', 60),
+        'ttl'                    => env('JWT_TTL', 60),
 
            /*
             |--------------------------------------------------------------------------
@@ -120,7 +118,7 @@ $result = [
             |
              */
 
-           'refresh_ttl'            => env('JWT_REFRESH_TTL', 20160),
+        'refresh_ttl'            => env('JWT_REFRESH_TTL', 20160),
 
            /*
             |--------------------------------------------------------------------------
@@ -134,7 +132,7 @@ $result = [
             |
              */
 
-           'algo'                   => env('JWT_ALGO', 'HS256'),
+        'algo'                   => env('JWT_ALGO', 'HS256'),
 
            /*
             |--------------------------------------------------------------------------
@@ -147,14 +145,14 @@ $result = [
             |
              */
 
-           'required_claims'        => [
-                                        'iss',
-                                        'iat',
-                                        'exp',
-                                        'nbf',
-                                        'sub',
-                                        'jti',
-                                       ],
+        'required_claims'        => [
+                                     'iss',
+                                     'iat',
+                                     'exp',
+                                     'nbf',
+                                     'sub',
+                                     'jti',
+                                    ],
 
            /*
             |--------------------------------------------------------------------------
@@ -169,7 +167,7 @@ $result = [
             |
              */
 
-           'persistent_claims'      => [],    // 'foo',    // 'bar',
+        'persistent_claims'      => [],    // 'foo',    // 'bar',
 
             /*
             |--------------------------------------------------------------------------
@@ -188,7 +186,7 @@ $result = [
             |
             */
 
-           'lock_subject'           => true,
+        'lock_subject'           => true,
 
            /*
             |--------------------------------------------------------------------------
@@ -205,7 +203,7 @@ $result = [
             |
              */
 
-           'leeway'                 => env('JWT_LEEWAY', 0),
+        'leeway'                 => env('JWT_LEEWAY', 0),
 
            /*
             |--------------------------------------------------------------------------
@@ -217,7 +215,7 @@ $result = [
             |
              */
 
-           'blacklist_enabled'      => env('JWT_BLACKLIST_ENABLED', true),
+        'blacklist_enabled'      => env('JWT_BLACKLIST_ENABLED', true),
 
            /*
             | -------------------------------------------------------------------------
@@ -232,7 +230,7 @@ $result = [
             |
              */
 
-           'blacklist_grace_period' => env('JWT_BLACKLIST_GRACE_PERIOD', 0),
+        'blacklist_grace_period' => env('JWT_BLACKLIST_GRACE_PERIOD', 0),
 
            /*
             |--------------------------------------------------------------------------
@@ -250,7 +248,7 @@ $result = [
             |
              */
 
-           'decrypt_cookies'        => false,
+        'decrypt_cookies'        => false,
 
            /*
             |--------------------------------------------------------------------------
@@ -261,7 +259,7 @@ $result = [
             |
              */
 
-           'providers'              => [
+        'providers'              => [
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -272,7 +270,7 @@ $result = [
                                         |
                                          */
 
-                                        'jwt'     => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
+                                     'jwt'     => Tymon\JWTAuth\Providers\JWT\Lcobucci::class,
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -283,7 +281,7 @@ $result = [
                                         |
                                          */
 
-                                        'auth'    => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
+                                     'auth'    => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
 
                                         /*
                                         |--------------------------------------------------------------------------
@@ -294,9 +292,8 @@ $result = [
                                         |
                                          */
 
-                                        'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
+                                     'storage' => Tymon\JWTAuth\Providers\Storage\Illuminate::class,
 
-                                       ],
+                                    ],
 
-          ];
-return $result;
+       ];

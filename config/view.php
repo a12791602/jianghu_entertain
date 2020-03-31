@@ -1,6 +1,5 @@
 <?php
-
-$result = [
+return [
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +12,7 @@ $result = [
 |
 */
 
-           'paths'    => [resource_path('views')],
+        'paths'    => [resource_path('views')],
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +25,6 @@ $result = [
 |
 */
 
-           'compiled' => env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))),
+        'compiled' => env('VIEW_COMPILED_PATH', realpath(storage_path('framework/views'))),
 
-          ];
-return $result;
+       ];
