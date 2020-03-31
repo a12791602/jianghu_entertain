@@ -18,7 +18,7 @@ class AllRequireInfosAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $routeCollection = Route::getRoutes()->get();
+        $routeCollection = Route::getRoutes()->getRoutes();
 
         if ((int) $inputDatas['type'] === 0) {
             $routeInfo = $this->_getAllRouteInfo($routeCollection);
@@ -88,7 +88,10 @@ class AllRequireInfosAction extends MainAction
     {
         $routeInfo = [];
         foreach ($routeCollection as $route) {
-            if (!isset($route->action['as']) || $route->action['prefix'] === '_debugbar') {
+            if (!isset($route->action['as'])
+                || !isset($route->action['prefix'])
+                || $route->action['prefix'] === '_debugbar'
+            ) {
                 continue;
             }
             $routeShortData = [
