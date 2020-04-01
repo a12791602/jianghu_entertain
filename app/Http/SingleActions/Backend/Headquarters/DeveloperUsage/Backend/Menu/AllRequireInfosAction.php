@@ -19,7 +19,6 @@ class AllRequireInfosAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $routeCollection = Route::getRoutes()->getRoutes();
-
         if ((int) $inputDatas['type'] === 0) {
             $routeInfo = $this->_getAllRouteInfo($routeCollection);
         } else {
@@ -59,6 +58,7 @@ class AllRequireInfosAction extends MainAction
 
         foreach ($routeCollection as $route) {
             if (!isset($route->action['as'])
+                || !isset($route->action['prefix'])
                 || $route->action['prefix'] === '_debugbar'
                 || preg_match('#^' . $routeEndKey . '#', $route->action['as']) !== 1
                 || in_array($route->action['as'], (array) $registeredRoute)
