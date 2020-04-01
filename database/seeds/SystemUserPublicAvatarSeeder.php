@@ -17,7 +17,7 @@ class SystemUserPublicAvatarSeeder extends Seeder
     {
         SystemUserPublicAvatar::insert(
             [
-             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/1c2aceaea46e637be0cad581028defd2.png'],
+             ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/1c2aceaea46e637be0cad581028defd2.jpg'],
              ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/80d7a0c5182a389519b3f13466cabd82.jpg'],
              ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/85aab7699c4b3d725390debd8168bcd3.jpg'],
              ['pic_path' => 'uploads/jhhy/avatar/2020-03-25/b648c61dd2b7fbb8c4703d90d642e7e8.jpg'],

@@ -11,7 +11,7 @@ Route::group(
         Route::post('send', [SystemEmailController::class, 'send'])
             ->name($namePrefix . 'send');
         //已发邮件
-        Route::get('send-index', [SystemEmailController::class, 'sendIndex'])
+        Route::post('send-index', [SystemEmailController::class, 'sendIndex'])
             ->name($namePrefix . 'send-index');
         //已收邮件
         Route::get('received-index', [SystemEmailController::class, 'receivedIndex'])
@@ -22,5 +22,8 @@ Route::group(
         //删除已收邮件
         Route::post('destroy-incoming-email', [SystemEmailController::class, 'destroyIncomingEmail'])
             ->name($namePrefix . 'destroy.incoming.email');
+        //删除已发邮件
+        Route::post('destroy-sent-email', [SystemEmailController::class, 'destroySentEmail'])
+            ->name($namePrefix . 'destroy.sent.email');
     },
 );

@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Events\SystemEmailEvent;
 use App\Models\Email\SystemEmail;
+use App\Models\Email\SystemEmailSend;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 
@@ -35,9 +36,14 @@ class SendAction extends BaseAction
             throw new \Exception('303000');
         }
         if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
+            SystemEmailSend::create(
+                [
+                 'email_id'  => $this->model->id,
+                 'sender_id' => $this->user->id,
+                ],
+            );
             event(new SystemEmailEvent($this->model->id));
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

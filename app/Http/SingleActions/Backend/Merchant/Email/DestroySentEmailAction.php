@@ -2,15 +2,15 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
-use App\Models\Email\SystemEmailOfMerchant;
+use App\Models\Email\SystemEmailSend;
 use Illuminate\Http\JsonResponse;
 use Log;
 
 /**
- * Class DestroyIncomingEmailAction
+ * Class DestroySentMailAction
  * @package App\Http\SingleActions\Backend\Merchant\Email
  */
-class DestroyIncomingEmailAction extends BaseAction
+class DestroySentEmailAction extends BaseAction
 {
     /**
      * @param array $inputDatas InputDatas.
@@ -19,11 +19,9 @@ class DestroyIncomingEmailAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $condition                  = [];
-        $condition['merchant_id']   = $this->user->id;
-        $condition['platform_sign'] = $this->currentPlatformEloq->sign;
         try {
-            SystemEmailOfMerchant::where($condition)->whereIn('email_id', $inputDatas['email_id'])->delete();
+            SystemEmailSend::where('sender_id', $this->user->id)
+                ->whereIn('email_id', $inputDatas['email_id'])->delete();
             return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());

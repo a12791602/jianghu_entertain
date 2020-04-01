@@ -2,8 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
-use App\ModelFilters\Email\SystemEmailFilter;
-use App\Models\Email\SystemEmail;
+use App\Http\Resources\Backend\Merchant\Email\IndexResource;
+use App\ModelFilters\Email\SystemEmailSendFilter;
+use App\Models\Email\SystemEmailSend;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -25,17 +26,12 @@ class SendIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                    = $this->model::getPageSize();
+        $pageSize                    = SystemEmailSend::getPageSize();
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $outputDatas                 = $this->model::with('merchant:id,name')
-            ->filter($inputDatas, SystemEmailFilter::class)
-            ->whereIn(
-                'type',
-                [
-                 SystemEmail::TYPE_MER_TO_HEAD,
-                 SystemEmail::TYPE_MER_TO_USER,
-                ],
-            )->orderByDesc('created_at')->paginate($pageSize);
-        return msgOut($outputDatas);
+
+        $item = SystemEmailSend::with('email')->where(['sender_id' => $this->user->id])
+            ->filter($inputDatas, SystemEmailSendFilter::class)
+            ->orderByDesc('created_at')->paginate($pageSize);
+        return msgOut(IndexResource::collection($item));
     }
 }
