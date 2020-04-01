@@ -6,6 +6,7 @@ use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckInAction;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckOutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 /**
  * Class AcknowledgementController
@@ -24,9 +25,8 @@ class AcknowledgementController
         AckInAction $action
     ): JsonResponse {
         $inputDatas = $request->all();
-        $headers    = $request->header();
-        $result     = $action->execute($inputDatas, $headers);
-        return $result;
+        $headers    = Arr::wrap($request->header());
+        return $action->execute($inputDatas, $headers);
     }
 
     /**
@@ -40,8 +40,7 @@ class AcknowledgementController
         AckOutAction $action
     ): JsonResponse {
         $inputDatas = $request->all();
-        $headers    = $request->header();
-        $result     = $action->execute($inputDatas, $headers);
-        return $result;
+        $headers    = Arr::wrap($request->header());
+        return $action->execute($inputDatas, $headers);
     }
 }
