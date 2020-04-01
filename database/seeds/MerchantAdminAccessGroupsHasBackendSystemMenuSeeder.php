@@ -246,14 +246,6 @@ class MerchantAdminAccessGroupsHasBackendSystemMenuSeeder extends Seeder
               'menu_id'  => 57,
              ],
              [
-              'group_id' => 1,
-              'menu_id'  => 58,
-             ],
-             [
-              'group_id' => 1,
-              'menu_id'  => 59,
-             ],
-             [
               'group_id' => 2,
               'menu_id'  => 1,
              ],
@@ -480,14 +472,6 @@ class MerchantAdminAccessGroupsHasBackendSystemMenuSeeder extends Seeder
              [
               'group_id' => 2,
               'menu_id'  => 57,
-             ],
-             [
-              'group_id' => 2,
-              'menu_id'  => 58,
-             ],
-             [
-              'group_id' => 2,
-              'menu_id'  => 59,
              ],
             ],
         );

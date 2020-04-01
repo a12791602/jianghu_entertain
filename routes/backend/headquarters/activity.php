@@ -11,7 +11,5 @@ Route::group(
             ->name($namePrefix . 'index-do');
         Route::post('status-do', [BackendSystemDynActivityController::class, 'status'])
             ->name($namePrefix . 'status-do');
-        Route::post('status-doa', [BackendSystemDynActivityController::class, 'statusa'])
-            ->name($namePrefix . 'status-doa');
     },
 );
