@@ -20,16 +20,21 @@ class UnassignGamesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                           = Game::getPageSize();
         $inputDatas['unassign_platform_id'] = $inputDatas['platform_id'];
-        $outputDatas                        = Game::filter($inputDatas, GameFilter::class)->select(
+
+        $game = new Game();
+        if (isset($inputDatas['pageSize'])) {
+            $game->setPerPage($inputDatas['pageSize']);
+        }
+
+        $outputDatas = $game->filter($inputDatas, GameFilter::class)->select(
             [
              'id',
              'name',
              'sign',
              'vendor_id',
             ],
-        )->paginate($pageSize);
+        )->paginate();
         return msgOut($outputDatas);
     }
 }

@@ -32,6 +32,9 @@ class IndexAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         if (isset($inputDatas['parent_mobile'])) {
             $filterArr = ['mobile' => $inputDatas['parent_mobile']];
             $parentId  = $this->model->filter($filterArr, FrontendUserFilter::class)->first();
@@ -63,7 +66,7 @@ class IndexAction
                  'account:user_id,balance',
                 ],
             )
-            ->paginate($this->model::getPageSize())->toArray();
+            ->paginate()->toArray();
         $datas = $this->_handleData($datas);
         return msgOut($datas);
     }

@@ -39,15 +39,16 @@ class IndexAction extends MainAction
     {
         $inputDatas['sign']     = $this->currentPlatformEloq->sign;
         $inputDatas['data_pid'] = 0;
-        $result                 = $this->model
-            ->filter($inputDatas, SystemUsersHelpCenterFilter::class)
-            ->with(
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
+        $result = $this->model
+            ->filter($inputDatas, SystemUsersHelpCenterFilter::class)->with(
                 [
                  'childs.author',
                  'childs.newer',
                 ],
-            )
-            ->select(
+            )->select(
                 [
                  'id',
                  'pid',
@@ -57,8 +58,8 @@ class IndexAction extends MainAction
                  'created_at',
                  'updated_at',
                 ],
-            )->paginate($this->model::getPageSize())->toArray();
-        $data                   = [];
+            )->paginate()->toArray();
+        $data   = [];
         foreach ($result['data'] as $helpDatas) {
             $childs = [];
             foreach ($helpDatas['childs'] as $item) {

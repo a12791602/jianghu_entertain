@@ -25,10 +25,19 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                  = $this->model::getPageSIze();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
-            ->filter($inputDatas, NoticeMarqueeFilter::class)->paginate($pageSize);
+        $data                      = $this->model
+            ->with(
+                [
+                 'author:id,name',
+                 'lastEditor:id,name',
+                ],
+            )
+            ->filter($inputDatas, NoticeMarqueeFilter::class)
+            ->paginate();
         return msgOut($data);
     }
 }

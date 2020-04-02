@@ -25,9 +25,14 @@ class SendIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize    = $this->model::getPageSize();
-        $outputDatas = $this->model::with('headquarters:id,name')->filter($inputDatas, SystemEmailFilter::class)
-            ->where('type', SystemEmail::TYPE_HEAD_TO_MER)->orderByDesc('created_at')->paginate($pageSize);
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
+        $outputDatas = $this->model::with('headquarters:id,name')
+            ->filter($inputDatas, SystemEmailFilter::class)
+            ->where('type', SystemEmail::TYPE_HEAD_TO_MER)
+            ->orderByDesc('created_at')
+            ->paginate();
         return msgOut($outputDatas);
     }
 }

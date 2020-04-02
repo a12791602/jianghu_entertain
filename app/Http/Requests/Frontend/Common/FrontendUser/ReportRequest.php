@@ -28,23 +28,12 @@ class ReportRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'type'        => 'required|integer|in:1,2,3', //类型  1.账变明细  2.充值记录 3.提现记录
-                'createdAt'   => 'array|size:2', // 账变时间
+                'type'        => 'required|integer|in:1,2,3',    //类型  1.账变明细  2.充值记录 3.提现记录
+                'createdAt'   => 'array|size:2',                 // 账变时间
                 'createdAt.*' => 'date|date_format:Y-m-d H:i:s', //账变时间
+                'pageSize'    => 'integer|between:1,100',        //每页数据条数
                ];
     }
-
-    /**
-     * Get custom messages for validator errors.
-     * @return mixed[]
-     */
-    // public function messages(): array
-    // {
-    //     $result = [
-
-    //               ];
-    //     return $result;
-    // }
 
     /**
      *  Filters to be applied to the input.

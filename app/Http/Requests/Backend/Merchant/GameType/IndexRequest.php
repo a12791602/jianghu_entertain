@@ -28,9 +28,10 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'device' => 'required|integer|in:1,2,3',
-                'status' => 'integer|in:0,1',
-                'name'   => 'string|max:64',
+                'device'   => 'required|integer|in:1,2,3',
+                'status'   => 'integer|in:0,1',
+                'name'     => 'string|max:64',
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

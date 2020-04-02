@@ -38,6 +38,7 @@ class LoginLogRequest extends BaseFormRequest
                 'guid'          => 'string|max:16',                         //用户UID
                 'create_at'     => 'string',                                //登陆时间
                 'last_login_ip' => 'ip',                                    //登陆IP
+                'pageSize'      => 'integer|between:1,100',                 //每页数据条数
                ];
     }
 }

@@ -23,7 +23,9 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize    = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $outputDatas = $this->model::with(
             [
              'type:id,name',
@@ -32,7 +34,8 @@ class IndexDoAction extends BaseAction
              'lastEditor:id,name',
              'author:id,name',
             ],
-        )->filter($inputDatas, GameFilter::class)->paginate($pageSize);
+        )->filter($inputDatas, GameFilter::class)
+        ->paginate();
         return msgOut($outputDatas);
     }
 }

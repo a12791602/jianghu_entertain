@@ -46,6 +46,7 @@ class IndexRequest extends BaseFormRequest
                 'name'     => 'string',
                 'loginIp'  => 'ip',
                 'createAt' => 'string',
+                'pageSize' => 'integer|between:1,100', //每页数据条数
                ];
     }
 }

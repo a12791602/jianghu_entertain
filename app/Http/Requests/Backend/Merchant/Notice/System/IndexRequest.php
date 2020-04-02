@@ -27,6 +27,9 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['title' => 'string|max:64'];
+        return [
+                'title'    => 'string|max:64',
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
+               ];
     }
 }

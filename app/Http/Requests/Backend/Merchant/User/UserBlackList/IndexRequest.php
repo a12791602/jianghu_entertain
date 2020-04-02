@@ -43,6 +43,7 @@ class IndexRequest extends BaseFormRequest
                 'guid'         => 'string|max:16',                         //用户UID
                 'created_at'   => 'array|size:2',                          //进入黑名单日期
                 'created_at.*' => 'date',                                  //进入黑名单日期
+                'pageSize'     => 'integer|between:1,100',                 //每页数据条数
                ];
     }
 

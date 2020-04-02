@@ -32,6 +32,7 @@ class UnassignGamesRequest extends BaseFormRequest
                 'platform_id' => 'required|exists:system_platforms,id',
                 'vendor_id'   => 'exists:game_vendors,id',
                 'game_id'     => 'exists:games,id',
+                'pageSize'    => 'integer|between:1,100', //每页数据条数
                ];
     }
 

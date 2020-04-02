@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Merchant\Setting\Admin\DeleteAdminRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\DestroyRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\EditRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\GroupCreateRequest;
+use App\Http\Requests\Backend\Merchant\Setting\Admin\GroupIndexRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\SearchAdminRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\SpecificGroupUsersRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\SwitchAdminRequest;
@@ -32,12 +33,16 @@ class AdminController
     /**
      * Display a listing of the resource.
      *
-     * @param  GroupIndexAction $action Action.
+     * @param  GroupIndexRequest $request Request.
+     * @param  GroupIndexAction  $action  Action.
      * @return JsonResponse
      */
-    public function groupIndex(GroupIndexAction $action): JsonResponse
-    {
-        return $action->execute();
+    public function groupIndex(
+        GroupIndexRequest $request,
+        GroupIndexAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**

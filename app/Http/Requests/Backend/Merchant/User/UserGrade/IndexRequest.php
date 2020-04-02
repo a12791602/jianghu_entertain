@@ -1,22 +1,21 @@
 <?php
 
-namespace App\Http\Requests\Backend\Merchant\Activity\Dynamic;
+namespace App\Http\Requests\Backend\Merchant\User\UserGrade;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Activity\SystemDynActivity;
+use App\Models\User\FrontendUserLevel;
 
 /**
- * Class IndexRequest
- * @package App\Http\Requests\Backend\Merchant\Activity\Dynamic
+ * 用户等级-列表
  */
 class IndexRequest extends BaseFormRequest
 {
-
+    
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [SystemDynActivity::class];
-
+    protected $dependentModels = [FrontendUserLevel::class];
+    
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,9 +33,6 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'name'     => 'string|min:1|max:16',
-                'pageSize' => 'integer|between:1,100',     //每页数据条数
-               ];
+        return ['pageSize' => 'integer|between:1,100']; //每页数据条数
     }
 }

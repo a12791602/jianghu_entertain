@@ -54,6 +54,7 @@ class CheckIndexRequest extends BaseFormRequest
                 'review_at'    => 'array',
                 'review_at.*'  => 'required|date',
                 'is_audit'     => 'integer|in:0,1',
+                'pageSize'     => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

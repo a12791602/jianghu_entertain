@@ -23,10 +23,17 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        $pageSize = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $outputDatas = $this->model::with(
-            ['lastEditor:id,name', 'author:id,name', 'whiteList:finance_vendor_id,ips'],
-        )->filter($inputDatas, SystemFinanceVendorFilter::class)->paginate($pageSize);
+            [
+             'lastEditor:id,name',
+             'author:id,name',
+             'whiteList:finance_vendor_id,ips',
+            ],
+        )->filter($inputDatas, SystemFinanceVendorFilter::class)
+        ->paginate();
         return msgOut($outputDatas);
     }
 }

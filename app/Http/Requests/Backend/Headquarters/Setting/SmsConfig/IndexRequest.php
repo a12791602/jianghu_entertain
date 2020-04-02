@@ -34,10 +34,11 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'name'         => 'string|max:16', //最后更新人名称
-                'status'       => 'in:0,1',        //状态 0禁用 1启用
-                'updated_at'   => 'array',         //更新时间
-                'updated_at.*' => 'date',          //更新时间
+                'name'         => 'string|max:16',         //最后更新人名称
+                'status'       => 'in:0,1',                //状态 0禁用 1启用
+                'updated_at'   => 'array',                 //更新时间
+                'updated_at.*' => 'date',                  //更新时间
+                'pageSize'     => 'integer|between:1,100', //每页数据条数
                ];
     }
 }

@@ -37,9 +37,12 @@ class DomainDetailAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $data = $this->model
             ->filter($inputDatas, SystemDomainFilter::class)
-            ->paginate($this->model::getPageSize());
+            ->paginate();
         return msgOut($data);
     }
 }

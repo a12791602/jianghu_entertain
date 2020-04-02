@@ -33,6 +33,7 @@ class DomainDetailRequest extends BaseFormRequest
                 'status'       => 'integer|in:0,1',                                 //状态  0.关闭 1.开启
                 'created_at'   => 'array',                                          //添加时间
                 'created_at.*' => 'date',                                           //添加时间
+                'pageSize'     => 'integer|between:1,100',                          //每页数据条数
                ];
     }
 

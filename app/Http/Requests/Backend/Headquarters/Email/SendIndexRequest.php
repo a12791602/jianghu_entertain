@@ -40,6 +40,7 @@ class SendIndexRequest extends BaseFormRequest
                 'is_send'      => 'integer|in:' . SystemEmail::IS_SEND_NO . ',' . SystemEmail::IS_SEND_YES,
                 'created_at'   => 'array',
                 'created_at.*' => 'date',
+                'pageSize'     => 'integer|between:1,100', //每页数据条数
                ];
     }
 

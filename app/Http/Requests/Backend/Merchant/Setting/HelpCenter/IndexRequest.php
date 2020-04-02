@@ -34,9 +34,10 @@ class IndexRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'type'   => 'required|integer|in:1,2,3', //客户端类型 1.H5 2.PC 3.APP
-                'status' => 'integer|in:0,1',            //状态 0.关闭 1.开启
-                'title'  => 'string|max:32',             //标题
+                'type'     => 'required|integer|in:1,2,3', //客户端类型 1.H5 2.PC 3.APP
+                'status'   => 'integer|in:0,1',            //状态 0.关闭 1.开启
+                'title'    => 'string|max:32',             //标题
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
                ];
     }
 }

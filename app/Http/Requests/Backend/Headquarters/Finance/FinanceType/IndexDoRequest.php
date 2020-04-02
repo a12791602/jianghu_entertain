@@ -29,8 +29,9 @@ class IndexDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'status' => 'in:0,1',
-                'name'   => 'string',
+                'status'   => 'in:0,1',
+                'name'     => 'string',
+                'pageSize' => 'integer|between:1,100', //每页数据条数
                ];
     }
 

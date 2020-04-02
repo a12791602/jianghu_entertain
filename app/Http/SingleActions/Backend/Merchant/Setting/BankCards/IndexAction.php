@@ -37,6 +37,9 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $returnData         = $this->model
             ->filter($inputDatas, FrontendUsersBankCardFilter::class)
@@ -47,7 +50,7 @@ class IndexAction extends MainAction
                 ],
             )
             ->select(['id', 'platform_sign', 'user_id', 'owner_name', 'bank_id', 'card_number', 'created_at'])
-            ->paginate($this->model::getPageSize())
+            ->paginate()
             ->toArray();
             
         $bankCards = [];
