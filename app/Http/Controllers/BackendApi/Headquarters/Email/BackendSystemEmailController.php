@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Email;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Email\ReadEmailRequest;
 use App\Http\Requests\Backend\Headquarters\Email\ReceivedIndexRequest;
 use App\Http\Requests\Backend\Headquarters\Email\SendIndexRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters\Email
  */
-class BackendSystemEmailController
+class BackendSystemEmailController extends Controller
 {
     /**
      * 发送邮件

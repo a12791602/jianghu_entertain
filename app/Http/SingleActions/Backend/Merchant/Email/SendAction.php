@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Events\SystemEmailEvent;
+use App\Jobs\Email\MerchantSendMail;
 use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailSend;
 use App\Models\User\FrontendUser;
@@ -31,6 +32,11 @@ class SendAction extends BaseAction
         unset($inputDatas['is_head']);
         $inputDatas['sender_id']     = $this->user->id;
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
+        $send_timestamp              = $inputDatas['send_time'] - now()->timestamp;
+        $inputDatas['send_time']     = date('Y-m-d h:s', $inputDatas['send_time']);
+        if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_YES) {
+            $inputDatas['is_send'] = SystemEmail::IS_SEND_NO;
+        }
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');
@@ -43,6 +49,8 @@ class SendAction extends BaseAction
                 ],
             );
             event(new SystemEmailEvent($this->model->id));
+        } else {
+            dispatch(new MerchantSendMail($this->model, (int) $send_timestamp));
         }
         return msgOut();
     }
