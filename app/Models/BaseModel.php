@@ -16,7 +16,7 @@ class BaseModel extends Model
     use Cachable;
     use Filterable;
 
-    private const DEFAULT_PAGESIZE = 50;
+    protected $perPage = 50;
 
     /**
      * Prepare a date for array / JSON serialization.
@@ -28,16 +28,5 @@ class BaseModel extends Model
     {
         $date = $date->format('Y-m-d H:i:s');
         return $date;
-    }
-
-    /**
-     * 获取分页条数
-     *
-     * @return integer|mixed
-     */
-    public static function getPageSize()
-    {
-        $pageSize = app('request')->get('pageSize') ?? self::DEFAULT_PAGESIZE;
-        return $pageSize;
     }
 }
