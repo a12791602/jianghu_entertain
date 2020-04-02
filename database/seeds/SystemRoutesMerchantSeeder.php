@@ -875,7 +875,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-group.detail',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -883,7 +883,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-group.create',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-添加',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -891,7 +891,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-group.edit',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-编辑',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -899,7 +899,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-group.delete',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-删除',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -907,7 +907,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-group.specific-group-users',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-管理员列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -915,7 +915,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.get-all-admins',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-所有管理员',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -923,7 +923,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.create',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-添加',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -931,7 +931,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.update-admin-group',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-更换组',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -939,7 +939,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.delete-admin',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-删除',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -947,7 +947,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.search-admin',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-搜索',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -955,7 +955,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.merchant-admin-user.switch-admin',
-              'menu_group_id' => 51,
+              'menu_group_id' => 48,
               'title'         => '设置管理-管理员分组-禁用启用',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
@@ -963,7 +963,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.config.index',
-              'menu_group_id' => 52,
+              'menu_group_id' => 49,
               'title'         => '设置管理-全域设置-列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\ConfigController',
@@ -971,7 +971,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.config.edit',
-              'menu_group_id' => 52,
+              'menu_group_id' => 49,
               'title'         => '设置管理-全域设置-修改设置',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\ConfigController',
@@ -979,7 +979,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.costomer-service.index',
-              'menu_group_id' => 53,
+              'menu_group_id' => 50,
               'title'         => '设置管理-客服设置-列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\CostomerServiceController',
@@ -987,7 +987,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.costomer-service.do-add',
-              'menu_group_id' => 53,
+              'menu_group_id' => 50,
               'title'         => '设置管理-客服设置-添加',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\CostomerServiceController',
@@ -995,7 +995,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.costomer-service.edit',
-              'menu_group_id' => 53,
+              'menu_group_id' => 50,
               'title'         => '设置管理-客服设置-编辑',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\CostomerServiceController',
@@ -1003,7 +1003,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.costomer-service.delete',
-              'menu_group_id' => 53,
+              'menu_group_id' => 50,
               'title'         => '设置管理-客服设置-删除',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\CostomerServiceController',
@@ -1011,7 +1011,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.help-center.index',
-              'menu_group_id' => 54,
+              'menu_group_id' => 51,
               'title'         => '设置管理-帮助设置-列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\HelpCenterController',
@@ -1019,7 +1019,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.help-center.do-add',
-              'menu_group_id' => 54,
+              'menu_group_id' => 51,
               'title'         => '设置管理-帮助设置-添加',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\HelpCenterController',
@@ -1027,7 +1027,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.help-center.edit',
-              'menu_group_id' => 54,
+              'menu_group_id' => 51,
               'title'         => '设置管理-帮助设置-编辑',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\HelpCenterController',
@@ -1035,7 +1035,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.help-center.delete',
-              'menu_group_id' => 54,
+              'menu_group_id' => 51,
               'title'         => '设置管理-帮助设置-删除',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\HelpCenterController',
@@ -1043,7 +1043,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.bank-cards.bank-list',
-              'menu_group_id' => 56,
+              'menu_group_id' => 54,
               'title'         => '设置管理-银行卡反查-银行列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\BankCardsController',
@@ -1051,7 +1051,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.bank-cards.index',
-              'menu_group_id' => 56,
+              'menu_group_id' => 54,
               'title'         => '设置管理-银行卡反查-列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\BankCardsController',
@@ -1059,7 +1059,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.bank-cards.delete',
-              'menu_group_id' => 56,
+              'menu_group_id' => 54,
               'title'         => '设置管理-银行卡反查-删除',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\BankCardsController',
@@ -1067,7 +1067,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.login',
-              'menu_group_id' => 58,
+              'menu_group_id' => 56,
               'title'         => '登录',
               'is_open'       => 1,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MerchantAuthController',
@@ -1075,7 +1075,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.logout',
-              'menu_group_id' => 58,
+              'menu_group_id' => 56,
               'title'         => '登出',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MerchantAuthController',
@@ -1083,7 +1083,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.menu.current-admin-menu',
-              'menu_group_id' => 58,
+              'menu_group_id' => 56,
               'title'         => '当前管理员拥有的菜单',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\MenuController',
@@ -1091,7 +1091,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.upload',
-              'menu_group_id' => 58,
+              'menu_group_id' => 56,
               'title'         => '上传图片',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\CommonApi\UploadController',
@@ -1099,7 +1099,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.game.ackOut',
-              'menu_group_id' => 59,
+              'menu_group_id' => 57,
               'title'         => '玩家追号，投注等接受回调地址',
               'is_open'       => 1,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
@@ -1107,7 +1107,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.game.ackIn',
-              'menu_group_id' => 59,
+              'menu_group_id' => 57,
               'title'         => '玩家撤单，余额退回平台接收地址',
               'is_open'       => 1,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
