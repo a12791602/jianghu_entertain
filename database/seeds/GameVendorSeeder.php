@@ -37,7 +37,7 @@ class GameVendorSeeder extends Seeder
              [
               'name'            => 'VR视讯',
               'sign'            => 'vr',
-              'type_id'         => 1,
+              'type_id'         => 5,
               'sort'            => 2,
               'status'          => 1,
               'urls'            => null,
