@@ -25,11 +25,13 @@ class SaveIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['direction'] = SystemFinanceHandleSaveBuckleRecord::DIRECTION_IN;
         $data                    = $this->model::with('user:id,mobile,guid,is_tester', 'admin:id,name')
             ->filter($inputDatas, SystemFinanceHandleSaveBuckleRecordFilter::class)
-            ->paginate($pageSize);
+            ->paginate();
         return msgOut($data);
     }
 }

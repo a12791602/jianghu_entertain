@@ -32,6 +32,7 @@ class IndexDoRequest extends BaseFormRequest
                 'channel_id' => 'integer',
                 'type_id'    => 'integer',
                 'vendor_id'  => 'integer',
+                'pageSize'   => 'integer|between:1,100', //每页数据条数
                ];
     }
 

@@ -29,9 +29,10 @@ class IndexDoRequest extends BaseFormRequest
     public function rules():array
     {
         return [
-            'status' => 'in:0,1',
-            'name' => 'string',
-        ];
+                'status'   => 'in:0,1',
+                'name'     => 'string',
+                'pageSize' => 'integer|between:1,100', //每页数据条数
+               ];
     }
 
     /**
@@ -40,8 +41,8 @@ class IndexDoRequest extends BaseFormRequest
     public function messages() :array
     {
         return [
-            'status.in' => '所选状态不存在',
-            'name.string' => '厂商名称不符合规则',
-        ];
+                'status.in'   => '所选状态不存在',
+                'name.string' => '厂商名称不符合规则',
+               ];
     }
 }

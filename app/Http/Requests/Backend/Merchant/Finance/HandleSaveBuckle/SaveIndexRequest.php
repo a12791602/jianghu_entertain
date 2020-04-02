@@ -42,6 +42,7 @@ class SaveIndexRequest extends BaseFormRequest
                 'type'         => 'integer|in:' . implode(',', $type),
                 'created_at'   => 'array',
                 'created_at.*' => 'required|date',
+                'pageSize'     => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

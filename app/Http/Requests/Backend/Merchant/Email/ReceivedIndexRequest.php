@@ -38,6 +38,7 @@ class ReceivedIndexRequest extends BaseFormRequest
                 'title'        => 'string|min:1|max:16',
                 'created_at'   => 'array',
                 'created_at.*' => 'date',
+                'pageSize'     => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

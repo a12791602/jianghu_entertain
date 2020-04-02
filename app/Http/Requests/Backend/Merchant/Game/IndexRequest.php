@@ -34,6 +34,7 @@ class IndexRequest extends BaseFormRequest
                 'type_id'   => 'required_unless:hot_new,1|integer|exists:game_types,id',
                 'status'    => 'integer|in:0,1',
                 'hot_new'   => 'integer|in:0,1',
+                'pageSize'  => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

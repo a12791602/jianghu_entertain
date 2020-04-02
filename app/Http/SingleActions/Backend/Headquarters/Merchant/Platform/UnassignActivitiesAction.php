@@ -20,10 +20,14 @@ class UnassignActivitiesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                             = SystemDynActivity::getPageSize();
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas                          = SystemDynActivity::filter($inputDatas, SystemDynActivityFilter::class)
-            ->paginate($pageSize);
+
+        $systemDynActivity = new SystemDynActivity();
+        if (isset($inputDatas['pageSize'])) {
+            $systemDynActivity->setPerPage($inputDatas['pageSize']);
+        }
+        $outputDatas = $systemDynActivity->filter($inputDatas, SystemDynActivityFilter::class)
+            ->paginate();
         return msgOut($outputDatas);
     }
 }

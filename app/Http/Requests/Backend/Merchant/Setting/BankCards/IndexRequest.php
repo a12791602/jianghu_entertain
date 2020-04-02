@@ -35,12 +35,13 @@ class IndexRequest extends BaseFormRequest
     {
         $mobile = ['regex:/^1[345789]\d{9}$/'];//(手机号码第一位1第二位345789总共11位数字)
         return [
-                'user_id'      => 'integer',              //用户UID
-                'mobile'       => $mobile,                //用户手机号
-                'bank_id'      => 'integer',              //银行ID
-                'card_number'  => 'digits_between:13,19', //银行卡号
-                'created_at'   => 'array|size:2',         //绑定时间
-                'created_at.*' => 'date',                 //绑定时间
+                'user_id'      => 'integer',               //用户UID
+                'mobile'       => $mobile,                 //用户手机号
+                'bank_id'      => 'integer',               //银行ID
+                'card_number'  => 'digits_between:13,19',  //银行卡号
+                'created_at'   => 'array|size:2',          //绑定时间
+                'created_at.*' => 'date',                  //绑定时间
+                'pageSize'     => 'integer|between:1,100', //每页数据条数
                ];
     }
 

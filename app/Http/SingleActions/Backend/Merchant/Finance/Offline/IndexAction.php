@@ -26,10 +26,14 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                  = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
 
-        $data = $this->model::filter($inputDatas, SystemFinanceOfflineInfoFilter::class)->paginate($pageSize);
+        $data = $this->model
+            ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
+            ->paginate();
         return msgOut(IndexResource::collection($data));
     }
 }

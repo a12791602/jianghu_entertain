@@ -39,6 +39,7 @@ class ReceivedIndexRequest extends BaseFormRequest
                 'platform_sign' => 'string|min:1|max:64',
                 'created_at'    => 'array',
                 'created_at.*'  => 'date',
+                'pageSize'      => 'integer|between:1,100', //每页数据条数
                ];
     }
 

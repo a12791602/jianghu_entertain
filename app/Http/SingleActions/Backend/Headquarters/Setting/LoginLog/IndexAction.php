@@ -39,12 +39,18 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $data = $this->model
             ->filter($inputDatas, BackendLoginLogFilter::class)
-            ->select(['email', 'ip', 'created_at'])
-            ->paginate($this->model::getPageSize());
-            
-        $msgOut = msgOut($data);
-        return $msgOut;
+            ->select(
+                [
+                 'email',
+                 'ip',
+                 'created_at',
+                ],
+            )->paginate();
+        return msgOut($data);
     }
 }

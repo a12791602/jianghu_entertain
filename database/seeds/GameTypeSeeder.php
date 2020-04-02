@@ -52,6 +52,20 @@ class GameTypeSeeder extends Seeder
               'status' => 1,
               'sort'   => 5,
              ],
+             [
+              'id'     => 6,
+              'name'   => '彩票游戏',
+              'sign'   => 'lottery',
+              'status' => 1,
+              'sort'   => 6,
+             ],
+             [
+              'id'     => 7,
+              'name'   => '游戏大厅',
+              'sign'   => 'lobby',
+              'status' => 1,
+              'sort'   => 7,
+             ],
             ],
         );
     }

@@ -43,6 +43,7 @@ class DetailRequest extends BaseFormRequest
                 'status'       => 'integer|in:0,1',                             //状态  0拉黑 1解封
                 'created_at'   => 'array|size:2',                               //进入黑名单日期
                 'created_at.*' => 'date',                                       //进入黑名单日期
+                'pageSize'     => 'integer|between:1,100',                      //每页数据条数
                ];
     }
 

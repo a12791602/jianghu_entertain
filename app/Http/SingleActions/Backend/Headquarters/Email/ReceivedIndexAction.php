@@ -19,11 +19,14 @@ class ReceivedIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize = SystemEmailOfHead::getPageSize();
-        $datas    = SystemEmailOfHead::with('email.platform:sign,name')
-            ->filter($inputDatas, SystemEmailOfHeadFilter::class)
+        $systemEmailOfHead = new SystemEmailOfHead();
+        if (isset($inputDatas['pageSize'])) {
+            $systemEmailOfHead->setPerPage($inputDatas['pageSize']);
+        }
+        $datas = $systemEmailOfHead->filter($inputDatas, SystemEmailOfHeadFilter::class)
+            ->with('email.platform:sign,name')
             ->orderByDesc('created_at')
-            ->paginate($pageSize);
+            ->paginate();
         return msgOut($datas);
     }
 }
