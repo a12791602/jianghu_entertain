@@ -127,6 +127,16 @@ class GameSubTypeSeeder extends Seeder
               'last_editor_id' => 0,
               'sort'           => 5,
              ],
+             [
+              'id'             => 12,
+              'parent_id'      => 7,
+              'name'           => '游戏大厅',
+              'sign'           => 'lobby',
+              'status'         => 1,
+              'author_id'      => 0,
+              'last_editor_id' => 0,
+              'sort'           => 1,
+             ],
             ],
         );
     }

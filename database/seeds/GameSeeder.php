@@ -18,8 +18,8 @@ class GameSeeder extends Seeder
         Game::insert(
             [
              [
-              'type_id'      => 0,
-              'sub_type_id'  => 0,
+              'type_id'      => 7,
+              'sub_type_id'  => 12,
               'vendor_id'    => 1,
               'name'         => '游戏大厅',
               'sign'         => '0',
@@ -399,7 +399,7 @@ class GameSeeder extends Seeder
               'type_id'      => 5,
               'sub_type_id'  => 7,
               'vendor_id'    => 2,
-              'name'         => 'VR自开游戏大厅',
+              'name'         => 'VR即开游戏大厅',
               'sign'         => '10000',
               'request_mode' => 1,
               'status'       => 1,
