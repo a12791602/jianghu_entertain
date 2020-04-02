@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
 use App\Events\SystemEmailEvent;
+use App\Jobs\Email\HeadquartersSendMail;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
@@ -26,14 +27,17 @@ class SendAction extends BaseAction
             ->get()->pluck('id')->toJson();
         $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
         $inputDatas['sender_id']    = $this->user->id;
+        $send_timestamp             = $inputDatas['send_time'] - now()->timestamp;
+        $inputDatas['send_time']    = date('Y-m-d h:s', $inputDatas['send_time']);
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');
         }
         if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
             event(new SystemEmailEvent($this->model->id));
+        } else {
+            dispatch(new HeadquartersSendMail($this->model, (int) $send_timestamp));
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }
