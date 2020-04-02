@@ -59,6 +59,7 @@ class IndexRequest extends BaseFormRequest
                 'snap_merchant'      => 'string|min:1|max:64',
                 'finance_type_id'    => 'integer|min:1|exists:system_finance_types,id',
                 'snap_account'       => 'string|min:1|max:128',
+                'pageSize'           => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

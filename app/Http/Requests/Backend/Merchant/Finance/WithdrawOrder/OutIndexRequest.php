@@ -58,6 +58,7 @@ class OutIndexRequest extends BaseFormRequest
                 'admin'          => 'string|min:1|max:32',
                 'operation_at'   => 'array',
                 'operation_at.*' => 'required|date',
+                'pageSize'       => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

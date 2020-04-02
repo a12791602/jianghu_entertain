@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Http\Requests\Backend\Merchant\Notice\Marquee;
+namespace App\Http\Requests\Backend\Merchant\User\UsersTag;
 
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class IndexRequest
- * @package App\Http\Requests\Backend\Merchant\Notice\Marquee
+ * 用户标签-列表
  */
 class IndexRequest extends BaseFormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,9 +27,6 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'title'    => 'string|max:16',
-                'pageSize' => 'integer|between:1,100',     //每页数据条数
-               ];
+        return ['pageSize' => 'integer|between:1,100']; //每页数据条数
     }
 }

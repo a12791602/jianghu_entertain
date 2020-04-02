@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\User;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\EditRequest;
+use App\Http\Requests\Backend\Merchant\User\UsersTag\IndexRequest;
 use App\Http\SingleActions\Backend\Merchant\User\UsersTag\DeleteAction;
 use App\Http\SingleActions\Backend\Merchant\User\UsersTag\DoAddAction;
 use App\Http\SingleActions\Backend\Merchant\User\UsersTag\EditAction;
@@ -20,12 +21,16 @@ class UsersTagController
     /**
      * 用户标签-列表
      *
-     * @param  IndexAction $action Action.
+     * @param  IndexRequest $request Request.
+     * @param  IndexAction  $action  Action.
      * @return JsonResponse
      */
-    public function index(IndexAction $action): JsonResponse
-    {
-        return $action->execute();
+    public function index(
+        IndexRequest $request,
+        IndexAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**

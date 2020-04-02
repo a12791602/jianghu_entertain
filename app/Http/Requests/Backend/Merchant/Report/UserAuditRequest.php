@@ -39,6 +39,7 @@ class UserAuditRequest extends BaseFormRequest
                 'created_at'   => 'array|size:2',                    //生成时间
                 'created_at.*' => 'date|date_format:Y-m-d H:i:s',    //生成时间
                 'status'       => 'integer|in:0,1',                  //状态 0未完成 1已完成
+                'pageSize'     => 'integer|between:1,100',           //每页数据条数
                ];
     }
 

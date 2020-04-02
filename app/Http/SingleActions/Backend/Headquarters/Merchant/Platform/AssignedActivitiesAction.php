@@ -20,10 +20,13 @@ class AssignedActivitiesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                             = SystemDynActivity::getPageSize();
+        $systemDynActivity = new SystemDynActivity();
+        if (isset($inputDatas['pageSize'])) {
+            $systemDynActivity->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['assigned_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas                          = SystemDynActivity::filter($inputDatas, SystemDynActivityFilter::class)
-            ->paginate($pageSize);
+        $outputDatas                          = $systemDynActivity->filter($inputDatas, SystemDynActivityFilter::class)
+            ->paginate();
         return msgOut($outputDatas);
     }
 }

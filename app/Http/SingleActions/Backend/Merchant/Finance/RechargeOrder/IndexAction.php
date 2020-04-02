@@ -24,9 +24,11 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $pageSize                    = $this->model::getPageSize();
-        $data                        = $this->model::with(
+        $data                        = $this->model->with(
             [
              'user:id,mobile,guid,parent_id,is_tester',
              'user.parent:id,mobile,guid',
@@ -53,7 +55,7 @@ class IndexAction extends BaseAction
              'created_at',
              'updated_at',
             ],
-        )->paginate($pageSize);
+        )->paginate();
         return msgOut($data);
     }
 }

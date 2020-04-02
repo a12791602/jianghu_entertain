@@ -25,7 +25,9 @@ class CheckIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                    = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $returnField                 = $this->_getReturnField();
         $inputDatas['status_list']   = [
@@ -33,13 +35,16 @@ class CheckIndexAction extends BaseAction
                                         UsersWithdrawOrder::STATUS_CHECK_PASS,
                                         UsersWithdrawOrder::STATUS_CHECK_REFUSE,
                                        ];
-        $data                        = $this->model::with(
-            [
-             'user:id,mobile,guid,parent_id,is_tester',
-             'reviewer:id,name',
-             'user.parent:id,mobile,guid',
-            ],
-        )->filter($inputDatas, UsersWithdrawOrderFilter::class)->select($returnField)->paginate($pageSize);
+        $data                        = $this->model
+            ->with(
+                [
+                 'user:id,mobile,guid,parent_id,is_tester',
+                 'reviewer:id,name',
+                 'user.parent:id,mobile,guid',
+                ],
+            )->filter($inputDatas, UsersWithdrawOrderFilter::class)
+            ->select($returnField)
+            ->paginate();
         return msgOut($data);
     }
 

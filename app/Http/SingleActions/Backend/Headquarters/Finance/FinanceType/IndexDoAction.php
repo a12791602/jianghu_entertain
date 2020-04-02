@@ -23,13 +23,16 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize    = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $outputDatas = $this->model::with(
             [
              'lastEditor:id,name',
              'author:id,name',
             ],
-        )->filter($inputDatas, SystemFinanceTypeFilter::class)->paginate($pageSize);
+        )->filter($inputDatas, SystemFinanceTypeFilter::class)
+        ->paginate();
         return msgOut($outputDatas);
     }
 }

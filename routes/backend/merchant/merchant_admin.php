@@ -16,7 +16,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.merchant-admin-group.';
         //添加管理员角色
-        Route::post('create', [AdminController::class, 'create'])
+        Route::post('create', [AdminController::class, 'groupCreate'])
             ->name($namePrefix . 'create');
         //获取管理员角色
         Route::get('detail', [AdminController::class, 'groupIndex'])

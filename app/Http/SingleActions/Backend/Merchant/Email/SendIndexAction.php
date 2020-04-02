@@ -26,12 +26,17 @@ class SendIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                    = SystemEmailSend::getPageSize();
+        $systemEmailSend = new SystemEmailSend();
+        if (isset($inputDatas['pageSize'])) {
+            $systemEmailSend->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
 
-        $item = SystemEmailSend::with('email')->where(['sender_id' => $this->user->id])
+        $item = $systemEmailSend->where(['sender_id' => $this->user->id])
             ->filter($inputDatas, SystemEmailSendFilter::class)
-            ->orderByDesc('created_at')->paginate($pageSize);
+            ->with('email')
+            ->orderByDesc('created_at')
+            ->paginate();
         return msgOut(IndexResource::collection($item));
     }
 }

@@ -28,10 +28,11 @@ class IndexRequest extends BaseFormRequest
     public function rules():array
     {
         return [
-            'device' => 'required|integer|in:1,2,3',
-            'status' => 'integer|in:0,1',
-            'name' => 'string|max:64',
-        ];
+                'device'   => 'required|integer|in:1,2,3',
+                'status'   => 'integer|in:0,1',
+                'name'     => 'string|max:64',
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
+               ];
     }
 
     /**
@@ -40,10 +41,10 @@ class IndexRequest extends BaseFormRequest
     public function messages():array
     {
         return [
-            'device.required' => '请选择设备',
-            'device.in' => '所选设备不再范围内',
-            'status.in' => '所传状态不在范围内',
-            'name.string' => '名称不符合规则',
-        ];
+                'device.required' => '请选择设备',
+                'device.in'       => '所选设备不再范围内',
+                'status.in'       => '所传状态不在范围内',
+                'name.string'     => '名称不符合规则',
+               ];
     }
 }

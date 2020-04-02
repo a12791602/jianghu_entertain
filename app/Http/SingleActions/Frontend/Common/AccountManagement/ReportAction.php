@@ -28,6 +28,11 @@ class ReportAction extends MainAction
     protected $filterDatas;
 
     /**
+     * @var integer
+     */
+    protected $pageSize = 25;
+
+    /**
      * @param Request                     $request                     Request.
      * @param FrontendUsersAccountsReport $frontendUsersAccountsReport FrontendUsersAccountsReport.
      */
@@ -48,11 +53,13 @@ class ReportAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->pageSize = $inputDatas['pageSize'];
+        }
         $this->filterDatas           = $inputDatas;
         $this->filterDatas['userId'] = $this->user->id;
         $data                        = $this->_getReport($inputDatas['type']);
-        $msgOut                      = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 
     /**
@@ -88,13 +95,11 @@ class ReportAction extends MainAction
                                               $this->model::FROZEN_STATUS_OUT,
                                               $this->model::FROZEN_STATUS_BACK,
                                              ];
-
-        $data = $this->model
+        return $this->model
             ->filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
             ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])
-            ->paginate($this->model::getPageSize())
+            ->paginate($this->pageSize)
             ->toArray();
-        return $data;
     }
 
     /**
@@ -103,11 +108,10 @@ class ReportAction extends MainAction
      */
     private function _getRechargeReport(): array
     {
-        $data = UsersRechargeOrder::filter($this->filterDatas, UsersRechargeOrderFilter::class)
+        return UsersRechargeOrder::filter($this->filterDatas, UsersRechargeOrderFilter::class)
             ->select(['order_no', 'money', 'arrive_money', 'recharge_status', 'status', 'created_at'])
-            ->paginate($this->model::getPageSize())
+            ->paginate($this->pageSize)
             ->toArray();
-        return $data;
     }
 
     /**
@@ -116,10 +120,9 @@ class ReportAction extends MainAction
      */
     private function _getwithdrawReport(): array
     {
-        $data = UsersWithdrawOrder::filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
+        return UsersWithdrawOrder::filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
-            ->paginate($this->model::getPageSize())
+            ->paginate($this->pageSize)
             ->toArray();
-        return $data;
     }
 }

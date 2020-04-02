@@ -37,6 +37,9 @@ class DetailAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
 
         $data = $this->model
@@ -54,7 +57,7 @@ class DetailAction extends MainAction
                  'remark',
                 ],
             )
-            ->paginate($this->model::getPageSize());
+            ->paginate();
         return msgOut($data);
     }
 }

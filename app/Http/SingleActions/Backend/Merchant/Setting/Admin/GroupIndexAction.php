@@ -33,11 +33,15 @@ class GroupIndexAction extends MainAction
     }
 
     /**
+     * @param  array $inputDatas 接收的数据.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(): JsonResponse
+    public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $filterArr = ['platform' => $this->currentPlatformEloq->sign];
         $data      = $this->model
             ->filter($filterArr, MerchantAdminAccessGroupFilter::class)
@@ -48,7 +52,7 @@ class GroupIndexAction extends MainAction
                  'group_name',
                  'created_at',
                 ],
-            )->paginate($this->model::getPageSize());
+            )->paginate();
         return msgOut($data);
     }
 }

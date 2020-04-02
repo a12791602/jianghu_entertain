@@ -51,6 +51,7 @@ class IndexRequest extends BaseFormRequest
                 'register_ip'   => 'ip',                                    //注册IP
                 'created_at'    => 'array|size:2',                          //注册时间
                 'created_at.*'  => 'date',                                  //注册时间
+                'pageSize'      => 'integer|between:1,100',                 //每页数据条数
                ];
     }
 

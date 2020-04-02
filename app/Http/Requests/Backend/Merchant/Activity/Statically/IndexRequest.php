@@ -37,8 +37,9 @@ class IndexRequest extends BaseFormRequest
     {
         $const = FactoryService::getInstence()->generateService('constant');
         return [
-                'title'  => 'string',
-                'device' => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
+                'title'    => 'string',
+                'device'   => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
                ];
     }
 }

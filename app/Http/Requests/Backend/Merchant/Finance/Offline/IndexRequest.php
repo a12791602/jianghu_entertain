@@ -45,6 +45,7 @@ class IndexRequest extends BaseFormRequest
                 'last_editor_name' => 'string|min:1|max:128',
                 'updated_at'       => 'array',
                 'updated_at.*'     => 'date',
+                'pageSize'         => 'integer|between:1,100',     //每页数据条数
                ];
     }
     /**

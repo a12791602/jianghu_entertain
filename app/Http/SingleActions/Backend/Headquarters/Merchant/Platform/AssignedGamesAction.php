@@ -20,16 +20,19 @@ class AssignedGamesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                           = Game::getPageSize();
+        $game = new Game();
+        if (isset($inputDatas['pageSize'])) {
+            $game->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['assigned_platform_id'] = $inputDatas['platform_id'];
-        $outputDatas                        = Game::filter($inputDatas, GameFilter::class)->select(
+        $outputDatas                        = $game->filter($inputDatas, GameFilter::class)->select(
             [
              'id',
              'name',
              'sign',
              'vendor_id',
             ],
-        )->paginate($pageSize);
+        )->paginate();
         return msgOut($outputDatas);
     }
 }

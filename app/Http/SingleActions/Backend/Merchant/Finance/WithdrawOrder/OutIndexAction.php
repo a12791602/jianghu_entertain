@@ -25,7 +25,9 @@ class OutIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                    = $this->model::getPageSize();
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $returnField                 = $this->_getReturnField();
         $inputDatas['status_list']   = [
@@ -33,14 +35,16 @@ class OutIndexAction extends BaseAction
                                         UsersWithdrawOrder::STATUS_OUT_REFUSE,
                                         UsersWithdrawOrder::STATUS_OUT_SUCESS,
                                        ];
-        $data                        = $this->model::with(
+        $data                        = $this->model->with(
             [
              'user:id,mobile,guid,parent_id,is_tester',
              'admin:id,name',
              'reviewer:id,name',
              'user.parent:id,mobile,guid',
             ],
-        )->filter($inputDatas, UsersWithdrawOrderFilter::class)->select($returnField)->paginate($pageSize);
+        )->filter($inputDatas, UsersWithdrawOrderFilter::class)
+        ->select($returnField)
+        ->paginate();
         return msgOut($data);
     }
 

@@ -39,6 +39,7 @@ class AssignedActivitiesRequest extends BaseFormRequest
         return [
                 'platform_sign' => 'required|exists:system_platforms,sign',
                 'name'          => 'string|min:1|max:16',
+                'pageSize'      => 'integer|between:1,100', //每页数据条数
                ];
     }
 }

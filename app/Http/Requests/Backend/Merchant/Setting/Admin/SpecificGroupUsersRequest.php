@@ -33,6 +33,9 @@ class SpecificGroupUsersRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|integer|exists:merchant_admin_access_groups'];
+        return [
+                'id'       => 'required|integer|exists:merchant_admin_access_groups',
+                'pageSize' => 'integer|between:1,100',     //每页数据条数
+               ];
     }
 }

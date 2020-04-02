@@ -44,6 +44,7 @@ class IndexRequest extends BaseFormRequest
                 'last_editor_name' => 'string',
                 'updated_at'       => 'array',
                 'updated_at.*'     => 'date',
+                'pageSize'         => 'integer|between:1,100',     //每页数据条数
                ];
     }
 

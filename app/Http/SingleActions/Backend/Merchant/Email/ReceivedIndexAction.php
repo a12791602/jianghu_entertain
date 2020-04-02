@@ -19,9 +19,12 @@ class ReceivedIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $pageSize                    = SystemEmailOfMerchant::getPageSize();
+        $systemEmailOfMerchant = new SystemEmailOfMerchant();
+        if (isset($inputDatas['pageSize'])) {
+            $systemEmailOfMerchant->setPerPage($inputDatas['pageSize']);
+        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $emails                      = SystemEmailOfMerchant::with('email.headquarters')
+        $emails                      = $systemEmailOfMerchant
             ->select(
                 [
                  'id',
@@ -32,8 +35,9 @@ class ReceivedIndexAction extends BaseAction
                 ],
             )
             ->filter($inputDatas, SystemEmailOfMerchantFilter::class)
+            ->with('email.headquarters')
             ->orderByDesc('created_at')
-            ->paginate($pageSize)
+            ->paginate()
             ->toArray();
 
         $datas = [];

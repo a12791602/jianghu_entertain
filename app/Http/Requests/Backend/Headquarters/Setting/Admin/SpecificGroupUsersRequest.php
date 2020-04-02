@@ -33,6 +33,9 @@ class SpecificGroupUsersRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|numeric|exists:backend_admin_access_groups,id'];
+        return [
+                'id'       => 'required|numeric|exists:backend_admin_access_groups,id',
+                'pageSize' => 'integer|between:1,100', //每页数据条数
+               ];
     }
 }

@@ -38,6 +38,9 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $data = $this->model
             ->filter($inputDatas, SystemSmsConfigFilter::class)
             ->select(
@@ -57,7 +60,7 @@ class IndexAction extends MainAction
                  'created_at',
                 ],
             )->with('admin:id,name')
-            ->paginate($this->model::getPageSize());
+            ->paginate();
         return msgOut($data);
     }
 }

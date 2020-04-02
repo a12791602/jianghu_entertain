@@ -31,10 +31,20 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
         $data = $this->model
-            ->select(['id', 'name', 'email', 'status'])
+            ->select(
+                [
+                 'id',
+                 'name',
+                 'email',
+                 'status',
+                ],
+            )
             ->where('group_id', $inputDatas['id'])
-            ->paginate($this->model::getPageSize());
+            ->paginate();
         return msgOut($data);
     }
 }
