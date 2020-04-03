@@ -13,6 +13,7 @@ use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
@@ -63,10 +64,12 @@ function msgOut(
                     'message' => $message,
                    ];
     $handledData = DataCrypt::handle($datas);
+    $resource    = $handledData['data'];
 
-    $resource = optional($handledData['data'])->resource;
-    if ($resource instanceof LengthAwarePaginator) {
-        $handledData['data'] = $resource;
+    if ($resource instanceof JsonResource) {
+        if ($resource->resource instanceof LengthAwarePaginator) {
+            $handledData['data'] = $resource->resource;
+        }
     }
     return Response::json($handledData);
 }
