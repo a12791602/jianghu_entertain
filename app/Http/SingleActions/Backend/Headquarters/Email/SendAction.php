@@ -27,7 +27,6 @@ class SendAction extends BaseAction
             ->get()->pluck('id')->toJson();
         $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
         $inputDatas['sender_id']    = $this->user->id;
-        $send_timestamp             = strtotime($inputDatas['send_time']) - now()->timestamp;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');
@@ -35,6 +34,7 @@ class SendAction extends BaseAction
         if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_NO) {
             event(new SystemEmailEvent($this->model->id));
         } else {
+            $send_timestamp = strtotime($inputDatas['send_time']) - now()->timestamp;
             dispatch(new HeadquartersSendMail($this->model, (int) $send_timestamp));
         }
         return msgOut();
