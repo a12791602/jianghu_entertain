@@ -51,7 +51,7 @@ class SendRequest extends BaseFormRequest
                 'title'       => 'required|string|min:1|max:16',
                 'content'     => 'required|string|min:1|max:1000',
                 'is_timing'   => 'required|integer|in:' . SystemEmail::IS_TIMING_NO . ',' . SystemEmail::IS_TIMING_YES,
-                'send_time'   => 'integer|digits:10|required_if:is_timing,' . SystemEmail::IS_TIMING_YES,
+                'send_time'   => 'required_if:is_timing,' . SystemEmail::IS_TIMING_YES . '|date|after:now',
                ];
     }
 
