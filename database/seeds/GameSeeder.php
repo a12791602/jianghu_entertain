@@ -18,7 +18,7 @@ class GameSeeder extends Seeder
         Game::insert(
             [
              [
-              'type_id'      => 7,
+              'type_id'      => 1,
               'sub_type_id'  => 12,
               'vendor_id'    => 1,
               'name'         => '游戏大厅',
@@ -612,7 +612,7 @@ class GameSeeder extends Seeder
               'status'       => 1,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '腾讯分分彩',
@@ -621,7 +621,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '重庆时时彩',
@@ -630,7 +630,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '新疆时时彩',
@@ -639,7 +639,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '天津时时彩',
@@ -648,7 +648,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '广东11选5',
@@ -657,7 +657,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '江西11选5',
@@ -666,7 +666,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '北京赛车',
@@ -675,7 +675,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '江苏快三',
@@ -684,7 +684,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '幸运28',
@@ -693,7 +693,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '香港六合彩',
@@ -702,7 +702,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '云南时时彩',
@@ -711,7 +711,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '上海11选5',
@@ -720,7 +720,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '山东11选5',
@@ -729,7 +729,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '新疆11选5',
@@ -738,7 +738,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '江苏11选5',
@@ -747,7 +747,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '辽宁11选5',
@@ -756,7 +756,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '河北11选5',
@@ -765,7 +765,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '吉林快三',
@@ -774,7 +774,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '北京快三',
@@ -783,7 +783,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '广西快三',
@@ -792,7 +792,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '河南快三',
@@ -801,7 +801,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '湖北快三',
@@ -810,7 +810,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '河北快三',
@@ -819,7 +819,7 @@ class GameSeeder extends Seeder
               'status'       => 0,
              ],
              [
-              'type_id'      => 6,
+              'type_id'      => 5,
               'sub_type_id'  => 11,
               'vendor_id'    => 2,
               'name'         => '内蒙古快三',

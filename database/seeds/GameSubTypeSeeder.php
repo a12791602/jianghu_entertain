@@ -129,7 +129,7 @@ class GameSubTypeSeeder extends Seeder
              ],
              [
               'id'             => 12,
-              'parent_id'      => 7,
+              'parent_id'      => 1,
               'name'           => '游戏大厅',
               'sign'           => 'lobby',
               'status'         => 1,
