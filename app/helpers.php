@@ -13,6 +13,7 @@ use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
@@ -54,6 +55,7 @@ function msgOut(
     } else {
         $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
     }
+
     $datas       = [
                     'status'  => true,
                     'code'    => $code,
@@ -61,6 +63,11 @@ function msgOut(
                     'message' => $message,
                    ];
     $handledData = DataCrypt::handle($datas);
+
+    $resource = optional($handledData['data'])->resource;
+    if ($resource instanceof LengthAwarePaginator) {
+        $handledData['data'] = $resource;
+    }
     return Response::json($handledData);
 }
 
