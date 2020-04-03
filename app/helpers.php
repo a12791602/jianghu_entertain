@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Str;
 
 if (!function_exists('configure')) {
     /**
@@ -60,8 +61,7 @@ function msgOut(
                     'message' => $message,
                    ];
     $handledData = DataCrypt::handle($datas);
-    $jsonData    = Response::json($handledData);
-    return $jsonData;
+    return Response::json($handledData);
 }
 
 /**
@@ -145,7 +145,17 @@ if (!function_exists('isJson')) {
         } catch (\Throwable $exception) {
             return false;
         }
-        $result = is_object($jObject);
-        return $result;
+        return is_object($jObject);
     }
+}
+
+/**
+ * get node Hex for orderid or logid
+ * @return string
+ */
+function getUUidNodeHex(): string
+{
+    $uuid       = Str::orderedUuid();
+    $uuidString = $uuid->toString();
+    return Str::afterLast($uuidString, '-');
 }

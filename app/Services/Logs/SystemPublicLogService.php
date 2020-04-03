@@ -4,7 +4,6 @@ namespace App\Services\Logs;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Str;
 
 /**
  * Class SystemPublicLogService
@@ -44,9 +43,7 @@ class SystemPublicLogService
      */
     public function __construct(Request $request, string $logger)
     {
-        $uuid           = Str::orderedUuid();
-        $uuidString     = $uuid->toString();
-        $nodeHex        = Str::afterLast($uuidString, '-');
+        $nodeHex        = getUUidNodeHex();
         $this->log_uuid = $nodeHex;
         $this->input    = $request->all(); //获取所有相关的传参数据
         $this->route    = $request->route();

@@ -4,7 +4,6 @@ namespace App\Models\User\Logics;
 
 use App\Models\User\FrontendUser;
 use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Str;
 
 trait FrontendUsersAuditLogics
 {
@@ -63,6 +62,6 @@ trait FrontendUsersAuditLogics
      */
     public static function getSerialNumber(string $sign): string
     {
-        return $sign . Str::orderedUuid()->getNodeHex();
+        return $sign . getUUidNodeHex();
     }
 }
