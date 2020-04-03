@@ -32,8 +32,7 @@ class SendAction extends BaseAction
         unset($inputDatas['is_head']);
         $inputDatas['sender_id']     = $this->user->id;
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $send_timestamp              = $inputDatas['send_time'] - now()->timestamp;
-        $inputDatas['send_time']     = date('Y-m-d h:s', $inputDatas['send_time']);
+        $send_timestamp              = strtotime($inputDatas['send_time']) - now()->timestamp;
         if ((int) $inputDatas['is_timing'] === SystemEmail::IS_TIMING_YES) {
             $inputDatas['is_send'] = SystemEmail::IS_SEND_NO;
         }

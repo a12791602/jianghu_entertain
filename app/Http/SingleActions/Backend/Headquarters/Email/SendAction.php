@@ -27,8 +27,7 @@ class SendAction extends BaseAction
             ->get()->pluck('id')->toJson();
         $inputDatas['type']         = SystemEmail::TYPE_HEAD_TO_MER;
         $inputDatas['sender_id']    = $this->user->id;
-        $send_timestamp             = $inputDatas['send_time'] - now()->timestamp;
-        $inputDatas['send_time']    = date('Y-m-d h:s', $inputDatas['send_time']);
+        $send_timestamp             = strtotime($inputDatas['send_time']) - now()->timestamp;
         $this->model->fill($inputDatas);
         if (!$this->model->save()) {
             throw new \Exception('303000');
