@@ -11,12 +11,7 @@ use App\Models\Email\SystemEmail;
  */
 class ReceivedIndexResource extends BaseResource
 {
-
-    /**
-     * @var integer $id Id.
-     */
-    private $id;
-
+    
     /**
      * @var SystemEmail $email SystemEmail.
      */
@@ -33,7 +28,7 @@ class ReceivedIndexResource extends BaseResource
     {
         unset($request);
         return [
-                'id'         => $this->id,
+                'email_id'   => $this->email->id,
                 'title'      => $this->email->title,
                 'content'    => $this->email->content,
                 'is_read'    => $this->email->is_read,
