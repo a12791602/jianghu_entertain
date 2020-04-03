@@ -109,8 +109,7 @@ trait AccountChangeLogics
     {
         $this->fresh();
         $this->balance += $money;
-        $save                    = $this->save();
-        return $save;
+        return $this->save();
     }
 
     /**
@@ -127,8 +126,7 @@ trait AccountChangeLogics
             throw new \Exception('100203');
         }
         $this->balance -= $money;
-        $save                    = $this->save();
-        return $save;
+        return $this->save();
     }
 
     /**
@@ -146,8 +144,7 @@ trait AccountChangeLogics
         }
         $this->balance -= $money;
         $this->frozen  += $money;
-        $save                    = $this->save();
-        return $save;
+        return $this->save();
     }
 
     /**
@@ -159,8 +156,7 @@ trait AccountChangeLogics
     {
         $this->balance += $money;
         $this->frozen  -= $money;
-        $save                    = $this->save();
-        return $save;
+        return $this->save();
     }
 
     /**
@@ -176,8 +172,7 @@ trait AccountChangeLogics
             throw new \Exception('100205');
         }
         $this->frozen -= $money;
-        $save                   = $this->save();
-        return $save;
+        return $this->save();
     }
 
     /**
@@ -225,8 +220,7 @@ trait AccountChangeLogics
 
         $accountsReport = new FrontendUsersAccountsReport();
         $accountsReport->fill($report);
-        $save = $accountsReport->save();
-        return $save;
+        return $accountsReport->save();
     }
 
     /**
@@ -235,9 +229,9 @@ trait AccountChangeLogics
      */
     private function _getSerialNumber(): string
     {
-        $sign         = $this->_getCurrentPlatformSign();
-        $serialNumber = $sign . Str::orderedUuid()->getNodeHex();
-        return $serialNumber;
+        $sign    = $this->_getCurrentPlatformSign();
+        $nodeHex = getUUidNodeHex();
+        return $sign . $nodeHex;
     }
 
     /**
@@ -282,7 +276,6 @@ trait AccountChangeLogics
     private function _getDemandBet(string $platformSign, float $amount, string $configSign): float
     {
         $auditTimes = configure($platformSign, $configSign);
-        $demandBet  = $amount * $auditTimes;
-        return $demandBet;
+        return $amount * $auditTimes;
     }
 }
