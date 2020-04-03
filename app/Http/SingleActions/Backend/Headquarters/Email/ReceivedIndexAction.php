@@ -24,7 +24,7 @@ class ReceivedIndexAction extends BaseAction
             $systemEmailOfHead->setPerPage($inputDatas['pageSize']);
         }
         $datas = $systemEmailOfHead->filter($inputDatas, SystemEmailOfHeadFilter::class)
-            ->with('email.platform:sign,name')
+            ->with('email.platform:sign,en_name,cn_name')
             ->orderByDesc('created_at')
             ->paginate();
         return msgOut($datas);
