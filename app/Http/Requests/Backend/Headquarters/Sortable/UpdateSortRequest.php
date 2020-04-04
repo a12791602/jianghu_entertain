@@ -42,11 +42,11 @@ class UpdateSortRequest extends BaseFormRequest
     {
         return [
                 'sort'        => 'required|array',
-                'sort.*.key'  => 'numeric',
-                'sort.*.sort' => 'numeric',
+                'sort.*.key'  => 'integer',
+                'sort.*.sort' => 'integer',
                 'model_type'  => [
                                   'required',
-                                  'numeric',
+                                  'integer',
                                   'in:1,2',
                                   new CheckSortableModel($this),
                                  ],
