@@ -32,8 +32,8 @@ class MerchantSystemMenuSeeder extends Seeder
              [
               'id'      => 2,
               'label'   => '首页',
-              'en_name' => '',
-              'route'   => '#',
+              'en_name' => 'Home',
+              'route'   => '/home',
               'pid'     => 1,
               'icon'    => '',
               'display' => 1,
