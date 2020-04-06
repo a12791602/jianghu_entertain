@@ -35,6 +35,7 @@ class EditRequest extends BaseFormRequest
     {
         return [
                 'id'     => 'required|exists:system_users_help_centers', //ID
+                'title'  => 'string|max:32',                             //标题
                 'pic'    => 'string|max:128',                            //图片路径
                 'status' => 'required_without:pic|integer|in:0,1',       //开启状态 0.关闭 1.开启
                ];
