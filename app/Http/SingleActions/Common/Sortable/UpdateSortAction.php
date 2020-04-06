@@ -24,7 +24,6 @@ class UpdateSortAction extends MainAction
     {
         $validatedData = $request->validated();
         $model         = $request->get('model'); // 从 App\Rules\Backend\Common\Sortable\CheckSortableModel 注入
-
         /**
             [0] => [
                 [key]  => 2
@@ -46,7 +45,6 @@ class UpdateSortAction extends MainAction
         if ($sortCollect->count() !== $model::count()) {
             throw new \RuntimeException('304000');
         }
-
         /**
          * key是要改的顺序, value 是对应的主键资源
          * [
@@ -57,16 +55,17 @@ class UpdateSortAction extends MainAction
          */
         $sortOrder = $sortCollect->pluck('sort')->sort();
         $sortItem  = $sortCollect->pluck('key')->combine($sortOrder);
-
         try {
             $models = $model::find($sortItem);
-            foreach ($models as $model) {
+            foreach ($models as $model_key => $model) {
                 $column           = data_get($model->sortable, 'order_column_name', 'sort');
                 $model->{$column} = $sortItem->get($model->getKey());
+                if (isset($sortCollect[$model_key]['parent_id'])) {
+                    $model->parent_id = $sortCollect[$model_key]['parent_id'];
+                }
                 $model->save();
             }
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }

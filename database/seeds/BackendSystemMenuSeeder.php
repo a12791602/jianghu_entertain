@@ -31,7 +31,7 @@ class BackendSystemMenuSeeder extends Seeder
              ],
              [
               'id'      => '2',
-              'label'   => '首页',
+              'label'   => '首页内容',
               'en_name' => 'Home',
               'route'   => '/home/home',
               'pid'     => 1,
@@ -115,7 +115,7 @@ class BackendSystemMenuSeeder extends Seeder
              ],
              [
               'id'      => '9',
-              'label'   => '游戏管理',
+              'label'   => '游戏设置',
               'en_name' => 'GameManage',
               'route'   => '/game/gamemanage',
               'pid'     => 6,

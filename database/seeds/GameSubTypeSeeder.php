@@ -75,7 +75,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 5,
+              'sort'           => 6,
              ],
              [
               'id'             => 7,
@@ -85,7 +85,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 1,
+              'sort'           => 7,
              ],
              [
               'id'             => 8,
@@ -95,7 +95,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 2,
+              'sort'           => 8,
              ],
              [
               'id'             => 9,
@@ -105,7 +105,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 3,
+              'sort'           => 9,
              ],
              [
               'id'             => 10,
@@ -115,7 +115,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 4,
+              'sort'           => 10,
              ],
              [
               'id'             => 11,
@@ -125,7 +125,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 5,
+              'sort'           => 11,
              ],
              [
               'id'             => 12,
@@ -135,7 +135,7 @@ class GameSubTypeSeeder extends Seeder
               'status'         => 1,
               'author_id'      => 0,
               'last_editor_id' => 0,
-              'sort'           => 1,
+              'sort'           => 12,
              ],
             ],
         );
