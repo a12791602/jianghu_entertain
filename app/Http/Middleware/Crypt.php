@@ -16,13 +16,13 @@ class Crypt
 
     /**
      * 当前平台
-     * @var object App\Models\Systems\SystemPlatform
+     * @var mixed
      */
     private $currentPlatformEloq;
 
     /**
      * 当前平台的SSL
-     * @var object App\Models\Systems\SystemPlatformSsl
+     * @var mixed
      */
     private $currentSSL;
 
@@ -67,23 +67,26 @@ class Crypt
     private function _getCurrentPlatform(Request $request): void
     {
         //获取来源域名
-        $host   = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
+        $host = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
+        if (!is_string($host)) {
+            throw new \Exception('100614');
+        }
         $strArr = explode('/', $host);              // [ 0 => "http:", 1 => "", 2 => "www.learnku.com", 3 => "laravel"]
         if (!is_array($strArr) || !isset($strArr[2])) {
             throw new \Exception('100611');
         }
         $domain     = $strArr[2]; // "www.learnku.com"
         $domainEloq = SystemDomain::where('domain', $domain)->first();
-        if (!$domainEloq) {
+        if ($domainEloq === null) {
             throw new \Exception('100609');
         }
         //域名所属平台
         $this->currentPlatformEloq = $domainEloq->platform;
-        if (!$this->currentPlatformEloq) {
+        if ($this->currentPlatformEloq === null) {
             throw new \Exception('100610');
         }
         $this->currentSSL = $this->currentPlatformEloq->sslKey;
-        if (!$this->currentSSL) {
+        if ($this->currentSSL === null) {
             throw new \Exception('100602');
         }
         $request->attributes->add(['current_platform_eloq' => $this->currentPlatformEloq]);
@@ -106,7 +109,7 @@ class Crypt
             throw new \Exception('100600');
         }
         $requestCryptData = explode($this->currentSSL->interval_str_first, $inData);
-        if (count($requestCryptData) !== 3) {
+        if (!is_array($requestCryptData) || count($requestCryptData) !== 3) {
             throw new \Exception('100601');
         }
         //开始数据解密   0加密的数据  1加密数据的值  2加密数据的键

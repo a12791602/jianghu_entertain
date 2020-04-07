@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Common\Sortable;
 
 use App\Http\Requests\Backend\Headquarters\Sortable\UpdateSortRequest;
 use App\Http\SingleActions\MainAction;
+use App\Rules\Backend\Common\Sortable\CheckSortableModel;
 use Illuminate\Http\JsonResponse;
 use Log;
 
@@ -40,7 +41,6 @@ class UpdateSortAction extends MainAction
          */
         $sorts       = $validatedData['sort'];
         $sortCollect = collect($sorts);
-
         // 与库里的数据进行对比
         if ($sortCollect->count() !== $model::count()) {
             throw new \RuntimeException('304000');
@@ -53,15 +53,16 @@ class UpdateSortAction extends MainAction
          *  3 => 3,
          * ]
          */
-        $sortOrder = $sortCollect->pluck('sort')->sort();
-        $sortItem  = $sortCollect->pluck('key')->combine($sortOrder);
+        $sortOrder  = $sortCollect->pluck('sort')->sort();
+        $sortItem   = $sortCollect->pluck('key')->combine($sortOrder);
+        $parent_ids = $sortCollect->sortBy('key')->pluck('parent_id');
         try {
             $models = $model::find($sortItem);
             foreach ($models as $model_key => $model) {
                 $column           = data_get($model->sortable, 'order_column_name', 'sort');
                 $model->{$column} = $sortItem->get($model->getKey());
-                if (isset($sortCollect[$model_key]['parent_id'])) {
-                    $model->parent_id = $sortCollect[$model_key]['parent_id'];
+                if ((int) $validatedData['model_type'] === CheckSortableModel::GAME_SUB_TYPE) {
+                    $model->parent_id = $parent_ids[$model_key];
                 }
                 $model->save();
             }

@@ -56,6 +56,7 @@ class IndexAction extends MainAction
                        'pic'         => $picDatas['pic'],
                        'author'      => $picDatas['author']['name'] ?? '',
                        'last_editor' => $picDatas['newer']['name'] ?? '',
+                       'status'      => $picDatas['status'],
                        'created_at'  => $picDatas['created_at'],
                        'updated_at'  => $picDatas['updated_at'],
                       ];
