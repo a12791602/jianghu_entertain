@@ -9,7 +9,6 @@
 
 namespace App\Services\Logs\FrontendLogs;
 
-use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemLogsFrontend;
 use App\Models\User\FrontendUser;
 use Jenssegers\Agent\Agent;
@@ -83,10 +82,7 @@ class FrontendLogProcessor
     {
         $request         = request();
         $agent           = new Agent();
-        $baseUrl         = explode('/', $request->headers->get('origin'));
-        $domain          = array_pop($baseUrl);
-        $system_domain   = SystemDomain::where('domain', $domain)->first(['platform_sign']);
-        $platform_sign   = $system_domain->platform_sign;
+        $platform_sign   = $request->get('current_platform_eloq')->sign;
         $clientOs        = $agent->platform();
         $osVersion       = $agent->version($clientOs);
         $browser         = $agent->browser();
@@ -95,7 +91,7 @@ class FrontendLogProcessor
         $type            = $this->_prepareType($agent);
         $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
         $route_path      = explode('/', $request->path());
-        $route_name      = array_pop($route_path);
+        $route_name      = array_pop($route_path) ?? '';
         $user_info       = $this->information(auth($request->get('guard')), $platform_sign, $route_name, $messageArr);
         $record['extra'] = [
                             'user_id'       => $user_info['user_id'],

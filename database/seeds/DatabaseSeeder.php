@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
              BackendAdminUserSeeder::class,
              BackendSystemMenuSeeder::class,
              FrontendUserSeeder::class,
-             FrontendUserAccountSeeder::class,
+             FrontendUsersAccountSeeder::class,
              FrontendUserAccountTypeSeeder::class,
              FrontendUserAccountTypeParamSeeder::class,
              FrontendUsersSpecificInfoSeeder::class,
