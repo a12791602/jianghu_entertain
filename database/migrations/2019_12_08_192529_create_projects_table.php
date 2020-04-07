@@ -22,7 +22,10 @@ class CreateProjectsTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('station_order_no', 128)->nullable()->default(null)->comment('注单号');
+                $table->string('serial_number', 32)->nullable()->default(null)->comment('注单号 14-32');
+                $table->string('their_serial_number', 32)->nullable()->default(null)->comment('三方单号 20-32');
+                $table->string('their_notifyId', 50)->nullable()->default(null)->comment('三方通知单号 39-50');
+                $table->integer('their_info_type')->comment('三方信息类型说明');
                 $table->integer('user_id')->comment('用户id');
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
                 $table->integer('top_id')->comment('最上级id');
