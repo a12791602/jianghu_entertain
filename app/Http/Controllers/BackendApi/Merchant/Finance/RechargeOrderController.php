@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\RechargeOrder\CheckPassRequest;
 use App\Http\Requests\Backend\Merchant\Finance\RechargeOrder\CheckRefuseRequest;
 use App\Http\Requests\Backend\Merchant\Finance\RechargeOrder\GetFinanceTypesRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class RechargeOrderController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class RechargeOrderController
+class RechargeOrderController extends Controller
 {
     /**
      * 入款订单列表.

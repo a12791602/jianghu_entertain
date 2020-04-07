@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\AlipayDestroyRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\BlackRequest;
 use App\Http\Requests\Backend\Merchant\User\FrontendUser\DetailRequest;
@@ -27,7 +28,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户相关
  */
-class FrontendUserController
+class FrontendUserController extends Controller
 {
 
     /**

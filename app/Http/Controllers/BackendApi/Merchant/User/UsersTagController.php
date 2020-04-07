@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\UsersTag\EditRequest;
@@ -15,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户标签管理
  */
-class UsersTagController
+class UsersTagController extends Controller
 {
 
     /**

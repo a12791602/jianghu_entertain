@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Activity;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Activity\Statically\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Statically\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Statically\EditRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class ActivityStaticController
  * @package App\Http\Controllers\BackendApi\Merchant\Activity
  */
-class ActivityStaticController
+class ActivityStaticController extends Controller
 {
     /**
      * 系统公告添加.

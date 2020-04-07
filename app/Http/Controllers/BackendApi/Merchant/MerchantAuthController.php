@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant;
 
+use App\Http\Controllers\Controller;
 use App\Http\SingleActions\Common\MerchantAuth\LoginAction;
 use App\Http\SingleActions\Common\MerchantAuth\LogoutAction;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * 运营商管理员
  */
-class MerchantAuthController
+class MerchantAuthController extends Controller
 {
 
     /**

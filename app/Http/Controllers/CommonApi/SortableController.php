@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\CommonApi;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Sortable\UpdateSortRequest;
 use App\Http\SingleActions\Common\Sortable\UpdateSortAction;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\JsonResponse;
  * Class SortableController
  * @package App\Http\Controllers\CommonApi
  */
-class SortableController
+class SortableController extends Controller
 {
 
     /**

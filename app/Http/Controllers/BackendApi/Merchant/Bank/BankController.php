@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Bank;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Bank\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Bank\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Bank\GetSystemBanksAction;
@@ -13,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class BankController
  * @package App\Http\Controllers\BackendApi\Merchant\Bank
  */
-class BankController
+class BankController extends Controller
 {
     /**
      * 获取银行列表

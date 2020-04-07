@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Email;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Email\DestroyIncomingEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\DestroySentEmailRequest;
 use App\Http\Requests\Backend\Merchant\Email\ReadEmailRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\JsonResponse;
  * Class SystemEmailController
  * @package App\Http\Controllers\BackendApi\Merchant\Email
  */
-class SystemEmailController
+class SystemEmailController extends Controller
 {
     /**
      * 发送邮件.

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Setting\SmsConfig\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\Setting\SmsConfig\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\Setting\SmsConfig\EditRequest;
@@ -17,7 +18,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 短信配置
  */
-class SmsConfigController
+class SmsConfigController extends Controller
 {
     /**
      * 短信配置-列表

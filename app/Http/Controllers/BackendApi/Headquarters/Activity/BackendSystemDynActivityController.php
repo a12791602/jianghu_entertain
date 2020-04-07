@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Activity;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Activity\SystemDynActivity\IndexRequest;
 use App\Http\Requests\Backend\Headquarters\Activity\SystemDynActivity\StatusRequest;
 use App\Http\SingleActions\Backend\Headquarters\Activity\SystemDynActivity\IndexAction;
@@ -14,7 +15,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters\Activity
  */
-class BackendSystemDynActivityController
+class BackendSystemDynActivityController extends Controller
 {
     /**
      * 动态活动列表

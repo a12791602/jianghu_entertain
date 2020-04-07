@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\EditRequest;
@@ -17,7 +18,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 用户等级管理
  */
-class UserGradeController
+class UserGradeController extends Controller
 {
 
     /**

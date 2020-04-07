@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\User\Commission\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\Commission\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\Commission\EditRequest;
@@ -15,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 洗码设置
  */
-class CommissionController
+class CommissionController extends Controller
 {
 
     /**

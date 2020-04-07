@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\GameType\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameType\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\GameType\IndexAction;
@@ -13,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameTypeController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameTypeController
+class GameTypeController extends Controller
 {
     /**
      * 列表

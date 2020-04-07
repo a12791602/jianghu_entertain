@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Setting\Admin\CreateRequest;
 use App\Http\Requests\Backend\Headquarters\Setting\Admin\DeleteAdminRequest;
 use App\Http\Requests\Backend\Headquarters\Setting\Admin\GroupCreateRequest;
@@ -30,7 +31,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 管理员
  */
-class AdminController
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.

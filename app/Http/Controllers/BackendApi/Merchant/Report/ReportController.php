@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Report;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Report\UserAuditRequest;
 use App\Http\SingleActions\Backend\Merchant\Report\UserAuditAction;
 use Illuminate\Http\JsonResponse;
@@ -9,7 +10,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 报表管理
  */
-class ReportController
+class ReportController extends Controller
 {
 
     /**

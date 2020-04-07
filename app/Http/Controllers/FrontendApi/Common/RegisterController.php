@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Http\Requests\Frontend\Common\RegisterVerificationCodeRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterAction;
@@ -12,7 +13,7 @@ use Illuminate\Http\JsonResponse;
  * Class RegisterController
  * @package App\Http\Controllers\FrontendApi\App
  */
-class RegisterController
+class RegisterController extends Controller
 {
 
     /**

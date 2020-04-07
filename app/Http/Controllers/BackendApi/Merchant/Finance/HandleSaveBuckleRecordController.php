@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\HandleSaveBuckle\BuckleIndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\HandleSaveBuckle\HandleBuckleRequest;
 use App\Http\Requests\Backend\Merchant\Finance\HandleSaveBuckle\HandleSaveRequest;
@@ -16,7 +17,7 @@ use Illuminate\Http\JsonResponse;
  * Class HandleSaveBuckleRecordController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class HandleSaveBuckleRecordController
+class HandleSaveBuckleRecordController extends Controller
 {
     /**
      * 人工存款.
