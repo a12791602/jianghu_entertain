@@ -33,7 +33,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'id'      => 2,
               'label'   => '首页',
               'en_name' => 'Home',
-              'route'   => '/home',
+              'route'   => '/home/home',
               'pid'     => 1,
               'icon'    => '',
               'display' => 1,
@@ -535,7 +535,7 @@ class MerchantSystemMenuSeeder extends Seeder
              ],
              [
               'id'      => 44,
-              'label'   => '线下支付配置',
+              'label'   => '线下金流配置',
               'en_name' => 'OfflinePay',
               'route'   => '/pay/offlinepay',
               'pid'     => 43,
