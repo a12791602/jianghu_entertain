@@ -15,6 +15,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
@@ -168,4 +169,20 @@ function getUUidNodeHex(): string
     $uuid       = Str::orderedUuid();
     $uuidString = $uuid->toString();
     return Str::afterLast($uuidString, '-');
+}
+
+/**
+ * 快捷记录 传输数据 与  头数据
+ * @param string      $channel   日志渠道.
+ * @param string|null $logMarker 带标注.
+ * @throws JsonException Exception.
+ * @return void
+ */
+function logAllRequestInfos(string $channel, ?string $logMarker): void
+{
+    $request    = request();
+    $inputToLog = json_encode($request->all(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+    Log::channel($channel)->info($logMarker . ' Inputs are ' . $inputToLog);
+    $headersToLog = json_encode($request->header(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
+    Log::channel($channel)->info($logMarker . '  Headers are ' . $headersToLog);
 }
