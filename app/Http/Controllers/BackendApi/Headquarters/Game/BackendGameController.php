@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Game;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Game\Game\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\EditDoRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters
  */
-class BackendGameController
+class BackendGameController extends Controller
 {
     /**
      * 添加游戏

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckIndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckPassRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckRefuseRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\JsonResponse;
  * Class WithdrawOrderController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class WithdrawOrderController
+class WithdrawOrderController extends Controller
 {
     /**
      * 审核出款列表.

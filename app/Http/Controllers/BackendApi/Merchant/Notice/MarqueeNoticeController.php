@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Notice;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Notice\Marquee\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Marquee\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Marquee\EditRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\JsonResponse;
  * Class MarqueeNoticeController
  * @package App\Http\Controllers\BackendApi\Merchant\Notice
  */
-class MarqueeNoticeController
+class MarqueeNoticeController extends Controller
 {
     /**
      * 添加跑马灯公告.

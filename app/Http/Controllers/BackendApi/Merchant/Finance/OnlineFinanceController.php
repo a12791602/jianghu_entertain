@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\Online\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\BankStatusRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\DelDoRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  * Class OnlineFinanceController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class OnlineFinanceController
+class OnlineFinanceController extends Controller
 {
 
     /**

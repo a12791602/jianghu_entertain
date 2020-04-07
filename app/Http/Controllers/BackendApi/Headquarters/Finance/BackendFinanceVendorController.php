@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceVendor\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceVendor\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceVendor\EditDoRequest;
@@ -19,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters\Finance
  */
-class BackendFinanceVendorController
+class BackendFinanceVendorController extends Controller
 {
     /**
      * @param  AddDoAction  $action  Action.

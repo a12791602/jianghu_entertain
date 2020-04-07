@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\GameListRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\GameCategoryRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\InGameRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class GamesLobbyController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class GamesLobbyController
+class GamesLobbyController extends Controller
 {
 
     /**

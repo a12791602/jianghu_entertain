@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Merchant;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignActivitiesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivitiesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignedActivityCancelRequest;
@@ -39,7 +40,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 运营商
  */
-class PlatformController
+class PlatformController extends Controller
 {
     /**
      * 运营商平台列表

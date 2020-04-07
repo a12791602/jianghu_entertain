@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Activity;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\SavePicRequest;
 use App\Http\Requests\Backend\Merchant\Activity\Dynamic\StatusRequest;
@@ -14,7 +15,7 @@ use Illuminate\Http\JsonResponse;
  * Class ActivityDynController
  * @package App\Http\Controllers\BackendApi\Merchant\Activity
  */
-class ActivityDynController
+class ActivityDynController extends Controller
 {
     /**
      * 动态活动列表.

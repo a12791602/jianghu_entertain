@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\SystemBank\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\SystemBank\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\SystemBank\EditRequest;
@@ -20,7 +21,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage
  */
-class BackendSystemBankController
+class BackendSystemBankController extends Controller
 {
     /**
      * 系统银行添加

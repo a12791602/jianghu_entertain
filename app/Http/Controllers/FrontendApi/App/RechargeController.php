@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\App;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\App\Recharge\CancelRequest;
 use App\Http\Requests\Frontend\App\Recharge\ChannelsRequest;
 use App\Http\Requests\Frontend\App\Recharge\ConfirmRequest;
@@ -19,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  * Class RechargeController
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class RechargeController
+class RechargeController extends Controller
 {
     /**
      * 获取分类

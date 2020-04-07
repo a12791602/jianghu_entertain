@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\CreateRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\DeleteAdminRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\DestroyRequest;
@@ -28,7 +29,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * Controls the data flow into a merchant admin user object and updates the view whenever data changes.
  */
-class AdminController
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.

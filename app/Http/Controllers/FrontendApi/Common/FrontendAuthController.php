@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\LoginAction;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\LogoutAction;
@@ -14,7 +15,7 @@ use Illuminate\Http\Request;
  *
  * @package App\Http\Controllers\FrontendApi
  */
-class FrontendAuthController
+class FrontendAuthController extends Controller
 {
 
     /**

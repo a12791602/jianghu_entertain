@@ -27,8 +27,8 @@ class CreateSystemRoutesMerchantsTable extends Migration
                 $table->integer('menu_group_id')->nullable()->default(null)->comment('菜单ID');
                 $table->string('title', 45)->nullable()->default(null)->comment('标题');
                 $table->text('description')->nullable()->default(null)->comment('描述');
-                $table->tinyInteger('is_open')->nullable()->default(null)->comment('0封闭式 1开放式');
-                $table->index('is_open');
+                $table->tinyInteger('is_open')->nullable()->index()->default(null)->comment('0封闭式 1开放式');
+                $table->tinyInteger('is_ack')->nullable()->index()->default(0)->comment('0默认加密 1与外部接触 无需加密');
                 $table->nullableTimestamps();
             },
         );

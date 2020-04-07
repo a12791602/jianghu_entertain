@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Notice;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Notice\System\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\System\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\System\EditRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class SystemNoticeController
  * @package App\Http\Controllers\BackendApi\Merchant\Notice
  */
-class SystemNoticeController
+class SystemNoticeController extends Controller
 {
     /**
      * 系统公告添加.

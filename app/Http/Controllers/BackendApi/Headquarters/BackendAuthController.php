@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters;
 
+use App\Http\Controllers\Controller;
 use App\Http\SingleActions\Common\Backend\LoginAction;
 use App\Http\SingleActions\Common\Backend\LogoutAction;
 use Illuminate\Http\JsonResponse;
@@ -10,7 +11,7 @@ use Illuminate\Http\Request;
 /**
  * 后台管理员
  */
-class BackendAuthController
+class BackendAuthController extends Controller
 {
 
     /**

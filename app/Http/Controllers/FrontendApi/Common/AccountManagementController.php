@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\FrontendUser\AccountDestroyRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\AliPayBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\AliPayFirstBindingRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  * Class AccountManagementController
  * @package App\Http\Controllers\FrontendApi\Common
  */
-class AccountManagementController
+class AccountManagementController extends Controller
 {
 
     /**
