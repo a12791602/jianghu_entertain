@@ -19,7 +19,7 @@ class GameVendorSeeder extends Seeder
             [
              [
               'name'            => '开源棋牌',
-              'sign'            => 'ky',
+              'sign'            => 'KY',
               'type_id'         => 1,
               'sort'            => 1,
               'status'          => 1,
@@ -36,7 +36,7 @@ class GameVendorSeeder extends Seeder
              ],
              [
               'name'            => 'VR视讯',
-              'sign'            => 'vr',
+              'sign'            => 'VR',
               'type_id'         => 5,
               'sort'            => 2,
               'status'          => 1,
