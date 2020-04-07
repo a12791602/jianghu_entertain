@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Merchant;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DeleteRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Merchant\Menu\DisplayRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 菜单
  */
-class MenuController
+class MenuController extends Controller
 {
     /**
      * Gets all menu.

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\DeveloperUsage\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\AllRequireInfosRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\ChangeParentRequest;
 use App\Http\Requests\Backend\Headquarters\DeveloperUsage\Backend\Menu\DeleteRequest;
@@ -21,7 +22,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 菜单
  */
-class MenuController
+class MenuController extends Controller
 {
     /**
      * Gets all menu.

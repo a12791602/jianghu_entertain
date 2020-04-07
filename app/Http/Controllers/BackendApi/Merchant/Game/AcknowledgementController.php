@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
+use App\Http\Controllers\Controller;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckInAction;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckOutAction;
 use Illuminate\Http\JsonResponse;
@@ -12,7 +13,7 @@ use Illuminate\Support\Arr;
  * Class AcknowledgementController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class AcknowledgementController
+class AcknowledgementController extends Controller
 {
     /**
      * @param Request     $request Request.

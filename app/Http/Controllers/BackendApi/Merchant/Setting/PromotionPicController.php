@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\PromotionPic\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\Setting\PromotionPic\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\Setting\PromotionPic\EditRequest;
@@ -15,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 推广图片
  */
-class PromotionPicController
+class PromotionPicController extends Controller
 {
 
     /**

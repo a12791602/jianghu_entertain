@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\HelpCenter\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\Setting\HelpCenter\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\Setting\HelpCenter\EditRequest;
@@ -15,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 帮助设置
  */
-class HelpCenterController
+class HelpCenterController extends Controller
 {
 
     /**

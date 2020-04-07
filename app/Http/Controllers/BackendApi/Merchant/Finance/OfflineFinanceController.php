@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Offline\EditRequest;
@@ -19,7 +20,7 @@ use Illuminate\Http\JsonResponse;
  * Class OfflineFinanceController
  * @package App\Http\Controllers\BackendApi\Merchant\Finance
  */
-class OfflineFinanceController
+class OfflineFinanceController extends Controller
 {
     /**
      * 添加线下支付

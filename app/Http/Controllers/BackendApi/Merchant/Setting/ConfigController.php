@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\Config\EditRequest;
 use App\Http\SingleActions\Backend\Merchant\Setting\Config\EditAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Config\IndexAction;
@@ -10,7 +11,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 全域设置
  */
-class ConfigController
+class ConfigController extends Controller
 {
 
     /**

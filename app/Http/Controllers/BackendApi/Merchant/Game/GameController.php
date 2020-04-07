@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Game\DoHotRequest;
 use App\Http\Requests\Backend\Merchant\Game\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Game\MaintainRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  * Class GameController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class GameController
+class GameController extends Controller
 {
 
     /**

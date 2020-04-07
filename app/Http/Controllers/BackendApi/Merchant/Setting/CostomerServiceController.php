@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\CostomerService\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\Setting\CostomerService\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\Setting\CostomerService\EditRequest;
@@ -15,7 +16,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 客服设置
  */
-class CostomerServiceController
+class CostomerServiceController extends Controller
 {
 
     /**

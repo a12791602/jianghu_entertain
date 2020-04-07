@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Setting;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Setting\BankCards\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\Setting\BankCards\IndexRequest;
 use App\Http\SingleActions\Backend\Merchant\Setting\BankCards\BankListAction;
@@ -12,7 +13,7 @@ use Illuminate\Http\JsonResponse;
 /**
  * 银行卡反查
  */
-class BankCardsController
+class BankCardsController extends Controller
 {
 
     /**

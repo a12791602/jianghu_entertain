@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\H5;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\ClaimGiftRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\CheckBenefitsAction;
@@ -13,7 +14,7 @@ use Illuminate\Http\JsonResponse;
  * Front-end user center.
  * @package App\Http\Controllers\FrontendApi\H5
  */
-class UserCenterController
+class UserCenterController extends Controller
 {
 
     /**

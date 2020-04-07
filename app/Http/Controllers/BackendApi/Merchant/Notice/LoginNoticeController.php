@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Notice;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Notice\Login\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Login\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Login\EditRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class LoginNoticeController
  * @package App\Http\Controllers\BackendApi\Merchant\Notice
  */
-class LoginNoticeController
+class LoginNoticeController extends Controller
 {
     /**
      * 登录弹窗公告添加.

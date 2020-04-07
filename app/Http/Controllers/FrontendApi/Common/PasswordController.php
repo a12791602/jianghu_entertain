@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\PasswordChangeRequest;
 use App\Http\Requests\Frontend\Common\PVerificationCodeRequest;
 use App\Http\Requests\Frontend\Common\ResetPasswordRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class ResetPasswordController
  * @package App\Http\Controllers\FrontendApi\Common
  */
-class PasswordController
+class PasswordController extends Controller
 {
 
     /**

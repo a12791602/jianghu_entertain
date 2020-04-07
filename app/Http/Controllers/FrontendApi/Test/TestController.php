@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Test;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\RegisterRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendAuth\RegisterAction;
 use App\Http\SingleActions\Frontend\Test\AccountChangeAction;
@@ -15,7 +16,7 @@ use Illuminate\Http\Request;
  * Class TestController
  * @package App\Http\Controllers\FrontendApi\Test
  */
-class TestController
+class TestController extends Controller
 {
     /**
      * 测试帐变接口
@@ -26,8 +27,7 @@ class TestController
      */
     public function accountChange(Request $request, AccountChangeAction $action)
     {
-        $msgOut = $action->execute($request);
-        return $msgOut;
+        return $action->execute($request);
     }
 
     /**
@@ -54,8 +54,7 @@ class TestController
             Cache::put($verification_key, ['mobile' => $mobile, 'verification_code' => strval($mobile)], 120);
             $action->execute($request);
         }
-        $result = msgOut();
-        return $result;
+        return msgOut();
     }
 
     /**
@@ -75,7 +74,6 @@ class TestController
                 $item->specificInfo->save();
             },
         );
-        $result = msgOut();
-        return $result;
+        return msgOut();
     }
 }

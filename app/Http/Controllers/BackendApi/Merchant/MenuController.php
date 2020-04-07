@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant;
 
+use App\Http\Controllers\Controller;
 use App\Http\SingleActions\Backend\Merchant\Menu\MenuAction;
 use Illuminate\Http\JsonResponse;
 
 /**
  * 菜单
  */
-class MenuController
+class MenuController extends Controller
 {
     /**
      * 菜单

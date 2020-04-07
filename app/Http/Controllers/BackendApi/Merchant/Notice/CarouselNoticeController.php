@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Merchant\Notice;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\AddDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Notice\Carousel\EditRequest;
@@ -18,7 +19,7 @@ use Illuminate\Http\JsonResponse;
  * Class CarouselNoticeController
  * @package App\Http\Controllers\BackendApi\Merchant\Notice
  */
-class CarouselNoticeController
+class CarouselNoticeController extends Controller
 {
     /**
      * 系统公告添加.

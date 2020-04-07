@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\FrontendApi\Common;
 
+use App\Http\Controllers\Controller;
 use App\Http\SingleActions\Common\Platform\CurrentSslAction;
 use Illuminate\Http\JsonResponse;
 
@@ -9,7 +10,7 @@ use Illuminate\Http\JsonResponse;
  * 平台相关
  * @package App\Http\Controllers\FrontendApi\Common
  */
-class PlatformController
+class PlatformController extends Controller
 {
 
     /**

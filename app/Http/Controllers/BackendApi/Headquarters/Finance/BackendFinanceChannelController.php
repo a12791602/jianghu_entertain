@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BackendApi\Headquarters\Finance;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\EditDoRequest;
@@ -23,7 +24,7 @@ use Illuminate\Http\JsonResponse;
  *
  * @package App\Http\Controllers\BackendApi\Headquarters\Finance
  */
-class BackendFinanceChannelController
+class BackendFinanceChannelController extends Controller
 {
     /**
      * 金流通道添加
