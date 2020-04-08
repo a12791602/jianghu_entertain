@@ -464,8 +464,8 @@ class MerchantSystemMenuSeeder extends Seeder
              [
               'id'      => 38,
               'label'   => '平台管理',
-              'en_name' => 'PlantForm',
-              'route'   => '/game/plantform',
+              'en_name' => 'PlatForm',
+              'route'   => '/game/platform',
               'pid'     => 34,
               'icon'    => '',
               'display' => 1,
