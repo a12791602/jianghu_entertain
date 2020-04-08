@@ -67,10 +67,8 @@ class Crypt
     private function _getCurrentPlatform(Request $request): void
     {
         //获取来源域名
-        $host = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
-        if (!is_string($host)) {
-            throw new \Exception('100614');
-        }
+        //$host   = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
+        $host   = 'http://api.397017.com'; // 因yapi插件获取域名问题, 暂时先开白
         $strArr = explode('/', $host);              // [ 0 => "http:", 1 => "", 2 => "www.learnku.com", 3 => "laravel"]
         if (!is_array($strArr) || !isset($strArr[2])) {
             throw new \Exception('100611');
