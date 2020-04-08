@@ -633,7 +633,7 @@ class MerchantSystemMenuSeeder extends Seeder
               'id'      => 52,
               'label'   => '推广图片配置',
               'en_name' => 'PicConfig',
-              'route'   => '/promote/picconfig',
+              'route'   => '/set/picconfig',
               'pid'     => 47,
               'icon'    => '',
               'display' => 1,
