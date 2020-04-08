@@ -60,9 +60,9 @@ class FrontendUserAccountTypeSeeder extends Seeder
              [
               'name'          => '游戏三方转出',
               'sign'          => 'game_out',
-              'in_out'        => 1,
+              'in_out'        => 2,
               'param'         => '11',
-              'frozen_type'   => 4,
+              'frozen_type'   => 0,
               'group_type_id' => 3,
               'activity_sign' => 0,
               'admin_id'      => 0,
@@ -70,6 +70,16 @@ class FrontendUserAccountTypeSeeder extends Seeder
              [
               'name'          => '游戏三方转入',
               'sign'          => 'game_in',
+              'in_out'        => 1,
+              'param'         => '11',
+              'frozen_type'   => 0,
+              'group_type_id' => 3,
+              'activity_sign' => 0,
+              'admin_id'      => 0,
+             ],
+             [
+              'name'          => '游戏真实扣款',
+              'sign'          => 'game_real_cost',
               'in_out'        => 2,
               'param'         => '11',
               'frozen_type'   => 0,

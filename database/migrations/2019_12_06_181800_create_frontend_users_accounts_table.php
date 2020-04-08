@@ -27,6 +27,7 @@ class CreateFrontendUsersAccountsTable extends Migration
                 $table->decimal('frozen', 18, 4)->default('0.0000')->comment('冻结资金')->unsigned();
                 $table->integer('integral')->nullable()->default(null)->comment('积分');
                 $table->tinyInteger('status')->default(1)->comment('状态 0关闭 1开启');
+                $table->tinyInteger('tax_status')->default(0)->comment('稽核状态  0已完成  1未完成');
                 $table->nullableTimestamps();
             },
         );
