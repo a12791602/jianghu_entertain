@@ -40,7 +40,7 @@ class EditAction extends MainAction
     {
         $filterArr    = [
                          'data_id'     => $inputDatas['id'],
-                         'platform_id' => $this->currentPlatformEloq->sign,
+                         'platform_id' => $this->currentPlatformEloq->id,
                         ];
         $promotionPic = $this->model
             ->filter($filterArr, SystemPromotionPicFilter::class)

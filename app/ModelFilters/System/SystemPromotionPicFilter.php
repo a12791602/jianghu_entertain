@@ -46,7 +46,7 @@ class SystemPromotionPicFilter extends ModelFilter
      * @param  string $platformId 平台ID.
      * @return SystemPromotionPicFilter
      */
-    public function platformId(string $platformId): SystemPromotionPicFilter
+    public function platform(string $platformId): SystemPromotionPicFilter
     {
         return $this->where('platform_id', $platformId);
     }
@@ -54,10 +54,10 @@ class SystemPromotionPicFilter extends ModelFilter
     /**
      * ID
      *
-     * @param  integer $dataId ID.
-     * @return SystemUsersHelpCenterFilter
+     * @param  string $dataId ID.
+     * @return SystemPromotionPicFilter
      */
-    public function dataId(int $dataId): SystemUsersHelpCenterFilter
+    public function data(string $dataId): SystemPromotionPicFilter
     {
         return $this->where('id', $dataId);
     }
