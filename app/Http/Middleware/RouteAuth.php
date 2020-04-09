@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\JHHYLibs\JHHYRoutes;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
@@ -71,7 +72,12 @@ class RouteAuth
         }
         //###############  检查路由  ###########################
         $curRouteInfos = $request->get('currentRouteInfos');//在 crypt MiddleWare 中需要共用的数据 进行处理
-        $request->attributes->remove('currentRouteInfos');
+        //总控时不会经过加密于是 这个参数会变空
+        if ($curRouteInfos === null) {
+            $curRouteInfos = JHHYRoutes::validateRoute();
+        } else {
+            $request->attributes->remove('currentRouteInfos');
+        }
         $this->guard = $curRouteInfos['guard'];
         $prefix      = $curRouteInfos['prefix'];
         $auth_check  = $curRouteInfos['auth_check'];
