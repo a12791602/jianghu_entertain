@@ -122,7 +122,10 @@ class IndexResource extends BaseResource
         $userTags = UsersTag::whereIn('id', $this->tags->tag_id)->get(['id', 'title']);
         return [
                 'id'          => $this->id,
-                'type'        => $this->type->name,
+                'type'        => [
+                                  'id'    => $this->type->id,
+                                  'title' => $this->type->name,
+                                 ],
                 'platform_id' => $this->platform_id,
                 'bank'        => optional($this->bank)->name,
                 'remark'      => $this->remark,
