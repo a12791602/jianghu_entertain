@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\JHHYLibs\JHHYRoutes;
 use App\Lib\Crypt\AesCrypt;
 use App\Lib\Crypt\RsaCrypt;
 use App\Models\Systems\SystemDomain;
@@ -37,10 +38,13 @@ class Crypt
     {
         //获取当前域名所属平台
         $this->_getCurrentPlatform($request);
-
+        //查看是否 有些路由是提供给外部的情况
+        $getcurrentRouteInfo = JHHYRoutes::validateRoute();
         //系统配置为不加密传输数据时直接放行
-        $isCryptData = configure($this->currentPlatformEloq->sign, 'is_crypt_data');
+        $configCryptStatus = configure($this->currentPlatformEloq->sign, 'is_crypt_data');
+        $isCryptData       = $getcurrentRouteInfo['exposure_status'] === 1 ? 0 : $configCryptStatus;
         $request->attributes->add(['is_crypt_data' => $isCryptData]);
+        $request->attributes->add(['currentRouteInfos' => $getcurrentRouteInfo]);// 传递到 RouteAuth 层 继续处理该处理的任务。
         if (!$isCryptData) {
             //配置为不加密数据时传递的数据还是加密的，则返回100607让前端刷新该加密配置
             if (isset($request['data'])) {
