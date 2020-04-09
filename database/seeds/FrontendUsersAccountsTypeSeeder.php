@@ -4,9 +4,9 @@ use App\Models\User\FrontendUsersAccountsType;
 use Illuminate\Database\Seeder;
 
 /**
- * Class FrontendUserAccountTypeSeeder
+ * Class FrontendUsersAccountsTypeSeeder
  */
-class FrontendUserAccountTypeSeeder extends Seeder
+class FrontendUsersAccountsTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.

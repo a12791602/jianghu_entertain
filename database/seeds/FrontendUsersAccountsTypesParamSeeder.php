@@ -4,9 +4,9 @@ use App\Models\User\FrontendUsersAccountsTypesParam;
 use Illuminate\Database\Seeder;
 
 /**
- * Class FrontendUserAccountTypeParamSeeder
+ * Class FrontendUsersAccountsTypesParamSeeder
  */
-class FrontendUserAccountTypeParamSeeder extends Seeder
+class FrontendUsersAccountsTypesParamSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -64,18 +64,18 @@ class FrontendUserAccountTypeParamSeeder extends Seeder
              ],
              [
               'id'    => 10,
-              'label' => '娱乐城游戏Code',
-              'param' => 'casino_game_code',
+              'label' => '游戏series_id',
+              'param' => 'game_series_id',
              ],
              [
               'id'    => 11,
-              'label' => '娱乐城游戏平台',
-              'param' => 'casino_game_plat',
+              'label' => '游戏厂商id',
+              'param' => 'game_vendor_id',
              ],
              [
               'id'    => 12,
-              'label' => '娱乐城游戏类型',
-              'param' => 'casino_game_category',
+              'label' => '游戏类型id',
+              'param' => 'game_type_id',
              ],
             ],
         );
