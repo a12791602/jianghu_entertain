@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateProjectsTable
+ * Class CreateGameProjectsTable
  */
-class CreateProjectsTable extends Migration
+class CreateGameProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'projects',
+            'game_projects',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -49,7 +49,7 @@ class CreateProjectsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `projects` comment '游戏记录表'");
+        DB::statement("ALTER TABLE `game_projects` comment '游戏记录表'");
     }
 
     /**
@@ -59,6 +59,6 @@ class CreateProjectsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('projects');
+        Schema::dropIfExists('game_projects');
     }
 }
