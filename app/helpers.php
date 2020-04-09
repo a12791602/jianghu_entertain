@@ -172,6 +172,52 @@ function getUUidNodeHex(): string
 }
 
 /**
+ * 生成编号
+ * @return string
+ */
+function getSerialNumber(): string
+{
+    $sign    = getCurrentPlatformSign();
+    $nodeHex = getUUidNodeHex();
+    return $sign . $nodeHex;
+}
+
+/**
+ * 获取平台Sign
+ * @return string
+ */
+function getCurrentPlatformSign(): string
+{
+    $request         = request();
+    $currentPlatform = $request->get('current_platform_eloq');
+    if ($currentPlatform) {
+        return $currentPlatform->sign;
+    }
+    return 'JHHY';
+}
+
+/**
+ * 获取 referrer domain
+ * @return string
+ */
+function getReferrerDomain(): string
+{
+    $request  = request();
+    $referrer = (string) $request->headers->get('referer');
+    return getDomain($referrer);
+}
+
+/**
+ * 获取 domain
+ * @param string $host Host.
+ * @return string
+ */
+function getDomain(string $host): string
+{
+    return Str::after($host, '://');
+}
+
+/**
  * 快捷记录 传输数据 与  头数据
  * @param string      $channel   日志渠道.
  * @param string|null $logMarker 带标注.

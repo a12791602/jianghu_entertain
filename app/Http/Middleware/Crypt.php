@@ -47,7 +47,11 @@ class Crypt
         $request->attributes->add(['currentRouteInfos' => $getcurrentRouteInfo]);// 传递到 RouteAuth 层 继续处理该处理的任务。
         if (!$isCryptData) {
             //配置为不加密数据时传递的数据还是加密的，则返回100607让前端刷新该加密配置
-            if (isset($request['data'])) {
+            $domain       = getReferrerDomain();
+            $domainExist  = SystemDomain::where('domain', $domain)->exists();
+            $requsetCount = $request->attributes->count();
+            $status       = ($domainExist && ($requsetCount === 1) && $request->has('data'));
+            if ($status) {
                 throw new \Exception('100607');
             }
             return $next($request);
@@ -72,12 +76,8 @@ class Crypt
     {
         //获取来源域名
         //$host   = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
-        $host   = 'http://api.397017.com'; // 因yapi插件获取域名问题, 暂时先开白
-        $strArr = explode('/', $host);              // [ 0 => "http:", 1 => "", 2 => "www.learnku.com", 3 => "laravel"]
-        if (!is_array($strArr) || !isset($strArr[2])) {
-            throw new \Exception('100611');
-        }
-        $domain     = $strArr[2]; // "www.learnku.com"
+        $host       = 'http://api.397017.com'; // 因yapi插件获取域名问题, 暂时先开白
+        $domain     = getDomain($host);// "www.learnku.com"
         $domainEloq = SystemDomain::where('domain', $domain)->first();
         if ($domainEloq === null) {
             throw new \Exception('100609');
