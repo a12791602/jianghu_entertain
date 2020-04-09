@@ -68,6 +68,7 @@ class Kernel extends HttpKernel
                                    'merchant-api'          => [
                                                                'throttle:500,1',
                                                                'bindings',
+                                                               'crypt',
                                                                'route-auth',
                                                               ],
                                    /**
