@@ -77,6 +77,11 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
               'label' => '游戏类型id',
               'param' => 'game_type_id',
              ],
+             [
+              'id'    => 13,
+              'label' => '活动标识',
+              'param' => 'activity_sign',
+             ],
             ],
         );
     }
