@@ -33,7 +33,7 @@ class GenerateUserGmaeId extends Command
      */
     public function handle(FrontendUsersGameId $usersGameId): bool
     {
-        $argument = $this->argument('brand') ?? 'jhhy';
+        $argument = $this->argument('brand') ?? 'JHHY';
         $usersGameId->generateUserUniqueID($argument);
         $this->info('Successfully');
         return true;

@@ -17,7 +17,7 @@ class SystemPlatformSslSeeder extends Seeder
     {
         SystemPlatformSsl::insert(
             [
-             'platform_sign'       => 'jhhy',
+             'platform_sign'       => 'JHHY',
              'private_key_first'   => '-----BEGIN PRIVATE KEY-----
 MIICeAIBADANBgkqhkiG9w0BAQEFAASCAmIwggJeAgEAAoGBAKDLok66m4OoT2K1
 VC8ZIEMmi0EQkUBK6SUjC9ww21dQf3092KEn5Mk3YCM2mHMJ2Av0qWC4Mb67gLvX
