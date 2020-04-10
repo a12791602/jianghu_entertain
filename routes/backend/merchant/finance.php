@@ -20,7 +20,7 @@ Route::group(
             ],
         )->name($namePrefix . 'add-do');
         //线下金流列表
-        Route::get(
+        Route::post(
             'index',
             [
              OfflineFinanceController::class,
@@ -75,7 +75,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.online-finance.';
         //线上金流列表
-        Route::get(
+        Route::post(
             'index',
             [
              OnlineFinanceController::class,
