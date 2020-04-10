@@ -4,6 +4,7 @@ namespace App\Http\Resources\Backend\Merchant\Finance\Offline;
 
 use App\Http\Resources\BaseResource;
 use App\Models\Admin\MerchantAdminUser;
+use App\Models\Finance\SystemBank;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
 use App\Models\User\UsersTag;
@@ -27,7 +28,7 @@ class IndexResource extends BaseResource
     private $platform_id;
 
     /**
-     * @var string $bank 银行信息.
+     * @var SystemBank $bank 银行信息.
      */
     private $bank;
 
@@ -123,11 +124,14 @@ class IndexResource extends BaseResource
         return [
                 'id'          => $this->id,
                 'type'        => [
-                                  'id'    => $this->type->id,
-                                  'title' => $this->type->name,
+                                  'id'   => $this->type->id,
+                                  'name' => $this->type->name,
                                  ],
                 'platform_id' => $this->platform_id,
-                'bank'        => optional($this->bank)->name,
+                'bank'        => [
+                                  'id'   => $this->bank->id ?? '',
+                                  'name' => $this->bank->name ?? '',
+                                 ],
                 'remark'      => $this->remark,
                 'qrcode'      => $this->qrcode,
                 'account'     => $this->account,
