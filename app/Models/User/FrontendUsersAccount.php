@@ -23,6 +23,8 @@ class FrontendUsersAccount extends BaseAuthModel
     public const FROZEN_STATUS_BACK      = 2; //解冻金额(返还给用户)
     public const FROZEN_STATUS_GAME_WIN  = 3; //游戏中奖
     public const FROZEN_STATUS_TO_SYSTEM = 4; //扣除冻结金额
+    public const TAX_STATUS_DONE         = 0; //稽核状态  0已完成
+    public const TAX_STATUS_UNDONE       = 1; //稽核状态  1未完成
 
     /**
      * @var array $guarded
