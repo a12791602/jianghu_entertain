@@ -8,6 +8,7 @@ use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Services\FactoryService;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
@@ -119,7 +120,8 @@ class RechargeAction extends MainAction
      */
     private function _checkMoneyIsEffective(): void
     {
-        if ($this->inputDatas['money'] < $this->model->min || $this->inputDatas['money'] > $this->model->max) {
+        $money = $this->inputDatas['money'];
+        if ($money < $this->model->min_amount || $money > $this->model->max_amount) {
             throw new \Exception('100301');
         }
     }
@@ -144,8 +146,7 @@ class RechargeAction extends MainAction
         $order          = UsersRechargeOrder::where($whereCondition)->first();
         if ($order) {
             $data['real_money'] = $this->_getRealMoney();
-            $result             = $this->_saveOfflineOrderData($data);
-            return $result;
+            return $this->_saveOfflineOrderData($data);
         }
         $returnData              = [];
         $usersRechargeOrderModel = new UsersRechargeOrder();
@@ -154,18 +155,19 @@ class RechargeAction extends MainAction
         if (!$result) {
             throw new \Exception('100303');
         }
-        $lastId                   = $usersRechargeOrderModel->id;
-        $order                    = UsersRechargeOrder::find($lastId);
         $returnData['account']    = $this->model->account;
         $returnData['username']   = $this->model->username;
         $returnData['branch']     = $this->model->branch;
-        $returnData['real_money'] = $order->real_money;
-        $returnData['money']      = $order->money;
-        $returnData['order_no']   = $order->order_no;
+        $returnData['real_money'] = $usersRechargeOrderModel->real_money;
+        $returnData['money']      = $usersRechargeOrderModel->money;
+        $returnData['order_no']   = $usersRechargeOrderModel->order_no;
         $returnData['qrcode']     = $this->model->qrcode;
-        $returnData['created_at'] = $order->created_at->toDateTimeString();
-        $returnData['expired_at'] = $order->created_at
-            ->addMinutes(UsersRechargeOrder::EXPIRED)->toDateTimeString();
+        if ($usersRechargeOrderModel->created_at instanceof Carbon) {
+            $returnData['created_at'] = $usersRechargeOrderModel->created_at->toDateTimeString();
+        }
+        if ($usersRechargeOrderModel->created_at instanceof Carbon) {
+            $usersRechargeOrderModel->created_at->addMinutes(UsersRechargeOrder::EXPIRED)->toDateTimeString();
+        }
         return $returnData;
     }
 
@@ -183,9 +185,7 @@ class RechargeAction extends MainAction
         if (!$result) {
             throw new \Exception('100303');
         }
-        $lastId = $usersRechargeOrderModel->id;
-        $order  = UsersRechargeOrder::find($lastId);
-        return $order;
+        return $usersRechargeOrderModel;
     }
 
     /**
@@ -237,8 +237,7 @@ class RechargeAction extends MainAction
         if (!Cache::get($orderKey)) {
             Cache::put($orderKey, $init);
         }
-        $orderNo = Cache::increment($orderKey);
-        return $orderNo;
+        return (int) Cache::increment($orderKey);
     }
 
     /**
@@ -268,8 +267,7 @@ class RechargeAction extends MainAction
         if (empty($diff)) {
             throw new \Exception('100302');
         }
-        $randKey   = array_rand($diff);
-        $realMoney = $diff[$randKey] + $this->inputDatas['money'];
-        return $realMoney;
+        $randKey = array_rand($diff);
+        return $diff[$randKey] + $this->inputDatas['money'];
     }
 }
