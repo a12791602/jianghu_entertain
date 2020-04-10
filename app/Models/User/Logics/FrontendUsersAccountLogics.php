@@ -10,7 +10,7 @@ use App\Models\User\FrontendUsersAudit;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-trait UserAccountLogics
+trait FrontendUsersAccountLogics
 {
 
     /**
