@@ -4,7 +4,7 @@ use App\Models\User\FrontendUsersAccountsTypesGroup;
 use Illuminate\Database\Seeder;
 
 /**
- * Class FrontendUserAccountTypeSeeder
+ * Class FrontendUserAccountTypesGroupSeeder
  */
 class FrontendUserAccountTypesGroupSeeder extends Seeder
 {
