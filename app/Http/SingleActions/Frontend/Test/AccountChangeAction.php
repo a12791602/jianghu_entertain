@@ -27,10 +27,10 @@ class AccountChangeAction extends MainAction
         if (!$account) {
             return '用户金额表不存在';
         }
-        if (!$inputDatas['params']) {
-            $inputDatas['params'] = [];
-        }
-        $data = $account->operateAccount($inputDatas, $inputDatas['type'], $inputDatas['params']);
+        $params = $inputDatas;
+        unset($params['type']);
+        $params['user_id'] = $user->id;
+        $data              = $account->operateAccount($inputDatas['type'], $params);
         return msgOut($data);
     }
 }
