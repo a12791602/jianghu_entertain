@@ -3,7 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
-use App\Models\User\Logics\UserAccountLogics;
+use App\Models\User\Logics\FrontendUsersAccountLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -16,7 +16,7 @@ class FrontendUsersAccount extends BaseAuthModel
     /**
      * 账户Logics
      */
-    use UserAccountLogics;
+    use FrontendUsersAccountLogics;
 
     public const FROZEN_STATUS_NO        = 0; //冻结无关
     public const FROZEN_STATUS_OUT       = 1; //冻结金额
@@ -41,7 +41,7 @@ class FrontendUsersAccount extends BaseAuthModel
      * @var array
      */
     protected $activityTypes = ['gift'];
-    
+
     /**
      * 用户信息
      *

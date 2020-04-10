@@ -3,7 +3,6 @@
 namespace App\Models\User\Logics;
 
 use App\Models\User\FrontendUser;
-use Illuminate\Support\Facades\Request;
 
 trait FrontendUsersAuditLogics
 {
@@ -22,7 +21,7 @@ trait FrontendUsersAuditLogics
         float $amount,
         float $demandBet
     ): void {
-        $platformSign = self::getPlatformSign();
+        $platformSign = getCurrentPlatformSign();
         if (!$platformSign) {
             throw new \Exception('101006');
         }
@@ -40,19 +39,6 @@ trait FrontendUsersAuditLogics
         if (!$this->save()) {
             throw new \Exception('101007');
         }
-    }
-
-    /**
-     * 获取平台标识
-     * @return string
-     */
-    public static function getPlatformSign(): string
-    {
-        $platform = Request::get('current_platform_eloq');
-        if ($platform) {
-            return $platform->sign;
-        }
-        return 'JHHY';
     }
 
     /**
