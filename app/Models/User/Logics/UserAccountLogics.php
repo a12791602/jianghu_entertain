@@ -8,9 +8,7 @@ use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\FrontendUsersAudit;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 trait UserAccountLogics
 {
@@ -221,7 +219,7 @@ trait UserAccountLogics
         $report = [
                    'user_id'               => $user->id,
                    'parent_id'             => $user->parent_id,
-                   'serial_number'         => $this->_getSerialNumber(),
+                   'serial_number'         => getSerialNumber(),
                    'activity_sign'         => $params['activity_sign'] ?? 0,
                    'desc'                  => $params['desc'] ?? 0,
                    'frozen_type'           => $typeConfig['frozen_type'],
@@ -246,29 +244,6 @@ trait UserAccountLogics
     }
 
     /**
-     * 生成帐变编号
-     * @return string
-     */
-    private function _getSerialNumber(): string
-    {
-        $sign = $this->_getCurrentPlatformSign();
-        return $sign . Str::orderedUuid()->getNodeHex();
-    }
-
-    /**
-     * 获取平台Sign
-     * @return string
-     */
-    private function _getCurrentPlatformSign(): string
-    {
-        $currentPlatform = Request::get('current_platform_eloq');
-        if ($currentPlatform) {
-            return $currentPlatform->sign;
-        }
-        return 'JHHY';
-    }
-
-    /**
      * 稽核处理
      * @param  FrontendUser $user   用户Eloq.
      * @param  array        $type   账变类型Arr.
@@ -277,7 +252,7 @@ trait UserAccountLogics
      */
     private function _auditHandle(FrontendUser $user, array $type, float $amount): void
     {
-        $sign      = $this->_getCurrentPlatformSign();
+        $sign      = getCurrentPlatformSign();
         $userAudit = new FrontendUsersAudit();
         if (in_array($type['sign'], $this->rechargeTypes)) {
             $demandBet = $this->_getDemandBet($sign, $amount, 'recharge_audit_times');
