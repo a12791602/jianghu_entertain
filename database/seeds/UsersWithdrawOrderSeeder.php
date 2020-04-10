@@ -19,7 +19,7 @@ class UsersWithdrawOrderSeeder extends Seeder
             [
              [
               'id'              => 1,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'order_no'        => '20200406200837144378',
               'mobile'          => '18844446666',
               'user_id'         => 2,
@@ -45,7 +45,7 @@ class UsersWithdrawOrderSeeder extends Seeder
              ],
              [
               'id'              => 2,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'order_no'        => '20200406200839239490',
               'mobile'          => '18844446666',
               'user_id'         => 2,
@@ -71,7 +71,7 @@ class UsersWithdrawOrderSeeder extends Seeder
              ],
              [
               'id'              => 3,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'order_no'        => '20200406200839031023',
               'mobile'          => '18844446666',
               'user_id'         => 2,
@@ -97,7 +97,7 @@ class UsersWithdrawOrderSeeder extends Seeder
              ],
              [
               'id'              => 4,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'order_no'        => '20200406200840040550',
               'mobile'          => '18844446666',
               'user_id'         => 2,
@@ -123,7 +123,7 @@ class UsersWithdrawOrderSeeder extends Seeder
              ],
              [
               'id'              => 5,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'order_no'        => '20200406200841188540',
               'mobile'          => '18844446666',
               'user_id'         => 2,

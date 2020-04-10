@@ -20,7 +20,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 1,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '系统配置',
               'value'         => null,
@@ -31,7 +31,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 2,
               'pid'           => 1,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'is_crypt_data',
               'name'          => '传输数据是否加密',
               'value'         => 1,
@@ -42,7 +42,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 3,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '注册登录设定',
               'value'         => null,
@@ -53,7 +53,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 4,
               'pid'           => 3,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'login_error_num',
               'name'          => '登录密码错误限制次数',
               'value'         => 3,
@@ -64,7 +64,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 5,
               'pid'           => 3,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'register_invite_code',
               'name'          => '注册邀请码',
               'value'         => 0,
@@ -75,7 +75,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 6,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '游戏设定',
               'value'         => null,
@@ -86,7 +86,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 7,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'system_maintenance',
               'name'          => '系统维护总开关',
               'value'         => 0,
@@ -97,7 +97,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 8,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'commission',
               'name'          => '是否开启洗码',
               'value'         => 0,
@@ -108,7 +108,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 9,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'chat_user_grade',
               'name'          => '聊天室用户等级',
               'value'         => 0,
@@ -119,7 +119,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 10,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'play_min_recharge',
               'name'          => '最低充值多少才能游戏',
               'value'         => 30,
@@ -130,7 +130,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 11,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'withdraw_error_num',
               'name'          => '取款密码错误次数限制',
               'value'         => 3,
@@ -141,7 +141,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 12,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'popularize_url',
               'name'          => '推广分享地址',
               'value'         => null,
@@ -152,7 +152,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 13,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'upload_url',
               'name'          => '下载地址域名',
               'value'         => null,
@@ -163,7 +163,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 14,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'app_top_domain',
               'name'          => 'APP 大厅顶部域名配置',
               'value'         => null,
@@ -174,7 +174,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 15,
               'pid'           => 6,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'integral',
               'name'          => '输金额转换积分',
               'value'         => null,
@@ -185,7 +185,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 16,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '活动金额限制设定',
               'value'         => null,
@@ -196,7 +196,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 17,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_register_give',
               'name'          => '注册送活动最高金额限制',
               'value'         => null,
@@ -207,7 +207,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 18,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_sign_in_give',
               'name'          => '签到活动最高金额限制',
               'value'         => null,
@@ -218,7 +218,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 19,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_first_recharge_give',
               'name'          => '首充送活动最高金额限制',
               'value'         => null,
@@ -229,7 +229,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 20,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_red_envelopes_give',
               'name'          => '抢红包最高金额限制',
               'value'         => null,
@@ -240,7 +240,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 21,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_guess_give',
               'name'          => '有奖竞猜最高金额限制',
               'value'         => null,
@@ -251,7 +251,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 22,
               'pid'           => 16,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_roulette_give',
               'name'          => '转盘活动最高金额限制',
               'value'         => null,
@@ -262,7 +262,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 23,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '出入款设定',
               'value'         => null,
@@ -273,7 +273,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 24,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'withdraw_commission',
               'name'          => '出款手续费',
               'value'         => 2,
@@ -284,7 +284,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 25,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'withdraw_free_num',
               'name'          => '每天出款免手续费笔数',
               'value'         => 2,
@@ -295,7 +295,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 26,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'min_withdraw',
               'name'          => '每次出款最低金额',
               'value'         => 100,
@@ -306,7 +306,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 27,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_withdraw',
               'name'          => '每次出款最高金额',
               'value'         => 20000,
@@ -317,7 +317,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 28,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'day_withdraw',
               'name'          => '每日出款金额限制',
               'value'         => 100000,
@@ -328,7 +328,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 29,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'day_withdraw_num',
               'name'          => '每日出款次数',
               'value'         => 5,
@@ -339,7 +339,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 30,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_withdraw_commission',
               'name'          => '出款手续费最大金额',
               'value'         => 200,
@@ -350,7 +350,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 31,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'recharge_audit_times',
               'name'          => '入款稽核倍数',
               'value'         => 1,
@@ -361,7 +361,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 32,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'activity_audit_times',
               'name'          => '活动稽核倍数',
               'value'         => 2,
@@ -372,7 +372,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 33,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'audit_free',
               'name'          => '稽核不足出款手续费',
               'value'         => 0,
@@ -383,7 +383,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 34,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'audit_withdraw',
               'name'          => '稽核不足限制出款',
               'value'         => 1,
@@ -394,7 +394,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 35,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'max_artificial_recharge',
               'name'          => '人工充值最高金额限制',
               'value'         => 500,
@@ -405,7 +405,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 36,
               'pid'           => 23,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'bank_card_frozen',
               'name'          => '新绑银行卡多少小时能出款',
               'value'         => 2,
@@ -416,7 +416,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 37,
               'pid'           => 0,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => null,
               'name'          => '返利配置',
               'value'         => null,
@@ -427,7 +427,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 38,
               'pid'           => 37,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'rebate_percentage_1',
               'name'          => '一级返利',
               'value'         => 0,
@@ -438,7 +438,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 39,
               'pid'           => 37,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'rebate_percentage_2',
               'name'          => '二级返利',
               'value'         => 0,
@@ -449,7 +449,7 @@ class SystemConfigurationSeeder extends Seeder
              [
               'id'            => 40,
               'pid'           => 37,
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'sign'          => 'rebate_percentage_3',
               'name'          => '三级返利',
               'value'         => 0,

@@ -18,7 +18,7 @@ class SystemDomainSeeder extends Seeder
         SystemDomain::insert(
             [
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'h5.jianghu.local',
               'status'        => 1,
@@ -26,7 +26,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'madmin.jianghu.local',
               'status'        => 1,
@@ -34,7 +34,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'cadmin.jianghu.local',
               'status'        => 1,
@@ -42,7 +42,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'cadmin.397017.com',
               'status'        => 1,
@@ -50,7 +50,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'madmin.397017.com',
               'status'        => 1,
@@ -58,7 +58,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'api.jianghu.local',
               'status'        => 1,
@@ -66,7 +66,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => '10.10.50.127:8080',
               'status'        => 1,
@@ -74,7 +74,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => '10.10.50.198:8081',
               'status'        => 1,
@@ -82,7 +82,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => '10.10.40.196:7456',
               'status'        => 1,
@@ -90,7 +90,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => '10.10.50.209:8081',
               'status'        => 1,
@@ -98,7 +98,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'api.397017.com',
               'status'        => 1,
@@ -106,7 +106,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'app.397017.com',
               'status'        => 1,
@@ -114,7 +114,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'm.jianghu.com',
               'status'        => 1,
@@ -122,7 +122,7 @@ class SystemDomainSeeder extends Seeder
               'is_default'    => 0,
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'admin_id'      => null,
               'domain'        => 'app.jianghu.com',
               'status'        => 1,

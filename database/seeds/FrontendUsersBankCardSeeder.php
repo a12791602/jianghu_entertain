@@ -18,7 +18,7 @@ class FrontendUsersBankCardSeeder extends Seeder
         FrontendUsersBankCard::insert(
             [
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'user_id'       => 2,
               'bank_id'       => 1,
               'owner_name'    => '亚索',
@@ -31,7 +31,7 @@ class FrontendUsersBankCardSeeder extends Seeder
               'updated_at'    => '2020-02-12 10:18:09',
              ],
              [
-              'platform_sign' => 'jhhy',
+              'platform_sign' => 'JHHY',
               'user_id'       => 2,
               'bank_id'       => 4,
               'owner_name'    => '亚索',

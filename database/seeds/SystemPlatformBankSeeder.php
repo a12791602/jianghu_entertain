@@ -18,7 +18,7 @@ class SystemPlatformBankSeeder extends Seeder
         SystemPlatformBank::insert(
             [
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 1,
               'status'         => 1,
               'last_editor_id' => 1,
@@ -36,7 +36,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 2,
               'status'         => 1,
               'last_editor_id' => 1,
@@ -54,7 +54,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 3,
               'status'         => 1,
               'last_editor_id' => 1,
@@ -72,7 +72,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 4,
               'status'         => 1,
               'last_editor_id' => 1,
@@ -90,7 +90,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 5,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -108,7 +108,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 6,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -126,7 +126,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 7,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -144,7 +144,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 8,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -162,7 +162,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 9,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -180,7 +180,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 10,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -198,7 +198,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 11,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -216,7 +216,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 12,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -234,7 +234,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 13,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -252,7 +252,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 14,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -270,7 +270,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 15,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -288,7 +288,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 16,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -306,7 +306,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 17,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -324,7 +324,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 18,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -342,7 +342,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 19,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -360,7 +360,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 20,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -378,7 +378,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 21,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -396,7 +396,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 22,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -414,7 +414,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 23,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -432,7 +432,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 24,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -450,7 +450,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 25,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -468,7 +468,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 26,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -486,7 +486,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 27,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -504,7 +504,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 28,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -522,7 +522,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 29,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -540,7 +540,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 30,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -558,7 +558,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 31,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -576,7 +576,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 32,
               'status'         => 0,
               'last_editor_id' => 1,
@@ -594,7 +594,7 @@ class SystemPlatformBankSeeder extends Seeder
               'last_editor_id' => 1,
              ],
              [
-              'platform_sign'  => 'jhhy',
+              'platform_sign'  => 'JHHY',
               'bank_id'        => 33,
               'status'         => 0,
               'last_editor_id' => 1,

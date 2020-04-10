@@ -26,7 +26,7 @@ class MerchantAdminUserSeeder extends Seeder
               'group_id'        => '1',
               'status'          => '1',
               'platform_id'     => 1,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'chargeable_fund' => 100,
              ],
              [
@@ -38,7 +38,7 @@ class MerchantAdminUserSeeder extends Seeder
               'group_id'        => '2',
               'status'          => '1',
               'platform_id'     => 1,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'chargeable_fund' => 100,
              ],
              [
@@ -50,7 +50,7 @@ class MerchantAdminUserSeeder extends Seeder
               'group_id'        => '2',
               'status'          => '1',
               'platform_id'     => 1,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'chargeable_fund' => 100,
              ],
              [
@@ -62,7 +62,7 @@ class MerchantAdminUserSeeder extends Seeder
               'group_id'        => '2',
               'status'          => '1',
               'platform_id'     => 1,
-              'platform_sign'   => 'jhhy',
+              'platform_sign'   => 'JHHY',
               'chargeable_fund' => 100,
              ],
             ],

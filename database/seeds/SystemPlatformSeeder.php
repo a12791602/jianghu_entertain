@@ -20,7 +20,7 @@ class SystemPlatformSeeder extends Seeder
              'id'            => 1,
              'cn_name'       => '江湖互娱',
              'en_name'       => 'jh_entertainment',
-             'sign'          => 'jhhy',
+             'sign'          => 'JHHY',
              'agency_method' => '1,2',
              'start_time'    => '2019-12-01 00:00:00',
              'end_time'      => '2022-12-01 00:00:00',
