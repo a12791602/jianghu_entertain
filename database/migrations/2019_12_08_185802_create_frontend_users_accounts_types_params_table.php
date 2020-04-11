@@ -24,6 +24,8 @@ class CreateFrontendUsersAccountsTypesParamsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('label', 32)->nullable()->default(null)->comment('名称');
                 $table->string('param', 32)->nullable()->default(null)->comment('参数');
+                $table->string('rule', 128)->default(null)->comment('规则');
+                $table->tinyInteger('is_search_ease')->default('0')->comment('0.放入params字段内部 1.放到表字段');
                 $table->nullableTimestamps();
             },
         );
