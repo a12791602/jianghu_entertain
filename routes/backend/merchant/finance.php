@@ -300,5 +300,13 @@ Route::group(
              'outRefuse',
             ],
         )->name($namePrefix . 'out-refuse');
+        //查看稽核
+        Route::post(
+            'audit',
+            [
+             WithdrawOrderController::class,
+             'audit',
+            ],
+        )->name($namePrefix . 'audit');
     },
 );

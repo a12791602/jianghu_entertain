@@ -69,37 +69,6 @@ class EditRequest extends BaseFormRequest
     /**
      * @return mixed[]
      */
-    public function messages(): array
-    {
-        return [
-                'id.required'       => 'ID不存在',
-                'id.exists'         => 'ID不存在',
-                'type_id.required'  => '请选择入款类型',
-                'type_id.exists'    => '所选入款类型不存在',
-                'bank_id.exists'    => '所选银行不存在',
-                'bank_id.unique'    => '该银行类型已绑定银行卡',
-                'name.required'     => '请填写名称',
-                'name.unique'       => '名称已存在',
-                'username.required' => '请填写姓名',
-                'account.required'  => '请填写卡号',
-                'account.unique'    => '卡号已存在',
-                'branch.string'     => '支行名称不符合规则',
-                'min.required'      => '请填写最低入款金额',
-                'min.integer'       => '最低入款金额必须是整数',
-                'min.min'           => '最低入款金额不能小于1元',
-                'max.required'      => '请填写最高入款金额',
-                'max.integer'       => '最高入款金额必须是整数',
-                'max.gt'            => '最高入款金额必须大于最低入款金额',
-                'fee.numeric'       => '手续费不符合规则',
-                'fee.min'           => '手续费不能小于0元',
-                'tags.array'        => '用户标签不符合规则',
-                'tags.*'            => '用户标签不存在',
-                'remark.string'     => '说明不符合规则',
-               ];
-    }
-    /**
-     * @return mixed[]
-     */
     public function filters(): array
     {
         return ['tags' => 'cast:array'];

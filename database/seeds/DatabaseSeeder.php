@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
              FrontendUsersSpecificInfoSeeder::class,
              FrontendUserLevelsSeeder::class,
              FrontendUserLevelBenefitSeeder::class,
+             FrontendUsersAuditSeeder::class,
              UsersWithdrawOrderSeeder::class,
              UsersTagSeeder::class,
              MerchantSystemMenuSeeder::class,

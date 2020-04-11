@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\AuditRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckIndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckPassRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\CheckRefuseRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\OutIndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\OutRefuseRequest;
 use App\Http\Requests\Backend\Merchant\Finance\WithdrawOrder\OutSuccessRequest;
+use App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder\AuditAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder\CheckIndexAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder\CheckPassAction;
 use App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder\CheckRefuseAction;
@@ -114,6 +116,22 @@ class WithdrawOrderController extends Controller
     public function outRefuse(
         OutRefuseAction $action,
         OutRefuseRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 查看稽核.
+     *
+     * @param AuditAction  $action  Action.
+     * @param AuditRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function audit(
+        AuditAction $action,
+        AuditRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
