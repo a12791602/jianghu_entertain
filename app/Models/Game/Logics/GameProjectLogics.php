@@ -18,13 +18,13 @@ trait GameProjectLogics
      * @param array        $theirData  三方的数据.
      * @param FrontendUser $userObject 用户类.
      * @param GameVendor   $gameVendor 厂商类.
-     * @return boolean
+     * @return GameProjectLogics
      */
     public static function addData(
         array $theirData,
         FrontendUser $userObject,
         GameVendor $gameVendor
-    ): bool {
+    ): GameProjectLogics {
         $request = request();
         $data    = [
                     'serial_number'       => getSerialNumber(),
@@ -46,6 +46,8 @@ trait GameProjectLogics
                     'status'              => self::STATUS_BET,
                    ];
         $self    = new self();
-        return $self->fill($data)->save();
+        $self->fill($data);
+        $self->save();
+        return $self;
     }
 }
