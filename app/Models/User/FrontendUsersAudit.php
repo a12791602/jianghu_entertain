@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
 use App\Models\User\Logics\FrontendUsersAuditLogics;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 会员稽核
@@ -29,4 +30,13 @@ class FrontendUsersAudit extends BaseAuthModel
                                       'status'     => '稽核状态',
                                       'created_at' => '生成时间',
                                      ];
+
+    /**
+     * 用户
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUser::class, 'guid', 'guid');
+    }
 }

@@ -26,6 +26,9 @@ class FrontendUsersAccount extends BaseAuthModel
     public const TAX_STATUS_DONE         = 0; //稽核状态  0已完成
     public const TAX_STATUS_UNDONE       = 1; //稽核状态  1未完成
 
+    public const TAX_STATUS_NO  = 0; //稽核已完成 提现不需要扣除稽核手续费
+    public const TAX_STATUS_YES = 1; //稽核未完成 提现需要扣除稽核手续费
+
     /**
      * @var array $guarded
      */
