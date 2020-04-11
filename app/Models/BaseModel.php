@@ -16,6 +16,9 @@ class BaseModel extends Model
     use Cachable;
     use Filterable;
 
+    /**
+     * @var integer
+     */
     protected $perPage = 50;
 
     /**
@@ -26,7 +29,6 @@ class BaseModel extends Model
      */
     protected function serializeDate(DateTimeInterface $date): string
     {
-        $date = $date->format('Y-m-d H:i:s');
-        return $date;
+        return $date->format('Y-m-d H:i:s');
     }
 }
