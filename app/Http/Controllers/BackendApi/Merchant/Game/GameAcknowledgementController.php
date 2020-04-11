@@ -41,7 +41,7 @@ class GameAcknowledgementController extends Controller
         AckOutAction $action
     ): JsonResponse {
         logAllRequestInfos('ack-center', 'AckOut');
-        $inputDatas = $request->validated();
+        $inputDatas = $request->all();
         return $action->execute($inputDatas);
     }
 }
