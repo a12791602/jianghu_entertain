@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController;
+use App\Http\Controllers\BackendApi\Merchant\Game\GameAcknowledgementController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameTypeController;
 use App\Http\Controllers\BackendApi\Merchant\Game\GameVendorController;
@@ -138,9 +138,9 @@ Route::group(
         )->name($namePrefix . 'upload');
 
 
-        Route::match(['post', 'get'], 'acknowledge-in', [AcknowledgementController::class, 'ackIn'])
+        Route::match(['post', 'get'], 'acknowledge-in', [GameAcknowledgementController::class, 'ackIn'])
             ->name($namePrefix . 'ackIn');
-        Route::match(['post', 'get'], 'acknowledge-out', [AcknowledgementController::class, 'ackOut'])
+        Route::match(['post', 'get'], 'acknowledge-out', [GameAcknowledgementController::class, 'ackOut'])
             ->name($namePrefix . 'ackOut');
     },
 );

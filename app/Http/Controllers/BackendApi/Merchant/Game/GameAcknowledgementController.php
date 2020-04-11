@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Merchant\Game\AckInRequest;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckInAction;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckOutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Arr;
 
 /**
  * Class AcknowledgementController
  * @package App\Http\Controllers\BackendApi\Merchant\Game
  */
-class AcknowledgementController extends Controller
+class GameAcknowledgementController extends Controller
 {
     /**
-     * @param Request     $request Request.
-     * @param AckInAction $action  Action.
+     * @param AckInRequest $request Request.
+     * @param AckInAction  $action  Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function ackIn(
-        Request $request,
+        AckInRequest $request,
         AckInAction $action
     ): JsonResponse {
-        $inputDatas = $request->all();
-        $headers    = Arr::wrap($request->header());
-        return $action->execute($inputDatas, $headers);
+        logAllRequestInfos('ack-center', 'AckIn');
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
     }
 
     /**
@@ -40,8 +40,8 @@ class AcknowledgementController extends Controller
         Request $request,
         AckOutAction $action
     ): JsonResponse {
+        logAllRequestInfos('ack-center', 'AckOut');
         $inputDatas = $request->all();
-        $headers    = Arr::wrap($request->header());
-        return $action->execute($inputDatas, $headers);
+        return $action->execute($inputDatas);
     }
 }

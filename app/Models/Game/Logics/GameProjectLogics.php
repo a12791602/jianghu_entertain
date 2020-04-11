@@ -18,13 +18,13 @@ trait GameProjectLogics
      * @param array        $theirData  三方的数据.
      * @param FrontendUser $userObject 用户类.
      * @param GameVendor   $gameVendor 厂商类.
-     * @return GameProjectLogics
+     * @return self
      */
     public static function addData(
         array $theirData,
         FrontendUser $userObject,
         GameVendor $gameVendor
-    ): GameProjectLogics {
+    ): self {
         $request = request();
         $data    = [
                     'serial_number'       => getSerialNumber(),
@@ -47,7 +47,7 @@ trait GameProjectLogics
                    ];
         $self    = new self();
         $self->fill($data);
-        $self->save();
+        $self->save();//不是在 客户端使用不需要用 try-catch 去包起来 报错 不会执行下去 到时 直接看tg错误 修复
         return $self;
     }
 }
