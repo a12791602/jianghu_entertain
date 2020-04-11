@@ -166,7 +166,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.recharge-order.';
         //入款订单列表
-        Route::get(
+        Route::post(
             'index',
             [
              RechargeOrderController::class,
@@ -174,7 +174,7 @@ Route::group(
             ],
         )->name($namePrefix . 'index');
         //获取支付方式
-        Route::get(
+        Route::post(
             'get-finance-types',
             [
              RechargeOrderController::class,

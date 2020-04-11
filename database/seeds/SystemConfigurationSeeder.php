@@ -375,7 +375,7 @@ class SystemConfigurationSeeder extends Seeder
               'platform_sign' => 'JHHY',
               'sign'          => 'audit_free',
               'name'          => '稽核不足出款手续费',
-              'value'         => 0,
+              'value'         => 0.02,
               'status'        => 1,
               'display'       => 1,
               'editable_type' => '1',

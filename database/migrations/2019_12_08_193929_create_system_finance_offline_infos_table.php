@@ -29,8 +29,8 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->string('qrcode')->nullable()->default(null)->comment('二维码');
                 $table->string('account', 64)->nullable()->default(null)->comment('账户');
                 $table->string('username', 64)->nullable()->default(null)->comment('账户名');
-                $table->decimal('min', 18, 4)->nullable()->default(null)->comment('最小充值金额');
-                $table->decimal('max', 18, 4)->nullable()->default(null)->comment('最大充值金额');
+                $table->decimal('min_amount', 18, 4)->nullable()->default(null)->comment('最小充值金额');
+                $table->decimal('max_amount', 18, 4)->nullable()->default(null)->comment('最大充值金额');
                 $table->integer('sort')->nullable()->default(null)->comment('排序');
                 $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
                 $table->tinyInteger('pay_type')->nullable()->default(null)->comment('支付类型 1 转账 2 发红包 3 转银行卡');

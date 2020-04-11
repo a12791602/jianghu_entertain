@@ -39,7 +39,7 @@ class CreateUsersWithdrawOrdersTable extends Migration
                 $table->decimal('month_total', 18, 4)->nullable()->default(null)->comment('当月存款总额');
                 $table->tinyInteger('num_withdrawal')->default(0)->comment('今日出款次数');
                 $table->tinyInteger('num_top_up')->default(0)->comment('今日存款次数');
-                $table->text('account_snap')->nullable()->default(null)->comment('收款账户快照');
+                $table->json('account_snap')->nullable()->default(null)->comment('收款账户快照');
                 $table->string('remark')->nullable()->default(null)->comment('备注');
                 $table->tinyInteger('reviewer_id')->nullable()->default(null)->comment('审核人ID');
                 $table->tinyInteger('admin_id')->nullable()->default(null)->comment('操作人ID');
