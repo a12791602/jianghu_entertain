@@ -67,11 +67,18 @@ trait FrontendUsersAccountsTypeLogics
         if (!$paramIds) {
             return $data;
         }
-        $params = FrontendUsersAccountsTypesParam::whereIn('id', $paramIds)->pluck('param')->toArray();
+        $params = FrontendUsersAccountsTypesParam::whereIn('id', $paramIds)
+            ->get(
+                [
+                 'rule',
+                 'param',
+                ],
+            );
         if (empty($params)) {
             return $data;
         }
-        $paramsFlipped = array_flip($params);
-        return array_fill_keys(array_keys($paramsFlipped), 'required');
+        $paramsArr = $params->pluck('param')->toArray();
+        $rulesArr  = $params->pluck('rule')->toArray();
+        return array_combine($paramsArr, $rulesArr);
     }
 }

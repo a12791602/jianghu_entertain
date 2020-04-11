@@ -6,7 +6,9 @@ use App\Lib\Locker\AccountLocker;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
+use App\Models\User\FrontendUsersAccountsTypesParam;
 use App\Models\User\FrontendUsersAudit;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -215,6 +217,11 @@ trait FrontendUsersAccountLogics
         float $beforeFrozen,
         float $amount
     ): bool {
+        $keys       = FrontendUsersAccountsTypesParam::
+            where('is_search_ease', FrontendUsersAccountsTypesParam::SEARCH_EASE_NO)
+            ->pluck('param')
+            ->toArray();
+        $paramsData = Arr::only($params, $keys);
         // 保存帐变记录
         $report = [
                    'user_id'               => $user->id,
@@ -234,7 +241,7 @@ trait FrontendUsersAccountLogics
                    'balance'               => $this->balance,
                    'frozen_balance'        => $this->frozen,
                    'before_frozen_balance' => $beforeFrozen,
-                   'params'                => json_encode($params),
+                   'params'                => $paramsData,
                    'amount'                => $amount,
                   ];
 
