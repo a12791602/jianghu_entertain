@@ -1274,7 +1274,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '玩家追号，投注等接受回调地址',
               'is_open'       => 1,
               'is_ack'        => 1,
-              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameAcknowledgementController',
               'method'        => 'ackOut',
              ],
              [
@@ -1283,7 +1283,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'title'         => '玩家撤单，余额退回平台接收地址',
               'is_open'       => 1,
               'is_ack'        => 1,
-              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\AcknowledgementController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameAcknowledgementController',
               'method'        => 'ackIn',
              ],
 

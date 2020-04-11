@@ -2,27 +2,31 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Acknowledgement;
 
+use App\Http\SingleActions\MainAction;
+use App\JHHYLibs\GameCommons;
+use App\Models\Game\GameVendor;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class AckInAction
  * @package App\Http\SingleActions\Backend\Merchant\Acknowledgement
  */
-class AckInAction
+class AckInAction extends MainAction
 {
+
     /**
      * @param array $inputDatas 参数.
-     * @param array $headers    请求头.
      * @return JsonResponse return.
-     * @throws \Exception Exception.
+     * @throws \Exception|\RuntimeException Exception.
      */
-    public function execute(array $inputDatas = [], array $headers = []): JsonResponse
+    public function execute(array $inputDatas = []): JsonResponse
     {
-        $inputToLog = json_encode($inputDatas, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
-        Log::channel('ack-center')->info('AckIn Inputs are ' . $inputToLog);
-        $headersToLog = json_encode($headers, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
-        Log::channel('ack-center')->info('AckIn Headers are ' . $headersToLog);
-        return msgOut();
+        $curentVendorObj = GameVendor::where('sign', 'VR')->first();
+        if ($curentVendorObj === null) {
+            throw new \RuntimeException('203200');
+        }
+        $gameInstance = GameCommons::gameInit($curentVendorObj);
+        $gameInstance->downScore($inputDatas);
+        return $gameInstance->msgOut();
     }
 }
