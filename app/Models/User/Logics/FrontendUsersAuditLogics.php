@@ -3,6 +3,8 @@
 namespace App\Models\User\Logics;
 
 use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
+use Illuminate\Support\Facades\DB;
 
 trait FrontendUsersAuditLogics
 {
@@ -21,33 +23,35 @@ trait FrontendUsersAuditLogics
         float $amount,
         float $demandBet
     ): void {
-        $platformSign = getCurrentPlatformSign();
-        if (!$platformSign) {
-            throw new \Exception('101006');
-        }
-        $orderNumber = self::getSerialNumber($platformSign);
-        $addData     = [
-                        'mobile'        => $user->mobile,
-                        'guid'          => $user->guid,
-                        'platform_sign' => $platformSign,
-                        'order_number'  => $orderNumber,
-                        'type'          => $type['name'],
-                        'amount'        => $amount,
-                        'demand_bet'    => $demandBet,
-                       ];
+        $addData = [
+                    'mobile'        => $user->mobile,
+                    'guid'          => $user->guid,
+                    'platform_sign' => getCurrentPlatformSign(),
+                    'order_number'  => getSerialNumber(),
+                    'type'          => $type['name'],
+                    'amount'        => $amount,
+                    'demand_bet'    => $demandBet,
+                   ];
         $this->fill($addData);
         if (!$this->save()) {
+            DB::rollback();
             throw new \Exception('101007');
         }
-    }
-
-    /**
-     * 生成稽核单号
-     * @param  string $sign 平台标识.
-     * @return string
-     */
-    public static function getSerialNumber(string $sign): string
-    {
-        return $sign . getUUidNodeHex();
+        //修改账户稽核状态为未完成
+        $user = $this->user;
+        if ($user === null) {
+            DB::rollback();
+            throw new \Exception('101008');
+        }
+        $account = $user->account;
+        if ($account === null) {
+            DB::rollback();
+            throw new \Exception('101009');
+        }
+        $account->tax_status = FrontendUsersAccount::TAX_STATUS_YES;
+        if ($account->save() === false) {
+            DB::rollback();
+            throw new \Exception('101010');
+        }
     }
 }

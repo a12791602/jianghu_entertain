@@ -32,7 +32,6 @@ class CreateFrontendUsersAccountsReportsTable extends Migration
                 $table->string('type_name', 32)->nullable()->default(null)->comment('帐变类型名称');
                 $table->integer('params_value_id')->nullable()->default(null)->comment('详情数据表ID');
                 $table->tinyInteger('in_out')->nullable()->default(null)->comment('帐变类型1增加 2减少');
-                $table->string('activity_sign', 32)->nullable()->default(null)->comment('活动标识');
                 $table->decimal('before_balance', 18, 4)->default('0.0000')->comment('变动前的资金')->unsigned();
                 $table->decimal('balance', 18, 4)->default('0.0000')->comment('变动后的资金')->unsigned();
                 $table->decimal('before_frozen_balance', 18, 4)->default('0.0000')->comment('变动前的冻结资金')->unsigned();
