@@ -53,6 +53,7 @@ class AddDoRequest extends BaseFormRequest
                 'encrypt_mode'    => 'required|integer|in:'
                 . SystemFinanceOnlineInfo::ENCRYPT_MODE_SECRET
                 . ',' . SystemFinanceOnlineInfo::ENCRYPT_MODE_CERT,
+                'certificate'     => 'required_if:encrypt_mode,2|string|min:1|max:256',
                 'merchant_secret' => 'string|min:1|max:256',
                 'public_key'      => 'string|min:1|max:2048',
                 'private_key'     => 'string|min:1|max:2048',
@@ -61,8 +62,8 @@ class AddDoRequest extends BaseFormRequest
                 'app_id'          => 'string|min:1|max:256',
                 'tags'            => 'array',
                 'tags.*'          => 'exists:users_tags,id',
-                'min'             => 'required|integer|min:1',
-                'max'             => 'required|integer|gt:min',
+                'min_amount'      => 'required|integer|min:1',
+                'max_amount'      => 'required|integer|gt:min_amount',
                 'handle_fee'      => 'integer|gt:0',
                 'desc'            => 'string|min:1|max:256',
                 'backend_remark'  => 'string|min:1|max:256',
