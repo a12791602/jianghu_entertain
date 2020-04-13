@@ -3,6 +3,8 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
+use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 后台系统日志
@@ -20,4 +22,22 @@ class SystemLogsBackend extends BaseModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'data_ip'    => 'IP',
+                                      'created_at' => '操作时间',
+                                      'admin_name' => '管理员名称',
+                                     ];
+
+    /**
+     * 所属路由
+     * @return BelongsTo
+     */
+    public function route(): BelongsTo
+    {
+        return $this->belongsTo(SystemRoutesBackend::class, 'route_id', 'id');
+    }
 }
