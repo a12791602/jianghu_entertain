@@ -2,6 +2,7 @@
 
 namespace App\ModelFilters\System;
 
+use Carbon\Carbon;
 use EloquentFilter\ModelFilter;
 
 /**
@@ -49,18 +50,44 @@ class SystemPlatformFilter extends ModelFilter
     }
 
     /**
-     * 维护状态查询
+     * 当前维护状态查询
      *
-     * @param  string $maintain 状态.
+     * @param  integer $maintain 状态.
      * @return $this
      */
-    public function maintain(string $maintain): SystemPlatformFilter
+    public function maintain(int $maintain): SystemPlatformFilter
     {
         $eloq = $this;
-        if ((int) $maintain === 0) {
-            $eloq = $this->where([['maintain_start', null], ['maintain_end', null]]);
-        } elseif ((int) $maintain === 1) {
-            $eloq = $this->where([['maintain_start', '!=', null], ['maintain_end', '!=', null]]);
+        $time = Carbon::now();
+        if ($maintain === 0) {
+            $eloq = $this->where(
+                [
+                 [
+                  'maintain_start',
+                  null,
+                 ],
+                 [
+                  'maintain_end',
+                  null,
+                 ],
+                ],
+            )->orWhere('maintain_start', '>', $time)
+            ->orWhere('maintain_end', '<', $time);
+        } elseif ($maintain === 1) {
+            $eloq = $this->where(
+                [
+                 [
+                  'maintain_start',
+                  '<=',
+                  $time,
+                 ],
+                 [
+                  'maintain_end',
+                  '>=',
+                  $time,
+                 ],
+                ],
+            );
         }
         return $eloq;
     }

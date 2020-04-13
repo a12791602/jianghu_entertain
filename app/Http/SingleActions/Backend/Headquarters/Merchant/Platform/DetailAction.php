@@ -81,7 +81,7 @@ class DetailAction extends MainAction
                              'maintain_start' => $item->maintain_start,
                              'maintain_end'   => $item->maintain_end,
                              'status'         => $item->status,
-                             'created_at'     => $item->created_at->format('Y-m-d H:i:s'),
+                             'created_at'     => $item->created_at->toDatetimeString(),
                              'role'           => $role,
                             ];
         }
