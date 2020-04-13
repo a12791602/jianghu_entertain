@@ -2,11 +2,12 @@
 
 namespace App\Console\Commands;
 
+use DB;
+use File;
 use Illuminate\Console\GeneratorCommand;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Composer;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
+use Str;
 
 /**
  * Class SeederCommand
@@ -101,8 +102,7 @@ class SeederCommand extends GeneratorCommand
      */
     protected function getStub(): string
     {
-        $stub = base_path() . '/template/stubs/seeder.stub';
-        return $stub;
+        return base_path() . '/template/stubs/seeder.stub';
     }
 
     /**
@@ -114,8 +114,7 @@ class SeederCommand extends GeneratorCommand
     protected function getPath($name): string
     {
         $name = ucfirst($name) . 'Seeder';
-        $path = $this->laravel->databasePath() . '/seeds/' . $name . '.php';
-        return $path;
+        return $this->laravel->databasePath() . '/seeds/' . $name . '.php';
     }
 
     /**
@@ -131,6 +130,10 @@ class SeederCommand extends GeneratorCommand
         $file     = $this->files->exists($filePath);
         if ($file) {
             $mode = $this->option('m');
+            if (!is_string($mode)) {
+                $this->error('m 参数不符合规范!');
+                return false;
+            }
             $mode = strtolower($mode);
             if ($mode === self::MODE_APPEND) {
                 $content       = $this->files->get($filePath);
@@ -157,8 +160,7 @@ class SeederCommand extends GeneratorCommand
      */
     protected function qualifyClass($name): string
     {
-        $result = ucfirst($name);
-        return $result;
+        return ucfirst($name);
     }
 
     /**
@@ -169,9 +171,8 @@ class SeederCommand extends GeneratorCommand
      */
     protected function replaceClass($stub, $name): string
     {
-        $stub   = $this->replaceCustomizeSetting($stub); //替换自定义内容
-        $result = parent::replaceClass($stub, $name);
-        return $result;
+        $stub = $this->replaceCustomizeSetting($stub); //替换自定义内容
+        return parent::replaceClass($stub, $name);
     }
 
     /**
@@ -181,9 +182,19 @@ class SeederCommand extends GeneratorCommand
      */
     protected function replaceCustomizeSetting(string $stub): string
     {
-        $content = $this->_getReplaceContent(); //得到要替换的内容
-        $stub    = Str::replaceLast('~CUSTOMIZE~', $content, $stub);
-        return $stub;
+        $content   = $this->_getReplaceContent(); //得到要替换的内容
+        $namespace = $this->_getNameSpace();
+        return str_replace(
+            [
+             '{{NAMESPACE}}',
+             '{{CUSTOMIZE}}',
+            ],
+            [
+             $namespace,
+             $content,
+            ],
+            $stub,
+        );
     }
 
     /**
@@ -193,23 +204,34 @@ class SeederCommand extends GeneratorCommand
     private function _getReplaceContent(): string
     {
         $seederName = $this->argument('name');
-        $tableName  = $this->_getTable($seederName);
-        $condition  = $this->option('c');
-        $feild      = $this->option('f');
-        $model      = DB::table($tableName);
-        if (!empty($feild)) {
-            $feild = explode(',', $feild);
-            $model = $model->select($feild);
+        if (!is_string($seederName)) {
+            $this->error('模型 名称不符合规范!');
+            return '';
+        }
+        $tableName = $this->_getTable($seederName);
+        $condition = $this->option('c');
+        $field     = $this->option('f');
+        $model     = DB::table($tableName);
+        if (!empty($field)) {
+            if (!is_string($field)) {
+                $this->error('f 参数不符合规范!');
+                return '';
+            }
+            $field = explode(',', $field);
+            $model = $model->select($field);
         }
         if (!empty($condition)) {
+            if (!is_string($condition)) {
+                $this->error('c 参数不符合规范!');
+                return '';
+            }
             $condition = explode(',', $condition);
             $model     = $model->whereIn('id', $condition);
         }
         try {
             $data = $model->get()->toJson();
         } catch (\Throwable $exception) {
-            $message = $exception->getMessage();
-            $this->error($message);
+            $this->error($exception->getMessage());
             return '';
         }
         $data   = \json_decode($data, true);
@@ -226,11 +248,9 @@ class SeederCommand extends GeneratorCommand
             }
         }
         if ($number > 0) {
-            $data = $this->_arrToStr($data); //格式格式化字符串
-        } else {
-            $data = '';
+            return $this->_arrToStr($data); //格式格式化字符串
         }
-        return $data;
+        return '';
     }
 
     /**
@@ -240,14 +260,8 @@ class SeederCommand extends GeneratorCommand
      */
     private function _getTable(string $seederName): string
     {
-        $tableName  = Str::snake($seederName);
-        $lastLetter = Str::substr($tableName, -1);
-        if ($lastLetter === 'y') {
-            $tableName = Str::replaceLast('y', 'ies', $tableName);
-        } else {
-            $tableName .= 's';
-        }
-        return $tableName;
+        $tableName = Str::snake($seederName);
+        return Str::plural($tableName);
     }
 
     /**
@@ -284,6 +298,10 @@ class SeederCommand extends GeneratorCommand
             $content .= $thirteen . '],' . PHP_EOL;
         }
         $mode = $this->option('m');
+        if (!is_string($mode)) {
+            $this->error('m 参数不符合规范!');
+            return '';
+        }
         $mode = strtolower($mode);
         if ($mode === self::MODE_APPEND) {
             $string .= $this->content;
@@ -324,10 +342,43 @@ class SeederCommand extends GeneratorCommand
         $keys    = array_keys($data);
         $numbers = [];
         foreach ($keys as $item) {
-            $numbers[] = strlen($item);
+            $numbers[] = strlen((string) $item);
         }
         rsort($numbers);
-        $maxLength = $numbers[0] ?? 0;
-        return $maxLength;
+        return $numbers[0] ?? 0;
+    }
+
+    /**
+     * Get model namespace.
+     * @return string
+     */
+    private function _getNameSpace(): string
+    {
+        $seederName = $this->argument('name');
+        $path       = app_path('Models');
+        $classItem  = File::allFiles($path);
+        $models     = [];
+        foreach ($classItem as $class_key => $class) {
+            $model_namespace = str_replace(
+                [
+                 app_path(),
+                 '/',
+                 '.php',
+                ],
+                [
+                 'App',
+                 '\\',
+                 '',
+                ],
+                (string) $class->getRealPath(),
+            );
+
+            $models[$class_key] = [
+                                   'filename'      => \Str::afterLast($model_namespace, '\\'),
+                                   'full_filename' => $model_namespace,
+                                  ];
+        }
+        $model_key = array_search($seederName, array_column($models, 'filename'));
+        return $models[$model_key]['full_filename'];
     }
 }

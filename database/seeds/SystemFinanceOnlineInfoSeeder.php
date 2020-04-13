@@ -28,6 +28,7 @@ class SystemFinanceOnlineInfoSeeder extends Seeder
               'merchant_code'   => '11296',
               'merchant_secret' => 'zfpODDwL5gS34PwTPkwu9wABdq0Krkfi',
               'desc'            => '充值完成后请耐心等待3分钟!',
+              'encrypt_mode'    => 1,
               'status'          => 1,
               'author_id'       => 1,
               'last_editor_id'  => 1,

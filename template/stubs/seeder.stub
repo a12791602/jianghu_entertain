@@ -1,5 +1,6 @@
 <?php
 
+use {{NAMESPACE}};
 use Illuminate\Database\Seeder;
 
 /**
@@ -15,7 +16,7 @@ class DummyClassSeeder extends Seeder
     public function run(): void
     {
         DummyClass::insert(
-~CUSTOMIZE~
+{{CUSTOMIZE}}
         );
     }
 }
