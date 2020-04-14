@@ -3,7 +3,7 @@
 namespace App\Models\DeveloperUsage\Menu;
 
 use App\Models\BaseModel;
-use App\Models\DeveloperUsage\Menu\Logics\MerchantMenuLogics;
+use App\Models\DeveloperUsage\Menu\Logics\MerchantSystemMenuLogics;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class MerchantSystemMenu extends BaseModel
 {
-    use MerchantMenuLogics;
+    use MerchantSystemMenuLogics;
 
     /**
      * RedisKey

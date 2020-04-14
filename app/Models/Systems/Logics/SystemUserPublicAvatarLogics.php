@@ -5,7 +5,7 @@ namespace App\Models\Systems\Logics;
 use App\Models\Systems\SystemUserPublicAvatar;
 use Illuminate\Support\Arr;
 
-trait SystemUserAvatar
+trait SystemUserPublicAvatarLogics
 {
     /**
      * Generate random avatars for users.

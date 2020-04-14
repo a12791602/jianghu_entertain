@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
  * Date: 5/23/2019
  * Time: 10:02 PM
  */
-trait MenuLogics
+trait BackendSystemMenuLogics
 {
     /**
      * @return mixed[]
