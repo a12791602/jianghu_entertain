@@ -8,7 +8,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.user-tags.';
         //会员标签列表
-        Route::get(
+        Route::post(
             'index',
             [
              UsersTagController::class,

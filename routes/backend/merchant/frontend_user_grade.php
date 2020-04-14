@@ -16,7 +16,7 @@ Route::group(
             ],
         )->name($namePrefix . 'config');
         //会员等级-列表
-        Route::get(
+        Route::post(
             'index',
             [
              UserGradeController::class,
