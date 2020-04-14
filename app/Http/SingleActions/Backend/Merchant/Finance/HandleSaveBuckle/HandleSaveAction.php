@@ -4,7 +4,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\HandleSaveBuckle;
 
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class HandleSaveAction
@@ -23,7 +22,7 @@ class HandleSaveAction extends BaseAction
         $user         = FrontendUser::where('mobile', $inputDatas['user'])
             ->orWhere('guid', $inputDatas['user'])
             ->where('platform_sign', $platformSign)->first();
-        if (!$user) {
+        if (!$user || !$user->account) {
             throw new \Exception('202400');
         }
         $data                  = [];
@@ -36,22 +35,19 @@ class HandleSaveAction extends BaseAction
         $data['admin_id']      = $this->user->id;
         $data['balance']       = $user->account->balance + $inputDatas['money'];
         $data['direction']     = $this->model::DIRECTION_IN;
-        DB::beginTransaction();
         try {
             $this->model->fill($data);
             if ($this->model->save()) {
-                $user->account->operateAccount(
-                    ['amount' => $inputDatas['money']],
-                    'artificial_recharge',
-                );
-                DB::commit();
-                $msgOut = msgOut();
-                return $msgOut;
+                $param = [
+                          'user_id' => $this->user->id,
+                          'amount'  => $inputDatas['money'],
+                         ];
+                $user->account->operateAccount('artificial_recharge', $param);
+                return msgOut();
             }
         } catch (\Throwable $exception) {
             $this->writeLog($exception, $data['order_no']);
         }
-        DB::rollBack();
         throw new \Exception('202401');
     }
 }
