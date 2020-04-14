@@ -10,7 +10,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.marquee-notice.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              MarqueeNoticeController::class,
@@ -57,7 +57,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.system-notice.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              SystemNoticeController::class,
@@ -104,7 +104,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.login-notice.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              LoginNoticeController::class,
@@ -151,7 +151,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.carousel-notice.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              CarouselNoticeController::class,
