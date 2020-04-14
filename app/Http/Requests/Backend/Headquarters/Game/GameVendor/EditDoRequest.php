@@ -63,6 +63,7 @@ class EditDoRequest extends BaseFormRequest
                   'des_key'            => 'string|max:64',
                   'md5_key'            => 'string|max:32',
                   'status'             => 'required|in:0,1',
+                  'type_id'            => 'required|integer|exists:game_types,id',
                  ];
 
         return $rules;
