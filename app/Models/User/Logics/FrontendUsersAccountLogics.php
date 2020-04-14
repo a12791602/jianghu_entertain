@@ -227,7 +227,6 @@ trait FrontendUsersAccountLogics
                    'user_id'               => $user->id,
                    'parent_id'             => $user->parent_id,
                    'serial_number'         => getSerialNumber(),
-                   'activity_sign'         => $params['activity_sign'] ?? 0,
                    'desc'                  => $params['desc'] ?? 0,
                    'frozen_type'           => $typeConfig['frozen_type'],
                    'process_time'          => time(),
