@@ -3,7 +3,7 @@
 namespace App\Models\DeveloperUsage\Menu;
 
 use App\Models\BaseModel;
-use App\Models\DeveloperUsage\Menu\Logics\MenuLogics;
+use App\Models\DeveloperUsage\Menu\Logics\BackendSystemMenuLogics;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class BackendSystemMenu extends BaseModel
 {
-    use MenuLogics;
+    use BackendSystemMenuLogics;
 
     /**
      * RedisKey

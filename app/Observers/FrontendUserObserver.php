@@ -2,7 +2,7 @@
 
 namespace App\Observers;
 
-use App\Models\Systems\Logics\SystemUserAvatar;
+use App\Models\Systems\Logics\SystemUserPublicAvatarLogics;
 use App\Models\User\FrontendUser;
 
 /**
@@ -11,7 +11,7 @@ use App\Models\User\FrontendUser;
  */
 class FrontendUserObserver
 {
-    use SystemUserAvatar;
+    use SystemUserPublicAvatarLogics;
 
     /**
      * Handle the frontend user "created" event.
