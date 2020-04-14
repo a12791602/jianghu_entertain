@@ -19,11 +19,11 @@ class BankStatusAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        $platformSign               = $this->currentPlatformEloq->sign;
+        $condition                  = [];
+        $condition['bank_id']       = $inputDatas['bank_id'];
+        $condition['platform_sign'] = $platformSign;
         try {
-            $platformSign               = $this->currentPlatformEloq->sign;
-            $condition                  = [];
-            $condition['id']            = $inputDatas['id'];
-            $condition['platform_sign'] = $platformSign;
             SystemPlatformBank::where($condition)
                 ->update(
                     [
