@@ -491,6 +491,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'switchAdmin',
              ],
              [
+              'route_name'    => 'headquarters-api.operation-log.index',
+              'menu_group_id' => 27,
+              'title'         => '操作日志-列表',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Setting\OperationLogController',
+              'method'        => 'index',
+             ],
+             [
               'route_name'    => 'headquarters-api.sms-config.index',
               'menu_group_id' => 28,
               'title'         => '短信配置-列表',

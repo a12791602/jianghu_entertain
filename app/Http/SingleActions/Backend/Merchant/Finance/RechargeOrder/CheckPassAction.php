@@ -22,37 +22,37 @@ class CheckPassAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $order = $this->model::find($inputDatas['id']);
+        if (!$order instanceof UsersRechargeOrder) {
+            throw new \Exception('202300');
+        }
         if ($order->is_online !== SystemFinanceType::IS_ONLINE_NO) {
             throw new \Exception('202300');
         }
         if ($order->status !== UsersRechargeOrder::STATUS_CONFIRM) {
             throw new \Exception('202303');
         }
-        DB::beginTransaction();
         try {
             $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
             $order->admin_id = $this->user->id;
-            if ($order->save()) {
-                $order->user->account->operateAccount(
-                    ['amount' => $order->arrive_money],
-                    'recharge',
-                );
-                DB::commit();
-                $msgOut = msgOut();
-                return $msgOut;
-            }
-        } catch (\Throwable $exception) {
+            $order->save();
+            $param = [
+                      'user_id' => $this->user->id,
+                      'amount'  => $order->arrive_money,
+                     ];
+            $this->user->account->operateAccount('recharge', $param);
+            return msgOut();
+        } catch (\RuntimeException $exception) {
             $data    = [
                         'file'    => $exception->getFile(),
                         'line'    => $exception->getLine(),
                         'message' => $exception->getMessage(),
                        ];
             $logData = [
-                        'orderNo' => $order->order_no,
+                        'orderNo' => $order->order_no ?? '',
                         'msg'     => '审核通过失败!',
                         'data'    => $data,
                        ];
-            Log::channel('finance-callback-system')->info(json_encode($logData));
+            Log::channel('finance-callback-system')->info((string) json_encode($logData));
         }
         DB::rollBack();
         throw new \Exception('202304');

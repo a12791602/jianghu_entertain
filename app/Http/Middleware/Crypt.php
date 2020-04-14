@@ -74,20 +74,8 @@ class Crypt
      */
     private function _getCurrentPlatform(Request $request): void
     {
-        //获取来源域名
-        //$host   = $request->server('HTTP_REFERER'); // https://www.learnku.com/laravel
-        $host       = 'http://api.397017.com'; // 因yapi插件获取域名问题, 暂时先开白
-        $domain     = getDomain($host);// "www.learnku.com"
-        $domainEloq = SystemDomain::where('domain', $domain)->first();
-        if ($domainEloq === null) {
-            throw new \Exception('100609');
-        }
-        //域名所属平台
-        $this->currentPlatformEloq = $domainEloq->platform;
-        if ($this->currentPlatformEloq === null) {
-            throw new \Exception('100610');
-        }
-        $this->currentSSL = $this->currentPlatformEloq->sslKey;
+        $this->currentPlatformEloq = getCurrentPlatform($request);
+        $this->currentSSL          = $this->currentPlatformEloq->sslKey;
         if ($this->currentSSL === null) {
             throw new \Exception('100602');
         }

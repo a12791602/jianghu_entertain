@@ -38,6 +38,11 @@ class BankIndexResource extends BaseResource
     private $updated_at;
 
     /**
+     * @var integer $status Status.
+     */
+    private $status;
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request $request Request.
@@ -45,13 +50,13 @@ class BankIndexResource extends BaseResource
      */
     public function toArray($request): array
     {
-        $result = [
-                   'id'          => $this->id,
-                   'bank'        => $this->bank->name,
-                   'status'      => $this->bank->status,
-                   'last_editor' => $this->lastEditor->name,
-                   'updated_at'  => $this->updated_at->toDatetimeString(),
-                  ];
-        return $result;
+        unset($request);
+        return [
+                'id'          => $this->id,
+                'bank'        => $this->bank->name,
+                'status'      => $this->status,
+                'last_editor' => $this->lastEditor->name,
+                'updated_at'  => $this->updated_at->toDatetimeString(),
+               ];
     }
 }

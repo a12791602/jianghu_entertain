@@ -35,8 +35,8 @@ class BankStatusRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|exists:system_platform_banks,bank_id',
-                'status' => 'required|in:0,1',
+                'bank_id' => 'required|exists:system_platform_banks,bank_id',
+                'status'  => 'required|in:0,1',
                ];
     }
 }

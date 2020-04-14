@@ -55,6 +55,7 @@ class EditRequest extends BaseFormRequest
                     'encrypt_mode'    => 'required|in:'
                     . SystemFinanceOnlineInfo::ENCRYPT_MODE_SECRET
                     . ',' . SystemFinanceOnlineInfo::ENCRYPT_MODE_CERT,
+                    'certificate'     => 'required_if:encrypt_mode,2|string|min:1|max:256',
                     'merchant_secret' => 'string',
                     'public_key'      => 'string',
                     'private_key'     => 'string',
@@ -63,8 +64,8 @@ class EditRequest extends BaseFormRequest
                     'app_id'          => 'string',
                     'tags'            => 'array',
                     'tags.*'          => 'exists:users_tags,id',
-                    'min'             => 'required|integer',
-                    'max'             => 'required|integer|gt:min',
+                    'min_amount'      => 'required|integer',
+                    'max_amount'      => 'required|integer|gt:min_amount',
                     'handle_fee'      => 'integer',
                     'desc'            => 'string',
                     'backend_remark'  => 'string',

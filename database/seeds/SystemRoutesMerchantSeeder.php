@@ -360,6 +360,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'checkRefuse',
              ],
              [
+              'route_name'    => 'merchant-api.withdraw-order.audit',
+              'menu_group_id' => 13,
+              'title'         => '财务管理-出款审核-查看稽核',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\WithdrawOrderController',
+              'method'        => 'audit',
+             ],
+             [
               'route_name'    => 'merchant-api.withdraw-order.out-index',
               'menu_group_id' => 14,
               'title'         => '财务管理-出款订单-列表',
