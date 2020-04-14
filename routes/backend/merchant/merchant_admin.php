@@ -19,7 +19,7 @@ Route::group(
         Route::post('create', [AdminController::class, 'groupCreate'])
             ->name($namePrefix . 'create');
         //获取管理员角色
-        Route::get('detail', [AdminController::class, 'groupIndex'])
+        Route::post('detail', [AdminController::class, 'groupIndex'])
             ->name($namePrefix . 'detail');
         //编辑管理员角色
         Route::post('edit', [AdminController::class, 'edit'])
