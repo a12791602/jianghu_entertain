@@ -112,6 +112,14 @@ class GameVendor extends BaseModel
     }
 
     /**
+     * @return BelongsTo
+     */
+    public function gameType(): BelongsTo
+    {
+        return $this->belongsTo(GameType::class, 'type_id', 'id');
+    }
+
+    /**
      * @return mixed
      */
     public function modelFilter()
