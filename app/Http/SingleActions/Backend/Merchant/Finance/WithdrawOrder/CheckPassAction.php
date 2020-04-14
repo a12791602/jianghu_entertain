@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 use App\Models\User\UsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
+use Log;
 
 /**
  * Class CheckPassAction
@@ -29,9 +30,13 @@ class CheckPassAction extends BaseAction
                            'reviewer_id' => $this->user->id,
                            'review_at'   => Carbon::now(),
                           ];
-        $resl           = $this->model::where($whereCondition)->update($update);
-        if ($resl) {
-            return msgOut();
+        try {
+            $result = $this->model::where($whereCondition)->update($update);
+            if ($result) {
+                return msgOut();
+            }
+        } catch (\RuntimeException $exception) {
+            Log::error($exception->getMessage());
         }
         throw new \Exception('202900');
     }
