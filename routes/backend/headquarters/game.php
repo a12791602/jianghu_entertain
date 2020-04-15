@@ -39,6 +39,8 @@ Route::group(
             ->name($namePrefix . 'opt-index-do');
         Route::post('opt-del-do', [BackendGameVendorController::class, 'delDo'])
             ->name($namePrefix . 'opt-del-do');
+        Route::post('opt-status-do', [BackendGameVendorController::class, 'statusDo'])
+            ->name($namePrefix . 'opt-status-do');
     },
 );
 
