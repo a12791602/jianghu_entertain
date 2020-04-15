@@ -38,10 +38,8 @@ class RouteAuth
                                         'pc-api',
                                         'h5-api',
                                        ],
-                         'backend'  => [
-                                        'merchant-api',
-                                        'headquarters-api',
-                                       ],
+                         'backend'  => ['headquarters-api'],
+                         'merchant' => ['merchant-api'],
                         ];
 
     /**
