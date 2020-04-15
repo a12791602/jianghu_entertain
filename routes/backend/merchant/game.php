@@ -10,7 +10,7 @@ Route::group(
     ['prefix' => 'game-type'],
     static function (): void {
         $namePrefix = 'merchant-api.game-type.';
-        Route::get(
+        Route::post(
             'index',
             [
              GameTypeController::class,
@@ -33,7 +33,7 @@ Route::group(
     ['prefix' => 'game-vendor'],
     static function (): void {
         $namePrefix = 'merchant-api.game-vendor.';
-        Route::get(
+        Route::post(
             'index',
             [
              GameVendorController::class,
@@ -72,7 +72,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.game.';
         //游戏列表
-        Route::get(
+        Route::post(
             'index',
             [
              GameController::class,
