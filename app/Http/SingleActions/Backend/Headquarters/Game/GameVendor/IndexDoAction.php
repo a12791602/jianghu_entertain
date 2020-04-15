@@ -30,6 +30,7 @@ class IndexDoAction extends BaseAction
             [
              'lastEditor:id,name',
              'author:id,name',
+             'gameType:id,name',
              'whiteList:game_vendor_id,ips',
             ],
         )->filter($inputDatas, GamesVendorFilter::class)

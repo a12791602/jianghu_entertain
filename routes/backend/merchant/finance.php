@@ -221,7 +221,7 @@ Route::group(
             ],
         )->name($namePrefix . 'handle-save');
         //人工充值列表
-        Route::get(
+        Route::post(
             'save-index',
             [
              HandleSaveBuckleRecordController::class,
@@ -253,7 +253,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.withdraw-order.';
         //出款审核列表
-        Route::get(
+        Route::post(
             'check-index',
             [
              WithdrawOrderController::class,
@@ -277,7 +277,7 @@ Route::group(
             ],
         )->name($namePrefix . 'check-refuse');
         //出款列表
-        Route::get(
+        Route::post(
             'out-index',
             [
              WithdrawOrderController::class,

@@ -201,7 +201,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
               'method'        => 'delDo',
              ],
-
+             [
+              'route_name'    => 'headquarters-api.game-vendor.opt-status-do',
+              'menu_group_id' => 7,
+              'title'         => '游戏管理-游戏厂商-改变状态',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameVendorController',
+              'method'        => 'statusDo',
+             ],
              [
               'route_name'    => 'headquarters-api.game-type.opt-status-do',
               'menu_group_id' => 8,

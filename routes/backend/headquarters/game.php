@@ -35,10 +35,12 @@ Route::group(
             ->name($namePrefix . 'opt-add-do');
         Route::post('opt-edit-do', [BackendGameVendorController::class, 'editDo'])
             ->name($namePrefix . 'opt-edit-do');
-        Route::get('opt-index-do', [BackendGameVendorController::class, 'indexDo'])
+        Route::post('opt-index-do', [BackendGameVendorController::class, 'indexDo'])
             ->name($namePrefix . 'opt-index-do');
         Route::post('opt-del-do', [BackendGameVendorController::class, 'delDo'])
             ->name($namePrefix . 'opt-del-do');
+        Route::post('opt-status-do', [BackendGameVendorController::class, 'statusDo'])
+            ->name($namePrefix . 'opt-status-do');
     },
 );
 
