@@ -7,10 +7,12 @@ use App\Http\Requests\Backend\Headquarters\Game\GameVendor\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\GameVendor\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\GameVendor\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\GameVendor\IndexDoRequest;
+use App\Http\Requests\Backend\Headquarters\Game\GameVendor\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Game\GameVendor\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\GameVendor\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\GameVendor\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\GameVendor\IndexDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\GameVendor\StatusDoAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -71,6 +73,20 @@ class BackendGameVendorController extends Controller
     public function delDo(
         DelDoAction $action,
         DelDoRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * @param  StatusDoAction  $action  Action.
+     * @param  StatusDoRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function statusDo(
+        StatusDoAction $action,
+        StatusDoRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
