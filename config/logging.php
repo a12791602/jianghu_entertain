@@ -110,6 +110,10 @@ return [
                                                      'via'    => App\Services\Logs\FrontendLogs\FrontendLogMonolog::class,
                                                     ],
 
+                       'merchant'                => [
+                                                     'driver' => 'custom',
+                                                     'via'    => App\Services\Logs\MerchantLogs\MerchantLogMonolog::class,
+                                                    ],
                        'backend'                 => [
                                                      'driver' => 'custom',
                                                      'via'    => App\Services\Logs\BackendLogs\BackendLogMonolog::class,
