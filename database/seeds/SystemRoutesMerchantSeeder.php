@@ -1215,6 +1215,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'delete',
              ],
              [
+              'route_name'    => 'merchant-api.operation-log.index',
+              'menu_group_id' => 53,
+              'title'         => '设置管理-操作记录-列表',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\OperationLogController',
+              'method'        => 'index',
+             ],
+             [
               'route_name'    => 'merchant-api.bank-cards.bank-list',
               'menu_group_id' => 54,
               'title'         => '设置管理-银行卡反查-银行列表',
