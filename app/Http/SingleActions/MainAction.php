@@ -10,6 +10,7 @@ use App\Models\Systems\SystemPlatform;
 use App\Services\Logs\SystemPublicLogService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Route;
 use Jenssegers\Agent\Agent;
 
 /**
@@ -33,7 +34,7 @@ class MainAction
 
     /**
      * Get the currently authenticated user.
-     * @var object $auth
+     * @var \App\Models\Admin\MerchantAdminUser|\App\Models\Admin\BackendAdminUser|\App\Models\User\FrontendUser $user User Model.
      */
     protected $user;
 
@@ -74,7 +75,7 @@ class MainAction
 
     /**
      * 目前路由
-     * @var object $route
+     * @var Route $route
      */
     protected $route;
 
@@ -101,7 +102,7 @@ class MainAction
 
     /**
      * 路由权限
-     * @var boolean $routeAccessable
+     * @var boolean $routeAccessable RouteAccessible.
      */
     protected $routeAccessible = false;
 
@@ -119,12 +120,18 @@ class MainAction
     public function __construct(Request $request)
     {
         if ($request->get('logger')) {
-            new SystemPublicLogService($request, $request->get('logger'));
+            new SystemPublicLogService(
+                $request,
+                $request->get('logger'),
+            );
         }
         $this->agent = new Agent();
         $this->guard = $request->get('guard');
         $this->auth  = auth($this->guard);
-        $this->user  = $this->auth->user();
+        $this->user  = $request->user();
+        if (!$request->route() instanceof Route) {
+            return;
+        }
         $this->route = $request->route();
 
         /**
@@ -134,7 +141,7 @@ class MainAction
         if ($request->get('prefix') !== 'headquarters-api') {
             $this->currentPlatformEloq = getCurrentPlatform($request);
         }
-        if ($request->get('logger') !== 'backend') {
+        if ($request->get('logger') !== 'backend' && $request->get('logger') !== 'merchant') {
             return;
         }
         $this->_initial();
