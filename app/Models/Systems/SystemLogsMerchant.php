@@ -3,6 +3,8 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
+use App\Models\DeveloperUsage\Merchant\SystemRoutesMerchant;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 后台系统日志
@@ -34,8 +36,8 @@ class SystemLogsMerchant extends BaseModel
      * 所属路由
      * @return BelongsTo
      */
-    // public function route(): BelongsTo
-    // {
-    //     return $this->belongsTo(SystemRoutesMerchant::class, 'route_id', 'id');
-    // }
+    public function route(): BelongsTo
+    {
+        return $this->belongsTo(SystemRoutesMerchant::class, 'route_id', 'id');
+    }
 }
