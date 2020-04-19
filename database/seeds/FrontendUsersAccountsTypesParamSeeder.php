@@ -35,7 +35,7 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
               'id'             => 3,
               'label'          => '投注id',
               'param'          => 'project_id',
-              'rule'           => 'required|integer|exists:projects,id',
+              'rule'           => 'required|integer|exists:game_projects,id',
               'is_search_ease' => 0,
              ],
              [
