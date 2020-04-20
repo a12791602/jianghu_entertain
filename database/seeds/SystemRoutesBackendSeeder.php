@@ -114,6 +114,22 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'domainAdd',
              ],
              [
+              'route_name'    => 'headquarters-api.platform.domain-status',
+              'menu_group_id' => 4,
+              'title'         => '厅主列表-域名管理-修改状态',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController',
+              'method'        => 'domainStatus',
+             ],
+             [
+              'route_name'    => 'headquarters-api.platform.domain-delete',
+              'menu_group_id' => 4,
+              'title'         => '厅主列表-域名管理-删除',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController',
+              'method'        => 'domainDelete',
+             ],
+             [
               'route_name'    => 'headquarters-api.platform.maintain',
               'menu_group_id' => 4,
               'title'         => '厅主列表-维护',
