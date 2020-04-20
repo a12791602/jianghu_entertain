@@ -32,12 +32,14 @@ trait GameProjectLogics
                     'their_notifyId'      => $theirData['notifyId'], //string 161016040412032464550404120323911563198
                     'their_info_type'     => $theirData['type'],//int 16
                     'user_id'             => $userObject->id,
+                    'guid'                => $userObject->guid,
                     'username'            => $userObject->specificInfo->nickname ?? '',
                     'top_id'              => $userObject->top_id,
                     'parent_id'           => $userObject->parent_id,
                     'is_tester'           => $userObject->is_tester,
                     'platform_sign'       => $userObject->platform_sign,
                     'vip_level_id'        => $userObject->level_id,
+                    'game_type'           => $gameVendor->type_id,
                     'game_sign'           => '',
                     'game_vendor_sign'    => $gameVendor->sign,
                     'ip'                  => $request->ip(),
