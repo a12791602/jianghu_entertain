@@ -22,7 +22,7 @@ class AckInRequest extends BaseFormRequest
 
     /**
      * Get the validation rules that apply to the request.
-     * 'data'    => 'required|regex:/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};\':"\|\\,.<>\/?]{218,250}$',//218-250
+     * 'data'    => 'required|string|between:218,250',//218-250 not work
      * @return mixed[]
      */
     public function rules(): array
@@ -30,7 +30,10 @@ class AckInRequest extends BaseFormRequest
         return [
                 'version' => 'required|regex:/(^(\d{1,2}).(\d)$)/',
                 'id'      => 'required|exists:system_platforms,sign',
-                'data'    => 'required|string|between:218,250',//218-250
+                'data'    => [
+                              'required',
+                              'regex:/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};\':"\|\\\,.<>\/?]{214,250}$/',
+                             ],
                ];
     }
 
