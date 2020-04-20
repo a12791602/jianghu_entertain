@@ -12,7 +12,9 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\AssignGamesRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DetailRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DoAddRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainAddRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDeleteRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainDetailRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\DomainStatusRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\MaintainRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
@@ -27,7 +29,9 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignGamesAct
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DoAddAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainAddAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDeleteAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainDetailAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\DomainStatusAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\EditAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\GetSearchDataOfAssignGameAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\MaintainAction;
@@ -135,6 +139,38 @@ class PlatformController extends Controller
      */
     public function domainAdd(DomainAddRequest $request, DomainAddAction $action): JsonResponse
     {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 运营商域名状态
+     *
+     * @param DomainStatusRequest $request Request.
+     * @param DomainStatusAction  $action  Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function domainStatus(
+        DomainStatusRequest $request,
+        DomainStatusAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 删除运营商域名
+     *
+     * @param DomainDeleteRequest $request Request.
+     * @param DomainDeleteAction  $action  Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function domainDelete(
+        DomainDeleteRequest $request,
+        DomainDeleteAction $action
+    ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
     }
