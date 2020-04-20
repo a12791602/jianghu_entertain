@@ -18,13 +18,13 @@ class GameAcknowledgementController extends Controller
     /**
      * @param AckInRequest $request Request.
      * @param AckInAction  $action  Action.
-     * @return JsonResponse
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws \Exception Exception.
      */
     public function ackIn(
         AckInRequest $request,
         AckInAction $action
-    ): JsonResponse {
+    ) {
         logAllRequestInfos('ack-center', 'AckIn');
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
