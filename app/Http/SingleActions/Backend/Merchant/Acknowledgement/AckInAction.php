@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Acknowledgement;
 use App\Http\SingleActions\MainAction;
 use App\JHHYLibs\GameCommons;
 use App\Models\Game\GameVendor;
-use Illuminate\Http\JsonResponse;
 
 /**
  * Class AckInAction
@@ -16,10 +15,10 @@ class AckInAction extends MainAction
 
     /**
      * @param array $inputDatas 参数.
-     * @return JsonResponse return.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response return.
      * @throws \Exception|\RuntimeException Exception.
      */
-    public function execute(array $inputDatas = []): JsonResponse
+    public function execute(array $inputDatas = [])
     {
         $curentVendorObj = GameVendor::where('sign', 'VR')->first();
         if ($curentVendorObj === null) {
