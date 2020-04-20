@@ -701,6 +701,18 @@ class MerchantSystemMenuSeeder extends Seeder
               'sort'    => 12,
               'type'    => 1,
              ],
+             [
+              'id'      => 58,
+              'label'   => '顶部通知统计',
+              'en_name' => '',
+              'route'   => '#',
+              'pid'     => 55,
+              'icon'    => '',
+              'display' => 0,
+              'level'   => 1,
+              'sort'    => 12,
+              'type'    => 1,
+             ],
             ],
         );
     }

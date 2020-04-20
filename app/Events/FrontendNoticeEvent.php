@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\Services\FactoryService;
+use App\JHHYLibs\JHHYCnst;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -30,9 +30,9 @@ class FrontendNoticeEvent implements ShouldBroadcast
     /**
      * 会员uid.
      *
-     * @var string $userUid
+     * @var string $user_guid
      */
-    private $userUid;
+    private $user_guid;
 
     /**
      * 消息类型.
@@ -58,26 +58,23 @@ class FrontendNoticeEvent implements ShouldBroadcast
     /**
      * Create a new event instance.
      *
-     * @param string $platformSign 所属商户.
-     * @param string $userUid      会员UID.
-     * @param string $messageType  消息类型.
-     * @param string $message      消息.
-     * @param array  $data         广播数据.
+     * @param string $user_guid   会员UID.
+     * @param string $messageType 消息类型.
+     * @param string $message     消息.
+     * @param array  $data        广播数据.
      */
     public function __construct(
-        string $platformSign,
-        string $userUid,
+        string $user_guid,
         string $messageType,
         string $message = '',
         array $data = []
     ) {
-        $const              = FactoryService::getInstence()->generateService('constant');
-        $this->platformSign = $platformSign;
-        $this->userUid      = $userUid;
+        $this->platformSign = getCurrentPlatformSign();
+        $this->user_guid    = $user_guid;
         $this->messageType  = $messageType;
         $this->message      = $message;
-        if (empty($message) && isset($const::NOTICE_MESSAGES[$messageType])) {
-            $this->message = $const::NOTICE_MESSAGES[$messageType];
+        if (empty($message) && isset(JHHYCnst::NOTICE_MESSAGES[$messageType])) {
+            $this->message = JHHYCnst::NOTICE_MESSAGES[$messageType];
         }
         $this->data = $data;
     }
@@ -89,19 +86,9 @@ class FrontendNoticeEvent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        $channel = 'frontend.notice.' . $this->platformSign . '.' . $this->userUid;
+        $channel = 'frontend_notice_' . $this->platformSign . '_' . $this->user_guid;
         $channel = new Channel($channel);
         return $channel;
-    }
-
-    /**
-     * 事件的广播名称.
-     *
-     * @return string
-     */
-    public function broadcastAs(): string
-    {
-        return 'notice';
     }
 
     /**

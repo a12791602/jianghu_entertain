@@ -2,8 +2,10 @@
 
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
+use App\Events\PlatformNoticeEvent;
 use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\MainAction;
+use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
@@ -33,7 +35,7 @@ class WithdrawalAction extends MainAction
         $balance        = $this->_balance($amount);
         $num_withdrawal = UsersWithdrawOrder::select('id')->where('user_id', $user->id)
             ->whereDate('created_at', date('Y-m-d'))->count();
-        $this->_dayWithdrawNum();
+        $this->_dayWithdrawNum($num_withdrawal);
         $total_withdrawal = UsersWithdrawOrder::where('user_id', $user->id)
             ->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('amount');
         $num_top_up       = UsersRechargeOrder::select('id')
@@ -53,23 +55,20 @@ class WithdrawalAction extends MainAction
         );
         DB::beginTransaction();
         try {
-            $user->withdraw()->create($item);
+            $order = $user->withdraw()->create($item);
             $param = [
                       'user_id' => $user->id,
                       'amount'  => $amount,
                      ];
             $user->account->operateAccount('withdraw_frozen', $param);
             DB::commit();
+            broadcast(new PlatformNoticeEvent('notice_of_withdraw', '', $order->toArray()));
+            merchantNotificationIncrement(MerchantNotificationStatistic::WITHDRAWAL_ORDER);
             return msgOut([], '100903');
         } catch (\RuntimeException $exception) {
-            $data    = [
-                        'file'    => $exception->getFile(),
-                        'line'    => $exception->getLine(),
-                        'message' => $exception->getMessage(),
-                       ];
             $logData = [
                         'msg'  => '发起提现失败!',
-                        'data' => $data,
+                        'data' => $exception,
                        ];
             Log::channel('withdrawal-system')
                 ->info(json_encode($logData, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
@@ -111,13 +110,14 @@ class WithdrawalAction extends MainAction
 
     /**
      * 检查每日可提现次数.
+     * @param integer $num_withdrawal Num_withdrawal.
      * @return integer
      * @throws \RuntimeException RuntimeException.
      */
-    private function _dayWithdrawNum(): int
+    private function _dayWithdrawNum(int $num_withdrawal): int
     {
-        $day_withdraw_num = configure($this->user->platform_sign, 'day_withdraw_num');
-        if ($day_withdraw_num >= $this->_dayWithdrawNum()) {
+        $day_withdraw_num = (int) configure($this->user->platform_sign, 'day_withdraw_num');
+        if ($num_withdrawal >= $day_withdraw_num) {
             throw new \RuntimeException('100904');
         }
         return (int) $day_withdraw_num;
