@@ -2,10 +2,13 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
+use App\Events\FrontendNoticeEvent;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
+use DB;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -32,6 +35,7 @@ class CheckPassAction extends BaseAction
         if ($order->status !== UsersRechargeOrder::STATUS_CONFIRM) {
             throw new \Exception('202303');
         }
+        DB::beginTransaction();
         try {
             $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
             $order->admin_id = $this->user->id;
@@ -43,7 +47,12 @@ class CheckPassAction extends BaseAction
                       'user_id' => $order->user->id,
                       'amount'  => $order->arrive_money,
                      ];
+
+            $notice_guid    = $order->user->guid;
+            $notice_type    = JHHYCnst::NOTICE_OF_BALANCE_UPDATE;
+            $notice_balance = ['balance' => $order->user->account->balance];
             $order->user->account->operateAccount('recharge', $param);
+            broadcast(new FrontendNoticeEvent($notice_guid, $notice_type, '', $notice_balance));
             return msgOut();
         } catch (\RuntimeException $exception) {
             $data    = [
@@ -58,6 +67,7 @@ class CheckPassAction extends BaseAction
                        ];
             Log::channel('finance-callback-system')->info((string) json_encode($logData));
         }
+        DB::commit();
         throw new \Exception('202304');
     }
 }

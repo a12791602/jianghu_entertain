@@ -50,6 +50,11 @@ class UsersRechargeOrder extends BaseModel
     public const EXPIRED = 15;
 
     /**
+     * 线下支付
+     */
+    public const OFFLINE_FINANCE = 0;
+
+    /**
      * @var array
      */
     protected $guarded = ['id'];

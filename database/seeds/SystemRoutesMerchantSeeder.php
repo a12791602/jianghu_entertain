@@ -1304,6 +1304,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameAcknowledgementController',
               'method'        => 'ackIn',
              ],
+             [
+              'route_name'    => 'merchant-api.notification.statistic',
+              'menu_group_id' => 57,
+              'title'         => '顶部通知统计',
+              'is_open'       => 1,
+              'is_ack'        => 1,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Notification\NotificationController',
+              'method'        => 'statistic',
+             ],
 
              // [
              //  'route_name'    => 'merchant-api.bank.index',

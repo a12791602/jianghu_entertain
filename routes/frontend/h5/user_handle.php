@@ -28,5 +28,7 @@ Route::group(
             ->name($namePrefix . 'claim-benefits');
         Route::post('check-benefits', [UserCenterController::class, 'checkBenefits'])
             ->name($namePrefix . 'check-gifts');
+        Route::post('broadcast-balance', [UserCenterController::class, 'broadcastBalance'])
+            ->name($namePrefix . 'broadcast-balance');
     },
 );

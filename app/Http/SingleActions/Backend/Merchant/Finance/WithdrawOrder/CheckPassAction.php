@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
+use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\User\UsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -33,6 +34,7 @@ class CheckPassAction extends BaseAction
         try {
             $result = $this->model::where($whereCondition)->update($update);
             if ($result) {
+                merchantNotificationIncrement(MerchantNotificationStatistic::WITHDRAWAL_REVIEW);
                 return msgOut();
             }
         } catch (\RuntimeException $exception) {

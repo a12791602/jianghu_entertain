@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Frontend\App\Recharge;
 
 use App\Http\SingleActions\MainAction;
+use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Order\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 
@@ -33,6 +34,11 @@ class ConfirmAction extends MainAction
         }
         $order->status = UsersRechargeOrder::STATUS_CONFIRM;
         if ($order->save()) {
+            if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
+                merchantNotificationIncrement(MerchantNotificationStatistic::OFFLINE_TOP_UP);
+            } else {
+                merchantNotificationIncrement(MerchantNotificationStatistic::ONLINE_TOP_UP);
+            }
             return msgOut();
         }
         throw new \Exception('101004');

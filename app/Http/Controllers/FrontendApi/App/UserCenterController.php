@@ -4,7 +4,7 @@ namespace App\Http\Controllers\FrontendApi\App;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
-use App\Http\Requests\Frontend\Common\GamesLobby\ClaimGiftRequest;
+use App\Http\Requests\Frontend\Common\GamesLobby\ClaimBenefitsRequest;
 use App\Http\SingleActions\Frontend\App\UserCenter\InformationAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\CheckBenefitsAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\ClaimBenefitsAction;
@@ -55,14 +55,14 @@ class UserCenterController extends Controller
 
     /**
      * Claim a gift.
-     * @param ClaimBenefitsAction $action  ClaimBenefitsAction.
-     * @param ClaimGiftRequest    $request ClaimGiftRequest.
+     * @param ClaimBenefitsAction  $action  ClaimBenefitsAction.
+     * @param ClaimBenefitsRequest $request ClaimGiftRequest.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function claimBenefits(
         ClaimBenefitsAction $action,
-        ClaimGiftRequest $request
+        ClaimBenefitsRequest $request
     ): JsonResponse {
         $validated = $request->validated();
         return $action->execute($validated);

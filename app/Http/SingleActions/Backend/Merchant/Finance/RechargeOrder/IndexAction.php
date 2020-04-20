@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
 use App\ModelFilters\Order\UsersRechargeOrderFilter;
+use App\Models\Notification\MerchantNotificationStatistic;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -24,6 +25,7 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        merchantNotificationClear(MerchantNotificationStatistic::ONLINE_TOP_UP);
         if (isset($inputDatas['pageSize'])) {
             $this->model->setPerPage($inputDatas['pageSize']);
         }
