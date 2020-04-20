@@ -66,6 +66,22 @@ Route::group(
              'domainAdd',
             ],
         )->name($namePrefix . 'domain-add');
+        //运营商域名状态
+        Route::post(
+            'domain-status',
+            [
+             PlatformController::class,
+             'domainStatus',
+            ],
+        )->name($namePrefix . 'domain-status');
+        //删除运营商域名
+        Route::post(
+            'domain-delete',
+            [
+             PlatformController::class,
+             'domainDelete',
+            ],
+        )->name($namePrefix . 'domain-delete');
         //删除已分配的游戏
         Route::post(
             'assigned-game-cancel',
