@@ -8,8 +8,6 @@ use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckInAction;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckOutAction;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class AcknowledgementController
@@ -20,20 +18,16 @@ class GameAcknowledgementController extends Controller
     /**
      * @param AckInRequest $request Request.
      * @param AckInAction  $action  Action.
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
+     * @return void
      * @throws \Exception Exception.
      */
     public function ackIn(
         AckInRequest $request,
         AckInAction $action
-    ) {
+    ): void {
         logAllRequestInfos('ack-center', 'AckIn');
         $inputDatas = $request->validated();
-        $result     = $action->execute($inputDatas);
-        if ($result instanceof Response) {
-            Log::channel('ack-center')->info('AckIn return are ' . $result->content());
-        }
-        return $result;
+        $action->execute($inputDatas);
     }
 
     /**
