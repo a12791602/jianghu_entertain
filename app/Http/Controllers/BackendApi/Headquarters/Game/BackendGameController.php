@@ -5,12 +5,14 @@ namespace App\Http\Controllers\BackendApi\Headquarters\Game;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Game\Game\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\Game\Game\EditDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\OptEditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\Game\EditDetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\GetSearchConditionAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\IndexDoAction;
@@ -53,6 +55,22 @@ class BackendGameController extends Controller
     public function editDo(
         EditDoAction $action,
         EditDoRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 游戏编辑详情
+     *
+     * @param  EditDetailRequest $request Request.
+     * @param  EditDetailAction  $action  Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function editDetail(
+        EditDetailRequest $request,
+        EditDetailAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

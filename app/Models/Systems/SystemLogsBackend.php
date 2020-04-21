@@ -24,6 +24,16 @@ class SystemLogsBackend extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+                        'inputs' => 'array',
+                        'route'  => 'array',
+                       ];
+
+    /**
      * @var array
      */
     public static $fieldDefinition = [
