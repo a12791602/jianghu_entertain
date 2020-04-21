@@ -8,7 +8,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.activity-static.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              ActivityStaticController::class,
@@ -55,7 +55,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'merchant-api.activity-dyn.';
         //列表
-        Route::get(
+        Route::post(
             'index',
             [
              ActivityDynController::class,
