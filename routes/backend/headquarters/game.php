@@ -53,6 +53,8 @@ Route::group(
             ->name($namePrefix . 'add-do');
         Route::post('edit-do', [BackendGameController::class, 'editDo'])
             ->name($namePrefix . 'edit-do');
+        Route::post('edit-detail', [BackendGameController::class, 'editDetail'])
+            ->name($namePrefix . 'edit-detail');
         Route::get('index-do', [BackendGameController::class, 'indexDo'])
             ->name($namePrefix . 'index-do');
         Route::get('opt-index-do', [BackendGameController::class, 'indexDo'])

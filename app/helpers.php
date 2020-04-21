@@ -8,8 +8,10 @@
  */
 
 use App\Lib\Crypt\DataCrypt;
+use App\ModelFilters\System\SystemLogsBackendFilter;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Systems\SystemDomain;
+use App\Models\Systems\SystemLogsBackend;
 use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -260,4 +262,48 @@ function merchantNotificationIncrement(string $message_type): void
     $condition['platform_id']  = request()->get('current_platform_eloq')->id;
     $condition['message_type'] = $message_type;
     MerchantNotificationStatistic::where($condition)->increment('count');
+}
+
+/**
+ * 后台操作记录
+ * @param  array $inputDatas 传递的查询条件.
+ * @return mixed[]
+ */
+function backendOperationLog(array $inputDatas): array
+{
+    $systemLogsBackend = new SystemLogsBackend();
+    if (isset($inputDatas['pageSize'])) {
+        $systemLogsBackend->setPerPage($inputDatas['pageSize']);
+    }
+    $result = $systemLogsBackend->filter($inputDatas, SystemLogsBackendFilter::class)
+        ->select(
+            [
+             'origin',
+             'ip',
+             'user_agent',
+             'inputs',
+             'route_id',
+             'admin_name',
+             'created_at',
+             'route',
+            ],
+        )
+        ->with('route:id,title')
+        ->paginate()
+        ->toArray();
+
+    $data = [];
+    foreach ($result['data'] as $time) {
+        $data[] = [
+                   'title'      => $time['route']['title'] ?? '',
+                   'admin_name' => $time['admin_name'],
+                   'created_at' => $time['created_at'],
+                   'origin'     => $time['origin'],
+                   'ip'         => $time['ip'],
+                   'user_agent' => $time['user_agent'],
+                  ];
+    }
+
+    $result['data'] = $data;
+    return $result;
 }

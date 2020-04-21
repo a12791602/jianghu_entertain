@@ -116,7 +116,7 @@ class FrontendLogProcessor
             $record['extra']['robot'] = $robot;
         }
         if (isset($messageArr['input'])) {
-            $record['extra']['inputs'] = json_encode($messageArr['input'], JSON_THROW_ON_ERROR, 512);
+            $record['extra']['inputs'] = $messageArr['input'];
         }
         return $record;
     }

@@ -298,6 +298,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'indexDo',
              ],
              [
+              'route_name'    => 'headquarters-api.game.edit-detail',
+              'menu_group_id' => 9,
+              'title'         => '游戏管理-游戏管理-编辑详情',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Game\BackendGameController',
+              'method'        => 'editDetail',
+             ],
+             [
               'route_name'    => 'headquarters-api.activity.status-do',
               'menu_group_id' => 11,
               'title'         => '活动管理-活动列表-改变状态',
