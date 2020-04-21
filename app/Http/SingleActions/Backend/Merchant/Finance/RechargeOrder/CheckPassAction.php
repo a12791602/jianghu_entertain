@@ -2,7 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
+use App\Events\FrontendDynamicInfoEvent;
 use App\Events\FrontendNoticeEvent;
+use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
 use App\JHHYLibs\JHHYCnst;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
@@ -53,6 +55,8 @@ class CheckPassAction extends BaseAction
             $notice_balance = ['balance' => $order->user->account->balance];
             $order->user->account->operateAccount('recharge', $param);
             broadcast(new FrontendNoticeEvent($notice_guid, $notice_type, '', $notice_balance));
+            $user_info = DynamicInformationResource::make($order->user)->toArray(request());
+            broadcast(new FrontendDynamicInfoEvent($order->user->guid, $user_info));
             return msgOut();
         } catch (\RuntimeException $exception) {
             $data    = [
