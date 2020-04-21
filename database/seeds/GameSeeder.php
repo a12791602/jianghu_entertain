@@ -25,6 +25,9 @@ class GameSeeder extends Seeder
               'sign'         => '0',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -34,6 +37,9 @@ class GameSeeder extends Seeder
               'sign'         => '620',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -43,6 +49,9 @@ class GameSeeder extends Seeder
               'sign'         => '720',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -52,6 +61,9 @@ class GameSeeder extends Seeder
               'sign'         => '830',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -61,6 +73,9 @@ class GameSeeder extends Seeder
               'sign'         => '220',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -70,6 +85,9 @@ class GameSeeder extends Seeder
               'sign'         => '860',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -79,6 +97,9 @@ class GameSeeder extends Seeder
               'sign'         => '900',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -88,6 +109,9 @@ class GameSeeder extends Seeder
               'sign'         => '600',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -97,6 +121,9 @@ class GameSeeder extends Seeder
               'sign'         => '870',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -106,6 +133,9 @@ class GameSeeder extends Seeder
               'sign'         => '880',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -115,6 +145,9 @@ class GameSeeder extends Seeder
               'sign'         => '230',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -124,6 +157,9 @@ class GameSeeder extends Seeder
               'sign'         => '730',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -133,6 +169,9 @@ class GameSeeder extends Seeder
               'sign'         => '630',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -142,6 +181,9 @@ class GameSeeder extends Seeder
               'sign'         => '380',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -151,6 +193,9 @@ class GameSeeder extends Seeder
               'sign'         => '610',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -160,6 +205,9 @@ class GameSeeder extends Seeder
               'sign'         => '390',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -169,6 +217,9 @@ class GameSeeder extends Seeder
               'sign'         => '910',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -178,6 +229,9 @@ class GameSeeder extends Seeder
               'sign'         => '920',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -187,6 +241,9 @@ class GameSeeder extends Seeder
               'sign'         => '930',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -196,6 +253,9 @@ class GameSeeder extends Seeder
               'sign'         => '1950',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -205,6 +265,9 @@ class GameSeeder extends Seeder
               'sign'         => '650',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -214,6 +277,9 @@ class GameSeeder extends Seeder
               'sign'         => '890',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -223,6 +289,9 @@ class GameSeeder extends Seeder
               'sign'         => '740',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -232,6 +301,9 @@ class GameSeeder extends Seeder
               'sign'         => '1350',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -241,6 +313,9 @@ class GameSeeder extends Seeder
               'sign'         => '1940',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -250,6 +325,9 @@ class GameSeeder extends Seeder
               'sign'         => '1960',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -259,6 +337,9 @@ class GameSeeder extends Seeder
               'sign'         => '1980',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -268,6 +349,9 @@ class GameSeeder extends Seeder
               'sign'         => '1810',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -277,6 +361,9 @@ class GameSeeder extends Seeder
               'sign'         => '1990',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -286,6 +373,9 @@ class GameSeeder extends Seeder
               'sign'         => '1850',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 3,
@@ -295,6 +385,9 @@ class GameSeeder extends Seeder
               'sign'         => '510',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -304,6 +397,9 @@ class GameSeeder extends Seeder
               'sign'         => '1660',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -313,6 +409,9 @@ class GameSeeder extends Seeder
               'sign'         => '1355',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -322,6 +421,9 @@ class GameSeeder extends Seeder
               'sign'         => '1970',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -331,6 +433,9 @@ class GameSeeder extends Seeder
               'sign'         => '1860',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -340,6 +445,9 @@ class GameSeeder extends Seeder
               'sign'         => '1370',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 1,
@@ -349,6 +457,9 @@ class GameSeeder extends Seeder
               'sign'         => '1690',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -358,6 +469,9 @@ class GameSeeder extends Seeder
               'sign'         => '1890',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 4,
@@ -367,6 +481,9 @@ class GameSeeder extends Seeder
               'sign'         => '1610',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -376,6 +493,9 @@ class GameSeeder extends Seeder
               'sign'         => '36',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -385,6 +505,9 @@ class GameSeeder extends Seeder
               'sign'         => '37',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -394,6 +517,9 @@ class GameSeeder extends Seeder
               'sign'         => '38',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -403,6 +529,9 @@ class GameSeeder extends Seeder
               'sign'         => '10000',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -412,6 +541,9 @@ class GameSeeder extends Seeder
               'sign'         => '10001',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -421,6 +553,9 @@ class GameSeeder extends Seeder
               'sign'         => '10002',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -430,6 +565,9 @@ class GameSeeder extends Seeder
               'sign'         => '10003',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -439,6 +577,9 @@ class GameSeeder extends Seeder
               'sign'         => '10004',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -448,6 +589,9 @@ class GameSeeder extends Seeder
               'sign'         => '10005',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -457,6 +601,9 @@ class GameSeeder extends Seeder
               'sign'         => '10006',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -466,6 +613,9 @@ class GameSeeder extends Seeder
               'sign'         => '10007',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -475,6 +625,9 @@ class GameSeeder extends Seeder
               'sign'         => '10008',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -484,6 +637,9 @@ class GameSeeder extends Seeder
               'sign'         => '10009',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -493,6 +649,9 @@ class GameSeeder extends Seeder
               'sign'         => '10010',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -502,6 +661,9 @@ class GameSeeder extends Seeder
               'sign'         => '1',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -511,6 +673,9 @@ class GameSeeder extends Seeder
               'sign'         => '2',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -520,6 +685,9 @@ class GameSeeder extends Seeder
               'sign'         => '11',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -529,6 +697,9 @@ class GameSeeder extends Seeder
               'sign'         => '13',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -538,6 +709,9 @@ class GameSeeder extends Seeder
               'sign'         => '15',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -547,6 +721,9 @@ class GameSeeder extends Seeder
               'sign'         => '16',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -556,6 +733,9 @@ class GameSeeder extends Seeder
               'sign'         => '42',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -565,6 +745,9 @@ class GameSeeder extends Seeder
               'sign'         => '34',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -574,6 +757,9 @@ class GameSeeder extends Seeder
               'sign'         => '35',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -583,6 +769,9 @@ class GameSeeder extends Seeder
               'sign'         => '39',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -592,6 +781,9 @@ class GameSeeder extends Seeder
               'sign'         => '40',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -601,6 +793,9 @@ class GameSeeder extends Seeder
               'sign'         => '41',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -610,6 +805,9 @@ class GameSeeder extends Seeder
               'sign'         => '46',
               'request_mode' => 1,
               'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -619,6 +817,9 @@ class GameSeeder extends Seeder
               'sign'         => '45',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -628,6 +829,9 @@ class GameSeeder extends Seeder
               'sign'         => '3',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -637,6 +841,9 @@ class GameSeeder extends Seeder
               'sign'         => '4',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -646,6 +853,9 @@ class GameSeeder extends Seeder
               'sign'         => '5',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -655,6 +865,9 @@ class GameSeeder extends Seeder
               'sign'         => '6',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -664,6 +877,9 @@ class GameSeeder extends Seeder
               'sign'         => '7',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -673,6 +889,9 @@ class GameSeeder extends Seeder
               'sign'         => '8',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -682,6 +901,9 @@ class GameSeeder extends Seeder
               'sign'         => '9',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -691,6 +913,9 @@ class GameSeeder extends Seeder
               'sign'         => '10',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -700,6 +925,9 @@ class GameSeeder extends Seeder
               'sign'         => '14',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -709,6 +937,9 @@ class GameSeeder extends Seeder
               'sign'         => '17',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -718,6 +949,9 @@ class GameSeeder extends Seeder
               'sign'         => '18',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -727,6 +961,9 @@ class GameSeeder extends Seeder
               'sign'         => '19',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -736,6 +973,9 @@ class GameSeeder extends Seeder
               'sign'         => '20',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -745,6 +985,9 @@ class GameSeeder extends Seeder
               'sign'         => '21',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -754,6 +997,9 @@ class GameSeeder extends Seeder
               'sign'         => '22',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -763,6 +1009,9 @@ class GameSeeder extends Seeder
               'sign'         => '23',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -772,6 +1021,9 @@ class GameSeeder extends Seeder
               'sign'         => '26',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -781,6 +1033,9 @@ class GameSeeder extends Seeder
               'sign'         => '27',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -790,6 +1045,9 @@ class GameSeeder extends Seeder
               'sign'         => '29',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -799,6 +1057,9 @@ class GameSeeder extends Seeder
               'sign'         => '30',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -808,6 +1069,9 @@ class GameSeeder extends Seeder
               'sign'         => '31',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -817,6 +1081,9 @@ class GameSeeder extends Seeder
               'sign'         => '32',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
              [
               'type_id'      => 5,
@@ -826,6 +1093,9 @@ class GameSeeder extends Seeder
               'sign'         => '33',
               'request_mode' => 1,
               'status'       => 0,
+              'author_id'    => 1,
+              'created_at'   => '2020-03-18 16:05:50',
+              'updated_at'   => '2020-03-18 16:05:50',
              ],
             ],
         );

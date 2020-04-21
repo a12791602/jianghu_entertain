@@ -15,10 +15,10 @@ class AckInAction extends MainAction
 
     /**
      * @param array $inputDatas 参数.
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response return.
+     * @return void
      * @throws \Exception|\RuntimeException Exception.
      */
-    public function execute(array $inputDatas = [])
+    public function execute(array $inputDatas = []): void
     {
         $curentVendorObj = GameVendor::where('sign', 'VR')->first();
         if ($curentVendorObj === null) {
@@ -26,6 +26,6 @@ class AckInAction extends MainAction
         }
         $gameInstance = GameCommons::gameInit($curentVendorObj);
         $gameInstance->downScore($inputDatas);
-        return $gameInstance->msgOut();
+        $gameInstance->msgOut();
     }
 }

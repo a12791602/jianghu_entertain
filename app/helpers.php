@@ -8,6 +8,7 @@
  */
 
 use App\Lib\Crypt\DataCrypt;
+use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
@@ -231,4 +232,32 @@ function logAllRequestInfos(string $channel, ?string $logMarker): void
     Log::channel($channel)->info($logMarker . ' Inputs are ' . $inputToLog);
     $headersToLog = json_encode($request->header(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
     Log::channel($channel)->info($logMarker . '  Headers are ' . $headersToLog);
+}
+
+/**
+ * 商户顶部清除通知计数
+ * @param string $message_type Message_type.
+ * @return void
+ * @throws Exception Exception.
+ */
+function merchantNotificationClear(string $message_type): void
+{
+    $condition                 = [];
+    $condition['platform_id']  = request()->get('current_platform_eloq')->id;
+    $condition['message_type'] = $message_type;
+    MerchantNotificationStatistic::where($condition)->update(['count' => MerchantNotificationStatistic::COUNT_ZERO]);
+}
+
+/**
+ * 商户顶部通知计数增加
+ * @param string $message_type Message_type.
+ * @return void
+ * @throws RuntimeException Exception.
+ */
+function merchantNotificationIncrement(string $message_type): void
+{
+    $condition                 = [];
+    $condition['platform_id']  = request()->get('current_platform_eloq')->id;
+    $condition['message_type'] = $message_type;
+    MerchantNotificationStatistic::where($condition)->increment('count');
 }

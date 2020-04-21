@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
 use App\ModelFilters\User\UsersWithdrawOrderFilter;
+use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 
@@ -25,6 +26,7 @@ class CheckIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        merchantNotificationClear(MerchantNotificationStatistic::WITHDRAWAL_ORDER);
         if (isset($inputDatas['pageSize'])) {
             $this->model->setPerPage($inputDatas['pageSize']);
         }

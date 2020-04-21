@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Email;
 use App\Http\Resources\Backend\Merchant\Email\ReceivedIndexResource;
 use App\ModelFilters\Email\SystemEmailOfMerchantFilter;
 use App\Models\Email\SystemEmailOfMerchant;
+use App\Models\Notification\MerchantNotificationStatistic;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -20,6 +21,7 @@ class ReceivedIndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        merchantNotificationClear(MerchantNotificationStatistic::EMAIL);
         $systemEmailOfMerchant = new SystemEmailOfMerchant();
         if (isset($inputDatas['pageSize'])) {
             $systemEmailOfMerchant->setPerPage($inputDatas['pageSize']);

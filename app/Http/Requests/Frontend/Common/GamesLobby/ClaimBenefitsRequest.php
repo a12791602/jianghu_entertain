@@ -5,10 +5,10 @@ namespace App\Http\Requests\Frontend\Common\GamesLobby;
 use App\Http\Requests\BaseFormRequest;
 
 /**
- * Class ClaimGiftRequest
+ * Class ClaimBenefitsRequest
  * @package App\Http\Requests\Frontend\Common\GamesLobby
  */
-class ClaimGiftRequest extends BaseFormRequest
+class ClaimBenefitsRequest extends BaseFormRequest
 {
 
     /**
