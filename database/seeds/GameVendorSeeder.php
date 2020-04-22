@@ -24,7 +24,7 @@ class GameVendorSeeder extends Seeder
               'sort'            => 1,
               'status'          => 1,
               'urls'            => '{"login":"http://login.third-party.com","account_query_url":"http://account.third-party.com","top_up_url":"http://top.third-party.com","draw_out_url":"http://draw.third-party.com","order_query_url":"http://order.third-party.com","user_active_query_url":"http://online.third-party.com","game_order_query_url":"http://game-order.third-party.com","user_total_status_query_url":"http://user_total.third-party.com","kick_out_url":"http://kick.third-party.com","agent_account_query_url":"http://agent_account.third-party.com"}',
-              'test_urls'       => '{"login":"test.login.third-party.com"}',
+              'test_urls'       => '{"login":"http://test.login.third-party.com"}',
               'app_id'          => '83745293409',
               'merchant_id'     => '64421',
               'merchant_secret' => 'LDhqQyDjR4wukKYG',
@@ -33,6 +33,8 @@ class GameVendorSeeder extends Seeder
               'des_key'         => '6734706BE7C69976',
               'md5_key'         => 'F4474AB670FF9DCF',
               'needCreateAcc'   => 0,
+              'created_at'      => '2020-04-10 22:40:41',
+              'updated_at'      => '2020-04-10 22:40:41',
              ],
              [
               'name'            => 'VR视讯',
@@ -50,6 +52,8 @@ class GameVendorSeeder extends Seeder
               'des_key'         => null,
               'md5_key'         => null,
               'needCreateAcc'   => 1,
+              'created_at'      => '2020-04-10 22:40:41',
+              'updated_at'      => '2020-04-10 22:40:41',
              ],
             ],
         );

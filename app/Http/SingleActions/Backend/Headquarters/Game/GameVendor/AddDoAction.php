@@ -3,9 +3,12 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameVendor;
 
 use App\Models\Game\GameVendorPlatform;
+use App\Models\Systems\SystemIpWhiteList;
 use App\Models\Systems\SystemPlatform;
+use Arr;
+use DB;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+use Log;
 
 /**
  * Class AddDoAction
@@ -16,32 +19,36 @@ class AddDoAction extends BaseAction
 {
     
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param  array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $flag = false;
+        $inputData['author_id'] = $this->user->id;
+        $whitelist_ips           = $inputData['whitelist_ips'];
+        Arr::forget($inputData,'whitelist_ips');
+        $this->model->fill($inputData);
+        DB::beginTransaction();
         try {
-            $inputDatas['author_id'] = $this->user->id;
-            DB::beginTransaction();
-            $this->model->fill($inputDatas);
             if ($this->model->save()) {
                 $insertData = $this->_getFormatDataForVendorPlatform($this->model->id);
+                SystemIpWhiteList::create(
+                    [
+                     'ips'            => $whitelist_ips,
+                     'type'           => SystemIpWhiteList::WHITELIST_IP_TYPE_VENDOR,
+                     'game_vendor_id' => $this->model->id,
+                    ]
+                );
                 GameVendorPlatform::insert($insertData);
-                $flag = true;
+                DB::commit();
             }
+            return msgOut();
         } catch (\Throwable $exception) {
-            $flag = false;
+            Log::error($exception->getMessage());
         }
-        if (!$flag) {
-            DB::rollBack();
-            throw new \Exception('300302');
-        }
-        DB::commit();
-        $msgOut = msgOut();
-        return $msgOut;
+        DB::rollBack();
+        throw new \Exception('300302');
     }
 
     /**

@@ -55,7 +55,7 @@ return [
                                        'http://10.10.50.209:8081',// Charon
                                        'chrome-extension://jenkimcegeigaklkimboldgkpfliakpa',// Ethan
                                        'chrome-extension://pbmmpghdpldmkehedckllojmlfaihpkk',// Charon
-                                       'chrome-extension://nhbkehcdobchkimobfcfdpknkdjaogec',// Aaron
+                                       'chrome-extension://ichpaphebnfifnkklfilneoaginadpla',// Aaron
                                        'http://192.168.1.30:8081',// Aaron
                                        'http://192.168.1.29:8081',// Charon
                                       ],
