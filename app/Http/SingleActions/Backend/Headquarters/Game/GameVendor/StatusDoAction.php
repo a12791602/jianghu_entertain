@@ -17,7 +17,7 @@ class StatusDoAction extends BaseAction
 {
     
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param  array $inputDatas InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
@@ -27,7 +27,7 @@ class StatusDoAction extends BaseAction
         try {
             if ($model instanceof GameVendor) {
                 $inputDatas['last_editor_id'] = $this->user->id;
-                $model->update(['status' => $inputDatas['status']]);
+                $model->update($inputDatas);
                 return msgOut();
             }
         } catch (\Exception $exception) {
