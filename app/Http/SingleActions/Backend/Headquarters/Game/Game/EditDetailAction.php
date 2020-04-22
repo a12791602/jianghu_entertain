@@ -19,8 +19,8 @@ class EditDetailAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['route'] = 'headquarters-api.game.edit-do';
-        $data                = backendOperationLog($inputDatas);
+        $inputDatas['route_name'] = 'headquarters-api.game.edit-do';
+        $data                     = backendOperationLog($inputDatas);
         return msgOut($data);
     }
 }

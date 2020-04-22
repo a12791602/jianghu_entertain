@@ -11,18 +11,23 @@ trait SystemDomainLogics
      * 插入所有类型的域名
      * @param  string  $domain       域名.
      * @param  string  $platformSign 平台标识.
+     * @param  integer $status       域名状态.
      * @param  integer $adminId      管理员ID.
      * @return mixed
      */
-    public function insertAllTypeDomain(string $domain, string $platformSign, int $adminId)
-    {
+    public function insertAllTypeDomain(
+        string $domain,
+        string $platformSign,
+        int $status,
+        int $adminId
+    ) {
         $typePrefix = $this->typePrefix;
         DB::beginTransaction();
         foreach ($typePrefix as $type => $prefix) {
             $addData = [
                         'platform_sign' => $platformSign,
                         'admin_id'      => $adminId,
-                        'status'        => self::STATUS_OPEN,
+                        'status'        => $status,
                         'domain'        => $prefix . $domain,
                         'type'          => $type,
                        ];
