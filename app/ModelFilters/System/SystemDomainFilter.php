@@ -62,16 +62,15 @@ class SystemDomainFilter extends ModelFilter
 
     /**
      * 生成时间
-     * @param  string $createdStr 生成时间.
+     * @param  array $createdAt 生成时间.
      * @return $this
      */
-    public function createdAt(string $createdStr): SystemDomainFilter
+    public function createdAt(array $createdAt): SystemDomainFilter
     {
-        $createdArr = json_decode($createdStr, true);
-        if (!is_array($createdArr) || count($createdArr) !== 2) {
-            $eloq = $this;
+        if (count($createdAt) === 2) {
+            $eloq = $this->whereBetween('created_at', $createdAt);
         } else {
-            $eloq = $this->whereBetween('created_at', $createdArr);
+            $eloq = $this;
         }
         return $eloq;
     }
