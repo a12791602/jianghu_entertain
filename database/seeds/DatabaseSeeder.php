@@ -63,6 +63,7 @@ class DatabaseSeeder extends Seeder
              SystemPlatformSslSeeder::class,
              SystemConfigurationSeeder::class,
              SystemUserPublicAvatarSeeder::class,
+             SystemSmsConfigSeeder::class,
              FrontendUsersBankCardSeeder::class,
              SystemConfigurationStandardSeeder::class,
              FrontendUserAccountTypesGroupSeeder::class,
