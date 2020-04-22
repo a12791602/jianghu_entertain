@@ -72,7 +72,7 @@ class SystemLogsBackendFilter extends ModelFilter
      * @param  string $route 路由.
      * @return SystemLogsBackendFilter
      */
-    public function route(string $route): SystemLogsBackendFilter
+    public function routeName(string $route): SystemLogsBackendFilter
     {
         return $this->where('route->action->as', $route);
     }

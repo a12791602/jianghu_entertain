@@ -44,8 +44,8 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->tinyInteger('device_type')->nullable()->default(null)->comment('设备类型');
                 $table->string('robot', 50)->nullable()->default(null)->comment('机器');
                 $table->string('user_agent', 200)->nullable()->default(null)->comment('代理');
-                $table->text('inputs')->nullable()->default(null)->comment('传递的参数');
-                $table->text('route')->nullable()->default(null)->comment('路由');
+                $table->json('inputs')->nullable()->default(null)->comment('传递的参数');
+                $table->json('route')->nullable()->default(null)->comment('路由');
                 $table->unsignedInteger('route_id')->nullable()->default(null)->comment('路由id');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('手机号码');
                 $table->nullableTimestamps();

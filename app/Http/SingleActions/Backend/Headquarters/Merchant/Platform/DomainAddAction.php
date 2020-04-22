@@ -48,6 +48,7 @@ class DomainAddAction extends MainAction
             $result = $this->model->insertAllTypeDomain(
                 $inputDatas['domain'],
                 $inputDatas['platform_sign'],
+                $inputDatas['status'],
                 $this->user->id,
             );
         } else {
@@ -56,7 +57,6 @@ class DomainAddAction extends MainAction
         if ($result !== true) {
             throw new \Exception($result);
         }
-        $msgOut = msgOut(['domain' => $inputDatas['domain']]);
-        return $msgOut;
+        return msgOut(['domain' => $inputDatas['domain']]);
     }
 }
