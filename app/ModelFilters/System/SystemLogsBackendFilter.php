@@ -54,4 +54,26 @@ class SystemLogsBackendFilter extends ModelFilter
     {
         return $this->where('admin_name', $name);
     }
+
+    /**
+     * 数据id
+     *
+     * @param  integer $inputId 数据id.
+     * @return SystemLogsBackendFilter
+     */
+    public function data(int $inputId): SystemLogsBackendFilter
+    {
+        return $this->where('inputs->id', $inputId);
+    }
+
+    /**
+     * 路由
+     *
+     * @param  string $route 路由.
+     * @return SystemLogsBackendFilter
+     */
+    public function route(string $route): SystemLogsBackendFilter
+    {
+        return $this->where('route->action->as', $route);
+    }
 }

@@ -40,6 +40,14 @@ class DomainDetailRequest extends BaseFormRequest
     /**
      * @return mixed[]
      */
+    public function filters(): array
+    {
+        return ['created_at' => 'cast:array'];
+    }
+
+    /**
+     * @return mixed[]
+     */
     public function messages(): array
     {
         return [

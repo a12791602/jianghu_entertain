@@ -80,10 +80,10 @@ class BackendLogProcessor
             $record['extra']['robot'] = $robot;
         }
         if (isset($messageArr['input'])) {
-            $record['extra']['inputs'] = json_encode($messageArr['input'], JSON_THROW_ON_ERROR, 512);
+            $record['extra']['inputs'] = $messageArr['input'];
         }
         if (isset($messageArr['route'])) {
-            $record['extra']['route'] = json_encode($messageArr['route'], JSON_THROW_ON_ERROR, 512);
+            $record['extra']['route'] = $messageArr['route'];
             $routeEloq                = SystemRoutesBackend::where('route_name', $messageArr['route']['action']['as'])
                 ->first();
             if ($routeEloq !== null) {
