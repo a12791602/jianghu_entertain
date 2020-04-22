@@ -18,10 +18,12 @@ class SystemFinanceVendorSeeder extends Seeder
         SystemFinanceVendor::insert(
             [
              [
-              'name'      => '天道支付',
-              'sign'      => 'td',
-              'status'    => 1,
-              'author_id' => 2,
+              'name'       => '天道支付',
+              'sign'       => 'td',
+              'status'     => 1,
+              'author_id'  => 2,
+              'created_at' => '2020-04-10 22:40:41',
+              'updated_at' => '2020-04-10 22:40:41',
              ],
             ],
         );
