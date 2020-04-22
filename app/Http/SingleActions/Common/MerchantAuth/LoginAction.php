@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Common\MerchantAuth;
 
-use App\Http\Resources\Backend\LoginResource;
+use App\Http\Resources\Backend\Merchant\Auth\LoginResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\Systems\BackendLoginLog;

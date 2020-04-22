@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Backend;
+namespace App\Http\Resources\Backend\Merchant\Auth;
 
 use App\Http\Resources\BaseResource;
 
 /**
  * Class LoginResource
- * @package App\Http\Resources\Backend\Headquarters
+ * @package App\Http\Resources\Backend\Merchant\Auth
  */
 class LoginResource extends BaseResource
 {
@@ -47,6 +47,11 @@ class LoginResource extends BaseResource
     private $created_at;
 
     /**
+     * @var object $platform 管理员所属平台Eloq.
+     */
+    private $platform;
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request $request Request.
@@ -64,6 +69,7 @@ class LoginResource extends BaseResource
                 'status'         => $this->status,
                 'created_at'     => $this->created_at,
                 'token_type'     => 'Bearer',
+                'platform_sign'  => $this->platform->sign ?? 'JHHY',
                ];
     }
 }
