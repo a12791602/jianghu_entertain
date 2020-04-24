@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Admin\MerchantAdminUserFilter;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +38,7 @@ class SearchAdminAction extends MainAction
     {
         $inputDatas['platform'] = $this->currentPlatformEloq->sign;
         $data                   = $this->model
-            ->filter($inputDatas, MerchantAdminUserFilter::class)
+            ->filter($inputDatas)
             ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
         return msgOut($data);

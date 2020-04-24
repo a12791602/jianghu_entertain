@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Activity\SystemDynActivityFilter;
 use App\Models\Activity\SystemDynActivity;
 use Illuminate\Http\JsonResponse;
 
@@ -26,7 +25,7 @@ class UnassignActivitiesAction extends MainAction
         if (isset($inputDatas['pageSize'])) {
             $systemDynActivity->setPerPage($inputDatas['pageSize']);
         }
-        $outputDatas = $systemDynActivity->filter($inputDatas, SystemDynActivityFilter::class)
+        $outputDatas = $systemDynActivity->filter($inputDatas)
             ->paginate();
         return msgOut($outputDatas);
     }

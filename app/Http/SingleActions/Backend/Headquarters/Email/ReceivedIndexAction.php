@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
-use App\ModelFilters\Email\SystemEmailOfHeadFilter;
 use App\Models\Email\SystemEmailOfHead;
 use Illuminate\Http\JsonResponse;
 
@@ -23,7 +22,7 @@ class ReceivedIndexAction extends BaseAction
         if (isset($inputDatas['pageSize'])) {
             $systemEmailOfHead->setPerPage($inputDatas['pageSize']);
         }
-        $datas = $systemEmailOfHead->filter($inputDatas, SystemEmailOfHeadFilter::class)
+        $datas = $systemEmailOfHead->filter($inputDatas)
             ->with(
                 [
                  'email.platform:sign,en_name,cn_name',

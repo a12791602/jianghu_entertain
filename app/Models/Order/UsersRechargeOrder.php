@@ -3,7 +3,7 @@
 namespace App\Models\Order;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\User\FrontendUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Class UsersRechargeOrder
  * @package App\Models\Order
  */
-class UsersRechargeOrder extends BaseModel
+class UsersRechargeOrder extends FilterModel
 {
 
     /**

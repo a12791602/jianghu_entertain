@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\HelpCenter;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemUsersHelpCenterFilter;
 use App\Models\Systems\SystemUsersHelpCenter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class EditAction extends MainAction
                        'sign'   => $this->currentPlatformEloq->sign,
                       ];
         $helpCenter = $this->model
-            ->filter($filterArr, SystemUsersHelpCenterFilter::class)
+            ->filter($filterArr)
             ->first();
         if (!$helpCenter) {
             throw new \Exception('201301');
@@ -53,7 +52,6 @@ class EditAction extends MainAction
         if (!$helpCenter->save()) {
             throw new \Exception('201302');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

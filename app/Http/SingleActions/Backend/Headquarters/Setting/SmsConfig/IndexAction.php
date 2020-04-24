@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\SmsConfig;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemSmsConfigFilter;
 use App\Models\Systems\SystemSmsConfig;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class IndexAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $data = $this->model
-            ->filter($inputDatas, SystemSmsConfigFilter::class)
+            ->filter($inputDatas)
             ->select(
                 [
                  'id',
