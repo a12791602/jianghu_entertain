@@ -2,14 +2,14 @@
 
 namespace App\Models\Admin;
 
-use App\Models\BaseModel;
 use App\Models\DeveloperUsage\Backend\BackendAdminAccessGroupDetail;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class for backend admin access group.
  */
-class BackendAdminAccessGroup extends BaseModel
+class BackendAdminAccessGroup extends FilterModel
 {
 
     /**

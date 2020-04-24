@@ -2,14 +2,14 @@
 
 namespace App\Models\User;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class UsersCommissionConfig
  * @package App\Models\User
  */
-class UsersCommissionConfig extends BaseModel
+class UsersCommissionConfig extends FilterModel
 {
 
     /**

@@ -2,15 +2,14 @@
 
 namespace App\Models\User;
 
-use App\ModelFilters\Finance\SystemPlatformBankFilter;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use App\Models\Finance\SystemPlatformBank;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 用户银行卡
  */
-class FrontendUsersBankCard extends BaseModel
+class FrontendUsersBankCard extends FilterModel
 {
 
     /**
@@ -87,6 +86,6 @@ class FrontendUsersBankCard extends BaseModel
     public function getBindingNumAttribute(): int
     {
         $filterArr = ['card_number' => $this->card_number];
-        return self::filter($filterArr, SystemPlatformBankFilter::class)->count();
+        return self::filter($filterArr)->count();
     }
 }

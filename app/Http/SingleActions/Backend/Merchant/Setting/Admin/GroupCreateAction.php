@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use Exception;
@@ -50,7 +49,7 @@ class GroupCreateAction extends MainAction
                          'platform'  => $platformSign,
                          'groupName' => $inputDatas['group_name'],
                         ];
-        $nameIsExists = $this->model::filter($filterArr, MerchantAdminAccessGroupFilter::class)->exists();
+        $nameIsExists = $this->model::filter($filterArr)->exists();
         if ($nameIsExists === true) {
             throw new Exception('300102');
         }

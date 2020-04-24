@@ -5,11 +5,11 @@ namespace App\ModelFilters\Game;
 use EloquentFilter\ModelFilter;
 
 /**
- * Class GamesVendorFilter
+ * Class GameVendorFilter
  *
  * @package App\ModelFilters\Game
  */
-class GamesVendorFilter extends ModelFilter
+class GameVendorFilter extends ModelFilter
 {
 
     /**
@@ -23,9 +23,9 @@ class GamesVendorFilter extends ModelFilter
     /**
      * 状态查询
      * @param  integer $status Status.
-     * @return GamesVendorFilter
+     * @return GameVendorFilter
      */
-    public function status(int $status): GamesVendorFilter
+    public function status(int $status): GameVendorFilter
     {
         return $this->where('status', $status);
     }
@@ -33,9 +33,9 @@ class GamesVendorFilter extends ModelFilter
     /**
      * 名称查询
      * @param  string $name Name.
-     * @return GamesVendorFilter
+     * @return GameVendorFilter
      */
-    public function name(string $name): GamesVendorFilter
+    public function name(string $name): GameVendorFilter
     {
         return $this->where('name', $name);
     }
@@ -43,9 +43,9 @@ class GamesVendorFilter extends ModelFilter
     /**
      * 厂商查询
      * @param integer $vendor_id VendorId.
-     * @return GamesVendorFilter
+     * @return GameVendorFilter
      */
-    public function vendor(int $vendor_id): GamesVendorFilter
+    public function vendor(int $vendor_id): GameVendorFilter
     {
         return $this->where('game_vendors.id', $vendor_id);
     }

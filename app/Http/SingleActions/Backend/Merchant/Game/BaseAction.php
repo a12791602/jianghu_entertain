@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Platform\GamePlatform;
+use App\Models\Game\GamePlatform;
 use Illuminate\Http\Request;
 
 /**

@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Offline;
 
 use App\Http\Resources\Backend\Merchant\Finance\Offline\IndexResource;
-use App\ModelFilters\Finance\SystemFinanceOfflineInfoFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -32,7 +31,7 @@ class IndexAction extends BaseAction
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
 
         $data = $this->model
-            ->filter($inputDatas, SystemFinanceOfflineInfoFilter::class)
+            ->filter($inputDatas)
             ->paginate();
         return msgOut(IndexResource::collection($data));
     }

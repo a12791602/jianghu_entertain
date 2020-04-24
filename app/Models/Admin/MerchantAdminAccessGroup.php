@@ -2,13 +2,13 @@
 
 namespace App\Models\Admin;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class for marchant admin access group.
  */
-class MerchantAdminAccessGroup extends BaseModel
+class MerchantAdminAccessGroup extends FilterModel
 {
     public const IS_SUPER = 1;
     public const NO_SUPER = 0;

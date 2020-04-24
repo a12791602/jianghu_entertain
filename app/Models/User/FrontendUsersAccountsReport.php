@@ -2,13 +2,13 @@
 
 namespace App\Models\User;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * 用户帐变记录
  */
-class FrontendUsersAccountsReport extends BaseModel
+class FrontendUsersAccountsReport extends FilterModel
 {
     public const FROZEN_STATUS_NOT       = 0; //与冻结无关
     public const FROZEN_STATUS_OUT       = 1; //冻结

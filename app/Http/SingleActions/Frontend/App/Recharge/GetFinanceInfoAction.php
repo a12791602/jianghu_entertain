@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Frontend\App\Recharge;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Finance\SystemFinanceTypeFilter;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
@@ -37,7 +36,7 @@ class GetFinanceInfoAction extends MainAction
                  return $query;
              },
             ],
-        )->filter($data, SystemFinanceTypeFilter::class)
+        )->filter($data)
          ->withCacheCooldownSeconds(86400)
          ->get(['id', 'name', 'sign', 'is_online']);
         return msgOut($datas);

@@ -2,12 +2,12 @@
 
 namespace App\Models\Systems;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 
 /**
  * 客服设置
  */
-class SystemCostomerService extends BaseModel
+class SystemCostomerService extends FilterModel
 {
 
     /**

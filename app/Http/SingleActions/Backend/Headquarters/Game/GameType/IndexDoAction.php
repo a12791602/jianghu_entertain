@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameType;
 
-use App\ModelFilters\Game\GamesTypeFilter;
 use App\Models\Game\GameType;
 use Illuminate\Http\JsonResponse;
 
@@ -26,7 +25,7 @@ class IndexDoAction
              'author:id,name',
              'children:id,parent_id,name,sort,sign',
             ],
-        )->ordered()->filter($inputDatas, GamesTypeFilter::class)->get();
+        )->ordered()->filter($inputDatas)->get();
         return msgOut($outputDatas);
     }
 }

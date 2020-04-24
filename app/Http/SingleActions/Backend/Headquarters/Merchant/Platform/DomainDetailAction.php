@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemDomainFilter;
 use App\Models\Systems\SystemDomain;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,7 +40,7 @@ class DomainDetailAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $data = $this->model
-            ->filter($inputDatas, SystemDomainFilter::class)
+            ->filter($inputDatas)
             ->paginate();
         return msgOut($data);
     }

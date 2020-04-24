@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Dynamic;
 
-use App\ModelFilters\Platform\SystemDynActivityPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -30,7 +29,7 @@ class IndexAction extends BaseAction
         }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model::with('lastEditor:id,name', 'activity:id,sign,name')
-            ->filter($inputDatas, SystemDynActivityPlatformFilter::class)
+            ->filter($inputDatas)
             ->withCacheCooldownSeconds(86400)
             ->paginate();
         return msgOut($data);

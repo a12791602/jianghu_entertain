@@ -3,7 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  * Class SystemFinanceOnlineInfo
  * @package App\Models\Finance
  */
-class SystemFinanceOnlineInfo extends BaseModel
+class SystemFinanceOnlineInfo extends FilterModel
 {
 
     public const ENCRYPT_MODE_SECRET = 1;

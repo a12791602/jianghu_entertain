@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\HelpCenter;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemUsersHelpCenterFilter;
 use App\Models\Systems\SystemUsersHelpCenter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class DeleteAction extends MainAction
                             'sign'   => $this->currentPlatformEloq->sign,
                            ];
         $costomerService = $this->model
-            ->filter($filterArr, SystemUsersHelpCenterFilter::class)
+            ->filter($filterArr)
             ->first();
         if (!$costomerService) {
             throw new \Exception('201301');
@@ -51,7 +50,6 @@ class DeleteAction extends MainAction
         if (!$costomerService->delete()) {
             throw new \Exception('201303');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }
