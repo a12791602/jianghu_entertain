@@ -8,7 +8,7 @@ use App\Http\Requests\BaseFormRequest;
  * Class DoHotRequest
  * @package App\Http\Requests\Backend\Merchant\Game
  */
-class AckInRequest extends BaseFormRequest
+class AckOutRequest extends BaseFormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,7 +32,7 @@ class AckInRequest extends BaseFormRequest
                 'id'      => 'required|exists:system_platforms,sign',
                 'data'    => [
                               'required',
-                              'regex:/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};\':"\|\\\,.<>\/?]{214,250}$/',
+                              'regex:/^[a-zA-Z0-9!@#$%^&*()_+\-=\[\]{};\':"\|\\\,.<>\/?]{300,350}$/',//307 開始
                              ],
                ];
     }

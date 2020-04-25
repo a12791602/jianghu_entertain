@@ -2,7 +2,8 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Acknowledgement;
 
-use Illuminate\Http\JsonResponse;
+use App\JHHYLibs\GameCommons;
+use App\Models\Game\GameVendor;
 
 /**
  * Class AckInAction
@@ -12,12 +13,17 @@ class AckOutAction
 {
     /**
      * @param array $inputDatas 参数.
-     * @return JsonResponse return.
-     * @throws \Exception Exception.
+     * @return void
+     * @throws \RuntimeException RuntimeException.
      */
-    public function execute(array $inputDatas = []): JsonResponse
+    public function execute(array $inputDatas = []): void
     {
-        unset($inputDatas);
-        return msgOut();
+        $curentVendorObj = GameVendor::where('sign', 'VR')->first();
+        if ($curentVendorObj === null) {
+            throw new \RuntimeException('203200');
+        }
+        $gameInstance = GameCommons::gameInit($curentVendorObj);
+        $gameInstance->upScore($inputDatas);
+        $gameInstance->msgOut();
     }
 }
