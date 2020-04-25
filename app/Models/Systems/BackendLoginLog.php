@@ -2,13 +2,13 @@
 
 namespace App\Models\Systems;
 
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use App\Models\Systems\Logics\BackendLoginLogLogics;
 
 /**
  * 管理员登录记录
  */
-class BackendLoginLog extends FilterModel
+class BackendLoginLog extends BaseModel
 {
     use BackendLoginLogLogics;
     

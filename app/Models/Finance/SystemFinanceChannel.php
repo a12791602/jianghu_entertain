@@ -3,14 +3,14 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class SystemFinanceChannel
  * @package App\Models\Finance
  */
-class SystemFinanceChannel extends FilterModel
+class SystemFinanceChannel extends BaseModel
 {
 
     public const STATUS_YES = 1;

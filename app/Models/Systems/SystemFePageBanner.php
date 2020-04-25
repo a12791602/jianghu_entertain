@@ -2,13 +2,13 @@
 
 namespace App\Models\Systems;
 
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 
 /**
  * Class SystemFePageBanner
  * @package App\Models\Systems
  */
-class SystemFePageBanner extends FilterModel
+class SystemFePageBanner extends BaseModel
 {
 
     public const STATUS_OPEN = 1;

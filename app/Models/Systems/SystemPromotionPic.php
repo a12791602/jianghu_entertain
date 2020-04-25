@@ -3,13 +3,13 @@
 namespace App\Models\Systems;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 推广图片
  */
-class SystemPromotionPic extends FilterModel
+class SystemPromotionPic extends BaseModel
 {
 
     /**

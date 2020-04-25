@@ -306,20 +306,3 @@ function backendOperationLog(array $inputDatas): array
     $result['data'] = $data;
     return $result;
 }
-
-/**
- * 获取模型对应的filter
- * @param  mixed $model 模型.
- * @return string
- * @throws \Exception Exception.
- */
-function getFilter($model): string
-{
-    $modelPath = get_class($model);
-    $needle    = 'Models';
-    $filter    = substr_replace($modelPath, 'ModelFilters', strpos($modelPath, $needle), strlen($needle)) . 'Filter';
-    if (!class_exists($filter)) {
-        throw new \Exception('302600');
-    }
-    return $model->provideFilter($filter);
-}
