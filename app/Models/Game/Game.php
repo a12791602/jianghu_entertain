@@ -2,8 +2,9 @@
 
 namespace App\Models\Game;
 
+use App\ModelFilters\Game\GameFilter;
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Request;
 
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Request;
  * Class Game
  * @package App\Models\Game
  */
-class Game extends FilterModel
+class Game extends BaseModel
 {
     
     public const STATUS_CLOSE = 0;
@@ -80,6 +81,14 @@ class Game extends FilterModel
     public function subType(): BelongsTo
     {
         return $this->belongsTo(GameSubType::class, 'sub_type_id', 'id');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function modelFilter()
+    {
+        return $this->provideFilter(GameFilter::class);
     }
 
     /**

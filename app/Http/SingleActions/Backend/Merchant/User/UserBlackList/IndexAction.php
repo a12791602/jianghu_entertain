@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\UserBlackList;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\FrontendUsersBlackListFilter;
 use App\Models\User\FrontendUsersBlackList;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class IndexAction extends MainAction
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $inputDatas['status']       = $this->model::STATUS_BLACK;
         $data                       = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, FrontendUsersBlackListFilter::class)
             ->select(
                 [
                  'id',

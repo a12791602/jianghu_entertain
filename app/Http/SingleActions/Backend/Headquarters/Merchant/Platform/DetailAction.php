@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\System\SystemPlatformFilter;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class DetailAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $platformData = $this->model->filter($inputDatas)->with('owner.accessGroup.detail')
+        $platformData = $this->model->filter($inputDatas, SystemPlatformFilter::class)->with('owner.accessGroup.detail')
             ->get(
                 [
                  'id',

@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\PromotionPic;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\System\SystemPromotionPicFilter;
 use App\Models\Systems\SystemPromotionPic;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class IndexAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $result = $this->model
-            ->filter($inputDatas)->with(
+            ->filter($inputDatas, SystemPromotionPicFilter::class)->with(
                 [
                  'author',
                  'newer',

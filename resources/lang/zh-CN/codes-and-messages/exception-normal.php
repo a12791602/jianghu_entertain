@@ -127,8 +127,6 @@ return [
         '302404' => '删除短信配置时发生错误',
       //PlatformController
         '302500' => '域名已存在',
-      //helpers
-        '302600' => '找不到对应的filter文件',
       //BackendSystemEmailController
         '303000' => '邮件保存失败!',
         '303001' => '邮件发送失败!',

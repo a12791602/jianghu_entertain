@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
+use App\ModelFilters\Finance\SystemFinanceTypeFilter;
 use App\Models\Finance\SystemFinanceType;
 use Illuminate\Http\JsonResponse;
 
@@ -20,7 +21,7 @@ class TypesAction
     {
         $inputDatas['status']    = SystemFinanceType::STATUS_YES;
         $inputDatas['direction'] = SystemFinanceType::DIRECTION_IN;
-        $datas                   = SystemFinanceType::filter($inputDatas)
+        $datas                   = SystemFinanceType::filter($inputDatas, SystemFinanceTypeFilter::class)
             ->withCacheCooldownSeconds(86400)
             ->get(['id', 'name', 'sign', 'is_online']);
         return msgOut($datas);

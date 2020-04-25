@@ -44,7 +44,7 @@ class DoAddAction extends MainAction
         //生成平台默认配置
         $this->_createConfig();
         //平台绑定域名
-        $this->_createPlatformDomain($inputDatas['domains'], $this->user->id, $inputDatas['status']);
+        $this->_createPlatformDomain($inputDatas['domains'], $this->user->id);
         //生成平台银行配置
         $this->_createBanks();
         //生成超级管理员组
@@ -57,7 +57,8 @@ class DoAddAction extends MainAction
         $this->_editPlatformOwner($adminUser->id);
         //完成
         DB::commit();
-        return msgOut(['platform_name' => $inputDatas['platform_name']]);
+        $msgOut = msgOut(['platform_name' => $inputDatas['platform_name']]);
+        return $msgOut;
     }
 
     /**
@@ -134,11 +135,12 @@ class DoAddAction extends MainAction
             DB::rollback();
             throw new \Exception('300715');
         }
-        return [
-                'private_key'  => $privateKey,
-                'public_key'   => $publicKey['key'],
-                'interval_str' => Str::random(11),
-               ];
+        $data = [
+                 'private_key'  => $privateKey,
+                 'public_key'   => $publicKey['key'],
+                 'interval_str' => Str::random(11),
+                ];
+        return $data;
     }
 
     /**
@@ -182,21 +184,15 @@ class DoAddAction extends MainAction
      * Creates a platform domain.
      *
      * @param array   $domains 添加的域名.
-     * @param integer $adminId 管理员id.
-     * @param integer $status  域名状态.
+     * @param integer $adminId 平台标识.
      * @throws \Exception Exception.
      * @return void
      */
-    private function _createPlatformDomain(array $domains, int $adminId, int $status): void
+    private function _createPlatformDomain(array $domains, int $adminId): void
     {
         foreach ($domains as $domain) {
             $systemDomainELoq = new SystemDomain();
-            $insertDomain     = $systemDomainELoq->insertAllTypeDomain(
-                $domain,
-                $this->platformEloq->sign,
-                $adminId,
-                $status,
-            );
+            $insertDomain     = $systemDomainELoq->insertAllTypeDomain($domain, $this->platformEloq->sign, $adminId);
             if ($insertDomain !== true) {
                 DB::rollback();
                 throw new \Exception('300709');

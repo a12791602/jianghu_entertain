@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\UsersTag;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\UsersTagFilter;
 use App\Models\User\UsersTag;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class IndexAction extends MainAction
         $sign      = $this->currentPlatformEloq->sign;
         $filterArr = ['platformSign' => $sign];
         $data      = $this->model
-                          ->filter($filterArr)
+                          ->filter($filterArr, UsersTagFilter::class)
                           ->select('id', 'title', 'no_withdraw', 'no_login', 'no_play', 'no_promote', 'created_at')
                           ->paginate();
         return msgOut($data);

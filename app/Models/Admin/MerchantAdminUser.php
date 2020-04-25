@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin;
 
+use App\ModelFilters\Admin\MerchantAdminUserFilter;
 use App\Models\BaseAuthModel;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -69,5 +70,13 @@ class MerchantAdminUser extends BaseAuthModel
     public function accessGroup(): HasOne
     {
         return $this->hasOne(MerchantAdminAccessGroup::class, 'id', 'group_id');
+    }
+
+    /**
+     * @return string
+     */
+    public function modelFilter(): string
+    {
+        return $this->provideFilter(MerchantAdminUserFilter::class);
     }
 }

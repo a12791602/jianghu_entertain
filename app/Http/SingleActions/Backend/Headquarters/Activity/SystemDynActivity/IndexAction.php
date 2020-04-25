@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Activity\SystemDynActivity;
 
+use App\ModelFilters\Activity\SystemDynActivityFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -26,7 +27,7 @@ class IndexAction extends BaseAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $outputDatas = $this->model->with('lastEditor:id,name')
-            ->filter($inputDatas)
+            ->filter($inputDatas, SystemDynActivityFilter::class)
             ->paginate();
         return msgOut($outputDatas);
     }

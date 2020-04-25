@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Finance\FinanceVendor;
 
+use App\ModelFilters\Finance\SystemFinanceVendorFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -31,7 +32,7 @@ class IndexDoAction extends BaseAction
              'author:id,name',
              'whiteList:finance_vendor_id,ips',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, SystemFinanceVendorFilter::class)
         ->paginate();
         return msgOut($outputDatas);
     }

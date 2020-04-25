@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\DeveloperUsage\SystemBank;
 
+use App\ModelFilters\Finance\SystemBankFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -30,7 +31,7 @@ class IndexAction extends BaseAction
              'lastEditor:id,name',
              'author:id,name',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, SystemBankFilter::class)
         ->paginate();
         return msgOut($outputDatas);
     }

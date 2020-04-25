@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\UsersCommissionConfigFilter;
 use App\Models\User\UsersCommissionConfig;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -38,7 +39,7 @@ class IndexAction extends MainAction
     {
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $datas                      = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, UsersCommissionConfigFilter::class)
             ->with('configDetail.userGrade')
             ->get(['id', 'game_type_id', 'game_vendor_id', 'bet']);
 
@@ -59,6 +60,7 @@ class IndexAction extends MainAction
             }
             $returnData[$dataKey]['percent_data'] = $percentData;
         }
-        return msgOut($returnData);
+        $msgOut = msgOut($returnData);
+        return $msgOut;
     }
 }

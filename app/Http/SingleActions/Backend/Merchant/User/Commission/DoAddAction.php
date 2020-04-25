@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\UsersCommissionConfigFilter;
 use App\Models\User\FrontendUserLevel;
 use App\Models\User\UsersCommissionConfig;
 use App\Models\User\UsersCommissionConfigDetail;
@@ -55,7 +56,7 @@ class DoAddAction extends MainAction
                              'gameTypeId'   => $this->inputDatas['game_type_id'],
                              'gameVendorId' => $this->inputDatas['game_vendor_id'],
                             ];
-        $commissionConfig = $this->model->filter($filterArr)->get();
+        $commissionConfig = $this->model->filter($filterArr, UsersCommissionConfigFilter::class)->get();
 
         //验证数据是否合法
         $percentArr = $this->_dataValidation($commissionConfig, $userGrade);

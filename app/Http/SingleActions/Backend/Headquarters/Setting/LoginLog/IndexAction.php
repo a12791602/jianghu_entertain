@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\LoginLog;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\System\BackendLoginLogFilter;
 use App\Models\Systems\BackendLoginLog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class IndexAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $data = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, BackendLoginLogFilter::class)
             ->select(
                 [
                  'email',

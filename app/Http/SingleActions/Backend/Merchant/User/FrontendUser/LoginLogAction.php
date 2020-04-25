@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\FrontendUser;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\UsersLoginLogFilter;
 use App\Models\User\UsersLoginLog;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class LoginLogAction extends MainAction
         }
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $data                       = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, UsersLoginLogFilter::class)
             ->paginate();
         return msgOut($data);
     }

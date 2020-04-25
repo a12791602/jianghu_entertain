@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\Admin\BackendAdminUserFilter;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -37,7 +38,7 @@ class SearchAdminAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $data = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, BackendAdminUserFilter::class)
             ->get(['id', 'name', 'email', 'status', 'group_id', 'created_at'])
             ->toArray();
         return msgOut($data);

@@ -3,6 +3,8 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupsHasBackendSystemMenuFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminAccessGroupsHasBackendSystemMenu;
 use App\Models\Systems\SystemPlatform;
@@ -97,7 +99,7 @@ class EditAction extends MainAction
                        'platform' => $sign,
                        'super'    => MerchantAdminAccessGroup::IS_SUPER,
                       ];
-        $adminGroup = MerchantAdminAccessGroup::filter($filterArr)->first();
+        $adminGroup = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)->first();
         $oldRole    = $adminGroup->detail->pluck('menu_id')->toArray();
         //需要删除的权限
         $deleteRole = array_diff($oldRole, $role);
@@ -129,7 +131,7 @@ class EditAction extends MainAction
                        'menuIn'  => $deleteRole,
                       ];
         $deleteRole = MerchantAdminAccessGroupsHasBackendSystemMenu::
-            filter($filterArr)
+            filter($filterArr, MerchantAdminAccessGroupsHasBackendSystemMenuFilter::class)
             ->delete();
         return $deleteRole;
     }

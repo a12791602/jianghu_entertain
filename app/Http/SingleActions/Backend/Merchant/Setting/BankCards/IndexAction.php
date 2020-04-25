@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\BankCards;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\FrontendUsersBankCardFilter;
 use App\Models\User\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class IndexAction extends MainAction
         }
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $returnData         = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, FrontendUsersBankCardFilter::class)
             ->with(
                 [
                  'bank.bank',

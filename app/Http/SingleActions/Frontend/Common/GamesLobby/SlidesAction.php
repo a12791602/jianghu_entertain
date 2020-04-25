@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\Resources\Frontend\GamesLobby\SystemSlidesResource;
+use App\ModelFilters\System\SystemFePageBannerFilter;
 use App\Models\Systems\SystemFePageBanner;
 use Illuminate\Http\JsonResponse;
 
@@ -22,7 +23,7 @@ class SlidesAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['status'] = SystemFePageBanner::STATUS_OPEN;
-        $slides               = SystemFePageBanner::filter($inputDatas)->get();
+        $slides               = SystemFePageBanner::filter($inputDatas, SystemFePageBannerFilter::class)->get();
         return msgOut(SystemSlidesResource::collection($slides));
     }
 }

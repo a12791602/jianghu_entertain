@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Statically;
 
+use App\ModelFilters\Activity\SystemStaticActivityFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -28,7 +29,7 @@ class IndexAction extends BaseAction
         }
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
-            ->filter($inputDatas)->paginate();
+            ->filter($inputDatas, SystemStaticActivityFilter::class)->paginate();
         return msgOut($data);
     }
 }

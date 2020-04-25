@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\Game\GameFilter;
 use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
 
@@ -24,7 +25,7 @@ class AssignedGamesAction extends MainAction
             $game->setPerPage($inputDatas['pageSize']);
         }
         $inputDatas['assigned_platform_id'] = $inputDatas['platform_id'];
-        $outputDatas                        = $game->filter($inputDatas)->select(
+        $outputDatas                        = $game->filter($inputDatas, GameFilter::class)->select(
             [
              'id',
              'name',

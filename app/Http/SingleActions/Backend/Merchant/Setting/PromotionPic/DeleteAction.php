@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\PromotionPic;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\System\SystemPromotionPicFilter;
 use App\Models\Systems\SystemPromotionPic;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class DeleteAction extends MainAction
                          'platform_id' => $this->currentPlatformEloq->id,
                         ];
         $promotionPic = $this->model
-            ->filter($filterArr)
+            ->filter($filterArr, SystemPromotionPicFilter::class)
             ->first();
         if (!$promotionPic) {
             throw new \Exception('203101');

@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
 use App\Http\Resources\Backend\Merchant\Finance\Online\IndexResource;
+use App\ModelFilters\Finance\SystemFinanceOnlineInfoFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -35,7 +36,7 @@ class IndexAction extends BaseAction
              'lastEditor:id,name',
              'tags:online_finance_id,tag_id',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, SystemFinanceOnlineInfoFilter::class)
         ->paginate();
         return msgOut(IndexResource::collection($data));
     }

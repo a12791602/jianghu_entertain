@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
 
+use App\ModelFilters\Game\GameFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,7 +34,7 @@ class IndexDoAction extends BaseAction
              'lastEditor:id,name',
              'author:id,name',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, GameFilter::class)
         ->paginate();
         return msgOut($outputDatas);
     }

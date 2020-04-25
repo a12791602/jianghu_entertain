@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Game;
 
+use App\ModelFilters\Platform\GamesPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,7 +34,7 @@ class IndexAction extends BaseAction
              'vendor:game_vendors.id,game_vendors.name,game_vendors.sign',
             ],
         )->orderByDesc('sort')
-         ->filter($inputDatas)
+         ->filter($inputDatas, GamesPlatformFilter::class)
          ->withCacheCooldownSeconds(86400)
          ->paginate();
         return msgOut($datas);

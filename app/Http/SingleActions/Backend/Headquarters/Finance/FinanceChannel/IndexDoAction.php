@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel;
 
+use App\ModelFilters\Finance\SystemFinanceChannelFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -32,7 +33,7 @@ class IndexDoAction extends BaseAction
              'vendor:id,name',
              'type:id,name',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, SystemFinanceChannelFilter::class)
         ->paginate();
         return msgOut($outputDatas);
     }

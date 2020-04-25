@@ -4,9 +4,11 @@ namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
 use App\Lib\BaseCache;
-use App\Models\Game\GamePlatform;
+use App\ModelFilters\Game\GamePlatformFilter;
+use App\ModelFilters\Game\GameTypePlatformFilter;
 use App\Models\Game\GameSubType;
 use App\Models\Game\GameTypePlatform;
+use App\Models\Platform\GamePlatform;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -41,7 +43,7 @@ class GameListAction extends MainAction
                           'platform' => $this->currentPlatformEloq->id,
                           'status'   => GameTypePlatform::STATUS_OPEN,
                          ];
-            $types     = GameTypePlatform::filter($condition)
+            $types     = GameTypePlatform::filter($condition, GameTypePlatformFilter::class)
                 ->with('gameType.children')
                 ->get();
     
@@ -89,7 +91,7 @@ class GameListAction extends MainAction
      */
     private function _getGames(array $condition): array
     {
-        $datas = GamePlatform::filter($condition)
+        $datas = GamePlatform::filter($condition, GamePlatformFilter::class)
             ->select(
                 [
                  'id',

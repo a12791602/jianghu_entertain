@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Http\Resources\Backend\Merchant\Email\IndexResource;
+use App\ModelFilters\Email\SystemEmailSendFilter;
 use App\Models\Email\SystemEmailSend;
 use Illuminate\Http\JsonResponse;
 
@@ -32,7 +33,7 @@ class SendIndexAction extends BaseAction
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
 
         $item = $systemEmailSend->where(['sender_id' => $this->user->id])
-            ->filter($inputDatas)
+            ->filter($inputDatas, SystemEmailSendFilter::class)
             ->with('email')
             ->orderByDesc('created_at')
             ->paginate();

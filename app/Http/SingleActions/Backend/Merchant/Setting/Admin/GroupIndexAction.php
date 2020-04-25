@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class GroupIndexAction extends MainAction
         }
         $filterArr = ['platform' => $this->currentPlatformEloq->sign];
         $data      = $this->model
-            ->filter($filterArr)
+            ->filter($filterArr, MerchantAdminAccessGroupFilter::class)
             ->with('detail:group_id,menu_id')
             ->select(
                 [

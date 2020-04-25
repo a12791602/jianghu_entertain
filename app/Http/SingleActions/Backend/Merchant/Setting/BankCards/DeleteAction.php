@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\BankCards;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\FrontendUsersBankCardFilter;
 use App\Models\User\FrontendUsersBankCard;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class DeleteAction extends MainAction
                       'sign'   => $this->currentPlatformEloq->sign,
                      ];
         $bankCards = $this->model
-            ->filter($filterArr)
+            ->filter($filterArr, FrontendUsersBankCardFilter::class)
             ->first();
         if (!$bankCards) {
             throw new \Exception('201500');
@@ -50,6 +51,7 @@ class DeleteAction extends MainAction
         if (!$bankCards->delete()) {
             throw new \Exception('201501');
         }
-        return msgOut();
+        $msgOut = msgOut();
+        return $msgOut;
     }
 }

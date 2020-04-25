@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Models\Game;
+namespace App\Models\Platform;
 
-use App\Models\FilterModel;
+use App\Models\BaseModel;
+use App\Models\Game\Game;
+use App\Models\Game\GameType;
+use App\Models\Game\GameVendor;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
  * Class GamePlatform
  *
- * @package App\Models\Game
+ * @package App\Models\Platform
  */
-class GamePlatform extends FilterModel
+class GamePlatform extends BaseModel
 {
 
     public const IS_HOT_YES  = 1;

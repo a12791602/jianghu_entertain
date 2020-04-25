@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\HandleSaveBuckle;
 
+use App\ModelFilters\Finance\SystemFinanceHandleSaveBuckleRecordFilter;
 use App\Models\Finance\SystemFinanceHandleSaveBuckleRecord;
 use Illuminate\Http\JsonResponse;
 
@@ -29,7 +30,7 @@ class SaveIndexAction extends BaseAction
         }
         $inputDatas['direction'] = SystemFinanceHandleSaveBuckleRecord::DIRECTION_IN;
         $data                    = $this->model::with('user:id,mobile,guid,is_tester', 'admin:id,name')
-            ->filter($inputDatas)
+            ->filter($inputDatas, SystemFinanceHandleSaveBuckleRecordFilter::class)
             ->paginate();
         return msgOut($data);
     }

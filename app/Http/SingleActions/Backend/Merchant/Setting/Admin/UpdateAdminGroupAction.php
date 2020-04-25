@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\Admin\MerchantAdminAccessGroupFilter;
 use App\Models\Admin\MerchantAdminAccessGroup;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
@@ -52,7 +53,7 @@ class UpdateAdminGroupAction extends MainAction
                                  'platform' => $this->currentPlatformEloq->sign,
                                  'super'    => MerchantAdminAccessGroup::NO_SUPER,
                                 ];
-        $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr)
+        $platformAdminGroupId = MerchantAdminAccessGroup::filter($filterArr, MerchantAdminAccessGroupFilter::class)
                                     ->pluck('id')
                                     ->toArray();
         if (!in_array($inputDatas['group_id'], $platformAdminGroupId)) {

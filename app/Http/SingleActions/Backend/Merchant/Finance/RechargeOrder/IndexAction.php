@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
+use App\ModelFilters\Order\UsersRechargeOrderFilter;
 use App\Models\Notification\MerchantNotificationStatistic;
 use Illuminate\Http\JsonResponse;
 
@@ -35,7 +36,7 @@ class IndexAction extends BaseAction
              'user.parent:id,mobile,guid',
              'admin:id,name',
             ],
-        )->filter($inputDatas)->select(
+        )->filter($inputDatas, UsersRechargeOrderFilter::class)->select(
             [
              'id',
              'user_id',

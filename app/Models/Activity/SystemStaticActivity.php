@@ -3,7 +3,7 @@
 namespace App\Models\Activity;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Activity
  */
-class SystemStaticActivity extends FilterModel
+class SystemStaticActivity extends BaseModel
 {
 
     /**

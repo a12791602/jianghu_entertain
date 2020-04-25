@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\UserBlackList;
 
 use App\Http\SingleActions\MainAction;
+use App\ModelFilters\User\FrontendUsersBlackListFilter;
 use App\Models\User\FrontendUsersBlackList;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +43,7 @@ class DetailAction extends MainAction
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
 
         $data = $this->model
-            ->filter($inputDatas)
+            ->filter($inputDatas, FrontendUsersBlackListFilter::class)
             ->select(
                 [
                  'mobile',

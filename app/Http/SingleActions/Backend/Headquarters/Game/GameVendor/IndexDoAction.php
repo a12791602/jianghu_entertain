@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameVendor;
 
+use App\ModelFilters\Game\GamesVendorFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -32,7 +33,7 @@ class IndexDoAction extends BaseAction
              'gameType:id,name',
              'whiteList:game_vendor_id,ips',
             ],
-        )->filter($inputDatas)
+        )->filter($inputDatas, GamesVendorFilter::class)
         ->paginate();
         return msgOut($outputDatas);
     }

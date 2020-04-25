@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\ModelFilters\User\FrontendUsersBlackListFilter;
 use App\Models\BaseAuthModel;
 
 /**
@@ -43,6 +44,6 @@ class FrontendUsersBlackList extends BaseAuthModel
     public function getBlackNumAttribute(): int
     {
         $filterArr = ['guid' => $this->guid];
-        return self::filter($filterArr)->count();
+        return self::filter($filterArr, FrontendUsersBlackListFilter::class)->count();
     }
 }

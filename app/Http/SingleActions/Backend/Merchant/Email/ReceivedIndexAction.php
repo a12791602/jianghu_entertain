@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Http\Resources\Backend\Merchant\Email\ReceivedIndexResource;
+use App\ModelFilters\Email\SystemEmailOfMerchantFilter;
 use App\Models\Email\SystemEmailOfMerchant;
 use App\Models\Notification\MerchantNotificationStatistic;
 use Illuminate\Http\JsonResponse;
@@ -36,7 +37,7 @@ class ReceivedIndexAction extends BaseAction
                  'created_at',
                 ],
             )
-            ->filter($inputDatas)
+            ->filter($inputDatas, SystemEmailOfMerchantFilter::class)
             ->with('email.headquarters')
             ->orderByDesc('created_at')
             ->paginate();

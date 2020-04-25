@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\GameVendor;
 
+use App\ModelFilters\Game\GameVendorPlatformFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -29,7 +30,7 @@ class IndexAction extends BaseAction
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $datas                     = $this->model->with('gameVendor')
                                           ->orderByDesc('sort')
-                                          ->filter($inputDatas)
+                                          ->filter($inputDatas, GameVendorPlatformFilter::class)
                                           ->withCacheCooldownSeconds(86400)
                                           ->paginate();
         return msgOut($datas);

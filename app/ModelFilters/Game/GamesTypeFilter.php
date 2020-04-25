@@ -5,11 +5,11 @@ namespace App\ModelFilters\Game;
 use EloquentFilter\ModelFilter;
 
 /**
- * Class GameTypeFilter
+ * Class GamesTypeFilter
  *
  * @package App\ModelFilters\Game
  */
-class GameTypeFilter extends ModelFilter
+class GamesTypeFilter extends ModelFilter
 {
 
     /**
@@ -23,9 +23,9 @@ class GameTypeFilter extends ModelFilter
     /**
      * 状态查询
      * @param  integer $status Status.
-     * @return GameTypeFilter
+     * @return GamesTypeFilter
      */
-    public function status(int $status): GameTypeFilter
+    public function status(int $status): GamesTypeFilter
     {
         return $this->where('status', $status);
     }
@@ -33,9 +33,9 @@ class GameTypeFilter extends ModelFilter
     /**
      * 名称查询
      * @param  string $name Name.
-     * @return GameTypeFilter
+     * @return GamesTypeFilter
      */
-    public function name(string $name): GameTypeFilter
+    public function name(string $name): GamesTypeFilter
     {
         return $this->where('name', $name);
     }
@@ -43,9 +43,9 @@ class GameTypeFilter extends ModelFilter
     /**
      * 分类查询
      * @param integer $type_id TypeId.
-     * @return GameTypeFilter
+     * @return GamesTypeFilter
      */
-    public function type(int $type_id): GameTypeFilter
+    public function type(int $type_id): GamesTypeFilter
     {
         return $this->where('game_types.id', $type_id);
     }
