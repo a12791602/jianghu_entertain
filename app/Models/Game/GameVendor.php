@@ -2,9 +2,8 @@
 
 namespace App\Models\Game;
 
-use App\ModelFilters\Game\GamesVendorFilter;
 use App\Models\Admin\BackendAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use App\Models\Systems\SystemIpWhiteList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -13,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Class GameVendor
  * @package App\Models\Game
  */
-class GameVendor extends BaseModel
+class GameVendor extends FilterModel
 {
 
     /**
@@ -117,13 +116,5 @@ class GameVendor extends BaseModel
     public function gameType(): BelongsTo
     {
         return $this->belongsTo(GameType::class, 'type_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function modelFilter()
-    {
-        return $this->provideFilter(GamesVendorFilter::class);
     }
 }

@@ -3,8 +3,6 @@
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Order\UsersRechargeOrderFilter;
-use App\ModelFilters\User\FrontendUsersAccountsReportFilter;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\UsersWithdrawOrder;
@@ -96,7 +94,7 @@ class ReportAction extends MainAction
                                               $this->model::FROZEN_STATUS_BACK,
                                              ];
         return $this->model
-            ->filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
+            ->filter($this->filterDatas)
             ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])
             ->paginate($this->pageSize)
             ->toArray();
@@ -108,7 +106,7 @@ class ReportAction extends MainAction
      */
     private function _getRechargeReport(): array
     {
-        return UsersRechargeOrder::filter($this->filterDatas, UsersRechargeOrderFilter::class)
+        return UsersRechargeOrder::filter($this->filterDatas)
             ->select(['order_no', 'money', 'arrive_money', 'recharge_status', 'status', 'created_at'])
             ->paginate($this->pageSize)
             ->toArray();
@@ -120,7 +118,7 @@ class ReportAction extends MainAction
      */
     private function _getwithdrawReport(): array
     {
-        return UsersWithdrawOrder::filter($this->filterDatas, FrontendUsersAccountsReportFilter::class)
+        return UsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
             ->paginate($this->pageSize)
             ->toArray();

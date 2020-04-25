@@ -3,14 +3,14 @@
 namespace App\Models\Notice;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class NoticeLogin
  * @package App\Models\Notice
  */
-class NoticeLogin extends BaseModel
+class NoticeLogin extends FilterModel
 {
 
     /**

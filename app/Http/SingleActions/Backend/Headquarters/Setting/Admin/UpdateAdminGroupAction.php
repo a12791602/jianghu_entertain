@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Admin\BackendAdminAccessGroupFilter;
 use App\Models\Admin\BackendAdminAccessGroup;
 use App\Models\Admin\BackendAdminUser;
 use Illuminate\Http\JsonResponse;
@@ -50,7 +49,7 @@ class UpdateAdminGroupAction extends MainAction
                           'id'        => $inputDatas['group_id'],
                           'groupName' => $inputDatas['group_name'],
                          ];
-        $groupIsExists = BackendAdminAccessGroup::filter($filterArr, BackendAdminAccessGroupFilter::class)->exists();
+        $groupIsExists = BackendAdminAccessGroup::filter($filterArr)->exists();
         if ($groupIsExists === false) {
             throw new \Exception('301101');
         }

@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Platform\GamePlatform;
+use App\Models\Game\GamePlatform;
 use Illuminate\Http\JsonResponse;
 
 /**

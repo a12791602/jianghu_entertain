@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\HelpCenter;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemUsersHelpCenterFilter;
 use App\Models\Systems\SystemUsersHelpCenter;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class IndexAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $result = $this->model
-            ->filter($inputDatas, SystemUsersHelpCenterFilter::class)->with(
+            ->filter($inputDatas)->with(
                 [
                  'childs.author',
                  'childs.newer',

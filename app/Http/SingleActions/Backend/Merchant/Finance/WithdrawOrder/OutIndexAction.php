@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
-use App\ModelFilters\User\UsersWithdrawOrderFilter;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
@@ -44,7 +43,7 @@ class OutIndexAction extends BaseAction
              'reviewer:id,name',
              'user.parent:id,mobile,guid',
             ],
-        )->filter($inputDatas, UsersWithdrawOrderFilter::class)
+        )->filter($inputDatas)
         ->select($returnField)
         ->paginate();
         return msgOut($data);

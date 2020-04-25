@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\User\Commission;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\User\UsersCommissionConfigFilter;
 use App\Models\User\FrontendUserLevel;
 use App\Models\User\UsersCommissionConfig;
 use Illuminate\Http\JsonResponse;
@@ -94,7 +93,7 @@ class EditAction extends MainAction
                                   'gameVendorId' => $this->commissionConfig->game_vendor_id,
                                  ];
         $otherCommissionConfig = $this->model
-                                      ->filter($filterArr, UsersCommissionConfigFilter::class)
+                                      ->filter($filterArr)
                                       ->get();
         //存在其他的洗码设置时才需要去验证数据是否合法
         if ($otherCommissionConfig) {

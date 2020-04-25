@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
 
-use App\Models\Platform\GamePlatform;
+use App\Models\Game\GamePlatform;
 use DB;
 use Illuminate\Http\JsonResponse;
 use Log;

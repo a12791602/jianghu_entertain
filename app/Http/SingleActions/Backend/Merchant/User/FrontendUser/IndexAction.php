@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\FrontendUser;
 
-use App\ModelFilters\User\FrontendUserFilter;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 
@@ -37,12 +36,12 @@ class IndexAction
         }
         if (isset($inputDatas['parent_mobile'])) {
             $filterArr = ['mobile' => $inputDatas['parent_mobile']];
-            $parentId  = $this->model->filter($filterArr, FrontendUserFilter::class)->first();
+            $parentId  = $this->model->filter($filterArr)->first();
             if ($parentId !== null) {
                 $inputDatas['parentId'] = $parentId->id;
             }
         }
-        $datas = $this->model->filter($inputDatas, FrontendUserFilter::class)
+        $datas = $this->model->filter($inputDatas)
             ->select(
                 [
                  'id',
