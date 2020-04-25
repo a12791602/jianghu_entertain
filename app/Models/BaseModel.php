@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use DateTimeInterface;
+use App\Models\Logics\BaseModelLogics;
 use EloquentFilter\Filterable;
 use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Model;
@@ -15,20 +15,10 @@ class BaseModel extends Model
 {
     use Cachable;
     use Filterable;
+    use BaseModelLogics;
 
     /**
      * @var integer
      */
     protected $perPage = 50;
-
-    /**
-     * Prepare a date for array / JSON serialization.
-     *
-     * @param  DateTimeInterface $date DateTimeInterface.
-     * @return string
-     */
-    protected function serializeDate(DateTimeInterface $date): string
-    {
-        return $date->format('Y-m-d H:i:s');
-    }
 }

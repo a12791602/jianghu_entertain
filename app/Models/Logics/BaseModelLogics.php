@@ -2,25 +2,39 @@
 
 namespace App\Models\Logics;
 
+use DateTimeInterface;
+
 trait BaseModelLogics
 {
 
     /**
-     * 获取分页条数
+     * Prepare a date for array / JSON serialization.
      *
-     * @return mixed
+     * @param  DateTimeInterface $date DateTimeInterface.
+     * @return string
      */
-    public static function getPageSize()
+    protected function serializeDate(DateTimeInterface $date): string
     {
-        return app('request')->get('pageSize') ?? self::getDefaultPageSize();
+        $date = $date->format('Y-m-d H:i:s');
+        return $date;
     }
 
     /**
-     * 默认分页条数
-     * @return integer
+     * @return string
      */
-    public static function getDefaultPageSize(): int
+    public function modelFilter(): string
     {
-        return 50;
+        $modelPath = static::class;
+        $needle    = 'Models';
+        $filter    = substr_replace(
+            $modelPath,
+            'ModelFilters',
+            strpos($modelPath, $needle),
+            strlen($needle),
+        ) . 'Filter';
+        if (!class_exists($filter)) {
+            $filter = 'App\ModelFilters\DefaultFilter';
+        }
+        return $filter;
     }
 }
