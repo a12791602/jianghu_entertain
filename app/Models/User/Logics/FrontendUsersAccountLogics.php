@@ -70,8 +70,14 @@ trait FrontendUsersAccountLogics
         $beforeBalance = $this->balance;
         $beforeFrozen  = $this->frozen;
         $amount        = (float) $amount;
+        //游戏中奖时
+        if ($typeConfig['frozen_type'] === self::FROZEN_STATUS_GAME_WIN) {
+            $unfreezeAfWin = (float) $params['unfreeze_amount'];
+        } else {
+            $unfreezeAfWin = 0.0;
+        }
         // 根据冻结类型处理
-        $return = $this->_handleFrozen($typeConfig, $amount);
+        $return = $this->_handleFrozen($typeConfig, $amount, $unfreezeAfWin);
         if ($return !== true) {
             DB::rollback();
             throw new \Exception('100202');
@@ -92,11 +98,13 @@ trait FrontendUsersAccountLogics
 
     /**
      * 根据冻结类型处理
-     * @param  array $typeConfig 帐变类型Arr.
-     * @param  float $amount     金额.
+     * @param array      $typeConfig    帐变类型Arr.
+     * @param float      $amount        金额.
+     * @param float|null $unfreezeAfWin 盈利之后要解放冻结金额.
      * @return mixed
+     * @throws \Exception Exception.
      */
-    private function _handleFrozen(array $typeConfig, float $amount)
+    private function _handleFrozen(array $typeConfig, float $amount, ?float $unfreezeAfWin)
     {
 
         switch ($typeConfig['frozen_type']) {
@@ -107,6 +115,7 @@ trait FrontendUsersAccountLogics
                 $result = $this->unFrozen($amount);
                 break;
             case self::FROZEN_STATUS_GAME_WIN:
+                $result = $this->costWin($amount, $unfreezeAfWin);
                 break;
             case self::FROZEN_STATUS_TO_SYSTEM:
                 $result = $this->costFrozen($amount);
@@ -196,6 +205,23 @@ trait FrontendUsersAccountLogics
             throw new \Exception('100205');
         }
         $this->frozen -= $money;
+        return $this->save();
+    }
+
+    /**
+     * @param float $amount        金额.
+     * @param float $unfreezeAfWin 盈利之后要解放冻结金额.
+     * @return boolean
+     * @throws \Exception Exception.
+     */
+    public function costWin(float $amount, float $unfreezeAfWin): bool
+    {
+        if ($unfreezeAfWin > $this->frozen) {
+            DB::rollback();
+            throw new \Exception('100205');
+        }
+        $this->frozen  -= $unfreezeAfWin;
+        $this->balance += $amount;
         return $this->save();
     }
 
