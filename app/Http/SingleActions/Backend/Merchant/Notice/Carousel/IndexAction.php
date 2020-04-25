@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Carousel;
 
-use App\ModelFilters\Notice\NoticeCarouselFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -35,7 +34,7 @@ class IndexAction extends BaseAction
                  'lastEditor:id,name',
                 ],
             )
-            ->filter($inputDatas, NoticeCarouselFilter::class)
+            ->filter($inputDatas)
             ->paginate();
         return msgOut($data);
     }

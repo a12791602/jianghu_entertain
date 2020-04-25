@@ -2,7 +2,7 @@
 
 namespace App\Models\Game;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Game
  */
-class GameTypePlatform extends BaseModel
+class GameTypePlatform extends FilterModel
 {
 
     public const DEVICE_H5    = 2;

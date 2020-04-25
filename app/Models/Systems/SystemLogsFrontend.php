@@ -2,12 +2,12 @@
 
 namespace App\Models\Systems;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 
 /**
  * 前台系统日志
  */
-class SystemLogsFrontend extends BaseModel
+class SystemLogsFrontend extends FilterModel
 {
     public const PHONE    = 1;
     public const DESKSTOP = 2;

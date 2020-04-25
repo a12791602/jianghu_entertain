@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Bank;
 
-use App\ModelFilters\Finance\SystemPlatformBankFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -29,7 +28,7 @@ class IndexAction extends BaseAction
         }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model->with('bank:id,name')
-            ->filter($inputDatas, SystemPlatformBankFilter::class)
+            ->filter($inputDatas)
             ->paginate();
         return msgOut($data);
     }

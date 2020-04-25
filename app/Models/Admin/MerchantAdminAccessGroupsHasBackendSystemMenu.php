@@ -2,12 +2,12 @@
 
 namespace App\Models\Admin;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 
 /**
  * Class for merchant admin access groups has backend system menu.
  */
-class MerchantAdminAccessGroupsHasBackendSystemMenu extends BaseModel
+class MerchantAdminAccessGroupsHasBackendSystemMenu extends FilterModel
 {
 
     /**

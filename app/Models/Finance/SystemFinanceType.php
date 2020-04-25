@@ -3,7 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * Class SystemFinanceType
  * @package App\Models\Finance
  */
-class SystemFinanceType extends BaseModel
+class SystemFinanceType extends FilterModel
 {
 
     public const IS_ONLINE_YES = 1;
