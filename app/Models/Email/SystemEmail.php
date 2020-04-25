@@ -4,7 +4,7 @@ namespace App\Models\Email;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Email
  */
-class SystemEmail extends FilterModel
+class SystemEmail extends BaseModel
 {
 
     /**

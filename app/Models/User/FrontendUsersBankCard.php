@@ -2,14 +2,14 @@
 
 namespace App\Models\User;
 
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use App\Models\Finance\SystemPlatformBank;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 用户银行卡
  */
-class FrontendUsersBankCard extends FilterModel
+class FrontendUsersBankCard extends BaseModel
 {
 
     /**

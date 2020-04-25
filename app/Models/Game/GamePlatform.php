@@ -2,7 +2,7 @@
 
 namespace App\Models\Game;
 
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOneThrough;
  *
  * @package App\Models\Game
  */
-class GamePlatform extends FilterModel
+class GamePlatform extends BaseModel
 {
 
     public const IS_HOT_YES  = 1;

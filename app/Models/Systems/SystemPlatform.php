@@ -3,7 +3,7 @@
 namespace App\Models\Systems;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use App\Models\Game\Game;
 use App\Models\Game\GameType;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 /**
  * 代理平台
  */
-class SystemPlatform extends FilterModel
+class SystemPlatform extends BaseModel
 {
 
     public const STATUS_OPEN = 1;

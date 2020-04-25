@@ -3,7 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Class SystemFinanceOfflineInfo
  * @package App\Models\Finance
  */
-class SystemFinanceOfflineInfo extends FilterModel
+class SystemFinanceOfflineInfo extends BaseModel
 {
 
     public const STATUS_YES = 1;

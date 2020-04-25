@@ -3,7 +3,7 @@
 namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use App\Models\Systems\SystemIpWhiteList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
  * Class GameVendor
  * @package App\Models\Game
  */
-class GameVendor extends FilterModel
+class GameVendor extends BaseModel
 {
 
     /**

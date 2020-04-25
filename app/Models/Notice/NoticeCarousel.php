@@ -3,14 +3,14 @@
 namespace App\Models\Notice;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class NoticeCarousel
  * @package App\Models\Notice
  */
-class NoticeCarousel extends FilterModel
+class NoticeCarousel extends BaseModel
 {
 
     public const TYPE_INSIDE = 1;
