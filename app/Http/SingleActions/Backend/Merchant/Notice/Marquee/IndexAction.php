@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Marquee;
 
-use App\ModelFilters\Notice\NoticeMarqueeFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -36,7 +35,7 @@ class IndexAction extends BaseAction
                  'lastEditor:id,name',
                 ],
             )
-            ->filter($inputDatas, NoticeMarqueeFilter::class)
+            ->filter($inputDatas)
             ->paginate();
         return msgOut($data);
     }

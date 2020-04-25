@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\CostomerService;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemCostomerServiceFilter;
 use App\Models\Systems\SystemCostomerService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -39,7 +38,7 @@ class IndexAction extends MainAction
     {
         $inputDatas['sign'] = $this->currentPlatformEloq->sign;
         $data               = $this->model
-            ->filter($inputDatas, SystemCostomerServiceFilter::class)
+            ->filter($inputDatas)
             ->get()
             ->toArray();
         return msgOut($data);

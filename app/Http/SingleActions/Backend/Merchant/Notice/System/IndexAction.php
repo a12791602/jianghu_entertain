@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\System;
 
-use App\ModelFilters\Notice\NoticeSystemFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -35,7 +34,7 @@ class IndexAction extends BaseAction
                  'author:id,name',
                  'lastEditor:id,name',
                 ],
-            )->filter($inputDatas, NoticeSystemFilter::class)
+            )->filter($inputDatas)
             ->paginate();
         return msgOut($data);
     }

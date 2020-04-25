@@ -2,7 +2,7 @@
 
 namespace App\Models\Email;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Email
  */
-class SystemEmailOfHead extends BaseModel
+class SystemEmailOfHead extends FilterModel
 {
 
     /**

@@ -2,14 +2,14 @@
 
 namespace App\Models\User;
 
-use App\Models\BaseAuthModel;
+use App\Models\FilterModel;
 use App\Models\User\Logics\FrontendUsersAuditLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 会员稽核
  */
-class FrontendUsersAudit extends BaseAuthModel
+class FrontendUsersAudit extends FilterModel
 {
     /**
      * 用户稽核Logics

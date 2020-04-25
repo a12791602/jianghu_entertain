@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\User\FrontendUsersAuditFilter;
 use App\Models\User\FrontendUsersAudit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class UserAuditAction extends MainAction
         }
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $data                       = $this->model
-            ->filter($inputDatas, FrontendUsersAuditFilter::class)
+            ->filter($inputDatas)
             ->select(
                 [
                  'mobile',

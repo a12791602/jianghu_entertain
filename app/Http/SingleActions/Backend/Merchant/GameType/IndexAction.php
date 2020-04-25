@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\GameType;
 
-use App\ModelFilters\Game\GameTypePlatformFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -29,7 +28,7 @@ class IndexAction extends BaseAction
         }
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $datas                     = $this->model->with('gameType:id,name,sign')
-                                          ->filter($inputDatas, GameTypePlatformFilter::class)
+                                          ->filter($inputDatas)
                                           ->paginate();
         return msgOut($datas);
     }

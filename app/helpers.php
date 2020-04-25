@@ -8,7 +8,6 @@
  */
 
 use App\Lib\Crypt\DataCrypt;
-use App\ModelFilters\System\SystemLogsBackendFilter;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemLogsBackend;
@@ -275,7 +274,7 @@ function backendOperationLog(array $inputDatas): array
     if (isset($inputDatas['pageSize'])) {
         $systemLogsBackend->setPerPage($inputDatas['pageSize']);
     }
-    $result = $systemLogsBackend->filter($inputDatas, SystemLogsBackendFilter::class)
+    $result = $systemLogsBackend->filter($inputDatas)
         ->select(
             [
              'origin',
@@ -306,4 +305,21 @@ function backendOperationLog(array $inputDatas): array
 
     $result['data'] = $data;
     return $result;
+}
+
+/**
+ * 获取模型对应的filter
+ * @param  mixed $model 模型.
+ * @return string
+ * @throws \Exception Exception.
+ */
+function getFilter($model): string
+{
+    $modelPath = get_class($model);
+    $needle    = 'Models';
+    $filter    = substr_replace($modelPath, 'ModelFilters', strpos($modelPath, $needle), strlen($needle)) . 'Filter';
+    if (!class_exists($filter)) {
+        throw new \Exception('302600');
+    }
+    return $model->provideFilter($filter);
 }

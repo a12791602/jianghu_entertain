@@ -4,7 +4,7 @@ namespace App\Models\Platform;
 
 use App\Models\Activity\SystemDynActivity;
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Platform
  */
-class SystemDynActivityPlatform extends BaseModel
+class SystemDynActivityPlatform extends FilterModel
 {
 
     /**

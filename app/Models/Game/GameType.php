@@ -4,9 +4,8 @@ namespace App\Models\Game;
 
 use App\Lib\EloquentSortable\EloquentSortable;
 use App\Lib\EloquentSortable\Sortable;
-use App\ModelFilters\Game\GamesTypeFilter;
 use App\Models\Admin\BackendAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -15,7 +14,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
  * Class GamesType
  * @package App\Models\Game
  */
-class GameType extends BaseModel implements Sortable
+class GameType extends FilterModel implements Sortable
 {
     use EloquentSortable;// Eloquent Sortable.
     
@@ -56,14 +55,6 @@ class GameType extends BaseModel implements Sortable
     public function author(): BelongsTo
     {
         return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function modelFilter()
-    {
-        return $this->provideFilter(GamesTypeFilter::class);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Activity\SystemDynActivityFilter;
 use App\Models\Activity\SystemDynActivity;
 use Illuminate\Http\JsonResponse;
 
@@ -25,7 +24,7 @@ class AssignedActivitiesAction extends MainAction
             $systemDynActivity->setPerPage($inputDatas['pageSize']);
         }
         $inputDatas['assigned_platform_sign'] = $inputDatas['platform_sign'];
-        $outputDatas                          = $systemDynActivity->filter($inputDatas, SystemDynActivityFilter::class)
+        $outputDatas                          = $systemDynActivity->filter($inputDatas)
             ->paginate();
         return msgOut($outputDatas);
     }

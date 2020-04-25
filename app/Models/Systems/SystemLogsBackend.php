@@ -2,14 +2,14 @@
 
 namespace App\Models\Systems;
 
-use App\Models\BaseModel;
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 后台系统日志
  */
-class SystemLogsBackend extends BaseModel
+class SystemLogsBackend extends FilterModel
 {
     public const PHONE    = 1;
     public const DESKSTOP = 2;

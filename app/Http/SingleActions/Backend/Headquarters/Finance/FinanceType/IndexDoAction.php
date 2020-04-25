@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Finance\FinanceType;
 
-use App\ModelFilters\Finance\SystemFinanceTypeFilter;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -31,7 +30,7 @@ class IndexDoAction extends BaseAction
              'lastEditor:id,name',
              'author:id,name',
             ],
-        )->filter($inputDatas, SystemFinanceTypeFilter::class)
+        )->filter($inputDatas)
         ->paginate();
         return msgOut($outputDatas);
     }
