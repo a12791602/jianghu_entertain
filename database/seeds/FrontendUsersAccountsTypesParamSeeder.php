@@ -108,6 +108,13 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
               'rule'           => 'required|string|max:32',
               'is_search_ease' => 0,
              ],
+             [
+              'id'             => 14,
+              'label'          => '释放冻结金额',
+              'param'          => 'unfreeze_amount',
+              'rule'           => 'required|numeric|gt:0',
+              'is_search_ease' => 0,
+             ],
             ],
         );
     }

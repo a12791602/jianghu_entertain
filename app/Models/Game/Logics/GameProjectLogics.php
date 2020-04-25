@@ -52,4 +52,34 @@ trait GameProjectLogics
         $self->save();//不是在 客户端使用不需要用 try-catch 去包起来 报错 不会执行下去 到时 直接看tg错误 修复
         return $self;
     }
+
+    /**
+     *  * 检查 是否有 同样的订单存在
+     * @param array  $theirData  三方返回过来的数据从新整理后的数据.
+     * @param string $gameVDSign 廠商的標識.
+     * @return mixed
+     */
+    public static function checkHasOrder(array $theirData, string $gameVDSign)
+    {
+        $orderCriterias = [
+                           [
+                            'their_serial_number',
+                            '=',
+                            $theirData['serialNumber'],
+                           ],
+                           [
+                            'game_vendor_sign',
+                            '=',
+                            $gameVDSign,
+                           ],
+                           [
+                            'status',
+                            '=',
+                            self::STATUS_BET,
+                           ],
+                          ];
+        return self::where(
+            $orderCriterias,
+        );
+    }
 }

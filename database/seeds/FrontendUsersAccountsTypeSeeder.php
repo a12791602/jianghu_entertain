@@ -165,7 +165,7 @@ class FrontendUsersAccountsTypeSeeder extends Seeder
               'name'          => '游戏三方单一套现',
               'sign'          => 'game_thier_gain',
               'in_out'        => 1,
-              'param'         => '1,2,3,11,12',
+              'param'         => '1,2,3,11,12,14',
               'frozen_type'   => 3,
               'group_type_id' => 3,
               'admin_id'      => 0,

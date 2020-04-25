@@ -3,11 +3,10 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\Merchant\Game\AckInRequest;
+use App\Http\Requests\Backend\Merchant\GameAcknowledgement\AckInRequest;
+use App\Http\Requests\Backend\Merchant\GameAcknowledgement\AckOutRequest;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckInAction;
 use App\Http\SingleActions\Backend\Merchant\Acknowledgement\AckOutAction;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 /**
  * Class AcknowledgementController
@@ -16,14 +15,14 @@ use Illuminate\Http\Request;
 class GameAcknowledgementController extends Controller
 {
     /**
-     * @param AckInRequest $request Request.
      * @param AckInAction  $action  Action.
+     * @param AckInRequest $request Request.
      * @return void
      * @throws \Exception Exception.
      */
     public function ackIn(
-        AckInRequest $request,
-        AckInAction $action
+        AckInAction $action,
+        AckInRequest $request
     ): void {
         logAllRequestInfos('ack-center', 'AckIn');
         $inputDatas = $request->validated();
@@ -31,17 +30,17 @@ class GameAcknowledgementController extends Controller
     }
 
     /**
-     * @param Request      $request Request.
-     * @param AckOutAction $action  Action.
-     * @return JsonResponse
+     * @param AckOutAction  $action  Action.
+     * @param AckOutRequest $request Request.
+     * @return void
      * @throws \Exception Exception.
      */
     public function ackOut(
-        Request $request,
-        AckOutAction $action
-    ): JsonResponse {
+        AckOutAction $action,
+        AckOutRequest $request
+    ): void {
         logAllRequestInfos('ack-center', 'AckOut');
-        $inputDatas = $request->all();
-        return $action->execute($inputDatas);
+        $inputDatas = $request->validated();
+        $action->execute($inputDatas);
     }
 }
