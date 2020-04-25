@@ -5,12 +5,14 @@ namespace App\Http\Controllers\BackendApi\Headquarters\Finance;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\DelDoRequest;
+use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\EditDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\EditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\OptEditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel\StatusDoRequest;
 use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\AddDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\DelDoAction;
+use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\EditDetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\GetSearchConditionAction;
 use App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel\IndexDoAction;
@@ -53,6 +55,22 @@ class BackendFinanceChannelController extends Controller
     public function editDo(
         EditDoAction $action,
         EditDoRequest $request
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 金流通道-编辑详情
+     *
+     * @param  EditDetailAction  $action  Action.
+     * @param  EditDetailRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function editDetail(
+        EditDetailAction $action,
+        EditDetailRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

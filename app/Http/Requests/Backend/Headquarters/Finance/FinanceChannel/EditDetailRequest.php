@@ -1,24 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Backend\Headquarters\Game\Game;
+namespace App\Http\Requests\Backend\Headquarters\Finance\FinanceChannel;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Game\Game;
 
 /**
  * Class EditDetailRequest
  *
- * @package App\Http\Requests\Backend\Headquarters\Game
+ * @package App\Http\Requests\Backend\Headquarters\FinanceChannel
  */
 class EditDetailRequest extends BaseFormRequest
 {
-
-    /**
-     * 需要依赖模型中的字段备注信息
-     * @var array<int,string>
-     */
-    protected $dependentModels = [Game::class];
-
     /**
      * Determine if the user is authorized to make this request.
      *

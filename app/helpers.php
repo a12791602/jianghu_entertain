@@ -288,6 +288,7 @@ function backendOperationLog(array $inputDatas): array
             ],
         )
         ->with('route:id,title')
+        ->orderBy('created_at', 'desc')
         ->paginate()
         ->toArray();
 
@@ -300,6 +301,7 @@ function backendOperationLog(array $inputDatas): array
                    'origin'     => $time['origin'],
                    'ip'         => $time['ip'],
                    'user_agent' => $time['user_agent'],
+                   'inputs'     => $time['inputs'],
                   ];
     }
 

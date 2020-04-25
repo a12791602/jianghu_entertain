@@ -426,6 +426,14 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'optEditDo',
              ],
              [
+              'route_name'    => 'headquarters-api.finance-channel.edit-detail',
+              'menu_group_id' => 24,
+              'title'         => '金流配置-通道管理-编辑详情',
+              'is_open'       => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceChannelController',
+              'method'        => 'editDetail',
+             ],
+             [
               'route_name'    => 'headquarters-api.backend-admin-group.detail',
               'menu_group_id' => 26,
               'title'         => '管理员分组-列表',
