@@ -3,13 +3,13 @@
 namespace App\Models\Systems;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 短信配置
  */
-class SystemSmsConfig extends FilterModel
+class SystemSmsConfig extends BaseModel
 {
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Finance
  */
-class SystemBank extends FilterModel
+class SystemBank extends BaseModel
 {
 
     public const STATUS_OPEN  = 1;

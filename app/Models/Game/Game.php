@@ -3,7 +3,7 @@
 namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
-use App\Models\FilterModel;
+use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Request;
 
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Request;
  * Class Game
  * @package App\Models\Game
  */
-class Game extends FilterModel
+class Game extends BaseModel
 {
     
     public const STATUS_CLOSE = 0;
