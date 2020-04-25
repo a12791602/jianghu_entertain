@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
+namespace App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel;
 
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class EditDetailAction
  *
- * @package App\Http\SingleActions\Backend\Headquarters\Game
+ * @package App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel
  */
 class EditDetailAction extends BaseAction
 {
@@ -20,8 +20,8 @@ class EditDetailAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['route_name'] = [
-                                     'headquarters-api.game.edit-do',
-                                     'headquarters-api.game.edit-status',
+                                     'headquarters-api.finance-channel.edit-do',
+                                     'headquarters-api.finance-channel.status-do',
                                     ];
         $data                     = backendOperationLog($inputDatas);
         return msgOut($data);

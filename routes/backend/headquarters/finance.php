@@ -77,6 +77,8 @@ Route::group(
             ->name($namePrefix . 'status-do');
         Route::post('opt-status-do', [BackendFinanceChannelController::class, 'statusDo'])
             ->name($namePrefix . 'opt-status-do');
+        Route::post('edit-detail', [BackendFinanceChannelController::class, 'editDetail'])
+            ->name($namePrefix . 'edit-detail');
     },
 );
 
