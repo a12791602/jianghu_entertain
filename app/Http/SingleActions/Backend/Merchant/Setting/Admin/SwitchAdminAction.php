@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\Admin\MerchantAdminUserFilter;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -42,7 +41,7 @@ class SwitchAdminAction extends MainAction
                       'dataId'   => $inputDatas['id'],
                       'platform' => $this->currentPlatformEloq->sign,
                      ];
-        $adminUser = $this->model->filter($filterArr, MerchantAdminUserFilter::class)->first();
+        $adminUser = $this->model->filter($filterArr)->first();
         if (!$adminUser) {
             throw new \Exception('201000');
         }
@@ -50,7 +49,6 @@ class SwitchAdminAction extends MainAction
         if (!$adminUser->save()) {
             throw new \Exception('201004');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

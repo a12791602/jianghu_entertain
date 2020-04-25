@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Email;
 
-use App\ModelFilters\Email\SystemEmailFilter;
 use App\Models\Email\SystemEmail;
 use Illuminate\Http\JsonResponse;
 
@@ -29,7 +28,7 @@ class SendIndexAction extends BaseAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $outputDatas = $this->model::with('headquarters:id,name')
-            ->filter($inputDatas, SystemEmailFilter::class)
+            ->filter($inputDatas)
             ->where('type', SystemEmail::TYPE_HEAD_TO_MER)
             ->orderByDesc('created_at')
             ->paginate();

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Frontend\Common;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Platform\GamePlatform;
+use App\Models\Game\GamePlatform;
 
 /**
  * Class GameListRequest

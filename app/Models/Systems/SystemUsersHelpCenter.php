@@ -3,14 +3,14 @@
 namespace App\Models\Systems;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * 帮助设置
  */
-class SystemUsersHelpCenter extends BaseModel
+class SystemUsersHelpCenter extends FilterModel
 {
 
     /**

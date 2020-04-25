@@ -2,10 +2,9 @@
 
 namespace App\Models\User;
 
-use App\ModelFilters\User\FrontendUserFilter;
 use App\Models\BaseAuthModel;
+use App\Models\Game\GamePlatform;
 use App\Models\Game\GameTypePlatform;
-use App\Models\Platform\GamePlatform;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -195,14 +194,6 @@ class FrontendUser extends BaseAuthModel
     public function withdraw(): HasMany
     {
         return $this->hasMany(UsersWithdrawOrder::class, 'user_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function modelFilter()
-    {
-        return $this->provideFilter(FrontendUserFilter::class);
     }
 
     /**

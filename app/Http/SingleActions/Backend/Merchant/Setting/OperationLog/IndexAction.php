@@ -3,7 +3,6 @@
 namespace App\Http\SingleActions\Backend\Merchant\Setting\OperationLog;
 
 use App\Http\SingleActions\MainAction;
-use App\ModelFilters\System\SystemLogsMerchantFilter;
 use App\Models\Systems\SystemLogsMerchant;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -43,7 +42,7 @@ class IndexAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $result = $this->model
-            ->filter($inputDatas, SystemLogsMerchantFilter::class)
+            ->filter($inputDatas)
             ->select(
                 [
                  'origin',

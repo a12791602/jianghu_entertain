@@ -2,14 +2,14 @@
 
 namespace App\Models\Game;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class GameVendorPlatform
  * @package App\Models\Game
  */
-class GameVendorPlatform extends BaseModel
+class GameVendorPlatform extends FilterModel
 {
 
     public const DEVICE_H5  = 2;

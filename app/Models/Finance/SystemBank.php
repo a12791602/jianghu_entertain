@@ -2,9 +2,8 @@
 
 namespace App\Models\Finance;
 
-use App\ModelFilters\Finance\SystemBankFilter;
 use App\Models\Admin\BackendAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -12,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Finance
  */
-class SystemBank extends BaseModel
+class SystemBank extends FilterModel
 {
 
     public const STATUS_OPEN  = 1;
@@ -47,13 +46,5 @@ class SystemBank extends BaseModel
     public function author(): BelongsTo
     {
         return $this->belongsTo(BackendAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
-     * @return mixed
-     */
-    public function modelFilter()
-    {
-        return $this->provideFilter(SystemBankFilter::class);
     }
 }

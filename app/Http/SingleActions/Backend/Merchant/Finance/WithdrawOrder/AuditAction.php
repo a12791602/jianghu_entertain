@@ -2,7 +2,6 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
-use App\ModelFilters\User\FrontendUsersAuditFilter;
 use App\Models\User\FrontendUsersAudit;
 use Illuminate\Http\JsonResponse;
 
@@ -23,7 +22,7 @@ class AuditAction extends BaseAction
         if (isset($inputData['pageSize'])) {
             $audit->setPerPage($inputData['pageSize']);
         }
-        $item = $audit->filter($inputData, FrontendUsersAuditFilter::class)->paginate();
+        $item = $audit->filter($inputData)->paginate();
         return msgOut($item);
     }
 }

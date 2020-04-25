@@ -1,12 +1,12 @@
 <?php
 
-namespace App\ModelFilters\System;
+namespace App\ModelFilters\Systems;
 
 use EloquentFilter\ModelFilter;
 
 /**
  * Class SystemFePageBannerFilter
- * @package App\ModelFilters\System
+ * @package App\ModelFilters\Systems
  */
 class SystemFePageBannerFilter extends ModelFilter
 {

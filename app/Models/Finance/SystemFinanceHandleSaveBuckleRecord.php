@@ -3,7 +3,7 @@
 namespace App\Models\Finance;
 
 use App\Models\Admin\MerchantAdminUser;
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use App\Models\User\FrontendUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * Class SystemFinanceHandleSaveBuckleRecord
  * @package App\Models\Finance
  */
-class SystemFinanceHandleSaveBuckleRecord extends BaseModel
+class SystemFinanceHandleSaveBuckleRecord extends FilterModel
 {
 
     /**

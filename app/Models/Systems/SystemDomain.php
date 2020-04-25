@@ -2,14 +2,14 @@
 
 namespace App\Models\Systems;
 
-use App\Models\BaseModel;
+use App\Models\FilterModel;
 use App\Models\Systems\Logics\SystemDomainLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class for system domain.
  */
-class SystemDomain extends BaseModel
+class SystemDomain extends FilterModel
 {
     use SystemDomainLogics;
 
