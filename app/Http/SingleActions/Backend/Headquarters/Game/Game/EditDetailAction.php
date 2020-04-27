@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
 
+use App\Models\Systems\SystemLogsBackend;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -23,7 +24,7 @@ class EditDetailAction extends BaseAction
                                      'headquarters-api.game.edit-do',
                                      'headquarters-api.game.edit-status',
                                     ];
-        $data                     = backendOperationLog($inputDatas);
+        $data                     = backendOperationLog(new SystemLogsBackend(), $inputDatas);
         return msgOut($data);
     }
 }

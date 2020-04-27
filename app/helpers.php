@@ -10,7 +10,6 @@
 use App\Lib\Crypt\DataCrypt;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Systems\SystemDomain;
-use App\Models\Systems\SystemLogsBackend;
 use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -265,16 +264,16 @@ function merchantNotificationIncrement(string $message_type): void
 
 /**
  * 后台操作记录
- * @param  array $inputDatas 传递的查询条件.
+ * @param  object $systemLog  日志表Eloq.
+ * @param  array  $inputDatas 传递的查询条件.
  * @return mixed[]
  */
-function backendOperationLog(array $inputDatas): array
+function backendOperationLog(object $systemLog, array $inputDatas): array
 {
-    $systemLogsBackend = new SystemLogsBackend();
     if (isset($inputDatas['pageSize'])) {
-        $systemLogsBackend->setPerPage($inputDatas['pageSize']);
+        $systemLog->setPerPage($inputDatas['pageSize']);
     }
-    $result = $systemLogsBackend->filter($inputDatas)
+    $result = $systemLog->filter($inputDatas)
         ->select(
             [
              'origin',

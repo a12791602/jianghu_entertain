@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Setting\OperationLog;
 
 use App\Http\SingleActions\MainAction;
+use App\Models\Systems\SystemLogsBackend;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -18,7 +19,7 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $data = backendOperationLog($inputDatas);
+        $data = backendOperationLog(new SystemLogsBackend(), $inputDatas);
         return msgOut($data);
     }
 }
