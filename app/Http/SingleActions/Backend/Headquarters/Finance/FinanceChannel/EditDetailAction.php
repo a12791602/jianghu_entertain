@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Finance\FinanceChannel;
 
+use App\Models\Systems\SystemLogsBackend;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -23,7 +24,7 @@ class EditDetailAction extends BaseAction
                                      'headquarters-api.finance-channel.edit-do',
                                      'headquarters-api.finance-channel.status-do',
                                     ];
-        $data                     = backendOperationLog($inputDatas);
+        $data                     = backendOperationLog(new SystemLogsBackend(), $inputDatas);
         return msgOut($data);
     }
 }
