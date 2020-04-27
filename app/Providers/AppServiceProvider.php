@@ -37,8 +37,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton(
             'redis_user_unique_id',
             static function () {
-                $result = Redis::connection();
-                return $result;
+                return Redis::connection();
             },
         );
         $gameClass = Config::get('games_classes');
@@ -152,15 +151,12 @@ class AppServiceProvider extends ServiceProvider
     private function _formatDuration(float $seconds): string
     {
         if ($seconds < 0.001) {
-            $result = round($seconds * 1000000) . 'μs';
-            return $result;
+            return round($seconds * 1000000) . 'μs';
         }
 
         if ($seconds < 1) {
-            $result = round($seconds * 1000, 2) . 'ms';
-            return $result;
+            return round($seconds * 1000, 2) . 'ms';
         }
-        $result = round($seconds, 2) . 's';
-        return $result;
+        return round($seconds, 2) . 's';
     }
 }
