@@ -38,39 +38,7 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
-        $result = $this->model
-            ->filter($inputDatas)
-            ->select(
-                [
-                 'origin',
-                 'ip',
-                 'user_agent',
-                 'inputs',
-                 'route_id',
-                 'admin_name',
-                 'created_at',
-                ],
-            )
-            ->with('route:id,title')
-            ->paginate()
-            ->toArray();
-
-        $data = [];
-        foreach ($result['data'] as $time) {
-            $data[] = [
-                       'title'      => $time['route']['title'] ?? '',
-                       'admin_name' => $time['admin_name'],
-                       'created_at' => $time['created_at'],
-                       'origin'     => $time['origin'],
-                       'ip'         => $time['ip'],
-                       'user_agent' => $time['user_agent'],
-                      ];
-        }
-
-        $result['data'] = $data;
-        return msgOut($result);
+        $data = backendOperationLog($this->model, $inputDatas);
+        return msgOut($data);
     }
 }
