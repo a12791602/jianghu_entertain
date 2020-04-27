@@ -91,5 +91,13 @@ Route::group(
              'switchAdmin',
             ],
         )->name($namePrefix . 'switch-admin');
+        //修改管理员密码
+        Route::post(
+            'update-password',
+            [
+             AdminController::class,
+             'updatePassword',
+            ],
+        )->name($namePrefix . 'update-password');
     },
 );
