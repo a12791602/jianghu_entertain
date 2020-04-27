@@ -1089,6 +1089,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'switchAdmin',
              ],
              [
+              'route_name'    => 'merchant-api.merchant-admin-user.update-password',
+              'menu_group_id' => 48,
+              'title'         => '设置管理-管理员分组-修改管理员密码',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Setting\AdminController',
+              'method'        => 'updatePassword',
+             ],
+             [
               'route_name'    => 'merchant-api.config.index',
               'menu_group_id' => 49,
               'title'         => '设置管理-全域设置-列表',

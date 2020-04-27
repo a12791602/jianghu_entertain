@@ -13,6 +13,7 @@ use App\Http\Requests\Backend\Merchant\Setting\Admin\SearchAdminRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\SpecificGroupUsersRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\SwitchAdminRequest;
 use App\Http\Requests\Backend\Merchant\Setting\Admin\UpdateAdminGroupRequest;
+use App\Http\Requests\Backend\Merchant\Setting\Admin\UpdatePasswordRequest;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\AllAdminsAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\CreateAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\DeleteAdminAction;
@@ -24,6 +25,7 @@ use App\Http\SingleActions\Backend\Merchant\Setting\Admin\SearchAdminAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\SpecificGroupUsersAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\SwitchAdminAction;
 use App\Http\SingleActions\Backend\Merchant\Setting\Admin\UpdateAdminGroupAction;
+use App\Http\SingleActions\Backend\Merchant\Setting\Admin\UpdatePasswordAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -182,6 +184,20 @@ class AdminController extends Controller
     public function switchAdmin(
         SwitchAdminRequest $request,
         SwitchAdminAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 修改管理员密码
+     * @param UpdatePasswordRequest $request 接收的参数.
+     * @param UpdatePasswordAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function updatePassword(
+        UpdatePasswordRequest $request,
+        UpdatePasswordAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
