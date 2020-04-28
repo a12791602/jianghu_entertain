@@ -38,14 +38,13 @@ class IsOpenAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $routeEloq = $this->model->find($inputDatas['id']);
-        if (!$routeEloq) {
+        if (!$routeEloq instanceof $this->model) {
             throw new \Exception('302301');
         }
         $routeEloq->is_open = $inputDatas['is_open'];
         if (!$routeEloq->save()) {
             throw new \Exception('302304');
         }
-        $msgOut = msgOut(['title' => $routeEloq->title, 'is_open' => $routeEloq->is_open]);
-        return $msgOut;
+        return msgOut(['title' => $routeEloq->title, 'is_open' => $routeEloq->is_open]);
     }
 }

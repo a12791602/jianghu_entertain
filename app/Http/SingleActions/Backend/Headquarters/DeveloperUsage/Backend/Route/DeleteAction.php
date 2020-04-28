@@ -38,14 +38,13 @@ class DeleteAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $routeEloq = $this->model->find($inputDatas['id']);
-        if (!$routeEloq) {
+        if (!$routeEloq instanceof $this->model) {
             throw new \Exception('302301');
         }
         $title = $routeEloq->title;
         if (!$routeEloq->delete()) {
             throw new \Exception('302303');
         }
-        $msgOut = msgOut(['title' => $title]);
-        return $msgOut;
+        return msgOut(['title' => $title]);
     }
 }

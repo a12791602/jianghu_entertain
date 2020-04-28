@@ -19,11 +19,13 @@ class EditAction extends BaseAction
     {
         $inputDatas['last_editor_id'] = $this->user->id;
         $model                        = $this->model->find($inputDatas['id']);
+        if (!$model instanceof $this->model) {
+            throw new \Exception('201904');
+        }
         $model->fill($inputDatas);
         $result = $model->save();
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('201901');
     }

@@ -21,11 +21,13 @@ class EditAction extends BaseAction
         $inputDatas['last_editor_id'] = $this->user->id;
         $inputDatas['device']         = $inputDatas;
         $model                        = $this->model->find($inputDatas['id']);
+        if (!$model instanceof $this->model) {
+            throw new \Exception('201704');
+        }
         $model->fill($inputDatas);
         $result = $model->save();
         if ($result) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('201701');
     }

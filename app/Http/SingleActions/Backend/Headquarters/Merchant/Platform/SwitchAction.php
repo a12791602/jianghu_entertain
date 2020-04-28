@@ -40,14 +40,13 @@ class SwitchAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $platformEloq = $this->model::find($inputDatas['id']);
-        if ($platformEloq === null) {
+        if (!$platformEloq instanceof $this->model) {
             throw new \Exception('300706');
         }
         $platformEloq->status = $inputDatas['status'];
         if (!$platformEloq->save()) {
             throw new \Exception('300707');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

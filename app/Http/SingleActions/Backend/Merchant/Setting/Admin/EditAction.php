@@ -41,7 +41,7 @@ class EditAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $adminGroupELoq = $this->model::find($inputDatas['id']);
-        if ($adminGroupELoq === null) {
+        if (!$adminGroupELoq instanceof $this->model) {
             throw new \Exception('200902');
         }
         if ($adminGroupELoq->is_super === 1) {

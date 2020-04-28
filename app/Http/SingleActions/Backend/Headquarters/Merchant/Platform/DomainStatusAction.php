@@ -38,7 +38,7 @@ class DomainStatusAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $domainEloq = $this->model->find($inputDatas['id']);
-        if ($domainEloq === null) {
+        if (!$domainEloq instanceof $this->model) {
             throw new \Exception('302009');
         }
         $domainEloq->status = $inputDatas['status'];

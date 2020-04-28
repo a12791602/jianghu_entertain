@@ -39,7 +39,7 @@ class DeleteAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $menuEloq = $this->model->find($inputDatas['id']);
-        if (!$menuEloq) {
+        if (!$menuEloq instanceof $this->model) {
             throw new \Exception('300004');
         }
         $menuPid   = $menuEloq->pid;

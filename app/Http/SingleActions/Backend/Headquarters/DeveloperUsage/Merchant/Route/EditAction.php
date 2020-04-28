@@ -38,14 +38,13 @@ class EditAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $routeEloq = $this->model->find($inputDatas['id']);
-        if (!$routeEloq) {
+        if (!$routeEloq instanceof $this->model) {
             throw new \Exception('302301');
         }
         $routeEloq->fill($inputDatas);
         if (!$routeEloq->save()) {
             throw new \Exception('302302');
         }
-        $msgOut = msgOut(['title' => $routeEloq->title]);
-        return $msgOut;
+        return msgOut(['title' => $routeEloq->title]);
     }
 }
