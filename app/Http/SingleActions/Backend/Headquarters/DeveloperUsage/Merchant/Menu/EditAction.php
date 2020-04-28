@@ -38,7 +38,7 @@ class EditAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $menuEloq = $this->model::find($inputDatas['id']);
-        if (!$menuEloq) {
+        if (!$menuEloq instanceof $this->model) {
             throw new \Exception('202801');
         }
         $menuEloq->fill($inputDatas);

@@ -44,7 +44,7 @@ class EditAction extends MainAction
     {
         DB::beginTransaction();
         $platformELoq = $this->model->find($inputDatas['id']);
-        if ($platformELoq === null) {
+        if (!$platformELoq instanceof $this->model) {
             DB::rollback();
             throw new \Exception('302004');
         }
@@ -97,7 +97,7 @@ class EditAction extends MainAction
                        'platform' => $sign,
                        'super'    => MerchantAdminAccessGroup::IS_SUPER,
                       ];
-        $adminGroup = MerchantAdminAccessGroup::filter($filterArr)->first();
+        $adminGroup = MerchantAdminAccessGroup::filter($filterArr)->get()->first();
         $oldRole    = $adminGroup->detail->pluck('menu_id')->toArray();
         //需要删除的权限
         $deleteRole = array_diff($oldRole, $role);

@@ -65,10 +65,11 @@ class DetailAction extends MainAction
             } else {
                 $role = [];
             }
+            $createdAt    = $item->created_at !== null ? $item->created_at->toDatetimeString() : null;
             $returnData[] = [
                              'id'             => $item->id,
                              'cn_name'        => $item->cn_name,
-                             'email'          => $item->owner->email,
+                             'email'          => $item->owner->email ?? '',
                              'sign'           => $item->sign,
                              'agency_method'  => $item->agency_method,
                              'pc_skin_id'     => $item->pc_skin_id,
@@ -80,10 +81,10 @@ class DetailAction extends MainAction
                              'maintain_start' => $item->maintain_start,
                              'maintain_end'   => $item->maintain_end,
                              'status'         => $item->status,
-                             'created_at'     => $item->created_at->toDatetimeString(),
+                             'created_at'     => $createdAt,
                              'role'           => $role,
                             ];
-        }
+        }//end foreach
         return msgOut($returnData);
     }
 }

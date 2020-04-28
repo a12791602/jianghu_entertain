@@ -38,15 +38,13 @@ class DeleteAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $systemSmsConfig = $this->model->find($inputDatas['id']);
-        if (!$systemSmsConfig) {
+        if (!$systemSmsConfig instanceof $this->model) {
             throw new \Exception('302401');
         }
         $data = ['name' => $systemSmsConfig->name];
         if (!$systemSmsConfig->delete()) {
             throw new \Exception('302404');
         }
-
-        $msgOut = msgOut($data);
-        return $msgOut;
+        return msgOut($data);
     }
 }

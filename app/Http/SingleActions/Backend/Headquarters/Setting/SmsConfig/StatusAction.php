@@ -38,7 +38,7 @@ class StatusAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $systemSmsConfig = $this->model->find($inputDatas['id']);
-        if (!$systemSmsConfig) {
+        if (!$systemSmsConfig instanceof $this->model) {
             throw new \Exception('302401');
         }
         $systemSmsConfig->status = $inputDatas['status'];

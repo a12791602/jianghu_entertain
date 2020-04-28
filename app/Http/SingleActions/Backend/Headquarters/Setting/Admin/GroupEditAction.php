@@ -45,7 +45,7 @@ class GroupEditAction extends MainAction
             throw new \Exception('300101');
         }
         $datas = $this->model->find($id);
-        if (!$datas) {
+        if (!$datas instanceof $this->model) {
             throw new \Exception('300100');
         }
         DB::beginTransaction();
@@ -71,6 +71,6 @@ class GroupEditAction extends MainAction
         } catch (\Throwable $e) {
             DB::rollBack();
             throw new \Exception('300105');
-        }
+        }//end try
     }
 }
