@@ -2,7 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Email;
 
+use App\Events\PlatformNoticeEvent;
 use App\Events\SystemEmailEvent;
+use App\JHHYLibs\JHHYCnst;
 use App\Jobs\Email\MerchantSendMail;
 use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailSend;
@@ -23,8 +25,9 @@ class SendAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         if ((int) $inputDatas['is_head'] === 0) {
-            $inputDatas['receiver_ids'] = FrontendUser::whereIn('guid', $inputDatas['receivers'])
-                ->where('platform_sign', $this->currentPlatformEloq->sign)->get()->pluck('id')->toJson();
+            $frontend_users             = FrontendUser::whereIn('guid', $inputDatas['receivers'])
+                ->where('platform_sign', $this->currentPlatformEloq->sign)->get();
+            $inputDatas['receiver_ids'] = $frontend_users->pluck('id')->toJson();
             $inputDatas['type']         = SystemEmail::TYPE_MER_TO_USER;
         } elseif ((int) $inputDatas['is_head'] === 1) {
             $inputDatas['type'] = SystemEmail::TYPE_MER_TO_HEAD;
@@ -47,6 +50,7 @@ class SendAction extends BaseAction
                 ],
             );
             event(new SystemEmailEvent($this->model->id));
+            broadcast(new PlatformNoticeEvent(JHHYCnst::NOTICE_OF_EMAIL, '', $this->model->toArray()));
         } else {
             $send_timestamp = strtotime($inputDatas['send_time']) - now()->timestamp;
             dispatch(new MerchantSendMail($this->model, (int) $send_timestamp));
