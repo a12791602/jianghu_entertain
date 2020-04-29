@@ -31,23 +31,30 @@ class EditAction extends MainAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
+     * @param array $inputData 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $systemSmsConfig = $this->model->find($inputDatas['id']);
+        $systemSmsConfig = $this->model->find($inputData['id']);
         if (!$systemSmsConfig instanceof $this->model) {
             throw new \Exception('302401');
         }
-        
-        $inputDatas['last_editor_id'] = $this->user->id;
-        $systemSmsConfig->fill($inputDatas);
+        if ($systemSmsConfig->sms_remaining < (int) $inputData['sms_num']) {
+            throw new \Exception('302402');
+        }
+        if ((int) $inputData['is_increase'] === SystemSmsConfig::INCREASE) {
+             $systemSmsConfig->sms_num       += $inputData['sms_num'];
+             $systemSmsConfig->sms_remaining += $inputData['sms_num'];
+        } else {
+            $systemSmsConfig->sms_remaining -= $inputData['sms_num'];
+        }
+        $systemSmsConfig->name           = $inputData['name'];
+        $systemSmsConfig->last_editor_id = $this->user->id;
         if (!$systemSmsConfig->save()) {
             throw new \Exception('302402');
         }
-
         $data = ['name' => $systemSmsConfig->name];
         return msgOut($data);
     }

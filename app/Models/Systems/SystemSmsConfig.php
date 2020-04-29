@@ -12,6 +12,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SystemSmsConfig extends BaseModel
 {
 
+    public const INCREASE = 1;
+
     /**
      * @var array $guarded
      */
