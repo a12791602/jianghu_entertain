@@ -42,23 +42,7 @@ class IndexAction extends MainAction
         }
         $data = $this->model
             ->filter($inputDatas)
-            ->select(
-                [
-                 'id',
-                 'name',
-                 'sign',
-                 'merchant_code',
-                 'merchant_secret',
-                 'public_key',
-                 'authorization_code',
-                 'sms_num',
-                 'url',
-                 'status',
-                 'last_editor_id',
-                 'updated_at',
-                 'created_at',
-                ],
-            )->with('admin:id,name')
+            ->with('admin:id,name')
             ->paginate();
         return msgOut($data);
     }

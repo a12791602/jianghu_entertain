@@ -40,6 +40,7 @@ class DoAddAction extends MainAction
         $inputDatas['author_id']      = $this->user->id;
         $inputDatas['last_editor_id'] = $this->user->id;
         $this->model->fill($inputDatas);
+        $this->model->sms_remaining = $inputDatas['sms_num'];
         if (!$this->model->save()) {
             throw new \Exception('302400');
         }
