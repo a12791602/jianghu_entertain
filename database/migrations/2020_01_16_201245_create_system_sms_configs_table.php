@@ -23,17 +23,12 @@ class CreateSystemSmsConfigsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 16)->nullable()->comment('名称');
                 $table->string('sign', 10)->nullable()->comment('标识');
-                $table->string('merchant_code', 64)->nullable()->comment('商户号');
-                $table->text('merchant_secret')->nullable()->comment('商户密钥');
-                $table->text('public_key')->nullable()->comment('商户公钥');
                 $table->integer('sms_num')->nullable()->comment('短信数量');
-                $table->string('authorization_code', 255)->nullable()->comment('授权码');
-                $table->string('url', 255)->nullable()->comment('请求地址');
+                $table->integer('sms_remaining')->nullable()->comment('剩余短信数量');
                 $table->integer('author_id')->nullable()->comment('创建人ID');
                 $table->integer('last_editor_id')->nullable()->comment('最后修改人ID');
                 $table->tinyInteger('status')->default(0)->comment('状态  0.关闭 1.开启');
                 $table->index('sign');
-                $table->index('merchant_code');
                 $table->index('status');
                 $table->timestamps();
             },
