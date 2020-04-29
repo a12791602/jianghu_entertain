@@ -34,11 +34,12 @@ class SmsConfigController extends Controller
 
     /**
      * 短信配置-添加
-     * @param  DoAddRequest $request Request.
-     * @param  DoAddAction  $action  Action.
+     * @param DoAddAction  $action  Action.
+     * @param DoAddRequest $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function doAdd(DoAddRequest $request, DoAddAction $action): JsonResponse
+    public function doAdd(DoAddAction $action, DoAddRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
@@ -46,14 +47,15 @@ class SmsConfigController extends Controller
 
     /**
      * 短信配置-编辑
-     * @param  EditRequest $request Request.
-     * @param  EditAction  $action  Action.
+     * @param EditAction  $action  Action.
+     * @param EditRequest $request Request.
      * @return JsonResponse
+     * @throws \Exception Exception.
      */
-    public function edit(EditRequest $request, EditAction $action): JsonResponse
+    public function edit(EditAction $action, EditRequest $request): JsonResponse
     {
-        $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 
     /**

@@ -34,14 +34,10 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'                 => 'required|exists:system_sms_configs', //ID
-                'name'               => 'required|string|max:16',             //商户名称
-                'merchant_code'      => 'required|string|max:64',             //商户号
-                'merchant_secret'    => 'required|string',                    //商户密钥
-                'public_key'         => 'required|string',                    //商户公钥
-                'sms_num'            => 'required|integer|gte:0',             //短信数量
-                'authorization_code' => 'required|string|max:255',            //授权码
-                'url'                => 'required|string|max:255',            //请求地址
+                'id'          => 'required|exists:system_sms_configs', //ID
+                'name'        => 'required|string|max:16',             //商户名称
+                'sms_num'     => 'required|integer|gte:0',             //短信数量
+                'is_increase' => 'required|integer|in:1,2',            //短信数量
                ];
     }
 }
