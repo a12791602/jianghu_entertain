@@ -2177,6 +2177,14 @@ class GamePlatformSeeder extends Seeder
               'device'       => 3,
               'is_recommend' => 0,
              ],
+             [
+              'platform_id'  => 1,
+              'game_id'      => 91,
+              'status'       => 1,
+              'hot_new'      => 0,
+              'device'       => 2,
+              'is_recommend' => 0,
+             ],
             ],
         );
     }
