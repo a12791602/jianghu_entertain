@@ -2,7 +2,9 @@
 
 namespace App\Jobs\Email;
 
+use App\Events\PlatformNoticeEvent;
 use App\Events\SystemEmailEvent;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailSend;
 use Illuminate\Bus\Queueable;
@@ -53,5 +55,6 @@ class MerchantSendMail implements ShouldQueue
             ],
         );
         event(new SystemEmailEvent($this->email->id));
+        broadcast(new PlatformNoticeEvent(JHHYCnst::NOTICE_OF_EMAIL, '', $this->email->toArray()));
     }
 }

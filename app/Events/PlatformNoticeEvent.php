@@ -6,6 +6,7 @@ use App\JHHYLibs\JHHYCnst;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
@@ -77,7 +78,7 @@ class PlatformNoticeEvent implements ShouldBroadcast
     public function broadcastOn(): Channel
     {
         $channel = 'merchant_notice_' . $this->platformSign;
-        $channel = new Channel($channel);
+        $channel = new PrivateChannel($channel);
         return $channel;
     }
 

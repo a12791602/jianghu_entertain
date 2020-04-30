@@ -11,9 +11,7 @@
 |
 */
 
-Broadcast::channel(
-    'App.User.{id}',
-    static function ($user, $id) {
-        return (int) $user->id === (int) $id;
-    },
-);
+use App\Broadcasting\MerchantNoticeChannel;
+
+Broadcast::routes(['middleware' => ['auth:merchant']]);
+Broadcast::channel('merchant_notice_{platform_sign}', MerchantNoticeChannel::class);
