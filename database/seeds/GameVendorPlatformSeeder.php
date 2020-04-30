@@ -81,6 +81,14 @@ class GameVendorPlatformSeeder extends Seeder
               'status'      => 0,
               'device'      => 3,
              ],
+             [
+              'platform_id' => 1,
+              'vendor_id'   => 3,
+              'sort'        => 0,
+              'is_maintain' => 0,
+              'status'      => 1,
+              'device'      => 2,
+             ],
             ],
         );
     }

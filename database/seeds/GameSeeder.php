@@ -1097,6 +1097,18 @@ class GameSeeder extends Seeder
               'created_at'   => '2020-03-18 16:05:50',
               'updated_at'   => '2020-03-18 16:05:50',
              ],
+             [
+              'type_id'      => 2,
+              'sub_type_id'  => 13,
+              'vendor_id'    => 3,
+              'name'         => '游戏大厅',
+              'sign'         => '0',
+              'request_mode' => 1,
+              'status'       => 1,
+              'author_id'    => 1,
+              'created_at'   => '2020-04-30 16:05:50',
+              'updated_at'   => '2020-04-30 16:05:50',
+             ],
             ],
         );
     }

@@ -29,6 +29,7 @@ class CreateGameSubTypesTable extends Migration
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->integer('sort')->index()->comment('排序');
                 $table->nullableTimestamps();
+                $table->unique(['parent_id', 'name']);
             },
         );
         DB::statement("ALTER TABLE `game_sub_types` comment '游戏种类子分类表'");
