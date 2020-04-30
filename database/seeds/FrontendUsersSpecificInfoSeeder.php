@@ -29,7 +29,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'address'       => '朝歌',
               'register_type' => 0,
               'total_members' => 20,
-              'g_active'      => '{"ky":1,"vr":0}',
+              'g_active'      => '{"KY":1,"VR":1,"IM":0}',
              ],
              [
               'id'            => 2,
@@ -43,7 +43,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'address'       => 'State of California',
               'register_type' => 0,
               'total_members' => 15,
-              'g_active'      => null,
+              'g_active'      => '{"KY":1,"VR":1,"IM":0}',
              ],
              [
               'id'            => 3,
