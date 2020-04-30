@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Models\Systems\StaticResource;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -27,9 +28,22 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        unset($schedule);//currently unsect for there have no usage
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $path         = StaticResource::getSchedulePath();
+        $scheduleJson = StaticResource::getResource(config('filesystems.default'), $path);
+        $scheduleArr  = json_decode($scheduleJson, true);
+        if (!is_array($scheduleArr) || empty($scheduleArr)) {
+            return;
+        }
+
+        foreach ($scheduleArr as $scheduleItem) {
+            if (is_array($scheduleItem['param']) && !empty($scheduleItem['param'])) {
+                //有argument的情况
+                $schedule->command($scheduleItem['command'], [$scheduleItem['param']])->cron($scheduleItem['schedule']);
+            } else {
+                //没有argument的情况
+                $schedule->command($scheduleItem['command'])->cron($scheduleItem['schedule']);
+            }
+        }
     }
 
     /**
