@@ -390,6 +390,18 @@ class BackendSystemMenuSeeder extends Seeder
               'type'    => 1,
              ],
              [
+              'id'      => '32',
+              'label'   => '定时任务',
+              'en_name' => 'Schedule',
+              'route'   => '/dev/schedule',
+              'pid'     => 29,
+              'icon'    => null,
+              'display' => 1,
+              'level'   => 2,
+              'sort'    => 3,
+              'type'    => 1,
+             ],
+             [
               'id'      => '34',
               'label'   => '游戏管理配置',
               'en_name' => 'GameManaConfig',
@@ -398,7 +410,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 5,
+              'sort'    => 4,
               'type'    => 1,
              ],
              [
@@ -410,7 +422,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 6,
+              'sort'    => 5,
               'type'    => 1,
              ],
              [
@@ -422,7 +434,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 7,
+              'sort'    => 6,
               'type'    => 1,
              ],
              [
@@ -434,7 +446,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 8,
+              'sort'    => 7,
               'type'    => 1,
              ],
              [
@@ -446,7 +458,7 @@ class BackendSystemMenuSeeder extends Seeder
               'icon'    => null,
               'display' => 1,
               'level'   => 2,
-              'sort'    => 9,
+              'sort'    => 8,
               'type'    => 1,
              ],
              [
