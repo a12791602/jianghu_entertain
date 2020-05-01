@@ -3,14 +3,22 @@
 namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Game\Game;
 
 /**
  *  Class UnassignGamesRequest
  *
  * @package App\Http\Requests\Backend\Headquarters\Merchant\Platform
  */
-class UnassignGamesRequest extends BaseFormRequest
+class UnassignedGamesRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [Game::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -33,19 +41,6 @@ class UnassignGamesRequest extends BaseFormRequest
                 'vendor_id'   => 'exists:game_vendors,id',
                 'game_id'     => 'exists:games,id',
                 'pageSize'    => 'integer|between:1,100', //每页数据条数
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'platform_id.required' => '请选择平台',
-                'platform_id.exists'   => '所选择平台不存在',
-                'vendor_id.exists'     => '所选厂商不存在',
-                'game_id.exists'       => '所选游戏不存在',
                ];
     }
 }

@@ -108,12 +108,12 @@ Route::group(
         )->name($namePrefix . 'assigned-games');
         //未分配的游戏
         Route::get(
-            'unassign-games',
+            'unassigned-games',
             [
              PlatformController::class,
-             'unassignGames',
+             'unassignedGames',
             ],
-        )->name($namePrefix . 'unassign-games');
+        )->name($namePrefix . 'unassigned-games');
         //获取分配游戏接口的查询条件
         Route::get(
             'get-search-data-of-assign-game',
