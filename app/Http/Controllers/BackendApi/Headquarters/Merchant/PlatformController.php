@@ -19,7 +19,7 @@ use App\Http\Requests\Backend\Headquarters\Merchant\Platform\EditRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\MaintainRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\SwitchRequest;
 use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignActivitiesRequest;
-use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignGamesRequest;
+use App\Http\Requests\Backend\Headquarters\Merchant\Platform\UnassignedGamesRequest;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignActivitiesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedActivitiesAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\AssignedActivityCancelAction;
@@ -38,7 +38,7 @@ use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\MaintainAction
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SkinListAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\SwitchAction;
 use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignActivitiesAction;
-use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignGamesAction;
+use App\Http\SingleActions\Backend\Headquarters\Merchant\Platform\UnassignedGamesAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -210,14 +210,14 @@ class PlatformController extends Controller
     /**
      * 未分配给运营商的游戏列表
      *
-     * @param  UnassignGamesAction  $action  Action.
-     * @param  UnassignGamesRequest $request Request.
+     * @param  UnassignedGamesAction  $action  Action.
+     * @param  UnassignedGamesRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function unassignGames(
-        UnassignGamesAction $action,
-        UnassignGamesRequest $request
+    public function unassignedGames(
+        UnassignedGamesAction $action,
+        UnassignedGamesRequest $request
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
