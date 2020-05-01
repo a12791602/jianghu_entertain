@@ -26,12 +26,12 @@ class SystemRoutesBackendSeeder extends Seeder
               'method'        => 'assignedGames',
              ],
              [
-              'route_name'    => 'headquarters-api.platform.unassign-games',
+              'route_name'    => 'headquarters-api.platform.unassigned-games',
               'menu_group_id' => 4,
               'title'         => '厅主列表-游戏管理-未分配的游戏列表',
               'is_open'       => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Merchant\PlatformController',
-              'method'        => 'unassignGames',
+              'method'        => 'unassignedGames',
              ],
              [
               'route_name'    => 'headquarters-api.platform.get-search-data-of-assign-game',
