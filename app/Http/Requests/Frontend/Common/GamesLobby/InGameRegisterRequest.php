@@ -8,17 +8,13 @@ use App\Http\Requests\BaseFormRequest;
  * Class InGameRequest
  * @package App\Http\Requests\Frontend\Common\GamesLobby
  */
-class InGameRequest extends BaseFormRequest
+class InGameRegisterRequest extends BaseFormRequest
 {
 
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
-    protected $extraDefinition = [
-                                  'game_types_id'  => '游戏主类型',
-                                  'sub_types_id'   => '游戏子类型',
-                                  'game_series_id' => '游戏类型',
-                                 ];
+    protected $extraDefinition = ['vendor' => '游戏厂商类型'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -38,9 +34,8 @@ class InGameRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'game_types_id'  => 'required|integer|gt:0|exists:game_types,id',
-                'sub_types_id'   => 'required|exists:game_sub_types,id',
-                'game_series_id' => 'required|integer|gt:0|exists:games,id',
+                'vendor'   => 'required|integer|gt:0|exists:game_vendors,id',
+                'password' => 'required|alpha_num|between:5,40',
                ];
     }
 }
