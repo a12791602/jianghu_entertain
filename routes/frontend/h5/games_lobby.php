@@ -17,5 +17,12 @@ Route::group(
              'inGame',
             ],
         )->name($namePrefix . 'in-game');
+        Route::post(
+            'in-game-register/{vendor}',
+            [
+             GamesLobbyController::class,
+             'inGameRegister',
+            ],
+        )->name($namePrefix . 'in-game-register');
     },
 );
