@@ -22,8 +22,20 @@ class AddDoRequest extends BaseFormRequest
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
     protected $extraDefinition = [
-        'whitelist_ips.*' => '白名单',
-    ];
+                                  'whitelist_ips.*'            => '白名单',
+                                  'production.app_id'          => '终端号',
+                                  'production.md5_key'         => 'md5 密钥',
+                                  'production.merchant_id'     => '商户号',
+                                  'production.public_key'      => '公钥',
+                                  'production.private_key'     => '私钥',
+                                  'production.merchant_secret' => '商户密钥',
+                                  'testing.app_id'             => '终端号',
+                                  'testing.md5_key'            => 'md5 密钥',
+                                  'testing.merchant_id'        => '商户号',
+                                  'testing.public_key'         => '公钥',
+                                  'testing.private_key'        => '私钥',
+                                  'testing.merchant_secret'    => '商户密钥',
+                                 ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -42,27 +54,30 @@ class AddDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $result = [
-                   'name'               => 'required|unique:game_vendors,name',
-                   'sign'               => 'required|string|unique:game_vendors,sign|max:6',
-                   'whitelist_ips'      => 'array',
-                   'whitelist_ips.*'    => 'ip',
-                   'type_id'            => 'required|integer',
-                   'urls'               => 'required|array',
-                   'urls.*'             => 'url',
-                   'test_urls'          => 'array',
-                   'test_urls.*'        => 'url',
-                   'app_id'             => 'string|nullable',
-                   'authorization_code' => 'string',
-                   'merchant_id'        => 'string',
-                   'merchant_secret'    => 'string',
-                   'public_key'         => 'string',
-                   'private_key'        => 'string',
-                   'des_key'            => 'string',
-                   'md5_key'            => 'string',
-                   'status'             => 'required|in:0,1',
-                  ];
-        return $result;
+        return [
+                'name'                       => 'required|unique:game_vendors,name',
+                'sign'                       => 'required|string|unique:game_vendors,sign|max:6',
+                'whitelist_ips'              => 'required|array',
+                'whitelist_ips.*'            => 'ip',
+                'authorization_code'         => 'string|max:10',
+                'status'                     => 'required|in:0,1',
+                'type_id'                    => 'required|integer|exists:game_types,id',
+                'production'                 => 'array',
+                'production.app_id'          => 'string|max:128',
+                'production.merchant_id'     => 'string|max:10',
+                'production.public_key'      => 'required_without_all:production.merchant_secret,production.md5_key|string|max:2048',
+                'production.private_key'     => 'required_without_all:production.merchant_secret,production.md5_key|string|max:2048',
+                'production.merchant_secret' => 'required_without_all:production.public_key,production.private_key,production.md5_key|string|max:128',
+                'production.md5_key'         => 'required_without_all:production.public_key,production.private_key,production.merchant_secret|string|max:32',
+                'production.des_key'         => 'string|max:64',
+                'production.url.*'           => 'url',
+                'testing.public_key'         => 'string|max:2048',
+                'testing.private_key'        => 'string|max:2048',
+                'testing.merchant_secret'    => 'string|max:128',
+                'testing.md5_key'            => 'string|max:32',
+                'testing.des_key'            => 'string|max:64',
+                'testing.url.*'              => 'url',
+               ];
     }
 
     /**

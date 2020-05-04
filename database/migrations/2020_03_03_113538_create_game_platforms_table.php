@@ -33,9 +33,9 @@ class CreateGamePlatformsTable extends Migration
                     ->nullable()
                     ->index('fk_system_platforms_has_games_games_idx_idx')
                     ->comment('游戏id');
-                $table->tinyInteger('status')->nullable()->comment('状态 1 启用 0 禁用');
+                $table->tinyInteger('status')->default(1)->comment('状态 1 启用 0 禁用');
                 $table->integer('sort')->nullable()->comment('排序');
-                $table->tinyInteger('hot_new')->nullable()->index()->comment('0 正常, 1 热门游戏, 2 新游戏');
+                $table->tinyInteger('hot_new')->default(0)->index()->comment('0 正常, 1 热门游戏, 2 新游戏');
                 $table->tinyInteger('device')->default(0)->index()->comment('设备  1.PC  2.H5 3.APP');
                 $table->tinyInteger('is_recommend')->default(0)->comment('是否推荐 0 否 1 是');
                 $table->string('icon', 128)->nullable()->comment('图标');

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Game;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Game\GamePlatform;
 
 /**
  * Class DoHotRequest
@@ -10,6 +11,12 @@ use App\Http\Requests\BaseFormRequest;
  */
 class DoHotRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [GamePlatform::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -29,20 +36,7 @@ class DoHotRequest extends BaseFormRequest
     {
         return [
                 'id'      => 'required|integer|exists:game_platforms',
-                'hot_new' => 'required|integer|in:0,1',
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'      => 'ID不存在',
-                'id.exists'        => 'ID不存在',
-                'hot_new.required' => '请选择是否热门',
-                'hot_new.in'       => '所选是否热门不在范围内',
+                'hot_new' => 'required|integer|in:0,1,2',
                ];
     }
 }

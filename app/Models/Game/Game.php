@@ -40,6 +40,7 @@ class Game extends BaseModel
                                       'sub_type_id'  => '游戏子分类ID',
                                       'vendor_id'    => '所属厂商ID',
                                       'request_mode' => '请求方式',
+                                      'platform_id'  => '平台ID',
                                      ];
 
     /**

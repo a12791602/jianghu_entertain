@@ -26,8 +26,8 @@ class GameVendor extends BaseModel
      * @var array
      */
     protected $casts = [
-                        'urls'      => 'array',
-                        'test_urls' => 'array',
+                        'testing'    => 'array',
+                        'production' => 'array',
                        ];
 
     /**
