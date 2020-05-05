@@ -6,6 +6,7 @@ use App\Models\Game\GameVendor;
 use App\Models\Systems\SystemIpWhiteList;
 use Arr;
 use Illuminate\Http\JsonResponse;
+use Jenssegers\Agent\Agent;
 use Log;
 
 /**

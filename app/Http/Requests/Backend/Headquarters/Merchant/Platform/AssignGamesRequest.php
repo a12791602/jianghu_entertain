@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Game\Game;
 use Illuminate\Validation\Rule;
 
 /**
@@ -12,6 +13,22 @@ use Illuminate\Validation\Rule;
  */
 class AssignGamesRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [Game::class];
+
+    /**
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
+     */
+    protected $extraDefinition = [
+                                  'game_ids'   => '游戏ID',
+                                  'game_ids.*' => '游戏ID',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -40,22 +57,6 @@ class AssignGamesRequest extends BaseFormRequest
                                   'exists:games,id',
                                   $unique,
                                  ],
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'platform_id.required' => '请选择厅主',
-                'platform_id.exists'   => '所选厅主不存在',
-                'game_ids.required'    => '请选择游戏',
-                'game_ids.array'       => '游戏格式不正确',
-                'game_ids.*.required'  => '请选择游戏',
-                'game_ids.*.exists'    => '所选游戏不存在',
-                'game_ids.*.unique'    => '您所选的游戏已经分配过了',
                ];
     }
 
