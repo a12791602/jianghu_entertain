@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use App;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class SystemSlidesResource
@@ -11,6 +11,27 @@ use Illuminate\Support\Facades\App;
  */
 class SystemSlidesResource extends JsonResource
 {
+
+    /**
+     * @var string $title Title.
+     */
+    private $title;
+
+    /**
+     * @var string $redirect_url Redirect_url.
+     */
+    private $redirect_url;
+
+    /**
+     * @var integer $type Type.
+     */
+    private $type;
+
+    /**
+     * @var string $pic_path Pic_path.
+     */
+    private $pic_path;
+
     /**
      * Transform the resource into an array.
      *
@@ -19,13 +40,13 @@ class SystemSlidesResource extends JsonResource
      */
     public function toArray($request): array
     {
+        unset($request);
         $appEnvironment = App::environment();
-        $result         = [
-                           'title'        => $this->title,
-                           'pic_path'     => config('image_domain.' . $appEnvironment)  . $this->pic_path,
-                           'redirect_url' => $this->redirect_url,
-                           'type'         => $this->type,
-                          ];
-        return $result;
+        return [
+                'title'        => $this->title,
+                'pic_path'     => config('image_domain.' . $appEnvironment)  . $this->pic_path,
+                'redirect_url' => $this->redirect_url,
+                'type'         => $this->type,
+               ];
     }
 }

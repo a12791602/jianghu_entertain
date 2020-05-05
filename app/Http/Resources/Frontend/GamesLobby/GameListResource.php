@@ -2,8 +2,8 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use App\Models\Game\Game;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\ResourceCollection;
 
 /**
  * Class GameListResource
@@ -11,6 +11,12 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
  */
 class GameListResource extends JsonResource
 {
+
+    /**
+     * @var Game $games Game Model.
+     */
+    private $games;
+
     /**
      * Transform the resource into an array.
      *
@@ -19,13 +25,13 @@ class GameListResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
-                   'game_id'   => optional($this->games)->id,
-                   'name'      => optional($this->games)->name,
-                   'game_sign' => optional($this->games)->sign,
-                   'type_id'   => optional($this->games)->type_id,
-                   'type_sign' => optional($this->games)->type->sign,
-                  ];
-        return $result;
+        unset($request);
+        return [
+                'game_id'   => $this->games->id,
+                'name'      => $this->games->name,
+                'game_sign' => $this->games->sign,
+                'type_id'   => $this->games->type_id,
+                'type_sign' => optional($this->games->type)->sign,
+               ];
     }
 }
