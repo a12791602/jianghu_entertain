@@ -10,6 +10,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class SystemAvatarResource extends JsonResource
 {
+
+    /**
+     * @var integer $id ID.
+     */
+    private $id;
+
+    /**
+     * @var string $avatar_full Avatar_full.
+     */
+    private $avatar_full;
+
     /**
      * Transform the resource into an array.
      *
@@ -18,10 +29,10 @@ class SystemAvatarResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
-                   'id'       => $this->id,
-                   'pic_path' => $this->avatar_full,
-                  ];
-        return $result;
+        unset($request);
+        return [
+                'id'       => $this->id,
+                'pic_path' => $this->avatar_full,
+               ];
     }
 }
