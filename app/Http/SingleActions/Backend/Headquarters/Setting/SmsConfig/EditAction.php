@@ -41,13 +41,13 @@ class EditAction extends MainAction
         if (!$systemSmsConfig instanceof $this->model) {
             throw new \Exception('302401');
         }
-        if ($systemSmsConfig->sms_remaining < (int) $inputData['sms_num']) {
-            throw new \Exception('302402');
-        }
         if ((int) $inputData['is_increase'] === SystemSmsConfig::INCREASE) {
-             $systemSmsConfig->sms_num       += $inputData['sms_num'];
-             $systemSmsConfig->sms_remaining += $inputData['sms_num'];
+            $systemSmsConfig->sms_num       += $inputData['sms_num'];
+            $systemSmsConfig->sms_remaining += $inputData['sms_num'];
         } else {
+            if ($systemSmsConfig->sms_remaining < (int) $inputData['sms_num']) {
+                throw new \Exception('302402');
+            }
             $systemSmsConfig->sms_remaining -= $inputData['sms_num'];
         }
         $systemSmsConfig->name           = $inputData['name'];
