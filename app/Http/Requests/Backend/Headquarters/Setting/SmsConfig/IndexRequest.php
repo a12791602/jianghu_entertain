@@ -41,4 +41,12 @@ class IndexRequest extends BaseFormRequest
                 'pageSize'     => 'integer|between:1,100', //每页数据条数
                ];
     }
+
+    /**
+     * @return mixed[]
+     */
+    public function filters(): array
+    {
+        return ['updated_at' => 'cast:array'];
+    }
 }

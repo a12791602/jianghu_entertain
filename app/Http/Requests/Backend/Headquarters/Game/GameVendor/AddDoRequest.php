@@ -24,17 +24,19 @@ class AddDoRequest extends BaseFormRequest
     protected $extraDefinition = [
                                   'whitelist_ips.*'            => '白名单',
                                   'production.app_id'          => '终端号',
+                                  'production.des_key'         => 'des 秘钥',
                                   'production.md5_key'         => 'md5 密钥',
                                   'production.merchant_id'     => '商户号',
                                   'production.public_key'      => '公钥',
                                   'production.private_key'     => '私钥',
                                   'production.merchant_secret' => '商户密钥',
-                                  'testing.app_id'             => '终端号',
-                                  'testing.md5_key'            => 'md5 密钥',
-                                  'testing.merchant_id'        => '商户号',
-                                  'testing.public_key'         => '公钥',
-                                  'testing.private_key'        => '私钥',
-                                  'testing.merchant_secret'    => '商户密钥',
+                                  'staging.app_id'             => '终端号',
+                                  'staging.des_key'            => 'des 秘钥',
+                                  'staging.md5_key'            => 'md5 密钥',
+                                  'staging.merchant_id'        => '商户号',
+                                  'staging.public_key'         => '公钥',
+                                  'staging.private_key'        => '私钥',
+                                  'staging.merchant_secret'    => '商户密钥',
                                  ];
 
     /**
@@ -71,12 +73,12 @@ class AddDoRequest extends BaseFormRequest
                 'production.md5_key'         => 'required_without_all:production.public_key,production.private_key,production.merchant_secret|string|max:32',
                 'production.des_key'         => 'string|max:64',
                 'production.url.*'           => 'url',
-                'testing.public_key'         => 'string|max:2048',
-                'testing.private_key'        => 'string|max:2048',
-                'testing.merchant_secret'    => 'string|max:128',
-                'testing.md5_key'            => 'string|max:32',
-                'testing.des_key'            => 'string|max:64',
-                'testing.url.*'              => 'url',
+                'staging.public_key'         => 'string|max:2048',
+                'staging.private_key'        => 'string|max:2048',
+                'staging.merchant_secret'    => 'string|max:128',
+                'staging.md5_key'            => 'string|max:32',
+                'staging.des_key'            => 'string|max:64',
+                'staging.url.*'              => 'url',
                ];
     }
 
