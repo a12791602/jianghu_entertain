@@ -35,6 +35,6 @@ class DeleteRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|exists:system_banks,id'];
+        return ['id' => 'required|exists:cron_jobs,id'];
     }
 }
