@@ -36,8 +36,7 @@ class MakeAction extends GeneratorCommand
      */
     protected function getStub()
     {
-        $stub = base_path('template/stubs') . '/Action.stub';
-        return $stub;
+        return base_path('template/stubs') . '/Action.stub';
     }
 
     /**
@@ -55,6 +54,10 @@ class MakeAction extends GeneratorCommand
      */
     public function handle()
     {
+        if (!is_string($this->argument('name'))) {
+            $this->error('命名不符合规范!');
+            return false;
+        }
         if (substr($this->argument('name'), -6) !== 'Action') {
             $this->error('Action 命名不符合规范!');
             return false;
@@ -62,21 +65,25 @@ class MakeAction extends GeneratorCommand
         if ($this->option('r')) {
             $this->_createRequest();
         }
-        $result = parent::handle();
-        return $result;
+        return parent::handle();
     }
 
     /**
      * 创建request
-     * @return void
+     * @return boolean
      */
-    private function _createRequest()
+    private function _createRequest(): bool
     {
+        if (!is_string($this->argument('name'))) {
+            $this->error('命名不符合规范!');
+            return false;
+        }
         $this->call(
             'make:request',
             [
              'name' => substr($this->argument('name'), 0, -6) . 'Request',
             ],
         );
+        return true;
     }
 }

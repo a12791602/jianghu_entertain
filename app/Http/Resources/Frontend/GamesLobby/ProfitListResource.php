@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use App\Models\User\FrontendUser;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
@@ -10,6 +11,17 @@ use Illuminate\Http\Resources\Json\JsonResource;
  */
 class ProfitListResource extends JsonResource
 {
+
+    /**
+     * @var FrontendUser $frontendUser FrontendUser.
+     */
+    private $frontendUser;
+
+    /**
+     * @var float $balance Balance.
+     */
+    private $balance;
+
     /**
      * Transform the resource into an array.
      *
@@ -18,12 +30,12 @@ class ProfitListResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
-                   'name'    => $this->frontendUser->specificInfo->nickname,
-                   'avatar'  => $this->frontendUser->specificInfo->avatar_full,
-                   'guid'    => $this->frontendUser->guid,
-                   'balance' => $this->balance,
-                  ];
-        return $result;
+        unset($request);
+        return [
+                'name'    => optional($this->frontendUser->specificInfo)->nickname,
+                'avatar'  => optional($this->frontendUser->specificInfo)->avatar_full,
+                'guid'    => $this->frontendUser->guid,
+                'balance' => (float) sprintf('%.2f', $this->balance),
+               ];
     }
 }

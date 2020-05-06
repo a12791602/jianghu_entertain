@@ -27,9 +27,9 @@ class CreateGameVendorsTable extends Migration
                 $table->string('sign', 64)->nullable()->comment('厂商标识')->index();
                 $table->integer('type_id')->comment('游戏类型id');
                 $table->integer('sort')->nullable()->comment('排序');
-                $table->tinyInteger('status')->comment('状态 0 禁用 1 启用');
+                $table->tinyInteger('status')->default(1)->comment('状态 0 禁用 1 启用');
                 $table->json('production')->nullable()->comment('正式站配置信息');
-                $table->json('testing')->nullable()->comment('测试站配置信息');
+                $table->json('staging')->nullable()->comment('测试站配置信息');
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->boolean('needCreateAcc')->nullable()->default(0)->comment('是否登录之前需要先创建账号 1 需要 0不需先要创建用户');
