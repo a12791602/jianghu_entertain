@@ -34,6 +34,9 @@ class BankIndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['name' => 'string|max:15'];
+        return [
+                'name'   => 'string|max:15',
+                'status' => 'integer|in:0,1',
+               ];
     }
 }
