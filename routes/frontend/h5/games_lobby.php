@@ -31,5 +31,12 @@ Route::group(
              'inGameResetPassword',
             ],
         )->name($namePrefix . 'in-game-reset-password');
+        Route::post(
+            'in-game-balance/{vendor}',
+            [
+             GamesLobbyController::class,
+             'inGameBalance',
+            ],
+        )->name($namePrefix . 'in-game-balance');
     },
 );
