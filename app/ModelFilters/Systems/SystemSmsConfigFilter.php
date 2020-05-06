@@ -26,23 +26,20 @@ class SystemSmsConfigFilter extends ModelFilter
      * 修改时间查询
      *
      * @param  array $updatedAt 修改时间.
-     * @return SystemSmsConfigFilter
+     * @return self
      */
-    public function updatedAt(array $updatedAt): SystemSmsConfigFilter
+    public function updatedAt(array $updatedAt): self
     {
-        if (!$this instanceof SystemSmsConfigFilter) {
-            return $this->whereBetween('updated_at', $updatedAt);
-        }
-        return $this;
+        return $this->whereBetween('updated_at', $updatedAt);
     }
 
     /**
      * 状态查询
      *
      * @param integer $status 状态.
-     * @return $this
+     * @return self
      */
-    public function status(int $status): SystemSmsConfigFilter
+    public function status(int $status): self
     {
         return $this->where('status', $status);
     }
