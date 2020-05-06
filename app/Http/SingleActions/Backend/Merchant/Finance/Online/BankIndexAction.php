@@ -13,12 +13,15 @@ use Illuminate\Http\JsonResponse;
 class BankIndexAction extends BaseAction
 {
     /**
+     * @param array $inputData InputData.
      * @return JsonResponse
-     * @throws \RuntimeException RuntimeException.
      */
-    public function execute(): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $result = SystemPlatformBank::with('bank')->where('platform_sign', $this->currentPlatformEloq->sign)->get();
+        $result = SystemPlatformBank::with('bank')
+            ->filter($inputData)
+            ->where('platform_sign', $this->currentPlatformEloq->sign)
+            ->get();
         return msgOut(BankIndexResource::collection($result));
     }
 }

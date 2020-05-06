@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\Finance;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Finance\Online\AddDoRequest;
+use App\Http\Requests\Backend\Merchant\Finance\Online\BankIndexRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\BankStatusRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\DelDoRequest;
 use App\Http\Requests\Backend\Merchant\Finance\Online\EditRequest;
@@ -106,13 +107,14 @@ class OnlineFinanceController extends Controller
 
     /**
      * 银行列表
-     * @param BankIndexAction $action Action.
+     * @param BankIndexAction  $action  Action.
+     * @param BankIndexRequest $request BankIndexRequest.
      * @return JsonResponse
-     * @throws \Exception Exception.
      */
-    public function bankIndex(BankIndexAction $action): JsonResponse
+    public function bankIndex(BankIndexAction $action, BankIndexRequest $request): JsonResponse
     {
-        return $action->execute();
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 
     /**
