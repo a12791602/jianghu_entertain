@@ -23,9 +23,9 @@ class SystemBankFilter extends ModelFilter
     /**
      * 按状态搜索
      * @param integer $status Status.
-     * @return SystemBankFilter
+     * @return self
      */
-    public function status(int $status): SystemBankFilter
+    public function status(int $status): self
     {
         return $this->where('status', $status);
     }
@@ -33,10 +33,10 @@ class SystemBankFilter extends ModelFilter
     /**
      * 按名称搜索
      * @param string $name Name.
-     * @return SystemBankFilter
+     * @return self
      */
-    public function name(string $name): SystemBankFilter
+    public function name(string $name): self
     {
-        return $this->where('name', $name);
+        return $this->whereLike('name', $name);
     }
 }
