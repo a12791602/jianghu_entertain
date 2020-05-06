@@ -28,8 +28,8 @@ trait GameProjectLogics
         $request = request();
         $data    = [
                     'serial_number'       => getSerialNumber(),
-                    'their_serial_number' => $theirData['serialNumber'],//string 50404120323911563198
-                    'their_notifyId'      => $theirData['notifyId'], //string 161016040412032464550404120323911563198
+                    'their_serial_number' => $theirData['serialNumber'] ?? '',//string 50404120323911563198
+                    'their_notifyId'      => $theirData['notifyId'] ?? '', //string 161016040412032464550404120323911563198
                     'their_info_type'     => $theirData['type'],//int 16
                     'user_id'             => $userObject->id,
                     'guid'                => $userObject->guid,

@@ -38,5 +38,12 @@ Route::group(
              'inGameBalance',
             ],
         )->name($namePrefix . 'in-game-balance');
+        Route::post(
+            'in-game-tx-balance/{vendor}',
+            [
+             GamesLobbyController::class,
+             'inGameTxBalance',
+            ],
+        )->name($namePrefix . 'in-game-tx-balance');
     },
 );
