@@ -22,9 +22,6 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $outputDatas = $this->model::with(
             [
              'type:id,name',
@@ -34,7 +31,7 @@ class IndexDoAction extends BaseAction
              'author:id,name',
             ],
         )->filter($inputDatas)
-        ->paginate();
+        ->paginate($this->perPage);
         return msgOut($outputDatas);
     }
 }

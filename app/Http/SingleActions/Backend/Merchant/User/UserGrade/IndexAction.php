@@ -30,15 +30,11 @@ class IndexAction extends MainAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $sign = $this->currentPlatformEloq->sign;
         $data = $this->model
                     ->where('platform_sign', $sign)
@@ -54,7 +50,7 @@ class IndexAction extends MainAction
                          'updated_at',
                         ],
                     )
-                    ->paginate();
+                    ->paginate($this->perPage);
         return msgOut($data);
     }
 }

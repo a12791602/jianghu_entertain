@@ -38,9 +38,7 @@ class IndexAction extends MainAction
     {
         $inputDatas['sign']     = $this->currentPlatformEloq->sign;
         $inputDatas['data_pid'] = 0;
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $result = $this->model
             ->filter($inputDatas)->with(
                 [
@@ -57,7 +55,7 @@ class IndexAction extends MainAction
                  'created_at',
                  'updated_at',
                 ],
-            )->paginate()->toArray();
+            )->paginate($this->perPage)->toArray();
         $data   = [];
         foreach ($result['data'] as $helpDatas) {
             $childs = [];
@@ -82,7 +80,7 @@ class IndexAction extends MainAction
                        'updated_at' => $helpDatas['updated_at'],
                        'childs'     => $childs,
                       ];
-        }
+        }//end foreach
         $result['data'] = $data;
         return msgOut($result);
     }

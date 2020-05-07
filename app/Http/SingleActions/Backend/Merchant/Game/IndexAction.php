@@ -23,9 +23,7 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $datas                     = $this->model->with(
             [
@@ -35,7 +33,7 @@ class IndexAction extends BaseAction
         )->orderByDesc('sort')
          ->filter($inputDatas)
          ->withCacheCooldownSeconds(86400)
-         ->paginate();
+         ->paginate($this->perPage);
         return msgOut($datas);
     }
 }

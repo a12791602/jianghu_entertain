@@ -7,7 +7,6 @@ use App\Http\Requests\Backend\Merchant\User\UserGrade\DeleteRequest;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\DoAddRequest;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\EditRequest;
 use App\Http\Requests\Backend\Merchant\User\UserGrade\GradeConfigRequest;
-use App\Http\Requests\Backend\Merchant\User\UserGrade\IndexRequest;
 use App\Http\SingleActions\Backend\Merchant\User\UserGrade\DeleteAction;
 use App\Http\SingleActions\Backend\Merchant\User\UserGrade\DoAddAction;
 use App\Http\SingleActions\Backend\Merchant\User\UserGrade\EditAction;
@@ -40,17 +39,14 @@ class UserGradeController extends Controller
     /**
      * 用户等级-列表
      *
-     * @param IndexRequest $request Request.
-     * @param IndexAction  $action  Action.
+     * @param IndexAction $action Action.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
     public function index(
-        IndexRequest $request,
         IndexAction $action
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        return $action->execute();
     }
 
     /**
