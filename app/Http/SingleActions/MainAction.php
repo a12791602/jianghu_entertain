@@ -155,6 +155,30 @@ class MainAction
     }
 
     /**
+     * @return object
+     */
+    public function getAgent(): object
+    {
+        return $this->agent;
+    }
+
+    /**
+     * @return object
+     */
+    public function getRoute(): object
+    {
+        return $this->route;
+    }
+
+    /**
+     * @return object
+     */
+    public function getUser(): object
+    {
+        return $this->user;
+    }
+
+    /**
      * Initial.
      * @return void
      * @throws Exception Exception.
