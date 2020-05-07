@@ -113,6 +113,12 @@ class MainAction
     public $currentPlatformEloq;
 
     /**
+     * Set PerPage.
+     * @var integer $perPage PerPage.
+     */
+    protected $perPage;
+
+    /**
      * MainAction constructor.
      * @param Request $request Request.
      * @throws Exception Exception.
@@ -141,34 +147,11 @@ class MainAction
         if ($request->get('prefix') !== 'headquarters-api') {
             $this->currentPlatformEloq = getCurrentPlatform($request);
         }
-        if ($request->get('logger') !== 'backend' && $request->get('logger') !== 'merchant') {
+        if ($request->get('logger') !== 'backend') {
             return;
         }
+        $this->perPage = $this->_perPage($request);
         $this->_initial();
-    }
-
-    /**
-     * @return object
-     */
-    public function getAgent(): object
-    {
-        return $this->agent;
-    }
-
-    /**
-     * @return object
-     */
-    public function getRoute(): object
-    {
-        return $this->route;
-    }
-
-    /**
-     * @return object
-     */
-    public function getUser(): object
-    {
-        return $this->user;
     }
 
     /**
@@ -253,5 +236,15 @@ class MainAction
             return;
         }
         $this->routeAccessible = true;
+    }
+
+    /**
+     * 获取分页参数
+     * @param Request $request Request.
+     * @return integer
+     */
+    private function _perPage(Request $request): int
+    {
+        return (int) $request->pageSize ?? null;
     }
 }
