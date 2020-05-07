@@ -27,7 +27,8 @@ class InGameBalanceAction extends MainAction
             throw new \RuntimeException('100704');//对不起,游戏厂商不存在!
         }
         $gameInstance = GameCommons::gameInit($curentVendorObj);
-        $gameInstance->checkBalance($this->user, $inputDatas);
-        return msgOut();
+        $balance      = $gameInstance->checkBalance($this->user, $inputDatas);
+        $data         = ['balance' => $balance];
+        return msgOut($data);
     }
 }
