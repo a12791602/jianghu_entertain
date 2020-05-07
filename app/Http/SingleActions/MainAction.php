@@ -148,6 +148,9 @@ class MainAction
             $this->currentPlatformEloq = getCurrentPlatform($request);
         }
         $this->perPage = $this->_perPage($request);
+        if ($request->get('prefix') === 'h5-api' || $request->get('prefix') === 'app-api') {
+            return;
+        }
         $this->_initial();
     }
 
@@ -243,7 +246,7 @@ class MainAction
     private function _entry(): void
     {
         $entry       = $this->guard;
-        $this->entry = $this->$entry;
+        $this->entry = $this->{$entry};
     }
 
     /**
