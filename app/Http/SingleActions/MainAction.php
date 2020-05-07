@@ -147,9 +147,6 @@ class MainAction
         if ($request->get('prefix') !== 'headquarters-api') {
             $this->currentPlatformEloq = getCurrentPlatform($request);
         }
-        if ($request->get('logger') !== 'backend') {
-            return;
-        }
         $this->perPage = $this->_perPage($request);
         $this->_initial();
     }
