@@ -28,7 +28,7 @@ class InGameBalanceAction extends MainAction
         }
         $gameInstance = GameCommons::gameInit($curentVendorObj);
         $balance      = $gameInstance->checkBalance($this->user, $inputDatas);
-        $data         = ['balance' => $balance];
+        $data         = ['balance' => sprintf('%.2f', $balance)];
         return msgOut($data);
     }
 }
