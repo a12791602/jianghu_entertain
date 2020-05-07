@@ -2,13 +2,14 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Setting\Admin;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\Admin\MerchantAdminUser;
 use Illuminate\Http\JsonResponse;
 
 /**
  * Class for specific group users action.
  */
-class SpecificGroupUsersAction
+class SpecificGroupUsersAction extends MainAction
 {
 
     /**
@@ -31,9 +32,7 @@ class SpecificGroupUsersAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $data = $this->model
             ->select(
                 [
@@ -44,7 +43,7 @@ class SpecificGroupUsersAction
                 ],
             )
             ->where('group_id', $inputDatas['id'])
-            ->paginate();
+            ->paginate($this->perPage);
         return msgOut($data);
     }
 }

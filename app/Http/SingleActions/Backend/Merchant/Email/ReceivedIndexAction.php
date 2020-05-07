@@ -21,10 +21,7 @@ class ReceivedIndexAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         merchantNotificationClear(MerchantNotificationStatistic::EMAIL);
-        $systemEmailOfMerchant = new SystemEmailOfMerchant();
-        if (isset($inputDatas['pageSize'])) {
-            $systemEmailOfMerchant->setPerPage($inputDatas['pageSize']);
-        }
+        $systemEmailOfMerchant       = new SystemEmailOfMerchant();
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $emails                      = $systemEmailOfMerchant
             ->select(
@@ -39,7 +36,7 @@ class ReceivedIndexAction extends BaseAction
             ->filter($inputDatas)
             ->with('email.headquarters')
             ->orderByDesc('created_at')
-            ->paginate();
+            ->paginate($this->perPage);
         return msgOut(ReceivedIndexResource::collection($emails));
     }
 }

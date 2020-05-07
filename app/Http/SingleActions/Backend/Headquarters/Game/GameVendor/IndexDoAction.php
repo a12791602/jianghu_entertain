@@ -22,9 +22,6 @@ class IndexDoAction extends BaseAction
      */
     public function execute(array $inputDatas) :JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $outputDatas = $this->model::with(
             [
              'lastEditor:id,name',
@@ -33,7 +30,7 @@ class IndexDoAction extends BaseAction
              'whiteList:game_vendor_id,ips',
             ],
         )->filter($inputDatas)
-        ->paginate();
+        ->paginate($this->perPage);
         return msgOut($outputDatas);
     }
 }

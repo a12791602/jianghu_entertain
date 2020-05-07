@@ -24,9 +24,6 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model->with(
             [
@@ -36,7 +33,7 @@ class IndexAction extends BaseAction
              'tags:online_finance_id,tag_id',
             ],
         )->filter($inputDatas)
-        ->paginate();
+        ->paginate($this->perPage);
         return msgOut(IndexResource::collection($data));
     }
 }

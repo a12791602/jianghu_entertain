@@ -19,10 +19,7 @@ class AuditAction extends BaseAction
     public function execute(array $inputData): JsonResponse
     {
         $audit = new FrontendUsersAudit();
-        if (isset($inputData['pageSize'])) {
-            $audit->setPerPage($inputData['pageSize']);
-        }
-        $item = $audit->filter($inputData)->paginate();
+        $item  = $audit->filter($inputData)->paginate($this->perPage);
         return msgOut($item);
     }
 }

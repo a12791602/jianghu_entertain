@@ -23,12 +23,9 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
-            ->filter($inputDatas)->paginate();
+            ->filter($inputDatas)->paginate($this->perPage);
         return msgOut($data);
     }
 }

@@ -30,21 +30,18 @@ class IndexAction extends MainAction
     }
 
     /**
-     * @param array $inputDatas 接收的参数.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $sign      = $this->currentPlatformEloq->sign;
         $filterArr = ['platformSign' => $sign];
         $data      = $this->model
                           ->filter($filterArr)
                           ->select('id', 'title', 'no_withdraw', 'no_login', 'no_play', 'no_promote', 'created_at')
-                          ->paginate();
+                          ->paginate($this->perPage);
         return msgOut($data);
     }
 }

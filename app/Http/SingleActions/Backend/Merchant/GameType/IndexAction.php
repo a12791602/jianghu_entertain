@@ -23,13 +23,11 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
         $datas                     = $this->model->with('gameType:id,name,sign')
                                           ->filter($inputDatas)
-                                          ->paginate();
+                                          ->paginate($this->perPage);
         return msgOut($datas);
     }
 }

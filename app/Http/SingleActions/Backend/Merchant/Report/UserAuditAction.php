@@ -36,9 +36,7 @@ class UserAuditAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $data                       = $this->model
             ->filter($inputDatas)
@@ -56,7 +54,7 @@ class UserAuditAction extends MainAction
                  'achieved_time',
                 ],
             )
-            ->paginate();
+            ->paginate($this->perPage);
         return msgOut($data);
     }
 }
