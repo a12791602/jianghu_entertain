@@ -26,9 +26,7 @@ class OutIndexAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         merchantNotificationClear(MerchantNotificationStatistic::WITHDRAWAL_REVIEW);
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $returnField                 = $this->_getReturnField();
         $inputDatas['status_list']   = [
@@ -45,7 +43,7 @@ class OutIndexAction extends BaseAction
             ],
         )->filter($inputDatas)
         ->select($returnField)
-        ->paginate();
+        ->paginate($this->perPage);
         return msgOut($data);
     }
 

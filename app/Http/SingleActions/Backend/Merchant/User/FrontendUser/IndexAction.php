@@ -2,13 +2,14 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\FrontendUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 
 /**
  * 会员列表
  */
-class IndexAction
+class IndexAction extends MainAction
 {
 
     /**
@@ -31,9 +32,7 @@ class IndexAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         if (isset($inputDatas['parent_mobile'])) {
             $filterArr = ['mobile' => $inputDatas['parent_mobile']];
             $parentId  = $this->model->filter($filterArr)->first();
@@ -66,7 +65,7 @@ class IndexAction
                  'account:user_id,balance',
                 ],
             )
-            ->paginate()->toArray();
+            ->paginate($this->perPage)->toArray();
         $datas = $this->_handleData($datas);
         return msgOut($datas);
     }

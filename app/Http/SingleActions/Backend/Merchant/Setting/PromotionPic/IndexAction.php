@@ -38,16 +38,14 @@ class IndexAction extends MainAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
+
         $result = $this->model
             ->filter($inputDatas)->with(
                 [
                  'author',
                  'newer',
                 ],
-            )->paginate()->toArray();
+            )->paginate($this->perPage)->toArray();
         $data   = [];
         foreach ($result['data'] as $picDatas) {
             $data[] = [

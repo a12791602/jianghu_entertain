@@ -25,9 +25,6 @@ class IndexAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         merchantNotificationClear(MerchantNotificationStatistic::ONLINE_TOP_UP);
-        if (isset($inputDatas['pageSize'])) {
-            $this->model->setPerPage($inputDatas['pageSize']);
-        }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $data                        = $this->model->with(
             [
@@ -56,7 +53,7 @@ class IndexAction extends BaseAction
              'created_at',
              'updated_at',
             ],
-        )->paginate();
+        )->paginate($this->perPage);
         return msgOut($data);
     }
 }
