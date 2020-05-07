@@ -245,6 +245,6 @@ class MainAction
      */
     private function _perPage(Request $request): int
     {
-        return (int) $request->pageSize ?? null;
+        return (int) ($request->pageSize ?? null);
     }
 }
