@@ -229,9 +229,20 @@ function logAllRequestInfos(string $channel, ?string $logMarker): void
 {
     $request    = request();
     $inputToLog = json_encode($request->all(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
-    Log::channel($channel)->info($logMarker . ' Inputs are ' . $inputToLog);
+    saveLog($channel, $logMarker . ' Inputs are ' . $inputToLog);
     $headersToLog = json_encode($request->header(), JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512);
-    Log::channel($channel)->info($logMarker . '  Headers are ' . $headersToLog);
+    saveLog($channel, $logMarker . '  Headers are ' . $headersToLog);
+}
+
+/**
+ * 快捷记录日志
+ * @param  string $channel 日志渠道.
+ * @param  mixed  $info    日志内容.
+ * @return void
+ */
+function saveLog(string $channel, $info): void
+{
+    Log::channel($channel)->info($info);
 }
 
 /**
