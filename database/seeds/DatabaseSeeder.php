@@ -73,6 +73,7 @@ class DatabaseSeeder extends Seeder
              GameTheirAccountTypeSeeder::class,
              CronJobSeeder::class,
              GameProjectSeeder::class,
+             FrontendUsersAccountsReportSeeder::class,
             ],
         );
     }
