@@ -15,6 +15,9 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class GameVendor extends BaseModel
 {
 
+    public const STATUS_CLOSE = 0;
+    public const STATUS_OPEN  = 1;
+
     /**
      * @var array
      */

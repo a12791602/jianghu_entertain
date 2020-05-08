@@ -42,7 +42,7 @@ class CreateGameProjectsTable extends Migration
                 $table->string('proxy_ip', 200)->nullable()->default(null)->comment('代理ip');
                 $table->decimal('bet_money', 18, 4)->nullable()->default(null)->comment('下注金额');
                 $table->decimal('odds', 18, 4)->nullable()->default(null)->comment('赔率');
-                $table->decimal('win_money', 18, 4)->nullable()->default(null)->comment('输赢金额');
+                $table->decimal('win_money', 18, 4)->nullable()->default(0)->comment('输赢金额');
                 $table->decimal('our_win_money', 18, 4)->nullable()->default(null)->comment('我们平台输赢金额');
                 $table->decimal('our_net_win', 18, 4)->nullable()->default(null)->comment('我们平台净赚金额');
                 $table->timestamp('delivery_time')->nullable()->default(null)->comment('派彩时间');
