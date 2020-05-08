@@ -31,8 +31,8 @@ class FrontendUsersAccountSeeder extends Seeder
              [
               'id'         => 2,
               'user_id'    => 2,
-              'balance'    => '30000.0000',
-              'frozen'     => '44440.0000',
+              'balance'    => '29955.0000',
+              'frozen'     => '44441.0000',
               'integral'   => null,
               'status'     => 1,
               'tax_status' => 1,
