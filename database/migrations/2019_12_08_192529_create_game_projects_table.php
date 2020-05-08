@@ -53,6 +53,8 @@ class CreateGameProjectsTable extends Migration
                 $table->tinyInteger('status')->default('0')->comment('0已投注 1已撤销 2未中奖 3已中奖 4已派奖');
                 $table->timestamp('their_create_time')->nullable()->default(null)->comment('三方投注时间');
                 $table->timestamp('thier_updated_time')->nullable()->default(null)->comment('三方最后更新时间');
+                $table->tinyInteger('pull_thier_status')->default('0')->comment('第三方的拉取状态：0未拉取  1已拉取');
+                $table->timestamp('pull_thier_time')->nullable()->default(null)->comment('第三方的拉取时间');
                 $table->nullableTimestamps();
             },
         );
