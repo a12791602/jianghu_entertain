@@ -18,11 +18,11 @@ class CronJobSeeder extends Seeder
         CronJob::insert(
             [
              [
-              'command'  => 'vrgame',
+              'command'  => 'gamelog',
               'param'    => null,
               'schedule' => '*/1 * * * *',
               'status'   => 1,
-              'remarks'  => '每分钟抓取VR游戏记录里未拉取三方数据的记录并更新游戏状态',
+              'remarks'  => '每分钟抓取三方游戏数据的记录',
              ],
             ],
         );
