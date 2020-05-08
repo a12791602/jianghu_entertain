@@ -3,7 +3,9 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use App\Models\User\FrontendUser;
 use App\Models\User\Logics\GameProjectLogics;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * Class Game
@@ -19,9 +21,29 @@ class GameProject extends BaseModel
     public const STATUS_LOSE          = 2;//2未中奖
     public const STATUS_WIN           = 3;//3已中奖
     public const STATUS_WIN_CALCULATE = 4;//4已派奖
+    public const PULL_STATUS_NO       = 0;//0未拉取第三方状态
+    public const PULL_STATUS_YES      = 1;//1已拉取第三方状态
 
     /**
      * @var array
      */
     protected $guarded = ['id'];
+
+    /**
+     * 用户
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
+    }
+
+    /**
+     * 游戏厂商
+     * @return BelongsTo
+     */
+    public function gameVendor(): BelongsTo
+    {
+        return $this->belongsTo(GameVendor::class, 'game_vendor_sign', 'sign');
+    }
 }

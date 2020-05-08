@@ -71,6 +71,7 @@ class DatabaseSeeder extends Seeder
              GameRoomSeeder::class,
              StaticResourceSeeder::class,
              GameTheirAccountTypeSeeder::class,
+             CronJobSeeder::class,
             ],
         );
     }
