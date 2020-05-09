@@ -4,6 +4,7 @@ use App\Http\Controllers\BackendApi\Merchant\Finance\HandleSaveBuckleRecordContr
 use App\Http\Controllers\BackendApi\Merchant\Finance\OfflineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\OnlineFinanceController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\RechargeOrderController;
+use App\Http\Controllers\BackendApi\Merchant\Finance\UserAccountController;
 use App\Http\Controllers\BackendApi\Merchant\Finance\WithdrawOrderController;
 
 //线下金流
@@ -310,3 +311,12 @@ Route::group(
         )->name($namePrefix . 'audit');
     },
 );
+
+//资金账变-列表
+Route::post(
+    'user-account/index',
+    [
+     UserAccountController::class,
+     'index',
+    ],
+)->name('merchant-api.user-account.index');
