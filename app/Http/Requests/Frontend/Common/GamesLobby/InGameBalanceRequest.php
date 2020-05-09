@@ -14,7 +14,10 @@ class InGameBalanceRequest extends BaseFormRequest
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
-    protected $extraDefinition = ['vendor' => '游戏厂商类型'];
+    protected $extraDefinition = [
+                                  'vendor' => '游戏厂商类型',
+                                  'wallet' => '钱包类型',
+                                 ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,7 +38,7 @@ class InGameBalanceRequest extends BaseFormRequest
     {
         return [
                 'vendor' => 'required|integer|gt:0|exists:game_vendors,id',
-                'wallet' => 'required|integer|digits:3',
+                'wallet' => 'required|integer|digits:3|in:301',
                ];
     }
 }
