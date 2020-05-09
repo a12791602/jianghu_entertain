@@ -396,6 +396,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'outRefuse',
              ],
              [
+              'route_name'    => 'merchant-api.user-account.index',
+              'menu_group_id' => 15,
+              'title'         => '财务管理-资金帐变-列表',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\UserAccountController',
+              'method'        => 'Index',
+             ],
+             [
               'route_name'    => 'merchant-api.marquee-notice.add-do',
               'menu_group_id' => 17,
               'title'         => '公告管理-跑马灯消息-添加',

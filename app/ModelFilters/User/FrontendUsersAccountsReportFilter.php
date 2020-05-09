@@ -16,7 +16,12 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = [
+                         'user' => [
+                                    'mobile',
+                                    'guid',
+                                   ],
+                        ];
 
     /**
      * 用户ID
@@ -44,9 +49,9 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 账变时间
      *
      * @param  array $createdAt 账变时间.
-     * @return FrontendUsersAccountsReportFilter
+     * @return FrontendUsersAccountsReportFilter|\Illuminate\Database\Eloquent\Builder
      */
-    public function createdAt(array $createdAt): FrontendUsersAccountsReportFilter
+    public function createdAt(array $createdAt)
     {
         $eloq = $this;
         if (count($createdAt) === 2) {
@@ -64,5 +69,16 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
     public function typeIn(array $type): FrontendUsersAccountsReportFilter
     {
         return $this->whereIn('type_sign', $type);
+    }
+
+    /**
+     * 平台标识
+     *
+     * @param  string $sign 平台标识.
+     * @return FrontendUsersAccountsReportFilter
+     */
+    public function platformSign(string $sign): FrontendUsersAccountsReportFilter
+    {
+        return $this->where('platform_sign', $sign);
     }
 }
