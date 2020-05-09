@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
 use App\JHHYLibs\GameCommons;
+use App\Models\Game\Game;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -19,7 +20,7 @@ class InGameAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result = GameCommons::getGameRequirement($this->currentPlatformEloq, $inputDatas);
+        $result = Game::getGameRequirement($this->currentPlatformEloq, $inputDatas);
         /** @var \App\Models\Game\Game $curentGameObj */
         $curentGameObj = null;
         /** @var \App\Models\Game\GameVendor $curentVendorObj */
