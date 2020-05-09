@@ -312,11 +312,25 @@ Route::group(
     },
 );
 
-//资金账变-列表
-Route::post(
-    'user-account/index',
-    [
-     UserAccountController::class,
-     'index',
-    ],
-)->name('merchant-api.user-account.index');
+Route::group(
+    ['prefix' => 'user-account'],
+    static function (): void {
+        $namePrefix = 'merchant-api.user-account.';
+        //资金账变-列表
+        Route::post(
+            'index',
+            [
+             UserAccountController::class,
+             'index',
+            ],
+        )->name($namePrefix . 'index');
+        //获取支付方式
+        Route::post(
+            'account-type',
+            [
+             UserAccountController::class,
+             'accountType',
+            ],
+        )->name($namePrefix . 'account-type');
+    },
+);

@@ -27,9 +27,9 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 用户ID
      *
      * @param  integer $userId 用户ID.
-     * @return FrontendUsersAccountsReportFilter
+     * @return self
      */
-    public function userId(int $userId): FrontendUsersAccountsReportFilter
+    public function userId(int $userId): self
     {
         return $this->where('user_id', $userId);
     }
@@ -38,9 +38,9 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 冻结类型
      *
      * @param  array $type 冻结类型.
-     * @return FrontendUsersAccountsReportFilter
+     * @return self
      */
-    public function frozenTypeIn(array $type): FrontendUsersAccountsReportFilter
+    public function frozenTypeIn(array $type): self
     {
         return $this->whereIn('frozen_type', $type);
     }
@@ -64,9 +64,9 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 账变类型
      *
      * @param  array $type 账变类型.
-     * @return FrontendUsersAccountsReportFilter
+     * @return self
      */
-    public function typeIn(array $type): FrontendUsersAccountsReportFilter
+    public function typeIn(array $type): self
     {
         return $this->whereIn('type_sign', $type);
     }
@@ -75,9 +75,9 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 平台标识
      *
      * @param  string $sign 平台标识.
-     * @return FrontendUsersAccountsReportFilter
+     * @return self
      */
-    public function platformSign(string $sign): FrontendUsersAccountsReportFilter
+    public function platformSign(string $sign): self
     {
         return $this->where('platform_sign', $sign);
     }
