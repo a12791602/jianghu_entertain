@@ -31,12 +31,12 @@ trait FrontendUsersAccountLogics
         DB::beginTransaction();
         $resource = $this->doChange($type, $params);
         $accountLocker->release();
-        if ($resource !== true) {
+        if ($resource === false) {
             DB::rollback();
             throw new \Exception('100204');
         }
         DB::commit();
-        return true;
+        return $resource;
     }
 
     /**
@@ -63,7 +63,7 @@ trait FrontendUsersAccountLogics
         // 3. 检测金额
         $amount = abs($params['amount']);
         if ((bool) $amount === false) {
-            return true;
+            return false;
         }
         // 冻结类型 1 冻结自己金额 2 冻结退还
         // 资金增减. 需要检测对应
@@ -129,7 +129,7 @@ trait FrontendUsersAccountLogics
                 break;
             default:
                 $result = false;
-        }
+        }//end switch
         return $result;
     }
 
@@ -233,7 +233,7 @@ trait FrontendUsersAccountLogics
      * @param  float        $beforeBalance 帐变前金额.
      * @param  float        $beforeFrozen  帐变前冻结金额.
      * @param  float        $amount        金额.
-     * @return boolean
+     * @return FrontendUsersAccountsReport
      */
     private function _saveData(
         array $params,
@@ -242,7 +242,7 @@ trait FrontendUsersAccountLogics
         float $beforeBalance,
         float $beforeFrozen,
         float $amount
-    ): bool {
+    ): FrontendUsersAccountsReport {
         $keys       = FrontendUsersAccountsTypesParam::
             where('is_search_ease', FrontendUsersAccountsTypesParam::SEARCH_EASE_NO)
             ->pluck('param')
@@ -272,7 +272,8 @@ trait FrontendUsersAccountLogics
 
         $accountsReport = new FrontendUsersAccountsReport();
         $accountsReport->fill($report);
-        return $accountsReport->save();
+        $accountsReport->save();
+        return $accountsReport;
     }
 
     /**
