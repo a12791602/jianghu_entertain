@@ -87,12 +87,7 @@ class ReportAction extends MainAction
      */
     private function _getAccountReport(): array
     {
-        
-        $this->filterDatas['frozenTypeIn'] = [
-                                              $this->model::FROZEN_STATUS_NOT,
-                                              $this->model::FROZEN_STATUS_OUT,
-                                              $this->model::FROZEN_STATUS_BACK,
-                                             ];
+        $this->filterDatas['frontend_display'] = $this->model::FRONTEND_DISPLAY_NO;
         return $this->model
             ->filter($this->filterDatas)
             ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])

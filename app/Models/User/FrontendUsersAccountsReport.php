@@ -16,6 +16,8 @@ class FrontendUsersAccountsReport extends BaseModel
     public const FROZEN_STATUS_BACK      = 2; //解冻
     public const FROZEN_STATUS_TO_PLAYER = 3;
     public const FROZEN_STATUS_TO_SYSTEM = 4; //消耗冻结资金
+    public const FRONTEND_DISPLAY_NO     = 0; //前台不显示（部分只操作冻结金额的记录不需要给用户看到）
+    public const FRONTEND_DISPLAY_YES    = 1; //前台显示
 
     /**
      * @var array

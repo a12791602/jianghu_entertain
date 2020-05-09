@@ -49,7 +49,7 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * 账变时间
      *
      * @param  array $createdAt 账变时间.
-     * @return FrontendUsersAccountsReportFilter|\Illuminate\Database\Eloquent\Builder
+     * @return self|\Illuminate\Database\Eloquent\Builder
      */
     public function createdAt(array $createdAt)
     {
@@ -80,5 +80,16 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
     public function platformSign(string $sign): self
     {
         return $this->where('platform_sign', $sign);
+    }
+
+    /**
+     * 前台是否显示
+     *
+     * @param  integer $display 前台是否显示.
+     * @return self
+     */
+    public function frontendDisplay(int $display): self
+    {
+        return $this->whereIn('frontend_display', $display);
     }
 }
