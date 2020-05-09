@@ -23,8 +23,8 @@ class CreateBackendAdminAccessGroupsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('group_name', 15)->comment('管理员组名称');
-                $table->tinyInteger('status')->nullable()->default('1')->comment('状态：0关闭 1开启');
-                $table->tinyInteger('recharge_status')->nullable()->default('0')->comment('充值状态：0关闭 1开启');
+                $table->tinyInteger('status')->default(1)->comment('状态：0关闭 1开启');
+                $table->tinyInteger('recharge_status')->default(0)->comment('充值状态：0关闭 1开启');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent();
             },

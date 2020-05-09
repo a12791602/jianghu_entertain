@@ -23,17 +23,11 @@ class IndexAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-
         $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $datas                     = $this->model->with(
-            [
-             'games:id,name,sign',
-             'vendor:game_vendors.id,game_vendors.name,game_vendors.sign',
-            ],
-        )->orderByDesc('sort')
-         ->filter($inputDatas)
-         ->withCacheCooldownSeconds(86400)
-         ->paginate($this->perPage);
-        return msgOut($datas);
+
+        $data = $this->model->with('games.vendor:id,name,sign')->orderByDesc('sort')->filter($inputDatas)
+            ->withCacheCooldownSeconds(86400)
+            ->paginate($this->perPage);
+        return msgOut($data);
     }
 }

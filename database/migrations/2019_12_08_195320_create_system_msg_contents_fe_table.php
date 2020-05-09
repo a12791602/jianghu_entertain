@@ -27,13 +27,13 @@ class CreateSystemMsgContentsFeTable extends Migration
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1公告 2站内信');
                 $table->string('title', 45)->nullable()->default(null)->comment('标题');
                 $table->text('content')->nullable()->default(null)->comment('内容');
-                $table->integer('sort')->nullable()->default(null)->comment('排序');
+                $table->integer('sort')->default(0)->comment('排序');
                 $table->timestamp('start_time')->nullable()->default(null)->comment('开始时间');
                 $table->timestamp('end_time')->nullable()->default(null)->comment('结束时间');
                 $table->text('pic_path')->nullable()->default(null)->comment('图片路径');
                 $table->text('describe')->nullable()->default(null)->comment('描述');
-                $table->tinyInteger('status')->comment('1显示 0关闭');
-                $table->unsignedTinyInteger('top')->nullable()->default('0')->comment('1置顶 0取消置顶');
+                $table->tinyInteger('status')->default(0)->comment('1显示 0关闭');
+                $table->unsignedTinyInteger('top')->nullable()->default(0)->comment('1置顶 0取消置顶');
                 $table->nullableTimestamps();
             },
         );

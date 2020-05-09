@@ -25,12 +25,12 @@ class CreateBackendSystemMenusTable extends Migration
                 $table->string('label', 20)->nullable()->default(null)->comment('名称');
                 $table->string('en_name', 50)->nullable()->default(null)->comment('英文名');
                 $table->string('route', 50)->nullable()->default(null)->comment('路由');
-                $table->integer('pid')->nullable()->default('0')->comment('菜单的父级别');
+                $table->integer('pid')->nullable()->default(0)->comment('菜单的父级别');
                 $table->string('icon', 64)->nullable()->default(null)->comment('图标');
-                $table->tinyInteger('display')->nullable()->default('1')->comment('是否显示 0否 1是');
-                $table->integer('level')->nullable()->default('1')->comment('等级');
-                $table->integer('sort')->nullable()->default(null)->comment('排序');
-                $table->tinyInteger('type')->default('1')->comment('1 代表菜单要在左侧显示 2 代表按钮  3 代表普通链接');
+                $table->tinyInteger('display')->nullable()->default(1)->comment('是否显示 0否 1是');
+                $table->integer('level')->nullable()->default(1)->comment('等级');
+                $table->integer('sort')->default(0)->comment('排序');
+                $table->tinyInteger('type')->default(1)->comment('1 代表菜单要在左侧显示 2 代表按钮  3 代表普通链接');
                 $table->nullableTimestamps();
             },
         );

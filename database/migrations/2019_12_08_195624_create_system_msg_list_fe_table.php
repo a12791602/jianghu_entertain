@@ -24,7 +24,7 @@ class CreateSystemMsgListFeTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('receive_user_id')->comment('接收的用户id');
                 $table->integer('notices_content_id')->nullable()->default(null)->comment('消息内容表id');
-                $table->tinyInteger('status')->comment('0未读  1已读');
+                $table->tinyInteger('status')->default(0)->comment('0未读  1已读');
                 $table->nullableTimestamps();
             },
         );

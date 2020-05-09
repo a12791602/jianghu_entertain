@@ -41,8 +41,8 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->string('app_id')->nullable()->default(null)->comment('终端号');
                 $table->string('vendor_url')->nullable()->default(null)->comment('第三方域名');
                 $table->string('level_ids')->nullable()->default(null)->comment('可见的用户层级');
-                $table->tinyInteger('status')->nullable()->default(null)->comment('状态 1 启用 0 禁用');
-                $table->integer('sort')->nullable()->default(null)->comment('排序');
+                $table->tinyInteger('status')->default(0)->comment('状态 1 启用 0 禁用');
+                $table->integer('sort')->default(0)->comment('排序');
                 $table->tinyInteger('auto_audit')->nullable()->default(null)->comment('是否自动审核 1 是 0 否');
                 $table->string('merchant_no')->nullable()->default(null)->comment('商户编号');
                 $table->string('desc')->nullable()->default(null)->comment('充值说明 备注');

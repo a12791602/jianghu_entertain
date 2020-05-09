@@ -28,7 +28,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'zip_code'      => '233333',
               'address'       => '朝歌',
               'register_type' => 0,
-              'total_members' => 20,
+              'total_members' => 3,
               'g_active'      => '{"KY":1,"VR":1,"IM":0}',
              ],
              [
@@ -42,7 +42,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'zip_code'      => '1600',
               'address'       => 'State of California',
               'register_type' => 0,
-              'total_members' => 15,
+              'total_members' => 3,
               'g_active'      => '{"KY":1,"VR":1,"IM":0}',
              ],
              [
@@ -56,7 +56,7 @@ class FrontendUsersSpecificInfoSeeder extends Seeder
               'zip_code'      => '233333',
               'address'       => 'test city',
               'register_type' => 0,
-              'total_members' => 15,
+              'total_members' => 3,
               'g_active'      => null,
              ],
             ],

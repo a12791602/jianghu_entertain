@@ -24,7 +24,7 @@ class CreateFrontendUserInvitedRecordsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('user_id')->comment('用户id （frontend_users表id）');
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
-                $table->integer('invite_code')->default('0')->comment('邀请码');
+                $table->integer('invite_code')->default(0)->comment('邀请码');
                 $table->char('ip', 15)->nullable()->default(null)->comment('IP地址');
                 $table->nullableTimestamps();
             },

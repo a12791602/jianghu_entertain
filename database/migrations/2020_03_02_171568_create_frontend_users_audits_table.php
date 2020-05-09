@@ -31,7 +31,7 @@ class CreateFrontendUsersAuditsTable extends Migration
                 $table->decimal('amount', 18, 4)->nullable()->default(0)->comment('金额');
                 $table->decimal('demand_bet', 18, 4)->nullable()->default(0)->comment('需求的打码量');
                 $table->decimal('achieved_bet', 18, 4)->nullable()->default(0)->comment('完成的打码量');
-                $table->tinyInteger('status')->nullable()->default(0)->comment('状态 0未完成 1已完成');
+                $table->tinyInteger('status')->default(0)->comment('状态 0未完成 1已完成');
                 $table->timestamp('achieved_time')->nullable()->default(null)->comment('完成的时间');
                 $table->timestamps();
             },
