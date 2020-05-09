@@ -14,7 +14,10 @@ class InGameTxBalanceOutRequest extends BaseFormRequest
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
-    protected $extraDefinition = ['vendor' => '游戏厂商类型'];
+    protected $extraDefinition = [
+                                  'vendor' => '游戏厂商类型',
+                                  'wallet' => '钱包类型',
+                                 ];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -35,8 +38,8 @@ class InGameTxBalanceOutRequest extends BaseFormRequest
     {
         return [
                 'vendor' => 'required|integer|gt:0|exists:game_vendors,id',
-                'wallet' => 'required|integer|digits:3',
-                'amount' => 'required|digits_between:0,99.99',//两位小数点
+                'wallet' => 'required|integer|digits:3|in:301',
+                'amount' => 'required|digits_between:0.1,99.99',//两位小数点
                ];
     }
 }
