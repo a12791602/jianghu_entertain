@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -29,10 +30,24 @@ class FrontendUsersAccountsReport extends BaseModel
     protected $casts = ['params' => 'array'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = ['created_at' => '账变时间'];
+
+    /**
      * @return HasOne
      */
     public function changeType(): HasOne
     {
         return $this->hasOne(FrontendUsersAccountsType::class, 'sign', 'type_sign');
+    }
+
+    /**
+     * 用户
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 }
