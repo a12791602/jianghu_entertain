@@ -2,17 +2,16 @@
 
 namespace App\Http\Resources\Frontend\FrontendUser;
 
+use App\Http\Resources\BaseResource;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersSpecificInfo;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class HomePersonalInformationResource
  * @package App\Http\Resources
  */
-class DynamicInformationResource extends JsonResource
+class DynamicInformationResource extends BaseResource
 {
 
     /**

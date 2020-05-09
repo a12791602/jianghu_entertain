@@ -2,13 +2,13 @@
 
 namespace App\Http\Resources\Frontend\System;
 
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BaseResource;
 
 /**
  * Class SystemAvatarResource
  * @package App\Http\Resources\Frontend\System
  */
-class SystemAvatarResource extends JsonResource
+class SystemAvatarResource extends BaseResource
 {
 
     /**

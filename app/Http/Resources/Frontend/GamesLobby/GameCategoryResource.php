@@ -2,15 +2,15 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use App\Http\Resources\BaseResource;
 use App\Models\Game\GameType;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class GameCategoryResource
  * @package App\Http\Resources
  */
-class GameCategoryResource extends JsonResource
+class GameCategoryResource extends BaseResource
 {
 
     /**
