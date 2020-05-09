@@ -42,7 +42,7 @@ class IndexAction extends MainAction
                     ->select(
                         [
                          'id',
-                         'name',
+                         'level',
                          'experience_min',
                          'experience_max',
                          'promotion_gift',
