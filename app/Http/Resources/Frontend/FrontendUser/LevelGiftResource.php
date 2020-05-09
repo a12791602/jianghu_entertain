@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources\Frontend\FrontendUser;
 
+use App\Http\Resources\BaseResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class LevelGiftResource
  * @package App\Http\Resources\Frontend\FrontendUser
  */
-class LevelGiftResource extends JsonResource
+class LevelGiftResource extends BaseResource
 {
 
     /**

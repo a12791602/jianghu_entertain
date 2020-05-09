@@ -3,13 +3,13 @@
 namespace App\Http\Resources\Frontend\GamesLobby;
 
 use App;
-use Illuminate\Http\Resources\Json\JsonResource;
+use App\Http\Resources\BaseResource;
 
 /**
  * Class SystemSlidesResource
  * @package App\Http\Resources\GamesLobby
  */
-class SystemSlidesResource extends JsonResource
+class SystemSlidesResource extends BaseResource
 {
 
     /**
