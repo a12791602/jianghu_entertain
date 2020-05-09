@@ -2,15 +2,15 @@
 
 namespace App\Http\Resources\Frontend\FrontendUser;
 
+use App\Http\Resources\BaseResource;
 use App\Http\Resources\Frontend\System\SystemLevelResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class BenefitsResource
  * @package App\Http\Resources\Frontend\FrontendUser
  */
-class BenefitsResource extends JsonResource
+class BenefitsResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -20,10 +20,10 @@ class BenefitsResource extends JsonResource
      */
     public function toArray($request): array
     {
-        $result = [
-                   'system_level'          => SystemLevelResource::collection($this['system_level']),
-                   'level_benefits_status' => LevelGiftResource::collection($this['level_benefits']),
-                  ];
-        return $result;
+        unset($request);
+        return [
+                'system_level'          => SystemLevelResource::collection($this['system_level']),
+                'level_benefits_status' => LevelGiftResource::collection($this['level_benefits']),
+               ];
     }
 }

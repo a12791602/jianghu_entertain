@@ -2,14 +2,14 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
+use App\Http\Resources\BaseResource;
 use App\Models\User\FrontendUser;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class RichListResource
  * @package App\Http\Resources
  */
-class RichListResource extends JsonResource
+class RichListResource extends BaseResource
 {
 
     /**

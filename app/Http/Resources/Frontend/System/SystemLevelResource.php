@@ -2,16 +2,14 @@
 
 namespace App\Http\Resources\Frontend\System;
 
-use App\Models\User\FrontendUsersAccount;
+use App\Http\Resources\BaseResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 
 /**
  * Class SystemLevelResource
  * @package App\Http\Resources\Frontend\FrontendUser
  */
-class SystemLevelResource extends JsonResource
+class SystemLevelResource extends BaseResource
 {
 
     /**
