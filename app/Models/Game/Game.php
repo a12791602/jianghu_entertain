@@ -4,6 +4,7 @@ namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\User\Logics\GameLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Request;
 
@@ -13,7 +14,8 @@ use Illuminate\Support\Facades\Request;
  */
 class Game extends BaseModel
 {
-    
+    use GameLogics;
+
     public const STATUS_CLOSE = 0;
     public const STATUS_OPEN  = 1;
 
