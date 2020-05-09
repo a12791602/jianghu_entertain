@@ -43,7 +43,7 @@ class DynamicInformationResource extends BaseResource
                 'score'       => 1440,
                 'level'       => $this->specificInfo->level,
                 'experience'  => $this->specificInfo->experience,
-                'balance'     => $this->account->balance,
+                'balance'     => (float) sprintf('%.2f', $this->account->balance),
                 'rich_rank'   => $rank,
                 'profit_rank' => $rank,
                ];
