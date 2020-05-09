@@ -4,7 +4,6 @@ namespace App\Http\Resources\Frontend\AccountManagement;
 
 use App\Http\Resources\BaseResource;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class SystemSlidesResource

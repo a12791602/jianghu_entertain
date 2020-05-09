@@ -2,16 +2,15 @@
 
 namespace App\Http\Resources\Frontend\GamesLobby;
 
-use App\Models\User\FrontendUsersAccount;
+use App\Http\Resources\BaseResource;
 use App\Models\User\FrontendUsersSpecificInfo;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
  * Class HomePersonalInformationResource
  * @package App\Http\Resources
  */
-class PersonalInformationResource extends JsonResource
+class PersonalInformationResource extends BaseResource
 {
 
     /**
