@@ -402,7 +402,16 @@ class SystemRoutesMerchantSeeder extends Seeder
               'is_open'       => 0,
               'is_ack'        => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\UserAccountController',
-              'method'        => 'Index',
+              'method'        => 'index',
+             ],
+             [
+              'route_name'    => 'merchant-api.user-account.account-type',
+              'menu_group_id' => 15,
+              'title'         => '财务管理-资金帐变-账变类型列表',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Finance\UserAccountController',
+              'method'        => 'accountType',
              ],
              [
               'route_name'    => 'merchant-api.marquee-notice.add-do',
