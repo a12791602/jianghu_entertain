@@ -28,7 +28,7 @@ class CreateSystemRoutesBackendsTable extends Migration
                 $table->unsignedInteger('menu_group_id')->nullable()->default(null)->comment('菜单id');
                 $table->string('title', 45)->nullable()->default(null)->comment('标题');
                 $table->text('description')->nullable()->default(null)->comment('描述');
-                $table->tinyInteger('is_open')->nullable()->default('0')->comment('0封闭式 1开放式');
+                $table->tinyInteger('is_open')->nullable()->default(0)->comment('0封闭式 1开放式');
                 $table->index('is_open');
                 $table->nullableTimestamps();
             },

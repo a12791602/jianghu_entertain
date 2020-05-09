@@ -29,7 +29,7 @@ class CreateMerchantAdminUsersTable extends Migration
                 $table->string('password')->nullable()->default(null)->comment('密码');
                 $table->text('remember_token')->nullable()->default(null)->comment('token');
                 $table->integer('group_id')->nullable()->default(null)->comment('管理员组id');
-                $table->tinyInteger('status')->nullable()->default('1')->comment('状态 0关闭 1开启');
+                $table->tinyInteger('status')->default(1)->comment('状态 0关闭 1开启');
                 $table->decimal('chargeable_fund', 10, 2)->nullable()->default(null)->comment('后台管理员手中拥有的 可以充值的余额');
                 $table->index('platform_sign');
                 $table->index('email');

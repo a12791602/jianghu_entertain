@@ -25,7 +25,7 @@ class CreateBackendAdminAuditPasswordsListsTable extends Migration
                 $table->unsignedInteger('type')->comment('审核类型 1=password, 2=资金密码');
                 $table->unsignedInteger('user_id')->comment('被审核用户的id');
                 $table->text('audit_data')->nullable()->default(null)->comment('审核的数据');
-                $table->tinyInteger('status')->default('0')->comment('0:审核中, 1:审核通过, 2:审核拒绝');
+                $table->tinyInteger('status')->default(0)->comment('0:审核中, 1:审核通过, 2:审核拒绝');
                 $table->integer('audit_flow_id')->nullable()->default(null)->comment('提交人 与审核人的记录流程');
                 $table->nullableTimestamps();
             },

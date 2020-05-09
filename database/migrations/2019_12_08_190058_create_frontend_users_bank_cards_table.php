@@ -29,7 +29,7 @@ class CreateFrontendUsersBankCardsTable extends Migration
                 $table->string('card_number', 64)->nullable()->default(null)->comment('银行卡号');
                 $table->string('branch', 64)->nullable()->default(null)->comment('支行');
                 $table->string('code', 32)->nullable()->default(null)->comment('银行编码');
-                $table->tinyInteger('status')->default('0')->comment('状态 0不可以 1可用');
+                $table->tinyInteger('status')->default(0)->comment('状态 0不可以 1可用');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1 储蓄卡 2 支付宝');
                 $table->timestamp('created_at')->nullable();
                 $table->timestamp('updated_at')->nullable();

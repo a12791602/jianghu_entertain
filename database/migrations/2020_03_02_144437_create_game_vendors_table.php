@@ -26,7 +26,7 @@ class CreateGameVendorsTable extends Migration
                 $table->string('name', 64)->nullable()->comment('厂商名称')->index();
                 $table->string('sign', 64)->nullable()->comment('厂商标识')->index();
                 $table->integer('type_id')->comment('游戏类型id');
-                $table->integer('sort')->nullable()->comment('排序');
+                $table->integer('sort')->default(0)->comment('排序');
                 $table->tinyInteger('status')->default(1)->comment('状态 0 禁用 1 启用');
                 $table->json('production')->nullable()->comment('正式站配置信息');
                 $table->json('staging')->nullable()->comment('测试站配置信息');

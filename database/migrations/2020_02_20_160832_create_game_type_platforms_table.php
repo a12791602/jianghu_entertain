@@ -24,7 +24,7 @@ class CreateGameTypePlatformsTable extends Migration
                 $table->integer('platform_id')->nullable()->default(0)->comment('平台ID')->unsigned();
                 $table->integer('type_id')->nullable()->default(0)->comment('分类ID')->unsigned();
                 $table->string('device', 8)->nullable()->default(null)->comment('设备 1 pc 2 H5 3 APP');
-                $table->integer('status')->nullable()->default(0)->comment('状态 0 禁用 1 启用');
+                $table->integer('status')->default(0)->comment('状态 0 禁用 1 启用');
                 $table->nullableTimestamps();
                 $table->foreign('type_id', 'fk_system_platforms_has_game_types_game_types_idx')
                     ->references('id')->on('game_types')->onDelete('cascade')->onUpdate('cascade');

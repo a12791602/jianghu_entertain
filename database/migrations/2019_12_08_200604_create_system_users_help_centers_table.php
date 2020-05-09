@@ -27,7 +27,7 @@ class CreateSystemUsersHelpCentersTable extends Migration
                 $table->string('title', 32)->nullable()->default(null)->comment('标题');
                 $table->string('pic', 128)->nullable()->default(null)->comment('图片路径');
                 $table->tinyInteger('type')->nullable()->default(null)->comment('1. H5  2. PC  3. APP');
-                $table->tinyInteger('status')->nullable()->default(null)->comment('开启状态 0关闭 1开启');
+                $table->tinyInteger('status')->default(0)->comment('开启状态 0关闭 1开启');
                 $table->integer('add_admin_id')->nullable()->default(null)->comment('添加的管理员id');
                 $table->integer('update_admin_id')->nullable()->default(null)->comment('最后修改的管理员id');
                 $table->index('title');

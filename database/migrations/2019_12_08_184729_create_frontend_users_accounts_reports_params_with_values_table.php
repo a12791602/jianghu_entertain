@@ -25,10 +25,10 @@ class CreateFrontendUsersAccountsReportsParamsWithValuesTable extends Migration
                 $table->integer('parent_id')->nullable()->default(null)->comment('上级id');
                 $table->decimal('amount', 18, 4)->default('0.0000')->comment('变动前的资金')->unsigned();
                 $table->integer('user_id')->comment('用户id（frontend_users表id）');
-                $table->integer('project_id')->default('0')->comment('注单id');
-                $table->integer('from_id')->default('0')->comment('转帐用户id');
-                $table->integer('from_admin_id')->default('0')->comment('转帐管理员id');
-                $table->integer('to_id')->default('0')->comment('接收转帐的用户id');
+                $table->integer('project_id')->default(0)->comment('注单id');
+                $table->integer('from_id')->default(0)->comment('转帐用户id');
+                $table->integer('from_admin_id')->default(0)->comment('转帐管理员id');
+                $table->integer('to_id')->default(0)->comment('接收转帐的用户id');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->nullable();
             },
