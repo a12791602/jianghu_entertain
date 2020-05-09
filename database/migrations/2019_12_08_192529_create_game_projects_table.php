@@ -31,7 +31,7 @@ class CreateGameProjectsTable extends Migration
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
                 $table->integer('top_id')->comment('最上级id');
                 $table->integer('parent_id')->comment('上级id');
-                $table->tinyInteger('is_tester')->default('0')->comment('是否测试用户 0否 1是');
+                $table->tinyInteger('is_tester')->default(0)->comment('是否测试用户 0否 1是');
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('所属平台标记');
                 $table->string('vip_level_id', 25)->nullable()->default(null)->comment('用户vip等级id');
                 $table->integer('game_type')->nullable()->default(null)->comment('所属游戏类型 game_type_platforms表id');
@@ -50,10 +50,10 @@ class CreateGameProjectsTable extends Migration
                 $table->string('game_no', 128)->nullable()->default(null)->comment('游戏局号');
                 $table->integer('grade_id')->nullable()->default(null)->comment('当前等级');
                 $table->decimal('commission', 18, 4)->nullable()->default(null)->comment('洗码');
-                $table->tinyInteger('status')->default('0')->comment('0已投注 1已撤销 2未中奖 3已中奖 4已派奖');
+                $table->tinyInteger('status')->default(0)->comment('0已投注 1已撤销 2未中奖 3已中奖 4已派奖');
                 $table->timestamp('their_create_time')->nullable()->default(null)->comment('三方投注时间');
                 $table->timestamp('thier_updated_time')->nullable()->default(null)->comment('三方最后更新时间');
-                $table->tinyInteger('pull_thier_status')->default('0')->comment('第三方的拉取状态：0未拉取  1已拉取');
+                $table->tinyInteger('pull_thier_status')->default(0)->comment('第三方的拉取状态：0未拉取  1已拉取');
                 $table->timestamp('pull_thier_time')->nullable()->default(null)->comment('第三方的拉取时间');
                 $table->nullableTimestamps();
             },

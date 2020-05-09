@@ -24,7 +24,7 @@ class CreateGameTypesTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 64)->nullable()->default(null)->index()->comment('游戏名称');
                 $table->string('sign', 64)->nullable()->default(null)->index()->comment('游戏标识');
-                $table->tinyInteger('status')->index()->comment('状态 0 禁用 1 启用');
+                $table->tinyInteger('status')->default(0)->index()->comment('状态 0 禁用 1 启用');
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->integer('sort')->index()->comment('排序');

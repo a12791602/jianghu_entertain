@@ -27,9 +27,9 @@ class CreateSystemFinanceTypesTable extends Migration
                 $table->string('ico')->nullable()->default(null)->comment('类型图标');
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是在线支付 1 是 0 否');
                 $table->tinyInteger('direction')->nullable()->default(null)->comment('金流方向 1 入款 0 出款');
-                $table->tinyInteger('status')->default('0')->comment('状态 1 启用 0 禁用');
-                $table->integer('author_id')->default('0')->comment('添加人id');
-                $table->integer('last_editor_id')->default('0')->comment('最后编辑人id');
+                $table->tinyInteger('status')->default(0)->comment('状态 1 启用 0 禁用');
+                $table->integer('author_id')->default(0)->comment('添加人id');
+                $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->nullableTimestamps();
                 $table->index('name');
                 $table->index('sign');

@@ -23,8 +23,8 @@ class CreateSystemDynActivitiesTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 32)->default(' ')->comment('活动名称');
                 $table->string('sign', 32)->default(' ')->comment('活动标记');
-                $table->integer('last_editor_id')->default('0')->comment('最后更新人');
-                $table->tinyInteger('status')->comment('状态 0 禁用 1 启用');
+                $table->integer('last_editor_id')->default(0)->comment('最后更新人');
+                $table->tinyInteger('status')->default(0)->comment('状态 0 禁用 1 启用');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent();
             },

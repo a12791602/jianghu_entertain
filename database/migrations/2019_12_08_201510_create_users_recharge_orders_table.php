@@ -34,7 +34,7 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->decimal('discount_money', 18, 4)->nullable()->default(null)->comment('优惠金额');
                 $table->decimal('handling_money', 18, 4)->nullable()->default(null)->comment('手续费');
                 $table->decimal('arrive_money', 18, 4)->nullable()->default(null)->comment('到帐金额');
-                $table->tinyInteger('status')->nullable()->default(null)->comment('状态 0 审核中 1 审核通过');
+                $table->tinyInteger('status')->default(0)->comment('状态 0 审核中 1 审核通过');
                 $table->integer('admin_id')->nullable()->default(null)->comment('操作人ID');
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是线上存款 1 是 0 否');
                 $table->tinyInteger('recharge_status')->nullable()->default(null)->comment('支付状态 1 已支付 0 未支付');

@@ -28,16 +28,16 @@ class CreateUsersSalaryReportsTable extends Migration
                 $table->integer('user_id')->comment('用户id');
                 $table->string('parent_username', 32)->nullable()->default(null)->comment('上级用户名');
                 $table->string('username', 32)->nullable()->default(null)->comment('用户名');
-                $table->unsignedInteger('amount')->default('0')->comment('日工资');
-                $table->unsignedInteger('real_amount')->default('0')->comment('实际发放的日工资');
-                $table->unsignedInteger('bets')->default('0')->comment('下注总额');
-                $table->unsignedInteger('lose')->default('0')->comment('输赢');
+                $table->unsignedInteger('amount')->default(0)->comment('日工资');
+                $table->unsignedInteger('real_amount')->default(0)->comment('实际发放的日工资');
+                $table->unsignedInteger('bets')->default(0)->comment('下注总额');
+                $table->unsignedInteger('lose')->default(0)->comment('输赢');
                 $table->integer('day')->comment('日期');
                 $table->decimal('ratio', 5, 1)->default('0.0')->comment('比例');
-                $table->tinyInteger('status')->default('0')->comment('状态 0未发放 1已发放');
-                $table->integer('add_time')->default('0')->comment('统计时间');
-                $table->integer('send_time')->default('0')->comment('发放时间');
-                $table->integer('resend_time')->default('0')->comment('重新发放时间');
+                $table->tinyInteger('status')->default(0)->comment('状态 0未发放 1已发放');
+                $table->integer('add_time')->default(0)->comment('统计时间');
+                $table->integer('send_time')->default(0)->comment('发放时间');
+                $table->integer('resend_time')->default(0)->comment('重新发放时间');
                 $table->nullableTimestamps();
             },
         );

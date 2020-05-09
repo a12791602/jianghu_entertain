@@ -27,9 +27,9 @@ class CreateBackendAdminUsersTable extends Migration
                 $table->timestamp('email_verified_at')->nullable()->default(null)->comment('验证邮箱的时间');
                 $table->string('password')->nullable()->default(null)->comment('密码');
                 $table->text('remember_token')->nullable()->default(null)->comment('token');
-                $table->tinyInteger('is_test')->nullable()->default('0')->comment('是否测试号   0不是 1是');
+                $table->tinyInteger('is_test')->nullable()->default(0)->comment('是否测试号   0不是 1是');
                 $table->integer('group_id')->nullable()->default(null)->comment('管理员组id')->unsigned();
-                $table->tinyInteger('status')->nullable()->default('1')->comment('状态 0关闭 1开启');
+                $table->tinyInteger('status')->default(1)->comment('状态 0关闭 1开启');
                 $table->unsignedInteger('super_id')->nullable()->default(null)->comment('是否超管');
                 $table->decimal('chargeable_fund', 10, 2)->nullable()->default(null)->comment('后台管理员手中拥有的 可以充值的余额');
 
