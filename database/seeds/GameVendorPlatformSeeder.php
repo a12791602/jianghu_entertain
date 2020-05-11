@@ -24,6 +24,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 2,
+              'icon_id'     => 2,
              ],
              [
               'platform_id' => 1,
@@ -32,6 +33,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 3,
+              'icon_id'     => 2,
              ],
              [
               'platform_id' => 1,
@@ -40,6 +42,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 1,
+              'icon_id'     => 2,
              ],
              [
               'platform_id' => 1,
@@ -48,6 +51,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 2,
+              'icon_id'     => 3,
              ],
              [
               'platform_id' => 1,
@@ -56,6 +60,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 3,
+              'icon_id'     => 3,
              ],
              [
               'platform_id' => 1,
@@ -64,22 +69,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 0,
               'device'      => 1,
-             ],
-             [
-              'platform_id' => 1,
-              'vendor_id'   => 2,
-              'sort'        => 0,
-              'is_maintain' => 0,
-              'status'      => 0,
-              'device'      => 2,
-             ],
-             [
-              'platform_id' => 1,
-              'vendor_id'   => 2,
-              'sort'        => 0,
-              'is_maintain' => 0,
-              'status'      => 0,
-              'device'      => 3,
+              'icon_id'     => 3,
              ],
              [
               'platform_id' => 1,
@@ -88,6 +78,7 @@ class GameVendorPlatformSeeder extends Seeder
               'is_maintain' => 0,
               'status'      => 1,
               'device'      => 2,
+              'icon_id'     => 2,
              ],
             ],
         );

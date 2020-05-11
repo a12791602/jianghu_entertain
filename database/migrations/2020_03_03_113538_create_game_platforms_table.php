@@ -38,7 +38,7 @@ class CreateGamePlatformsTable extends Migration
                 $table->tinyInteger('hot_new')->default(0)->index()->comment('0 正常, 1 热门游戏, 2 新游戏');
                 $table->tinyInteger('device')->default(0)->index()->comment('设备  1.PC  2.H5 3.APP');
                 $table->tinyInteger('is_recommend')->default(0)->comment('是否推荐 0 否 1 是');
-                $table->string('icon', 128)->nullable()->comment('图标');
+                $table->integer('icon_id')->default(0)->comment('图标');
                 $table->timestamps();
                 $table->foreign('game_id', 'fk_system_platforms_has_games_games_idx')
                     ->references('id')

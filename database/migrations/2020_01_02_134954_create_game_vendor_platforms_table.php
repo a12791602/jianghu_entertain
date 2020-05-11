@@ -23,11 +23,11 @@ class CreateGameVendorPlatformsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->integer('vendor_id')->default(0)->comment('厂商id');
+                $table->integer('icon_id')->default(0)->comment('游戏图标');
                 $table->integer('sort')->default(0)->comment('排序');
                 $table->tinyInteger('is_maintain')->default(0)->comment('是否维护 0 否 1 是');
                 $table->tinyInteger('status')->default(0)->comment('状态 0 禁用 1 启用');
                 $table->tinyInteger('device')->default(0)->comment('设备');
-                $table->string('icon', 128)->nullable()->default(null)->comment('图标');
                 $table->timestamps();
             },
         );

@@ -25,6 +25,7 @@ class CreateGameVendorsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('name', 64)->nullable()->comment('厂商名称')->index();
                 $table->string('sign', 64)->nullable()->comment('厂商标识')->index();
+                $table->integer('icon_id')->default(0)->comment('游戏图标');
                 $table->integer('type_id')->comment('游戏类型id');
                 $table->integer('sort')->default(0)->comment('排序');
                 $table->tinyInteger('status')->default(1)->comment('状态 0 禁用 1 启用');
