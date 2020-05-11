@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Upload;
 
 use App\Http\Requests\Backend\Headquarters\Upload\UploadImageRequest;
+use App\Models\Systems\StaticResource;
 use App\Services\UploadService;
 use Illuminate\Http\JsonResponse;
 
@@ -26,7 +27,9 @@ class UploadImageAction
         if (!$file['status']) {
             throw new \RuntimeException('201100');
         }
-        $result = msgOut($file['file']);
-        return $result;
+        $resource           = ['path' => $file['file']['path']];
+        $model_item         = StaticResource::create($resource);
+        $file['file']['id'] = $model_item->id;
+        return msgOut($file['file']);
     }
 }

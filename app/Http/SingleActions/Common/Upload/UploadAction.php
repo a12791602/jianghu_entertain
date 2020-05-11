@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Common\Upload;
 
 use App\Http\SingleActions\MainAction;
+use App\Models\Systems\StaticResource;
 use App\Services\UploadService;
 use Illuminate\Http\JsonResponse;
 
@@ -27,7 +28,9 @@ class UploadAction extends MainAction
         if (!$file['status']) {
             throw new \Exception('201100');
         }
-        $result = msgOut($file['file']);
-        return $result;
+        $resource           = ['path' => $file['file']['path']];
+        $model_item         = StaticResource::create($resource);
+        $file['file']['id'] = $model_item->id;
+        return msgOut($file['file']);
     }
 }

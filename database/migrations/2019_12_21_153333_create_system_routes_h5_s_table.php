@@ -28,6 +28,7 @@ class CreateSystemRoutesH5STable extends Migration
                 $table->string('title', 45)->nullable()->default(null)->comment('标题');
                 $table->text('description')->nullable()->default(null)->comment('描述');
                 $table->tinyInteger('is_open')->nullable()->default(0)->comment('0封闭式 1开放式');
+                $table->tinyInteger('is_ack')->nullable()->index()->default(0)->comment('0默认加密 1与外部接触 无需加密');
                 $table->index('is_open');
                 $table->nullableTimestamps();
             },

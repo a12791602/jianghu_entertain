@@ -1309,7 +1309,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'menu_group_id' => 56,
               'title'         => '上传图片',
               'is_open'       => 0,
-              'is_ack'        => 0,
+              'is_ack'        => 1,
               'controller'    => 'App\Http\Controllers\CommonApi\UploadController',
               'method'        => 'upload',
              ],
