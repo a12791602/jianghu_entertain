@@ -37,7 +37,8 @@ class DoAddRequest extends BaseFormRequest
     {
         return [
                 'command'  => 'required|string|max:32',  //任务名称
-                'param'    => 'array',                   //传递的参数
+                'argument' => 'array|max:5',             //必须传递的参数
+                'option'   => 'array|max:5',             //可选传递的参数
                 'schedule' => 'required|string|max:32',  //执行时间cron表达式
                 'status'   => 'required|integer|in:0,1', //开启状态 0关闭 1开启
                 'remarks'  => 'required|string|max:64',  //定时任务用意描述备注
@@ -49,6 +50,9 @@ class DoAddRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['param' => 'cast:array'];
+        return [
+                'argument' => 'cast:array',
+                'option'   => 'cast:array',
+               ];
     }
 }

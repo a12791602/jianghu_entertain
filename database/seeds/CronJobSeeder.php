@@ -19,8 +19,9 @@ class CronJobSeeder extends Seeder
             [
              [
               'command'  => 'gamelog',
-              'param'    => null,
               'schedule' => '*/1 * * * *',
+              'argument' => null,
+              'option'   => null,
               'status'   => 1,
               'remarks'  => '每分钟抓取三方游戏数据的记录',
              ],
