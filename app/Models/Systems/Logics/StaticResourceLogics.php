@@ -17,8 +17,9 @@ trait StaticResourceLogics
             ->get(
                 [
                  'command',
-                 'param',
                  'schedule',
+                 'argument',
+                 'option',
                 ],
             )
             ->toArray();
