@@ -137,6 +137,16 @@ Route::group(
             ],
         )->name($namePrefix . 'icon');
 
+        //下载游戏图标
+        Route::post(
+            'icon-download',
+            [
+             GameController::class,
+             'iconDownload',
+            ],
+        )->name($namePrefix . 'icon-download');
+
+
 
         Route::match(['post', 'get'], 'acknowledge-in', [GameAcknowledgementController::class, 'ackIn'])
             ->name($namePrefix . 'ackIn');
