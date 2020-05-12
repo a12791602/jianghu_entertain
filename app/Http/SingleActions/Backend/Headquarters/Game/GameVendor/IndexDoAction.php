@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameVendor;
 
+use App\Http\Resources\Backend\Headquarters\Game\GameVendor\GameVendorResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -16,21 +17,22 @@ class IndexDoAction extends BaseAction
      */
     protected $model;
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas) :JsonResponse
+    public function execute(array $inputData) :JsonResponse
     {
-        $outputDatas = $this->model::with(
+        $outputData = $this->model::with(
             [
              'lastEditor:id,name',
              'author:id,name',
              'gameType:id,name',
              'whiteList:game_vendor_id,ips',
+             'icon:id,path',
             ],
-        )->filter($inputDatas)
+        )->filter($inputData)
         ->paginate($this->perPage);
-        return msgOut($outputDatas);
+        return msgOut(GameVendorResource::collection($outputData));
     }
 }

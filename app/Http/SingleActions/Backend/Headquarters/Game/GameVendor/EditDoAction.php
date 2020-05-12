@@ -3,6 +3,8 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameVendor;
 
 use App\Models\Game\GameVendor;
+use App\Models\Game\GameVendorPlatform;
+use App\Models\Systems\StaticResource;
 use App\Models\Systems\SystemIpWhiteList;
 use Arr;
 use Illuminate\Http\JsonResponse;
@@ -18,25 +20,34 @@ class EditDoAction extends BaseAction
 {
     
     /**
-     * @param  array $inputDatas InputDatas.
+     * @param  array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $model = $this->model->find($inputDatas['id']);
+        $model = $this->model->find($inputData['id']);
+        if (!$model instanceof GameVendor) {
+            throw new \Exception('300303');
+        }
+        $resource = [
+                     'type'        => 1,
+                     'title'       => 'game_vendor_icon',
+                     'table_name'  => 'game_vendor',
+                     'description' => '游戏厂商 icon',
+                    ];
+
+        $inputData['last_editor_id'] = $this->user->id;
+        $whitelist_ids_item          = [
+            'ips'  => $inputData['whitelist_ips'],
+            'type' => SystemIpWhiteList::WHITELIST_IP_TYPE_VENDOR,
+        ];
         try {
-            if ($model instanceof GameVendor) {
-                $inputDatas['last_editor_id'] = $this->user->id;
-                $whitelist_ids_item           = [
-                    'ips'  => $inputDatas['whitelist_ips'],
-                    'type' => SystemIpWhiteList::WHITELIST_IP_TYPE_VENDOR,
-                ];
-                SystemIpWhiteList::updateOrCreate(['game_vendor_id' => $inputDatas['id']], $whitelist_ids_item);
-                Arr::forget($inputDatas, 'whitelist_ips');
-                $model->update($inputDatas);
-                return msgOut();
-            }
+            StaticResource::where(['id' => $inputData['icon_id']])->update($resource);
+            SystemIpWhiteList::updateOrCreate(['game_vendor_id' => $inputData['id']], $whitelist_ids_item);
+            Arr::forget($inputData, 'whitelist_ips');
+            $model->update($inputData);
+            return msgOut();
         } catch (\Exception $e) {
             Log::error($e);
         }

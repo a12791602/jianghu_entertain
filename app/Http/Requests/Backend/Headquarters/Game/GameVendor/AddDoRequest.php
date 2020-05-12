@@ -67,6 +67,7 @@ class AddDoRequest extends BaseFormRequest
                 'whitelist_ips.*'                => 'ip',
                 'authorization_code'             => 'string|max:10',
                 'status'                         => 'required|in:0,1',
+                'icon_id'                        => 'integer|exists:static_resources,id',
                 'type_id'                        => 'required|integer|exists:game_types,id',
                 'production'                     => 'array',
                 'production.app_id'              => 'string|max:128|nullable',

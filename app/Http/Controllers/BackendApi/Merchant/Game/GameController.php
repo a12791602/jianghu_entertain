@@ -4,20 +4,20 @@ namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Game\DoHotRequest;
+use App\Http\Requests\Backend\Merchant\Game\IconRequest;
 use App\Http\Requests\Backend\Merchant\Game\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Game\MaintainRequest;
 use App\Http\Requests\Backend\Merchant\Game\RecommendRequest;
 use App\Http\Requests\Backend\Merchant\Game\SortRequest;
 use App\Http\Requests\Backend\Merchant\Game\StatusRequest;
-use App\Http\Requests\Backend\Merchant\Game\UploadRequest;
 use App\Http\SingleActions\Backend\Merchant\Game\DoHotAction;
 use App\Http\SingleActions\Backend\Merchant\Game\GetSearchConditionDataAction;
+use App\Http\SingleActions\Backend\Merchant\Game\IconAction;
 use App\Http\SingleActions\Backend\Merchant\Game\IndexAction;
 use App\Http\SingleActions\Backend\Merchant\Game\MaintainAction;
 use App\Http\SingleActions\Backend\Merchant\Game\RecommendAction;
 use App\Http\SingleActions\Backend\Merchant\Game\SortAction;
 use App\Http\SingleActions\Backend\Merchant\Game\StatusAction;
-use App\Http\SingleActions\Backend\Merchant\Game\UploadAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -117,14 +117,14 @@ class GameController extends Controller
     }
 
     /**
-     * 上传图片.
+     * 更新游戏icon.
      *
-     * @param UploadAction  $action  Action.
-     * @param UploadRequest $request Request.
+     * @param IconAction  $action  Action.
+     * @param IconRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function upload(UploadAction $action, UploadRequest $request): JsonResponse
+    public function icon(IconAction $action, IconRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
