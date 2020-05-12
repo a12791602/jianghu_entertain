@@ -47,11 +47,10 @@ class IndexResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $appEnvironment = App::environment();
-        $icon           = $this->icon->path ?? null;
+        $icon = $this->icon->path ?? null;
         return [
                 'id'        => $this->id,
-                'icon'      => config('image_domain.' . $appEnvironment) . $icon,
+                'icon'      => config('image_domain.' . $this->app_environment) . $icon,
                 'name'      => $this->games->name,
                 'sort'      => $this->sort,
                 'hot_new'   => $this->hot_new,

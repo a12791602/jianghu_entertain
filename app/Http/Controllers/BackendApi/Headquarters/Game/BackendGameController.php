@@ -7,6 +7,7 @@ use App\Http\Requests\Backend\Headquarters\Game\Game\AddDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\DelDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\EditDetailRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\EditDoRequest;
+use App\Http\Requests\Backend\Headquarters\Game\Game\IconRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\IndexDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\OptEditDoRequest;
 use App\Http\Requests\Backend\Headquarters\Game\Game\StatusDoRequest;
@@ -15,6 +16,7 @@ use App\Http\SingleActions\Backend\Headquarters\Game\Game\DelDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\EditDetailAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\EditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\GetSearchConditionAction;
+use App\Http\SingleActions\Backend\Headquarters\Game\Game\IconAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\IndexDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\OptEditDoAction;
 use App\Http\SingleActions\Backend\Headquarters\Game\Game\StatusDoAction;
@@ -149,5 +151,21 @@ class BackendGameController extends Controller
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
+    }
+
+    /**
+     * 更新游戏图标
+     *
+     * @param IconAction  $action  Action.
+     * @param IconRequest $request Request.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function icon(
+        IconAction $action,
+        IconRequest $request
+    ): JsonResponse {
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 }

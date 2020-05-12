@@ -41,6 +41,8 @@ Route::group(
             ->name($namePrefix . 'opt-del-do');
         Route::post('opt-status-do', [BackendGameVendorController::class, 'statusDo'])
             ->name($namePrefix . 'opt-status-do');
+        Route::post('icon', [BackendGameVendorController::class, 'icon'])
+            ->name($namePrefix . 'icon');
     },
 );
 
@@ -53,6 +55,8 @@ Route::group(
             ->name($namePrefix . 'add-do');
         Route::post('edit-do', [BackendGameController::class, 'editDo'])
             ->name($namePrefix . 'edit-do');
+        Route::post('icon', [BackendGameController::class, 'icon'])
+            ->name($namePrefix . 'icon');
         Route::post('edit-detail', [BackendGameController::class, 'editDetail'])
             ->name($namePrefix . 'edit-detail');
         Route::get('index-do', [BackendGameController::class, 'indexDo'])
