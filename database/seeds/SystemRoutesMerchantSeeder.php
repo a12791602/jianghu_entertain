@@ -666,6 +666,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'icon',
              ],
              [
+              'route_name'    => 'merchant-api.game.icon-download',
+              'menu_group_id' => 34,
+              'title'         => '游戏管理-游戏-下载游戏icon',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameController',
+              'method'        => 'icon-download',
+             ],
+             [
               'route_name'    => 'merchant-api.game.index',
               'menu_group_id' => 35,
               'title'         => '游戏管理-(H5/PC/APP)游戏管理-列表',

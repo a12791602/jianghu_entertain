@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Game\DoHotRequest;
+use App\Http\Requests\Backend\Merchant\Game\IconDownloadRequest;
 use App\Http\Requests\Backend\Merchant\Game\IconRequest;
 use App\Http\Requests\Backend\Merchant\Game\IndexRequest;
 use App\Http\Requests\Backend\Merchant\Game\MaintainRequest;
@@ -13,12 +14,14 @@ use App\Http\Requests\Backend\Merchant\Game\StatusRequest;
 use App\Http\SingleActions\Backend\Merchant\Game\DoHotAction;
 use App\Http\SingleActions\Backend\Merchant\Game\GetSearchConditionDataAction;
 use App\Http\SingleActions\Backend\Merchant\Game\IconAction;
+use App\Http\SingleActions\Backend\Merchant\Game\IconDownloadAction;
 use App\Http\SingleActions\Backend\Merchant\Game\IndexAction;
 use App\Http\SingleActions\Backend\Merchant\Game\MaintainAction;
 use App\Http\SingleActions\Backend\Merchant\Game\RecommendAction;
 use App\Http\SingleActions\Backend\Merchant\Game\SortAction;
 use App\Http\SingleActions\Backend\Merchant\Game\StatusAction;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 /**
  * Class GameController
@@ -128,5 +131,20 @@ class GameController extends Controller
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
+    }
+
+    /**
+     * 下载游戏icon.
+     *
+     * @param IconDownloadAction  $action  Action.
+     * @param IconDownloadRequest $request Request.
+     * @return BinaryFileResponse
+     */
+    public function iconDownload(
+        IconDownloadAction $action,
+        IconDownloadRequest $request
+    ): BinaryFileResponse {
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 }
