@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
+use App;
 use App\Http\SingleActions\MainAction;
 use App\Lib\BaseCache;
 use App\Models\Game\GamePlatform;
@@ -77,7 +78,7 @@ class GameListAction extends MainAction
                                          'list' => $games,
                                         ];
             $this->saveTagsCacheData($redisKey, $result);
-        }
+        }//end if
         $result = msgOut($result);
         return $result;
     }
@@ -95,22 +96,31 @@ class GameListAction extends MainAction
                  'id',
                  'platform_id',
                  'game_id',
+                 'icon_id',
                  'hot_new',
                  'status',
                  'device',
                 ],
             )
-            ->with('games:id,type_id,sub_type_id,name')
+            ->with(
+                [
+                 'games:id,type_id,sub_type_id,name',
+                 'icon:id,path',
+                ],
+            )
             ->get();
 
-        $result = [];
+        $result         = [];
+        $appEnvironment = App::environment();
         foreach ($datas as $game) {
+            $icon                          = $game->icon->path ?? '';
             $typeId                        = $game->games->type_id ?? 0;
             $sunTypeId                     = $game->games->sub_type_id ?? 0;
             $result[$typeId][$sunTypeId][] = [
                                               'name'    => $game->games->name ?? '',
                                               'hot_new' => $game->hot_new,
                                               'url'     => $game->games->url ?? '',
+                                              'icon'    => config('image_domain.' . $appEnvironment) . $icon,
                                              ];
         }
         return $result;

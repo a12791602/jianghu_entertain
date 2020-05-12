@@ -3,7 +3,9 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use App\Models\Systems\StaticResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 /**
@@ -53,5 +55,13 @@ class GamePlatform extends BaseModel
     public function type(): HasOneThrough
     {
         return $this->hasOneThrough(GameType::class, Game::class, 'id', 'id', 'id', 'type_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function icon(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'icon_id');
     }
 }

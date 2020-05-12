@@ -4,6 +4,7 @@ namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\Systems\StaticResource;
 use App\Models\Systems\SystemIpWhiteList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -40,6 +41,7 @@ class GameVendor extends BaseModel
                                       'name'                             => '厂商名称',
                                       'sign'                             => '厂商标识',
                                       'type_id'                          => '游戏类型id',
+                                      'icon_id'                          => '游戏图标',
                                       'whitelist_ips'                    => '白名单',
                                       'sort'                             => '排序',
                                       'status'                           => '厂商状态',
@@ -86,6 +88,14 @@ class GameVendor extends BaseModel
     public function whiteList(): HasOne
     {
         return $this->hasOne(SystemIpWhiteList::class, 'game_vendor_id', 'id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function icon(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'icon_id');
     }
 
     /**
