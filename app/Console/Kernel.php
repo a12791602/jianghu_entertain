@@ -34,11 +34,16 @@ class Kernel extends ConsoleKernel
         if (!is_array($scheduleArr) || empty($scheduleArr)) {
             return;
         }
-
         foreach ($scheduleArr as $scheduleItem) {
-            if (is_array($scheduleItem['param']) && !empty($scheduleItem['param'])) {
-                //有argument的情况
-                $schedule->command($scheduleItem['command'], [$scheduleItem['param']])->cron($scheduleItem['schedule']);
+            //有argument的情况
+            if (is_array($scheduleItem['argument']) && !empty($scheduleItem['argument'])) {
+                //有argument和option  需要合并
+                if (is_array($scheduleItem['option']) && !empty($scheduleItem['option'])) {
+                    $params = array_merge($scheduleItem['argument'], $scheduleItem['option']);
+                } else {
+                    $params = $scheduleItem['argument'];
+                }
+                $schedule->command($scheduleItem['command'], [$params])->cron($scheduleItem['schedule']);
             } else {
                 //没有argument的情况
                 $schedule->command($scheduleItem['command'])->cron($scheduleItem['schedule']);
