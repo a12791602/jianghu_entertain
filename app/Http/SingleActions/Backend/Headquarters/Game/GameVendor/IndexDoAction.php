@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\GameVendor;
 
-use App\Http\Resources\Backend\Headquarters\Game\GameVendor\GameVendorResource;
+use App\Http\Resources\Backend\Headquarters\Game\GameVendor\IndexResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -33,6 +33,6 @@ class IndexDoAction extends BaseAction
             ],
         )->filter($inputData)
         ->paginate($this->perPage);
-        return msgOut(GameVendorResource::collection($outputData));
+        return msgOut(IndexResource::collection($outputData));
     }
 }

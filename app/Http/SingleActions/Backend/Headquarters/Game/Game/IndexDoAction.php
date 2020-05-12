@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
 
+use App\Http\Resources\Backend\Headquarters\Game\Game\IndexResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -16,22 +17,23 @@ class IndexDoAction extends BaseAction
      */
     protected $model;
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $outputDatas = $this->model::with(
+        $outputData = $this->model::with(
             [
              'type:id,name',
              'subType:id,name',
-             'vendor:id,name',
+             'vendor',
              'lastEditor:id,name',
              'author:id,name',
+             'icon:id,path',
             ],
-        )->filter($inputDatas)
+        )->filter($inputData)
         ->paginate($this->perPage);
-        return msgOut($outputDatas);
+        return msgOut(IndexResource::collection($outputData));
     }
 }

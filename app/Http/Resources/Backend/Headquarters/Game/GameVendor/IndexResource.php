@@ -2,15 +2,14 @@
 
 namespace App\Http\Resources\Backend\Headquarters\Game\GameVendor;
 
-use App;
 use App\Http\Resources\BaseResource;
 use Carbon\Carbon;
 
 /**
- * Class LoginResource
- * @package App\Http\Resources\Backend\Headquarters
+ * Class IndexResource
+ * @package App\Http\Resources\Backend\Headquarters\Game\GameVendor
  */
-class GameVendorResource extends BaseResource
+class IndexResource extends BaseResource
 {
 
     /**
@@ -29,7 +28,7 @@ class GameVendorResource extends BaseResource
     private $status;
 
     /**
-     * @var App\Models\Systems\StaticResource $icon 游戏图标地址.
+     * @var \App\Models\Systems\StaticResource $icon 游戏图标地址.
      */
     private $icon;
 
@@ -59,22 +58,22 @@ class GameVendorResource extends BaseResource
     private $updated_at;
 
     /**
-     * @var App\Models\Game\GameType $gameType GameType.
+     * @var \App\Models\Game\GameType $gameType GameType.
      */
     private $gameType;
 
     /**
-     * @var App\Models\Admin\BackendAdminUser $lastEditor BackendAdminUser.
+     * @var \App\Models\Admin\BackendAdminUser $lastEditor BackendAdminUser.
      */
     private $lastEditor;
 
     /**
-     * @var App\Models\Admin\BackendAdminUser $author BackendAdminUser.
+     * @var \App\Models\Admin\BackendAdminUser $author BackendAdminUser.
      */
     private $author;
 
     /**
-     * @var App\Models\Systems\SystemIpWhiteList $whiteList SystemIpWhiteList.
+     * @var \App\Models\Systems\SystemIpWhiteList $whiteList SystemIpWhiteList.
      */
     private $whiteList;
 
@@ -86,13 +85,12 @@ class GameVendorResource extends BaseResource
      */
     public function toArray($request): array
     {
-        $appEnvironment = App::environment();
         $icon = $this->icon->path ?? null;
         unset($request);
         return [
                 'id'             => $this->id,
                 'name'           => $this->name,
-                'icon'           => config('image_domain.' . $appEnvironment) . $icon,
+                'icon'           => config('image_domain.' . $this->app_environment) . $icon,
                 'sort'           => $this->sort,
                 'type'           => $this->gameType->name,
                 'status'         => $this->status,

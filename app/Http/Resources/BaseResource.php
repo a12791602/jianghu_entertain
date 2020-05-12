@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App;
 use Illuminate\Http\Resources\Json\JsonResource;
 use ReflectionClass;
 use ReflectionProperty;
@@ -13,6 +14,11 @@ use ReflectionProperty;
  */
 class BaseResource extends JsonResource
 {
+
+    /**
+     * @var string $app_environment App_environment.
+     */
+    protected $app_environment;
 
     /**
      * BaseResource constructor.
@@ -32,5 +38,6 @@ class BaseResource extends JsonResource
             $getProperty->setAccessible(true);
             $getProperty->setValue($this, $resource->{$property->name});
         }
+        $this->app_environment = (string) App::environment();
     }
 }

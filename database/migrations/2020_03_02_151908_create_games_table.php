@@ -30,6 +30,7 @@ class CreateGamesTable extends Migration
                 $table->string('sign', 64)->nullable()->comment('游戏标识');
                 $table->tinyInteger('request_mode')->nullable()->comment('请求方式');
                 $table->tinyInteger('status')->default(0)->comment('状态 1 启用 0 禁用');
+                $table->integer('icon_id')->default(0)->comment('图标');
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->timestamps();

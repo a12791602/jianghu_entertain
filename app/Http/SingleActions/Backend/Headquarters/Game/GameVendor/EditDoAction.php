@@ -30,20 +30,12 @@ class EditDoAction extends BaseAction
         if (!$model instanceof GameVendor) {
             throw new \Exception('300303');
         }
-        $resource = [
-                     'type'        => 1,
-                     'title'       => 'game_vendor_icon',
-                     'table_name'  => 'game_vendor',
-                     'description' => '游戏厂商 icon',
-                    ];
-
         $inputData['last_editor_id'] = $this->user->id;
         $whitelist_ids_item          = [
-            'ips'  => $inputData['whitelist_ips'],
-            'type' => SystemIpWhiteList::WHITELIST_IP_TYPE_VENDOR,
-        ];
+                                        'ips'  => $inputData['whitelist_ips'],
+                                        'type' => SystemIpWhiteList::WHITELIST_IP_TYPE_VENDOR,
+                                       ];
         try {
-            StaticResource::where(['id' => $inputData['icon_id']])->update($resource);
             SystemIpWhiteList::updateOrCreate(['game_vendor_id' => $inputData['id']], $whitelist_ids_item);
             Arr::forget($inputData, 'whitelist_ips');
             $model->update($inputData);

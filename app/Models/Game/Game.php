@@ -4,8 +4,10 @@ namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\Systems\StaticResource;
 use App\Models\User\Logics\GameLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Request;
 
 /**
@@ -93,5 +95,15 @@ class Game extends BaseModel
     {
         $prefix = Request::get('prefix');
         return '/' . $prefix . '/games-lobby/in-game/' . $this->type_id . '/' . $this->sub_type_id . '/' . $this->id;
+    }
+
+
+    /**
+     * Game icon.
+     * @return HasOne
+     */
+    public function icon(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'icon_id');
     }
 }
