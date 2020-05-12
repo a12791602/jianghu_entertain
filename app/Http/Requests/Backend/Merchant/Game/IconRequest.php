@@ -35,7 +35,7 @@ class IconRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'      => 'required|integer|min:1|exists:game_vendor_platforms',
+                'id'      => 'required|integer|min:1|exists:game_platforms',
                 'icon_id' => 'required|integer|exists:static_resources,id',
                ];
     }
