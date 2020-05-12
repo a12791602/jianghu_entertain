@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Str;
 
 if (!function_exists('configure')) {
@@ -59,20 +58,18 @@ function msgOut(
         $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
     }
 
-    $datas       = [
-                    'status'  => true,
-                    'code'    => $code,
-                    'data'    => $data,
-                    'message' => $message,
-                   ];
-    $handledData = DataCrypt::handle($datas);
-    $resource    = $handledData['data'];
-
-    if ($resource instanceof JsonResource) {
-        if ($resource->resource instanceof LengthAwarePaginator) {
-            $handledData['data'] = $resource->resource;
+    $item = [
+             'status'  => true,
+             'code'    => $code,
+             'data'    => $data,
+             'message' => $message,
+            ];
+    if ($data instanceof JsonResource) {
+        if ($data->resource instanceof LengthAwarePaginator) {
+            $item['data'] = $data->resource;
         }
     }
+    $handledData = DataCrypt::handle($item);
     return Response::json($handledData);
 }
 

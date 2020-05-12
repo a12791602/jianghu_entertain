@@ -128,14 +128,14 @@ Route::group(
             ],
         )->name($namePrefix . 'get-search-condition-data');
 
-        //图片上传
+        //更新游戏图标
         Route::post(
-            'upload',
+            'icon',
             [
              GameController::class,
-             'upload',
+             'icon',
             ],
-        )->name($namePrefix . 'upload');
+        )->name($namePrefix . 'icon');
 
 
         Route::match(['post', 'get'], 'acknowledge-in', [GameAcknowledgementController::class, 'ackIn'])

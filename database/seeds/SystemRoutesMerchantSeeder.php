@@ -657,13 +657,13 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'userAudit',
              ],
              [
-              'route_name'    => 'merchant-api.game.upload',
+              'route_name'    => 'merchant-api.game.icon',
               'menu_group_id' => 34,
-              'title'         => '游戏管理-游戏-上传图片',
+              'title'         => '游戏管理-游戏-更新游戏icon',
               'is_open'       => 0,
               'is_ack'        => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameController',
-              'method'        => 'upload',
+              'method'        => 'icon',
              ],
              [
               'route_name'    => 'merchant-api.game.index',
