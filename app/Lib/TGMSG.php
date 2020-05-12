@@ -49,8 +49,7 @@ class TGMSG
         $stringLenUtf8        = mb_strlen($fullmsg, 'UTF-8');
         $sendAbleStringLength = 4096;
         if ($stringLenUtf8 <= $sendAbleStringLength) {
-            $return = $this->_sendMessage($fullmsg);
-            return $return;
+            return $this->_sendMessage($fullmsg);
         }
         $modulus         = $stringLenUtf8 % $sendAbleStringLength;
         $additionalTimes = $modulus > 0 ? 1 : 0;
