@@ -54,10 +54,10 @@ class IndexAction extends MainAction
                                  'guid'             => $report['user']['guid'] ?? '',
                                  'in_out'           => $report['in_out'],
                                  'type_sign'        => $report['type_sign'],
-                                 'before_balance'   => $report['before_balance'],
-                                 'amount'           => $report['amount'],
-                                 'balance'          => $report['balance'],
-                                 'frozen_balance'   => $report['frozen_balance'],
+                                 'before_balance'   => (float) sprintf('%.2f', $report['before_balance']),
+                                 'amount'           => (float) sprintf('%.2f', $report['amount']),
+                                 'balance'          => (float) sprintf('%.2f', $report['balance']),
+                                 'frozen_balance'   => (float) sprintf('%.2f', $report['frozen_balance']),
                                  'created_at'       => $report['created_at'],
                                 ];
         }
