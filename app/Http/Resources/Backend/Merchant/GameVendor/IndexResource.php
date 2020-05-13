@@ -47,7 +47,7 @@ class IndexResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $icon = $this->icon->path;
+        $icon = $this->icon->path ?? null;
         if ($icon) {
             $icon = config('image_domain.' . $this->app_environment) . $icon;
         }

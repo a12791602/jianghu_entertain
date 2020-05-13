@@ -41,7 +41,7 @@ class SystemSlidesResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $pic_path = $this->pic_path;
+        $pic_path = $this->pic_path ?? null;
         if ($pic_path) {
             $pic_path = config('image_domain.' . $this->app_environment) . $pic_path;
         }
