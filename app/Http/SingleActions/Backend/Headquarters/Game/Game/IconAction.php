@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Game\Game;
 
+use App\Models\Game\Game;
 use App\Models\Game\GamePlatform;
 use App\Models\Systems\StaticResource;
 use Illuminate\Http\JsonResponse;
@@ -29,13 +30,12 @@ class IconAction extends BaseAction
                           'table_name'  => 'games',
                           'description' => '游戏 icon',
                          ];
-        if ($model === null) {
+        if (!$model instanceof Game) {
             throw new \Exception('300201');
         }
         $icon_id = $inputData['icon_id'];
         try {
-            $model->fill(['icon_id' => $icon_id]);
-            $model->update();
+            $model->update(['icon_id' => $icon_id]);
             $game_platform->map(
                 static function ($item) use ($icon_id, $resource): void {
                     if ($item->icon_id > 0) {
