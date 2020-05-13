@@ -7,6 +7,7 @@ bootstrap/cache/*
 /storage/redis/*.log
 /storage/debugbar/*
 /storage/logs/*.log
+/storage/statics/*
 /vendor
 .env
 .env.backup
@@ -21,12 +22,11 @@ composer.json
 \.editorconfig
 \.idea/
 \.phpintel/
-
 composer.lock
 .gitmodules
-
 .phpstorm.meta.php
 _ide_helper_models.php
 _ide_helper.php
-
 app/Game
+
+
