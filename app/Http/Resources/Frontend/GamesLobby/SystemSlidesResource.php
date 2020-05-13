@@ -41,10 +41,13 @@ class SystemSlidesResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $appEnvironment = App::environment();
+        $pic_path = $this->pic_path;
+        if ($pic_path) {
+            $pic_path = config('image_domain.' . $this->app_environment) . $pic_path;
+        }
         return [
                 'title'        => $this->title,
-                'pic_path'     => config('image_domain.' . $appEnvironment)  . $this->pic_path,
+                'pic_path'     => $pic_path,
                 'redirect_url' => $this->redirect_url,
                 'type'         => $this->type,
                ];

@@ -4,8 +4,19 @@ namespace App\Http\Requests\Backend\Merchant\GameVendor;
 
 use App\Http\Requests\BaseFormRequest;
 
-class UploadRequest extends BaseFormRequest
+/**
+ * Class IconRequest
+ * @package App\Http\Requests\Backend\Merchant\Game
+ */
+class IconRequest extends BaseFormRequest
 {
+
+    /**
+     * 自定义字段 【此字段在数据库中没有的字段字典】
+     * @var array<string,string>
+     */
+    protected $extraDefinition = ['icon_id' => '游戏图标'];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +35,8 @@ class UploadRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'   => 'required|integer|min:1|exists:game_vendor_platforms',
-                'icon' => 'required|string|min:1|max:256',
+                'id'      => 'required|integer|min:1|exists:game_vendor_platforms',
+                'icon_id' => 'required|integer|exists:static_resources,id',
                ];
     }
 }

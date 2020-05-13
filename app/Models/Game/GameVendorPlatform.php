@@ -3,7 +3,9 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use App\Models\Systems\StaticResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class GameVendorPlatform
@@ -27,5 +29,14 @@ class GameVendorPlatform extends BaseModel
     public function gameVendor(): BelongsTo
     {
         return $this->belongsTo(GameVendor::class, 'vendor_id', 'id');
+    }
+
+    /**
+     * Game icon.
+     * @return HasOne
+     */
+    public function icon(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'icon_id');
     }
 }

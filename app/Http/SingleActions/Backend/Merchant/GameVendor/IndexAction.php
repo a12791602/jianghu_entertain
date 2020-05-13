@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\GameVendor;
 
+use App\Http\Resources\Backend\Merchant\GameVendor\IndexResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -17,19 +18,18 @@ class IndexAction extends BaseAction
     protected $model;
 
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-
-        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $datas                     = $this->model->with('gameVendor')
-                                          ->orderByDesc('sort')
-                                          ->filter($inputDatas)
-                                          ->withCacheCooldownSeconds(86400)
-                                          ->paginate($this->perPage);
-        return msgOut($datas);
+        $inputData['platform_id'] = $this->currentPlatformEloq->id;
+        $data                     = $this->model->with('gameVendor', 'icon:id,path')
+                                         ->orderByDesc('sort')
+                                         ->filter($inputData)
+                                         ->withCacheCooldownSeconds(86400)
+                                         ->paginate($this->perPage);
+        return msgOut(IndexResource::collection($data));
     }
 }

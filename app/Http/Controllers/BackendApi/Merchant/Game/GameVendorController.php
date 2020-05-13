@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Game;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Merchant\GameVendor\IconRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\IndexRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\SortRequest;
 use App\Http\Requests\Backend\Merchant\GameVendor\StatusRequest;
-use App\Http\Requests\Backend\Merchant\GameVendor\UploadRequest;
+use App\Http\SingleActions\Backend\Merchant\GameVendor\IconAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\IndexAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\SortAction;
 use App\Http\SingleActions\Backend\Merchant\GameVendor\StatusAction;
-use App\Http\SingleActions\Backend\Merchant\GameVendor\UploadAction;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -58,14 +58,14 @@ class GameVendorController extends Controller
     }
 
     /**
-     * 上传图片.
+     * 更新厂商icon.
      *
-     * @param UploadAction  $action  Action.
-     * @param UploadRequest $request Request.
+     * @param IconAction  $action  Action.
+     * @param IconRequest $request Request.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function upload(UploadAction $action, UploadRequest $request): JsonResponse
+    public function icon(IconAction $action, IconRequest $request): JsonResponse
     {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);

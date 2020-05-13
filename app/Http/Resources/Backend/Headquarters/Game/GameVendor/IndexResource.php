@@ -85,12 +85,15 @@ class IndexResource extends BaseResource
      */
     public function toArray($request): array
     {
-        $icon = $this->icon->path ?? null;
         unset($request);
+        $icon = $this->icon->path;
+        if ($icon) {
+            $icon = config('image_domain.' . $this->app_environment) . $icon;
+        }
         return [
                 'id'             => $this->id,
                 'name'           => $this->name,
-                'icon'           => config('image_domain.' . $this->app_environment) . $icon,
+                'icon'           => $icon,
                 'sort'           => $this->sort,
                 'type'           => $this->gameType->name,
                 'status'         => $this->status,

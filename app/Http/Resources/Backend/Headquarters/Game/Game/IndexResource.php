@@ -66,15 +66,18 @@ class IndexResource extends BaseResource
      */
     public function toArray($request): array
     {
-        $icon = $this->icon->path ?? null;
         unset($request);
+        $icon = $this->icon->path;
+        if ($icon) {
+            $icon = config('image_domain.' . $this->app_environment) . $icon;
+        }
         return [
                 'id'          => $this->id,
                 'vendor_name' => $this->vendor->name,
                 'name'        => $this->name,
                 'type'        => $this->type->name,
                 'sub_type'    => $this->subType->name,
-                'icon'        => config('image_domain.' . $this->app_environment) . $icon,
+                'icon'        => $icon,
                 'status'      => $this->status,
                 'last_editor' => $this->lastEditor->name ?? null,
                 'updated_at'  => $this->updated_at->toDateTimeString(),
