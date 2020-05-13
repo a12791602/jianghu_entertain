@@ -2,11 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
+use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
 use App\Models\User\UsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 /**
  * Class CheckRefuseAction
@@ -32,17 +33,24 @@ class CheckRefuseAction extends BaseAction
                            'review_at'   => Carbon::now(),
                           ];
         $withdrawOrder  = $this->model::find($inputDatas['id']);
-        DB::beginTransaction();
+        if (!$withdrawOrder instanceof UsersWithdrawOrder) {
+            throw new \Exception('202901');
+        }
+        if (!$withdrawOrder->user instanceof FrontendUser) {
+            throw new \Exception('202901');
+        }
+        if (!$withdrawOrder->user->account instanceof FrontendUsersAccount) {
+            throw new \Exception('202901');
+        }
         try {
-            $resl = $this->model::where($whereCondition)->update($update);
-            if ($resl) {
-                $withdrawOrder->user->account->operateAccount(
-                    ['amount' => $withdrawOrder->amount],
-                    'withdraw_un_frozen',
-                );
-                DB::commit();
-                $msgOut = msgOut();
-                return $msgOut;
+            $result = $this->model::where($whereCondition)->update($update);
+            if ($result) {
+                $param = [
+                          'user_id' => $withdrawOrder->user->id,
+                          'amount'  => $withdrawOrder->amount,
+                         ];
+                $withdrawOrder->user->account->operateAccount('withdraw_un_frozen', $param);
+                return msgOut();
             }
         } catch (\Throwable $exception) {
             $data    = [
@@ -55,9 +63,8 @@ class CheckRefuseAction extends BaseAction
                         'msg'     => '审核拒绝失败!',
                         'data'    => $data,
                        ];
-            Log::channel('finance-callback-system')->info(json_encode($logData));
-        }
-        DB::rollBack();
+            Log::channel('finance-callback-system')->info((string) json_encode($logData));
+        }//end try
         throw new \Exception('202901');
     }
 }
