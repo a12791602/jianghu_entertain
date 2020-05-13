@@ -54,14 +54,14 @@ Route::group(
              'sort',
             ],
         )->name($namePrefix . 'sort');
-        //上传图片
+        //更新厂商图标
         Route::post(
-            'upload',
+            'icon',
             [
              GameVendorController::class,
-             'upload',
+             'icon',
             ],
-        )->name($namePrefix . 'upload');
+        )->name($namePrefix . 'icon');
     },
 );
 

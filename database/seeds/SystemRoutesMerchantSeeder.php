@@ -765,13 +765,13 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'sort',
              ],
              [
-              'route_name'    => 'merchant-api.game-vendor.upload',
+              'route_name'    => 'merchant-api.game-vendor.icon',
               'menu_group_id' => 38,
-              'title'         => '游戏管理-平台管理-上传图片',
+              'title'         => '游戏管理-平台管理-更新平台icon',
               'is_open'       => 0,
               'is_ack'        => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Game\GameVendorController',
-              'method'        => 'upload',
+              'method'        => 'icon',
              ],
              [
               'route_name'    => 'merchant-api.game-type.index',

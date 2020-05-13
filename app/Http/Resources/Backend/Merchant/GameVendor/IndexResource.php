@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Backend\Merchant\Game;
+namespace App\Http\Resources\Backend\Merchant\GameVendor;
 
 use App;
 use App\Http\Resources\BaseResource;
@@ -19,9 +19,9 @@ class IndexResource extends BaseResource
     private $id;
 
     /**
-     * @var Game $games Game Model.
+     * @var App\Models\Game\GameVendor $gameVendor GameVendor Model.
      */
-    private $games;
+    private $gameVendor;
 
     /**
      * @var integer $sort Sort.
@@ -29,9 +29,9 @@ class IndexResource extends BaseResource
     private $sort;
 
     /**
-     * @var integer $hot_new Hot_new.
+     * @var integer $status Status.
      */
-    private $hot_new;
+    private $status;
 
     /**
      * @var App\Models\Systems\StaticResource $icon 游戏图标地址.
@@ -52,13 +52,11 @@ class IndexResource extends BaseResource
             $icon = config('image_domain.' . $this->app_environment) . $icon;
         }
         return [
-                'id'        => $this->id,
-                'icon'      => $icon,
-                'name'      => $this->games->name,
-                'sort'      => $this->sort,
-                'hot_new'   => $this->hot_new,
-                'vendor'    => optional($this->games->vendor)->name,
-                'vendor_id' => $this->games->vendor_id,
+                'id'     => $this->id,
+                'icon'   => $icon,
+                'name'   => $this->gameVendor->name,
+                'sort'   => $this->sort,
+                'status' => $this->status,
                ];
     }
 }
