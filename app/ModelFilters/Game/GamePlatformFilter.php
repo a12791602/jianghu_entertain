@@ -18,8 +18,8 @@ class GamePlatformFilter extends ModelFilter
      */
     public $relations = [
                          'games' => [
-                                     'type_in',
-                                     'sub_type_in',
+                                     'type_id',
+                                     'sub_type_id',
                                     ],
                         ];
 
@@ -51,5 +51,15 @@ class GamePlatformFilter extends ModelFilter
     public function device(int $device): GamePlatformFilter
     {
         return $this->where('device', $device);
+    }
+
+    /**
+     * 热门游戏
+     * @param  integer $hot_new HotNew.
+     * @return GamePlatformFilter
+     */
+    public function hotNew(int $hot_new): GamePlatformFilter
+    {
+        return $this->where('hot_new', $hot_new);
     }
 }
