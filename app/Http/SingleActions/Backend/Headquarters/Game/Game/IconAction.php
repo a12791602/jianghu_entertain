@@ -36,14 +36,14 @@ class IconAction extends BaseAction
         $icon_id = $inputData['icon_id'];
         try {
             $model->update(['icon_id' => $icon_id]);
+            StaticResource::where(['id' => $icon_id])->update($resource);
             $game_platform->map(
-                static function ($item) use ($icon_id, $resource): void {
+                static function ($item) use ($icon_id): void {
                     if ($item->icon_id > 0) {
                         return;
                     }
                     $item->icon_id = $icon_id;
                     $item->save();
-                    StaticResource::where(['id' => $icon_id])->update($resource);
                 },
             );
             return msgOut();

@@ -88,7 +88,10 @@ class DetailResource extends BaseResource
                 'balance'           => (float) sprintf('%.2f', $this->account->balance),
                 'type'              => $this->type,
                 'status'            => $this->status,
-                'label'             => $this->userTag->title ?? '',
+                'label'             => [
+                                        'id'    => $this->userTag->id,
+                                        'title' => $this->userTag->title ?? '',
+                                       ],
                 'promotion_details' => [
                                         'total_members'      => $this->specificInfo->total_members,
                                         'promotion_level'    => null,
