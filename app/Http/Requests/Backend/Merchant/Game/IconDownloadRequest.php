@@ -1,11 +1,16 @@
 <?php
 
-namespace App\Http\Requests\Backend\Merchant\GameVendor;
+namespace App\Http\Requests\Backend\Merchant\Game;
 
 use App\Http\Requests\BaseFormRequest;
 
-class UploadRequest extends BaseFormRequest
+/**
+ * Class IconDownloadRequest
+ * @package App\Http\Requests\Backend\Merchant\Game
+ */
+class IconDownloadRequest extends BaseFormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -23,9 +28,6 @@ class UploadRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return [
-                'id'   => 'required|integer|min:1|exists:game_vendor_platforms',
-                'icon' => 'required|string|min:1|max:256',
-               ];
+        return ['icon_id' => 'required|integer|exists:static_resources,id'];
     }
 }

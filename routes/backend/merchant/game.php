@@ -54,14 +54,14 @@ Route::group(
              'sort',
             ],
         )->name($namePrefix . 'sort');
-        //上传图片
+        //更新厂商图标
         Route::post(
-            'upload',
+            'icon',
             [
              GameVendorController::class,
-             'upload',
+             'icon',
             ],
-        )->name($namePrefix . 'upload');
+        )->name($namePrefix . 'icon');
     },
 );
 
@@ -128,14 +128,24 @@ Route::group(
             ],
         )->name($namePrefix . 'get-search-condition-data');
 
-        //图片上传
+        //更新游戏图标
         Route::post(
-            'upload',
+            'icon',
             [
              GameController::class,
-             'upload',
+             'icon',
             ],
-        )->name($namePrefix . 'upload');
+        )->name($namePrefix . 'icon');
+
+        //下载游戏图标
+        Route::post(
+            'icon-download',
+            [
+             GameController::class,
+             'iconDownload',
+            ],
+        )->name($namePrefix . 'icon-download');
+
 
 
         Route::match(['post', 'get'], 'acknowledge-in', [GameAcknowledgementController::class, 'ackIn'])
