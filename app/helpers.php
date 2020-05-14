@@ -16,6 +16,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
@@ -34,6 +35,30 @@ if (!function_exists('configure')) {
         }
         return $configure;
     }
+}
+
+
+/**
+ * Setting Data into the Config
+ *
+ * @param string $filename FileName.
+ * @param array  $params   Params.
+ * @var string $params [use_type] int 1 common , 2 individual
+ * @var int $params [type] int, required 1 是普通数据的结果要存入为json 2 是表的结果要存入为 json  type 1 时不需要 table_name type 2 时需要 table_name
+ * @var string $params [title] string, required           use_type 1|2  type 1|2 英文字母大小写.
+ * @var string $params [description] string, required     use_type 1|2  type 1|2 中文备注.
+ * @var string $params [table] string, required           use_type 1|2  type 2   表名存入.
+ * @var string $params [fields] string, required          use_type 1|2  type 2   表名中要存入 json 的字段 比如 id,name,code,status
+ * @var string $params [platform_sign] string, required   use_type 2.
+ * @var string $params [path] string, required            use_type 1|2  type 1|2 存文件路径.
+ * @var string $params [data] array, required             use_type 1|2  type 1 时 传入的数据 最终需要转变为 json.
+ * @return boolean
+ * @throws Exception Exception.
+ */
+function genStaticJSON(string $filename, array $params): bool
+{
+    $staticJson = app('App\Lib\StaticJson\StaticJsonHandler');
+    return $staticJson->setData($filename, $params);
 }
 
 /**
@@ -313,5 +338,20 @@ function backendOperationLog(object $systemLog, array $inputDatas): array
     }
 
     $result['data'] = $data;
+    return $result;
+}
+
+/**
+ * @param object $result         Eloquent Object.
+ * @param array  $toRetrieveData Mixed Field Data.
+ * @param array  $field          Data Field to Retrieve like ['type', 'path', 'description', 'title'].
+ * @return object
+ */
+function prepareBeforeSave(object $result, array $toRetrieveData, array $field): object
+{
+    $eloqToSaveData = Arr::only($toRetrieveData, $field);
+    foreach ($eloqToSaveData as $updKey => $updValue) {
+        $result->$updKey = $updValue;
+    }
     return $result;
 }
