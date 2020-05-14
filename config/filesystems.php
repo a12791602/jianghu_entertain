@@ -69,6 +69,12 @@ return [
                                     'url'        => env('APP_URL') . '/storage',
                                     'visibility' => 'public',
                                    ],
+                      'json'    => [
+                                    'driver'     => 'local',
+                                    'root'       => storage_path('statics'),
+                                    'url'        => env('JSON_URL'),
+                                    'visibility' => 'public',
+                                   ],
 
                      ],
        ];
