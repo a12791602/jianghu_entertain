@@ -19,12 +19,23 @@ class FrontendUsersBlackListFilter extends ModelFilter
     public $relations = [];
 
     /**
+     * id查询
+     *
+     * @param  integer $dataId Id.
+     * @return self
+     */
+    public function dataId(int $dataId): self
+    {
+        return $this->where('id', $dataId);
+    }
+
+    /**
      * 用户guid查询
      *
      * @param  string $guid 用户guid.
-     * @return FrontendUsersBlackListFilter
+     * @return self
      */
-    public function guid(string $guid): FrontendUsersBlackListFilter
+    public function guid(string $guid): self
     {
         return $this->where('guid', $guid);
     }
@@ -33,9 +44,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 手机号码查询
      *
      * @param  string $mobile 手机号码.
-     * @return FrontendUsersBlackListFilter
+     * @return self
      */
-    public function mobile(string $mobile): FrontendUsersBlackListFilter
+    public function mobile(string $mobile): self
     {
         return $this->where('mobile', $mobile);
     }
@@ -44,9 +55,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 拉黑时间查询
      *
      * @param  array $createdAt 拉黑时间.
-     * @return FrontendUsersBlackListFilter
+     * @return $this|\Illuminate\Database\Eloquent\Builder
      */
-    public function createdAt(array $createdAt): FrontendUsersBlackListFilter
+    public function createdAt(array $createdAt)
     {
         $eloq = $this;
         if (count($createdAt) === 2) {
@@ -59,9 +70,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 状态查询
      *
      * @param integer $status 状态.
-     * @return FrontendUsersBlackListFilter
+     * @return self
      */
-    public function status(int $status): FrontendUsersBlackListFilter
+    public function status(int $status): self
     {
         return $this->where('status', $status);
     }
@@ -70,9 +81,9 @@ class FrontendUsersBlackListFilter extends ModelFilter
      * 平台标识查询
      *
      * @param  string $platformSign 平台标识.
-     * @return FrontendUsersBlackListFilter
+     * @return self
      */
-    public function platformSign(string $platformSign): FrontendUsersBlackListFilter
+    public function platformSign(string $platformSign): self
     {
         return $this->where('platform_sign', $platformSign);
     }

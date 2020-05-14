@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 用户黑名单
@@ -44,5 +45,13 @@ class FrontendUsersBlackList extends BaseAuthModel
     {
         $filterArr = ['guid' => $this->guid];
         return self::filter($filterArr)->count();
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUser::class, 'guid', 'guid');
     }
 }
