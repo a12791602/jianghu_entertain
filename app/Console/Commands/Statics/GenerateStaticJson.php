@@ -53,20 +53,20 @@ class GenerateStaticJson extends BaseCommand
     {
         $datas = Config::get('static_json.data');
         $index = $this->option('index');
-        if (is_string($index)) {
-            if ($index) {
-                $datas        = Config::get('static_json.data');
-                $filteredData = Arr::where(
-                    $datas,
-                    static function ($value) {
-                        return $value['type'] === StaticResource::TYPE_WHOLE_TABLE;
-                    },
-                );
-                foreach ($filteredData as $staticKey => $data) {
-                    dispatch(new StaticJsonJob((string) $staticKey, $data));
-                }
-                $this->info('Success!');
-            } else {
+        if ($index === null) {
+            $datas        = Config::get('static_json.data');
+            $filteredData = Arr::where(
+                $datas,
+                static function ($value) {
+                    return $value['type'] === StaticResource::TYPE_WHOLE_TABLE;
+                },
+            );
+            foreach ($filteredData as $staticKey => $data) {
+                dispatch(new StaticJsonJob((string) $staticKey, $data));
+            }
+            $this->info('Success!');
+        } else {
+            if (is_string($index)) {
                 if (array_key_exists($index, $datas)) {
                     $data = Arr::get($datas, $index);
                     dispatch(new StaticJsonJob($index, $data));
@@ -74,9 +74,9 @@ class GenerateStaticJson extends BaseCommand
                 } else {
                     $this->info('there has no key in the config!!!');
                 }
-            }//end if
-        } else {
-            $this->info('please put string!!!');
+            } else {
+                $this->info('please put string!!!');
+            }
         }//end if
     }
 }
