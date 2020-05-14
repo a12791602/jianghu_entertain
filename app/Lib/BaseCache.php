@@ -44,6 +44,24 @@ trait BaseCache
     }
 
     /**
+     * @param string $cacheKey 缓存键.
+     * @param array  $data     缓存值.
+     * @return array<string,mixed>|boolean
+     */
+    public static function appendArrTagsCache(string $cacheKey, array $data)
+    {
+        if (!$data) {
+            return false;
+        }
+        if (self::hasTagsCache($cacheKey)) {
+            $originalData = self::getTagsCacheData($cacheKey);
+            $data         = array_merge($originalData, $data);//用最后数据覆盖之前的数据 如果没有用最后数据 合并到之前数据
+        }
+        self::saveTagsCacheData($cacheKey, $data);
+        return $data;
+    }
+
+    /**
      * 删除tags缓存
      * @param  string $cacheKey 缓存键.
      * @return boolean
@@ -52,8 +70,7 @@ trait BaseCache
     {
         $cacheConfig = self::getCacheConfig($cacheKey);
         if (!empty($cacheConfig) && isset($cacheConfig['tags'], $cacheConfig['key'])) {
-            $forgetCache = Cache::tags($cacheConfig['tags'])->forget($cacheConfig['key']);
-            return $forgetCache;
+            return Cache::tags($cacheConfig['tags'])->forget($cacheConfig['key']);
         }
         return false;
     }
@@ -66,8 +83,7 @@ trait BaseCache
     public static function getCacheConfig(string $cacheKey)
     {
         $cacheConfig = config('web.main.cache');
-        $configData  = $cacheConfig[$cacheKey] ?? [];
-        return $configData;
+        return $cacheConfig[$cacheKey] ?? [];
     }
 
     /**
@@ -79,8 +95,7 @@ trait BaseCache
     {
         $cacheConfig = self::getCacheConfig($cacheKey);
         if (!empty($cacheConfig) && isset($cacheConfig['tags'], $cacheConfig['key'])) {
-            $hasTagsCache = Cache::tags($cacheConfig['tags'])->has($cacheConfig['key']);
-            return $hasTagsCache;
+            return Cache::tags($cacheConfig['tags'])->has($cacheConfig['key']);
         }
         return false;
     }
