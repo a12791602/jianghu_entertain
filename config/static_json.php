@@ -8,7 +8,12 @@ return [
                                       'title'       => 'system_banks_available',
                                       'description' => '系统支持银行',
                                       'model'       => \App\Models\Finance\SystemBank::Class,//model Name
-                                      'fields'      => 'id,name,code,status',
+                                      'fields'      => [
+                                                        'id',
+                                                        'name',
+                                                        'code',
+                                                        'status',
+                                                       ],
                                       'redis_index' => 'static_jsons_common',//config/web/main.php 里面的 redis_index 要存入的 redis 组
                                      ],
                   ],

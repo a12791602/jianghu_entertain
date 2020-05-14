@@ -55,7 +55,12 @@ trait StaticJsonLogic
         $model = new $params['model']();
         //$model = app($params['model']);
         $table_name = $model->getTable();
-        $jsonData   = $model->cursor()->pluck('name', 'id')->toJson(JSON_UNESCAPED_UNICODE);
+        $jsonData   = $model->cursor()->map(
+            static function ($data) use ($params) {
+                return collect($data->toArray())
+                ->only($params['fields']);
+            },
+        )->toJson(JSON_UNESCAPED_UNICODE);
         return [
                 'table_name' => $table_name,
                 'jsonData'   => $jsonData,
@@ -78,7 +83,6 @@ trait StaticJsonLogic
                       'title'         => 'trim|escape',
                       'description'   => 'trim|escape',
                       'table'         => 'trim|escape',
-                      'fields'        => 'trim|escape',
                       'use_type'      => 'trim|escape',
                       'table_type'    => 'trim|escape',
                      ];
@@ -99,7 +103,9 @@ trait StaticJsonLogic
              'description'   => 'required|string',
                 //             'table'         => 'required_if:table_type,==,2|alpha_dash',
              'model'         => 'required',
-             'fields'        => 'required_if:type,==,2|regex:/^(?!\,)(?!.*\,$)(?!.*?\,\,)[\w,]{1,20}$/', //id,name,code ...
+             'fields'        => 'required_if:type,==,2|array',
+             'fields.*'      => 'alpha_dash|between:1,50', //id,name,code ...
+            //             'fields'        => 'required_if:type,==,2|regex:/^(?!\,)(?!.*\,$)(?!.*?\,\,)[\w,]{1,20}$/', //id,name,code ...
             ],
         );
         if ($validator->fails()) {
