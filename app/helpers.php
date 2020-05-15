@@ -355,3 +355,18 @@ function prepareBeforeSave(object $result, array $toRetrieveData, array $field):
     }
     return $result;
 }
+
+/**
+ * 保存游戏日志
+ * @param  string $info              日志信息.
+ * @param  string $theirSerialNumber 三方订单号.
+ * @return void
+ */
+function saveGameLog(string $info, string $theirSerialNumber = ''): void
+{
+    if ($theirSerialNumber === '') {
+        saveLog('game', $info);
+    } else {
+        saveLog('game', $info . '，their_serial_number：' . $theirSerialNumber);
+    }
+}

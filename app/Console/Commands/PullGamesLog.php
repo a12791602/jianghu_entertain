@@ -35,9 +35,6 @@ class PullGamesLog extends Command
     {
         $gameVendors = GameVendor::where('status', GameVendor::STATUS_OPEN)->get();
         foreach ($gameVendors as $vendor) {
-            if ($vendor->sign === 'IM') {
-                continue;
-            }
             $gameInstance = GameCommons::gameInit($vendor);
             $gameInstance->saveBetOrder();
         }
