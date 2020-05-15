@@ -4,8 +4,9 @@ namespace App\Lib\StaticJson;
 
 use App\Lib\BaseCache;
 use App\Models\Systems\StaticResource;
-use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 /**
  * Class StaticJsonHandler
@@ -16,16 +17,6 @@ class StaticJsonHandler
 {
     use BaseCache;
     use StaticJsonLogic;
-
-    /**
-     * @var string[]
-     */
-    private $saveField = [
-                          'type',
-                          'path',
-                          'description',
-                          'title',
-                         ];
 
     /**
      * Setting Data into the Config
@@ -47,39 +38,52 @@ class StaticJsonHandler
     {
         $params = $this->validateData($params);
         $path   = $params['path'] . '/' . $filename . '.json';
-        if ($params['type'] === 2) {
-            $result = $this->handleTableData($params);
-            /** @var string $table_name */
-            $table_name = null;
-            /** @var string $jsonData */
-            $jsonData = null;
-            extract($result, EXTR_OVERWRITE);
-            $filterCriteria = ['table_name' => $table_name];
-
-            $staticResourceData               = Arr::only($params, $this->saveField);
-            $staticResourceData['table_name'] = $table_name;
-        } else {
-            $jsonData = json_encode($params['data'], JSON_UNESCAPED_UNICODE);
+        /** @var string $table_name */
+        $table_name = null;
+        /** @var string $jsonData */
+        $jsonData = '';
+        switch ($params['type']) {
+            case StaticResource::TYPE_WHOLE_TABLE:
+                $result = $this->handleTableData($params);
+                extract($result, EXTR_OVERWRITE);
+                break;
+            case StaticResource::TYPE_COMMAND:
+                $result = $this->handleCommandData();
+                extract($result, EXTR_OVERWRITE);
+                break;
+            default:
+                $jsonData = (string) json_encode($params['data'], JSON_UNESCAPED_UNICODE);
+                break;
         }
-        $staticResourceData['path']        = $path;//覆盖之前的 路径与 拼接后缀的 路径
-        $staticResourceData['static_type'] = StaticResource::STATIC_TYPE_JSON;
-
-        Storage::disk('json')->put($path, (string) $jsonData);
+        Storage::disk('json')->put($path, $jsonData);
         $storageLink = Storage::disk('json')->url($path);
         $this->cachingData($params, $path, $storageLink);
-        $filterCriteria['type']        = $params['type'];
-        $filterCriteria['title']       = $params['title'];
-        $filterCriteria['static_type'] = StaticResource::STATIC_TYPE_JSON;
-        $result                        = StaticResource::filter($filterCriteria)->first();
-        if (! $result instanceof StaticResource) {
-            $staticResourceEloq = new StaticResource();
-            $staticResourceEloq->fill($staticResourceData);
-            $result = $staticResourceEloq->save();
-        } else {
-            $params['path']     = $path;
-            $staticResourceEloq = prepareBeforeSave($result, $params, $this->saveField);
-            $result             = $staticResourceEloq->save();
+        return $this->saveStaticRecord($params, $path, $table_name);
+        //#######################################################
+    }
+
+    /**
+     * 处理Command数据
+     * @return array <string,mixed>
+     */
+    protected function handleCommandData(): array
+    {
+        $validCommand = [];
+        $allArtisan   = Artisan::all();
+        foreach ($allArtisan as $artisanKey => $commandCollection) {
+            $commandClass    = get_class($commandCollection);
+            $validClassCheck = Str::startsWith($commandClass, 'App\Console\Commands');
+            $validCheck      = $validClassCheck === true && $artisanKey !== 'base';
+            if (!$validCheck) {
+                continue;
+            }
+            $validCommand[] = [
+                               'sign'        => $artisanKey,
+                               'command'     => Str::afterLast($commandClass, '\\'),
+                               'description' => $commandCollection->getDescription(),
+                              ];
         }
-        return $result;
+        $jsonData = json_encode($validCommand);
+        return ['jsonData' => $jsonData];
     }
 }
