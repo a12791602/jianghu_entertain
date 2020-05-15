@@ -6,7 +6,8 @@ $sqliteDBPath  = database_path('database.sqlite');
 $redisOptionDB = Str::slug(env('APP_NAME', 'laravel'), '_') . '_database_';
 $mysql_SSL_CA  = extension_loaded('pdo_mysql') ? array_filter(
     [
-     PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+     PDO::MYSQL_ATTR_SSL_CA             => env('MYSQL_ATTR_SSL_CA'),
+     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => false,
     ],
 ) : [];
 return [
