@@ -37,7 +37,7 @@ class GameVendorSeeder extends Seeder
               'id'             => 2,
               'name'           => 'VR视讯',
               'sign'           => 'VR',
-              'icon_id'        => 3,
+              'icon_id'        => 390,
               'type_id'        => 5,
               'sort'           => 2,
               'status'         => 1,
@@ -47,7 +47,7 @@ class GameVendorSeeder extends Seeder
               'last_editor_id' => 1,
               'needCreateAcc'  => 1,
               'created_at'     => '2020-04-10 22:40:41',
-              'updated_at'     => '2020-05-08 22:46:23',
+              'updated_at'     => '2020-05-15 15:28:24',
              ],
              [
               'id'             => 3,
