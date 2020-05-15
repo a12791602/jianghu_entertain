@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Config;
 class GenerateStaticJson extends BaseCommand
 {
 
+    private const VALID_TYPE = [
+                                StaticResource::TYPE_WHOLE_TABLE,
+                                StaticResource::TYPE_COMMAND,
+                               ];
+
     /**
      * The name and signature of the console command.
      *
@@ -58,7 +63,7 @@ class GenerateStaticJson extends BaseCommand
             $filteredData = Arr::where(
                 $datas,
                 static function ($value) {
-                    return $value['type'] === StaticResource::TYPE_WHOLE_TABLE;
+                    return in_array($value['type'], self::VALID_TYPE, true);
                 },
             );
             foreach ($filteredData as $staticKey => $data) {
