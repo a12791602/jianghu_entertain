@@ -20,6 +20,8 @@ class StaticResource extends BaseModel
 
     public const TYPE_WHOLE_TABLE = 2;//以表 转变 json
 
+    public const TYPE_COMMAND = 3;//以 artisan command 转变为 json
+
     /**
      * @var array $guarded
      */
