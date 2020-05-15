@@ -25,7 +25,7 @@ class CreateGameProjectsTable extends Migration
                 $table->string('serial_number', 32)->nullable()->default(null)->comment('注单号 14-32');
                 $table->string('their_serial_number', 32)->nullable()->default(null)->comment('三方单号 20-32');
                 $table->string('their_notifyId', 50)->nullable()->default(null)->comment('三方通知单号 39-50');
-                $table->integer('their_info_type')->comment('三方信息类型说明');
+                $table->integer('their_info_type')->nullable()->comment('三方信息类型说明');
                 $table->integer('user_id')->comment('用户id');
                 $table->string('guid', 16)->nullable()->default(null)->comment('客户游戏唯一标识id');
                 $table->string('username', 64)->nullable()->default(null)->comment('用户名');
