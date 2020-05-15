@@ -60,28 +60,6 @@ trait StaticJsonLogic
     }
 
     /**
-     * 处理表数据
-     * @param array $params Params.
-     * @return array <string,mixed>
-     */
-    protected function handleTableData(array $params): array
-    {
-        $model = new $params['model']();
-        //$model = app($params['model']);
-        $table_name = $model->getTable();
-        $jsonData   = $model->cursor()->map(
-            static function ($data) use ($params) {
-                return collect($data->toArray())
-                ->only($params['fields']);
-            },
-        )->toJson(JSON_UNESCAPED_UNICODE);
-        return [
-                'table_name' => $table_name,
-                'jsonData'   => $jsonData,
-               ];
-    }
-
-    /**
      * 处理Command数据
      * @return array <string,mixed>
      */
@@ -114,7 +92,9 @@ trait StaticJsonLogic
      */
     protected function saveStaticRecord(array $params, string $path, ?string $table_name): bool
     {
-        $staticResourceData = Arr::only($params, $this->saveField);
+        $staticResourceData                = Arr::only($params, $this->saveField);
+        $staticResourceData['path']        = $path;//覆盖之前的 路径与 拼接后缀的 路径
+        $staticResourceData['static_type'] = StaticResource::STATIC_TYPE_JSON;
         switch ($params['type']) {
             case StaticResource::TYPE_WHOLE_TABLE:
                 $staticResourceData['table_name'] = $table_name;
@@ -122,8 +102,6 @@ trait StaticJsonLogic
                 break;
             case StaticResource::TYPE_COMMAND:
             default:
-                $staticResourceData['path']        = $path;//覆盖之前的 路径与 拼接后缀的 路径
-                $staticResourceData['static_type'] = StaticResource::STATIC_TYPE_JSON;
                 break;
         }
         $filterCriteria['type']        = $params['type'];
@@ -179,6 +157,7 @@ trait StaticJsonLogic
                 //             'table'         => 'required_if:table_type,==,2|alpha_dash',
              'model'         => 'required_if:type,==,2',
              'fields'        => 'required_if:type,==,2|array',
+             'relations'     => 'array',
              'fields.*'      => 'alpha_dash|between:1,50', //id,name,code ...
             //             'fields'        => 'required_if:type,==,2|regex:/^(?!\,)(?!.*\,$)(?!.*?\,\,)[\w,]{1,20}$/', //id,name,code ...
             ],
