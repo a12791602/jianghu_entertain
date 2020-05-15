@@ -4,8 +4,10 @@ namespace App\Lib\StaticJson;
 
 use App\Models\Systems\StaticResource;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 use Waavi\Sanitizer\Sanitizer;
 
 trait StaticJsonLogic
@@ -77,6 +79,31 @@ trait StaticJsonLogic
                 'table_name' => $table_name,
                 'jsonData'   => $jsonData,
                ];
+    }
+
+    /**
+     * 处理Command数据
+     * @return array <string,mixed>
+     */
+    protected function handleCommandData(): array
+    {
+        $validCommand = [];
+        $allArtisan   = Artisan::all();
+        foreach ($allArtisan as $artisanKey => $commandCollection) {
+            $commandClass    = get_class($commandCollection);
+            $validClassCheck = Str::startsWith($commandClass, 'App\Console\Commands');
+            $validCheck      = $validClassCheck === true && $artisanKey !== 'base';
+            if (!$validCheck) {
+                continue;
+            }
+            $validCommand[] = [
+                               'sign'        => $artisanKey,
+                               'command'     => Str::afterLast($commandClass, '\\'),
+                               'description' => $commandCollection->getDescription(),
+                              ];
+        }
+        $jsonData = json_encode($validCommand);
+        return ['jsonData' => $jsonData];
     }
 
     /**
