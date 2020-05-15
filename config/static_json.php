@@ -24,5 +24,25 @@ return [
                                              'description' => '系统定时任务命令集',
                                              'redis_index' => 'static_jsons_common',//config/web/main.php 里面的 redis_index 要存入的 redis 组
                                             ],
+                   'user_account_type'   => [
+                                             'use_type'    => 1,//common
+                                             'type'        => \App\Models\Systems\StaticResource::TYPE_WHOLE_TABLE,//1 是普通数据的结果要存入为json 2 是表的结果要存入为 json  type 1 时不需要 table_name type 2 时需要 table_name
+                                             'path'        => 'common/account',//需要保存json的路径
+                                             'title'       => 'frontend_users_accounts_types',
+                                             'description' => '用户账变类型',
+                                             'model'       => \App\Models\User\FrontendUsersAccountsTypesGroup::Class,//model Name
+                                             'relations'   => [
+                                                               'accountType' => [
+                                                                                 'group_type_id',
+                                                                                 'name',
+                                                                                 'sign',
+                                                                                ],//表 relation 的 关系 与 字段
+                                                              ],
+                                             'fields'      => [
+                                                               'id',
+                                                               'group_name',
+                                                              ],//主表的字段
+                                             'redis_index' => 'static_jsons_common',//config/web/main.php 里面的 redis_index 要存入的 redis 组
+                                            ],
                   ],
        ];

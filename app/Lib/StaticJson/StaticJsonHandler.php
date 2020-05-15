@@ -15,6 +15,7 @@ class StaticJsonHandler
 {
     use BaseCache;
     use StaticJsonLogic;
+    use StaticJsonTableLogic;
 
     /**
      * Setting Data into the Config
