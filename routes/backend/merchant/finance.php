@@ -324,13 +324,5 @@ Route::group(
              'index',
             ],
         )->name($namePrefix . 'index');
-        //获取支付方式
-        Route::post(
-            'account-type',
-            [
-             UserAccountController::class,
-             'accountType',
-            ],
-        )->name($namePrefix . 'account-type');
     },
 );
