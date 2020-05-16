@@ -33,6 +33,7 @@ return [
                                              'model'       => \App\Models\User\FrontendUsersAccountsTypesGroup::Class,//model Name
                                              'relations'   => [
                                                                'accountType' => [
+                                                                                 'id',
                                                                                  'group_type_id',
                                                                                  'name',
                                                                                  'sign',
