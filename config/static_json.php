@@ -45,5 +45,27 @@ return [
                                                               ],//主表的字段
                                              'redis_index' => 'static_jsons_common',//config/web/main.php 里面的 redis_index 要存入的 redis 组
                                             ],
+                   'vendors_list'        => [
+                                             'use_type'    => 1,//common
+                                             'type'        => \App\Models\Systems\StaticResource::TYPE_WHOLE_TABLE,//1 是普通数据的结果要存入为json 2 是表的结果要存入为 json  type 1 时不需要 table_name type 2 时需要 table_name
+                                             'path'        => 'common/game',//需要保存json的路径
+                                             'title'       => 'game_type_vendors',
+                                             'description' => '游戏厂商列表',
+                                             'model'       => \App\Models\Game\GameType::class,//model Name
+                                             'relations'   => [
+                                                               'vendors' => [
+                                                                             'type_id',
+                                                                             'id',
+                                                                             'name',
+                                                                             'sign',
+                                                                            ],//表 relation 的 关系 与 字段
+                                                              ],
+                                             'fields'      => [
+                                                               'id',
+                                                               'name',
+                                                               'sign',
+                                                              ],//主表的字段
+                                             'redis_index' => 'static_jsons_common',//config/web/main.php 里面的 redis_index 要存入的 redis 组
+                                            ],
                   ],
        ];

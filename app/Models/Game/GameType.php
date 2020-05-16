@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 class GameType extends BaseModel implements Sortable
 {
     use EloquentSortable;// Eloquent Sortable.
-    
+
     public const STATUS_CLOSE = 0;
     public const STATUS_OPEN  = 1;
 
@@ -78,6 +78,14 @@ class GameType extends BaseModel implements Sortable
     public function children(): HasMany
     {
         return $this->hasMany(GameSubType::class, 'parent_id', 'id')->ordered();
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function vendors(): HasMany
+    {
+        return $this->hasMany(GameVendor::class, 'type_id', 'id');
     }
 
     /**
