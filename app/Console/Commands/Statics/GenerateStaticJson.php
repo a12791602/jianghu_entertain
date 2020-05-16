@@ -69,7 +69,7 @@ class GenerateStaticJson extends BaseCommand
             foreach ($filteredData as $staticKey => $data) {
                 dispatch(new StaticJsonJob((string) $staticKey, $data));
             }
-            $this->info('Success!');
+            $this->info('updated Status JSON Success!');
         } else {
             if (is_string($index)) {
                 if (array_key_exists($index, $datas)) {

@@ -35,11 +35,8 @@ trait StaticJsonTableLogic
         }
         $model      = new $params['model']();
         $table_name = $model->getTable();
-        $jsonData   = call_user_func(
-            $params['model'] . '::with',
-            $withData,
-        )
-            ->get(['id', 'group_name'])
+        $jsonData   = $params['model'] ::with($withData)
+            ->get($params['fields'])
             ->toJson(JSON_UNESCAPED_UNICODE);
         return [
                 'table_name' => $table_name,
