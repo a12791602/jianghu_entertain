@@ -27,13 +27,6 @@ class Game extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * The accessors to append to the model's array form.
-     *
-     * @var array
-     */
-    protected $appends = ['url'];
-
-    /**
      * @var array
      */
     public static $fieldDefinition = [

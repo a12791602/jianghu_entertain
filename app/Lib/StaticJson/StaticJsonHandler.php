@@ -4,7 +4,6 @@ namespace App\Lib\StaticJson;
 
 use App\Lib\BaseCache;
 use App\Models\Systems\StaticResource;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class StaticJsonHandler
@@ -54,10 +53,7 @@ class StaticJsonHandler
                 $jsonData = (string) json_encode($params['data'], JSON_UNESCAPED_UNICODE);
                 break;
         }
-        Storage::disk('json')->put($path, $jsonData);
-        $storageLink = Storage::disk('json')->url($path);
-        $this->cachingData($params, $path, $storageLink);
-        return $this->saveStaticRecord($params, $path, $table_name);
+        return $this->saveStaticRecord($params, $path, $jsonData, $table_name);
         //#######################################################
     }
 }

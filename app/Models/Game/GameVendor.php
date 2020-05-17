@@ -7,6 +7,7 @@ use App\Models\BaseModel;
 use App\Models\Systems\StaticResource;
 use App\Models\Systems\SystemIpWhiteList;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -129,5 +130,13 @@ class GameVendor extends BaseModel
     public function gameType(): BelongsTo
     {
         return $this->belongsTo(GameType::class, 'type_id', 'id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function gamesUnderVendor(): HasMany
+    {
+        return $this->hasMany(Game::class, 'vendor_id', 'id');
     }
 }

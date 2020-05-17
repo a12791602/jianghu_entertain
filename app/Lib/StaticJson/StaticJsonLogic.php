@@ -87,11 +87,16 @@ trait StaticJsonLogic
     /**
      * @param array       $params     Params.
      * @param string      $path       Path.
+     * @param string      $jsonData   JSON Data string.
      * @param string|null $table_name Table name.
      * @return boolean
      */
-    protected function saveStaticRecord(array $params, string $path, ?string $table_name): bool
-    {
+    protected function saveStaticRecord(
+        array $params,
+        string $path,
+        string $jsonData,
+        ?string $table_name
+    ): bool {
         $staticResourceData                = Arr::only($params, $this->saveField);
         $staticResourceData['path']        = $path;//覆盖之前的 路径与 拼接后缀的 路径
         $staticResourceData['static_type'] = StaticResource::STATIC_TYPE_JSON;
@@ -113,11 +118,35 @@ trait StaticJsonLogic
             $staticResourceEloq->fill($staticResourceData);
             $result = $staticResourceEloq->save();
         } else {
-            $params['path']     = $path;
+            $params['path'] = $path;
+            $this->removeOldFile($result->path);
             $staticResourceEloq = prepareBeforeSave($result, $params, $this->saveField);
             $result             = $staticResourceEloq->save();
         }
+        $this->generateJsonFile($params, $path, $jsonData);
         return $result;
+    }
+
+    /**
+     * @param array  $params   Params.
+     * @param string $path     Path.
+     * @param string $jsonData JSON Data string.
+     * @return boolean
+     */
+    protected function generateJsonFile(array $params, string $path, string $jsonData): bool
+    {
+        Storage::disk('json')->put($path, $jsonData);
+        $storageLink = Storage::disk('json')->url($path);
+        return $this->cachingData($params, $path, $storageLink);
+    }
+
+    /**
+     * @param string $path Path.
+     * @return boolean
+     */
+    protected function removeOldFile(string $path): bool
+    {
+        return Storage::disk('json')->delete($path);
     }
 
     /**
