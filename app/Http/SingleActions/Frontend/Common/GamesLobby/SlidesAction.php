@@ -3,7 +3,8 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\Resources\Frontend\GamesLobby\SystemSlidesResource;
-use App\Models\Systems\SystemFePageBanner;
+use App\JHHYLibs\JHHYCnst;
+use App\Models\Notice\NoticeCarousel;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -21,8 +22,12 @@ class SlidesAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $inputDatas['status'] = SystemFePageBanner::STATUS_OPEN;
-        $slides               = SystemFePageBanner::filter($inputDatas)->get();
+        $criteria = [
+                     'satus'  => JHHYCnst::STATUS_OPEN,
+                     'type'   => $inputDatas['flag'],
+                     'device' => JHHYCnst::DEVICE_H5,
+                    ];
+        $slides   = NoticeCarousel::filter($criteria)->get();
         return msgOut(SystemSlidesResource::collection($slides));
     }
 }

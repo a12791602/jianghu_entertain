@@ -23,9 +23,9 @@ class NoticeCarouselFilter extends ModelFilter
      * 按平台搜索.
      *
      * @param integer $platform_id 所属平台的id.
-     * @return NoticeCarouselFilter
+     * @return self
      */
-    public function platform(int $platform_id): NoticeCarouselFilter
+    public function platform(int $platform_id): self
     {
         return $this->where('platform_id', $platform_id);
     }
@@ -34,9 +34,9 @@ class NoticeCarouselFilter extends ModelFilter
      * 按标题搜索.
      *
      * @param string $title 标题.
-     * @return NoticeCarouselFilter
+     * @return self
      */
-    public function title(string $title): NoticeCarouselFilter
+    public function title(string $title): self
     {
         return $this->where('title', $title);
     }
@@ -45,10 +45,21 @@ class NoticeCarouselFilter extends ModelFilter
      * 按设备查找.
      *
      * @param integer $device 设备.
-     * @return NoticeCarouselFilter
+     * @return self
      */
-    public function device(int $device): NoticeCarouselFilter
+    public function device(int $device): self
     {
         return $this->where('device', $device);
+    }
+
+    /**
+     * 跳转方式查找.
+     *
+     * @param integer $type 跳转方式.
+     * @return self
+     */
+    public function type(int $type): self
+    {
+        return $this->where('type', $type);
     }
 }

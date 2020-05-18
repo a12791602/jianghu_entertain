@@ -4,6 +4,7 @@ namespace App\Http\Resources\Frontend\GamesLobby;
 
 use App;
 use App\Http\Resources\BaseResource;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class SystemSlidesResource
@@ -18,9 +19,9 @@ class SystemSlidesResource extends BaseResource
     private $title;
 
     /**
-     * @var string $redirect_url Redirect_url.
+     * @var string $link Redirect_url.
      */
-    private $redirect_url;
+    private $link;
 
     /**
      * @var integer $type Type.
@@ -28,9 +29,9 @@ class SystemSlidesResource extends BaseResource
     private $type;
 
     /**
-     * @var string $pic_path Pic_path.
+     * @var string $pic Pic_path.
      */
-    private $pic_path;
+    private $pic;
 
     /**
      * Transform the resource into an array.
@@ -41,14 +42,11 @@ class SystemSlidesResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $pic_path = $this->pic_path ?? null;
-        if ($pic_path) {
-            $pic_path = config('image_domain.' . $this->app_environment) . $pic_path;
-        }
+        $pic = isset($this->pic) ? Storage::disk('resources')->url($this->pic) : null;
         return [
                 'title'        => $this->title,
-                'pic_path'     => $pic_path,
-                'redirect_url' => $this->redirect_url,
+                'pic_path'     => $pic,
+                'redirect_url' => $this->link,
                 'type'         => $this->type,
                ];
     }
