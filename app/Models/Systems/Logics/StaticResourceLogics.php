@@ -47,4 +47,20 @@ trait StaticResourceLogics
     {
         return Storage::disk($disk)->get($path);
     }
+
+    /**
+     * 清理旧文件 与 数据
+     * @param integer $id Id to find data.
+     * @return boolean
+     */
+    public static function resourceClean(int $id): bool
+    {
+        $statusResourseEloq = self::find($id);
+        if (!$statusResourseEloq instanceof self) {
+            return false;
+        }
+        Storage::disk('json')->delete($statusResourseEloq->path);
+        $statusResourseEloq->delete();
+        return true;
+    }
 }

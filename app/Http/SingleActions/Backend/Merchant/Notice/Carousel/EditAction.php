@@ -4,7 +4,6 @@ namespace App\Http\SingleActions\Backend\Merchant\Notice\Carousel;
 
 use App\Models\Systems\StaticResource;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Storage;
 
 /**
  * Class EditAction
@@ -25,11 +24,7 @@ class EditAction extends BaseAction
             throw new \Exception('201904');
         }
         if ($modelResult->pic_id !== $inputDatas['pic_id']) {
-            $statusResourseEloq = StaticResource::find($modelResult->pic_id);
-            if ($statusResourseEloq !== null && $statusResourseEloq instanceof StaticResource) {
-                Storage::disk('json')->delete($statusResourseEloq->path);
-                $statusResourseEloq->delete();
-            }
+            StaticResource::resourceClean($modelResult->pic_id);
         }
         $modelResult->fill($inputDatas);
         $result = $modelResult->save();
