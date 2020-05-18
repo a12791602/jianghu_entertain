@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\System;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Services\FactoryService;
+use App\JHHYLibs\JHHYCnst;
 
 /**
  * Class AddDoRequest
@@ -28,7 +28,6 @@ class AddDoRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'title'      => 'required|string|max:64',
                 'h5_pic'     => 'string|string|max:128',
@@ -36,7 +35,7 @@ class AddDoRequest extends BaseFormRequest
                 'pc_pic'     => 'string|string|max:128',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
-                'status'     => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                ];
     }
 

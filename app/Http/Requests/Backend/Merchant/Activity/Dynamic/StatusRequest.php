@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Dynamic;
 
 use App\Http\Requests\BaseFormRequest;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Activity\SystemDynActivity;
-use App\Services\FactoryService;
 
 /**
  * Class StatusRequest
@@ -35,10 +35,9 @@ class StatusRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'id'     => 'required|integer|exists:system_dyn_activity_platforms',
-                'status' => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status' => 'required|integer|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                ];
     }
 }
