@@ -2,9 +2,9 @@
 
 namespace App\Models\Notice;
 
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
-use App\Services\FactoryService;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -43,20 +43,19 @@ class NoticeSystem extends BaseModel
      */
     public function setDeviceAttribute(array $value): void
     {
-        $const  = FactoryService::getInstence()->generateService('constant');
         $device = [];
         if (array_key_exists('h5_pic', $value)) {
-            $device[] = $const::DEVICE_H5;
+            $device[] = JHHYCnst::DEVICE_H5;
         } else {
             $this->attributes['h5_pic'] = '';
         }
         if (array_key_exists('app_pic', $value)) {
-            $device[] = $const::DEVICE_APP;
+            $device[] = JHHYCnst::DEVICE_APP;
         } else {
             $this->attributes['app_pic'] = '';
         }
         if (array_key_exists('pc_pic', $value)) {
-            $device[] = $const::DEVICE_PC;
+            $device[] = JHHYCnst::DEVICE_PC;
         } else {
             $this->attributes['pc_pic'] = '';
         }

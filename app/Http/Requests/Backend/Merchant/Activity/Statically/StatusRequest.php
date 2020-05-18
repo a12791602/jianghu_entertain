@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Statically;
 
 use App\Http\Requests\BaseFormRequest;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Activity\SystemStaticActivity;
-use App\Services\FactoryService;
 
 /**
  * Class StatusRequest
@@ -35,10 +35,9 @@ class StatusRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'id'     => 'required|exists:system_static_activities,id',
-                'status' => 'required|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status' => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\Carousel;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Notice\NoticeCarousel;
 
 /**
  * Class DelDoRequest
@@ -10,6 +11,11 @@ use App\Http\Requests\BaseFormRequest;
  */
 class DelDoRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [NoticeCarousel::class];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,16 +34,5 @@ class DelDoRequest extends BaseFormRequest
     public function rules(): array
     {
         return ['id' => 'required|integer|exists:notice_carousels'];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required' => 'ID不存在',
-                'id.exists'   => 'ID不存在',
-               ];
     }
 }

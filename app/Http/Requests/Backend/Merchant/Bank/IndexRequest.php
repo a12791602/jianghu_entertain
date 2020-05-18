@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Backend\Merchant\Bank;
 
 use App\Http\Requests\BaseFormRequest;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Finance\SystemPlatformBank;
-use App\Services\FactoryService;
 
 /**
  * Class IndexRequest
@@ -12,7 +12,7 @@ use App\Services\FactoryService;
  */
 class IndexRequest extends BaseFormRequest
 {
-    
+
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
@@ -35,10 +35,9 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'name'     => 'string|max:32',
-                'status'   => 'integer|in:' . $const::STATUS_NORMAL . ',' . $const::STATUS_DISABLE,
+                'status'   => 'integer|in:' . JHHYCnst::STATUS_OPEN . ',' . JHHYCnst::STATUS_DISABLE,
                 'pageSize' => 'integer|between:1,100',     //每页数据条数
                ];
     }

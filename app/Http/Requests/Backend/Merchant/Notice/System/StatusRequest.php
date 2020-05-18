@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\System;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Services\FactoryService;
+use App\JHHYLibs\JHHYCnst;
 
 /**
  * Class StatusRequest
@@ -28,10 +28,9 @@ class StatusRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'id'     => 'required|integer|exists:notice_systems',
-                'status' => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
+                'status' => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                ];
     }
 

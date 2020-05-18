@@ -3,8 +3,8 @@
 namespace App\Http\Requests\Backend\Merchant\Activity\Statically;
 
 use App\Http\Requests\BaseFormRequest;
+use App\JHHYLibs\JHHYCnst;
 use App\Models\Activity\SystemStaticActivity;
-use App\Services\FactoryService;
 
 /**
  * Class IndexRequest
@@ -35,10 +35,10 @@ class IndexRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
+        $deviceRule = 'required|in:' . JHHYCnst::DEVICE_PC . ',' . JHHYCnst::DEVICE_H5 . ',' . JHHYCnst::DEVICE_APP;
         return [
                 'title'    => 'string',
-                'device'   => 'required|in:' . $const::DEVICE_PC . ',' . $const::DEVICE_H5 . ',' . $const::DEVICE_APP,
+                'device'   => $deviceRule,
                 'pageSize' => 'integer|between:1,100',     //每页数据条数
                ];
     }
