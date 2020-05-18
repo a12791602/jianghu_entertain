@@ -20,6 +20,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 1,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP1',
               'experience_min' => 1000,
               'experience_max' => 1999,
               'promotion_gift' => 5.88,
@@ -28,6 +29,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 2,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP2',
               'experience_min' => 2000,
               'experience_max' => 2999,
               'promotion_gift' => 10.88,
@@ -36,6 +38,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 3,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP3',
               'experience_min' => 3000,
               'experience_max' => 3999,
               'promotion_gift' => 15.88,
@@ -44,6 +47,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 4,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP4',
               'experience_min' => 4000,
               'experience_max' => 4999,
               'promotion_gift' => 20.88,
@@ -52,6 +56,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 5,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP5',
               'experience_min' => 5000,
               'experience_max' => 5999,
               'promotion_gift' => 25.88,
@@ -60,6 +65,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 6,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP6',
               'experience_min' => 6000,
               'experience_max' => 6999,
               'promotion_gift' => 30.88,
@@ -68,6 +74,7 @@ class FrontendUserLevelsSeeder extends Seeder
              [
               'level'          => 7,
               'platform_sign'  => 'JHHY',
+              'name'           => 'VIP7',
               'experience_min' => 7000,
               'experience_max' => 7999,
               'promotion_gift' => 35.88,

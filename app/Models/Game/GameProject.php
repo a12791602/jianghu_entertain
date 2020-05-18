@@ -4,6 +4,7 @@ namespace App\Models\Game;
 
 use App\Models\BaseModel;
 use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUserLevel;
 use App\Models\User\Logics\GameProjectLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -30,6 +31,19 @@ class GameProject extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'guid'              => '用户ID',
+                                      'serial_number'     => '注单号',
+                                      'status'            => '状态',
+                                      'game_vendor_sign'  => '游戏厂商',
+                                      'their_create_time' => '注单时间',
+                                      'delivery_time'     => '派彩时间',
+                                      'created_at'        => '入库时间',
+                                     ];
+
+    /**
      * 用户
      * @return BelongsTo
      */
@@ -39,11 +53,29 @@ class GameProject extends BaseModel
     }
 
     /**
+     * 游戏
+     * @return BelongsTo
+     */
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class, 'game_sign', 'sign');
+    }
+
+    /**
      * 游戏厂商
      * @return BelongsTo
      */
     public function gameVendor(): BelongsTo
     {
         return $this->belongsTo(GameVendor::class, 'game_vendor_sign', 'sign');
+    }
+
+    /**
+     * 等级
+     * @return BelongsTo
+     */
+    public function userLevel(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUserLevel::class, 'vip_level_id', 'id');
     }
 }
