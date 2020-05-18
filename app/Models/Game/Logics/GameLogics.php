@@ -92,7 +92,7 @@ trait GameLogics
              ],
              [
               'games.status',
-              JHHYCnst::STATUS_NORMAL,
+              JHHYCnst::STATUS_OPEN,
              ],
             ],
         );
