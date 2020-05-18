@@ -36,10 +36,10 @@ class IndexAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-
         $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
         $inputDatas['status']       = $this->model::STATUS_BLACK;
-        $data                       = $this->model
+        $blackCount                 = $inputDatas['black_count'] ?? 0;
+        $dataEloq                   = $this->model
             ->filter($inputDatas)
             ->select(
                 [
@@ -53,8 +53,13 @@ class IndexAction extends MainAction
                  'last_login_ip',
                  'remark',
                 ],
-            )
-            ->paginate($this->perPage);
+            );
+        $count                      = $dataEloq->count();
+        if ($count >= $blackCount) {
+            $data = $dataEloq->paginate($this->perPage);
+        } else {
+            $data = paginateArray([]);
+        }
         return msgOut($data);
     }
 }
