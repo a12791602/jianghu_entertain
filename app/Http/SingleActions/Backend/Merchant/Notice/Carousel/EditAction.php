@@ -2,7 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Carousel;
 
+use App\Models\Systems\StaticResource;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class EditAction
@@ -18,12 +20,19 @@ class EditAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['last_editor_id'] = $this->user->id;
-        $model                        = $this->model->find($inputDatas['id']);
-        if (!$model instanceof $this->model) {
+        $modelResult                  = $this->model->find($inputDatas['id']);
+        if (!$modelResult instanceof $this->model) {
             throw new \Exception('201904');
         }
-        $model->fill($inputDatas);
-        $result = $model->save();
+        if ($modelResult->pic_id !== $inputDatas['pic_id']) {
+            $statusResourseEloq = StaticResource::find($modelResult->pic_id);
+            if ($statusResourseEloq !== null && $statusResourseEloq instanceof StaticResource) {
+                Storage::disk('json')->delete($statusResourseEloq->path);
+                $statusResourseEloq->delete();
+            }
+        }
+        $modelResult->fill($inputDatas);
+        $result = $modelResult->save();
         if ($result) {
             return msgOut();
         }

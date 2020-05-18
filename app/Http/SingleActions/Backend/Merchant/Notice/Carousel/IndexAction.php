@@ -34,6 +34,11 @@ class IndexAction extends BaseAction
             )
             ->filter($inputDatas)
             ->paginate($this->perPage);
+        $data->each(
+            static function ($item): void {
+                $item->append(['pic']);
+            },
+            );
         return msgOut($data);
     }
 }
