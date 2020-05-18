@@ -48,7 +48,6 @@ class DatabaseSeeder extends Seeder
              GamePlatformSeeder::class,
              GameVendorUrlFieldSeeder::class,
              SystemDomainSeeder::class,
-             SystemFePageBannerSeeder::class,
              GameVendorPlatformSeeder::class,
              SystemFinanceUserTagSeeder::class,
              MerchantAdminAccessGroupsHasBackendSystemMenuSeeder::class,
