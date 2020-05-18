@@ -23,7 +23,7 @@ class SlidesAction
     public function execute(array $inputDatas): JsonResponse
     {
         $criteria = [
-                     'satus'  => JHHYCnst::STATUS_OPEN,
+                     'status' => JHHYCnst::STATUS_OPEN,
                      'type'   => $inputDatas['flag'],
                      'device' => JHHYCnst::DEVICE_H5,
                     ];
