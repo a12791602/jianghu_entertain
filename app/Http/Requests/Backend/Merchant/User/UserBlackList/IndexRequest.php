@@ -44,6 +44,7 @@ class IndexRequest extends BaseFormRequest
                 'created_at'   => 'array|size:2',                          //进入黑名单日期
                 'created_at.*' => 'date',                                  //进入黑名单日期
                 'pageSize'     => 'integer|between:1,100',                 //每页数据条数
+                'black_count'  => 'integer|max:100',
                ];
     }
 

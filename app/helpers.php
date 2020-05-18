@@ -370,3 +370,25 @@ function saveGameLog(string $info, string $theirSerialNumber = ''): void
         saveLog('game', $info . '，their_serial_number：' . $theirSerialNumber);
     }
 }
+
+/**
+ * @param array        $data    Product of Arr Data.
+ * @param integer|null $perPage Define how many data we want to be visible in each page.
+ * @return LengthAwarePaginator
+ */
+function paginateArray(array $data, ?int $perPage = 1): LengthAwarePaginator
+{
+    // Get current page form url e.x. &page=1
+    $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+    // Create a new Laravel collection from the array data
+    $productCollection = collect($data);
+    // Slice the collection to get the data to display in current page
+    $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+    // Create our paginator and pass it to the view
+    $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), (int) $perPage);
+
+    // set url path for generted links
+    $paginatedproducts->setPath(request()->url());
+    return $paginatedproducts;
+}
