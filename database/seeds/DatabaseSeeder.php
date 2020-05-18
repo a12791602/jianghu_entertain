@@ -75,6 +75,7 @@ class DatabaseSeeder extends Seeder
              CronJobSeeder::class,
              GameProjectSeeder::class,
              FrontendUsersAccountsReportSeeder::class,
+             NoticeCarouselSeeder::class,
             ],
         );
     }

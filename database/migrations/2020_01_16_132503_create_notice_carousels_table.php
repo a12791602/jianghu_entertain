@@ -23,7 +23,7 @@ class CreateNoticeCarouselsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->string('title', 64)->default(' ')->comment('公告标题');
-                $table->string('pic', 128)->default(' ')->comment('轮播图图片');
+                $table->integer('pic_id')->nullable()->comment('图标id');
                 $table->tinyInteger('type')->default(0)->comment('轮播类型 1 内部 2 外部');
                 $table->string('link', 128)->default(' ')->comment('跳转链接');
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
