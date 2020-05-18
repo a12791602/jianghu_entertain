@@ -3,7 +3,8 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\Marquee;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Services\FactoryService;
+use App\JHHYLibs\JHHYCnst;
+use App\Models\Notice\NoticeMarquee;
 
 /**
  * Class StatusRequest
@@ -11,6 +12,11 @@ use App\Services\FactoryService;
  */
 class StatusRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [NoticeMarquee::class];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,23 +34,9 @@ class StatusRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $const = FactoryService::getInstence()->generateService('constant');
         return [
                 'id'     => 'required|integer|exists:notice_marquees',
-                'status' => 'required|integer|in:' . $const::STATUS_DISABLE . ',' . $const::STATUS_NORMAL,
-               ];
-    }
-
-    /**
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'id.required'     => 'ID不存在',
-                'id.exists'       => 'ID不存在',
-                'status.required' => '请选择状态',
-                'status.in'       => '所选状态不在范围内',
+                'status' => 'required|integer|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                ];
     }
 }

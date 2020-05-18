@@ -19,26 +19,24 @@ class NoticeMarquee extends BaseModel
     protected $guarded = ['id'];
 
     /**
-     * @param mixed[] $value Value.
-     * @return void
+     * The attributes that should be cast to native types.
+     *
+     * @var array
      */
-    public function setDeviceAttribute(array $value): void
-    {
-        $this->attributes['device'] = json_encode($value);
-    }
+    protected $casts = ['device' => 'array'];
 
     /**
-     * @param string $value Value.
-     * @return mixed[]
+     * @var array
      */
-    public function getDeviceAttribute(string $value): array
-    {
-        $data = [];
-        if (!empty($value)) {
-            $data = json_decode($value, true);
-        }
-        return $data;
-    }
+    public static $fieldDefinition = [
+                                      'id'         => '跑马灯id',
+                                      'title'      => '跑马灯标题',
+                                      'content'    => '跑马灯内容',
+                                      'device'     => '跑马灯展示设备',
+                                      'status'     => '跑马灯使用状态',
+                                      'start_time' => '开始时间',
+                                      'end_time'   => '结束时间',
+                                     ];
 
     /**
      * @return BelongsTo
