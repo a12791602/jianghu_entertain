@@ -44,7 +44,7 @@ class EditRequest extends BaseFormRequest
                 'link'       => 'required_if:type,' . NoticeCarousel::TYPE_INSIDE . '|string|max:128',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
-                'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_NORMAL,
+                'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
                 'device'     => $devCriteria,
                ];
     }

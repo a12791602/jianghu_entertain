@@ -15,7 +15,7 @@ class JHHYCnst
     //app端
     public const DEVICE_APP = 3;
     //启用状态
-    public const STATUS_NORMAL = 1;
+    public const STATUS_OPEN = 1;
     //禁用状态
     public const STATUS_DISABLE = 0;
     //邮件通知
