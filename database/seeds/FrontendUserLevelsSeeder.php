@@ -18,6 +18,7 @@ class FrontendUserLevelsSeeder extends Seeder
         FrontendUserLevel::insert(
             [
              [
+              'name'           => 'VIP1',
               'level'          => 1,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP1',
@@ -27,6 +28,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 5.88,
              ],
              [
+              'name'           => 'VIP2',
               'level'          => 2,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP2',
@@ -36,6 +38,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 10.88,
              ],
              [
+              'name'           => 'VIP3',
               'level'          => 3,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP3',
@@ -45,6 +48,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 15.88,
              ],
              [
+              'name'           => 'VIP4',
               'level'          => 4,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP4',
@@ -54,6 +58,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 20.88,
              ],
              [
+              'name'           => 'VIP5',
               'level'          => 5,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP5',
@@ -63,6 +68,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 25.88,
              ],
              [
+              'name'           => 'VIP6',
               'level'          => 6,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP6',
@@ -72,6 +78,7 @@ class FrontendUserLevelsSeeder extends Seeder
               'weekly_gift'    => 30.88,
              ],
              [
+              'name'           => 'VIP7',
               'level'          => 7,
               'platform_sign'  => 'JHHY',
               'name'           => 'VIP7',
