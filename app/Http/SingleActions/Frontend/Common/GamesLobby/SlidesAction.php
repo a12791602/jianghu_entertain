@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\Resources\Frontend\GamesLobby\SystemSlidesResource;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Notice\NoticeCarousel;
 use Illuminate\Http\JsonResponse;
 

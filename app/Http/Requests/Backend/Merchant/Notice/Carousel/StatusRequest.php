@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\Carousel;
 
 use App\Http\Requests\BaseFormRequest;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Notice\NoticeCarousel;
 
 /**

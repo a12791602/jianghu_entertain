@@ -226,7 +226,7 @@ return [
                               'Validator'    => Illuminate\Support\Facades\Validator::class,
                               'View'         => Illuminate\Support\Facades\View::class,
                               'Telegram'     => Telegram\Bot\Laravel\Facades\Telegram::class,
-                              'JHHYCnst'     => \App\JHHYLibs\JHHYCnst::class,
+                              'JHHYCnst'     => \App\Lib\Constant\JHHYCnst::class,
                              ],
 
        ];

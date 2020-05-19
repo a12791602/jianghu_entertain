@@ -2,7 +2,7 @@
 
 namespace App\Models\Notice;
 
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

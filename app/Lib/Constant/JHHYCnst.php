@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JHHYLibs;
+namespace App\Lib\Constant;
 
 /**
  * Class JHHYConstant
