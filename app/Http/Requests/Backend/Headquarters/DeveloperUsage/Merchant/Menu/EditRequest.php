@@ -44,8 +44,8 @@ class EditRequest extends BaseFormRequest
                 'en_name' => [
                               'required',
                               Rule::unique('merchant_system_menus')->ignore($this->get('id')),
-                              'regex:/^(?!\.)(?!.*\.$)(?!.*?\.\.)[a-z.-]+$/',
-                             ], //英文名(小写+“-”)
+                              'regex:/^[A-Za-z]{3,30}+$/',
+                             ], //3-30位大小写
                 'display' => 'required|numeric|in:0,1',//是否显示 0否 1是
                 'route'   => 'required|regex:/^(?!.*\/$)(?!.*?\/\/)[a-z\/-]+$/', //路由(小写+数字+“/”)
                   //图标(小写+数字+“-”)
