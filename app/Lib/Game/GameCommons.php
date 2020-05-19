@@ -1,6 +1,6 @@
 <?php
 
-namespace App\JHHYLibs;
+namespace App\Lib\Game;
 
 use App\Models\Game\GameVendor;
 use Illuminate\Support\Facades\Config;
