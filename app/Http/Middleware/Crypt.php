@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\JHHYLibs\JHHYRoutes;
 use App\Lib\Crypt\AesCrypt;
 use App\Lib\Crypt\RsaCrypt;
+use App\Lib\Route\JHHYRoutes;
 use App\Models\Systems\SystemDomain;
 use Closure;
 use Illuminate\Http\Request;
