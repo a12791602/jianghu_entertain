@@ -5,7 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 use App\Events\FrontendDynamicInfoEvent;
 use App\Events\FrontendNoticeEvent;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
@@ -70,7 +70,7 @@ class CheckPassAction extends BaseAction
                         'data'    => $data,
                        ];
             Log::channel('finance-callback-system')->info((string) json_encode($logData));
-        }
+        }//end try
         DB::commit();
         throw new \Exception('202304');
     }

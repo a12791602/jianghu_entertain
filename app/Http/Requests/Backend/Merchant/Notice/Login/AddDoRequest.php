@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\Login;
 
 use App\Http\Requests\BaseFormRequest;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 
 /**
  * Class AddDoRequest

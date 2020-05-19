@@ -2,7 +2,7 @@
 
 namespace App\Models\User\Logics;
 
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Game\Game;
 use App\Models\Systems\SystemPlatform;
 

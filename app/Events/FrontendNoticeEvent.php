@@ -2,7 +2,7 @@
 
 namespace App\Events;
 
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use Carbon\Carbon;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;

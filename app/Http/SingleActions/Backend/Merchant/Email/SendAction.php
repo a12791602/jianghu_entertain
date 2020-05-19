@@ -4,8 +4,8 @@ namespace App\Http\SingleActions\Backend\Merchant\Email;
 
 use App\Events\PlatformNoticeEvent;
 use App\Events\SystemEmailEvent;
-use App\JHHYLibs\JHHYCnst;
 use App\Jobs\Email\MerchantSendMail;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailSend;
 use App\Models\User\FrontendUser;

@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Game\GamePlatform;
 use Illuminate\Http\JsonResponse;
 

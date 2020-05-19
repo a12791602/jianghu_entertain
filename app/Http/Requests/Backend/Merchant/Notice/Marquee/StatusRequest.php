@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Notice\Marquee;
 
 use App\Http\Requests\BaseFormRequest;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Notice\NoticeMarquee;
 
 /**

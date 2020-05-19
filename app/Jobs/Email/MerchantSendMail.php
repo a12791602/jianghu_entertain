@@ -4,7 +4,7 @@ namespace App\Jobs\Email;
 
 use App\Events\PlatformNoticeEvent;
 use App\Events\SystemEmailEvent;
-use App\JHHYLibs\JHHYCnst;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Email\SystemEmail;
 use App\Models\Email\SystemEmailSend;
 use Illuminate\Bus\Queueable;
@@ -23,7 +23,7 @@ class MerchantSendMail implements ShouldQueue
     use InteractsWithQueue;
     use Queueable;
     use SerializesModels;
-    
+
     /**
      * @var SystemEmail $email SystemEmail.
      */
