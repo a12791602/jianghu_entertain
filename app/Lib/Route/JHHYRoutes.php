@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\JHHYLibs;
+namespace App\Lib\Route;
 
 use App\Models\DeveloperUsage\Backend\SystemRoutesBackend;
 use App\Models\DeveloperUsage\Frontend\SystemRoutesH5;
@@ -12,7 +12,7 @@ use Exception;
 
 /**
  * Class JHHYRoutes
- * @package App\JHHYLibs
+ * @package App\Lib\Route
  */
 class JHHYRoutes
 {

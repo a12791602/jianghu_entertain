@@ -4,7 +4,7 @@ namespace App\Lib\Constant;
 
 /**
  * Class JHHYConstant
- * @package App\JHHYLibs
+ * @package App\Lib\Constant
  */
 class JHHYCnst
 {
