@@ -63,6 +63,9 @@ class AppServiceProvider extends ServiceProvider
         FrontendUser::observe(FrontendUserObserver::class);
         GameType::observe(GameTypeObserver::class);
         GameSubType::observe(GameTypeChildObserver::class);
+        if (env('APP_DEBUG') !== true) {
+            return;
+        }
         $this->_loggingDBQuery();
     }
 
@@ -89,16 +92,14 @@ class AppServiceProvider extends ServiceProvider
                     ),
                 );
                 $duration      = $this->_formatDuration($query->time / 1000);
-
-                Log::debug(
-                    sprintf(
-                        '[%s] %s | %s: %s',
-                        $duration,
-                        $realSql,
-                        request()->method(),
-                        request()->getRequestUri(),
-                    ),
+                $logInfo       = sprintf(
+                    '[%s] %s | %s: %s',
+                    $duration,
+                    $realSql,
+                    request()->method(),
+                    request()->getRequestUri(),
                 );
+                Log::channel('query')->debug($logInfo);
             },
         );
     }
