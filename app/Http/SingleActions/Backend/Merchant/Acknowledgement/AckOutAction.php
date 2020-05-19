@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Acknowledgement;
 
-use App\JHHYLibs\GameCommons;
+use App\Lib\Game\GameCommons;
 use App\Models\Game\GameVendor;
 
 /**
