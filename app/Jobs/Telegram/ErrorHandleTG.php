@@ -94,9 +94,10 @@ class ErrorHandleTG implements ShouldQueue
         Agent $agent,
         ?Route $currentRoute
     ): void {
+        $inputs        = $this->getInputs($request);
         $requestData   = [
                           'ips'        => $request->ips(),
-                          'inputs'     => $request->all(),
+                          'inputs'     => $inputs,
                           'crypt_data' => $request->get('crypt_data') ?? '', //加密的data
                          ];
         $requestOs     = $agent->platform();
@@ -135,6 +136,31 @@ class ErrorHandleTG implements ShouldQueue
         $this->responseStatus = $response->getStatusCode();
         $this->currentRoute   = $currentRoute === null ? '' : $currentRoute->uri();
         $this->routePrefix    = $currentRoute === null ? '' : trim((string) $currentRoute->getPrefix(), '/');
+    }
+
+    /**
+     * @param Request $request Requset.
+     * @return mixed
+     */
+    protected function getInputs(Request $request)
+    {
+        $inputs       = $request->all();
+        $fileinstance = $request->file();
+        if (is_array($fileinstance) && count($fileinstance) > 0) {
+            $fileArr = [];
+            $file    = $request->files->all();
+            foreach ($file as $fileKey => $fileInfo) {
+                $fileDetailInfo    = [
+                                      'origin-name' => $fileInfo->getClientOriginalName(),
+                                      'mimeType'    => $fileInfo->getMimeType(),
+                                      'size'        => $fileInfo->getSize(),
+                                     ];
+                $fileArr[$fileKey] = $fileDetailInfo;
+            }
+            unset($inputs['file']);
+            $inputs['file-lists'] = $fileArr;
+        }
+        return $inputs;
     }
 
     /**
