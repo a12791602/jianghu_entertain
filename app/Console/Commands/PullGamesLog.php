@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\JHHYLibs\GameCommons;
+use App\Lib\Game\GameCommons;
 use App\Models\Game\GameVendor;
 use Illuminate\Console\Command;
 

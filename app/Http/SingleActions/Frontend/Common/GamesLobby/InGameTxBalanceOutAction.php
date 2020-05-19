@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\GamesLobby;
 
 use App\Http\SingleActions\MainAction;
-use App\JHHYLibs\GameCommons;
+use App\Lib\Game\GameCommons;
 use App\Models\Game\GameVendor;
 use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
