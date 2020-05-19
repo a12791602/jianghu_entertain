@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\JHHYLibs\JHHYRoutes;
+use App\Lib\Route\JHHYRoutes;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
