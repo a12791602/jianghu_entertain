@@ -178,6 +178,12 @@ return [
                                                      'level'  => 'debug',
                                                      'days'   => 14,
                                                     ],
+                       'query'                   => [//mysql 查询语句日志
+                                                     'driver' => 'daily',
+                                                     'path'   => storage_path('logs/mysql/query.log'),
+                                                     'level'  => 'debug',
+                                                     'days'   => 14,
+                                                    ],
                       ],
 
        ];
