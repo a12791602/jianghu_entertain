@@ -18,6 +18,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 if (!function_exists('configure')) {
@@ -391,4 +392,16 @@ function paginateArray(array $data, ?int $perPage = 1): LengthAwarePaginator
     // set url path for generted links
     $paginatedproducts->setPath(request()->url());
     return $paginatedproducts;
+}
+
+/**
+ * 获取json 或 图片地址
+ *
+ * @param string $path FilePath.
+ * @param string $type Type json|pic.
+ * @return mixed
+ */
+function getJHHYUrl(string $path, string $type)
+{
+    return Storage::disk($type)->url($path);
 }

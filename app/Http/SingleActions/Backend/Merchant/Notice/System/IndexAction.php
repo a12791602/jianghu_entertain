@@ -34,6 +34,13 @@ class IndexAction extends BaseAction
                 ],
             )->filter($inputDatas)
             ->paginate($this->perPage);
+        $data->each(
+            static function ($item): void {
+                $item->append(['h5_pic']);
+                $item->append(['app_pic']);
+                $item->append(['pc_pic']);
+            },
+        );
         return msgOut($data);
     }
 }

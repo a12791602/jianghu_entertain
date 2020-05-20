@@ -7,6 +7,7 @@ use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use App\Models\Systems\StaticResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Arr;
 
 /**
@@ -98,5 +99,80 @@ class NoticeSystem extends BaseModel
             StaticResource::resourceClean($this->$criKey);
         }
         return true;
+    }
+
+    /**
+     * Get H5 Pic
+     *
+     * @return string
+     */
+    public function getH5PicAttribute(): string
+    {
+        $result = $this->getPicPath($this->h5PicPath);
+        unset($this->h5PicPath);
+        return $result;
+    }
+
+    /**
+     * Get App Pic
+     *
+     * @return string
+     */
+    public function getAppPicAttribute(): string
+    {
+        $result = $this->getPicPath($this->appPicPath);
+        unset($this->appPicPath);
+        return $result;
+    }
+
+    /**
+     * Get Pc Pic
+     *
+     * @return string
+     */
+    public function getPcPicAttribute(): string
+    {
+        $result = $this->getPicPath($this->pcPicPath);
+        unset($this->pcPicPath);
+        return $result;
+    }
+
+    /**
+     * @param StaticResource|null $eloqPath EloqPath.
+     * @return boolean|mixed
+     */
+    protected function getPicPath(?StaticResource $eloqPath)
+    {
+        if ($eloqPath instanceof StaticResource) {
+            return getJHHYUrl($eloqPath->path, 'resources');
+        }
+        return false;
+    }
+
+    /**
+     * Banner PicPath.
+     * @return HasOne
+     */
+    public function h5PicPath(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'h5_pic_id');
+    }
+
+    /**
+     * Banner PicPath.
+     * @return HasOne
+     */
+    public function appPicPath(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'app_pic_id');
+    }
+
+    /**
+     * Banner PicPath.
+     * @return HasOne
+     */
+    public function pcPicPath(): HasOne
+    {
+        return $this->hasOne(StaticResource::class, 'id', 'pc_pic_id');
     }
 }
