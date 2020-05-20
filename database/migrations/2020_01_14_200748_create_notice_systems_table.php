@@ -26,7 +26,7 @@ class CreateNoticeSystemsTable extends Migration
                 $table->integer('h5_pic_id')->nullable()->comment('h5系统公告图片id');
                 $table->integer('app_pic_id')->nullable()->comment('app系统公告图片id');
                 $table->integer('pc_pic_id')->nullable()->comment('pc系统公告图片id');
-                $table->json('device')->default(' ')->comment('所拥有的设备');
+                $table->json('device')->comment('所拥有的设备');
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');
                 $table->integer('author_id')->default(0)->comment('创建人id');
