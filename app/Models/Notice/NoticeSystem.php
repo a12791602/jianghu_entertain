@@ -2,7 +2,6 @@
 
 namespace App\Models\Notice;
 
-use App\Lib\Constant\JHHYCnst;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -20,6 +19,28 @@ class NoticeSystem extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = ['device' => 'array'];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'id'         => '系统公告id',
+                                      'title'      => '系统公告标题',
+                                      'h5_pic_id'  => 'h5系统公告图片id',
+                                      'app_pic_id' => 'app系统公告图片id',
+                                      'pc_pic_id'  => 'pc系统公告图片id',
+                                      'device'     => '系统公告展示设备',
+                                      'status'     => '系统公告使用状态',
+                                      'start_time' => '开始时间',
+                                      'end_time'   => '结束时间',
+                                     ];
+
+    /**
      * @return BelongsTo
      */
     public function lastEditor(): BelongsTo
@@ -33,46 +54,5 @@ class NoticeSystem extends BaseModel
     public function author(): BelongsTo
     {
         return $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
-    }
-
-    /**
-     * 设置device.
-     *
-     * @param array $value Value.
-     * @return void
-     */
-    public function setDeviceAttribute(array $value): void
-    {
-        $device = [];
-        if (array_key_exists('h5_pic', $value)) {
-            $device[] = JHHYCnst::DEVICE_H5;
-        } else {
-            $this->attributes['h5_pic'] = '';
-        }
-        if (array_key_exists('app_pic', $value)) {
-            $device[] = JHHYCnst::DEVICE_APP;
-        } else {
-            $this->attributes['app_pic'] = '';
-        }
-        if (array_key_exists('pc_pic', $value)) {
-            $device[] = JHHYCnst::DEVICE_PC;
-        } else {
-            $this->attributes['pc_pic'] = '';
-        }
-        $device                     = json_encode($device);
-        $this->attributes['device'] = $device;
-    }
-
-    /**
-     * @param string $value Value.
-     * @return mixed[]
-     */
-    public function getDeviceAttribute(string $value): array
-    {
-        $value = json_decode($value, true);
-        if (empty($value)) {
-            $value = [];
-        }
-        return $value;
     }
 }
