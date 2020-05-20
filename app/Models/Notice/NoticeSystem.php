@@ -85,16 +85,25 @@ class NoticeSystem extends BaseModel
     }
 
     /**
-     * @param array $inputDatas Input.
+     * @param array|null $inputDatas Input.
      * @return boolean
      */
-    public function cleanResource(array $inputDatas): bool
+    public function cleanResource(?array $inputDatas): bool
     {
         foreach (self::PIC_CRITERIAS as $criKey => $criVal) {
             unset($criVal);
-            $hasValue = $this->$criKey !== null && isset($inputDatas[$criKey]);
-            if (!$hasValue || $this->$criKey === $inputDatas[$criKey]) {
-                continue;
+            //编辑的时候
+            if ($inputDatas !== null) {
+                $hasValue = $this->$criKey !== null && isset($inputDatas[$criKey]);
+                if (!$hasValue || $this->$criKey === $inputDatas[$criKey]) {
+                    continue;
+                }
+            } else {
+                //删除的时候
+                $hasValue = $this->$criKey !== null;
+                if (!$hasValue) {
+                    continue;
+                }
             }
             StaticResource::resourceClean($this->$criKey);
         }

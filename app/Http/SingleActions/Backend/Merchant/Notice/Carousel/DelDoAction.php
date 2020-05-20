@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Carousel;
 
+use App\Models\Systems\StaticResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -17,8 +18,12 @@ class DelDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result = $this->model->where('id', $inputDatas['id'])->delete();
-        if ($result) {
+        $modelResult = $this->model->find($inputDatas['id']);
+        if ($modelResult instanceof $this->model) {
+            $hasValue = $modelResult->pic_id !== null;
+            if ($hasValue) {
+                StaticResource::resourceClean($modelResult->pic_id);
+            }
             return msgOut();
         }
         throw new \Exception('201903');
