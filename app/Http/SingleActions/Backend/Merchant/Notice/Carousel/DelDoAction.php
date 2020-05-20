@@ -24,6 +24,7 @@ class DelDoAction extends BaseAction
             if ($hasValue) {
                 StaticResource::resourceClean($modelResult->pic_id);
             }
+            $modelResult->delete();
             return msgOut();
         }
         throw new \Exception('201903');
