@@ -42,10 +42,9 @@ class SystemSlidesResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
-        $pic = isset($this->pic) ? Storage::disk('resources')->url($this->pic) : null;
         return [
                 'title'        => $this->title,
-                'pic_path'     => $pic,
+                'pic_path'     => $this->pic ?? null,
                 'redirect_url' => $this->link,
                 'type'         => $this->type,
                ];

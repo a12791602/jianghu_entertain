@@ -61,9 +61,21 @@ class NoticeCarousel extends BaseModel
      */
     public function getPicAttribute(): string
     {
-        $result = $this->picPath->path ?? '';
+        $result = $this->getPicPath($this->picPath);
         unset($this->picPath);
         return $result;
+    }
+
+    /**
+     * @param StaticResource|null $eloqPath EloqPath.
+     * @return boolean|mixed
+     */
+    protected function getPicPath(?StaticResource $eloqPath)
+    {
+        if ($eloqPath instanceof StaticResource) {
+            return getJHHYUrl($eloqPath->path, 'resources');
+        }
+        return false;
     }
 
     /**
