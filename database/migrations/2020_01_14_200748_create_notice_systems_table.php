@@ -23,9 +23,9 @@ class CreateNoticeSystemsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->string('title', 64)->default(' ')->comment('公告标题');
-                $table->string('h5_pic', 128)->default(' ')->comment('h5端图片链接');
-                $table->string('app_pic', 128)->default(' ')->comment('app端图片链接');
-                $table->string('pc_pic', 128)->default(' ')->comment('pc端图片链接');
+                $table->integer('h5_pic_id')->nullable()->comment('h5系统公告图片id');
+                $table->integer('app_pic_id')->nullable()->comment('app系统公告图片id');
+                $table->integer('pc_pic_id')->nullable()->comment('pc系统公告图片id');
                 $table->string('device', 8)->default(' ')->comment('所拥有的设备');
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');

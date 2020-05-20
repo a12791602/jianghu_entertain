@@ -19,13 +19,14 @@ class EditAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $inputDatas['last_editor_id'] = $this->user->id;
-        $inputDatas['device']         = $inputDatas;
-        $model                        = $this->model->find($inputDatas['id']);
-        if (!$model instanceof $this->model) {
+        $inputDatas['device']         = $this->model->getDevice($inputDatas);
+        $modelResult                  = $this->model->find($inputDatas['id']);
+        if (!$modelResult instanceof $this->model) {
             throw new \Exception('201704');
         }
-        $model->fill($inputDatas);
-        $result = $model->save();
+        $modelResult->cleanResource($inputDatas);
+        $modelResult->fill($inputDatas);
+        $result = $modelResult->save();
         if ($result) {
             return msgOut();
         }
