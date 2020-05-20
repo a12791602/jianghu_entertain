@@ -17,8 +17,10 @@ class DelDoAction extends BaseAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result = $this->model->where('id', $inputDatas['id'])->delete();
-        if ($result) {
+        $modelResult = $this->model->find($inputDatas['id']);
+        if ($modelResult instanceof $this->model) {
+            $modelResult->cleanResource($inputDatas);
+            $modelResult->delete();
             return msgOut();
         }
         throw new \Exception('201703');
