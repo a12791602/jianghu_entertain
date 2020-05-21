@@ -6,6 +6,7 @@ use App\Http\SingleActions\MainAction;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Order\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Redis;
 
 /**
  * Class ConfirmAction
@@ -39,6 +40,18 @@ class ConfirmAction extends MainAction
             } else {
                 merchantNotificationIncrement(MerchantNotificationStatistic::ONLINE_TOP_UP);
             }
+            $time         = mktime(23, 59, 59) - mktime((int) date('H'), (int) date('i'), (int) date('s'));
+            $redis        = Redis::connection();
+            $top_up_cache = json_encode(
+                [
+                 'user_id' => $this->user->id,
+                 'amount'  => (float) sprintf('%.2f', $order['money']),
+                ],
+                JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT,
+                512,
+            );
+            $redis->rpush('headquarters_statistics:top_up', $top_up_cache);
+            $redis->expire('headquarters_statistics:top_up', $time);
             return msgOut();
         }
         throw new \Exception('101004');

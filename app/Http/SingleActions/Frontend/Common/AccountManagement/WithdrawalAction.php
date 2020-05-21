@@ -11,8 +11,8 @@ use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\UsersWithdrawOrder;
 use Arr;
-use DB;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Redis;
 use Log;
 
 /**
@@ -53,7 +53,6 @@ class WithdrawalAction extends MainAction
             $num_top_up,
             $audit_fee,
         );
-        DB::beginTransaction();
         try {
             $order = $user->withdraw()->create($item);
             $param = [
@@ -61,20 +60,42 @@ class WithdrawalAction extends MainAction
                       'amount'  => $amount,
                      ];
             $user->account->operateAccount('withdraw_frozen', $param);
-            DB::commit();
             broadcast(new PlatformNoticeEvent('notice_of_withdraw', '', $order->toArray()));
             merchantNotificationIncrement(MerchantNotificationStatistic::WITHDRAWAL_ORDER);
+            $this->_redis($amount);
             return msgOut([], '100903');
-        } catch (\RuntimeException $exception) {
+        } catch (\Throwable $exception) {
             $logData = [
                         'msg'  => '发起提现失败!',
                         'data' => $exception,
                        ];
             Log::channel('withdrawal-system')
                 ->info(json_encode($logData, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
-        }
-        DB::rollBack();
+        }//end try
         throw new \RuntimeException('100905');
+    }
+
+    /**
+     * Headquarters statistics.
+     * @param float $amount Withdrawal Amount.
+     * @return void
+     * @throws \RuntimeException RuntimeException.
+     */
+    private function _redis(float $amount): void
+    {
+        $time  = mktime(23, 59, 59) - mktime((int) date('H'), (int) date('i'), (int) date('s'));
+        $redis = Redis::connection();
+
+        $withdraw_cache = json_encode(
+            [
+             'user_id' => $this->user->id,
+             'amount'  => $amount,
+            ],
+            JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT,
+            512,
+        );
+        $redis->rpush('headquarters_statistics:withdrawal', $withdraw_cache);
+        $redis->expire('headquarters_statistics:withdrawal', $time);
     }
 
     /**
