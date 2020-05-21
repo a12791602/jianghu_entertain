@@ -52,13 +52,14 @@ class IndexResource extends BaseResource
             $icon = config('image_domain.' . $this->app_environment) . $icon;
         }
         return [
-                'id'        => $this->id,
-                'icon'      => $icon,
-                'name'      => $this->games->name,
-                'sort'      => $this->sort,
-                'hot_new'   => $this->hot_new,
-                'vendor'    => optional($this->games->vendor)->name,
-                'vendor_id' => $this->games->vendor_id,
+                'id'              => $this->id,
+                'icon'            => $icon,
+                'default_icon_id' => $this->games->icon_id,
+                'name'            => $this->games->name,
+                'sort'            => $this->sort,
+                'hot_new'         => $this->hot_new,
+                'vendor'          => optional($this->games->vendor)->name,
+                'vendor_id'       => $this->games->vendor_id,
                ];
     }
 }
