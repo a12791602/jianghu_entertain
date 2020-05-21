@@ -8,6 +8,7 @@ use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Services\FactoryService;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
 
@@ -119,7 +120,8 @@ class RechargeAction extends MainAction
      */
     private function _checkMoneyIsEffective(): void
     {
-        if ($this->inputDatas['money'] < $this->model->min || $this->inputDatas['money'] > $this->model->max) {
+        $money = $this->inputDatas['money'];
+        if ($money < $this->model->min_amount || $money > $this->model->max_amount) {
             throw new \Exception('100301');
         }
     }
@@ -144,8 +146,7 @@ class RechargeAction extends MainAction
         $order          = UsersRechargeOrder::where($whereCondition)->first();
         if ($order) {
             $data['real_money'] = $this->_getRealMoney();
-            $result             = $this->_saveOfflineOrderData($data);
-            return $result;
+            return $this->_saveOfflineOrderData($data);
         }
         $returnData              = [];
         $usersRechargeOrderModel = new UsersRechargeOrder();
@@ -154,8 +155,14 @@ class RechargeAction extends MainAction
         if (!$result) {
             throw new \Exception('100303');
         }
-        $lastId                   = $usersRechargeOrderModel->id;
-        $order                    = UsersRechargeOrder::find($lastId);
+        $lastId = $usersRechargeOrderModel->id;
+        $order  = UsersRechargeOrder::find($lastId);
+        if (!$order) {
+            throw new \Exception('100303');
+        }
+        if (!$order->created_at instanceof Carbon) {
+            throw new \Exception('100303');
+        }
         $returnData['account']    = $this->model->account;
         $returnData['username']   = $this->model->username;
         $returnData['branch']     = $this->model->branch;
@@ -185,6 +192,9 @@ class RechargeAction extends MainAction
         }
         $lastId = $usersRechargeOrderModel->id;
         $order  = UsersRechargeOrder::find($lastId);
+        if (!$order) {
+            throw new \Exception('100303');
+        }
         return $order;
     }
 
@@ -219,11 +229,9 @@ class RechargeAction extends MainAction
             $data['snap_account']      = $this->model->account;
             $data['snap_bank']         = $this->model->name;
         }
-        $data['status']             = UsersRechargeOrder::STATUS_INIT;
-        $data['is_online']          = $this->inputDatas['is_online'];
-        $data['client_ip']          = $this->inputDatas['ip'];
-        $data['snap_user_grade']    = $this->user->grade->name;
-        $data['snap_user_grade_id'] = $this->user->grade_id;
+        $data['status']    = UsersRechargeOrder::STATUS_INIT;
+        $data['is_online'] = $this->inputDatas['is_online'];
+        $data['client_ip'] = $this->inputDatas['ip'];
         return $data;
     }
 
@@ -239,8 +247,7 @@ class RechargeAction extends MainAction
         if (!Cache::get($orderKey)) {
             Cache::put($orderKey, $init);
         }
-        $orderNo = Cache::increment($orderKey);
-        return $orderNo;
+        return (int) Cache::increment($orderKey);
     }
 
     /**
@@ -259,9 +266,10 @@ class RechargeAction extends MainAction
                            'is_online'          => SystemFinanceType::IS_ONLINE_NO,
                           ];
         $orders         = UsersRechargeOrder::where($whereConfition)
-            ->get('real_money')->pluck('real_money')->toArray();
+            ->get('real_money');
+        $real_money     = $orders->pluck('real_money')->toArray();
         $exists         = []; //已经存在的
-        foreach ($orders as $order) {
+        foreach ($real_money as $order) {
             $money    = round($order - $this->inputDatas['money'], 2);
             $exists[] = $money;
         }
@@ -270,8 +278,7 @@ class RechargeAction extends MainAction
         if (empty($diff)) {
             throw new \Exception('100302');
         }
-        $randKey   = array_rand($diff);
-        $realMoney = $diff[$randKey] + $this->inputDatas['money'];
-        return $realMoney;
+        $randKey = array_rand($diff);
+        return $diff[$randKey] + $this->inputDatas['money'];
     }
 }
