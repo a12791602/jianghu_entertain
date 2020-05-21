@@ -58,6 +58,7 @@ class IndexResource extends BaseResource
                 'name'            => $this->games->name,
                 'sort'            => $this->sort,
                 'hot_new'         => $this->hot_new,
+                'status'          => $this->games->status,
                 'vendor'          => optional($this->games->vendor)->name,
                 'vendor_id'       => $this->games->vendor_id,
                ];
