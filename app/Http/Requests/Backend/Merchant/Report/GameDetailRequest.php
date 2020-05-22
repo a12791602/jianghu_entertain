@@ -39,7 +39,8 @@ class GameDetailRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'game_vendor_sign' => 'alpha|max:32',           //游戏厂商
+                'game_vendor_sign' => 'required|alpha|max:32',  //游戏厂商
+                'game_name'        => 'string|max:32',          //游戏名称
                 'project_day'      => 'array|size:2',           //日期
                 'project_day.*'    => 'date|date_format:Y-m-d', //日期
                 'pageSize'         => 'integer|between:1,100',  //每页数据条数

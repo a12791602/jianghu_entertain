@@ -31,6 +31,16 @@ class GameReportDayFilter extends ModelFilter
     }
 
     /**
+     * 游戏名称模糊查询
+     * @param string $gameName 游戏名称.
+     * @return self
+     */
+    public function gameName(string $gameName): self
+    {
+        return $this->whereLike('game_name', $gameName);
+    }
+
+    /**
      * 平台查询
      * @param string $platformSign 平台标识.
      * @return self
