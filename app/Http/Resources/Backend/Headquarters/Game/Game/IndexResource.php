@@ -74,6 +74,11 @@ class IndexResource extends BaseResource
     private $author;
 
     /**
+     * @var integer $request_mode Request_mode.
+     */
+    private $request_mode;
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request $request Request.
@@ -87,18 +92,28 @@ class IndexResource extends BaseResource
             $icon = config('image_domain.' . $this->app_environment) . $icon;
         }
         return [
-                'id'          => $this->id,
-                'vendor_name' => $this->vendor->name,
-                'name'        => $this->name,
-                'sign'        => $this->sign,
-                'type'        => $this->type->name,
-                'sub_type'    => $this->subType->name,
-                'icon'        => $icon,
-                'status'      => $this->status,
-                'author'      => $this->author->name,
-                'last_editor' => $this->lastEditor->name ?? null,
-                'created_at'  => $this->created_at->toDateTimeString(),
-                'updated_at'  => $this->updated_at->toDateTimeString(),
+                'id'           => $this->id,
+                'vendor'       => [
+                                   'id'   => $this->vendor->id,
+                                   'name' => $this->vendor->name,
+                                  ],
+                'name'         => $this->name,
+                'sign'         => $this->sign,
+                'type'         => [
+                                   'id'   => $this->type->id,
+                                   'name' => $this->type->name,
+                                  ],
+                'sub_type'     => [
+                                   'id'   => $this->subType->id,
+                                   'name' => $this->subType->name,
+                                  ],
+                'icon'         => $icon,
+                'status'       => $this->status,
+                'request_mode' => $this->request_mode,
+                'author'       => $this->author->name,
+                'last_editor'  => $this->lastEditor->name ?? null,
+                'created_at'   => $this->created_at->toDateTimeString(),
+                'updated_at'   => $this->updated_at->toDateTimeString(),
                ];
     }
 }
