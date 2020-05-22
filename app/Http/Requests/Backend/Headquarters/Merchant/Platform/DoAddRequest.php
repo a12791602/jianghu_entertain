@@ -3,12 +3,19 @@
 namespace App\Http\Requests\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Systems\SystemPlatform;
 
 /**
  *  Class for do add request.
  */
 class DoAddRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [SystemPlatform::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -32,6 +39,9 @@ class DoAddRequest extends BaseFormRequest
                 'platform_name' => 'required|unique:system_platforms,cn_name',          //平台名称
                 'platform_sign' => 'required|unique:system_platforms,sign',             //平台标识
                 'agency_method' => 'required|string',                                   //代理方式
+                'pc_skin_id'    => 'required|integer',                                  //PC皮肤
+                'h5_skin_id'    => 'required|integer',                                  //H5皮肤
+                'app_skin_id'   => 'required|integer',                                  //APP皮肤
                 'domains'       => 'required|array',                                    //域名
                 'domains.*'     => 'unique:system_domains,domain',                      //域名
                 'role'          => 'required|string',                                   //权限
