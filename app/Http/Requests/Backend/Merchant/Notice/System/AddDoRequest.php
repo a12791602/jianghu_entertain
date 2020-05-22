@@ -36,9 +36,9 @@ class AddDoRequest extends BaseFormRequest
     {
         return [
                 'title'      => 'required|string|max:64',
-                'h5_pic_id'  => 'required|integer|exists:static_resources,id',
-                'app_pic_id' => 'required|integer|exists:static_resources,id',
-                'pc_pic_id'  => 'required|integer|exists:static_resources,id',
+                'h5_pic_id'  => 'integer|exists:static_resources,id',
+                'app_pic_id' => 'integer|exists:static_resources,id',
+                'pc_pic_id'  => 'integer|exists:static_resources,id',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
                 'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
