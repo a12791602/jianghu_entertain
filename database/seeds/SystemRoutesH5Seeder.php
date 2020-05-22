@@ -261,6 +261,15 @@ class SystemRoutesH5Seeder extends Seeder
               'is_open'           => 0,
              ],
              [
+              'route_name'        => 'h5-api.user.user-report',
+              'controller'        => null,
+              'method'            => 'userReport',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+             ],
+             [
               'route_name'        => 'h5-api.account.destroy',
               'controller'        => null,
               'method'            => 'accountDestroy',
