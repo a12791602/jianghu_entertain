@@ -39,6 +39,16 @@ class IndexResource extends BaseResource
     private $icon;
 
     /**
+     * @var integer $is_recommend 是否推荐
+     */
+    private $is_recommend;
+
+    /**
+     * @var integer $status 状态
+     */
+    private $status;
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request $request Request.
@@ -58,7 +68,8 @@ class IndexResource extends BaseResource
                 'name'            => $this->games->name,
                 'sort'            => $this->sort,
                 'hot_new'         => $this->hot_new,
-                'status'          => $this->games->status,
+                'status'          => $this->status,
+                'is_recommend'    => $this->is_recommend,
                 'vendor'          => optional($this->games->vendor)->name,
                 'vendor_id'       => $this->games->vendor_id,
                ];

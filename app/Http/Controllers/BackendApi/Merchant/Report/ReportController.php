@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Report;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Merchant\Report\GameDetailRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameProjectRequest;
+use App\Http\Requests\Backend\Merchant\Report\GameRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserAuditRequest;
+use App\Http\SingleActions\Backend\Merchant\Report\GameAction;
+use App\Http\SingleActions\Backend\Merchant\Report\GameDetailAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameProjectAction;
 use App\Http\SingleActions\Backend\Merchant\Report\UserAuditAction;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +18,36 @@ use Illuminate\Http\JsonResponse;
  */
 class ReportController extends Controller
 {
+
+    /**
+     * 游戏报表-列表
+     *
+     * @param  GameRequest $request Request.
+     * @param  GameAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function game(
+        GameRequest $request,
+        GameAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 游戏报表-详情
+     *
+     * @param  GameDetailRequest $request Request.
+     * @param  GameDetailAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function gameDetail(
+        GameDetailRequest $request,
+        GameDetailAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
 
     /**
      * 平台注单-列表

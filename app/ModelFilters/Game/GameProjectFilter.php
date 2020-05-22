@@ -61,6 +61,16 @@ class GameProjectFilter extends ModelFilter
     }
 
     /**
+     * 状态
+     * @param  array $status 状态.
+     * @return self
+     */
+    public function statusIn(array $status): self
+    {
+        return $this->whereIn('status', $status);
+    }
+
+    /**
      * 游戏厂商
      * @param  string $gameVendorSign 游戏厂商.
      * @return self
