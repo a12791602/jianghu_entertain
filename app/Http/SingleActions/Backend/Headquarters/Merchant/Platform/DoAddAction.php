@@ -75,6 +75,9 @@ class DoAddAction extends MainAction
                                'cn_name'        => $inputDatas['platform_name'],
                                'sign'           => $inputDatas['platform_sign'],
                                'agency_method'  => $inputDatas['agency_method'],
+                               'pc_skin_id'     => $inputDatas['pc_skin_id'],
+                               'h5_skin_id'     => $inputDatas['h5_skin_id'],
+                               'app_skin_id'    => $inputDatas['app_skin_id'],
                                'start_time'     => $inputDatas['start_time'],
                                'end_time'       => $inputDatas['end_time'],
                                'sms_num'        => $inputDatas['sms_num'],
@@ -174,8 +177,8 @@ class DoAddAction extends MainAction
                     DB::rollback();
                     throw new \Exception('300717');
                 }
-            }
-        }
+            }//end foreach
+        }//end foreach
     }
 
     /**
@@ -201,7 +204,7 @@ class DoAddAction extends MainAction
                 DB::rollback();
                 throw new \Exception('300709');
             }
-        }
+        }//end foreach
     }
 
     /**
@@ -224,7 +227,7 @@ class DoAddAction extends MainAction
                 DB::rollback();
                 throw new \Exception('300710');
             }
-        }
+        }//end foreach
     }
 
     /**
@@ -272,7 +275,7 @@ class DoAddAction extends MainAction
                 DB::rollback();
                 throw new \Exception('300712');
             }
-        }
+        }//end foreach
     }
 
     /**
