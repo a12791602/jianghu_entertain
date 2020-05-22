@@ -61,8 +61,8 @@ class GetFinanceInfoAction extends MainAction
                         'system_finance_online_infos.id',
                         'frontend_name',
                         'frontend_remark',
-                        'min',
-                        'max',
+                        'min_amount',
+                        'max_amount',
                         'handle_fee',
                         'merchant_no',
                         'system_finance_online_infos.desc',
@@ -100,8 +100,8 @@ class GetFinanceInfoAction extends MainAction
                         'type_id',
                         'name',
                         'remark',
-                        'min',
-                        'max',
+                        'min_amount',
+                        'max_amount',
                         'fee',
                        ];
         $query->with('bank:id,name,code')->whereHas(
