@@ -639,6 +639,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'destroySentEmail',
              ],
              [
+              'route_name'    => 'merchant-api.report.user',
+              'menu_group_id' => 30,
+              'title'         => '报表管理-个人报表-列表',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Report\ReportController',
+              'method'        => 'user',
+             ],
+             [
               'route_name'    => 'merchant-api.report.game',
               'menu_group_id' => 31,
               'title'         => '报表管理-游戏报表-列表',

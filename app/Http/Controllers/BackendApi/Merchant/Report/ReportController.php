@@ -7,9 +7,11 @@ use App\Http\Requests\Backend\Merchant\Report\GameDetailRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameProjectRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserAuditRequest;
+use App\Http\Requests\Backend\Merchant\Report\UserRequest;
 use App\Http\SingleActions\Backend\Merchant\Report\GameAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameDetailAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameProjectAction;
+use App\Http\SingleActions\Backend\Merchant\Report\UserAction;
 use App\Http\SingleActions\Backend\Merchant\Report\UserAuditAction;
 use Illuminate\Http\JsonResponse;
 
@@ -18,6 +20,21 @@ use Illuminate\Http\JsonResponse;
  */
 class ReportController extends Controller
 {
+
+    /**
+     * 个人报表-列表
+     *
+     * @param  UserRequest $request Request.
+     * @param  UserAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function user(
+        UserRequest $request,
+        UserAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
 
     /**
      * 游戏报表-列表
