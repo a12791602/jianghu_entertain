@@ -30,5 +30,7 @@ Route::group(
             ->name($namePrefix . 'check-gifts');
         Route::post('broadcast-balance', [UserCenterController::class, 'broadcastBalance'])
             ->name($namePrefix . 'broadcast-balance');
+        Route::post('user-report', [UserCenterController::class, 'userReport'])
+            ->name($namePrefix . 'user-report');
     },
 );
