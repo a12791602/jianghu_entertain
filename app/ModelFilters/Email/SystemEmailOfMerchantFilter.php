@@ -18,7 +18,13 @@ class SystemEmailOfMerchantFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = ['email' => ['title']];
+    public $relations = [
+                         'email' => [
+                                     'title',
+                                     'sender',
+                                     'send_time',
+                                    ],
+                        ];
 
     /**
      * 按创建时间

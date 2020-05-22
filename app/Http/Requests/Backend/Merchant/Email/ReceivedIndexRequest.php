@@ -36,6 +36,8 @@ class ReceivedIndexRequest extends BaseFormRequest
     {
         return [
                 'title'        => 'string|min:1|max:16',
+                'sender'       => 'string|min:1|max:30',
+                'send_time'    => 'date',
                 'created_at'   => 'array',
                 'created_at.*' => 'date',
                 'pageSize'     => 'integer|between:1,100',     //每页数据条数

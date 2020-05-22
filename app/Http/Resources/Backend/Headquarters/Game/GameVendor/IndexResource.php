@@ -23,6 +23,11 @@ class IndexResource extends BaseResource
     private $name;
 
     /**
+     * @var string $sign Sign.
+     */
+    private $sign;
+
+    /**
      * @var string $status 管理员状态.
      */
     private $status;
@@ -92,10 +97,14 @@ class IndexResource extends BaseResource
         }
         return [
                 'id'             => $this->id,
+                'sign'           => $this->sign,
                 'name'           => $this->name,
                 'icon'           => $icon,
                 'sort'           => $this->sort,
-                'type'           => $this->gameType->name,
+                'type'           => [
+                                     'id'   => $this->gameType->id,
+                                     'name' => $this->gameType->name,
+                                    ],
                 'status'         => $this->status,
                 'production'     => $this->production,
                 'staging'        => $this->staging,
