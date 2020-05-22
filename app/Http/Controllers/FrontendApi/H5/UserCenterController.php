@@ -4,9 +4,11 @@ namespace App\Http\Controllers\FrontendApi\H5;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\FrontendUser\InformationUpdateRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\UserReportRequest;
 use App\Http\Requests\Frontend\Common\GamesLobby\ClaimBenefitsRequest;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\CheckBenefitsAction;
 use App\Http\SingleActions\Frontend\Common\FrontendUser\ClaimBenefitsAction;
+use App\Http\SingleActions\Frontend\Common\FrontendUser\UserReportAction;
 use App\Http\SingleActions\Frontend\H5\UserCenter\InformationAction;
 use Illuminate\Http\JsonResponse;
 
@@ -77,5 +79,20 @@ class UserCenterController extends Controller
     public function checkBenefits(CheckBenefitsAction $action): JsonResponse
     {
         return $action->execute();
+    }
+
+    /**
+     * 个人报表.
+     * @param UserReportAction  $action  UserReportAction.
+     * @param UserReportRequest $request UserReportRequest.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function userReport(
+        UserReportAction $action,
+        UserReportRequest $request
+    ): JsonResponse {
+        $validated = $request->validated();
+        return $action->execute($validated);
     }
 }

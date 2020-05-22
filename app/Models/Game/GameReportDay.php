@@ -20,5 +20,8 @@ class GameReportDay extends BaseModel
     /**
      * @var array
      */
-    public static $fieldDefinition = ['game_vendor_sign' => '游戏厂商标识'];
+    public static $fieldDefinition = [
+                                      'game_vendor_sign' => '游戏厂商标识',
+                                      'game_name'        => '游戏名称',
+                                     ];
 }
