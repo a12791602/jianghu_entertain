@@ -21,9 +21,9 @@ class BackendAdminUserFilter extends ModelFilter
     /**
      * @param string $string 搜索的字符串.
      *
-     * @return $this
+     * @return self
      */
-    public function searchStr(string $string): BackendAdminUserFilter
+    public function searchStr(string $string): self
     {
         return $this->whereLike('name', $string)->orWhere('email', 'like', '%' . $string . '%');
     }
@@ -37,5 +37,16 @@ class BackendAdminUserFilter extends ModelFilter
     public function name(string $name): BackendAdminUserFilter
     {
         return $this->where('name', $name);
+    }
+
+    /**
+     * 按发件人
+     *
+     * @param string $email Email.
+     * @return self
+     */
+    public function sender(string $email): self
+    {
+        return $this->whereLike('email', $email);
     }
 }

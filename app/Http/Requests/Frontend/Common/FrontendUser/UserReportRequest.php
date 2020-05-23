@@ -36,6 +36,7 @@ class UserReportRequest extends BaseFormRequest
         return [
                 'report_day'   => 'required|array|size:2',           //日期
                 'report_day.*' => 'required|date|date_format:Y-m-d', //日期
+                'pageSize'     => 'integer|between:1,100',           //每页数据条数
                ];
     }
 

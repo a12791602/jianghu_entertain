@@ -7,6 +7,14 @@ Route::group(
     ['prefix' => 'report'],
     static function (): void {
         $namePrefix = 'merchant-api.report.';
+        //个人报表-列表
+        Route::post(
+            'user',
+            [
+             ReportController::class,
+             'user',
+            ],
+        )->name($namePrefix . 'user');
         //游戏报表-列表
         Route::post(
             'game',

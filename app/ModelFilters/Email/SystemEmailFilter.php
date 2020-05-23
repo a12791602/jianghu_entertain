@@ -18,7 +18,12 @@ class SystemEmailFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = [
+                         'headquarters' => [
+                                            'sender',
+                                            'send_time',
+                                           ],
+                        ];
 
     /**
      * 按是否发送.
@@ -53,7 +58,6 @@ class SystemEmailFilter extends ModelFilter
         return $this->where('receivers', 'like', '%' . $name . '%');
     }
 
-
     /**
      * 按创建时间
      * @param array $crated_at CreatedAt.
@@ -71,6 +75,16 @@ class SystemEmailFilter extends ModelFilter
                 ->where('send_time', '<=', $crated_at[1]);
         }
         return $object;
+    }
+
+    /**
+     * 按发送时间
+     * @param string $send_time Send time.
+     * @return SystemEmailFilter
+     */
+    public function sendTime(string $send_time): SystemEmailFilter
+    {
+        return $this->whereLike('send_time', $send_time);
     }
 
     /**
