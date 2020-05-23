@@ -37,7 +37,7 @@ class AuditRequest extends BaseFormRequest
     {
         return [
                 'guid'   => 'integer|exists:frontend_users,guid',
-                'status' => 'required|in:0,1',
+                'status' => 'in:0,1',
                 'mobile' => [
                              'regex:/^1[345789]\d{9}$/',
                              'exists:frontend_users,mobile',

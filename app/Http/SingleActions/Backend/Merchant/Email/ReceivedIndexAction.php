@@ -34,6 +34,7 @@ class ReceivedIndexAction extends BaseAction
                 ],
             )
             ->filter($inputDatas)
+            ->where('merchant_id', $this->user->id)
             ->with('email.headquarters')
             ->orderByDesc('created_at')
             ->paginate($this->perPage);

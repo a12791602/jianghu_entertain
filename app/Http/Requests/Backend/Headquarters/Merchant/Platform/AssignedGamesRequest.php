@@ -37,11 +37,11 @@ class AssignedGamesRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'platform_id' => 'required|exists:system_platforms,id',
-                'vendor_id'   => 'exists:game_vendors,id',
-                'game_id'     => 'exists:games,id',
-                'page'        => 'integer|between:1,100', //页码
-                'pageSize'    => 'integer|between:1,100', //每页数据条数
+                'platform' => 'required|exists:system_platforms,id',
+                'vendor'   => 'exists:game_vendors,id',
+                'game'     => 'exists:games,id',
+                'page'     => 'integer|between:1,100', //页码
+                'pageSize' => 'integer|between:1,100', //每页数据条数
                ];
     }
 }
