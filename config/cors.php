@@ -58,6 +58,11 @@ return [
                                        'chrome-extension://ichpaphebnfifnkklfilneoaginadpla',// Aaron
                                        'http://192.168.1.30:8081',// Aaron
                                        'http://192.168.1.29:8081',// Charon
+                                       'http://cadstg.397017.com',// 总后台地址
+                                       'http://madstg.397017.com',// 商户后台地址
+                                       'http://picstg.397017.com',// 图片站地址
+                                       'http://echo.397017.com',// websocket地址
+                                       'http://apistg.397017.com',// api 调用地址
                                       ],
 
            /*
