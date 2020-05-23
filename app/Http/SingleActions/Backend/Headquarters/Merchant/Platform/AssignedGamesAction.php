@@ -21,14 +21,15 @@ class AssignedGamesAction extends MainAction
      */
     public function execute(array $inputData): JsonResponse
     {
-        $condition                = [];
-        $condition['status']      = GamePlatform::STATUS_OPEN;
-        $condition['platform_id'] = $inputData['platform_id'];
-        $item                     = GamePlatform::with('games')->where($condition)->get()->unique('game_id');
-        $item_count               = $item->count();
-        $page                     = $inputData['page'] ?? 1;
-        $perPage                  = $inputData['pageSize'] ?? $item_count;
-        $assigned_games           = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
+        $condition           = [];
+        $condition['status'] = GamePlatform::STATUS_OPEN;
+
+        $item = GamePlatform::with('games')->where($condition)->filter($inputData)->get()->unique('game_id');
+
+        $item_count     = $item->count();
+        $page           = $inputData['page'] ?? 1;
+        $perPage        = $inputData['pageSize'] ?? $item_count;
+        $assigned_games = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
         return msgOut(AssignedGameResource::collection($assigned_games));
     }
 }
