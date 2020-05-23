@@ -40,6 +40,7 @@ class EditDoRequest extends BaseFormRequest
         return [
                 'id'           => 'required|exists:games,id',
                 'type_id'      => 'required|exists:game_types,id',
+                'sub_type_id'  => 'required|exists:game_sub_types,id',
                 'vendor_id'    => 'required|exists:game_vendors,id',
                 'name'         => 'required|max:64|unique:games,name,' . $thisId,
                 'sign'         => 'required|max:64|unique:games,sign,' . $thisId . '|regex:/\w+/', //(字母+下划线)
