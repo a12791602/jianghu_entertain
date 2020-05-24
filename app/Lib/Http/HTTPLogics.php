@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Game\GameModule\IM\Logics;
+namespace App\Lib\Http;
 
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
