@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\User\Logics;
+namespace App\Models\Game\Logics;
 
 use App\Models\Game\GameVendor;
 use App\Models\User\FrontendUser;

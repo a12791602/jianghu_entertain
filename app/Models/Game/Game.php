@@ -4,8 +4,8 @@ namespace App\Models\Game;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\Game\Logics\GameLogics;
 use App\Models\Systems\StaticResource;
-use App\Models\User\Logics\GameLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Request;

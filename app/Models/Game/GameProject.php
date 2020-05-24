@@ -3,9 +3,9 @@
 namespace App\Models\Game;
 
 use App\Models\BaseModel;
+use App\Models\Game\Logics\GameProjectLogics;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUserLevel;
-use App\Models\User\Logics\GameProjectLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
