@@ -28,7 +28,6 @@ class EditDoAction
         if (!$item->save()) {
             throw new \RuntimeException('300403');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

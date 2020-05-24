@@ -41,7 +41,6 @@ class DoAddAction extends MainAction
         if (!$this->model->save()) {
             throw new \Exception('201200');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

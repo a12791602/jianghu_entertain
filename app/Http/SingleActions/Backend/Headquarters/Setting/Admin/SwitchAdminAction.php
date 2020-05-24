@@ -46,7 +46,6 @@ class SwitchAdminAction extends MainAction
         if (!$adminUser->save()) {
             throw new \Exception('301104');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

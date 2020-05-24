@@ -49,7 +49,6 @@ class DestroyAction
         if (!$adminGroupELoq->delete()) {
             throw new \Exception('200903');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

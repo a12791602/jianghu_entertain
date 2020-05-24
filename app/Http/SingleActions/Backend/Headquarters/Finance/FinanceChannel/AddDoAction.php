@@ -24,7 +24,6 @@ class AddDoAction extends BaseAction
         if (!$this->model->save()) {
             throw new \Exception('300800');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

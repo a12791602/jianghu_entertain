@@ -35,7 +35,7 @@ trait StaticJsonTableLogic
         }
         $model      = new $params['model']();
         $table_name = $model->getTable();
-        $jsonData   = $params['model'] ::with($withData)
+        $jsonData   = $params['model']::with($withData)
             ->get($params['fields'])
             ->toJson(JSON_UNESCAPED_UNICODE);
         return [

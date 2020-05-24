@@ -45,7 +45,6 @@ class GradeConfigAction extends MainAction
         if (!$gradesRuleEloq->save()) {
             throw new \Exception('200700');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

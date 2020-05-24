@@ -104,7 +104,7 @@ class BasePay extends Base implements Payment
                 $this->verifyData['realMoney']       = $data['amount'];
                 $this->verifyData['merchantOrderNo'] = $data['transaction_id'];
             }
-        }
+        }//end if
         $this->verifyData['backStr'] = 'OK';
         return $this->verifyData;
     }

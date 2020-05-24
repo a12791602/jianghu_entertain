@@ -116,7 +116,7 @@ class EditAction extends MainAction
             if ($afterConfig) {
                 $this->_checkAfterPercent($afterConfig, $percentArr);
             }
-        }
+        }//end if
         return $percentArr;
     }
 

@@ -53,7 +53,6 @@ class EditAction extends MainAction
         if (!$configEloq->save()) {
             throw new \Exception('202501');
         }
-        $msgOut = msgOut(['key' => $inputDatas['key'], 'value' => $inputDatas['value']]);
-        return $msgOut;
+        return msgOut(['key' => $inputDatas['key'], 'value' => $inputDatas['value']]);
     }
 }

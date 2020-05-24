@@ -56,7 +56,6 @@ class GroupDestroyAction extends MainAction
         if (!$datas->delete()) {
             throw new \Exception('300104');
         }
-        $msgOut = msgOut(['group_name' => $groupName]);
-        return $msgOut;
+        return msgOut(['group_name' => $groupName]);
     }
 }

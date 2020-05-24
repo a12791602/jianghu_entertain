@@ -41,7 +41,6 @@ class DoAddAction extends MainAction
         if (!$this->model->save()) {
             throw new \Exception('200500');
         }
-        $msgOut = msgOut(['title' => $inputDatas['title']]);
-        return $msgOut;
+        return msgOut(['title' => $inputDatas['title']]);
     }
 }
