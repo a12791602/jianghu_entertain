@@ -28,7 +28,6 @@ class EditDoAction extends BaseAction
         if (!$model->save()) {
             throw new \Exception('300501');
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

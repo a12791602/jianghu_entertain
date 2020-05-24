@@ -62,7 +62,7 @@ class EditRequest extends BaseFormRequest
                     'tags.*'     => 'exists:users_tags,id',
                     'remark'     => 'string|min:1|max:256',
                    ];
-        }
+        }//end if
         return ['id' => 'required|exists:system_finance_offline_infos,id'];
     }
 

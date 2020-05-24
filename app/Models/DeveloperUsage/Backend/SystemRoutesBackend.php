@@ -48,8 +48,7 @@ class SystemRoutesBackend extends BaseModel
         if (!Route::has($this->route_name)) {
             return '';
         }
-        $routeName = route($this->route_name, [], false);
-        return $routeName;
+        return route($this->route_name, [], false);
     }
 
     /**
@@ -68,7 +67,6 @@ class SystemRoutesBackend extends BaseModel
      */
     public function menu(): BelongsTo
     {
-        $menu = $this->belongsTo(BackendSystemMenu::class, 'menu_group_id', 'id');
-        return $menu;
+        return $this->belongsTo(BackendSystemMenu::class, 'menu_group_id', 'id');
     }
 }

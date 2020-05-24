@@ -57,7 +57,7 @@ class AddDoAction extends BaseAction
             }
         } catch (\Throwable $exception) {
             Log::error($exception->getMessage());
-        }
+        }//end try
 
         DB::rollBack();
         throw new \Exception('200600');

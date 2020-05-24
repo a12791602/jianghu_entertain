@@ -63,7 +63,6 @@ class BankListAction extends MainAction
                           'name' => $item->bank->name ?? null,
                          ];
         }
-        $msgOut = msgOut($results);
-        return $msgOut;
+        return msgOut($results);
     }
 }

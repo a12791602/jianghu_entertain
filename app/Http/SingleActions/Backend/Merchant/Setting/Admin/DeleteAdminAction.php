@@ -62,8 +62,6 @@ class DeleteAdminAction extends MainAction
         if (!$adminEloq->delete()) {
             throw new \Exception('201003');
         }
-
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }

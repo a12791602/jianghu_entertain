@@ -70,7 +70,7 @@ class EditRequest extends BaseFormRequest
                     'desc'            => 'string',
                     'backend_remark'  => 'string',
                    ];
-        }
+        }//end if
         return ['id' => 'required|exists:system_finance_online_infos,id'];
     }
 

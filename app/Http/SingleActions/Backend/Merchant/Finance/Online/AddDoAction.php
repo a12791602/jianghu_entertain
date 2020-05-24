@@ -51,7 +51,7 @@ class AddDoAction extends BaseAction
             return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
-        }
+        }//end try
         DB::rollBack();
         throw new \RuntimeException('201400');
     }

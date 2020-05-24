@@ -45,7 +45,6 @@ class FrontendUsersSpecificInfo extends BaseAuthModel
             $avatarEloq = $avatarClass::first();
             $avatar_pic = optional($avatarEloq)->pic_path;
         }
-        $result = config('image_domain.' . $appEnvironment) . $avatar_pic;
-        return $result;
+        return config('image_domain.' . $appEnvironment) . $avatar_pic;
     }
 }

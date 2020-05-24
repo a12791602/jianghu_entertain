@@ -21,8 +21,7 @@ class SortAction extends BaseAction
             foreach ($inputDatas['sorts'] as $inputData) {
                 $this->model::where('id', $inputData['id'])->update(['sort' => $inputData['sort']]);
             }
-            $result = msgOut();
-            return $result;
+            return msgOut();
         } catch (\Throwable $exception) {
             throw new \Exception('200203');
         }

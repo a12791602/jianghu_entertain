@@ -51,7 +51,6 @@ class StoreAction extends MainAction
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }
-        $msgOut = msgOut();
-        return $msgOut;
+        return msgOut();
     }
 }
