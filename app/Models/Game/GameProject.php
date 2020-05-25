@@ -24,6 +24,8 @@ class GameProject extends BaseModel
     public const STATUS_WIN_CALCULATE = 4;//4已派奖
     public const PULL_STATUS_NO       = 0;//0未拉取第三方状态
     public const PULL_STATUS_YES      = 1;//1已拉取第三方状态
+    public const COUNTED_REPORT_NO    = 0;//0未计入报表
+    public const COUNTED_REPORT_YES   = 1;//1以计入报表
 
     /**
      * @var array
