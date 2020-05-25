@@ -10,9 +10,13 @@
 namespace App\Listeners;
 
 use App\Models\Systems\SystemLogsFrontend;
+use App\Models\Systems\SystemPlatform;
+use App\Models\User\FrontendUser;
+use App\Models\User\UsersLoginLog;
 use App\Services\Logs\FrontendLogs\FrontendLogMonologEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Log;
 
@@ -66,6 +70,28 @@ class FrontendLogMonologEventListener implements ShouldQueue
         //记录日志
         $sysLog->fill($event->records['formatted']);
         $sysLog->save();
+        $this->saveToUserLogTable($event->records['formatted']);
+    }
+
+    /**
+     * Save to Login Logs
+     * @param array $data Data.
+     * @return void
+     */
+    protected function saveToUserLogTable(array $data): void
+    {
+        $systemPlatform                  = SystemPlatform::where('sign', $data['platform_sign'])->first();
+        $toSaveData                      = Arr::only($data, ['platform_sign', 'mobile', 'origin']);
+        $toSaveData['last_login_ip']     = $data['ip'];
+        $toSaveData['pid']               = $systemPlatform->id ?? 0;
+        $toSaveData['last_login_device'] = $data['device_type'];
+        $frontUser                       = FrontendUser::where('mobile', $data['mobile'])->first();
+        if ($frontUser instanceof FrontendUser) {
+            $toSaveData['guid'] = $frontUser->guid;
+        }
+        $userLog = new UsersLoginLog();
+        $userLog->fill($toSaveData);
+        $userLog->save();
     }
 
     /**
