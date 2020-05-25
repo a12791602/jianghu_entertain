@@ -3,13 +3,18 @@
 namespace App\Models\User;
 
 use App\Models\BaseAuthModel;
+use App\Models\User\Logics\UsersReportDayLogics;
 
 /**
  * 用户日报表
  */
 class UsersReportDay extends BaseAuthModel
 {
-
+    /**
+     * UsersReportDayLogics
+     */
+    use UsersReportDayLogics;
+    
     /**
      * @var array $guarded
      */
