@@ -52,8 +52,10 @@ class ConfirmAction extends MainAction
             );
             $redis->rpush('headquarters_statistics:top_up', $top_up_cache);
             $redis->expire('headquarters_statistics:top_up', $time);
+            $redis->rpush('merchant_statistics_' . $this->user->platform_sign . ':top_up', $top_up_cache);
+            $redis->expire('merchant_statistics_' . $this->user->platform_sign . ':top_up', $time);
             return msgOut();
-        }
+        }//end if
         throw new \Exception('101004');
     }
 }
