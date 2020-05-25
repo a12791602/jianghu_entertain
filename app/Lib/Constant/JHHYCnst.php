@@ -14,6 +14,8 @@ class JHHYCnst
     public const DEVICE_H5 = 2;
     //app端
     public const DEVICE_APP = 3;
+    //Android
+    public const DEVICE_APK = 4;
     //启用状态
     public const STATUS_OPEN = 1;
     //禁用状态
@@ -44,4 +46,8 @@ class JHHYCnst
     public const FRONTEND    = 'frontend';
     public const MERCHANT    = 'merchant';
     public const HEADQUARTER = 'headquarter';
+    //在线
+    public const ONLINE = 1;
+    //离线
+    public const OFFLINE = 0;
 }

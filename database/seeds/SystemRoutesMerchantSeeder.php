@@ -1376,6 +1376,15 @@ class SystemRoutesMerchantSeeder extends Seeder
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Notification\NotificationController',
               'method'        => 'statistic',
              ],
+             [
+              'route_name'    => 'merchant-api.statistics.index',
+              'menu_group_id' => 57,
+              'title'         => '首页统计',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Statistic\StatisticController',
+              'method'        => 'index',
+             ],
 
              // [
              //  'route_name'    => 'merchant-api.bank.index',

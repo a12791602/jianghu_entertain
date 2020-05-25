@@ -96,6 +96,8 @@ class WithdrawalAction extends MainAction
         );
         $redis->rpush('headquarters_statistics:withdrawal', $withdraw_cache);
         $redis->expire('headquarters_statistics:withdrawal', $time);
+        $redis->rpush('merchant_statistics_' . $this->user->platform_sign . ':withdrawal', $withdraw_cache);
+        $redis->expire('merchant_statistics_' . $this->user->platform_sign . ':withdrawal', $time);
     }
 
     /**
