@@ -72,6 +72,7 @@ class LoginAction extends MainAction
         $user->remember_token  = $token;
         $user->last_login_ip   = request()->ip();
         $user->last_login_time = Carbon::now()->timestamp;
+        $user->is_online       = 1;
         $user->save();
         $data = [
                  'access_token' => $token,
