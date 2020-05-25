@@ -8,10 +8,15 @@ use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\FrontendUsersAccountsTypesParam;
 use App\Models\User\FrontendUsersAudit;
+use App\Models\User\UsersReportDay;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Trait FrontendUsersAccountLogics
+ * @package App\Models\User\Logics
+ */
 trait FrontendUsersAccountLogics
 {
 
@@ -31,12 +36,12 @@ trait FrontendUsersAccountLogics
         DB::beginTransaction();
         $resource = $this->doChange($type, $params);
         $accountLocker->release();
-        if ($resource === false) {
+        if ($resource !== true) {
             DB::rollback();
             throw new \Exception('100204');
         }
         DB::commit();
-        return $resource;
+        return true;
     }
 
     /**
@@ -63,21 +68,15 @@ trait FrontendUsersAccountLogics
         // 3. 检测金额
         $amount = abs($params['amount']);
         if ((bool) $amount === false) {
-            return false;
+            return true;
         }
         // 冻结类型 1 冻结自己金额 2 冻结退还
         // 资金增减. 需要检测对应
         $beforeBalance = $this->balance;
         $beforeFrozen  = $this->frozen;
         $amount        = (float) $amount;
-        //游戏中奖时
-        if ($typeConfig['frozen_type'] === self::FROZEN_STATUS_GAME_WIN) {
-            $unfreezeAfWin = (float) $params['unfreeze_amount'];
-        } else {
-            $unfreezeAfWin = 0.0;
-        }
         // 根据冻结类型处理
-        $return = $this->_handleFrozen($typeConfig, $amount, $unfreezeAfWin);
+        $return = $this->_handleFrozen($typeConfig, $amount);
         if ($return !== true) {
             DB::rollback();
             throw new \Exception('100202');
@@ -93,18 +92,18 @@ trait FrontendUsersAccountLogics
         );
         //稽核处理
         $this->_auditHandle($user, $typeConfig, $amount);
+        //报表处理
+        $this->_reportHandle($user, $typeConfig, $amount);
         return $saveData;
     }
 
     /**
      * 根据冻结类型处理
-     * @param array      $typeConfig    帐变类型Arr.
-     * @param float      $amount        金额.
-     * @param float|null $unfreezeAfWin 盈利之后要解放冻结金额.
+     * @param  array $typeConfig 帐变类型Arr.
+     * @param  float $amount     金额.
      * @return mixed
-     * @throws \Exception Exception.
      */
-    private function _handleFrozen(array $typeConfig, float $amount, ?float $unfreezeAfWin)
+    private function _handleFrozen(array $typeConfig, float $amount)
     {
 
         switch ($typeConfig['frozen_type']) {
@@ -115,7 +114,6 @@ trait FrontendUsersAccountLogics
                 $result = $this->unFrozen($amount);
                 break;
             case self::FROZEN_STATUS_GAME_WIN:
-                $result = $this->costWin($amount, $unfreezeAfWin);
                 break;
             case self::FROZEN_STATUS_TO_SYSTEM:
                 $result = $this->costFrozen($amount);
@@ -209,23 +207,6 @@ trait FrontendUsersAccountLogics
     }
 
     /**
-     * @param float $amount        金额.
-     * @param float $unfreezeAfWin 盈利之后要解放冻结金额.
-     * @return boolean
-     * @throws \Exception Exception.
-     */
-    public function costWin(float $amount, float $unfreezeAfWin): bool
-    {
-        if ($unfreezeAfWin > $this->frozen) {
-            DB::rollback();
-            throw new \Exception('100205');
-        }
-        $this->frozen  -= $unfreezeAfWin;
-        $this->balance += $amount;
-        return $this->save();
-    }
-
-    /**
      *
      * @param  array        $params        参数.
      * @param  array        $typeConfig    帐变类型.
@@ -233,7 +214,7 @@ trait FrontendUsersAccountLogics
      * @param  float        $beforeBalance 帐变前金额.
      * @param  float        $beforeFrozen  帐变前冻结金额.
      * @param  float        $amount        金额.
-     * @return FrontendUsersAccountsReport
+     * @return boolean
      */
     private function _saveData(
         array $params,
@@ -242,7 +223,7 @@ trait FrontendUsersAccountLogics
         float $beforeBalance,
         float $beforeFrozen,
         float $amount
-    ): FrontendUsersAccountsReport {
+    ): bool {
         $keys       = FrontendUsersAccountsTypesParam::
             where('is_search_ease', FrontendUsersAccountsTypesParam::SEARCH_EASE_NO)
             ->pluck('param')
@@ -272,8 +253,7 @@ trait FrontendUsersAccountLogics
 
         $accountsReport = new FrontendUsersAccountsReport();
         $accountsReport->fill($report);
-        $accountsReport->save();
-        return $accountsReport;
+        return $accountsReport->save();
     }
 
     /**
@@ -294,6 +274,27 @@ trait FrontendUsersAccountLogics
             $demandBet = $this->_getDemandBet($sign, $amount, 'activity_audit_times');
             $userAudit->createAudit($user, $type, $amount, $demandBet);
         }
+    }
+
+    /**
+     * 用户日报表处理
+     * @param  FrontendUser $user   Frontend User.
+     * @param  array        $type   Type.
+     * @param  float        $amount Amount.
+     * @return void
+     */
+    private function _reportHandle(FrontendUser $user, array $type, float $amount): void
+    {
+        //充值
+        if (in_array($type['sign'], $this->rechargeTypes)) {
+            UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 1);
+        }
+        //提现成功
+        if ($type['sign'] !== 'withdraw_finish') {
+            return;
+        }
+
+        UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 2);
     }
 
     /**
