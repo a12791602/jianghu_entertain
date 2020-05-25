@@ -58,7 +58,6 @@ class UserAction extends MainAction
                  'commission',
                  'activity_sum',
                  'game_win_sum',
-                 'real_win_lose',
                  'day',
                 ],
             )->orderBy('day', 'desc')

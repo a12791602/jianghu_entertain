@@ -41,6 +41,9 @@ class UsersReportDayFilter extends ModelFilter
         if (count($reportDay) === 2) {
             $eloq = $this->whereBetween('day', $reportDay);
         }
+        if (count($reportDay) === 1 && isset($reportDay[0])) {
+            $eloq = $this->whereDate('day', $reportDay[0]);
+        }
         return $eloq;
     }
 

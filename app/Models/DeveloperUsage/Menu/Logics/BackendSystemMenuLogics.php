@@ -42,7 +42,7 @@ trait BackendSystemMenuLogics
         if (Cache::tags([$this->redisFirstTag])->has($redisKey)) {
             $menuData = Cache::tags([$this->redisFirstTag])->get($redisKey);
         } else {
-            $menuData = self::createMenuDatas($redisKey, $adminAccessGroupDetail);
+            $menuData = $this->createMenuDatas($redisKey, $adminAccessGroupDetail);
         }
         return $menuData;
     }
