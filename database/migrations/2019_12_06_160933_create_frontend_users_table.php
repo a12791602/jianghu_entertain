@@ -37,7 +37,6 @@ class CreateFrontendUsersTable extends Migration
                 $table->text('remember_token')->nullable()->default(null)->comment('token');
                 $table->char('register_ip', 15)->nullable()->index()->comment('注册IP');
                 $table->char('last_login_ip', 15)->nullable()->default(null)->comment('最后登陆IP');
-                $table->char('last_login_ip', 15)->nullable()->index()->comment('最后登陆IP');
                 $table->integer('user_specific_id')->nullable()->default(null)->comment('用户扩展信息表id');
                 $table->integer('user_tag_id')->nullable()->default(1)->index()->comment('用户标签id');
                 $table->tinyInteger('status')->default(1)->comment('状态 0禁用 1正常');
