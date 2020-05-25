@@ -25,18 +25,17 @@ class CreateUsersReportDaysTable extends Migration
                 $table->string('platform_sign', 10)->nullable()->default(null)->comment('所属平台标记');
                 $table->string('mobile', 11)->nullable()->default(null)->comment('用户账号（手机号码）');
                 $table->string('guid', 16)->nullable()->default(null)->comment('用户游戏唯一标识id');
-                $table->decimal('recharge_sum', 18, 4)->nullable()->default(null)->comment('入款金额');
+                $table->decimal('recharge_sum', 18, 4)->nullable()->default(0)->comment('入款金额');
                 $table->integer('recharge_num')->default(0)->comment('入款次数');
-                $table->decimal('withdraw_sum', 18, 4)->nullable()->default(null)->comment('出款金额');
+                $table->decimal('withdraw_sum', 18, 4)->nullable()->default(0)->comment('出款金额');
                 $table->integer('withdraw_num')->default(0)->comment('出款次数');
-                $table->decimal('bet_sum', 18, 4)->nullable()->default(null)->comment('投注金额');
+                $table->decimal('bet_sum', 18, 4)->nullable()->default(0)->comment('投注金额');
                 $table->integer('bet_num')->default(0)->comment('投注次数');
-                $table->decimal('reduced_sum', 18, 4)->nullable()->default(null)->comment('优惠金额');
-                $table->decimal('effective_bet_sum', 18, 4)->nullable()->default(null)->comment('有效投注金额');
-                $table->decimal('commission', 18, 4)->nullable()->default(null)->comment('洗码');
-                $table->decimal('activity_sum', 18, 4)->nullable()->default(null)->comment('活动金额');
-                $table->decimal('game_win_sum', 18, 4)->nullable()->default(null)->comment('游戏中奖金额');
-                $table->decimal('real_win_lose', 18, 4)->nullable()->default(null)->comment('真实盈亏');
+                $table->decimal('reduced_sum', 18, 4)->nullable()->default(0)->comment('优惠金额');
+                $table->decimal('effective_bet_sum', 18, 4)->nullable()->default(0)->comment('有效投注金额');
+                $table->decimal('commission', 18, 4)->nullable()->default(0)->comment('洗码');
+                $table->decimal('activity_sum', 18, 4)->nullable()->default(0)->comment('活动金额');
+                $table->decimal('game_win_sum', 18, 4)->nullable()->default(0)->comment('游戏中奖金额');
                 $table->date('day')->comment('日期');
                 $table->nullableTimestamps();
             },

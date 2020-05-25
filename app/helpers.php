@@ -8,9 +8,11 @@
  */
 
 use App\Lib\Crypt\DataCrypt;
+use App\Models\Game\GameProject;
 use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\Systems\SystemDomain;
 use App\Models\Systems\SystemPlatform;
+use App\Models\User\UsersReportDay;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -404,4 +406,16 @@ function paginateArray(array $data, ?int $perPage = 1): LengthAwarePaginator
 function getJHHYUrl(string $path, string $type)
 {
     return Storage::disk($type)->url($path);
+}
+
+/**
+ * @param  GameProject $gameProject 游戏注单.
+ * @return void
+ */
+function gameReportHandle(GameProject $gameProject): void
+{
+    if ($gameProject->is_counted_report !== GameProject::COUNTED_REPORT_NO) {
+        return;
+    }
+    UsersReportDay::saveGameReport($gameProject);
 }
