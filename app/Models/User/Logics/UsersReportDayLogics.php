@@ -14,14 +14,14 @@ trait UsersReportDayLogics
      * @param  integer $mobile       手机号.
      * @param  string  $guid         用户guid.
      * @param  string  $reportAt     报表日期.
-     * @return self
+     * @return self|null
      */
     public static function getUserReport(
         string $platformSign,
         int $mobile,
         string $guid,
         string $reportAt
-    ): self {
+    ): ?self {
         $filterArr = [
                       'platform_sign' => $platformSign,
                       'mobile'        => $mobile,
