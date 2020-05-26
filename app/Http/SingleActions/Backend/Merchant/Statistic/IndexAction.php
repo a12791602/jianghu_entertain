@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Statistic;
 use App\Http\Resources\Backend\Headquarters\Statistic\IndexResource;
 use App\Http\SingleActions\MainAction;
 use App\Lib\Constant\JHHYCnst;
+use App\Models\Systems\SystemPlatform;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersReportDay;
 use Carbon\Carbon;
@@ -25,11 +26,19 @@ class IndexAction extends MainAction
      */
     public function execute(): JsonResponse
     {
-        $platform      = $this->currentPlatformEloq->sign;
-        $top_up_key    = 'merchant_statistics_' . $platform . ':top_up';
-        $top_up        = $this->getCacheItem($top_up_key);
-        $top_up_amount = $top_up->sum('amount');
-        $top_up_num    = $top_up->unique('user_id')->count();
+        $platform        = $this->currentPlatformEloq->sign;
+        $top_up_key      = 'merchant_statistics_' . $platform . ':top_up';
+        $top_up          = $this->getCacheItem($top_up_key);
+        $top_up_amount   = $top_up->sum('amount');
+        $top_up_num      = $top_up->unique('user_id')->count();
+        $system_platform = SystemPlatform::where('sign', $this->currentPlatformEloq->sign)->first();
+        if (!$system_platform instanceof SystemPlatform) {
+            return msgOut();
+        }
+        $frontend_users           = FrontendUser::whereDate('created_at', now()->toDateString())->get();
+        $sign_up_today            = $frontend_users->count();
+        $frontend_users_id        = $frontend_users->pluck('id');
+        $sign_up_and_top_up_today = $top_up->whereIn('user_id', $frontend_users_id)->unique('user_id')->count();
 
         $withdrawal_key    = 'merchant_statistics_' . $platform . ':withdrawal';
         $withdrawal        = $this->getCacheItem($withdrawal_key);
@@ -52,15 +61,18 @@ class IndexAction extends MainAction
         $online       = $this->online();
 
         $item = [
-                 'online'                => $online,
-                 'registration'          => $registration,
-                 'withdrawal_num'        => $withdrawal_num,
-                 'withdrawal_amount'     => $withdrawal_amount,
-                 'top_up_num'            => $top_up_num,
-                 'top_up_amount'         => $top_up_amount,
-                 'gift_num'              => $gift_num,
-                 'gift_amount'           => $gift_amount,
-                 'top_up_and_withdrawal' => $this->statement(),
+                 'platform_end_time'        => $system_platform->end_time,
+                 'sign_up_today'            => $sign_up_today,
+                 'sign_up_and_top_up_today' => $sign_up_and_top_up_today,
+                 'online'                   => $online,
+                 'registration'             => $registration,
+                 'withdrawal_num'           => $withdrawal_num,
+                 'withdrawal_amount'        => $withdrawal_amount,
+                 'top_up_num'               => $top_up_num,
+                 'top_up_amount'            => $top_up_amount,
+                 'gift_num'                 => $gift_num,
+                 'gift_amount'              => $gift_amount,
+                 'top_up_and_withdrawal'    => $this->statement(),
                 ];
         return msgOut(IndexResource::make($item));
     }
