@@ -31,6 +31,14 @@ Route::group(
              'gameDetail',
             ],
         )->name($namePrefix . 'game-detail');
+        //公司报表
+        Route::post(
+            'platform',
+            [
+             ReportController::class,
+             'platform',
+            ],
+        )->name($namePrefix . 'platform');
         //平台注单
         Route::post(
             'game-project',

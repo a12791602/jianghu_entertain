@@ -631,7 +631,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.email.destroy.sent.email',
-              'menu_group_id' => 23,
+              'menu_group_id' => 27,
               'title'         => '邮件系统-发件箱-删除邮件',
               'is_open'       => 0,
               'is_ack'        => 0,
@@ -649,7 +649,7 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.report.game',
-              'menu_group_id' => 31,
+              'menu_group_id' => 28,
               'title'         => '报表管理-游戏报表-列表',
               'is_open'       => 0,
               'is_ack'        => 0,
@@ -658,12 +658,21 @@ class SystemRoutesMerchantSeeder extends Seeder
              ],
              [
               'route_name'    => 'merchant-api.report.game-detail',
-              'menu_group_id' => 31,
+              'menu_group_id' => 28,
               'title'         => '报表管理-游戏报表-详情',
               'is_open'       => 0,
               'is_ack'        => 0,
               'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Report\ReportController',
               'method'        => 'gameDetail',
+             ],
+             [
+              'route_name'    => 'merchant-api.report.platform',
+              'menu_group_id' => 29,
+              'title'         => '报表管理-公司报表-列表',
+              'is_open'       => 0,
+              'is_ack'        => 0,
+              'controller'    => 'App\Http\Controllers\BackendApi\Merchant\Report\ReportController',
+              'method'        => 'platform',
              ],
              [
               'route_name'    => 'merchant-api.report.game-project',
