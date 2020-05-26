@@ -16,6 +16,8 @@ class JHHYCnst
     public const DEVICE_APP = 3;
     //Android
     public const DEVICE_APK = 4;
+    public const GUARD_H5   = 'frontend-h5';
+    public const GUARD_APP  = 'frontend-mobile';
     //启用状态
     public const STATUS_OPEN = 1;
     //禁用状态
