@@ -3,6 +3,7 @@
 namespace App\Models\User\Logics;
 
 use App\Lib\Locker\AccountLocker;
+use App\Models\Systems\SystemPlatformReportDay;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
@@ -300,7 +301,7 @@ trait FrontendUsersAccountLogics
     }
 
     /**
-     * 用户日报表处理
+     * 报表处理
      * @param  FrontendUser $user   Frontend User.
      * @param  array        $type   Type.
      * @param  float        $amount Amount.
@@ -311,6 +312,7 @@ trait FrontendUsersAccountLogics
         //充值
         if (in_array($type['sign'], $this->rechargeTypes)) {
             UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 1);
+            SystemPlatformReportDay::saveReport('recharge_sum', $amount);
         }
         //提现成功
         if ($type['sign'] !== 'withdraw_finish') {
@@ -318,6 +320,7 @@ trait FrontendUsersAccountLogics
         }
 
         UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 2);
+        SystemPlatformReportDay::saveReport('withdraw_sum', $amount);
     }
 
     /**
