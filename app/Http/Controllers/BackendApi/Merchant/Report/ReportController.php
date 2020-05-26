@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Merchant\Report\GameDetailRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameProjectRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameRequest;
+use App\Http\Requests\Backend\Merchant\Report\PlatformRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserAuditRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserRequest;
 use App\Http\SingleActions\Backend\Merchant\Report\GameAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameDetailAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameProjectAction;
+use App\Http\SingleActions\Backend\Merchant\Report\PlatformAction;
 use App\Http\SingleActions\Backend\Merchant\Report\UserAction;
 use App\Http\SingleActions\Backend\Merchant\Report\UserAuditAction;
 use Illuminate\Http\JsonResponse;
@@ -61,6 +63,21 @@ class ReportController extends Controller
     public function gameDetail(
         GameDetailRequest $request,
         GameDetailAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 公司报表-列表
+     *
+     * @param  PlatformRequest $request Request.
+     * @param  PlatformAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function platform(
+        PlatformRequest $request,
+        PlatformAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
