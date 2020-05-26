@@ -41,7 +41,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->integer('user_specific_id')->nullable()->default(null)->comment('用户扩展信息表id');
                 $table->integer('user_tag_id')->nullable()->default(1)->index()->comment('用户标签id');
                 $table->tinyInteger('status')->default(1)->comment('状态 0禁用 1正常');
-                $table->string('invite_code', 64)->nullable()->default(null)->comment('邀请码');
+                $table->integer('invite_code')->default(0)->comment('邀请码');
                 $table->tinyInteger('is_online')->nullable()->default(0)->index()->comment('是否在线 1 是 0 否');
                 $table->string('device_code', 128)->nullable()->default(null)->comment('设备');
                 $table->timestamps();
