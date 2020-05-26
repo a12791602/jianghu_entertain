@@ -10,8 +10,8 @@ use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
-use DB;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -41,8 +41,11 @@ class CheckPassAction extends BaseAction
         try {
             $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
             $order->admin_id = $this->user->id;
-            $order->save();
-            if (!$order->user instanceof FrontendUser || !$order->user->account instanceof FrontendUsersAccount) {
+            $saveStatus      = $order->save();
+            if (! $order->user instanceof FrontendUser || !$order->user->account instanceof FrontendUsersAccount) {
+                throw new \Exception('100505');//用户不存在
+            }
+            if (!$saveStatus) {
                 throw new \Exception('202304');
             }
             $param = [
@@ -57,21 +60,32 @@ class CheckPassAction extends BaseAction
             broadcast(new FrontendNoticeEvent($notice_guid, $notice_type, '', $notice_balance));
             $user_info = DynamicInformationResource::make($order->user)->toArray(request());
             broadcast(new FrontendDynamicInfoEvent($order->user->guid, $user_info));
+            DB::commit();
             return msgOut();
         } catch (\RuntimeException $exception) {
-            $data    = [
-                        'file'    => $exception->getFile(),
-                        'line'    => $exception->getLine(),
-                        'message' => $exception->getMessage(),
-                       ];
-            $logData = [
-                        'orderNo' => $order->order_no ?? '',
-                        'msg'     => '审核通过失败!',
-                        'data'    => $data,
-                       ];
-            Log::channel('finance-callback-system')->info((string) json_encode($logData));
+            $this->packLogData($order, $exception);
         }//end try
-        DB::commit();
+        DB::rollBack();
         throw new \Exception('202304');
+    }
+
+    /**
+     * @param UsersRechargeOrder $order     RechargeOrder.
+     * @param \RuntimeException  $exception Exception.
+     * @return void
+     */
+    protected function packLogData(UsersRechargeOrder $order, \RuntimeException $exception): void
+    {
+        $data    = [
+                    'file'    => $exception->getFile(),
+                    'line'    => $exception->getLine(),
+                    'message' => $exception->getMessage(),
+                   ];
+        $logData = [
+                    'orderNo' => $order->order_no ?? '',
+                    'msg'     => '审核通过失败!',
+                    'data'    => $data,
+                   ];
+        Log::channel('finance-callback-system')->info((string) json_encode($logData));
     }
 }
