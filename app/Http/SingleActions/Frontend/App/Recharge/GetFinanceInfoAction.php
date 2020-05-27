@@ -25,7 +25,7 @@ class GetFinanceInfoAction extends MainAction
         $data['platform_sign'] = $this->user->platform_sign;
         $data['status']        = SystemFinanceType::STATUS_YES;
         $data['direction']     = SystemFinanceType::DIRECTION_IN;
-        $datas                 = SystemFinanceType::with(
+        $data                  = SystemFinanceType::with(
             [
              'onlineInfos'  => static function ($query) use ($data): object {
                  $query = self::getOnlineInfos($query, $data);
@@ -39,7 +39,7 @@ class GetFinanceInfoAction extends MainAction
         )->filter($data)
          ->withCacheCooldownSeconds(86400)
          ->get(['id', 'name', 'sign', 'is_online']);
-        return msgOut($datas);
+        return msgOut($data);
     }
 
     /**
@@ -85,11 +85,11 @@ class GetFinanceInfoAction extends MainAction
     /**
      * 获取线下支付信息.
      *
-     * @param object $query      Query.
-     * @param array  $inputDatas InputDatas.
+     * @param object $query     Query.
+     * @param array  $inputData InputData.
      * @return object
      */
-    protected static function getOfflineInfos(object $query, array $inputDatas): object
+    protected static function getOfflineInfos(object $query, array $inputData): object
     {
         //搜索的条件
         $whereConditions = ['status' => SystemFinanceOfflineInfo::STATUS_YES];
@@ -106,10 +106,10 @@ class GetFinanceInfoAction extends MainAction
                        ];
         $query->with('bank:id,name,code')->whereHas(
             'tags',
-            static function ($query) use ($inputDatas): object {
+            static function ($query) use ($inputData): object {
                 $query = $query->where(
                     [
-                     'tag_id'    => $inputDatas['tag_id'],
+                     'id'        => $inputData['tag_id'],
                      'is_online' => SystemFinanceType::IS_ONLINE_NO,
                     ],
                 );

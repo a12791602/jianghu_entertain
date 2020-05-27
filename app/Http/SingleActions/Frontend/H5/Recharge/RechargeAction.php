@@ -19,12 +19,12 @@ use Illuminate\Support\Facades\Cache;
 class RechargeAction extends MainAction
 {
 
-    public const STUTAS_NO = 0;
+    public const STATUS_NO = 0;
 
     /**
-     * @var array $inputDatas
+     * @var array $inputData
      */
-    protected $inputDatas;
+    protected $inputData;
 
     /**
      * @var mixed $model
@@ -37,14 +37,14 @@ class RechargeAction extends MainAction
     protected $order;
 
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $result           = [];
-        $this->inputDatas = $inputDatas;
+        $result          = [];
+        $this->inputData = $inputData;
         //获取模型
         $this->_getModel();
         //前置检查
@@ -52,7 +52,7 @@ class RechargeAction extends MainAction
         //生成订单数据
         $data = $this->_generateOrderData();
         //保存线上订单
-        if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
+        if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $order        = $this->_saveOnlineOrderData($data);
             $platformSign = $this->model->channel->vendor->sign; //第三方平台厂商的标记
             $channelSign  = $this->model->channel->sign; //第三方通道的标记
@@ -66,7 +66,7 @@ class RechargeAction extends MainAction
             }
         }
         //保存线下订单
-        if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
+        if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $result = $this->_saveOfflineOrderData($data);
         }
         $result = msgOut($result);
@@ -78,10 +78,10 @@ class RechargeAction extends MainAction
      */
     private function _getModel(): void
     {
-        if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            $this->model = SystemFinanceOnlineInfo::find($this->inputDatas['channel_id']);
-        } elseif ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
-            $this->model = SystemFinanceOfflineInfo::find($this->inputDatas['channel_id']);
+        if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
+            $this->model = SystemFinanceOnlineInfo::find($this->inputData['channel_id']);
+        } elseif ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
+            $this->model = SystemFinanceOfflineInfo::find($this->inputData['channel_id']);
         }
     }
 
@@ -102,12 +102,12 @@ class RechargeAction extends MainAction
      */
     private function _checkChannelIsOpen(): void
     {
-        if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            if ((int) ($this->model->status && $this->model->channel->status) === self::STUTAS_NO) {
+        if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
+            if ((int) ($this->model->status && $this->model->channel->status) === self::STATUS_NO) {
                 throw new \Exception('100300');
             }
-        } elseif ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
-            if ((int) $this->model->status === self::STUTAS_NO) {
+        } elseif ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
+            if ((int) $this->model->status === self::STATUS_NO) {
                 throw new \Exception('100300');
             }
         }
@@ -120,7 +120,7 @@ class RechargeAction extends MainAction
      */
     private function _checkMoneyIsEffective(): void
     {
-        $money = $this->inputDatas['money'];
+        $money = $this->inputData['money'];
         if ($money < $this->model->min_amount || $money > $this->model->max_amount) {
             throw new \Exception('100301');
         }
@@ -137,8 +137,8 @@ class RechargeAction extends MainAction
         $platformSign   = $this->currentPlatformEloq->sign;
         $whereCondition = [
                            'status'             => UsersRechargeOrder::STATUS_INIT,
-                           'money'              => $this->inputDatas['money'],
-                           'finance_channel_id' => $this->inputDatas['channel_id'],
+                           'money'              => $this->inputData['money'],
+                           'finance_channel_id' => $this->inputData['channel_id'],
                            'platform_sign'      => $platformSign,
                            'is_online'          => SystemFinanceType::IS_ONLINE_NO,
                            'real_money'         => $data['real_money'],
@@ -210,9 +210,11 @@ class RechargeAction extends MainAction
         $data['platform_sign']      = $platformSign;
         $data['user_id']            = $this->user->id;
         $data['order_no']           = $this->_generateOrderNo($platformSign);
-        $data['finance_channel_id'] = $this->inputDatas['channel_id'];
-        $data['money']              = $this->inputDatas['money'];
-        if ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
+        $data['finance_channel_id'] = $this->inputData['channel_id'];
+        $data['money']              = $this->inputData['money'];
+        $data['top_up_remark']      = $this->inputData['top_up_remark'];
+        $data['snap_user_level']    = $this->user->specificInfo->level;
+        if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $data['finance_type_id']    = $this->model->channel->type_id;
             $data['handling_money']     = $this->model->handle_fee;
             $data['arrive_money']       = $data['money'] - $data['handling_money'];
@@ -220,7 +222,7 @@ class RechargeAction extends MainAction
             $data['snap_merchant_code'] = $this->model->merchant_code;
             $data['snap_merchant']      = $this->model->channel->name;
             $data['snap_finance_type']  = $this->model->channel->type->name;
-        } elseif ((int) $this->inputDatas['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
+        } elseif ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $data['finance_type_id']   = $this->model->type_id;
             $data['real_money']        = $this->_getRealMoney();
             $data['handling_money']    = $this->model->handle_fee;
@@ -228,10 +230,13 @@ class RechargeAction extends MainAction
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
             $data['snap_bank']         = $this->model->name;
+            $data['card_number']       = $this->inputData['card_number'];
+            $data['branch']            = $this->inputData['branch'];
+            $data['bank']              = $this->inputData['bank'];
         }
         $data['status']    = UsersRechargeOrder::STATUS_INIT;
-        $data['is_online'] = $this->inputDatas['is_online'];
-        $data['client_ip'] = $this->inputDatas['ip'];
+        $data['is_online'] = $this->inputData['is_online'];
+        $data['client_ip'] = $this->inputData['ip'];
         return $data;
     }
 
@@ -260,8 +265,8 @@ class RechargeAction extends MainAction
         $platformSign   = $this->currentPlatformEloq->sign;
         $whereConfition = [
                            'status'             => UsersRechargeOrder::STATUS_INIT,
-                           'money'              => $this->inputDatas['money'],
-                           'finance_channel_id' => $this->inputDatas['channel_id'],
+                           'money'              => $this->inputData['money'],
+                           'finance_channel_id' => $this->inputData['channel_id'],
                            'platform_sign'      => $platformSign,
                            'is_online'          => SystemFinanceType::IS_ONLINE_NO,
                           ];
@@ -270,7 +275,7 @@ class RechargeAction extends MainAction
         $real_money     = $orders->pluck('real_money')->toArray();
         $exists         = []; //已经存在的
         foreach ($real_money as $order) {
-            $money    = round($order - $this->inputDatas['money'], 2);
+            $money    = round($order - $this->inputData['money'], 2);
             $exists[] = $money;
         }
         $allNum = range(-0.99, 0.99, 0.01); //所有的
@@ -279,6 +284,6 @@ class RechargeAction extends MainAction
             throw new \Exception('100302');
         }
         $randKey = array_rand($diff);
-        return $diff[$randKey] + $this->inputDatas['money'];
+        return $diff[$randKey] + $this->inputData['money'];
     }
 }

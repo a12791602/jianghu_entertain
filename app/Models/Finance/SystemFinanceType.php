@@ -42,6 +42,10 @@ class SystemFinanceType extends BaseModel
                                       'last_editor_id' => '最后编辑人ID',
                                       'created_at'     => '创建时间',
                                       'updated_at'     => '更新时间',
+                                      'card_number'    => '银行卡号',
+                                      'remark'         => '充值金额',
+                                      'branch'         => '支行',
+                                      'bank'           => '银行',
                                      ];
 
     /**

@@ -57,9 +57,9 @@ class RechargeController extends Controller
      */
     public function recharge(RechargeAction $action, RechargeRequest $request): JsonResponse
     {
-        $inputDatas       = $request->validated();
-        $inputDatas['ip'] = $request->ip();
-        return $action->execute($inputDatas);
+        $inputData       = $request->validated();
+        $inputData['ip'] = $request->ip();
+        return $action->execute($inputData);
     }
 
     /**
