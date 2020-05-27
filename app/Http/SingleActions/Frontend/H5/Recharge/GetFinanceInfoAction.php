@@ -109,7 +109,7 @@ class GetFinanceInfoAction extends MainAction
             static function ($query) use ($inputDatas): object {
                 $query = $query->where(
                     [
-                     'tag_id'    => $inputDatas['tag_id'],
+                     'id'        => $inputDatas['tag_id'],
                      'is_online' => SystemFinanceType::IS_ONLINE_NO,
                     ],
                 );
