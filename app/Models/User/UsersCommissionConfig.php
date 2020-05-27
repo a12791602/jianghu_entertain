@@ -21,10 +21,10 @@ class UsersCommissionConfig extends BaseModel
      * @var array
      */
     public static $fieldDefinition = [
-                                      'id'             => '洗码配置ID',
-                                      'game_type_id'   => '游戏类型ID',
-                                      'game_vendor_id' => '洗码厂商ID',
-                                      'bet'            => '打码量',
+                                      'id'               => '洗码配置ID',
+                                      'game_type_sign'   => '游戏类型',
+                                      'game_vendor_sign' => '洗码厂商',
+                                      'bet'              => '打码量',
                                      ];
 
     /**
