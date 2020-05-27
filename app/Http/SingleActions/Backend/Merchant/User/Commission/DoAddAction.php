@@ -51,9 +51,9 @@ class DoAddAction extends MainAction
 
         //获取当前游戏平台的洗码设置
         $filterArr        = [
-                             'platformSign' => $sign,
-                             'gameTypeId'   => $this->inputDatas['game_type_id'],
-                             'gameVendorId' => $this->inputDatas['game_vendor_id'],
+                             'platformSign'   => $sign,
+                             'gameTypeSign'   => $this->inputDatas['game_type_sign'],
+                             'gameVendorSign' => $this->inputDatas['game_vendor_sign'],
                             ];
         $commissionConfig = $this->model->filter($filterArr)->get();
 
@@ -121,10 +121,10 @@ class DoAddAction extends MainAction
     private function _insertConfig(string $sign): void
     {
         $insertData = [
-                       'platform_sign'  => $sign,
-                       'game_type_id'   => $this->inputDatas['game_type_id'],
-                       'game_vendor_id' => $this->inputDatas['game_vendor_id'],
-                       'bet'            => $this->inputDatas['bet'],
+                       'platform_sign'    => $sign,
+                       'game_type_sign'   => $this->inputDatas['game_type_sign'],
+                       'game_vendor_sign' => $this->inputDatas['game_vendor_sign'],
+                       'bet'              => $this->inputDatas['bet'],
                       ];
         $this->model->fill($insertData);
         if (!$this->model->save()) {

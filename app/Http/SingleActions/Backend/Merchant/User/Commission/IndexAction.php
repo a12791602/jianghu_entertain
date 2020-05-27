@@ -40,15 +40,15 @@ class IndexAction extends MainAction
         $datas                      = $this->model
             ->filter($inputDatas)
             ->with('configDetail.userGrade')
-            ->get(['id', 'game_type_id', 'game_vendor_id', 'bet']);
+            ->get(['id', 'game_type_sign', 'game_vendor_sign', 'bet']);
 
         $returnData = [];
         foreach ($datas as $dataKey => $item) {
             $returnData[$dataKey] = [
-                                     'id'             => $item->id,
-                                     'game_type_id'   => $item->game_type_id,
-                                     'game_vendor_id' => $item->game_vendor_id,
-                                     'bet'            => $item->bet,
+                                     'id'               => $item->id,
+                                     'game_type_sign'   => $item->game_type_sign,
+                                     'game_vendor_sign' => $item->game_vendor_sign,
+                                     'bet'              => $item->bet,
                                     ];
             $percentData          = [];
             foreach ($item->configDetail as $config) {
