@@ -38,7 +38,11 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->integer('admin_id')->nullable()->default(null)->comment('操作人ID');
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是线上存款 1 是 0 否');
                 $table->tinyInteger('recharge_status')->nullable()->default(null)->comment('支付状态 1 已支付 0 未支付');
-                $table->string('remark')->nullable()->default(null)->comment('备注');
+                $table->string('remark')->nullable()->default(null)->comment('后台处理时的备注');
+                $table->string('card_number', 64)->nullable()->default(null)->comment('用户线下入款时的卡号');
+                $table->string('bank', 128)->nullable()->default(null)->comment('支行');
+                $table->string('branch', 128)->nullable()->default(null)->comment('支行');
+                $table->string('top_up_remark')->nullable()->default(null)->comment('用户充值时的备注');
                 $table->string('client_ip', 30)->nullable()->default(null)->comment('下单ip');
                 $table->string('snap_merchant_no', 128)->nullable()->default(null)->comment('商户编号快照');
                 $table->string('snap_merchant_code')->nullable()->default(null)->comment('商户号快照');
@@ -47,7 +51,7 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->string('snap_user_grade', 64)->nullable()->default(null)->comment('会员等级快照');
                 $table->string('snap_account', 128)->nullable()->default(null)->comment('收款账户快照');
                 $table->string('snap_bank', 64)->nullable()->default(null)->comment('收款银行快照');
-                $table->integer('snap_user_grade_id')->default(0)->comment('用户vip等级快照');
+                $table->integer('snap_user_level')->default(0)->comment('用户vip等级快照');
                 $table->nullableTimestamps();
                 $table->index('platform_sign');
                 $table->index('platform_no');
