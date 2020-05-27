@@ -87,10 +87,10 @@ class EditAction extends MainAction
             throw new \Exception('200802');
         }
         $filterArr             = [
-                                  'notInId'      => $this->commissionConfig->id,
-                                  'platformSign' => $platformSign,
-                                  'gameTypeId'   => $this->commissionConfig->game_type_id,
-                                  'gameVendorId' => $this->commissionConfig->game_vendor_id,
+                                  'notInId'        => $this->commissionConfig->id,
+                                  'platformSign'   => $platformSign,
+                                  'gameTypeSign'   => $this->commissionConfig->game_type_sign,
+                                  'gameVendorSign' => $this->commissionConfig->game_vendor_sign,
                                  ];
         $otherCommissionConfig = $this->model
                                       ->filter($filterArr)

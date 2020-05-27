@@ -38,10 +38,10 @@ class DoAddRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'game_type_id'   => 'required|integer|exists:game_types,id',   //游戏类型ID
-                'game_vendor_id' => 'required|integer|exists:game_vendors,id', //游戏平台ID
-                'bet'            => 'required|numeric|gte:0',                  //打码量
-                'percent'        => 'required|string',                         //洗码比例
+                'game_type_sign'   => 'required|string|exists:game_types,sign',   //游戏类型标识
+                'game_vendor_sign' => 'required|string|exists:game_vendors,sign', //游戏平台标识
+                'bet'              => 'required|numeric|gte:0',                   //打码量
+                'percent'          => 'required|string',                          //洗码比例
                ];
     }
 }

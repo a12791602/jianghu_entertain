@@ -30,25 +30,25 @@ class UsersCommissionConfigFilter extends ModelFilter
     }
 
     /**
-     * 游戏类型ID查询
+     * 游戏类型查询
      *
-     * @param  string $typeId 游戏类型ID.
+     * @param  string $sign 游戏类型标识.
      * @return UsersCommissionConfigFilter
      */
-    public function gameType(string $typeId): UsersCommissionConfigFilter
+    public function gameType(string $sign): UsersCommissionConfigFilter
     {
-        return $this->where('game_type_id', $typeId);
+        return $this->where('game_type_sign', $sign);
     }
 
     /**
-     * 厂商ID查询
+     * 厂商查询
      *
-     * @param  string $vendorId 厂商ID.
+     * @param  string $sign 厂商标识.
      * @return UsersCommissionConfigFilter
      */
-    public function gameVendor(string $vendorId): UsersCommissionConfigFilter
+    public function gameVendor(string $sign): UsersCommissionConfigFilter
     {
-        return $this->where('game_vendor_id', $vendorId);
+        return $this->where('game_vendor_sign', $sign);
     }
 
     /**
