@@ -18,6 +18,7 @@ use Illuminate\Validation\ValidationException;
 use Jenssegers\Agent\Agent;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Process\Exception\InvalidArgumentException;
 use Throwable;
 
@@ -61,7 +62,10 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [ValidationException::class,];
+    protected $dontReport = [
+                             ValidationException::class,
+                             NotFoundHttpException::class,//welcome api index ignoring
+                            ];
 
     /**
      * A list of the internal exception types that should not be reported.
@@ -100,8 +104,7 @@ class Handler extends ExceptionHandler
     public function report(Throwable $e): void
     {
         $class = get_class($e);
-        if (!in_array($class, $this->dontReport, true))
-        {
+        if (!in_array($class, $this->dontReport, true)) {
             $errorCodeStatus = ExceptionHelper::checkStatusCodeTransl($e);
             if ($errorCodeStatus) {
                 $this->dontReport[] = get_class($e);
