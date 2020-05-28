@@ -79,6 +79,8 @@ class DatabaseSeeder extends Seeder
              GameReportDaySeeder::class,
              GameVendorReportDaySeeder::class,
              UsersReportDaySeeder::class,
+             UsersCommissionConfigSeeder::class,
+             UsersCommissionConfigDetailSeeder::class,
             ],
         );
     }

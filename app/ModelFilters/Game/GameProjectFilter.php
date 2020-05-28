@@ -71,6 +71,16 @@ class GameProjectFilter extends ModelFilter
     }
 
     /**
+     * 洗码状态
+     * @param  string $status 洗码状态.
+     * @return self
+     */
+    public function commissionStatus(string $status): self
+    {
+        return $this->where('commission_status', $status);
+    }
+
+    /**
      * 游戏厂商
      * @param  string $gameVendorSign 游戏厂商.
      * @return self
@@ -119,6 +129,8 @@ class GameProjectFilter extends ModelFilter
     {
         if (count($createdAt) === 2) {
             $eloq = $this->whereBetween('created_at', $createdAt);
+        } elseif (count($createdAt) === 1 && isset($createdAt[0])) {
+            $eloq = $this->whereDate('created_at', $createdAt[0]);
         } else {
             $eloq = $this;
         }

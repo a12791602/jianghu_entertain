@@ -61,4 +61,15 @@ class UsersCommissionConfigFilter extends ModelFilter
     {
         return $this->where('id', '!=', $configId);
     }
+
+    /**
+     * 打码量查询
+     *
+     * @param  float $betSum 打码量.
+     * @return UsersCommissionConfigFilter
+     */
+    public function betEgt(float $betSum): UsersCommissionConfigFilter
+    {
+        return $this->where('bet', '<=', $betSum);
+    }
 }

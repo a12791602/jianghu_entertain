@@ -3,6 +3,7 @@
 namespace App\Models\User;
 
 use App\Models\BaseModel;
+use App\Models\User\Logics\UsersCommissionConfigLogics;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -11,6 +12,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class UsersCommissionConfig extends BaseModel
 {
+    /**
+     * UsersCommissionConfigLogics
+     */
+    use UsersCommissionConfigLogics;
 
     /**
      * @var array $guarded
