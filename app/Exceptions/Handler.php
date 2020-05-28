@@ -14,6 +14,7 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Validation\ValidationException;
 use Jenssegers\Agent\Agent;
 use ReflectionClass;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,7 +61,7 @@ class Handler extends ExceptionHandler
      *
      * @var array
      */
-    protected $dontReport = [];
+    protected $dontReport = [ValidationException::class,];
 
     /**
      * A list of the internal exception types that should not be reported.
@@ -98,9 +99,13 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $e): void
     {
-        $errorCodeStatus = ExceptionHelper::checkStatusCodeTransl($e);
-        if ($errorCodeStatus) {
-            $this->dontReport[] = get_class($e);
+        $class = get_class($e);
+        if (!in_array($class, $this->dontReport, true))
+        {
+            $errorCodeStatus = ExceptionHelper::checkStatusCodeTransl($e);
+            if ($errorCodeStatus) {
+                $this->dontReport[] = get_class($e);
+            }
         }
         parent::report($e);
         $this->reportResponses = [];
