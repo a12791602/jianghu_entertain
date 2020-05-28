@@ -11,15 +11,15 @@ use Illuminate\Http\JsonResponse;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $inputDatas['author_id']   = $this->user->id;
-        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $this->model->fill($inputDatas);
+        $inputData['author_id']   = $this->user->id;
+        $inputData['platform_id'] = $this->currentPlatformEloq->id;
+        $this->model->fill($inputData);
         $result = $this->model->save();
         if ($result) {
             return msgOut();

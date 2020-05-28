@@ -4,6 +4,7 @@ namespace App\Models\Activity;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
+use App\Models\Systems\StaticResource;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -46,5 +47,14 @@ class SystemStaticActivity extends BaseModel
     public function author(): BelongsTo
     {
         return $this->belongsTo(MerchantAdminUser::class, 'author_id', 'id');
+    }
+
+    /**
+     * Activity Picture.
+     * @return BelongsTo
+     */
+    public function picture(): BelongsTo
+    {
+        return $this->belongsTo(StaticResource::class, 'pic_id', 'id');
     }
 }

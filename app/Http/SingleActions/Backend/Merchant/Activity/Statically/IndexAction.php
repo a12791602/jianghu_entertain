@@ -2,6 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Activity\Statically;
 
+use App\Http\Resources\Backend\Merchant\Activity\Statically\IndexResource;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -17,15 +18,15 @@ class IndexAction extends BaseAction
     public $model;
 
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $inputDatas['platform_id'] = $this->currentPlatformEloq->id;
-        $data                      = $this->model::with(['author:id,name', 'lastEditor:id,name'])
-            ->filter($inputDatas)->paginate($this->perPage);
-        return msgOut($data);
+        $inputData['platform_id'] = $this->currentPlatformEloq->id;
+        $data                     = $this->model::with(['author:id,name', 'lastEditor:id,name', 'picture:id,path'])
+            ->filter($inputData)->paginate($this->perPage);
+        return msgOut(IndexResource::collection($data));
     }
 }

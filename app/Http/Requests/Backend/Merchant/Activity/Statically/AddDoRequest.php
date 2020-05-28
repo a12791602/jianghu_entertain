@@ -38,7 +38,7 @@ class AddDoRequest extends BaseFormRequest
         $deviceRule = 'required|in:' . JHHYCnst::DEVICE_PC . ',' . JHHYCnst::DEVICE_H5 . ',' . JHHYCnst::DEVICE_APP;
         return [
                 'title'      => 'required|string|max:64',
-                'pic'        => 'required|string|max:128',
+                'pic_id'     => 'required|integer|exists:static_resources,id',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
                 'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,
