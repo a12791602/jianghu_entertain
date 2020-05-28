@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use App\Jobs\Telegram\ErrorHandleTG;
 use App\Lib\Crypt\DataCrypt;
+use App\Lib\ErrorsHandler\ExceptionHelper;
 use App\Lib\ErrorsHandler\Formatters\BaseFormatter;
 use App\Lib\ErrorsHandler\Reporters\ReporterInterface;
 use Asm89\Stack\CorsService;
@@ -97,6 +98,10 @@ class Handler extends ExceptionHandler
      */
     public function report(Throwable $e): void
     {
+        $errorCodeStatus = ExceptionHelper::checkStatusCodeTransl($e);
+        if ($errorCodeStatus) {
+            $this->dontReport[] = get_class($e);
+        }
         parent::report($e);
         $this->reportResponses = [];
         if ($this->shouldntReport($e)) {
@@ -230,10 +235,8 @@ class Handler extends ExceptionHandler
             } else {
                 $result = ['message' => $message];
             }
-            $return = response()->json($result);
-            return $return;
+            return response()->json($result);
         }
-        $redirect = redirect()->guest($exception->redirectTo() ?? route('login'));
-        return $redirect;
+        return redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 }
