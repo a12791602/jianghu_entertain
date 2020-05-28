@@ -23,7 +23,7 @@ class CreateSystemStaticActivitiesTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->string('title', 64)->default(' ')->comment('活动标题');
-                $table->string('pic', 128)->default(' ')->comment('活动图片');
+                $table->integer('pic_id')->default(0)->comment('活动图片');
                 $table->tinyInteger('device')->default(0)->comment('所属设备 1 pc 2 h5 3 app');
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');

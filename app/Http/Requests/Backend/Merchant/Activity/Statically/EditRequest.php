@@ -39,7 +39,7 @@ class EditRequest extends BaseFormRequest
         return [
                 'id'         => 'required|exists:system_static_activities,id',
                 'title'      => 'required|string|max:64',
-                'pic'        => 'required|string|max:128',
+                'pic_id'     => 'required|integer|exists:static_resources,id',
                 'start_time' => 'required|date',
                 'end_time'   => 'required|date|after:start_time',
                 'status'     => 'required|in:' . JHHYCnst::STATUS_DISABLE . ',' . JHHYCnst::STATUS_OPEN,

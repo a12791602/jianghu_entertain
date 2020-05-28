@@ -2,6 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\System;
 
+use App\Events\AnnouncementEvent;
+use App\Lib\Constant\JHHYCnst;
+use Arr;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -12,22 +15,24 @@ class EditAction extends BaseAction
 {
     /**
      * ***
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $inputDatas['last_editor_id'] = $this->user->id;
-        $inputDatas['device']         = $this->model->getDevice($inputDatas);
-        $modelResult                  = $this->model->find($inputDatas['id']);
+        $inputData['last_editor_id'] = $this->user->id;
+        $inputData['device']         = $this->model->getDevice($inputData);
+        $modelResult                 = $this->model->find($inputData['id']);
         if (!$modelResult instanceof $this->model) {
             throw new \Exception('201704');
         }
-        $modelResult->cleanResource($inputDatas);
-        $modelResult->fill($inputDatas);
+        $modelResult->cleanResource($inputData);
+        $modelResult->fill($inputData);
         $result = $modelResult->save();
         if ($result) {
+            $broadcast_data = Arr::only($inputData, ['title', 'device']);
+            broadcast(new AnnouncementEvent(JHHYCnst::ANNOUNCEMENT_SYSTEM, $broadcast_data));
             return msgOut();
         }
         throw new \Exception('201701');

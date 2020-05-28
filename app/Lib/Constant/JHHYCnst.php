@@ -52,4 +52,10 @@ class JHHYCnst
     public const ONLINE = 1;
     //离线
     public const OFFLINE = 0;
+    // 滚动公告
+    public const ANNOUNCEMENT_SCROLL = 'announcement_scroll';
+    // 系统公告
+    public const ANNOUNCEMENT_SYSTEM = 'announcement_system';
+    // 登录弹窗公告
+    public const ANNOUNCEMENT_SIGN_IN = 'announcement_sign_in';
 }
