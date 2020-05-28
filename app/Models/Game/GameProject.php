@@ -17,15 +17,17 @@ class GameProject extends BaseModel
     use GameProjectLogics;
 
 
-    public const STATUS_BET           = 0;//0已投注
-    public const STATUS_CANCEL        = 1;//1已撤销
-    public const STATUS_LOSE          = 2;//2未中奖
-    public const STATUS_WIN           = 3;//3已中奖
-    public const STATUS_WIN_CALCULATE = 4;//4已派奖
-    public const PULL_STATUS_NO       = 0;//0未拉取第三方状态
-    public const PULL_STATUS_YES      = 1;//1已拉取第三方状态
-    public const COUNTED_REPORT_NO    = 0;//0未计入报表
-    public const COUNTED_REPORT_YES   = 1;//1以计入报表
+    public const STATUS_BET            = 0;//已投注
+    public const STATUS_CANCEL         = 1;//已撤销
+    public const STATUS_LOSE           = 2;//未中奖
+    public const STATUS_WIN            = 3;//已中奖
+    public const STATUS_WIN_CALCULATE  = 4;//已派奖
+    public const PULL_STATUS_NO        = 0;//未拉取第三方状态
+    public const PULL_STATUS_YES       = 1;//已拉取第三方状态
+    public const COUNTED_REPORT_NO     = 0;//未计入报表
+    public const COUNTED_REPORT_YES    = 1;//已计入报表
+    public const COMMISSION_STATUS_NO  = 0;//未统计洗码
+    public const COMMISSION_STATUS_YES = 1;//已统计洗码
 
     /**
      * @var array

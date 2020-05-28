@@ -49,7 +49,7 @@ class CreateGameProjectsTable extends Migration
                 $table->string('order_no', 128)->nullable()->default(null)->comment('系统订单号');
                 $table->string('game_no', 128)->nullable()->default(null)->comment('游戏局号');
                 $table->integer('grade_id')->nullable()->default(null)->comment('当前等级');
-                $table->decimal('commission', 18, 4)->nullable()->default(null)->comment('洗码');
+                $table->integer('commission_status')->nullable()->default(0)->comment('洗码统计状态 0未统计 1已统计');
                 $table->tinyInteger('is_counted_report')->default(0)->comment('是否已计入报表  0否 1是');
                 $table->tinyInteger('status')->default(0)->comment('0已投注 1已撤销 2未中奖 3已中奖 4已派奖');
                 $table->timestamp('their_create_time')->nullable()->default(null)->comment('三方投注时间');
