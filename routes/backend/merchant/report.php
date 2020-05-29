@@ -55,5 +55,21 @@ Route::group(
              'userAudit',
             ],
         )->name($namePrefix . 'user-audit');
+        //会员洗码-列表
+        Route::post(
+            'commission',
+            [
+             ReportController::class,
+             'commission',
+            ],
+        )->name($namePrefix . 'commission');
+        //会员洗码-详情
+        Route::post(
+            'commission-detail',
+            [
+             ReportController::class,
+             'commissionDetail',
+            ],
+        )->name($namePrefix . 'commission-detail');
     },
 );

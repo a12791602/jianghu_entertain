@@ -59,6 +59,17 @@ class ReportDayUserCommissionFilter extends ModelFilter
     }
 
     /**
+     * 会员账号.
+     *
+     * @param string $mobile 会员账号.
+     * @return self
+     */
+    public function mobile(string $mobile): self
+    {
+        return $this->where('mobile', $mobile);
+    }
+
+    /**
      * 平台查询
      * @param string $platformSign 平台标识.
      * @return self
