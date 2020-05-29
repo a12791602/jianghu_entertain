@@ -115,6 +115,13 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
               'rule'           => 'required|numeric|gt:0',
               'is_search_ease' => 0,
              ],
+             [
+              'id'             => 15,
+              'label'          => '静态活动id',
+              'param'          => 'static_activity_id',
+              'rule'           => 'required|integer|exists:system_static_activities,id',
+              'is_search_ease' => 0,
+             ],
             ],
         );
     }
