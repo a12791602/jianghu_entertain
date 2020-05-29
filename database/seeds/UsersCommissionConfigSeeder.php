@@ -22,14 +22,14 @@ class UsersCommissionConfigSeeder extends Seeder
               'platform_sign'    => 'JHHY',
               'game_type_sign'   => 'live',
               'game_vendor_sign' => 'VR',
-              'bet'              => 200,
+              'bet'              => 100,
              ],
              [
               'id'               => 2,
               'platform_sign'    => 'JHHY',
               'game_type_sign'   => 'sport',
               'game_vendor_sign' => 'IM',
-              'bet'              => 500,
+              'bet'              => 100,
              ],
             ],
         );

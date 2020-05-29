@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\BackendApi\Merchant\Report;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Backend\Merchant\Report\CommissionDetailRequest;
+use App\Http\Requests\Backend\Merchant\Report\CommissionRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameDetailRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameProjectRequest;
 use App\Http\Requests\Backend\Merchant\Report\GameRequest;
 use App\Http\Requests\Backend\Merchant\Report\PlatformRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserAuditRequest;
 use App\Http\Requests\Backend\Merchant\Report\UserRequest;
+use App\Http\SingleActions\Backend\Merchant\Report\CommissionAction;
+use App\Http\SingleActions\Backend\Merchant\Report\CommissionDetailAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameDetailAction;
 use App\Http\SingleActions\Backend\Merchant\Report\GameProjectAction;
@@ -108,6 +112,36 @@ class ReportController extends Controller
     public function userAudit(
         UserAuditRequest $request,
         UserAuditAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 会员洗码-列表
+     *
+     * @param  CommissionRequest $request Request.
+     * @param  CommissionAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function commission(
+        CommissionRequest $request,
+        CommissionAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 会员洗码-详情
+     *
+     * @param  CommissionDetailRequest $request Request.
+     * @param  CommissionDetailAction  $action  Action.
+     * @return JsonResponse
+     */
+    public function commissionDetail(
+        CommissionDetailRequest $request,
+        CommissionDetailAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
