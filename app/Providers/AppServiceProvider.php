@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Game\GameIF;
 use App\Models\Game\GameSubType;
 use App\Models\Game\GameType;
 use App\Models\User\FrontendUser;
@@ -10,8 +9,6 @@ use App\Observers\FrontendUserObserver;
 use App\Observers\GameTypeChildObserver;
 use App\Observers\GameTypeObserver;
 use Illuminate\Database\Events\QueryExecuted;
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
@@ -38,15 +35,6 @@ class AppServiceProvider extends ServiceProvider
                 return Redis::connection();
             },
         );
-        $gameClass = Config::get('games_classes');
-        if (empty($gameClass)) {
-            return;
-        }
-        $gameClass = Arr::flatten($gameClass);
-        if (empty($gameClass)) {
-            return;
-        }
-        $this->app->tag($gameClass, GameIF::class);
     }
 
     /**
