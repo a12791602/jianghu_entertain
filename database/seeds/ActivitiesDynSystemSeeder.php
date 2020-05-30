@@ -4,8 +4,7 @@ use App\Models\Activity\ActivitiesDynSystem;
 use Illuminate\Database\Seeder;
 
 /**
- * 动态活动数据表的种子文件
- * Class SystemDynActivitySeeder
+ * Class ActivitiesDynSystemSeeder
  */
 class ActivitiesDynSystemSeeder extends Seeder
 {
@@ -19,16 +18,40 @@ class ActivitiesDynSystemSeeder extends Seeder
         ActivitiesDynSystem::insert(
             [
              [
+              'id'             => 1,
               'name'           => '幸运转盘',
               'sign'           => 'TURNTABLE',
+              'title'          => null,
+              'type_id'        => null,
+              'model'          => null,
               'last_editor_id' => 0,
               'status'         => 1,
+              'created_at'     => '2020-05-30 18:22:30',
+              'updated_at'     => '2020-05-30 18:22:30',
              ],
              [
+              'id'             => 2,
               'name'           => '抢红包',
               'sign'           => 'RED',
+              'title'          => null,
+              'type_id'        => null,
+              'model'          => null,
               'last_editor_id' => 0,
               'status'         => 1,
+              'created_at'     => '2020-05-30 18:22:30',
+              'updated_at'     => '2020-05-30 18:22:30',
+             ],
+             [
+              'id'             => 3,
+              'name'           => ' 注册送礼',
+              'sign'           => 'REG_GIFT',
+              'title'          => 'FirstRegistrationGifts',
+              'type_id'        => 1,
+              'model'          => null,
+              'last_editor_id' => 0,
+              'status'         => 0,
+              'created_at'     => '2020-05-30 18:33:43',
+              'updated_at'     => '2020-05-30 18:33:43',
              ],
             ],
         );
