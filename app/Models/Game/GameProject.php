@@ -4,6 +4,7 @@ namespace App\Models\Game;
 
 use App\Models\BaseModel;
 use App\Models\Game\Logics\GameProjectLogics;
+use App\Models\Systems\SystemPlatform;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUserLevel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -81,5 +82,15 @@ class GameProject extends BaseModel
     public function userLevel(): BelongsTo
     {
         return $this->belongsTo(FrontendUserLevel::class, 'vip_level_id', 'id');
+    }
+
+
+    /**
+     * 平台
+     * @return BelongsTo
+     */
+    public function platform(): BelongsTo
+    {
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
     }
 }

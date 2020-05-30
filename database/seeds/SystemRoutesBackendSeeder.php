@@ -468,6 +468,16 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_ack'        => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.report.game-project',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
+              'method'        => 'gameProject',
+              'menu_group_id' => 17,
+              'title'         => '报表管理-厅主注单报表-列表',
+              'description'   => null,
+              'is_open'       => 0,
+              'is_ack'        => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.finance-vendor.opt-index-do',
               'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'indexDo',

@@ -55,6 +55,7 @@ class CommissionDetailAction extends MainAction
                  'day',
                 ],
             )->with('game:sign,name')
+            ->orderBy('created_at', 'desc')
             ->paginate();
         return msgOut($result);
     }

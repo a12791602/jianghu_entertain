@@ -53,7 +53,7 @@ class UserAuditAction extends MainAction
                  'created_at',
                  'achieved_time',
                 ],
-            )
+            )->orderBy('created_at', 'desc')
             ->paginate($this->perPage);
         return msgOut($data);
     }

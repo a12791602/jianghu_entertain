@@ -18,7 +18,10 @@ class GameProjectFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = ['user' => ['mobile']];
+    public $relations = [
+                         'user'     => ['mobile'],
+                         'platform' => ['platform_name'],
+                        ];
 
     /**
      * 平台标识
