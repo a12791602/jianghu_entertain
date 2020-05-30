@@ -53,7 +53,9 @@ class CommissionAction extends MainAction
                  'commission',
                  'day',
                 ],
-            )->with('gameVendor:sign,name')->paginate();
+            )->with('gameVendor:sign,name')
+            ->orderBy('created_at', 'desc')
+            ->paginate();
         return msgOut($result);
     }
 }

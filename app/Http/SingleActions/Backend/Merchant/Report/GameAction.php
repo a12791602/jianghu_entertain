@@ -54,7 +54,8 @@ class GameAction extends MainAction
                  'our_net_win',
                  'commission',
                 ],
-            )->paginate()
+            )->orderBy('created_at', 'desc')
+            ->paginate()
             ->toArray();
 
         $data = [];
