@@ -80,4 +80,15 @@ class GameFilter extends ModelFilter
     {
         return $this->where('name', $name);
     }
+
+    /**
+     * 名称模糊查询.
+     *
+     * @param string $name Name.
+     * @return GameFilter
+     */
+    public function gameName(string $name): GameFilter
+    {
+        return $this->whereLike('name', $name);
+    }
 }

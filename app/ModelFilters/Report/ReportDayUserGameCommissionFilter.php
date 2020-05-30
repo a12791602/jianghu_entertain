@@ -16,7 +16,7 @@ class ReportDayUserGameCommissionFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = ['game' => ['game_name']];
 
     /**
      * 游戏标识

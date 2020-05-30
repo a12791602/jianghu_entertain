@@ -41,7 +41,7 @@ class CommissionDetailRequest extends BaseFormRequest
         return [
                 'guid'             => 'required|string|size:8',          //会员UID
                 'game_vendor_sign' => 'required|string|max:32',          //游戏厂商标识
-                'game_sign'        => 'string|max:32',                   //游戏标识
+                'game_name'        => 'string|max:32',                   //游戏名称
                 'report_day'       => 'required|array|size:1',           //日期
                 'report_day.*'     => 'required|date|date_format:Y-m-d', //日期
                 'pageSize'         => 'integer|between:1,100',           //每页数据条数
