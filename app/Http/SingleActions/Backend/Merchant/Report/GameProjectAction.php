@@ -70,6 +70,7 @@ class GameProjectAction extends MainAction
                 ],
             )
             ->filter($inputDatas)
+            ->orderBy('created_at', 'desc')
             ->paginate()
             ->toArray();
 

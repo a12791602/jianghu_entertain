@@ -50,7 +50,8 @@ class PlatformAction extends MainAction
                  'activity_sum',
                  'day',
                 ],
-            )->paginate();
+            )->orderBy('created_at', 'desc')
+            ->paginate();
         return msgOut($result);
     }
 }
