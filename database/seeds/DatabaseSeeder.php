@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(
             [
-             SystemDynActivitySeeder::class,
+             ActivitiesDynSystemSeeder::class,
              BackendAdminAccessGroupSeeder::class,
              BackendAdminAccessGroupDetailSeeder::class,
              BackendAdminUserSeeder::class,

@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Activity\SystemDynActivity;
+use App\Models\Activity\ActivitiesDynSystem;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -19,7 +19,7 @@ class AssignedActivitiesAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $systemDynActivity = new SystemDynActivity();
+        $systemDynActivity = new ActivitiesDynSystem();
         if (isset($inputDatas['pageSize'])) {
             $systemDynActivity->setPerPage($inputDatas['pageSize']);
         }
