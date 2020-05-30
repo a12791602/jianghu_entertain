@@ -25,9 +25,9 @@ class SystemPlatformFilter extends ModelFilter
      * 状态查询
      *
      * @param  string $status 状态.
-     * @return $this
+     * @return self
      */
-    public function status(string $status): SystemPlatformFilter
+    public function status(string $status): self
     {
         return $this->where('status', $status);
     }
@@ -36,16 +36,16 @@ class SystemPlatformFilter extends ModelFilter
      * 生成时间
      *
      * @param  string $createdStr 生成时间.
-     * @return $this
+     * @return self|\Illuminate\Database\Eloquent\Builder
      */
-    public function createdAt(string $createdStr): SystemPlatformFilter
+    public function createdAt(string $createdStr)
     {
         $createdArr = json_decode($createdStr, true);
         if (!is_array($createdArr) || count($createdArr) !== 2) {
             $eloq = $this;
         } else {
             $eloq = $this->whereBetween('created_at', $createdArr);
-        }
+        }//end if
         return $eloq;
     }
 
@@ -53,9 +53,9 @@ class SystemPlatformFilter extends ModelFilter
      * 当前维护状态查询
      *
      * @param  integer $maintain 状态.
-     * @return $this
+     * @return self
      */
-    public function maintain(int $maintain): SystemPlatformFilter
+    public function maintain(int $maintain): self
     {
         $eloq = $this;
         $time = Carbon::now();
@@ -88,7 +88,17 @@ class SystemPlatformFilter extends ModelFilter
                  ],
                 ],
             );
-        }
+        }//end if
         return $eloq;
+    }
+
+    /**
+     * 平台名称
+     * @param  string $name 平台名称.
+     * @return self
+     */
+    public function platformName(string $name): self
+    {
+        return $this->whereLike('cn_name', $name);
     }
 }
