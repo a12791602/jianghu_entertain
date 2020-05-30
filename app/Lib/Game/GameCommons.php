@@ -3,7 +3,6 @@
 namespace App\Lib\Game;
 
 use App\Models\Game\GameVendor;
-use Illuminate\Support\Facades\Config;
 
 /**
  * Class GameCommons
@@ -19,11 +18,13 @@ class GameCommons
      */
     public static function gameInit(GameVendor $vendor)
     {
-        $className = Config::get('games_classes.' . $vendor->sign);
-        if ($className === null) {
+        $sign      = strtoupper($vendor->sign);
+        $className = 'App\\Game\\GameModule\\' . $sign . '\\' . $sign . 'Game';
+        try {
+            $gameClass = resolve($className);
+        } catch (\Throwable $e) {
             throw new \Exception('100708');//'游戏服务出错!'
         }
-        $gameClass = resolve($className);
         $gameClass->setVendor($vendor);
         return $gameClass;
     }
