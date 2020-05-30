@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Merchant\Platform;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Activity\SystemDynActivity;
+use App\Models\Activity\ActivitiesDynSystem;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -21,7 +21,7 @@ class UnassignActivitiesAction extends MainAction
     {
         $inputDatas['unassign_platform_sign'] = $inputDatas['platform_sign'];
 
-        $systemDynActivity = new SystemDynActivity();
+        $systemDynActivity = new ActivitiesDynSystem();
         if (isset($inputDatas['pageSize'])) {
             $systemDynActivity->setPerPage($inputDatas['pageSize']);
         }

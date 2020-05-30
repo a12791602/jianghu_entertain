@@ -2,7 +2,7 @@
 
 namespace App\Models\Platform;
 
-use App\Models\Activity\SystemDynActivity;
+use App\Models\Activity\ActivitiesDynSystem;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -25,7 +25,7 @@ class SystemDynActivityPlatform extends BaseModel
      */
     public function activity(): BelongsTo
     {
-        return $this->belongsTo(SystemDynActivity::class, 'activity_sign', 'sign');
+        return $this->belongsTo(ActivitiesDynSystem::class, 'activity_sign', 'sign');
     }
 
     /**

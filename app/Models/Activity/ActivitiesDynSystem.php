@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models\Activity
  */
-class SystemDynActivity extends BaseModel
+class ActivitiesDynSystem extends BaseModel
 {
 
     /**

@@ -1,13 +1,13 @@
 <?php
 
-use App\Models\Activity\SystemDynActivity;
+use App\Models\Activity\ActivitiesDynSystem;
 use Illuminate\Database\Seeder;
 
 /**
  * 动态活动数据表的种子文件
  * Class SystemDynActivitySeeder
  */
-class SystemDynActivitySeeder extends Seeder
+class ActivitiesDynSystemSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,7 +16,7 @@ class SystemDynActivitySeeder extends Seeder
      */
     public function run(): void
     {
-        SystemDynActivity::insert(
+        ActivitiesDynSystem::insert(
             [
              [
               'name'           => '幸运转盘',

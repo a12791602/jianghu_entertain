@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 /**
  * Class CreateSystemDynActivitiesTable
  */
-class CreateSystemDynActivitiesTable extends Migration
+class CreateActivitiesDynSystemTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ class CreateSystemDynActivitiesTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'system_dyn_activities',
+            'activities_dyn_systems',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -29,7 +29,7 @@ class CreateSystemDynActivitiesTable extends Migration
                 $table->timestamp('updated_at')->useCurrent();
             },
         );
-        DB::statement("ALTER TABLE `system_dyn_activities` comment '系统动态活动表'");
+        DB::statement("ALTER TABLE `activities_dyn_systems` comment '系统动态活动表'");
     }
 
     /**
@@ -39,6 +39,6 @@ class CreateSystemDynActivitiesTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_dyn_activities');
+        Schema::dropIfExists('activities_dyn_systems');
     }
 }

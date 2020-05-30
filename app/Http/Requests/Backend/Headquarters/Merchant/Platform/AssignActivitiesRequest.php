@@ -36,7 +36,7 @@ class AssignActivitiesRequest extends BaseFormRequest
                 'activities'    => 'required|array',
                 'activities.*'  => [
                                     'required',
-                                    'exists:system_dyn_activities,sign',
+                                    'exists:activities_dyn_systems,sign',
                                     $unique,
                                    ],
                ];

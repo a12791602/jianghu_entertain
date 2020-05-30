@@ -4,7 +4,7 @@ namespace App\Http\Requests\Backend\Merchant\Activity\Dynamic;
 
 use App\Http\Requests\BaseFormRequest;
 use App\Lib\Constant\JHHYCnst;
-use App\Models\Activity\SystemDynActivity;
+use App\Models\Activity\ActivitiesDynSystem;
 
 /**
  * Class StatusRequest
@@ -16,7 +16,7 @@ class StatusRequest extends BaseFormRequest
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [SystemDynActivity::class];
+    protected $dependentModels = [ActivitiesDynSystem::class];
 
     /**
      * Determine if the user is authorized to make this request.
