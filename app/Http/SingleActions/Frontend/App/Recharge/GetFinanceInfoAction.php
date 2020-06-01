@@ -2,11 +2,13 @@
 
 namespace App\Http\SingleActions\Frontend\App\Recharge;
 
+use App\Http\Resources\Frontend\Common\TopUp\GetFinanceInfoResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Collection;
 
 /**
  * Class GetFinanceInfoAction
@@ -25,21 +27,34 @@ class GetFinanceInfoAction extends MainAction
         $data['platform_sign'] = $this->user->platform_sign;
         $data['status']        = SystemFinanceType::STATUS_YES;
         $data['direction']     = SystemFinanceType::DIRECTION_IN;
-        $data                  = SystemFinanceType::with(
+        $item                  = SystemFinanceType::with(
             [
              'onlineInfos'  => static function ($query) use ($data): object {
                  $query = self::getOnlineInfos($query, $data);
                  return $query;
              },
-             'offlineInfos' => static function ($query) use ($data): object {
-                 $query = self::getOfflineInfos($query, $data);
+             'offlineInfos' => static function ($query): object {
+                 $query = self::getOfflineInfos($query);
                  return $query;
              },
             ],
-        )->filter($data)
-         ->withCacheCooldownSeconds(86400)
-         ->get(['id', 'name', 'sign', 'is_online']);
-        return msgOut($data);
+        )->filter($data)->get(['id', 'name', 'sign', 'is_online']);
+        $item->map(
+            function ($item): void {
+                if (!$item->offlineInfos instanceof Collection) {
+                    return;
+                }
+                $item->offlineInfos->transform(
+                    function ($item): ?SystemFinanceOfflineInfo {
+                        if (in_array($this->user->userTag->id, $item->tags->tag_id)) {
+                            return $item;
+                        }
+                        return null;
+                    },
+                );
+            },
+        );
+        return msgOut(GetFinanceInfoResource::collection($item));
     }
 
     /**
@@ -85,11 +100,10 @@ class GetFinanceInfoAction extends MainAction
     /**
      * 获取线下支付信息.
      *
-     * @param object $query     Query.
-     * @param array  $inputData InputData.
+     * @param object $query Query.
      * @return object
      */
-    protected static function getOfflineInfos(object $query, array $inputData): object
+    protected static function getOfflineInfos(object $query): object
     {
         //搜索的条件
         $whereConditions = ['status' => SystemFinanceOfflineInfo::STATUS_YES];
@@ -102,20 +116,14 @@ class GetFinanceInfoAction extends MainAction
                         'remark',
                         'min_amount',
                         'max_amount',
-                        'fee',
+                        'service_fee',
                        ];
         $query->with('bank:id,name,code')->whereHas(
             'tags',
-            static function ($query) use ($inputData): object {
-                $query = $query->where(
-                    [
-                     'id'        => $inputData['tag_id'],
-                     'is_online' => SystemFinanceType::IS_ONLINE_NO,
-                    ],
-                );
-                return $query;
+            static function ($query): object {
+                return $query->where(['is_online' => SystemFinanceType::IS_ONLINE_NO]);
             },
-        )->where($whereConditions)->select($returnField);
+        )->where($whereConditions)->select($returnField)->orderByDesc('id');
         return $query;
     }
 }

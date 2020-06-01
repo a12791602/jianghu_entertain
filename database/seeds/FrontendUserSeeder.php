@@ -63,7 +63,7 @@ class FrontendUserSeeder extends Seeder
               'last_login_ip'    => '172.19.0.1',
               'last_login_time'  => '2020-05-25 20:19:05',
               'user_specific_id' => 2,
-              'user_tag_id'      => 2,
+              'user_tag_id'      => 3,
               'status'           => 1,
               'invite_code'      => 1896731,
               'is_online'        => 1,

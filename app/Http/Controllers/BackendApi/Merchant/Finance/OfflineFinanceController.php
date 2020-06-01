@@ -94,8 +94,7 @@ class OfflineFinanceController extends Controller
      */
     public function edit(EditAction $action, EditRequest $request): JsonResponse
     {
-        $inputDatas           = $request->validated();
-        $inputDatas['method'] = $request->method();
-        return $action->execute($inputDatas);
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 }
