@@ -26,7 +26,7 @@ class CronJobSeeder extends Seeder
               'remarks'  => '每分钟抓取三方游戏数据的记录',
              ],
              [
-              'command'  => 'gameReportDay',
+              'command'  => 'createGameReportDay',
               'schedule' => '0 3 * * *',
               'argument' => null,
               'option'   => null,

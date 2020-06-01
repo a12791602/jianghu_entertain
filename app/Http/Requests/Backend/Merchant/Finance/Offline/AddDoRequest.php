@@ -42,22 +42,22 @@ class AddDoRequest extends BaseFormRequest
     {
         $unique = new CustomUnique($this, 'system_finance_offline_infos', 'platform_id');
         return [
-                'type_id'  => 'required|integer|exists:system_finance_types,id',
-                'bank_id'  => 'integer|exists:system_banks,id|unique:system_finance_offline_infos,bank_id',
-                'name'     => [
-                               'required',
-                               'string',
-                               $unique,
-                              ],
-                'username' => 'required|string|min:1|max:128',
-                'qrcode'   => 'string|min:1',
-                'account'  => 'required|string|min:1|max:256|unique:system_finance_offline_infos,account',
-                'branch'   => 'string|min:1|max:128',
-                'min'      => 'required|integer|min:1',
-                'max'      => 'required|integer|gt:min',
-                'fee'      => 'numeric|min:0',
-                'tags'     => 'array',
-                'remark'   => 'string|min:1|max:256',
+                'type_id'    => 'required|integer|exists:system_finance_types,id',
+                'bank_id'    => 'integer|exists:system_banks,id|unique:system_finance_offline_infos,bank_id',
+                'name'       => [
+                                 'required_if:type_id,2',
+                                 'string',
+                                 $unique,
+                                ],
+                'username'   => 'required|string|min:1|max:128',
+                'qrcode'     => 'string|min:1',
+                'account'    => 'required|string|min:1|max:256|unique:system_finance_offline_infos,account',
+                'branch'     => 'string|min:1|max:128',
+                'min_amount' => 'required|integer|min:1',
+                'max_amount' => 'required|integer|gt:min_amount',
+                'fee'        => 'numeric|min:0',
+                'tags'       => 'array',
+                'remark'     => 'string|min:1|max:256',
                ];
     }
 

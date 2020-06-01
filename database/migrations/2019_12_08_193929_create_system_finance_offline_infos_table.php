@@ -37,7 +37,7 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->string('branch', 128)->comment('支行')->default(null);
                 $table->integer('author_id')->default(0)->comment('添加人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
-                $table->decimal('fee', 20, 4)->default(0)->comment('手续费');
+                $table->decimal('service_fee', 20, 4)->default(0)->comment('手续费');
                 $table->nullableTimestamps();
             },
         );

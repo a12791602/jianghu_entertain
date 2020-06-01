@@ -16,16 +16,16 @@ use Log;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
         try {
             $platformId = $this->currentPlatformEloq->id;
             $dataToSave = Arr::only(
-                $inputDatas,
+                $inputData,
                 [
                  'type_id',
                  'name',
@@ -33,14 +33,13 @@ class AddDoAction extends BaseAction
                  'account',
                  'qrcode',
                  'branch',
-                 'min',
-                 'max',
+                 'min_amount',
+                 'max_amount',
                  'fee',
                  'remark',
                  'bank_id',
                 ],
             );
-
             DB::beginTransaction();
             $dataToSave['author_id'] = $this->user->id;
             $this->model->fill($dataToSave);
@@ -49,7 +48,7 @@ class AddDoAction extends BaseAction
                 $userTags['platform_id']        = $platformId;
                 $userTags['is_online']          = SystemFinanceType::IS_ONLINE_NO;
                 $userTags['offline_finance_id'] = $this->model->id;
-                $userTags['tag_id']             = $inputDatas['tags'];
+                $userTags['tag_id']             = $inputData['tags'];
 
                 SystemFinanceUserTag::create($userTags);
                 DB::commit();
