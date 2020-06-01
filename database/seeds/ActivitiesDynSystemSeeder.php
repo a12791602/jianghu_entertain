@@ -47,7 +47,7 @@ class ActivitiesDynSystemSeeder extends Seeder
               'sign'           => 'REG_GIFT',
               'title'          => 'FirstRegistrationGifts',
               'type_id'        => 1,
-              'model'          => null,
+              'model'          => 'ActivitiesConfigRegFirstimeRandom',
               'last_editor_id' => 0,
               'status'         => 0,
               'created_at'     => '2020-05-30 18:33:43',
