@@ -6,6 +6,7 @@ use App\Models\BaseAuthModel;
 use App\Models\Game\GamePlatform;
 use App\Models\Game\GameTypePlatform;
 use App\Models\Systems\SystemPlatform;
+use App\Models\User\Logics\FrontendUserLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -22,6 +23,11 @@ class FrontendUser extends BaseAuthModel
      * Notification
      */
     use Notifiable;
+
+    /**
+     * FrontendUserLogics
+     */
+    use FrontendUserLogics;
 
     public const IS_TESTER_YES = 1;
     public const IS_TESTER_NO  = 0;

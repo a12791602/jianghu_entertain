@@ -51,16 +51,20 @@ class RegisterAction extends MainAction
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
             throw new \Exception('100503', 401);
         }
-        $invite_code = null;
+        $parentId = 0;
+        $userRid  = '0';
         if (is_string($request['invite_code'])) {
-            $invite_code = $request['invite_code'];
+            $patent   = $this->_getParent($platform_sign, $request['invite_code']);
+            $parentId = $patent->id;
+            $userRid  = $patent->getRid();
         }
         $user   = $this->user(
             $verifyData['mobile'],
             $register_user_id,
             bcrypt($request['password']),
             (int) $device_code,
-            (int) $invite_code,
+            $parentId,
+            $userRid,
             $request->ip(),
             $this->currentPlatformEloq->id,
             $platform_sign,
@@ -109,7 +113,8 @@ class RegisterAction extends MainAction
      * @param string  $guid        Game_user_id.
      * @param string  $password    Password.
      * @param integer $device_code Device_code.
-     * @param integer $invite_code Invite_code.
+     * @param integer $parentId    Patent_id.
+     * @param string  $userRid     Rid.
      * @param string  $register_ip Register_ip.
      * @param integer $platform_id Platform_id.
      * @param string  $sign        Sign.
@@ -120,7 +125,8 @@ class RegisterAction extends MainAction
         string $guid,
         string $password,
         int $device_code,
-        int $invite_code,
+        int $parentId,
+        string $userRid,
         ?string $register_ip,
         int $platform_id,
         string $sign
@@ -130,12 +136,35 @@ class RegisterAction extends MainAction
                  'guid'          => $guid,
                  'password'      => $password,
                  'device_code'   => $device_code,
-                 'invite_code'   => $invite_code,
+                 'parent_id'     => $parentId,
+                 'rid'           => $userRid,
                  'register_ip'   => $register_ip,
                  'platform_id'   => $platform_id,
                  'platform_sign' => $sign,
                  'type'          => FrontendUser::TYPE_USER,
                 ];
         return FrontendUser::create($item);
+    }
+
+    /**
+     * 获取上级
+     * @param  string $platform_sign 平台标识.
+     * @param  string $guid          上级guid.
+     * @throws \Exception Exception.
+     * @return FrontendUser
+     */
+    private function _getParent(
+        string $platform_sign,
+        string $guid
+    ): FrontendUser {
+        $filterArr = [
+                      'platform_sign' => $platform_sign,
+                      'guid'          => $guid,
+                     ];
+        $parent    = FrontendUser::filter($filterArr)->first();
+        if ($parent === null) {
+            throw new \Exception('100506');
+        }
+        return $parent;
     }
 }

@@ -28,7 +28,6 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'invite_code'           => 'integer',
                 'password'              => [
                                             'required',
                                             'confirmed',
