@@ -11,6 +11,7 @@ use App\Services\FactoryService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Class RechargeAction
@@ -75,6 +76,7 @@ class RechargeAction extends MainAction
 
     /**
      * @return void
+     * @throws \Exception Exception.
      */
     private function _getModel(): void
     {
@@ -82,6 +84,10 @@ class RechargeAction extends MainAction
             $this->model = SystemFinanceOnlineInfo::find($this->inputData['channel_id']);
         } elseif ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $this->model = SystemFinanceOfflineInfo::find($this->inputData['channel_id']);
+            if (!$this->model instanceof SystemFinanceOfflineInfo) {
+                throw new \Exception('100300');
+            }
+            $this->authorize($this->model);
         }
     }
 
@@ -275,5 +281,20 @@ class RechargeAction extends MainAction
         }
         $randKey = array_rand($diff);
         return $diff[$randKey] + $this->inputData['money'];
+    }
+
+    /**
+     * Check if the user has permission for this card.
+     * @param SystemFinanceOfflineInfo $offlineInfo SystemFinanceOfflineInfo.
+     * @return boolean
+     * @throws AccessDeniedException AccessDeniedException.
+     */
+    protected function authorize(SystemFinanceOfflineInfo $offlineInfo): bool
+    {
+        $result = in_array($this->user->user_tag_id, optional($offlineInfo->tags)->tag_id);
+        if (!$result) {
+            throw new AccessDeniedException('This action is unauthorized.', 403);
+        }
+        return true;
     }
 }

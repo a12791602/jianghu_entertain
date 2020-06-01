@@ -40,30 +40,27 @@ class EditRequest extends BaseFormRequest
     public function rules(): array
     {
         $myId = $this->get('id');
-        if ($this->isMethod('post')) {
-            return [
-                    'id'         => 'required|integer|exists:system_finance_offline_infos,id',
-                    'type_id'    => 'required|integer|exists:system_finance_types,id',
-                    'bank_id'    => 'exists:system_banks,id|unique:system_finance_offline_infos,bank_id,' . $myId,
-                    'username'   => 'required|string|min:1|max:128',
-                    'qrcode'     => 'string|min:1',
-                    'account'    => [
-                                     'required',
-                                     'string',
-                                     'min:1',
-                                     'max:256',
-                                     'unique:system_finance_offline_infos,account,' . $myId,
-                                    ],
-                    'branch'     => 'string|min:1|max:128',
-                    'min_amount' => 'required|integer|min:1',
-                    'max_amount' => 'required|integer|gt:min_amount',
-                    'fee'        => 'numeric|min:0',
-                    'tags'       => 'array',
-                    'tags.*'     => 'exists:users_tags,id',
-                    'remark'     => 'string|min:1|max:256',
-                   ];
-        }//end if
-        return ['id' => 'required|exists:system_finance_offline_infos,id'];
+        return [
+                'id'         => 'required|integer|exists:system_finance_offline_infos,id',
+                'type_id'    => 'required|integer|exists:system_finance_types,id',
+                'bank_id'    => 'exists:system_banks,id|unique:system_finance_offline_infos,bank_id,' . $myId,
+                'username'   => 'required|string|min:1|max:128',
+                'qrcode'     => 'string|min:1',
+                'account'    => [
+                                 'required',
+                                 'string',
+                                 'min:1',
+                                 'max:256',
+                                 'unique:system_finance_offline_infos,account,' . $myId,
+                                ],
+                'branch'     => 'string|min:1|max:128',
+                'min_amount' => 'required|integer|min:1',
+                'max_amount' => 'required|integer|gt:min_amount',
+                'fee'        => 'numeric|min:0',
+                'tags'       => 'array',
+                'tags.*'     => 'exists:users_tags,id',
+                'remark'     => 'string|min:1|max:256',
+               ];
     }
 
     /**
