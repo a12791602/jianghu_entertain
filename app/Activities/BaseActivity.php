@@ -25,4 +25,16 @@ abstract class BaseActivity implements ActivitiesIF
     {
         $this->activity = $activity;
     }
+
+    /**
+     * @param object $acConfigInstance 获取对应游戏的奖品拥有的model.
+     * @param array  $acConfig         奖品配置数组.
+     * @return float
+     */
+    protected function getPrice(object $acConfigInstance, array $acConfig): float
+    {
+        $item     = getItemByProb($acConfig);
+        $itemEloq = $acConfigInstance->where('item', $item)->first();
+        return $itemEloq->amount ?? 0.0;
+    }
 }

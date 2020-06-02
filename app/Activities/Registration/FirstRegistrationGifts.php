@@ -12,7 +12,7 @@ use App\Game\BaseActivity;
 class FirstRegistrationGifts extends BaseActivity
 {
     /**
-     * @return integer|string
+     * @return float|integer
      */
     public function draw()
     {
@@ -20,7 +20,7 @@ class FirstRegistrationGifts extends BaseActivity
         if (isset($this->activity->model_class)) {
             $acConfigInstance = $this->activity->model_class;
             $acConfig         = $acConfigInstance->pluck('probability', 'item')->toArray();
-            $result           = getItemByProb($acConfig);
+            $result           = $this->getPrice($acConfigInstance, $acConfig);
         }
         return $result;
     }
