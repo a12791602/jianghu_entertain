@@ -33,8 +33,8 @@ class CreateUsersReportDaysTable extends Migration
                 $table->integer('bet_num')->default(0)->comment('投注次数');
                 $table->decimal('reduced_sum', 18, 4)->nullable()->default(0)->comment('优惠金额');
                 $table->decimal('effective_bet_sum', 18, 4)->nullable()->default(0)->comment('有效投注金额');
-                $table->decimal('commission', 18, 4)->nullable()->default(0)->comment('洗码');
-                $table->decimal('bouns', 18, 4)->nullable()->default(0)->comment('佣金');
+                $table->decimal('commission', 18, 4)->nullable()->default(0)->comment('佣金');
+                $table->decimal('rebate', 18, 4)->nullable()->default(0)->comment('洗码返利');
                 $table->decimal('activity_sum', 18, 4)->nullable()->default(0)->comment('活动金额');
                 $table->decimal('game_win_sum', 18, 4)->nullable()->default(0)->comment('游戏中奖金额');
                 $table->date('day')->comment('日期');

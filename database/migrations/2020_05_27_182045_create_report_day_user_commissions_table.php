@@ -28,7 +28,7 @@ class CreateReportDayUserCommissionsTable extends Migration
                 $table->string('game_vendor_sign', 32)->nullable()->default(null)->comment('游戏厂商标识');
                 $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('下注金额');
                 $table->decimal('effective_bet', 18, 4)->nullable()->default(null)->comment('有效下注金额');
-                $table->decimal('commission', 18, 4)->nullable()->default(null)->comment('洗码彩金');
+                $table->decimal('rebate', 18, 4)->nullable()->default(null)->comment('洗码返利');
                 $table->date('day')->comment('日期');
                 $table->nullableTimestamps();
             },

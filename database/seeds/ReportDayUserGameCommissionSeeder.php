@@ -26,7 +26,7 @@ class ReportDayUserGameCommissionSeeder extends Seeder
               'game_sign'        => '10002',
               'bet'              => 171,
               'effective_bet'    => 45,
-              'commission'       => 0.045,
+              'rebate'           => 0.045,
               'day'              => '2020-05-08',
               'created_at'       => '2020-05-29 17:50:38',
               'updated_at'       => '2020-05-29 17:50:38',

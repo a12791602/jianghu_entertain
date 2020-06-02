@@ -52,7 +52,7 @@ class RegisterAction extends MainAction
             throw new \Exception('100503', 401);
         }
         $parentId = 0;
-        $userRid  = [0];
+        $userRid  = [0]; //沒有邀请码时rid默认0
         if (is_string($request['invite_code'])) {
             $patent   = $this->_getParent($platform_sign, $request['invite_code']);
             $parentId = $patent->id;

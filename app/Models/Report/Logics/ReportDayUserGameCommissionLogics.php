@@ -14,7 +14,7 @@ trait ReportDayUserGameCommissionLogics
      * @param  string          $gameSign       游戏标识.
      * @param  float           $betMoney       下注金额.
      * @param  float           $effectiveBet   有效下注金额.
-     * @param  float           $commission     洗码金额.
+     * @param  float           $rebate         洗码金额.
      * @param  CarbonInterface $reportDay      报表日期.
      * @return boolean
      */
@@ -24,7 +24,7 @@ trait ReportDayUserGameCommissionLogics
         string $gameSign,
         float $betMoney,
         float $effectiveBet,
-        float $commission,
+        float $rebate,
         CarbonInterface $reportDay
     ): bool {
         $filterArr        = [
@@ -44,14 +44,14 @@ trait ReportDayUserGameCommissionLogics
                                  'game_sign'        => $gameSign,
                                  'bet'              => $betMoney,
                                  'effective_bet'    => $effectiveBet,
-                                 'commission'       => $commission,
+                                 'rebate'           => $rebate,
                                  'day'              => $reportDay,
                                 ];
             $commissionReport->fill($addData);
         } else {
             $commissionReport->bet           += $betMoney;
             $commissionReport->effective_bet += $effectiveBet;
-            $commissionReport->commission    += $commission;
+            $commissionReport->rebate        += $rebate;
         }//end if
         return $commissionReport->save();
     }
