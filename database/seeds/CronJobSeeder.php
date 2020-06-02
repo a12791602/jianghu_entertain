@@ -39,7 +39,7 @@ class CronJobSeeder extends Seeder
               'argument' => null,
               'option'   => null,
               'status'   => 1,
-              'remarks'  => '每日凌晨2点计算前一天的游戏洗码',
+              'remarks'  => '每日凌晨2点计算前一天的游戏洗码返佣',
              ],
             ],
         );
