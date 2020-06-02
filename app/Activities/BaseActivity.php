@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Game;
+namespace App\Activities;
 
-use App\Activities\ActivitiesIF;
 use App\Models\Activity\ActivitiesDynSystem;
 
 /**
