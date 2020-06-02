@@ -26,7 +26,7 @@ class CreateFrontendUsersTable extends Migration
                 $table->string('guid', 16)->nullable()->index()->comment('客户游戏唯一标识id');
                 $table->integer('top_id')->nullable()->default(0)->comment('最上级id');
                 $table->integer('parent_id')->nullable()->default(0)->index()->comment('上级id');
-                $table->string('rid', 64)->nullable()->default('0')->comment('上级代理关系id');
+                $table->json('rid')->nullable()->default(null)->comment('上级代理关系id');
                 $table->integer('platform_id')->nullable()->index()->comment('平台id');
                 $table->integer('level_id')->nullable()->default(null)->comment('等级id');
                 $table->string('platform_sign', 10)->nullable()->index()->comment('平台标识');

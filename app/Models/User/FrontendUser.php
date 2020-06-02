@@ -72,6 +72,7 @@ class FrontendUser extends BaseAuthModel
      * @var array
      */
     protected $casts = [
+                        'rid'             => 'array',
                         'register_time'   => 'datetime',
                         'last_login_time' => 'datetime',
                        ];
