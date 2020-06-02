@@ -8,7 +8,7 @@ Route::group(
     static function (): void {
         $namePrefix = 'dynamic-activity.';
         Route::get(
-            '/{activity_id}',
+            '/{activity_dyn_id}',
             [
              DynamicActivityController::class,
              'participate',

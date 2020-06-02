@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Common\DynamicActivity;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\Activity\ActivitiesDynPlatform;
 
 /**
  * Class ResetPasswordRequest
@@ -10,6 +11,11 @@ use App\Http\Requests\BaseFormRequest;
  */
 class ParticipateRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [ActivitiesDynPlatform::class];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,6 +33,6 @@ class ParticipateRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['activity_id' => 'required|integer|'];
+        return ['activity_dyn_id' => 'required|integer|exists:activities_dyn_platforms,activity_dyn_id'];
     }
 }
