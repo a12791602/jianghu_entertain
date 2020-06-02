@@ -20,7 +20,7 @@ class FirstRegistrationGifts extends BaseActivity
         if (isset($this->activity->model_class)) {
             $acConfigInstance = $this->activity->model_class;
             $acConfig         = $acConfigInstance->pluck('probability', 'item')->toArray();
-            $result           = $this->getPrice($acConfigInstance, $acConfig);
+            $result           = $this->drawItem($acConfigInstance, $acConfig);
         }
         return $result;
     }
