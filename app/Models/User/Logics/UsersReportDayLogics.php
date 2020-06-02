@@ -3,7 +3,9 @@
 namespace App\Models\User\Logics;
 
 use App\Models\Game\GameProject;
+use App\Models\User\FrontendUser;
 use Carbon\Carbon;
+use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
 
 trait UsersReportDayLogics
@@ -126,5 +128,63 @@ trait UsersReportDayLogics
             DB::rollback();
         }
         DB::commit();
+    }
+
+    /**
+     * 用户日报表洗码字段
+     * @param  FrontendUser    $user       用户.
+     * @param  CarbonInterface $reportDay  日期.
+     * @param  float           $userRebate 洗码返利.
+     * @return boolean
+     */
+    public static function saveRebateReport(
+        FrontendUser $user,
+        CarbonInterface $reportDay,
+        float $userRebate
+    ): bool {
+        $userReport = self::getUserReport($user->platform_sign, $user->mobile, $user->guid, $reportDay);
+        if ($userReport === null) {
+            $addData    = [
+                           'platform_sign' => $user->platform_sign,
+                           'mobile'        => $user->mobile,
+                           'guid'          => $user->guid,
+                           'rebate'        => $userRebate,
+                           'day'           => $reportDay,
+                          ];
+            $userReport = new self();
+            $userReport->fill($addData);
+        } else {
+            $userReport->rebate += $userRebate;
+        }
+        return $userReport->save();
+    }
+
+    /**
+     * 用户佣金字段
+     * @param  FrontendUser    $user           用户.
+     * @param  CarbonInterface $reportDay      日期.
+     * @param  float           $userCommission 洗码.
+     * @return boolean
+     */
+    public static function saveCommissionReport(
+        FrontendUser $user,
+        CarbonInterface $reportDay,
+        float $userCommission
+    ): bool {
+        $userReport = self::getUserReport($user->platform_sign, $user->mobile, $user->guid, $reportDay);
+        if ($userReport === null) {
+            $addData    = [
+                           'platform_sign' => $user->platform_sign,
+                           'mobile'        => $user->mobile,
+                           'guid'          => $user->guid,
+                           'commission'    => $userCommission,
+                           'day'           => $reportDay,
+                          ];
+            $userReport = new self();
+            $userReport->fill($addData);
+        } else {
+            $userReport->commission += $userCommission;
+        }
+        return $userReport->save();
     }
 }
