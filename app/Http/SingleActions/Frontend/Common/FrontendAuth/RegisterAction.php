@@ -52,7 +52,7 @@ class RegisterAction extends MainAction
             throw new \Exception('100503', 401);
         }
         $parentId = 0;
-        $userRid  = '0';
+        $userRid  = [0];
         if (is_string($request['invite_code'])) {
             $patent   = $this->_getParent($platform_sign, $request['invite_code']);
             $parentId = $patent->id;
@@ -114,7 +114,7 @@ class RegisterAction extends MainAction
      * @param string  $password    Password.
      * @param integer $device_code Device_code.
      * @param integer $parentId    Patent_id.
-     * @param string  $userRid     Rid.
+     * @param array   $userRid     Rid.
      * @param string  $register_ip Register_ip.
      * @param integer $platform_id Platform_id.
      * @param string  $sign        Sign.
@@ -126,7 +126,7 @@ class RegisterAction extends MainAction
         string $password,
         int $device_code,
         int $parentId,
-        string $userRid,
+        array $userRid,
         ?string $register_ip,
         int $platform_id,
         string $sign

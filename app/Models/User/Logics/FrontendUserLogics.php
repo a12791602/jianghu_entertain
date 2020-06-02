@@ -6,10 +6,10 @@ trait FrontendUserLogics
 {
     /**
      * 获取当前用户下级的rid
-     * @return string
+     * @return mixed[]
      */
-    public function getRid(): string
+    public function getRid(): array
     {
-        return $this->id . ',' . $this->rid;
+        return array_merge($this->rid, [$this->id]);
     }
 }
