@@ -2,12 +2,11 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 
 /**
- * Class CreateActivitiesConfigRegRandomTable
+ * Class CreateActivitiesConfigRegFirstimeRandomsTable
  */
-class CreateActivitiesConfigRegRandomTable extends Migration
+class CreateActivitiesConfigRegFirstimeRandomsTable extends Migration
 {
 
     /**
@@ -22,7 +21,8 @@ class CreateActivitiesConfigRegRandomTable extends Migration
             static function (Blueprint $table): void {
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->increments('id');
-                $table->decimal('item', 6)->nullable()->comment('礼物金额');
+                $table->string('item', 32)->nullable()->comment('礼物奖品');
+                $table->decimal('amount', 6)->nullable()->comment('礼物金额');
                 $table->decimal('probability', 5)->nullable()->comment('礼物抽中概率');
                 $table->timestamps();
             },
@@ -38,6 +38,6 @@ class CreateActivitiesConfigRegRandomTable extends Migration
      */
     public function down(): void
     {
-        Schema::drop('activities_config_reg_random');
+        Schema::drop('activities_config_reg_firstime_randoms');
     }
 }
