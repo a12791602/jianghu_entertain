@@ -3,7 +3,7 @@
 
 namespace App\Registration;
 
-use App\Game\BaseActivity;
+use App\Activities\BaseActivity;
 
 /**
  * Class FirstRegistrationGifts
