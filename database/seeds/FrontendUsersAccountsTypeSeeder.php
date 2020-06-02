@@ -215,6 +215,17 @@ class FrontendUsersAccountsTypeSeeder extends Seeder
               'group_type_id'    => 3,
               'admin_id'         => 0,
              ],
+             [
+              'id'               => 19,
+              'name'             => '自领活动',
+              'sign'             => 'diy_gift',
+              'in_out'           => 1,
+              'param'            => '1,2,16',
+              'frozen_type'      => 0,
+              'frontend_display' => 1,
+              'group_type_id'    => 4,
+              'admin_id'         => 0,
+             ],
             ],
         );
     }

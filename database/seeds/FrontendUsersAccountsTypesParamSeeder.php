@@ -122,6 +122,13 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
               'rule'           => 'required|integer|exists:system_static_activities,id',
               'is_search_ease' => 0,
              ],
+             [
+              'id'             => 16,
+              'label'          => '动态活动id',
+              'param'          => 'dynamic_activity_id',
+              'rule'           => 'required|integer|exists:activities_dyn_systems,id',
+              'is_search_ease' => 0,
+             ],
             ],
         );
     }
