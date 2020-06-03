@@ -20,16 +20,20 @@ class ParticipateAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $result                  = 0;
         $criteria                = $inputDatas;
         $criteria['platform_id'] = $this->currentPlatformEloq->id;
         $criteria['status']      = JHHYCnst::STATUS_OPEN;
         $activityIdenti          = ActivitiesDynPlatform::filter($criteria)->first();
-        $activity                = $activityIdenti->activitySystem;
-        if (isset($activity->activity_class)) {
-            $acInstance = $activity->activity_class;
-            $result     = $acInstance->draw();
+        if (!$activityIdenti instanceof ActivitiesDynPlatform) {
+            throw new \Exception('500000');
         }
+        $activity = $activityIdenti->activitySystem;
+        if (!isset($activity->activity_class)) {
+            throw new \Exception('500004');
+        }
+        $acInstance = $activity->activity_class;
+        $acInstance->setRequirements($this->user);
+        $result = $acInstance->draw();
         return msgOut($result);
     }
 }

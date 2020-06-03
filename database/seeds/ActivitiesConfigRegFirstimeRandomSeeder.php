@@ -43,7 +43,7 @@ class ActivitiesConfigRegFirstimeRandomSeeder extends Seeder
              ],
              [
               'id'          => 5,
-              'item'        => '注五等奖',
+              'item'        => '五等奖',
               'amount'      => '10.00',
               'probability' => '30.00',
              ],

@@ -125,7 +125,7 @@ class FrontendUsersAccountsTypesParamSeeder extends Seeder
              [
               'id'             => 16,
               'label'          => '动态活动id',
-              'param'          => 'dynamic_activity_id',
+              'param'          => 'activity_dyn_id',
               'rule'           => 'required|integer|exists:activities_dyn_systems,id',
               'is_search_ease' => 0,
              ],

@@ -10,7 +10,8 @@ namespace App\Activities;
 interface ActivitiesIF
 {
     /**
-     * @return integer|string
+     * @return array<string,string>|integer|string
+     * @throws \Exception Exception.
      */
     public function draw();
 }
