@@ -58,6 +58,7 @@ trait FrontendUsersAccountLogics
         $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);
         // 2. 参数检测
         $validator = Validator::make($params, $paramsValidator);
+        $params = $validator->validated();
         if ($validator->fails()) {
             DB::rollback();
             throw new \Exception('100201');
