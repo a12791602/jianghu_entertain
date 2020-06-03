@@ -115,6 +115,10 @@ abstract class BaseActivity implements ActivitiesIF
     protected function sendGift(array $params)
     {
         $userAccount = $this->user->account;
+        $bankCard    = $this->user->bankCard()->exists();
+        if (!$bankCard) {
+            throw new \RuntimeException('100907');
+        }
         if (! $userAccount instanceof FrontendUsersAccount) {
             throw new \RuntimeException('100505');
         }
