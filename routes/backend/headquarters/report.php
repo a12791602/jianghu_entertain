@@ -7,7 +7,7 @@ Route::group(
     ['prefix' => 'report'],
     static function (): void {
         $namePrefix = 'headquarters-api.report.';
-        //厅主注单-列表
+        //厅主注单报表-列表
         route::post(
             'game-project',
             [
@@ -15,5 +15,13 @@ Route::group(
              'gameProject',
             ],
         )->name($namePrefix . 'game-project');
+        //厅主游戏报表-列表
+        route::post(
+            'platform-game',
+            [
+             ReportController::class,
+             'platformGame',
+            ],
+        )->name($namePrefix . 'platform-game');
     },
 );
