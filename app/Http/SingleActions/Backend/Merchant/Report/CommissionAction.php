@@ -50,7 +50,7 @@ class CommissionAction extends MainAction
                  'game_vendor_sign',
                  'bet',
                  'effective_bet',
-                 'commission',
+                 'rebate',
                  'day',
                 ],
             )->with('gameVendor:sign,name')
