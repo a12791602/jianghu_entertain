@@ -2,7 +2,10 @@
 
 namespace App\Activities;
 
+use App\Models\Activity\ActivitiesDynLogs;
 use App\Models\Activity\ActivitiesDynSystem;
+use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
 
 /**
  * Class Base
@@ -17,6 +20,11 @@ abstract class BaseActivity implements ActivitiesIF
     protected $activity;
 
     /**
+     * @var FrontendUser FrontendUser.
+     */
+    protected $user;
+
+    /**
      * BaseActivity constructor.
      * @param ActivitiesDynSystem $activity ActivitiesDynSystem Model.
      */
@@ -26,15 +34,23 @@ abstract class BaseActivity implements ActivitiesIF
     }
 
     /**
+     * @param FrontendUser $user FronteneUser.
+     * @return void
+     */
+    public function setRequirements(FrontendUser $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
      * @param object $acConfigInstance 获取对应游戏的奖品拥有的model.
      * @param array  $acConfig         奖品配置数组.
-     * @return float
+     * @return mixed
      */
-    protected function drawItem(object $acConfigInstance, array $acConfig): float
+    protected function drawItem(object $acConfigInstance, array $acConfig)
     {
-        $item     = $this->getItemByProb($acConfig);
-        $itemEloq = $acConfigInstance->where('item', $item)->first();
-        return $itemEloq->amount ?? 0.0;
+        $item = $this->getItemByProb($acConfig);
+        return $acConfigInstance->where('item', $item)->first();
     }
 
     /**
@@ -89,5 +105,23 @@ abstract class BaseActivity implements ActivitiesIF
     {
         $arr_formula = $this->generateProbFormula($proArr);
         return $this->drawing($arr_formula, (int) array_sum($proArr));
+    }
+
+    /**
+     * @param array $params Param [user_id, amount,activity_dyn_id,item,times].
+     * @return mixed
+     * @throws \RuntimeException Exception.
+     */
+    protected function sendGift(array $params)
+    {
+        $userAccount = $this->user->account;
+        if (! $userAccount instanceof FrontendUsersAccount) {
+            throw new \RuntimeException('100505');
+        }
+        $userAccount->operateAccount(
+            'diy_gift',
+            $params,
+        );
+        return ActivitiesDynLogs::create($params);
     }
 }
