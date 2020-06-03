@@ -54,7 +54,7 @@ class ActivitiesDynSystem extends BaseModel
     public function getActivityClassAttribute()
     {
         if (isset($this->type)) {
-            $acConfigClassName = 'App\\' . ucfirst($this->type->type_title) . '\\' . $this->title;
+            $acConfigClassName = 'App\\Activities\\' . ucfirst($this->type->type_title) . '\\' . $this->title;
             $param             = ['activity' => $this];
             return resolve($acConfigClassName, $param);
         }
