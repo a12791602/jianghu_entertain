@@ -3,8 +3,8 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\HandleSaveBuckle;
 
 use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class HandleBuckleAction
@@ -26,6 +26,9 @@ class HandleBuckleAction extends BaseAction
         if (!$user) {
             throw new \Exception('202400');
         }
+        if (!$user->account instanceof FrontendUsersAccount) {
+            throw new \Exception('202400');
+        }
         $data                  = [];
         $data['order_no']      = $this->generateOrderNo($platformSign);
         $data['user_id']       = $user->id;
@@ -36,22 +39,20 @@ class HandleBuckleAction extends BaseAction
         $data['admin_id']      = $this->user->id;
         $data['balance']       = $user->account->balance - $inputDatas['money'];
         $data['direction']     = $this->model::DIRECTION_OUT;
-        DB::beginTransaction();
+
+        $param = [
+                  'user_id' => $user->id,
+                  'amount'  => $inputDatas['money'],
+                 ];
         try {
             $this->model->fill($data);
             if ($this->model->save()) {
-                $user->account->operateAccount(
-                    ['amount' => $inputDatas['money']],
-                    'artificial_deduction',
-                );
-                DB::commit();
-                $msgOut = msgOut();
-                return $msgOut;
+                $user->account->operateAccount('artificial_deduction', $param);
+                return msgOut();
             }
         } catch (\Throwable $exception) {
             $this->writeLog($exception, $data['order_no']);
         }
-        DB::rollBack();
         throw new \Exception('202402');
     }
 }

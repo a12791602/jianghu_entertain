@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SystemEmailOfMerchant extends BaseModel
 {
 
+    public const EMAIL_UNREAD = 0;
+
     /**
      * @var array
      */
