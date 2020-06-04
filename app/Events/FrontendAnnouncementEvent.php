@@ -13,7 +13,7 @@ use Illuminate\Queue\SerializesModels;
  * Class AnnouncementEvent
  * @package App\Events
  */
-class AnnouncementEvent implements ShouldBroadcast
+class FrontendAnnouncementEvent implements ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;
@@ -62,9 +62,19 @@ class AnnouncementEvent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        $channel = 'announcement_' . $this->platformSign;
+        $channel = 'frontend.announcement.' . $this->platformSign;
         $channel = new Channel($channel);
         return $channel;
+    }
+
+    /**
+     * The event's broadcast name.
+     *
+     * @return string
+     */
+    public function broadcastAs(): string
+    {
+        return 'frontend.announcement';
     }
 
     /**
