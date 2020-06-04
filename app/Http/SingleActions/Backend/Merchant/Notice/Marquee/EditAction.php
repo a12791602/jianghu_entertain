@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Notice\Marquee;
 
-use App\Events\AnnouncementEvent;
+use App\Events\FrontendAnnouncementEvent;
 use App\Lib\Constant\JHHYCnst;
 use Arr;
 use Illuminate\Http\JsonResponse;
@@ -29,7 +29,7 @@ class EditAction extends BaseAction
         $result = $model->update($inputData);
         if ($result) {
             $broadcast_data = Arr::only($inputData, ['title', 'content', 'device']);
-            broadcast(new AnnouncementEvent(JHHYCnst::ANNOUNCEMENT_SCROLL, $broadcast_data));
+            broadcast(new FrontendAnnouncementEvent(JHHYCnst::ANNOUNCEMENT_SCROLL, $broadcast_data));
             return msgOut();
         }
         throw new \Exception('201601');
