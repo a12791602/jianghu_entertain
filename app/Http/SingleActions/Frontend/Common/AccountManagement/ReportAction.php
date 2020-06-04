@@ -3,6 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\SingleActions\MainAction;
+use App\Models\Game\GameProject;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
@@ -56,8 +57,9 @@ class ReportAction extends MainAction
             $this->pageSize = $inputDatas['pageSize'];
         }
         $this->filterDatas = [
-                              'created_at' => $inputDatas['created_at'] ?? [],
-                              'user_id'    => $this->user->id,
+                              'created_at'        => $inputDatas['created_at'] ?? [],
+                              'their_create_time' => $inputDatas['their_create_time'] ?? [],
+                              'user_id'           => $this->user->id,
                              ];
         $data              = $this->_getReport($inputDatas['type']);
         return msgOut($data);
@@ -78,7 +80,10 @@ class ReportAction extends MainAction
                 $data = $this->_getRechargeReport();
                 break;
             case 3:
-                $data = $this->_getwithdrawReport();
+                $data = $this->_getWithdrawReport();
+                break;
+            case 4:
+                $data = $this->_getGameReport();
                 break;
         }
         return $data;
@@ -116,10 +121,24 @@ class ReportAction extends MainAction
      * 提现记录
      * @return mixed[]
      */
-    private function _getwithdrawReport(): array
+    private function _getWithdrawReport(): array
     {
         return UsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
+            ->orderBy('created_at', 'desc')
+            ->paginate($this->pageSize)
+            ->toArray();
+    }
+
+    /**
+     * 投注记录
+     * @return mixed[]
+     */
+    private function _getGameReport(): array
+    {
+        return GameProject::filter($this->filterDatas)
+            ->select(['game_vendor_sign', 'game_sign', 'bet_money', 'status', 'their_create_time'])
+            ->with(['game:name,sign', 'gameVendor:name,sign'])
             ->orderBy('created_at', 'desc')
             ->paginate($this->pageSize)
             ->toArray();
