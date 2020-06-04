@@ -28,10 +28,10 @@ class ReportRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'type'        => 'required|integer|in:1,2,3',    //类型  1.账变明细  2.充值记录 3.提现记录
-                'createdAt'   => 'array|size:2',                 // 账变时间
-                'createdAt.*' => 'date|date_format:Y-m-d H:i:s', //账变时间
-                'pageSize'    => 'integer|between:1,100',        //每页数据条数
+                'type'         => 'required|integer|in:1,2,3',     //类型  1.账变明细  2.充值记录 3.提现记录
+                'created_at'   => 'array|size:2',                 // 账变时间
+                'created_at.*' => 'date|date_format:Y-m-d H:i:s', //账变时间
+                'pageSize'     => 'integer|between:1,100',         //每页数据条数
                ];
     }
 
@@ -42,6 +42,6 @@ class ReportRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['createdAt' => 'cast:array'];
+        return ['created_at' => 'cast:array'];
     }
 }
