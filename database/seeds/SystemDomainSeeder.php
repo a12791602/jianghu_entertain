@@ -169,6 +169,14 @@ class SystemDomainSeeder extends Seeder
               'type'          => null,
               'is_default'    => 0,
              ],
+             [
+              'platform_sign' => 'JHHY',
+              'admin_id'      => null,
+              'domain'        => 'h5stg.397017.com',
+              'status'        => 1,
+              'type'          => null,
+              'is_default'    => 0,
+             ],
             ],
         );
     }

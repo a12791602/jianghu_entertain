@@ -63,6 +63,7 @@ return [
                                        'http://picstg.397017.com',// 图片站地址
                                        'http://echo.397017.com',// websocket地址
                                        'http://apistg.397017.com',// api 调用地址
+                                       'http://h5stg.397017.com',// H5地址
                                       ],
 
            /*
