@@ -5,6 +5,7 @@ namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 use App\Http\SingleActions\MainAction;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUsersAccountsReport;
+use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -54,9 +55,11 @@ class ReportAction extends MainAction
         if (isset($inputDatas['pageSize'])) {
             $this->pageSize = $inputDatas['pageSize'];
         }
-        $this->filterDatas           = $inputDatas;
-        $this->filterDatas['userId'] = $this->user->id;
-        $data                        = $this->_getReport($inputDatas['type']);
+        $this->filterDatas = [
+                              'created_at' => $inputDatas['created_at'] ?? [],
+                              'user_id'    => $this->user->id,
+                             ];
+        $data              = $this->_getReport($inputDatas['type']);
         return msgOut($data);
     }
 
@@ -87,11 +90,12 @@ class ReportAction extends MainAction
      */
     private function _getAccountReport(): array
     {
-        $this->filterDatas['frontend_display'] = $this->model::FRONTEND_DISPLAY_NO;
+        $this->filterDatas['frontend_display'] = FrontendUsersAccountsType::FRONTEND_DISPLAY_YES;
         return $this->model
             ->filter($this->filterDatas)
             ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])
-            ->paginate($this->pageSize)
+            ->orderBy('created_at', 'desc')
+            ->paginate()
             ->toArray();
     }
 
@@ -103,6 +107,7 @@ class ReportAction extends MainAction
     {
         return UsersRechargeOrder::filter($this->filterDatas)
             ->select(['order_no', 'money', 'arrive_money', 'recharge_status', 'status', 'created_at'])
+            ->orderBy('created_at', 'desc')
             ->paginate($this->pageSize)
             ->toArray();
     }
@@ -115,6 +120,7 @@ class ReportAction extends MainAction
     {
         return UsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
+            ->orderBy('created_at', 'desc')
             ->paginate($this->pageSize)
             ->toArray();
     }

@@ -4,7 +4,6 @@ namespace App\Models\User;
 
 use App\Models\BaseModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * 用户帐变记录
@@ -16,8 +15,6 @@ class FrontendUsersAccountsReport extends BaseModel
     public const FROZEN_STATUS_BACK      = 2; //解冻
     public const FROZEN_STATUS_TO_PLAYER = 3;
     public const FROZEN_STATUS_TO_SYSTEM = 4; //消耗冻结资金
-    public const FRONTEND_DISPLAY_NO     = 0; //前台不显示（部分只操作冻结金额的记录不需要给用户看到）
-    public const FRONTEND_DISPLAY_YES    = 1; //前台显示
 
     /**
      * @var array
@@ -37,11 +34,11 @@ class FrontendUsersAccountsReport extends BaseModel
     public static $fieldDefinition = ['created_at' => '账变时间'];
 
     /**
-     * @return HasOne
+     * @return BelongsTo
      */
-    public function changeType(): HasOne
+    public function changeType(): BelongsTo
     {
-        return $this->hasOne(FrontendUsersAccountsType::class, 'sign', 'type_sign');
+        return $this->belongsTo(FrontendUsersAccountsType::class, 'type_sign', 'sign');
     }
 
     /**
