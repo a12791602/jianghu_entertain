@@ -15,15 +15,15 @@ use Illuminate\Support\Facades\Redis;
 class ConfirmAction extends MainAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
         $where = [
                   'platform_sign' => $this->user->platform_sign,
-                  'order_no'      => $inputDatas['order_no'],
+                  'order_no'      => $inputData['order_no'],
                   'user_id'       => $this->user->id,
                  ];
         $order = UsersRechargeOrder::where($where)->first();
@@ -34,6 +34,12 @@ class ConfirmAction extends MainAction
             throw new \Exception('101003');
         }
         $order->status = UsersRechargeOrder::STATUS_CONFIRM;
+        if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
+            $order->bank          = $inputData['bank'];
+            $order->branch        = $inputData['branch'];
+            $order->card_number   = $inputData['card_number'];
+            $order->top_up_remark = $inputData['top_up_remark'] ?? null;
+        }
         if ($order->save()) {
             if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
                 merchantNotificationIncrement(MerchantNotificationStatistic::OFFLINE_TOP_UP);

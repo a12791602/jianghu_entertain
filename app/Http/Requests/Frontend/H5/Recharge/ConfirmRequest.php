@@ -18,6 +18,16 @@ class ConfirmRequest extends BaseFormRequest
     protected $dependentModels = [UsersRechargeOrder::class];
 
     /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'card_number'   => '银行卡号',
+                                  'branch'        => '支行',
+                                  'bank'          => '银行',
+                                  'top_up_remark' => '备注',
+                                 ];
+
+    /**
      * Determine if the user is authorized to make this request.
      *
      * @return boolean
@@ -34,6 +44,13 @@ class ConfirmRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['order_no' => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no'];
+        return [
+                'is_online'     => 'required|integer|in:0,1',
+                'branch'        => 'required_if:is_online,0|string|max:30',
+                'bank'          => 'required_if:is_online,0|string|max:30',
+                'card_number'   => 'required_if:is_online,0|digits_between:13,19',
+                'top_up_remark' => 'string|max:50',
+                'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
+               ];
     }
 }

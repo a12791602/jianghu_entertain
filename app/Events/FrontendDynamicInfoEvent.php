@@ -62,10 +62,21 @@ class FrontendDynamicInfoEvent implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        $channel = 'frontend_dynamic_' . $this->platformSign . '_' . $this->user_guid;
+        $channel = 'frontend.dynamic.' . $this->platformSign . '.' . $this->user_guid;
         $channel = new Channel($channel);
         return $channel;
     }
+
+    /**
+     * The event's broadcast name.
+     *
+     * @return string
+     */
+    public function broadcastAs(): string
+    {
+        return 'frontend.dynamic.info';
+    }
+
 
     /**
      * 指定广播数据.

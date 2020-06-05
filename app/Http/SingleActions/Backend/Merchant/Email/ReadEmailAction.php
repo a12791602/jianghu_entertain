@@ -13,17 +13,17 @@ use Illuminate\Http\JsonResponse;
 class ReadEmailAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $result = SystemEmailOfMerchant::where('id', $inputDatas['id'])
-            ->update(['is_read' => SystemEmail::IS_READ_YES]);
-        if ($result) {
+        $email = SystemEmailOfMerchant::find($inputData['id']);
+        if (!$email instanceof SystemEmailOfMerchant) {
             return msgOut();
         }
-        throw new \Exception('303002');
+        $email->update(['is_read' => SystemEmail::IS_READ_YES]);
+        return msgOut($email->email);
     }
 }

@@ -45,8 +45,8 @@ class StatisticAction extends MainAction
                  'email'             => $email,
                  'online_top_up'     => 0,
                  'offline_top_up'    => $offline_top_up,
-                 'withdrawal_order'  => $withdrawal_order,
-                 'withdrawal_review' => $withdrawal_review,
+                 'withdrawal_review' => $withdrawal_order,
+                 'withdrawal_order'  => $withdrawal_review,
                 ];
         return msgOut(IndexResource::make($item));
     }

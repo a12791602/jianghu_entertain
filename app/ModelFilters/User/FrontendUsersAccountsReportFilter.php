@@ -17,10 +17,11 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * @var array
      */
     public $relations = [
-                         'user' => [
-                                    'mobile',
-                                    'guid',
-                                   ],
+                         'user'       => [
+                                          'mobile',
+                                          'guid',
+                                         ],
+                         'changeType' => ['frontend_display'],
                         ];
 
     /**
@@ -80,16 +81,5 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
     public function platformSign(string $sign): self
     {
         return $this->where('platform_sign', $sign);
-    }
-
-    /**
-     * 前台是否显示
-     *
-     * @param  integer $display 前台是否显示.
-     * @return self
-     */
-    public function frontendDisplay(int $display): self
-    {
-        return $this->whereIn('frontend_display', $display);
     }
 }

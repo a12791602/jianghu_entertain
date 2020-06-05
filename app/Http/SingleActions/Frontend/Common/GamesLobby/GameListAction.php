@@ -72,6 +72,7 @@ class GameListAction extends MainAction
             $condition['type_in']     = $openTypeIds;
             $condition['sub_type_in'] = $openSubTypeIds;
             $condition['device']      = $inputData['device'];
+            $condition['status']      = GamePlatform::STATUS_OPEN;
             $games                    = $this->_getGames($condition);
             $result                   = [
                                          'raw'  => $rawData,

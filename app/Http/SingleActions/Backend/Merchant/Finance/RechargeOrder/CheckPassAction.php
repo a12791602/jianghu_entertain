@@ -3,15 +3,12 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
 use App\Events\FrontendDynamicInfoEvent;
-use App\Events\FrontendNoticeEvent;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
-use App\Lib\Constant\JHHYCnst;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -37,35 +34,27 @@ class CheckPassAction extends BaseAction
         if ($order->status !== UsersRechargeOrder::STATUS_CONFIRM) {
             throw new \Exception('202303');
         }
-        DB::beginTransaction();
+        $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
+        $order->admin_id = $this->user->id;
+        $saveStatus      = $order->save();
+        if (! $order->user instanceof FrontendUser || !$order->user->account instanceof FrontendUsersAccount) {
+            throw new \Exception('100505');//用户不存在
+        }
+        if (!$saveStatus) {
+            throw new \Exception('202304');
+        }
+        $param = [
+                  'user_id' => $order->user->id,
+                  'amount'  => $order->arrive_money,
+                 ];
         try {
-            $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
-            $order->admin_id = $this->user->id;
-            $saveStatus      = $order->save();
-            if (! $order->user instanceof FrontendUser || !$order->user->account instanceof FrontendUsersAccount) {
-                throw new \Exception('100505');//用户不存在
-            }
-            if (!$saveStatus) {
-                throw new \Exception('202304');
-            }
-            $param = [
-                      'user_id' => $order->user->id,
-                      'amount'  => $order->arrive_money,
-                     ];
-
-            $notice_guid    = $order->user->guid;
-            $notice_type    = JHHYCnst::NOTICE_OF_BALANCE_UPDATE;
-            $notice_balance = ['balance' => $order->user->account->balance];
             $order->user->account->operateAccount('recharge', $param);
-            broadcast(new FrontendNoticeEvent($notice_guid, $notice_type, '', $notice_balance));
             $user_info = DynamicInformationResource::make($order->user)->toArray(request());
             broadcast(new FrontendDynamicInfoEvent($order->user->guid, $user_info));
-            DB::commit();
             return msgOut();
         } catch (\RuntimeException $exception) {
             $this->packLogData($order, $exception);
         }//end try
-        DB::rollBack();
         throw new \Exception('202304');
     }
 
