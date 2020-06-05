@@ -603,7 +603,7 @@ class SystemRoutesMerchantSeeder extends Seeder
               'method'        => 'receivedIndex',
              ],
              [
-              'route_name'    => 'merchant-api.email.read-email',
+              'route_name'    => 'merchant-api.email.read',
               'menu_group_id' => 23,
               'title'         => '邮件系统-收件箱-读邮件',
               'is_open'       => 0,
