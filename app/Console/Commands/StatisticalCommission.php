@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Game\GameProject;
+use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUserCommission;
 use App\Models\Report\ReportDayUserGameCommission;
 use App\Models\User\FrontendUser;
@@ -60,11 +61,11 @@ class StatisticalCommission extends Command
             }
             $vendorGroupProject = $itemUserProjects->groupBy('game_vendor_sign');
             DB::beginTransaction();
-            //保存用户洗码报表
-            $userRebate = $this->_saveRebateReport($vendorGroupProject, $user, $reportDay);
-            //保存用户日报表
-            $saveUserReport = $this->_saveUserReport($user, $reportDay, $userRebate, $itemUserProjects);
-            if ($saveUserReport !== true) {
+            //游戏相关报表
+            $userRebate = $this->_saveGameReport($vendorGroupProject, $user, $reportDay);
+            //佣金返利报表
+            $saveReportCommisstion = $this->_saveReportCommisstion($user, $reportDay, $userRebate, $vendorGroupProject);
+            if ($saveReportCommisstion !== true) {
                 DB::rollback();
                 continue;
             }
@@ -78,7 +79,7 @@ class StatisticalCommission extends Command
      * @param  CarbonInterface $reportDay          日期.
      * @return float
      */
-    private function _saveRebateReport(
+    private function _saveGameReport(
         Collection $vendorGroupProject,
         FrontendUser $user,
         CarbonInterface $reportDay
@@ -114,7 +115,7 @@ class StatisticalCommission extends Command
                 $vendorRebateSum    += $gameRebateSum;
                 $userRebate         += $gameRebateSum;
             }//end foreach
-            $saveVendorRebate = ReportDayUserCommission::saveReport(
+            $saveUserRebate   = ReportDayUserCommission::saveReport(
                 $user,
                 $vendorSign,
                 $vendorBetSum,
@@ -122,7 +123,8 @@ class StatisticalCommission extends Command
                 $vendorRebateSum,
                 $reportDay,
             );
-            if ($saveVendorRebate === false) {
+            $saveVendorRebate = ReportDayGameVendor::saveRebateReport($vendorSign, $reportDay, $vendorRebateSum);
+            if ($saveUserRebate === false || $saveVendorRebate === false) {
                 DB::rollback();
                 continue;
             }
@@ -148,23 +150,47 @@ class StatisticalCommission extends Command
 
     /**
      * 保存用户日报表
-     * @param  FrontendUser    $user        用户.
-     * @param  CarbonInterface $reportDay   日期.
-     * @param  float           $userRebate  洗码返利.
-     * @param  Collection      $userProject 用户游戏注单.
+     * @param  FrontendUser    $user               用户.
+     * @param  CarbonInterface $reportDay          日期.
+     * @param  float           $userRebate         洗码返利.
+     * @param  Collection      $vendorGroupProject 游戏注单.
      * @return boolean
      */
-    private function _saveUserReport(
+    private function _saveReportCommisstion(
         FrontendUser $user,
         CarbonInterface $reportDay,
         float $userRebate,
-        Collection $userProject
+        Collection $vendorGroupProject
     ): bool {
         $saveRebate = UsersReportDay::saveRebateReport($user, $reportDay, $userRebate);
         if ($saveRebate === false) {
             return false;
         }
-        $userWinLose = $userProject->sum('win_money') - $userProject->sum('bet_money');
+        foreach ($vendorGroupProject as $gameVendorSign => $gameProjects) {
+            $saveCommission = $this->_saveCommission($user, $reportDay, (string) $gameVendorSign, $gameProjects);
+            if ($saveCommission === false) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 保存佣金报表
+     * @param  FrontendUser    $user           用户.
+     * @param  CarbonInterface $reportDay      日期.
+     * @param  string          $gameVendorSign 游戏厂商标识.
+     * @param  Collection      $gameProjects   游戏注单.
+     * @return boolean
+     */
+    private function _saveCommission(
+        FrontendUser $user,
+        CarbonInterface $reportDay,
+        string $gameVendorSign,
+        Collection $gameProjects
+    ): bool {
+        $vendorCommissionSum = 0;
+        $userWinLose         = $gameProjects->sum('win_money') - $gameProjects->sum('bet_money');
         //玩家不输钱的时候不需要给上级发放佣金
         if ($userWinLose >= 0) {
             return true;
@@ -197,8 +223,9 @@ class StatisticalCommission extends Command
                 if ($saveCommission !== true) {
                     return false;
                 }
+                $vendorCommissionSum += $commission;
             }//end foreach
         }//end if
-        return true;
+        return ReportDayGameVendor::saveCommissionReport($gameVendorSign, $reportDay, $vendorCommissionSum);
     }
 }
