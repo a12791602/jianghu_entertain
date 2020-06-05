@@ -89,14 +89,18 @@ trait UsersReportDayLogics
      */
     public static function saveGameReport(GameProject $gameProject): void
     {
-        $platformSign = getCurrentPlatformSign();
-        $reportAt     = $gameProject->created_at->format('Y-m-d');
-        $userReport   = self::getUserReport($platformSign, $gameProject->user->mobile, $gameProject->guid, $reportAt);
+        $reportAt   = $gameProject->created_at->format('Y-m-d');
+        $userReport = self::getUserReport(
+            $gameProject->platform_sign,
+            $gameProject->user->mobile,
+            $gameProject->guid,
+            $reportAt,
+        );
         if ($userReport === null) {
             $effectiveBet = $gameProject->bet_money - $gameProject->win_money;
             $effectiveBet = $effectiveBet < 0 ? 0 : $effectiveBet;
             $addData      = [
-                             'platform_sign'     => $platformSign,
+                             'platform_sign'     => $gameProject->platform_sign,
                              'mobile'            => $gameProject->user->mobile ?? '',
                              'guid'              => $gameProject->guid,
                              'bet_sum'           => $gameProject->bet_money,
