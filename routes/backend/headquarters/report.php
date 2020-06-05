@@ -15,6 +15,14 @@ Route::group(
              'gameProject',
             ],
         )->name($namePrefix . 'game-project');
+        //第三方游戏报表-列表
+        route::post(
+            'game-vendor',
+            [
+             ReportController::class,
+             'gameVendor',
+            ],
+        )->name($namePrefix . 'game-vendor');
         //厅主游戏报表-列表
         route::post(
             'platform-game',

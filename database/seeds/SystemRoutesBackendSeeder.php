@@ -469,7 +469,7 @@ class SystemRoutesBackendSeeder extends Seeder
              ],
              [
               'route_name'    => 'headquarters-api.report.game-project',
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Report\ReportController',
               'method'        => 'gameProject',
               'menu_group_id' => 17,
               'title'         => '报表管理-厅主注单报表-列表',
@@ -478,8 +478,18 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_ack'        => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.report.game-vendor',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Report\ReportController',
+              'method'        => 'gameVendor',
+              'menu_group_id' => 18,
+              'title'         => '报表管理-第三方游戏报表-列表',
+              'description'   => null,
+              'is_open'       => 0,
+              'is_ack'        => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.report.platform-game',
-              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Report\ReportController',
               'method'        => 'platformGame',
               'menu_group_id' => 19,
               'title'         => '报表管理-厅主游戏报表-列表',
