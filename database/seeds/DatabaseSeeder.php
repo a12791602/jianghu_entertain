@@ -86,6 +86,7 @@ class DatabaseSeeder extends Seeder
              ReportDayUserGameCommissionSeeder::class,
              ActivitiesConfigRegFirstimeRandomSeeder::class,
              ActivitiesDynPlatformSeeder::class,
+             ReportDayGameVendorSeeder::class,
             ],
         );
     }
