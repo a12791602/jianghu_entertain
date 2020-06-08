@@ -47,9 +47,13 @@ class RechargeRequest extends BaseFormRequest
         $isOnline = (int) $this->get('is_online');
         $table    = $isOnline === SystemFinanceType::IS_ONLINE_YES ? $onLine : $offLine;
         return [
-                'is_online'  => 'required|integer|in:0,1',
-                'channel_id' => 'required|integer|min:1|exists:' . $table . ',id',
-                'money'      => 'required|integer|min:1',
+                'is_online'     => 'required|integer|in:0,1',
+                'channel_id'    => 'required|integer|min:1|exists:' . $table . ',id',
+                'money'         => 'required|integer|min:1',
+                'branch'        => 'required_if:is_online,0|string|max:30',
+                'bank'          => 'required_if:is_online,0|string|max:30',
+                'card_number'   => 'required_if:is_online,0|digits_between:13,19',
+                'top_up_remark' => 'string|max:50',
                ];
     }
 }

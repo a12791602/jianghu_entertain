@@ -23,6 +23,9 @@ class OfflineInfoResource extends BaseResource
         unset($request);
         return [
                 'id'          => $this->resource->id,
+                'account'     => $this->resource->account,
+                'branch'      => $this->resource->branch,
+                'username'    => $this->resource->username,
                 'type_id'     => $this->resource->type_id,
                 'name'        => $this->resource->name,
                 'remark'      => $this->resource->remark,

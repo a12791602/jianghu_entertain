@@ -46,7 +46,7 @@ class GetFinanceInfoAction extends MainAction
                 }
                 $item->offlineInfos->transform(
                     function ($item): ?SystemFinanceOfflineInfo {
-                        if (in_array($this->user->userTag->id, $item->tags->tag_id)) {
+                        if (in_array(optional($this->user->userTag)->id, $item->tags->tag_id)) {
                             return $item;
                         }
                         return null;
@@ -111,6 +111,9 @@ class GetFinanceInfoAction extends MainAction
         $returnField = [
                         'id',
                         'bank_id',
+                        'account',
+                        'branch',
+                        'username',
                         'type_id',
                         'name',
                         'remark',
