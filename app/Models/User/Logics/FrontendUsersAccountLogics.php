@@ -3,13 +3,12 @@
 namespace App\Models\User\Logics;
 
 use App\Lib\Locker\AccountLocker;
-use App\Models\Systems\SystemPlatformReportDay;
+use App\Lib\Report\AccountReport;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\FrontendUsersAccountsTypesParam;
 use App\Models\User\FrontendUsersAudit;
-use App\Models\User\UsersReportDay;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -53,12 +52,10 @@ trait FrontendUsersAccountLogics
         if (!$user) {
             throw new \Exception('100206');
         }
-        $typeConfig = FrontendUsersAccountsType::getTypeBySign($typeSign);
-        //　1. 获取帐变配置
-        $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);
-        // 2. 参数检测
-        $validator = Validator::make($params, $paramsValidator);
-        $params = $validator->validated();
+        $typeConfig      = FrontendUsersAccountsType::getTypeBySign($typeSign);
+        $paramsValidator = FrontendUsersAccountsType::getParamToTransmit($typeSign);//　1. 获取帐变配置
+        $validator       = Validator::make($params, $paramsValidator);// 2. 参数检测
+        $params          = $validator->validated();
         if ($validator->fails()) {
             DB::rollback();
             throw new \Exception('100201');
@@ -97,7 +94,7 @@ trait FrontendUsersAccountLogics
         //稽核处理
         $this->_auditHandle($user, $typeConfig, $amount);
         //日报表处理
-        $this->_reportHandle($user, $typeConfig, $amount);
+        AccountReport::saveReport($user, $typeConfig['sign'], $amount);
         return $saveData;
     }
 
@@ -299,29 +296,6 @@ trait FrontendUsersAccountLogics
             $demandBet = $this->_getDemandBet($sign, $amount, 'activity_audit_times');
             $userAudit->createAudit($user, $type, $amount, $demandBet);
         }
-    }
-
-    /**
-     * 报表处理
-     * @param  FrontendUser $user   Frontend User.
-     * @param  array        $type   Type.
-     * @param  float        $amount Amount.
-     * @return void
-     */
-    private function _reportHandle(FrontendUser $user, array $type, float $amount): void
-    {
-        //充值
-        if (in_array($type['sign'], $this->rechargeTypes)) {
-            UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 1);
-            SystemPlatformReportDay::saveReport('recharge_sum', $amount);
-        }
-        //提现成功
-        if ($type['sign'] !== 'withdraw_finish') {
-            return;
-        }
-
-        UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 2);
-        SystemPlatformReportDay::saveReport('withdraw_sum', $amount);
     }
 
     /**
