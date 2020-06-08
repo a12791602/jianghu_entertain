@@ -218,6 +218,7 @@ class RechargeAction extends MainAction
         $data['order_no']           = $this->_generateOrderNo($platformSign);
         $data['finance_channel_id'] = $this->inputData['channel_id'];
         $data['money']              = $this->inputData['money'];
+        $data['top_up_remark']      = $this->inputData['top_up_remark'] ?? null;
         $data['snap_user_level']    = $this->user->specificInfo->level;
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $data['finance_type_id']    = $this->model->channel->type_id;
@@ -235,6 +236,9 @@ class RechargeAction extends MainAction
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
             $data['snap_bank']         = $this->model->name;
+            $data['bank']              = $this->inputData['bank'];
+            $data['branch']            = $this->inputData['branch'];
+            $data['card_number']       = $this->inputData['card_number'];
         }
         $data['status']    = UsersRechargeOrder::STATUS_INIT;
         $data['is_online'] = $this->inputData['is_online'];
