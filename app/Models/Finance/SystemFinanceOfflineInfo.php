@@ -17,6 +17,8 @@ class SystemFinanceOfflineInfo extends BaseModel
     public const STATUS_YES = 1;
     public const STATUS_NO  = 0;
 
+    public const FINANCE_TYPE_BANK = 1;
+
     /**
      * @var array
      */
