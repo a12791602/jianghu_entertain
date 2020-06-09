@@ -111,8 +111,17 @@ class ReportAction extends MainAction
     private function _getRechargeReport(): array
     {
         return UsersRechargeOrder::filter($this->filterDatas)
-            ->select(['order_no', 'money', 'arrive_money', 'recharge_status', 'status', 'created_at'])
-            ->orderBy('created_at', 'desc')
+            ->select(
+                [
+                 'order_no',
+                 'money',
+                 'arrive_money',
+                 'recharge_status',
+                 'status',
+                 'finance_type_id',
+                 'created_at',
+                ],
+            )->orderBy('created_at', 'desc')
             ->paginate($this->pageSize)
             ->toArray();
     }
