@@ -95,6 +95,9 @@ class UsersRechargeOrder extends BaseModel
                                       'snap_user_grade'    => '会员等级快照',
                                       'snap_account'       => '收款账户快照',
                                       'snap_bank'          => '收款银行快照',
+                                      'branch'             => '入款支行',
+                                      'bank'               => '入款银行',
+                                      'card_number'        => '入款卡号',
                                      ];
 
     /**

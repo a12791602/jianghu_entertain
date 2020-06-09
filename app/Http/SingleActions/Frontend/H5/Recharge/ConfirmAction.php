@@ -34,9 +34,9 @@ class ConfirmAction extends MainAction
             throw new \Exception('101003');
         }
         if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
-            $order->bank          = $inputData['bank'];
-            $order->branch        = $inputData['branch'];
-            $order->card_number   = $inputData['card_number'];
+            $order->bank          = $inputData['bank'] ?? null;
+            $order->branch        = $inputData['branch'] ?? null;
+            $order->card_number   = $inputData['card_number'] ?? null;
             $order->top_up_remark = $inputData['top_up_remark'] ?? null;
         }
         $order->status = UsersRechargeOrder::STATUS_CONFIRM;
