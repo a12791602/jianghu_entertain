@@ -498,6 +498,16 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_ack'        => 0,
              ],
              [
+              'route_name'    => 'headquarters-api.report.platform-account',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Report\ReportController',
+              'method'        => 'platformAccount',
+              'menu_group_id' => 20,
+              'title'         => '报表管理-厅主充提报表-列表',
+              'description'   => null,
+              'is_open'       => 0,
+              'is_ack'        => 0,
+             ],
+             [
               'route_name'    => 'headquarters-api.finance-vendor.opt-index-do',
               'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Finance\BackendFinanceVendorController',
               'method'        => 'indexDo',
