@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\Resources\Frontend\Common\TopUp\GetFinanceInfoResource;
+use App\Http\Resources\Frontend\Common\TopUp\FinanceTypeResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
@@ -46,7 +46,7 @@ class GetFinanceInfoAction extends MainAction
                 }
                 $item->offlineInfos->transform(
                     function ($item): ?SystemFinanceOfflineInfo {
-                        if (in_array($this->user->userTag->id, $item->tags->tag_id)) {
+                        if (in_array(optional($this->user->userTag)->id, $item->tags->tag_id)) {
                             return $item;
                         }
                         return null;
@@ -54,7 +54,7 @@ class GetFinanceInfoAction extends MainAction
                 );
             },
         );
-        return msgOut(GetFinanceInfoResource::collection($item));
+        return msgOut(FinanceTypeResource::make($item));
     }
 
     /**
@@ -111,6 +111,9 @@ class GetFinanceInfoAction extends MainAction
         $returnField = [
                         'id',
                         'bank_id',
+                        'account',
+                        'branch',
+                        'username',
                         'type_id',
                         'name',
                         'remark',

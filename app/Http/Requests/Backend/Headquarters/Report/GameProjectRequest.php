@@ -6,11 +6,11 @@ use App\Http\Requests\BaseFormRequest;
 use App\Models\Game\GameProject;
 
 /**
- * 厅主注单-列表
+ * 厅主注单-列表1
  */
 class GameProjectRequest extends BaseFormRequest
 {
-    
+
     /**
      * @var array 需要依赖模型中的字段备注信息
      */

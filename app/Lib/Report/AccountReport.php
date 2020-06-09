@@ -2,7 +2,6 @@
 
 namespace App\Lib\Report;
 
-use App\Models\Report\ReportDayCompany;
 use App\Models\Systems\SystemPlatformReportDay;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersReportDay;
@@ -27,8 +26,6 @@ class AccountReport
             UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 1);
             //平台日报表
             SystemPlatformReportDay::saveReport('recharge_sum', $amount);
-            //公司报表
-            ReportDayCompany::saveReport('recharge_sum', $amount);
         }
 
         //提现成功
@@ -39,7 +36,5 @@ class AccountReport
         UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 2);
         //平台日报表
         SystemPlatformReportDay::saveReport('withdraw_sum', $amount);
-        //公司报表
-        ReportDayCompany::saveReport('withdraw_sum', $amount);
     }
 }

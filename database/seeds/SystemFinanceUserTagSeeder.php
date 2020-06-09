@@ -43,7 +43,7 @@ class SystemFinanceUserTagSeeder extends Seeder
               'is_online'          => 0,
               'online_finance_id'  => 0,
               'offline_finance_id' => 2,
-              'tag_id'             => '["1","2"]',
+              'tag_id'             => '["1","2","3"]',
               'created_at'         => null,
               'updated_at'         => null,
              ],

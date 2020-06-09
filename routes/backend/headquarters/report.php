@@ -31,5 +31,13 @@ Route::group(
              'platformGame',
             ],
         )->name($namePrefix . 'platform-game');
+        //厅主充提报表-列表
+        route::post(
+            'platform-account',
+            [
+             ReportController::class,
+             'platformAccount',
+            ],
+        )->name($namePrefix . 'platform-account');
     },
 );

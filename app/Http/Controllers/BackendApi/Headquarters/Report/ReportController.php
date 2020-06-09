@@ -5,9 +5,11 @@ namespace App\Http\Controllers\BackendApi\Headquarters\Report;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Headquarters\Report\GameProjectRequest;
 use App\Http\Requests\Backend\Headquarters\Report\GameVendorRequest;
+use App\Http\Requests\Backend\Headquarters\Report\PlatformAccountRequest;
 use App\Http\Requests\Backend\Headquarters\Report\PlatformGameRequest;
 use App\Http\SingleActions\Backend\Headquarters\Report\GameProjectAction;
 use App\Http\SingleActions\Backend\Headquarters\Report\GameVendorAction;
+use App\Http\SingleActions\Backend\Headquarters\Report\PlatformAccountAction;
 use App\Http\SingleActions\Backend\Headquarters\Report\PlatformGameAction;
 use Illuminate\Http\JsonResponse;
 
@@ -58,6 +60,21 @@ class ReportController extends Controller
     public function platformGame(
         PlatformGameRequest $request,
         PlatformGameAction $action
+    ): JsonResponse {
+        $inputDatas = $request->validated();
+        return $action->execute($inputDatas);
+    }
+
+    /**
+     * 厅主充提报表
+     * @param  PlatformAccountRequest $request Request.
+     * @param  PlatformAccountAction  $action  Action.
+     * @return JsonResponse
+     * @throws \Exception Exception.
+     */
+    public function platformAccount(
+        PlatformAccountRequest $request,
+        PlatformAccountAction $action
     ): JsonResponse {
         $inputDatas = $request->validated();
         return $action->execute($inputDatas);
