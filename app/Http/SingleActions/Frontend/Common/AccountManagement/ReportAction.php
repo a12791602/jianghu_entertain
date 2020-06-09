@@ -110,7 +110,7 @@ class ReportAction extends MainAction
      */
     private function _getRechargeReport(): array
     {
-        return UsersRechargeOrder::filter($this->filterDatas)
+        $result = UsersRechargeOrder::filter($this->filterDatas)
             ->select(
                 [
                  'order_no',
@@ -124,6 +124,23 @@ class ReportAction extends MainAction
             )->orderBy('created_at', 'desc')
             ->paginate($this->pageSize)
             ->toArray();
+
+        $financeUrl      = 'http://picstg.397017.com/common/financial/finance_type_list.json';
+        $financeTypeJson = file_get_contents($financeUrl);
+        $financeTypeArr  = [];
+        if (is_string($financeTypeJson)) {
+            $financeTypeArr = json_decode($financeTypeJson, true);
+        }
+        if (!is_array($financeTypeArr)) {
+            $financeTypeArr = [];
+        }
+        $data = [];
+        foreach ($result['data'] as $itemOrder) {
+            $itemOrder['finance_type_name'] = $financeTypeArr[$itemOrder['finance_type_id']]['name'] ?? '';
+            $data[]                         = $itemOrder;
+        }
+        $result['data'] = $data;
+        return $result;
     }
 
     /**
