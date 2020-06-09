@@ -16,7 +16,7 @@ class SystemPlatformReportDayFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = ['platform' => ['platform_name']];
 
     /**
      * 日期
