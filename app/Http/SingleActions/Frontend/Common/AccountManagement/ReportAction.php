@@ -2,14 +2,17 @@
 
 namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
+use App\Http\Resources\Frontend\FrontendUser\RechargeReportResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Game\GameProject;
 use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\UsersWithdrawOrder;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * Class report action.
@@ -67,9 +70,9 @@ class ReportAction extends MainAction
 
     /**
      * @param integer $type 报表类型1账变明细2充值记录3提现记录.
-     * @return mixed[]
+     * @return mixed
      */
-    private function _getReport(int $type): array
+    private function _getReport(int $type)
     {
         $data = [];
         switch ($type) {
@@ -91,24 +94,23 @@ class ReportAction extends MainAction
 
     /**
      * 账变记录
-     * @return mixed[]
+     * @return LengthAwarePaginator
      */
-    private function _getAccountReport(): array
+    private function _getAccountReport(): LengthAwarePaginator
     {
         $this->filterDatas['frontend_display'] = FrontendUsersAccountsType::FRONTEND_DISPLAY_YES;
         return $this->model
             ->filter($this->filterDatas)
             ->select(['serial_number', 'in_out', 'amount', 'type_name', 'type_sign', 'balance', 'created_at'])
             ->orderBy('created_at', 'desc')
-            ->paginate()
-            ->toArray();
+            ->paginate();
     }
 
     /**
      * 充值记录
-     * @return mixed[]
+     * @return AnonymousResourceCollection
      */
-    private function _getRechargeReport(): array
+    private function _getRechargeReport(): AnonymousResourceCollection
     {
         $result = UsersRechargeOrder::filter($this->filterDatas)
             ->select(
@@ -122,51 +124,32 @@ class ReportAction extends MainAction
                  'created_at',
                 ],
             )->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize)
-            ->toArray();
-
-        $financeUrl      = 'http://picstg.397017.com/common/financial/finance_type_list.json';
-        $financeTypeJson = file_get_contents($financeUrl);
-        $financeTypeArr  = [];
-        if (is_string($financeTypeJson)) {
-            $financeTypeArr = json_decode($financeTypeJson, true);
-        }
-        if (!is_array($financeTypeArr)) {
-            $financeTypeArr = [];
-        }
-        $data = [];
-        foreach ($result['data'] as $itemOrder) {
-            $itemOrder['finance_type_name'] = $financeTypeArr[$itemOrder['finance_type_id']]['name'] ?? '';
-            $data[]                         = $itemOrder;
-        }
-        $result['data'] = $data;
-        return $result;
+            ->paginate($this->pageSize);
+        return RechargeReportResource::collection($result);
     }
 
     /**
      * 提现记录
-     * @return mixed[]
+     * @return LengthAwarePaginator
      */
-    private function _getWithdrawReport(): array
+    private function _getWithdrawReport(): LengthAwarePaginator
     {
         return UsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
             ->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize)
-            ->toArray();
+            ->paginate($this->pageSize);
     }
 
     /**
      * 投注记录
-     * @return mixed[]
+     * @return LengthAwarePaginator
      */
-    private function _getGameReport(): array
+    private function _getGameReport(): LengthAwarePaginator
     {
         return GameProject::filter($this->filterDatas)
             ->select(['game_vendor_sign', 'game_sign', 'bet_money', 'status', 'their_create_time'])
             ->with(['game:name,sign', 'gameVendor:name,sign'])
             ->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize)
-            ->toArray();
+            ->paginate($this->pageSize);
     }
 }
