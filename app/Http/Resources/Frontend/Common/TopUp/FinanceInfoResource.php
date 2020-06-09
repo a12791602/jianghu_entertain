@@ -30,7 +30,6 @@ class FinanceInfoResource extends BaseResource
                 'id'               => $this->resource->id,
                 'name'             => $this->resource->name,
                 'sign'             => $this->resource->sign,
-                'is_online'        => $this->resource->is_online,
                 'transfer_account' => $offline_item,
                ];
     }
