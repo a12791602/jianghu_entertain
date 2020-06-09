@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\Resources\Frontend\Common\TopUp\GetFinanceInfoResource;
+use App\Http\Resources\Frontend\Common\TopUp\FinanceTypeResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
@@ -54,7 +54,7 @@ class GetFinanceInfoAction extends MainAction
                 );
             },
         );
-        return msgOut(GetFinanceInfoResource::collection($item));
+        return msgOut(FinanceTypeResource::make($item));
     }
 
     /**

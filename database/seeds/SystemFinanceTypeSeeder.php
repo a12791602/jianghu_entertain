@@ -32,7 +32,7 @@ class SystemFinanceTypeSeeder extends Seeder
               'sign'       => 'alipay_transfer',
               'is_online'  => 0,
               'direction'  => 1,
-              'status'     => 0,
+              'status'     => 1,
               'author_id'  => 2,
               'created_at' => '2020-01-09 18:20:40',
               'updated_at' => '2020-01-09 18:20:40',

@@ -6,10 +6,10 @@ use App\Http\Resources\BaseResource;
 use Illuminate\Http\Request;
 
 /**
- * Class GetFinanceInfoResource
+ * Class FinanceInfoResource
  * @package App\Http\Resources\Frontend\Common\TopUp
  */
-class GetFinanceInfoResource extends BaseResource
+class FinanceInfoResource extends BaseResource
 {
     /**
      * Transform the resource into an array.
@@ -27,11 +27,11 @@ class GetFinanceInfoResource extends BaseResource
             $offline_item = OfflineInfoResource::make($offline_info);
         }
         return [
-                'id'            => $this->resource->id,
-                'name'          => $this->resource->name,
-                'sign'          => $this->resource->sign,
-                'is_online'     => $this->resource->is_online,
-                'offline_infos' => $offline_item,
+                'id'        => $this->resource->id,
+                'name'      => $this->resource->name,
+                'sign'      => $this->resource->sign,
+                'is_online' => $this->resource->is_online,
+                'account'   => $offline_item,
                ];
     }
 }
