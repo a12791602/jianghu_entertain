@@ -236,9 +236,6 @@ class RechargeAction extends MainAction
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
             $data['snap_bank']         = $this->model->name;
-            $data['bank']              = $this->inputData['bank'];
-            $data['branch']            = $this->inputData['branch'];
-            $data['card_number']       = $this->inputData['card_number'];
         }
         $data['status']    = UsersRechargeOrder::STATUS_INIT;
         $data['is_online'] = $this->inputData['is_online'];

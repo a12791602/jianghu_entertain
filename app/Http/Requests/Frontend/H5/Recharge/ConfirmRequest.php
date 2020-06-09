@@ -34,6 +34,12 @@ class ConfirmRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['order_no' => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no'];
+        return [
+                'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
+                'branch'        => 'required_if:is_online,0|string|max:30',
+                'bank'          => 'required_if:is_online,0|string|max:30',
+                'card_number'   => 'required_if:is_online,0|digits_between:13,19',
+                'top_up_remark' => 'string|max:50',
+               ];
     }
 }

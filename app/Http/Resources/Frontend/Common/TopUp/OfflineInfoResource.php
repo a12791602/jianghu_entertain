@@ -27,11 +27,9 @@ class OfflineInfoResource extends BaseResource
                 'branch'      => $this->resource->branch,
                 'username'    => $this->resource->username,
                 'type_id'     => $this->resource->type_id,
-                'name'        => $this->resource->name,
-                'remark'      => $this->resource->remark,
-                'min_amount'  => $this->resource->min_amount,
-                'max_amount'  => $this->resource->max_amount,
-                'service_fee' => $this->resource->service_fee,
+                'min_amount'  => (float) sprintf('%.2f', $this->resource->min_amount),
+                'max_amount'  => (float) sprintf('%.2f', $this->resource->max_amount),
+                'service_fee' => (float) sprintf('%.2f', $this->resource->service_fee),
                 'bank'        => $this->resource->bank,
                ];
     }
