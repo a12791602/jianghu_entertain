@@ -54,7 +54,7 @@ class SystemFinanceOfflineInfoSeeder extends Seeder
               'sort'           => 0,
               'status'         => 1,
               'pay_type'       => null,
-              'branch'         => ' ',
+              'branch'         => '',
               'author_id'      => 1,
               'last_editor_id' => 1,
               'service_fee'    => '2.0000',

@@ -19,7 +19,7 @@ class ReadEmailAction
      */
     public function execute(array $inputData): JsonResponse
     {
-        $email = SystemEmailOfMerchant::find($inputData['id']);
+        $email = SystemEmailOfMerchant::where('email_id', $inputData['id'])->first();
         if (!$email instanceof SystemEmailOfMerchant) {
             return msgOut();
         }

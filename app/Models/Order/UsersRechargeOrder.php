@@ -5,6 +5,7 @@ namespace App\Models\Order;
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use App\Models\Finance\SystemFinanceOnlineInfo;
+use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -60,6 +61,13 @@ class UsersRechargeOrder extends BaseModel
     protected $guarded = ['id'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['finance_type_name'];
+
+    /**
      * @var array
      */
     public static $fieldDefinition = [
@@ -87,6 +95,9 @@ class UsersRechargeOrder extends BaseModel
                                       'snap_user_grade'    => '会员等级快照',
                                       'snap_account'       => '收款账户快照',
                                       'snap_bank'          => '收款银行快照',
+                                      'branch'             => '入款支行',
+                                      'bank'               => '入款银行',
+                                      'card_number'        => '入款卡号',
                                      ];
 
     /**
@@ -111,5 +122,22 @@ class UsersRechargeOrder extends BaseModel
     public function admin(): BelongsTo
     {
         return $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
+    }
+
+    /**
+     * @return BelongsTo
+     */
+    public function financeType(): BelongsTo
+    {
+        return $this->belongsTo(SystemFinanceType::class, 'finance_type_id', 'id');
+    }
+
+    /**
+     * 充值类型名称
+     * @return string
+     */
+    public function getFinanceTypeNameAttribute(): string
+    {
+        return $this->financeType->name ?? '';
     }
 }

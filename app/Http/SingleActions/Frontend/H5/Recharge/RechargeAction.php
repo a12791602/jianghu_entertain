@@ -169,9 +169,6 @@ class RechargeAction extends MainAction
         if (!$order->created_at instanceof Carbon) {
             throw new \Exception('100303');
         }
-        $returnData['account']    = $this->model->account;
-        $returnData['username']   = $this->model->username;
-        $returnData['branch']     = $this->model->branch;
         $returnData['real_money'] = $order->real_money;
         $returnData['money']      = $order->money;
         $returnData['order_no']   = $order->order_no;
