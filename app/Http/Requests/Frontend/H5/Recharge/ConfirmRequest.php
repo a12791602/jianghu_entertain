@@ -3,7 +3,6 @@
 namespace App\Http\Requests\Frontend\H5\Recharge;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Order\UsersRechargeOrder;
 
 /**
@@ -35,24 +34,13 @@ class ConfirmRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        $order = UsersRechargeOrder::where('order_no', $this->order_no)->first();
-        if (!$order instanceof UsersRechargeOrder) {
-            return ['order_no' => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no'];
-        }
-        if ($order->finance_type_id === SystemFinanceOfflineInfo::FINANCE_TYPE_BANK) {
-            $condition = [
-                          'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
-                          'branch'        => 'required_if:is_online,0|string|max:30',
-                          'bank'          => 'required_if:is_online,0|string|max:30',
-                          'card_number'   => 'required_if:is_online,0|digits_between:13,19',
-                          'top_up_remark' => 'string|max:50',
-                         ];
-        } else {
-            $condition = [
-                          'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
-                          'top_up_remark' => 'string|max:50',
-                         ];
-        }
-        return $condition;
+        return [
+                'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
+                'type_id'       => 'integer|in:1,2',
+                'branch'        => 'required_if:type_id,1|string|max:30',
+                'bank'          => 'required_if:type_id,1|string|max:30',
+                'card_number'   => 'required_if:type_id,1,2|digits_between:11,19',
+                'top_up_remark' => 'string|max:50',
+               ];
     }
 }
