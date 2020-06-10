@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersReportDay;
+use App\Models\Report\ReportDayUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,14 +19,14 @@ class UserAction extends MainAction
     protected $model;
 
     /**
-     * @param UsersReportDay $usersReportDay 游戏日报表Model.
-     * @param Request        $request        Request.
+     * @param ReportDayUser $reportDayUser 游戏日报表Model.
+     * @param Request       $request       Request.
      * @throws \Exception Exception.
      */
-    public function __construct(UsersReportDay $usersReportDay, Request $request)
+    public function __construct(ReportDayUser $reportDayUser, Request $request)
     {
         parent::__construct($request);
-        $this->model = $usersReportDay;
+        $this->model = $reportDayUser;
     }
 
     /**

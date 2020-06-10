@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Models\User;
+namespace App\Models\Report;
 
 use App\Models\BaseAuthModel;
-use App\Models\User\Logics\UsersReportDayLogics;
+use App\Models\Report\Logics\ReportDayUserLogics;
 
 /**
  * 用户日报表
  */
-class UsersReportDay extends BaseAuthModel
+class ReportDayUser extends BaseAuthModel
 {
     /**
-     * UsersReportDayLogics
+     * ReportDayUserLogics
      */
-    use UsersReportDayLogics;
+    use ReportDayUserLogics;
     
     /**
      * @var array $guarded

@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
+use App\Models\Report\ReportDayUser;
 use App\Models\Report\ReportDayUserCommission;
 use App\Models\Report\ReportDayUserGameCommission;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersCommissionConfig;
-use App\Models\User\UsersReportDay;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Console\Command;
@@ -162,7 +162,7 @@ class StatisticalCommission extends Command
         float $userRebate,
         Collection $vendorGroupProject
     ): bool {
-        $saveRebate = UsersReportDay::saveRebateReport($user, $reportDay, $userRebate);
+        $saveRebate = ReportDayUser::saveRebateReport($user, $reportDay, $userRebate);
         if ($saveRebate === false) {
             return false;
         }
@@ -219,7 +219,7 @@ class StatisticalCommission extends Command
                 }
                 //保存用户佣金
                 $commission     = abs($userWinLose) * $commissionPercentage / 100;
-                $saveCommission = UsersReportDay::saveCommissionReport($agent, $reportDay, $commission);
+                $saveCommission = ReportDayUser::saveCommissionReport($agent, $reportDay, $commission);
                 if ($saveCommission !== true) {
                     return false;
                 }

@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Models\Systems;
+namespace App\Models\Report;
 
 use App\Models\BaseModel;
-use App\Models\Systems\Logics\SystemPlatformReportDayLogics;
+use App\Models\Report\Logics\ReportDayPlatformLogics;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 代理平台日报表
  */
-class SystemPlatformReportDay extends BaseModel
+class ReportDayPlatform extends BaseModel
 {
     /**
-     * SystemPlatformReportDayLogics
+     * ReportDayPlatformLogics
      */
-    use SystemPlatformReportDayLogics;
+    use ReportDayPlatformLogics;
 
     /**
      * @var array $guarded

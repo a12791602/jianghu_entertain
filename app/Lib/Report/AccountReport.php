@@ -2,9 +2,9 @@
 
 namespace App\Lib\Report;
 
-use App\Models\Systems\SystemPlatformReportDay;
+use App\Models\Report\ReportDayPlatform;
+use App\Models\Report\ReportDayUser;
 use App\Models\User\FrontendUser;
-use App\Models\User\UsersReportDay;
 
 /**
  * 资金报表相关
@@ -23,9 +23,9 @@ class AccountReport
         //充值
         if (in_array($sign, ['recharge', 'artificial_recharge'])) {
             //用户日报表
-            UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 1);
+            ReportDayUser::saveAccountReport($user->mobile, $user->guid, $amount, 1);
             //平台日报表
-            SystemPlatformReportDay::saveReport('recharge_sum', $amount);
+            ReportDayPlatform::saveReport('recharge_sum', $amount);
         }
 
         //提现成功
@@ -33,8 +33,8 @@ class AccountReport
             return;
         }
         //用户日报表
-        UsersReportDay::saveAccountReport($user->mobile, $user->guid, $amount, 2);
+        ReportDayUser::saveAccountReport($user->mobile, $user->guid, $amount, 2);
         //平台日报表
-        SystemPlatformReportDay::saveReport('withdraw_sum', $amount);
+        ReportDayPlatform::saveReport('withdraw_sum', $amount);
     }
 }
