@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Systems\SystemPlatformReportDay;
+use App\Models\Report\ReportDayPlatform;
 use Illuminate\Database\Seeder;
 
 /**
- * Class SystemPlatformReportDaySeeder
+ * Class ReportDayPlatformSeeder
  */
-class SystemPlatformReportDaySeeder extends Seeder
+class ReportDayPlatformSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class SystemPlatformReportDaySeeder extends Seeder
      */
     public function run(): void
     {
-        SystemPlatformReportDay::insert(
+        ReportDayPlatform::insert(
             [
              [
               'platform_sign' => 'JHHY',

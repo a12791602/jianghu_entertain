@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Models\Systems\Logics;
+namespace App\Models\Report\Logics;
 
 use Carbon\Carbon;
 
-trait SystemPlatformReportDayLogics
+trait ReportDayPlatformLogics
 {
     /**
      * 生成或更新代理平台报表

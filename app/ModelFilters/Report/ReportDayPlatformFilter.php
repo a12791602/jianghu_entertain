@@ -1,13 +1,13 @@
 <?php
 
-namespace App\ModelFilters\User;
+namespace App\ModelFilters\Report;
 
 use EloquentFilter\ModelFilter;
 
 /**
- * 用户日报表
+ * 代理平台日报表
  */
-class UsersReportDayFilter extends ModelFilter
+class ReportDayPlatformFilter extends ModelFilter
 {
 
     /**
@@ -16,23 +16,12 @@ class UsersReportDayFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
-
-    /**
-     * 手机号查询
-     *
-     * @param  string $mobile 手机号码.
-     * @return self
-     */
-    public function mobile(string $mobile): self
-    {
-        return $this->where('mobile', $mobile);
-    }
+    public $relations = ['platform' => ['platform_name']];
 
     /**
      * 日期
      *
-     * @param  array $reportDay 注册时间.
+     * @param  array $reportDay 日期.
      * @return self|\Illuminate\Database\Eloquent\Builder
      */
     public function reportDay(array $reportDay)
@@ -45,17 +34,6 @@ class UsersReportDayFilter extends ModelFilter
             $eloq = $this->whereDate('day', $reportDay[0]);
         }
         return $eloq;
-    }
-
-    /**
-     * 按会员id搜索.
-     *
-     * @param string $guid 会员ID.
-     * @return self
-     */
-    public function guid(string $guid): self
-    {
-        return $this->where('guid', $guid);
     }
 
     /**

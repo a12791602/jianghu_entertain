@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\User\Logics;
+namespace App\Models\Report\Logics;
 
 use App\Models\Game\GameProject;
 use App\Models\User\FrontendUser;
@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Illuminate\Support\Facades\DB;
 
-trait UsersReportDayLogics
+trait ReportDayUserLogics
 {
 
     /**

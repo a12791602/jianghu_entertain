@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\FrontendUser;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersReportDay;
+use App\Models\Report\ReportDayUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -21,14 +21,14 @@ class UserReportAction extends MainAction
     
      /**
       * MainAction constructor.
-      * @param UsersReportDay $usersReportDay 用户日报表.
-      * @param Request        $request        Request.
-      * @throws \Exception    Exception.
+      * @param ReportDayUser $reportDayUser 用户日报表.
+      * @param Request       $request       Request.
+      * @throws \Exception Exception.
       */
-    public function __construct(UsersReportDay $usersReportDay, Request $request)
+    public function __construct(ReportDayUser $reportDayUser, Request $request)
     {
         parent::__construct($request);
-        $this->model = $usersReportDay;
+        $this->model = $reportDayUser;
     }
     /**
      * @param array $inputDatas 接收的参数.

@@ -5,9 +5,9 @@ namespace App\Http\SingleActions\Backend\Merchant\Statistic;
 use App\Http\Resources\Backend\Headquarters\Statistic\IndexResource;
 use App\Http\SingleActions\MainAction;
 use App\Lib\Constant\JHHYCnst;
+use App\Models\Report\ReportDayUser;
 use App\Models\Systems\SystemPlatform;
 use App\Models\User\FrontendUser;
-use App\Models\User\UsersReportDay;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
@@ -153,7 +153,7 @@ class IndexAction extends MainAction
      */
     public function query(string $date, string $field_sum): float
     {
-        return UsersReportDay::select(
+        return ReportDayUser::select(
                 [
                  'recharge_sum',
                  'withdraw_sum',

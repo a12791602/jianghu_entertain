@@ -4,7 +4,7 @@ namespace App\Lib\Report;
 
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
-use App\Models\User\UsersReportDay;
+use App\Models\Report\ReportDayUser;
 
 /**
  * 游戏报表相关
@@ -21,7 +21,7 @@ class GameReport
             return;
         }
         //用户日报表
-        UsersReportDay::saveGameReport($gameProject);
+        ReportDayUser::saveGameReport($gameProject);
         //游戏厂商日总报表
         ReportDayGameVendor::saveGameReport($gameProject);
     }
