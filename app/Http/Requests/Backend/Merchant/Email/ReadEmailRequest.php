@@ -27,6 +27,6 @@ class ReadEmailRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['id' => 'required|integer|min:1|exists:system_email_of_merchants,id'];
+        return ['id' => 'required|integer|min:1|exists:system_email_of_merchants,email_id'];
     }
 }
