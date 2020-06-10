@@ -185,6 +185,7 @@ class IndexResource extends BaseResource
      */
     public function toArray($request): array
     {
+        unset($request);
         $userTags = UsersTag::whereIn('id', $this->tags->tag_id)->get(['id', 'title']);
         return [
                 'id'              => $this->id,
@@ -219,7 +220,7 @@ class IndexResource extends BaseResource
                 'desc'            => $this->desc,
                 'tags'            => $userTags,
                 'author'          => $this->author->name,
-                'last_editor'     => $this->lastEditor->name,
+                'last_editor'     => $this->lastEditor->name ?? null,
                 'updated_at'      => $this->updated_at->toDatetimeString(),
                 'created_at'      => $this->created_at->toDatetimeString(),
                ];

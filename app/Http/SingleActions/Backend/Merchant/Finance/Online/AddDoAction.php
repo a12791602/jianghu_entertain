@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
 use App\Models\Finance\SystemFinanceType;
 use App\Models\Finance\SystemFinanceUserTag;
+use Arr;
 use DB;
 use Illuminate\Http\JsonResponse;
 use Log;
@@ -15,44 +16,36 @@ use Log;
 class AddDoAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
-     * @throws \RuntimeException Exception.
+     * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
+        $platformSign               = $this->currentPlatformEloq->sign;
+        $platformId                 = $this->currentPlatformEloq->id;
+        $inputData['platform_sign'] = $platformSign;
+        $inputData['author_id']     = $this->user->id;
+        $tags                       = $inputData['tags'];
+        Arr::forget($inputData, 'tags');
+        DB::beginTransaction();
+        $this->model->fill($inputData);
         try {
-            $platformSign                = $this->currentPlatformEloq->sign;
-            $platformId                  = $this->currentPlatformEloq->id;
-            $inputDatas['platform_sign'] = $platformSign;
-            $inputDatas['author_id']     = $this->user->id;
-            $tags                        = [];
-            if (isset($inputDatas['tags'])) {
-                $tags = $inputDatas['tags'];
-                unset($inputDatas['tags']);
-            }
-            DB::beginTransaction();
-            $this->model->fill($inputDatas);
             if ($this->model->save()) {
-                $tmpData = [];
-                $data    = [];
-                foreach ($tags as $tagId) {
-                    $tmpData['platform_id']       = $platformId;
-                    $tmpData['is_online']         = SystemFinanceType::IS_ONLINE_YES;
-                    $tmpData['online_finance_id'] = $this->model->id;
-                    $tmpData['tag_id']            = $tagId;
-                    $data[]                       = $tmpData;
-                }
-                if (!empty($data)) {
-                    SystemFinanceUserTag::insert($data);
-                }
+                $userTags = [
+                             'platform_id'       => $platformId,
+                             'is_online'         => SystemFinanceType::IS_ONLINE_YES,
+                             'online_finance_id' => $this->model->id,
+                             'tag_id'            => $tags ?? [],
+                            ];
+                SystemFinanceUserTag::create($userTags);
+                DB::commit();
+                return msgOut();
             }
-            DB::commit();
-            return msgOut();
         } catch (\RuntimeException $exception) {
             Log::error($exception->getMessage());
         }//end try
         DB::rollBack();
-        throw new \RuntimeException('201400');
+        throw new \Exception('201400');
     }
 }
