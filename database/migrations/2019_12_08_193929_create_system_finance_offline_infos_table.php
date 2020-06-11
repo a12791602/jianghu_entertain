@@ -24,11 +24,11 @@ class CreateSystemFinanceOfflineInfosTable extends Migration
                 $table->integer('type_id')->nullable()->default(null)->comment('所属类型id');
                 $table->integer('platform_id')->default(0)->comment('平台id');
                 $table->integer('bank_id')->default(0)->comment('银行卡id');
-                $table->string('name', 64)->nullable()->default(null)->comment('名称');
+                $table->string('name', 64)->nullable()->default(null)->index()->comment('名称');
                 $table->string('remark')->nullable()->default(null)->comment('备注');
                 $table->string('qrcode')->nullable()->default(null)->comment('二维码');
-                $table->string('account', 64)->nullable()->default(null)->comment('账户');
-                $table->string('username', 64)->nullable()->default(null)->comment('账户名');
+                $table->string('account', 64)->nullable()->default(null)->index()->comment('账户');
+                $table->string('username', 64)->nullable()->default(null)->index()->comment('账户名');
                 $table->decimal('min_amount', 18, 4)->nullable()->default(null)->comment('最小充值金额');
                 $table->decimal('max_amount', 18, 4)->nullable()->default(null)->comment('最大充值金额');
                 $table->integer('sort')->default(0)->comment('排序');

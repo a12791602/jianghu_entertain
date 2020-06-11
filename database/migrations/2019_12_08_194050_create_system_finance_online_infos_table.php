@@ -22,11 +22,11 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
-                $table->string('frontend_name', 64)->nullable()->default(null)->comment('前台名称');
+                $table->string('frontend_name', 64)->nullable()->default(null)->index()->comment('前台名称');
                 $table->string('frontend_remark')->nullable()->default(null)->comment('前台备注');
                 $table->string('backend_name', 64)->nullable()->default(null)->comment('后台名称');
                 $table->string('backend_remark')->nullable()->default(null)->comment('后台备注');
-                $table->string('platform_sign', 10)->nullable()->default(null)->comment('平台标识');
+                $table->string('platform_sign', 10)->nullable()->default(null)->index()->comment('平台标识');
                 $table->integer('channel_id')->nullable()->default(null)->comment('所属通道id');
                 $table->decimal('min_amount', 20, 2)->nullable()->default(null)->comment('最小充值金额');
                 $table->decimal('max_amount', 20, 2)->nullable()->default(null)->comment('最大充值金额');
@@ -34,14 +34,14 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->string('rebate_fee', 10)->nullable()->default(null)->comment('返点');
                 $table->string('request_url')->nullable()->default(null)->comment('请求地址');
                 $table->string('back_url')->nullable()->default(null)->comment('返回地址');
-                $table->string('merchant_code')->nullable()->default(null)->comment('商户号');
+                $table->string('merchant_code')->nullable()->default(null)->index()->comment('商户号');
                 $table->text('merchant_secret')->nullable()->default(null)->comment('商户密钥');
                 $table->text('public_key')->nullable()->default(null)->comment('第三方公钥');
                 $table->text('private_key')->nullable()->default(null)->comment('第三方私钥');
                 $table->string('app_id')->nullable()->default(null)->comment('终端号');
                 $table->string('vendor_url')->nullable()->default(null)->comment('第三方域名');
                 $table->string('level_ids')->nullable()->default(null)->comment('可见的用户层级');
-                $table->tinyInteger('status')->default(0)->comment('状态 1 启用 0 禁用');
+                $table->tinyInteger('status')->default(0)->index()->comment('状态 1 启用 0 禁用');
                 $table->integer('sort')->default(0)->comment('排序');
                 $table->tinyInteger('auto_audit')->nullable()->default(null)->comment('是否自动审核 1 是 0 否');
                 $table->string('merchant_no')->nullable()->default(null)->comment('商户编号');
