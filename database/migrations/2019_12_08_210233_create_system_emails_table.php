@@ -34,8 +34,6 @@ class CreateSystemEmailsTable extends Migration
                 $table->string('platform_sign')->default(' ')->index()->comment('平台标记');
                 $table->timestamp('created_at')->useCurrent();
                 $table->timestamp('updated_at')->useCurrent();
-                $table->index('title');
-                $table->index('platform_sign');
             },
         );
         DB::statement("ALTER TABLE `system_emails` comment '邮件信息表'");

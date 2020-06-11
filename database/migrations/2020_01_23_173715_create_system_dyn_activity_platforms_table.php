@@ -31,9 +31,6 @@ class CreateSystemDynActivityPlatformsTable extends Migration
                 $table->timestamp('start_time')->useCurrent()->comment('开始时间');
                 $table->timestamp('end_time')->useCurrent()->comment('结束时间');
                 $table->timestamps();
-                $table->index('platform_sign');
-                $table->index('activity_sign');
-                $table->index('status');
             },
         );
         DB::statement("ALTER TABLE `system_dyn_activity_platforms` comment '动态活动与平台关联表'");
