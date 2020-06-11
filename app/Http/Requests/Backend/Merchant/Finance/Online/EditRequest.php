@@ -40,38 +40,35 @@ class EditRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        if ($this->isMethod('post')) {
-            $myId   = $this->get('id');
-            $unique = new CustomUnique($this, 'system_finance_online_infos', 'platform_sign', $myId);
-            return [
-                    'id'              => 'required|exists:system_finance_online_infos,id',
-                    'channel_id'      => 'required|exists:system_finance_channels,id',
-                    'frontend_name'   => [
-                                          'required',
-                                          $unique,
-                                         ],
-                    'merchant_code'   => 'required',
-                    'merchant_no'     => 'string',
-                    'encrypt_mode'    => 'required|in:'
-                    . SystemFinanceOnlineInfo::ENCRYPT_MODE_SECRET
-                    . ',' . SystemFinanceOnlineInfo::ENCRYPT_MODE_CERT,
-                    'certificate'     => 'required_if:encrypt_mode,2|string|min:1|max:256',
-                    'merchant_secret' => 'string',
-                    'public_key'      => 'string',
-                    'private_key'     => 'string',
-                    'request_url'     => 'required|url',
-                    'vendor_url'      => 'url',
-                    'app_id'          => 'string',
-                    'tags'            => 'array',
-                    'tags.*'          => 'exists:users_tags,id',
-                    'min_amount'      => 'required|integer',
-                    'max_amount'      => 'required|integer|gt:min_amount',
-                    'handle_fee'      => 'integer',
-                    'desc'            => 'string',
-                    'backend_remark'  => 'string',
-                   ];
-        }//end if
-        return ['id' => 'required|exists:system_finance_online_infos,id'];
+        $myId   = $this->get('id');
+        $unique = new CustomUnique($this, 'system_finance_online_infos', 'platform_sign', $myId);
+        return [
+                'id'              => 'required|exists:system_finance_online_infos,id',
+                'channel_id'      => 'required|exists:system_finance_channels,id',
+                'frontend_name'   => [
+                                      'required',
+                                      $unique,
+                                     ],
+                'merchant_code'   => 'required',
+                'merchant_no'     => 'string',
+                'encrypt_mode'    => 'required|in:'
+                . SystemFinanceOnlineInfo::ENCRYPT_MODE_SECRET
+                . ',' . SystemFinanceOnlineInfo::ENCRYPT_MODE_CERT,
+                'certificate'     => 'required_if:encrypt_mode,2|string|min:1|max:256',
+                'merchant_secret' => 'string',
+                'public_key'      => 'string',
+                'private_key'     => 'string',
+                'request_url'     => 'required|url',
+                'vendor_url'      => 'url',
+                'app_id'          => 'string',
+                'tags'            => 'array',
+                'tags.*'          => 'exists:users_tags,id',
+                'min_amount'      => 'required|integer',
+                'max_amount'      => 'required|integer|gt:min_amount',
+                'handle_fee'      => 'integer',
+                'desc'            => 'string',
+                'backend_remark'  => 'string',
+               ];
     }
 
     /**
