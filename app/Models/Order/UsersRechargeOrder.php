@@ -4,6 +4,7 @@ namespace App\Models\Order;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
+use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
@@ -106,6 +107,14 @@ class UsersRechargeOrder extends BaseModel
     public function onlineInfo(): HasOne
     {
         return $this->hasOne(SystemFinanceOnlineInfo::class, 'id', 'finance_channel_id');
+    }
+
+    /**
+     * @return HasOne
+     */
+    public function offlineInfo(): HasOne
+    {
+        return $this->hasOne(SystemFinanceOfflineInfo::class, 'id', 'finance_channel_id');
     }
 
     /**

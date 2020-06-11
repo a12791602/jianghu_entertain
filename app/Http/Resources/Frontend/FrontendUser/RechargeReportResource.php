@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Frontend\FrontendUser;
 
 use App\Http\Resources\BaseResource;
+use App\Models\Order\UsersRechargeOrder;
 
 /**
  * Class RechargeReportResource
@@ -37,9 +38,24 @@ class RechargeReportResource extends BaseResource
     private $status;
 
     /**
+     * @var integer $is_online 是否线上充值.
+     */
+    private $is_online;
+
+    /**
+     * @var \Carbon\Carbon $arrived_at 到账时间.
+     */
+    private $arrived_at;
+
+    /**
      * @var \App\Models\Finance\SystemFinanceType $financeType 资金类型.
      */
     private $financeType;
+
+    /**
+     * @var \App\Models\Finance\SystemFinanceOfflineInfo $offlineInfo 线下金流信息.
+     */
+    private $offlineInfo;
 
     /**
      * @var \Carbon\Carbon $created_at 充值时间.
@@ -55,6 +71,15 @@ class RechargeReportResource extends BaseResource
     public function toArray($request): array
     {
         unset($request);
+        $account  = '';
+        $username = '';
+        $branch   = '';
+        //线下充值返回平台收款账户信息
+        if ($this->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
+            $account  = $this->offlineInfo->account ?? '';
+            $username = $this->offlineInfo->username ?? '';
+            $branch   = $this->offlineInfo->branch ?? '';
+        }
         return [
                 'order_no'          => $this->order_no,
                 'money'             => $this->money,
@@ -63,6 +88,11 @@ class RechargeReportResource extends BaseResource
                 'status'            => $this->status,
                 'finance_type_name' => $this->financeType->name ?? '',
                 'created_at'        => $this->created_at->toDateTimeString(),
+                'is_online'         => $this->is_online,
+                'account'           => $account,
+                'username'          => $username,
+                'branch'            => $branch,
+                'arrived_at'        => $this->arrived_at,
                ];
     }
 }

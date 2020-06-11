@@ -122,8 +122,11 @@ class ReportAction extends MainAction
                  'status',
                  'finance_type_id',
                  'created_at',
+                 'finance_channel_id',
+                 'is_online',
                 ],
-            )->orderBy('created_at', 'desc')
+            )->with('offlineInfo')
+            ->orderBy('created_at', 'desc')
             ->paginate($this->pageSize);
         return RechargeReportResource::collection($result);
     }
