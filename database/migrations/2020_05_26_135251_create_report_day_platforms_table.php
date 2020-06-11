@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateSystemPlatformReportDaysTable
+ * Class CreateReportDayPlatformsTable
  */
-class CreateSystemPlatformReportDaysTable extends Migration
+class CreateReportDayPlatformsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateSystemPlatformReportDaysTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'system_platform_report_days',
+            'report_day_platforms',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -31,7 +31,7 @@ class CreateSystemPlatformReportDaysTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `system_platform_report_days` comment '平台日报表'");
+        DB::statement("ALTER TABLE `report_day_platforms` comment '平台日报表'");
     }
 
     /**
@@ -41,6 +41,6 @@ class CreateSystemPlatformReportDaysTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('system_platform_report_days');
+        Schema::dropIfExists('report_day_platforms');
     }
 }

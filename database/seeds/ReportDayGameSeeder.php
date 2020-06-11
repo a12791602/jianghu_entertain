@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Game\GameReportDay;
+use App\Models\Report\ReportDayGame;
 use Illuminate\Database\Seeder;
 
 /**
- * Class GameReportDaySeeder
+ * Class ReportDayGameSeeder
  */
-class GameReportDaySeeder extends Seeder
+class ReportDayGameSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class GameReportDaySeeder extends Seeder
      */
     public function run(): void
     {
-        GameReportDay::insert(
+        ReportDayGame::insert(
             [
              [
               'id'               => 1,

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Models\Game;
+namespace App\Models\Report;
 
 use App\Models\BaseModel;
 
 /**
- * Class GameReportDay
+ * Class ReportDayGame
  *
- * @package App\Models\Game
+ * @package App\Models\Report
  */
-class GameReportDay extends BaseModel
+class ReportDayGame extends BaseModel
 {
 
     /**

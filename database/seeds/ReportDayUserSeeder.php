@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\User\UsersReportDay;
+use App\Models\Report\ReportDayUser;
 use Illuminate\Database\Seeder;
 
 /**
- * Class UsersReportDaySeeder
+ * Class ReportDayUserSeeder
  */
-class UsersReportDaySeeder extends Seeder
+class ReportDayUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class UsersReportDaySeeder extends Seeder
      */
     public function run(): void
     {
-        UsersReportDay::insert(
+        ReportDayUser::insert(
             [
              [
               'platform_sign'     => 'JHHY',

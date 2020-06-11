@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Report;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\User\UsersReportDay;
+use App\Models\Report\ReportDayUser;
 
 /**
  * 个人报表-列表
@@ -14,7 +14,7 @@ class UserRequest extends BaseFormRequest
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [UsersReportDay::class];
+    protected $dependentModels = [ReportDayUser::class];
 
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】

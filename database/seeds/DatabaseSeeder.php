@@ -77,9 +77,9 @@ class DatabaseSeeder extends Seeder
              FrontendUsersAccountsReportSeeder::class,
              NoticeCarouselSeeder::class,
              NoticeMarqueeSeeder::class,
-             GameReportDaySeeder::class,
+             ReportDayGameSeeder::class,
              GameVendorReportDaySeeder::class,
-             UsersReportDaySeeder::class,
+             ReportDayUserSeeder::class,
              UsersCommissionConfigSeeder::class,
              UsersCommissionConfigDetailSeeder::class,
              ReportDayUserCommissionSeeder::class,
@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
              ActivitiesConfigRegFirstimeRandomSeeder::class,
              ActivitiesDynPlatformSeeder::class,
              ReportDayGameVendorSeeder::class,
-             SystemPlatformReportDaySeeder::class,
+             ReportDayPlatformSeeder::class,
             ],
         );
     }

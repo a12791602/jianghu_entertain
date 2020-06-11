@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Systems\SystemPlatformReportDay;
+use App\Models\Report\ReportDayPlatform;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,14 +19,14 @@ class PlatformAction extends MainAction
     protected $model;
 
     /**
-     * @param SystemPlatformReportDay $systemPlatformReportDay 公司日报表Model.
-     * @param Request                 $request                 Request.
+     * @param ReportDayPlatform $reportDayPlatform 公司日报表Model.
+     * @param Request           $request           Request.
      * @throws \Exception Exception.
      */
-    public function __construct(SystemPlatformReportDay $systemPlatformReportDay, Request $request)
+    public function __construct(ReportDayPlatform $reportDayPlatform, Request $request)
     {
         parent::__construct($request);
-        $this->model = $systemPlatformReportDay;
+        $this->model = $reportDayPlatform;
     }
 
     /**
