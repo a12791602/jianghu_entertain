@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Report;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Game\GameVendorReportDay;
+use App\Models\Report\ReportDayPlatformGameVendor;
 
 /**
  * 游戏报表-列表
@@ -14,7 +14,7 @@ class GameRequest extends BaseFormRequest
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [GameVendorReportDay::class];
+    protected $dependentModels = [ReportDayPlatformGameVendor::class];
 
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
