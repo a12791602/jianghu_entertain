@@ -51,10 +51,6 @@ class CreateSystemFinanceOnlineInfosTable extends Migration
                 $table->integer('author_id')->default(0)->comment('创建人id');
                 $table->integer('last_editor_id')->default(0)->comment('最后编辑人id');
                 $table->nullableTimestamps();
-                $table->index('frontend_name');
-                $table->index('platform_sign');
-                $table->index('merchant_code');
-                $table->index('status');
             },
         );
         DB::statement("ALTER TABLE `system_finance_online_infos` comment '线上金流详情表'");
