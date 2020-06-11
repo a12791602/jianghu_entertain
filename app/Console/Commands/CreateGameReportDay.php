@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Game\GameProject;
 use App\Models\Game\GameVendorReportDay;
-use App\Models\Report\ReportDayGame;
+use App\Models\Report\ReportDayPlatformGame;
 use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
@@ -92,7 +92,7 @@ class CreateGameReportDay extends Command
                                  'commission'       => $commissionSum,
                                  'day'              => $createAt,
                                 ];
-            $reportDayGame    = new ReportDayGame();
+            $reportDayGame    = new ReportDayPlatformGame();
             $reportDayGame->fill($addData);
             DB::beginTransaction();
             if ($reportDayGame->save() === false) {

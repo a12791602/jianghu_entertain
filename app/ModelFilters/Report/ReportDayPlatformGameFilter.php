@@ -5,11 +5,11 @@ namespace App\ModelFilters\Report;
 use EloquentFilter\ModelFilter;
 
 /**
- * Class ReportDayGameFilter
+ * Class ReportDayPlatformGameFilter
  *
  * @package App\ModelFilters\Report
  */
-class ReportDayGameFilter extends ModelFilter
+class ReportDayPlatformGameFilter extends ModelFilter
 {
 
     /**
