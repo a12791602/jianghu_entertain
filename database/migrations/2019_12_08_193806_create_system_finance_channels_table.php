@@ -24,8 +24,8 @@ class CreateSystemFinanceChannelsTable extends Migration
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->integer('type_id')->nullable()->default(null)->comment('所属类型id');
                 $table->integer('vendor_id')->nullable()->default(null)->comment('所属厂商id');
-                $table->string('name', 64)->nullable()->default(null)->comment('名称');
-                $table->string('sign', 64)->nullable()->default(null)->comment('标识');
+                $table->string('name', 64)->nullable()->default(null)->index()->comment('名称');
+                $table->string('sign', 64)->nullable()->default(null)->index()->comment('标识');
                 $table->tinyInteger('request_mode')->nullable()->default(null)->comment('请求方式 1 jump 0 json');
                 $table->string('request_url')->nullable()->default(null)->comment('回调地址');
                 $table->string('banks_code')->nullable()->default(null)->comment('银行编号');
