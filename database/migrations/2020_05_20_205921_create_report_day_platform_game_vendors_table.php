@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateGameVendorReportDaysTable
+ * Class CreateReportDayPlatformGameVendorsTable
  */
-class CreateGameVendorReportDaysTable extends Migration
+class CreateReportDayPlatformGameVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateGameVendorReportDaysTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'game_vendor_report_days',
+            'report_day_platform_game_vendors',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -34,7 +34,7 @@ class CreateGameVendorReportDaysTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `game_vendor_report_days` comment '游戏厂商日报表'");
+        DB::statement("ALTER TABLE `report_day_platform_game_vendors` comment '代理平台游戏厂商日报表'");
     }
 
     /**
@@ -44,6 +44,6 @@ class CreateGameVendorReportDaysTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('game_vendor_report_days');
+        Schema::dropIfExists('report_day_platform_game_vendors');
     }
 }

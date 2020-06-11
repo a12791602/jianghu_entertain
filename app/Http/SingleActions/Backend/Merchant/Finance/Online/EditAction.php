@@ -2,10 +2,11 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
-use App\Models\Finance\SystemFinanceType;
+use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceUserTag;
+use Arr;
+use DB;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Class EditAction
@@ -14,58 +15,33 @@ use Illuminate\Support\Facades\DB;
 class EditAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \Exception Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        $method = strtolower($inputDatas['method']);
-        if ($method === 'get') {
-            $userTags = SystemFinanceUserTag::where('is_online', SystemFinanceType::IS_ONLINE_YES)
-                ->where('online_finance_id', $inputDatas['id'])->get(['tag_id']);
-            $result   = msgOut($userTags);
-            return $result;
+        $inputData['platform_sign']  = $this->currentPlatformEloq->sign;
+        $inputData['last_editor_id'] = $this->user->id;
+        $tags                        = $inputData['tags'] ?? null;
+        Arr::forget($inputData, ['tags']);
+        $model = $this->model->find($inputData['id']);
+        if (!$model instanceof SystemFinanceOnlineInfo) {
+            throw new \Exception('201401');
         }
-        $flag = false;
+        $condition = [
+                      'platform_id'       => $this->currentPlatformEloq->id,
+                      'online_finance_id' => $inputData['id'],
+                     ];
+        DB::beginTransaction();
         try {
-            $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-            $inputDatas['author_id']     = $this->user->id;
-            $tags                        = [];
-            if (isset($inputDatas['tags'])) {
-                $tags = $inputDatas['tags'];
-                unset($inputDatas['tags']);
-            }
-            unset($inputDatas['method']);
-            $model = $this->model->find($inputDatas['id']);
-            DB::beginTransaction();
-            $model->fill($inputDatas);
-            if ($model->save()) {
-                $tmpData = [];
-                $data    = [];
-                foreach ($tags as $tagId) {
-                    $tmpData['platform_id']       = $this->currentPlatformEloq->id;
-                    $tmpData['is_online']         = SystemFinanceType::IS_ONLINE_YES;
-                    $tmpData['online_finance_id'] = $inputDatas['id'];
-                    $tmpData['tag_id']            = $tagId;
-                    $data[]                       = $tmpData;
-                }
-                if (!empty($data)) {
-                    SystemFinanceUserTag::where('platform_id', $this->currentPlatformEloq->id)
-                        ->where('online_finance_id', $inputDatas['id'])
-                        ->where('is_online', SystemFinanceType::IS_ONLINE_YES)
-                        ->delete();
-                    SystemFinanceUserTag::insert($data);
-                }
-                $flag = true;
+            if ($model->update($inputData)) {
+                SystemFinanceUserTag::where($condition)->update(['tag_id' => $tags]);
+                DB::commit();
+                return msgOut();
             }
         } catch (\Throwable $exception) {
-            $flag = false;
-        }
-        if ($flag) {
-            DB::commit();
-            $result = msgOut();
-            return $result;
+            \Log::error($exception->getMessage());
         }
         DB::rollBack();
         throw new \Exception('201401');

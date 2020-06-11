@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\Report\ReportDayGame;
+use App\Models\Report\ReportDayPlatformGameVendor;
 use Illuminate\Database\Seeder;
 
 /**
- * Class ReportDayGameSeeder
+ * Class ReportDayPlatformGameVendorsSeeder
  */
-class ReportDayGameSeeder extends Seeder
+class ReportDayPlatformGameVendorsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,17 +15,16 @@ class ReportDayGameSeeder extends Seeder
      */
     public function run(): void
     {
-        ReportDayGame::insert(
+        ReportDayPlatformGameVendor::insert(
             [
              [
               'id'               => 1,
               'platform_sign'    => 'JHHY',
-              'game_sign'        => '10002',
-              'game_name'        => '射兔神手',
               'game_vendor_sign' => 'VR',
-              'bet_money'        => 171.0000,
-              'effective_bet'    => 45.0000,
-              'win_money'        => 126.0000,
+              'game_vendor_name' => 'VR视讯',
+              'bet_money'        => 171,
+              'effective_bet'    => 45,
+              'win_money'        => 126,
               'our_net_win'      => 0,
               'commission'       => 0,
               'day'              => '2020-05-08',

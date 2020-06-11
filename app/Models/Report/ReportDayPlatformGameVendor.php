@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models\Game;
+namespace App\Models\Report;
 
 use App\Models\BaseModel;
-use App\Models\Game\Logics\GameVendorReportDayLogics;
+use App\Models\Report\Logics\ReportDayPlatformGameVendorLogics;
 use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class GameVendorReportDay
+ * Class ReportDayPlatformGameVendor
  *
- * @package App\Models\Game
+ * @package App\Models\Report
  */
-class GameVendorReportDay extends BaseModel
+class ReportDayPlatformGameVendor extends BaseModel
 {
     /**
-     * GameVendorReportDayLogics
+     * ReportDayPlatformGameVendorLogics
      */
-    use GameVendorReportDayLogics;
+    use ReportDayPlatformGameVendorLogics;
 
     /**
      * @var array

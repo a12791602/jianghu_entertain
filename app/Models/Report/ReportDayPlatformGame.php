@@ -5,11 +5,11 @@ namespace App\Models\Report;
 use App\Models\BaseModel;
 
 /**
- * Class ReportDayGame
+ * Class ReportDayPlatformGame
  *
  * @package App\Models\Report
  */
-class ReportDayGame extends BaseModel
+class ReportDayPlatformGame extends BaseModel
 {
 
     /**

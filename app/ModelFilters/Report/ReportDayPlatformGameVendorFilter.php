@@ -1,15 +1,15 @@
 <?php
 
-namespace App\ModelFilters\Game;
+namespace App\ModelFilters\Report;
 
 use EloquentFilter\ModelFilter;
 
 /**
- * Class GameVendorReportDayFilter
+ * Class ReportDayPlatformGameVendorFilter
  *
- * @package App\ModelFilters\Game
+ * @package App\ModelFilters\Report
  */
-class GameVendorReportDayFilter extends ModelFilter
+class ReportDayPlatformGameVendorFilter extends ModelFilter
 {
 
     /**

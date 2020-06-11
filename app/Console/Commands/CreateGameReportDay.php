@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Game\GameProject;
-use App\Models\Game\GameVendorReportDay;
-use App\Models\Report\ReportDayGame;
+use App\Models\Report\ReportDayPlatformGame;
+use App\Models\Report\ReportDayPlatformGameVendor;
 use App\Models\Systems\SystemPlatform;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
@@ -92,14 +92,14 @@ class CreateGameReportDay extends Command
                                  'commission'       => $commissionSum,
                                  'day'              => $createAt,
                                 ];
-            $reportDayGame    = new ReportDayGame();
+            $reportDayGame    = new ReportDayPlatformGame();
             $reportDayGame->fill($addData);
             DB::beginTransaction();
             if ($reportDayGame->save() === false) {
                 saveLog('game', '生成游戏日报表失败，平台：' . $projectItem->platform_sign . '|' . $createAt->format('Y-m-d'));
                 continue;
             }
-            $saveVendorReport = GameVendorReportDay::saveData(
+            $saveVendorReport = ReportDayPlatformGameVendor::saveData(
                 $projectItem->platform_sign,
                 $createAt,
                 $projectItem->game_vendor_sign,

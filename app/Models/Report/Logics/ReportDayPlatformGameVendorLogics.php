@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Models\Game\Logics;
+namespace App\Models\Report\Logics;
 
 use Carbon\CarbonInterface;
 
 /**
- * trait GameVendorReportDayLogics
+ * trait ReportDayPlatformGameVendorLogics
  * @package App\Models\User\Logics
  */
-trait GameVendorReportDayLogics
+trait ReportDayPlatformGameVendorLogics
 {
     /**
      * @param  string          $platformSign   平台标识.
