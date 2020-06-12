@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\Request;
 
 /**

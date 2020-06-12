@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Models\Order;
+namespace App\Models\User;
 
 use App\Models\Admin\MerchantAdminUser;
 use App\Models\BaseModel;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
-use App\Models\User\FrontendUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 

@@ -54,17 +54,4 @@ class SystemFinanceVendor extends BaseModel
     {
         return $this->hasOne(SystemIpWhiteList::class, 'finance_vendor_id', 'id');
     }
-
-    /**
-     * @param array $value Value.
-     * @return void
-     */
-    public function setWhitelistIpsAttribute(array $value): void
-    {
-        if (!empty($value)) {
-            $this->attributes['whitelist_ips'] = json_encode($value);
-        } else {
-            $this->attributes['whitelist_ips'] = null;
-        }
-    }
 }

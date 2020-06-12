@@ -2,7 +2,13 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\Online;
 
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\Finance\SystemFinanceChannel;
+use App\Models\Finance\SystemFinanceOnlineInfo;
+use App\Models\Finance\SystemFinanceVendor;
+use App\Models\Systems\SystemIpWhiteList;
+use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
+use App\Models\User\UsersRechargeOrder;
 use App\Services\FactoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,7 +31,7 @@ class CallbackAction
     /**
      * 请求的ip
      *
-     * @var string $remoteIp
+     * @var string|null $remoteIp
      */
     protected $remoteIp;
 
@@ -75,14 +81,9 @@ class CallbackAction
             if (!$result) {
                 return '403';
             }
-            $vendor  = $this->orderInfo->onlineInfo->channel->vendor->sign; //第三方厂商
-            $channel = $this->orderInfo->onlineInfo->channel->sign; //通道
-            $result  = FactoryService::getInstence()->generatePay($vendor, $channel)
-                ->setPreDataOfVerify($this->orderInfo)->verify($this->inputDatas);
-            //如果第三方返回的金额大于本系统的订单金额, 对不起, 为了安全, 按掉单处理.
-            if ($result['realMoney'] > $this->orderInfo->money) {
-                $this->_writeLog('finance-callback-system', $this->order, '回调的上分金额大于订单金额!');
-                return $result['backStr'];
+            $result = $this->handleVerify();
+            if (!$result) {
+                return '500';
             }
             if ($result['flag']) {
                 DB::beginTransaction();
@@ -90,16 +91,26 @@ class CallbackAction
                 $this->orderInfo->real_money  = $result['realMoney'];
                 $this->orderInfo->platform_no = $result['merchantOrderNo'];
                 $saveRes                      = $this->orderInfo->save();
+                $user                         = $this->orderInfo->user;
+                if (!$user instanceof FrontendUser) {
+                    $this->_writeLog('finance-callback-data', $order, '未找到对应用户');
+                    return '500';
+                }
+                $account = $user->account;
+                if (!$account instanceof FrontendUsersAccount) {
+                    $this->_writeLog('finance-callback-data', $order, '对应用户账号异常');
+                    return '500';
+                }
                 if ($saveRes) {
-                    $this->orderInfo->user->account->operateAccount(
-                        ['amount' => $this->orderInfo->arrive_money],
+                    $account->operateAccount(
                         'recharge',
+                        ['amount' => $this->orderInfo->arrive_money],
                     );
                     DB::commit();
                 } else {
                     DB::rollBack();
                 }
-            }
+            }//end if
             return $result['backStr'];
         } catch (\Throwable $exception) {
             $data = [
@@ -110,7 +121,42 @@ class CallbackAction
             $this->_writeLog('finance-callback-system', $this->order, '系统错误!', $data);
             DB::rollBack();
             return '500';
+        }//end try
+    }
+
+    /**
+     * 检查数据
+     * @return mixed
+     */
+    protected function handleVerify()
+    {
+        $onlineInfo = $this->orderInfo->onlineInfo;
+        if (!$onlineInfo instanceof SystemFinanceOnlineInfo) {
+            $this->_writeLog('finance-callback-data', $this->order, '未找到对应渠道');
+            return false;
         }
+        $channel = $onlineInfo->channel;
+        if (!$channel instanceof SystemFinanceChannel) {
+            $this->_writeLog('finance-callback-data', $this->order, '未找到对应通道');
+            return false;
+        }
+        $vendor = $channel->vendor;
+        if (!$vendor instanceof SystemFinanceVendor) {
+            $this->_writeLog('finance-callback-data', $this->order, '未找到对应厂商');
+            return false;
+        }
+        $vendor  = $vendor->sign; //第三方厂商
+        $channel = $channel->sign; //通道
+        $result  = FactoryService::getInstence()
+            ->generatePay($vendor, $channel)
+            ->setPreDataOfVerify($this->orderInfo)
+            ->verify($this->inputDatas);
+        //如果第三方返回的金额大于本系统的订单金额, 对不起, 为了安全, 按掉单处理.
+        if ($result['realMoney'] > $this->orderInfo->money) {
+            $this->_writeLog('finance-callback-data', $this->order, '回调的上分金额大于订单金额!');
+            return false;
+        }
+        return $result;
     }
 
     /**
@@ -137,7 +183,27 @@ class CallbackAction
             $this->_writeLog('finance-callback-system', $this->order, '该订单已关闭!', $orderInfo->toArray());
             return false;
         }
-        $whiteListIps = json_decode($orderInfo->onlineInfo->channel->vendor->whitelist_ips, true);
+        $onlineInfo = $this->orderInfo->onlineInfo;
+        if (!$onlineInfo instanceof SystemFinanceOnlineInfo) {
+            $this->_writeLog('finance-callback-system', $this->order, '未找到对应渠道');
+            return false;
+        }
+        $channel = $onlineInfo->channel;
+        if (!$channel instanceof SystemFinanceChannel) {
+            $this->_writeLog('finance-callback-system', $this->order, '未找到对应通道');
+            return false;
+        }
+        $vendor = $channel->vendor;
+        if (!$vendor instanceof SystemFinanceVendor) {
+            $this->_writeLog('finance-callback-system', $this->order, '未找到对应厂商');
+            return false;
+        }
+        $whiteList = $vendor->whiteList;
+        if (!$whiteList instanceof SystemIpWhiteList) {
+            $this->_writeLog('finance-callback-system', $this->order, '未找到对应白名单');
+            return false;
+        }
+        $whiteListIps = $whiteList->ips;
         //检测ip是否在自己厂商的ip白名单内
         if (empty($whiteListIps) || !in_array($this->remoteIp, $whiteListIps)) {
             $data = [
@@ -166,6 +232,6 @@ class CallbackAction
         string $msgs,
         array $data = []
     ): void {
-        Log::channel($channel)->info(['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
+        Log::channel($channel)->info('回调日志', ['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
     }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Finance\Pay\Core;
 
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Support\Facades\Log;
 
 /**

@@ -6,9 +6,10 @@ use App\Events\PlatformNoticeEvent;
 use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\MainAction;
 use App\Models\Notification\MerchantNotificationStatistic;
-use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
+use App\Models\User\FrontendUsersBankCard;
+use App\Models\User\UsersRechargeOrder;
 use App\Models\User\UsersWithdrawOrder;
 use Arr;
 use Illuminate\Http\JsonResponse;
@@ -29,25 +30,58 @@ class WithdrawalAction extends MainAction
      */
     public function execute(WithdrawalRequest $request): JsonResponse
     {
-        $validated      = $request->validated();
-        $user           = $this->user;
-        $amount         = (float) $validated['amount'];
-        $balance        = $this->_balance($amount);
+        $inputData = $request->validated();
+        $user      = $this->user;
+        if (!$user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
+        $account = $user->account;
+        if (!$account instanceof FrontendUsersAccount) {
+            throw new \RuntimeException('203001');
+        }
+        $bankCard = $user->bankCard()->where('id', $inputData['bank_id'])->first();
+        if (!$bankCard instanceof FrontendUsersBankCard) {
+            throw new \RuntimeException('100907');//请先绑定银行卡
+        }
+        $result = $this->handleOrderItem($user, $account, $bankCard, $inputData);
+        if (!$result) {
+            throw new \RuntimeException('100905');
+        }
+        return msgOut([], '100903');
+    }
+
+    /**
+     * @param FrontendUser          $user      FrontendUser.
+     * @param FrontendUsersAccount  $account   Account.
+     * @param FrontendUsersBankCard $bankCard  BankCard.
+     * @param array                 $inputData InputData.
+     * @return boolean
+     */
+    protected function handleOrderItem(
+        FrontendUser $user,
+        FrontendUsersAccount $account,
+        FrontendUsersBankCard $bankCard,
+        array $inputData
+    ): bool {
+        //提款次数处理
         $num_withdrawal = UsersWithdrawOrder::select('id')->where('user_id', $user->id)
             ->whereDate('created_at', date('Y-m-d'))->count();
-        $this->_dayWithdrawNum($num_withdrawal);
+        $this->_dayWithdrawNum($user->platform_sign, $num_withdrawal);
         $total_withdrawal = UsersWithdrawOrder::where('user_id', $user->id)
             ->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('amount');
-        $num_top_up       = UsersRechargeOrder::select('id')
+        //充值次数处理
+        $num_top_up = UsersRechargeOrder::select('id')
             ->where('status', UsersRechargeOrder::STATUS_SUCCESS)->count();
-        $account_snapshot = $user->bankCard()->where('id', $validated['bank_id'])->first();
-        $audit_fee        = $this->_audit($this->user, $amount);
-        $item             = $this->_orderItem(
+        //稽核处理
+        $amount    = (float) $inputData['amount'];
+        $balance   = $account->balance;
+        $audit_fee = $this->_audit($user, $amount);
+        $item      = $this->_orderItem(
             $amount,
-            $account_snapshot->type,
+            $bankCard->type,
             $user->mobile,
             $balance,
-            Arr::only($account_snapshot->toArray(), ['owner_name', 'card_number', 'branch']),
+            Arr::only($bankCard->toArray(), ['owner_name', 'card_number', 'branch']),
             (float) $total_withdrawal + $balance,
             $num_withdrawal,
             $num_top_up,
@@ -59,11 +93,11 @@ class WithdrawalAction extends MainAction
                       'user_id' => $user->id,
                       'amount'  => $amount,
                      ];
-            $user->account->operateAccount('withdraw_frozen', $param);
+            $account->operateAccount('withdraw_frozen', $param);
             broadcast(new PlatformNoticeEvent('notice_of_withdraw', '', $order->toArray()));
             merchantNotificationIncrement(MerchantNotificationStatistic::WITHDRAWAL_ORDER);
             $this->_redis($amount);
-            return msgOut([], '100903');
+            return true;
         } catch (\Throwable $exception) {
             $logData = [
                         'msg'  => '发起提现失败!',
@@ -71,8 +105,8 @@ class WithdrawalAction extends MainAction
                        ];
             Log::channel('withdrawal-system')
                 ->info(json_encode($logData, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT, 512));
+            return false;
         }//end try
-        throw new \RuntimeException('100905');
     }
 
     /**
@@ -83,12 +117,16 @@ class WithdrawalAction extends MainAction
      */
     private function _redis(float $amount): void
     {
+        $user = $this->user;
+        if (!$user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
         $time  = mktime(23, 59, 59) - mktime((int) date('H'), (int) date('i'), (int) date('s'));
         $redis = Redis::connection();
 
         $withdraw_cache = json_encode(
             [
-             'user_id' => $this->user->id,
+             'user_id' => $user->id,
              'amount'  => $amount,
             ],
             JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT,
@@ -96,23 +134,8 @@ class WithdrawalAction extends MainAction
         );
         $redis->rpush('headquarters_statistics:withdrawal', $withdraw_cache);
         $redis->expire('headquarters_statistics:withdrawal', $time);
-        $redis->rpush('merchant_statistics_' . $this->user->platform_sign . ':withdrawal', $withdraw_cache);
-        $redis->expire('merchant_statistics_' . $this->user->platform_sign . ':withdrawal', $time);
-    }
-
-    /**
-     * Check if the balance is enough to withdraw.
-     * @param float $amount Withdrawal Amount.
-     * @return float
-     * @throws \RuntimeException RuntimeException.
-     */
-    private function _balance(float $amount): float
-    {
-        $balance = $this->user->account->balance;
-        if ($amount > $balance) {
-            throw new \RuntimeException('100906');
-        }
-        return $balance;
+        $redis->rpush('merchant_statistics_' . $user->platform_sign . ':withdrawal', $withdraw_cache);
+        $redis->expire('merchant_statistics_' . $user->platform_sign . ':withdrawal', $time);
     }
 
     /**
@@ -133,13 +156,14 @@ class WithdrawalAction extends MainAction
 
     /**
      * 检查每日可提现次数.
+     * @param string  $platform_sign  平台标识.
      * @param integer $num_withdrawal Num_withdrawal.
      * @return integer
      * @throws \RuntimeException RuntimeException.
      */
-    private function _dayWithdrawNum(int $num_withdrawal): int
+    private function _dayWithdrawNum(string $platform_sign, int $num_withdrawal): int
     {
-        $day_withdraw_num = (int) configure($this->user->platform_sign, 'day_withdraw_num');
+        $day_withdraw_num = (int) configure($platform_sign, 'day_withdraw_num');
         if ($num_withdrawal >= $day_withdraw_num) {
             throw new \RuntimeException('100904');
         }

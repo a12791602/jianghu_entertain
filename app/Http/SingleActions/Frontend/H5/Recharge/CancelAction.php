@@ -3,7 +3,8 @@
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\FrontendUser;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -15,10 +16,13 @@ class CancelAction extends MainAction
     /**
      * @param array $inputDatas InputDatas.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (! $this->user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
         $where = [
                   'platform_sign' => $this->user->platform_sign,
                   'order_no'      => $inputDatas['order_no'],
@@ -26,16 +30,16 @@ class CancelAction extends MainAction
                  ];
         $order = UsersRechargeOrder::where($where)->first();
         if (!$order) {
-            throw new \Exception('101002');
+            throw new \RuntimeException('101002');
         }
         if ($order->status !== UsersRechargeOrder::STATUS_INIT) {
-            throw new \Exception('101000');
+            throw new \RuntimeException('101000');
         }
 
         $order->status = UsersRechargeOrder::STATUS_CANCEL;
         if ($order->save()) {
             return msgOut();
         }
-        throw new \Exception('101001');
+        throw new \RuntimeException('101001');
     }
 }

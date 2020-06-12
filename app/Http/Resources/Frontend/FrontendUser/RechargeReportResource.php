@@ -3,7 +3,7 @@
 namespace App\Http\Resources\Frontend\FrontendUser;
 
 use App\Http\Resources\BaseResource;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 
 /**
  * Class RechargeReportResource
