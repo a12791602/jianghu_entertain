@@ -193,12 +193,7 @@ class RechargeAction extends MainAction
         if (!$result) {
             throw new \Exception('100303');
         }
-        $lastId = $usersRechargeOrderModel->id;
-        $order  = UsersRechargeOrder::find($lastId);
-        if (!$order) {
-            throw new \Exception('100303');
-        }
-        return $order;
+        return $usersRechargeOrderModel;
     }
 
     /**

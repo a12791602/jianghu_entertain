@@ -87,7 +87,7 @@ abstract class Base implements Payment
         if (isset($data->onlineInfo->vendor_url)) {
             $this->payInfo['callbackUrl'] = $data->onlineInfo->vendor_url;
         }
-        $this->payInfo['redirectUrl']     = app('request')->getSchemeAndHttpHost();
+        $this->payInfo['redirectUrl']     = request()->headers->get('referer');
         $this->payInfo['appId']           = $data->onlineInfo->app_id;
         $this->payInfo['user']            = $data->platform_sign . '_' . $data->user->username;
         $this->payInfo['clientIp']        = $data->client_ip;
