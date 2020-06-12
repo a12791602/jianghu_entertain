@@ -3,6 +3,7 @@
 namespace App\Models\Report;
 
 use App\Models\BaseModel;
+use App\Models\Report\Logics\ReportDayPlatformGameLogics;
 
 /**
  * Class ReportDayPlatformGame
@@ -11,6 +12,10 @@ use App\Models\BaseModel;
  */
 class ReportDayPlatformGame extends BaseModel
 {
+    /**
+     * ReportDayPlatformGameLogics
+     */
+    use ReportDayPlatformGameLogics;
 
     /**
      * @var array
