@@ -85,9 +85,9 @@ trait ReportDayUserLogics
 
     /**
      * @param  GameProject $gameProject 游戏注单.
-     * @return void
+     * @return boolean
      */
-    public static function saveGameReport(GameProject $gameProject): void
+    public static function saveGameReport(GameProject $gameProject): bool
     {
         $reportAt   = $gameProject->created_at->format('Y-m-d');
         $userReport = self::getUserReport(
@@ -122,16 +122,11 @@ trait ReportDayUserLogics
             $userReport->commission        += $gameProject->commission;
             $userReport->game_win_sum      += $gameProject->win_money;
         }//end if
-        DB::beginTransaction();
         if ($userReport->save() === false) {
-            DB::rollback();
-            return;
+            return false;
         }
         $gameProject->is_counted_report = GameProject::COUNTED_REPORT_YES;
-        if ($gameProject->save() === false) {
-            DB::rollback();
-        }
-        DB::commit();
+        return $gameProject->save();
     }
 
     /**

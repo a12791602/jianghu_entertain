@@ -6,7 +6,8 @@ use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\FrontendUser;
+use App\Models\User\UsersRechargeOrder;
 use App\Services\FactoryService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
@@ -197,10 +198,13 @@ class RechargeAction extends MainAction
     /**
      * 生成订单数据
      * @return mixed[]
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     private function _generateOrderData(): array
     {
+        if (! $this->user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
         $data                       = [];
         $platformSign               = $this->currentPlatformEloq->sign;
         $data['platform_sign']      = $platformSign;
@@ -209,7 +213,7 @@ class RechargeAction extends MainAction
         $data['finance_channel_id'] = $this->inputData['channel_id'];
         $data['money']              = $this->inputData['money'];
         $data['top_up_remark']      = $this->inputData['top_up_remark'] ?? null;
-        $data['snap_user_level']    = $this->user->specificInfo->level;
+        $data['snap_user_level']    = $this->user->specificInfo->level ?? 0;
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $data['finance_type_id']    = $this->model->channel->type_id;
             $data['handling_money']     = $this->model->handle_fee;
@@ -288,9 +292,13 @@ class RechargeAction extends MainAction
      * @param SystemFinanceOfflineInfo $offlineInfo SystemFinanceOfflineInfo.
      * @return boolean
      * @throws AccessDeniedException AccessDeniedException.
+     * @throws \RuntimeException Exception.
      */
     protected function authorize(SystemFinanceOfflineInfo $offlineInfo): bool
     {
+        if (! $this->user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
         $result = in_array($this->user->user_tag_id, optional($offlineInfo->tags)->tag_id);
         if (!$result) {
             throw new AccessDeniedException('This action is unauthorized.', 403);

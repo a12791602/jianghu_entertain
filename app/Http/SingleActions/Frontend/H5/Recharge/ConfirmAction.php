@@ -4,7 +4,8 @@ namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
 use App\Http\SingleActions\MainAction;
 use App\Models\Notification\MerchantNotificationStatistic;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\FrontendUser;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Redis;
 
@@ -17,10 +18,13 @@ class ConfirmAction extends MainAction
     /**
      * @param array $inputData InputData.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputData): JsonResponse
     {
+        if (! $this->user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
         $where = [
                   'platform_sign' => $this->user->platform_sign,
                   'order_no'      => $inputData['order_no'],
@@ -28,10 +32,10 @@ class ConfirmAction extends MainAction
                  ];
         $order = UsersRechargeOrder::where($where)->first();
         if (!$order) {
-            throw new \Exception('101005');
+            throw new \RuntimeException('101005');
         }
         if ($order->status !== UsersRechargeOrder::STATUS_INIT) {
-            throw new \Exception('101003');
+            throw new \RuntimeException('101003');
         }
         if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
             $order->bank          = $inputData['bank'] ?? null;
@@ -62,6 +66,6 @@ class ConfirmAction extends MainAction
             $redis->expire('merchant_statistics_' . $this->user->platform_sign . ':top_up', $time);
             return msgOut();
         }//end if
-        throw new \Exception('101004');
+        throw new \RuntimeException('101004');
     }
 }

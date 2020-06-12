@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 
 use App\Models\Finance\SystemFinanceType;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -20,6 +20,9 @@ class CheckRefuseAction extends BaseAction
     public function execute(array $inputDatas): JsonResponse
     {
         $order = $this->model::find($inputDatas['id']);
+        if (!$order instanceof $this->model) {
+            throw new \Exception('202305');
+        }
         if ($order->is_online !== SystemFinanceType::IS_ONLINE_NO) {
             throw new \Exception('202300');
         }
@@ -29,8 +32,7 @@ class CheckRefuseAction extends BaseAction
         $order->status   = UsersRechargeOrder::STATUS_REFUSE;
         $order->admin_id = $this->user->id;
         if ($order->save()) {
-            $msgOut = msgOut();
-            return $msgOut;
+            return msgOut();
         }
         throw new \Exception('202304');
     }

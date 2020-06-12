@@ -5,7 +5,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Notification;
 use App\Http\Resources\Backend\Merchant\Notification\IndexResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Email\SystemEmailOfMerchant;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 

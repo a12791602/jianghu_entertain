@@ -5,9 +5,9 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\RechargeOrder;
 use App\Events\FrontendDynamicInfoEvent;
 use App\Http\Resources\Frontend\FrontendUser\DynamicInformationResource;
 use App\Models\Finance\SystemFinanceType;
-use App\Models\Order\UsersRechargeOrder;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 
@@ -59,8 +59,8 @@ class CheckPassAction extends BaseAction
     }
 
     /**
-     * @param UsersRechargeOrder $order     RechargeOrder.
-     * @param \RuntimeException  $exception Exception.
+     * @param \App\Models\User\UsersRechargeOrder $order     RechargeOrder.
+     * @param \RuntimeException                   $exception Exception.
      * @return void
      */
     protected function packLogData(UsersRechargeOrder $order, \RuntimeException $exception): void

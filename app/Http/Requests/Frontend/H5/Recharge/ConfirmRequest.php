@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Frontend\H5\Recharge;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Order\UsersRechargeOrder;
+use App\Models\User\UsersRechargeOrder;
 
 /**
  * Class ConfirmRequest
