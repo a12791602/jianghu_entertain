@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ModelFilters\Order;
+namespace App\ModelFilters\User;
 
 use EloquentFilter\ModelFilter;
 
