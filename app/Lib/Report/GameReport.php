@@ -4,6 +4,8 @@ namespace App\Lib\Report;
 
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
+use App\Models\Report\ReportDayPlatformGame;
+use App\Models\Report\ReportDayPlatformGameVendor;
 use App\Models\Report\ReportDayUser;
 
 /**
@@ -13,16 +15,29 @@ class GameReport
 {
     /**
      * @param  GameProject $gameProject 游戏注单.
-     * @return void
+     * @return boolean
      */
-    public static function saveReport(GameProject $gameProject): void
+    public static function saveReport(GameProject $gameProject): bool
     {
         if ($gameProject->is_counted_report !== GameProject::COUNTED_REPORT_NO) {
-            return;
+            return true;
         }
         //用户日报表
-        ReportDayUser::saveGameReport($gameProject);
+        $saveUserReport = ReportDayUser::saveGameReport($gameProject);
+        if ($saveUserReport !== true) {
+            return false;
+        }
+        //代理平台游戏报表
+        $savePlatformGameReport = ReportDayPlatformGame::saveGameReport($gameProject);
+        if ($savePlatformGameReport !== true) {
+            return false;
+        }
+        //代理平台游戏厂商报表
+        $savePlatformVendorReport = ReportDayPlatformGameVendor::saveGameReport($gameProject);
+        if ($savePlatformVendorReport !== true) {
+            return false;
+        }
         //游戏厂商日总报表
-        ReportDayGameVendor::saveGameReport($gameProject);
+        return ReportDayGameVendor::saveGameReport($gameProject);
     }
 }

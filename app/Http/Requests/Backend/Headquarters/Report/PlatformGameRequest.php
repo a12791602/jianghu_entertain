@@ -15,7 +15,7 @@ class PlatformGameRequest extends BaseFormRequest
      */
     protected $extraDefinition = [
                                   'platform_name' => '站点名称',
-                                  'project_day'   => '时间',
+                                  'report_day'    => '时间',
                                  ];
 
     /**
@@ -37,8 +37,8 @@ class PlatformGameRequest extends BaseFormRequest
     {
         return [
                 'platform_name' => 'string|max:32',          //站点名称
-                'project_day'   => 'array|size:2',           //时间
-                'project_day.*' => 'date|date_format:Y-m-d', //时间
+                'report_day'    => 'array|size:2',           //时间
+                'report_day.*'  => 'date|date_format:Y-m-d', //时间
                 'pageSize'      => 'integer|between:1,100',  //每页数据条数
                ];
     }
@@ -48,6 +48,6 @@ class PlatformGameRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['project_day' => 'cast:array'];
+        return ['report_day' => 'cast:array'];
     }
 }

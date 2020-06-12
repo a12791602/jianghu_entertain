@@ -19,7 +19,7 @@ class GameRequest extends BaseFormRequest
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
-    protected $extraDefinition = ['project_day' => '起止时间'];
+    protected $extraDefinition = ['report_day' => '起止时间'];
 
     /**
      * Determine if the user is authorized to make this request.
@@ -40,8 +40,8 @@ class GameRequest extends BaseFormRequest
     {
         return [
                 'game_vendor_name' => 'string|max:32',          //游戏厂商
-                'project_day'      => 'array|size:2',           //日期
-                'project_day.*'    => 'date|date_format:Y-m-d', //日期
+                'report_day'       => 'array|size:2',           //日期
+                'report_day.*'     => 'date|date_format:Y-m-d', //日期
                 'pageSize'         => 'integer|between:1,100',  //每页数据条数
                ];
     }
@@ -53,6 +53,6 @@ class GameRequest extends BaseFormRequest
      */
     public function filters(): array
     {
-        return ['project_day' => 'cast:array'];
+        return ['report_day' => 'cast:array'];
     }
 }

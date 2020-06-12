@@ -41,6 +41,16 @@ class ReportDayPlatformGameFilter extends ModelFilter
     }
 
     /**
+     * 游戏标识查询
+     * @param string $gameSign 游戏标识.
+     * @return self
+     */
+    public function gameSign(string $gameSign): self
+    {
+        return $this->where('game_sign', $gameSign);
+    }
+
+    /**
      * 平台查询
      * @param string $platformSign 平台标识.
      * @return self
@@ -51,16 +61,18 @@ class ReportDayPlatformGameFilter extends ModelFilter
     }
 
     /**
-     * 日期查询
-     * @param array $projectDay 厂商标识.
+     * 日期
+     * @param  array $reportDay 日期.
      * @return self|\Illuminate\Database\Eloquent\Builder
      */
-    public function projectDay(array $projectDay)
+    public function reportDay(array $reportDay)
     {
-        if (count($projectDay) === 2) {
-            $eloq = $this->whereBetween('day', $projectDay);
-        } else {
-            $eloq = $this;
+        $eloq = $this;
+        if (count($reportDay) === 2) {
+            $eloq = $this->whereBetween('day', $reportDay);
+        }
+        if (count($reportDay) === 1 && isset($reportDay[0])) {
+            $eloq = $this->whereDate('day', $reportDay[0]);
         }
         return $eloq;
     }
