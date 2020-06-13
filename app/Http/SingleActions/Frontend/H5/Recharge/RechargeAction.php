@@ -2,22 +2,19 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceOfflineInfo;
 use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersRechargeOrder;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Cache;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 
 /**
  * Class RechargeAction
  * @package App\Http\SingleActions\Frontend\H5\Recharge
  */
-class RechargeAction extends MainAction
+class RechargeAction extends BaseAction
 {
 
     public const STATUS_NO = 0;
@@ -70,8 +67,7 @@ class RechargeAction extends MainAction
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_NO) {
             $result = $this->_saveOfflineOrderData($data);
         }
-        $result = msgOut($result);
-        return $result;
+        return msgOut($result);
     }
 
     /**
@@ -134,49 +130,26 @@ class RechargeAction extends MainAction
 
     /**
      * 保存线下订单
-     * @param array $data Data.
+     * @param array $order Order.
      * @return mixed[]
      * @throws \Exception Exception.
      */
-    private function _saveOfflineOrderData(array $data): array
+    private function _saveOfflineOrderData(array $order): array
     {
-        $platformSign   = $this->currentPlatformEloq->sign;
-        $whereCondition = [
-                           'status'             => UsersRechargeOrder::STATUS_INIT,
-                           'money'              => $this->inputData['money'],
-                           'finance_channel_id' => $this->inputData['channel_id'],
-                           'platform_sign'      => $platformSign,
-                           'is_online'          => SystemFinanceType::IS_ONLINE_NO,
-                           'real_money'         => $data['real_money'],
-                          ];
-        $order          = UsersRechargeOrder::where($whereCondition)->first();
-        if ($order) {
-            $data['real_money'] = $this->_getRealMoney();
-            return $this->_saveOfflineOrderData($data);
-        }
-        $returnData              = [];
-        $usersRechargeOrderModel = new UsersRechargeOrder();
-        $usersRechargeOrderModel->fill($data);
-        $result = $usersRechargeOrderModel->save();
-        if (!$result) {
-            throw new \Exception('100303');
-        }
-        $lastId = $usersRechargeOrderModel->id;
-        $order  = UsersRechargeOrder::find($lastId);
-        if (!$order) {
-            throw new \Exception('100303');
-        }
-        if (!$order->created_at instanceof Carbon) {
-            throw new \Exception('100303');
-        }
-        $returnData['real_money'] = $order->real_money;
-        $returnData['money']      = $order->money;
-        $returnData['order_no']   = $order->order_no;
-        $returnData['qrcode']     = $this->model->qrcode;
-        $returnData['created_at'] = $order->created_at->toDateTimeString();
-        $returnData['expired_at'] = $order->created_at
-            ->addMinutes(UsersRechargeOrder::EXPIRED)->toDateTimeString();
-        return $returnData;
+        $money            = $this->inputData['money'];
+        $cache            = $this->cache;
+        $order_expired_at = UsersRechargeOrder::EXPIRED * 60;
+        $order_key        = $this->order_key . $money;
+        $model            = new UsersRechargeOrder();
+        $order_cache      = serialize($model->fill($order));
+        $cache->set($order_key, $order_cache, 'EX', $order_expired_at);
+        return [
+                'real_money' => $order['real_money'],
+                'money'      => (float) sprintf('%.2f', $order['money']),
+                'order_no'   => $order['order_no'],
+                'qrcode'     => $this->model->qrcode,
+                'expired_at' => $order_expired_at,
+               ];
     }
 
     /**
@@ -200,15 +173,15 @@ class RechargeAction extends MainAction
      * 生成订单数据
      * @param FrontendUser $user FrontentUser.
      * @return mixed[]
-     * @throws \RuntimeException Exception.
+     * @throws \Exception Exception.
      */
     private function _generateOrderData(FrontendUser $user): array
     {
         $data                       = [];
         $platformSign               = $this->currentPlatformEloq->sign;
         $data['platform_sign']      = $platformSign;
-        $data['user_id']            = $user->id;
-        $data['order_no']           = $this->_generateOrderNo($platformSign);
+        $data['user_id']            = $this->user->id;
+        $data['order_no']           = getUUidNodeHex();
         $data['finance_channel_id'] = $this->inputData['channel_id'];
         $data['money']              = $this->inputData['money'];
         $data['top_up_remark']      = $this->inputData['top_up_remark'] ?? null;
@@ -228,27 +201,17 @@ class RechargeAction extends MainAction
             $data['arrive_money']      = $data['money'] - $data['handling_money'];
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
-            $data['snap_bank']         = $this->model->name;
-        }
-        $data['status']    = UsersRechargeOrder::STATUS_INIT;
+            $data['created_at']        = now()->toDateTimeString();
+            if ($this->model->type_id === SystemFinanceOfflineInfo::FINANCE_TYPE_BANK) {
+                $data['snap_bank'] = $this->model->bank->name;
+            } else {
+                $data['snap_bank'] = $this->model->name;
+            }
+        }//end if
+        $data['status']    = UsersRechargeOrder::STATUS_UNCONFIRMED;
         $data['is_online'] = $this->inputData['is_online'];
         $data['client_ip'] = $this->inputData['ip'];
         return $data;
-    }
-
-    /**
-     * 获取订单号
-     * @param string $platformSign PlatformSign.
-     * @return integer
-     */
-    private function _generateOrderNo(string $platformSign): int
-    {
-        $init     = strtotime('2020-01-01 00:00:00') * 10;
-        $orderKey = $platformSign . '_recharge_order_no';
-        if (!Cache::get($orderKey)) {
-            Cache::put($orderKey, $init);
-        }
-        return (int) Cache::increment($orderKey);
     }
 
     /**
@@ -258,18 +221,18 @@ class RechargeAction extends MainAction
      */
     private function _getRealMoney(): float
     {
-        $platformSign   = $this->currentPlatformEloq->sign;
-        $whereConfition = [
-                           'status'             => UsersRechargeOrder::STATUS_INIT,
-                           'money'              => $this->inputData['money'],
-                           'finance_channel_id' => $this->inputData['channel_id'],
-                           'platform_sign'      => $platformSign,
-                           'is_online'          => SystemFinanceType::IS_ONLINE_NO,
-                          ];
-        $orders         = UsersRechargeOrder::where($whereConfition)
-            ->get('real_money');
-        $real_money     = $orders->pluck('real_money')->toArray();
-        $exists         = []; //已经存在的
+        $platformSign = $this->currentPlatformEloq->sign;
+
+        $condition  = [
+                       'status'             => UsersRechargeOrder::STATUS_INIT,
+                       'money'              => $this->inputData['money'],
+                       'finance_channel_id' => $this->inputData['channel_id'],
+                       'platform_sign'      => $platformSign,
+                       'is_online'          => SystemFinanceType::IS_ONLINE_NO,
+                      ];
+        $orders     = UsersRechargeOrder::where($condition)->get('real_money');
+        $real_money = $orders->pluck('real_money')->toArray();
+        $exists     = []; //已经存在的
         foreach ($real_money as $order) {
             $money    = round($order - $this->inputData['money'], 2);
             $exists[] = $money;

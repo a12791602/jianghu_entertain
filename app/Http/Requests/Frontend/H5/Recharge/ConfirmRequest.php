@@ -35,7 +35,7 @@ class ConfirmRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'order_no'      => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no',
+                'order_no'      => 'required|string|min:1|max:128',
                 'type_id'       => 'integer|in:1,2',
                 'branch'        => 'required_if:type_id,1|string|max:30',
                 'bank'          => 'required_if:type_id,1|string|max:30',
