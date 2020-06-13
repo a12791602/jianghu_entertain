@@ -210,7 +210,7 @@ class RechargeAction extends BaseAction
             }
         }//end if
         $data['status']    = UsersRechargeOrder::STATUS_UNCONFIRMED;
-        $data['is_online'] = $this->inputData['is_online'];
+        $data['is_online'] = (int) $this->inputData['is_online'];
         $data['client_ip'] = $this->inputData['ip'];
         return $data;
     }
