@@ -27,7 +27,6 @@ class CreateSystemFinanceChannelsTable extends Migration
                 $table->string('name', 64)->nullable()->default(null)->index()->comment('名称');
                 $table->string('sign', 64)->nullable()->default(null)->index()->comment('标识');
                 $table->tinyInteger('request_mode')->nullable()->default(null)->comment('请求方式 1 jump 0 json');
-                $table->string('request_url')->nullable()->default(null)->comment('回调地址');
                 $table->string('banks_code')->nullable()->default(null)->comment('银行编号');
                 $table->tinyInteger('status')->default(0)->comment('状态 1 启用 0 禁用');
                 $table->string('desc', 64)->nullable()->default(null)->comment('描述');
