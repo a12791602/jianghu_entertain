@@ -2,6 +2,10 @@
 
 namespace App\Finance\Pay\Core;
 
+use App\Models\Finance\SystemFinanceChannel;
+use App\Models\Finance\SystemFinanceOnlineInfo;
+use App\Models\User\UsersRechargeOrder;
+
 /**
  * Class Base
  * @package App\Finance\Pay\Core
@@ -34,7 +38,7 @@ abstract class Base implements Payment
                        'callbackUrl'     => null, //回调地址
                        'redirectUrl'     => null, //同步跳转地址
                        'appId'           => null, //终端号
-                       'user'            => null, //用户
+//                       'user'            => null, //用户
                        'clientIp'        => null, //终端ip
                        'certificatePath' => null, //证书地址
                       ];
@@ -67,58 +71,113 @@ abstract class Base implements Payment
                          ];
 
     /**
-     * 设置发起支付时的前置数据.
+     * 第三方通道.
      *
-     * @param object $data 数据.
-     * @return $this
+     * @var mixed $channelSign
      */
-    public function setPreDataOfRecharge(object $data)
-    {
-        $this->payInfo['platformSign']   = $data->platform_sign;
-        $this->payInfo['orderNo']        = $data->order_no;
-        $this->payInfo['money']          = $data->money;
-        $this->payInfo['merchantCode']   = $data->onlineInfo->merchant_code;
-        $this->payInfo['merchantSecret'] = $data->onlineInfo->merchant_secret;
-        $this->payInfo['publicKey']      = $data->onlineInfo->public_key;
-        $this->payInfo['privateKey']     = $data->onlineInfo->private_key;
-        $this->payInfo['requestUrl']     = $data->onlineInfo->request_url;
-        $this->payInfo['callbackUrl']    = app('request')
-                ->getSchemeAndHttpHost() . self::CALLBACK . $data->platform_sign . '/' . $data->order_no;
-        if (isset($data->onlineInfo->vendor_url)) {
-            $this->payInfo['callbackUrl'] = $data->onlineInfo->vendor_url;
+    protected $channelSign;
+
+    /**
+     * 第三方通道.
+     *
+     * @var mixed $channel
+     */
+    protected $channel;
+
+    /**
+     * 订单
+     * @var UsersRechargeOrder
+     */
+    protected $order;
+
+    /**
+     * @var SystemFinanceOnlineInfo
+     */
+    protected $onlineGateWay;
+
+    /**
+     * BasePay constructor.
+     * @param SystemFinanceChannel $channel  SystemFinanceChannel Model.
+     * @param UsersRechargeOrder   $order    UsersRechargeOrder  Model.
+     * @param integer|null         $callback IsCallBack.
+     * @throws \RuntimeException Exception.
+     */
+    public function __construct(
+        SystemFinanceChannel $channel,
+        UsersRechargeOrder $order,
+        ?int $callback = 0
+    ) {
+        $this->channel       = $channel;
+        $this->order         = $order;
+        $this->onlineGateWay = $this->_getOnlineGateWaty();
+        if ($callback) {
+            $this->setPreDataOfVerify();
+        } else {
+            $this->setPreDataOfRecharge();
         }
+    }
+
+    /**
+     * @return SystemFinanceOnlineInfo
+     * @throws \RuntimeException Exception.
+     */
+    private function _getOnlineGateWaty(): SystemFinanceOnlineInfo
+    {
+        $onlineGateWay = $this->order->onlineInfo;
+        if (!$onlineGateWay instanceof SystemFinanceOnlineInfo) {
+            throw new \RuntimeException('100300');
+        }
+        return $onlineGateWay;
+    }
+
+    /**
+     * 设置发起支付时的前置数据.
+     * @return void
+     */
+    public function setPreDataOfRecharge(): void
+    {
+        //        $this->payInfo['user']            = $order->platform_sign . '_' . $order->user->username;
+        $order                            = $this->order;
+        $this->channelSign                = $this->channel->sign;
+        $this->payInfo['platformSign']    = $order->platform_sign;
+        $this->payInfo['orderNo']         = $order->order_no;
+        $this->payInfo['money']           = $order->money;
+        $this->payInfo['merchantCode']    = $this->onlineGateWay->merchant_code;
+        $this->payInfo['merchantSecret']  = $this->onlineGateWay->merchant_secret;
+        $this->payInfo['publicKey']       = $this->onlineGateWay->public_key;
+        $this->payInfo['privateKey']      = $this->onlineGateWay->private_key;
+        $this->payInfo['requestUrl']      = $this->onlineGateWay->request_url;
+        $this->payInfo['callbackUrl']     = app('request')
+                ->getSchemeAndHttpHost() . self::CALLBACK . $order->platform_sign . '/' . $order->order_no;
         $this->payInfo['redirectUrl']     = request()->headers->get('referer');
-        $this->payInfo['appId']           = $data->onlineInfo->app_id;
-        $this->payInfo['user']            = $data->platform_sign . '_' . $data->user->username;
-        $this->payInfo['clientIp']        = $data->client_ip;
-        $this->payInfo['certificatePath'] = $data->onlineInfo->certificate;
-        $this->returnData['orderNo']      = $data->order_no;
-        $this->returnData['money']        = $data->money;
-        return $this;
+        $this->payInfo['appId']           = $this->onlineGateWay->app_id;
+        $this->payInfo['clientIp']        = $order->client_ip;
+        $this->payInfo['certificatePath'] = $this->onlineGateWay->certificate;
+        $this->returnData['orderNo']      = $order->order_no;
+        $this->returnData['money']        = $order->money;
     }
 
     /**
      * 设置发起验签时的前置数据.
-     *
-     * @param object $data 数据.
-     * @return $this
+     * @return void
      */
-    public function setPreDataOfVerify(object $data)
+    public function setPreDataOfVerify(): void
     {
-        $this->payInfo['platformSign']       = $data->platform_sign;
-        $this->payInfo['orderNo']            = $data->order_no;
-        $this->payInfo['money']              = $data->money;
-        $this->payInfo['merchantCode']       = $data->onlineInfo->merchant_code;
-        $this->payInfo['merchantSecret']     = $data->onlineInfo->merchant_secret;
-        $this->payInfo['publicKey']          = $data->onlineInfo->public_key;
-        $this->payInfo['privateKey']         = $data->onlineInfo->private_key;
-        $this->payInfo['appId']              = $data->onlineInfo->app_id;
-        $this->payInfo['clientIp']           = $data->client_ip;
-        $this->payInfo['certificatePath']    = $data->onlineInfo->certificate;
-        $this->verifyData['money']           = $data->money;
-        $this->verifyData['realMoney']       = $data->money;
-        $this->verifyData['orderNo']         = $data->order_no;
-        $this->verifyData['merchantOrderNo'] = $data->order_no;
-        return $this;
+        $order                               = $this->order;
+        $this->channelSign                   = $this->channel->sign;
+        $this->payInfo['platformSign']       = $order->platform_sign;
+        $this->payInfo['orderNo']            = $order->order_no;
+        $this->payInfo['money']              = $order->money;
+        $this->payInfo['merchantCode']       = $this->onlineGateWay->merchant_code;
+        $this->payInfo['merchantSecret']     = $this->onlineGateWay->merchant_secret;
+        $this->payInfo['publicKey']          = $this->onlineGateWay->public_key;
+        $this->payInfo['privateKey']         = $this->onlineGateWay->private_key;
+        $this->payInfo['appId']              = $this->onlineGateWay->app_id;
+        $this->payInfo['clientIp']           = $order->client_ip;
+        $this->payInfo['certificatePath']    = $this->onlineGateWay->certificate;
+        $this->verifyData['money']           = $order->money;
+        $this->verifyData['realMoney']       = $order->money;
+        $this->verifyData['orderNo']         = $order->order_no;
+        $this->verifyData['merchantOrderNo'] = $order->order_no;
     }
 }

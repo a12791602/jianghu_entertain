@@ -21,7 +21,7 @@ class SystemFinanceChannelSeeder extends Seeder
               'type_id'        => 5,
               'vendor_id'      => 1,
               'name'           => '天道(支付宝扫码)',
-              'sign'           => 'td_alipay_scan',
+              'sign'           => '903',
               'request_mode'   => 0,
               'status'         => 1,
               'author_id'      => 2,

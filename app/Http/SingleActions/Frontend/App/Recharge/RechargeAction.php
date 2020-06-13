@@ -8,7 +8,6 @@ use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersRechargeOrder;
-use App\Services\FactoryService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
@@ -41,7 +40,7 @@ class RechargeAction extends MainAction
     /**
      * @param array $inputData InputData.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputData): JsonResponse
     {
@@ -55,16 +54,14 @@ class RechargeAction extends MainAction
         $data = $this->_generateOrderData();
         //保存线上订单
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            $order        = $this->_saveOnlineOrderData($data);
-            $platformSign = $this->model->channel->vendor->sign; //第三方平台厂商的标记
-            $channelSign  = $this->model->channel->sign; //第三方通道的标记
+            $order   = $this->_saveOnlineOrderData($data);
+            $channel = $this->model->channel;
             try {
-                $result = FactoryService::getInstence()
-                    ->generatePay($platformSign, $channelSign)
-                    ->setPreDataOfRecharge($order)
+                $channelClass = $channel->channelClass;
+                $result       = $channelClass->setPreDataOfRecharge($order)
                     ->recharge();
             } catch (\Throwable $exception) {
-                throw new \Exception('100300');
+                throw new \RuntimeException('100300');
             }
         }
         //保存线下订单

@@ -6,18 +6,18 @@ use App\Finance\Pay\Core\Base;
 use App\Finance\Pay\Core\Payment;
 
 /**
- * Class BasePay
+ * Class TdPay
  * @package App\Finance\Pay\TdPlatform
  */
-class BasePay extends Base implements Payment
+class TdPay extends Base implements Payment
 {
 
     /**
-     * 第三方通道.
+     * 第三方通道标识.
      *
-     * @var mixed $channel
+     * @var mixed $channelSign
      */
-    protected $channel;
+    protected $channelSign;
 
     /**
      * 发起支付.
@@ -33,7 +33,7 @@ class BasePay extends Base implements Payment
         $this->setPlatformNeedNo($platformNeedNo);
         $data['pay_orderid']     = $platformNeedNo;
         $data['pay_applydate']   = date('Y-m-d H:i:s');
-        $data['pay_bankcode']    = $this->channel;
+        $data['pay_bankcode']    = $this->channelSign;
         $data['pay_notifyurl']   = $this->payInfo['callbackUrl'];
         $data['pay_callbackurl'] = $this->payInfo['redirectUrl'];
         $data['pay_amount']      = sprintf('%0.2f', $this->payInfo['money']);
