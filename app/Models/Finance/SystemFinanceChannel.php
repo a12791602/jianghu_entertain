@@ -4,7 +4,9 @@ namespace App\Models\Finance;
 
 use App\Models\Admin\BackendAdminUser;
 use App\Models\BaseModel;
+use App\Models\User\UsersRechargeOrder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 /**
  * Class SystemFinanceChannel
@@ -69,5 +71,26 @@ class SystemFinanceChannel extends BaseModel
     public function type(): BelongsTo
     {
         return $this->belongsTo(SystemFinanceType::class, 'type_id', 'id');
+    }
+
+    /**
+     * @param UsersRechargeOrder $order    UsersRechargeOrder.
+     * @param integer|null       $callback Callback.
+     * @return \Illuminate\Contracts\Foundation\Application|mixed|null
+     */
+    public function getChannelClass(UsersRechargeOrder $order, ?int $callback = 0)
+    {
+        $vendor = $this->vendor;
+        if (!$vendor instanceof SystemFinanceVendor) {
+            return null;
+        }
+        $platform           = ucfirst(Str::camel($vendor->sign));
+        $payConfigClassName = 'App\\Finance\\Pay\\' . $platform . 'Platform\\' . $platform . 'Pay';
+        $param              = [
+                               'channel'  => $this,
+                               'order'    => $order,
+                               'callback' => $callback,
+                              ];
+        return resolve($payConfigClassName, $param);
     }
 }

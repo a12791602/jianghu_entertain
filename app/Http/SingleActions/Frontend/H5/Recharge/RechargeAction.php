@@ -8,7 +8,6 @@ use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersRechargeOrder;
-use App\Services\FactoryService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
@@ -41,7 +40,7 @@ class RechargeAction extends MainAction
     /**
      * @param array $inputData InputData.
      * @return JsonResponse
-     * @throws \Exception Exception.
+     * @throws \RuntimeException Exception.
      */
     public function execute(array $inputData): JsonResponse
     {
@@ -52,19 +51,19 @@ class RechargeAction extends MainAction
         //前置检查
         $this->_preCheck();
         //生成订单数据
-        $data = $this->_generateOrderData();
+        if (! $this->user instanceof FrontendUser) {
+            throw new \RuntimeException('100505');//用户不存在
+        }
+        $data = $this->_generateOrderData($this->user);
         //保存线上订单
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
-            $order        = $this->_saveOnlineOrderData($data);
-            $platformSign = $this->model->channel->vendor->sign; //第三方平台厂商的标记
-            $channelSign  = $this->model->channel->sign; //第三方通道的标记
+            $order   = $this->_saveOnlineOrderData($data);
+            $channel = $this->model->channel;
             try {
-                $result = FactoryService::getInstence()
-                    ->generatePay($platformSign, $channelSign)
-                    ->setPreDataOfRecharge($order)
-                    ->recharge();
+                $channelClass = $channel->getChannelClass($order);
+                $result       = $channelClass->recharge();
             } catch (\Throwable $exception) {
-                throw new \Exception('100300');
+                throw new \RuntimeException('100300');
             }
         }
         //保存线下订单
@@ -199,23 +198,21 @@ class RechargeAction extends MainAction
 
     /**
      * 生成订单数据
+     * @param FrontendUser $user FrontentUser.
      * @return mixed[]
      * @throws \RuntimeException Exception.
      */
-    private function _generateOrderData(): array
+    private function _generateOrderData(FrontendUser $user): array
     {
-        if (! $this->user instanceof FrontendUser) {
-            throw new \RuntimeException('100505');//用户不存在
-        }
         $data                       = [];
         $platformSign               = $this->currentPlatformEloq->sign;
         $data['platform_sign']      = $platformSign;
-        $data['user_id']            = $this->user->id;
+        $data['user_id']            = $user->id;
         $data['order_no']           = $this->_generateOrderNo($platformSign);
         $data['finance_channel_id'] = $this->inputData['channel_id'];
         $data['money']              = $this->inputData['money'];
         $data['top_up_remark']      = $this->inputData['top_up_remark'] ?? null;
-        $data['snap_user_level']    = $this->user->specificInfo->level ?? 0;
+        $data['snap_user_level']    = $user->specificInfo->level ?? 0;
         if ((int) $this->inputData['is_online'] === SystemFinanceType::IS_ONLINE_YES) {
             $data['finance_type_id']    = $this->model->channel->type_id;
             $data['handling_money']     = $this->model->handle_fee;

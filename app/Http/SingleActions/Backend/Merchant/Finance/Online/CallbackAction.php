@@ -9,7 +9,6 @@ use App\Models\Systems\SystemIpWhiteList;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\UsersRechargeOrder;
-use App\Services\FactoryService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -140,17 +139,13 @@ class CallbackAction
             $this->_writeLog('finance-callback-data', $this->order, '未找到对应通道');
             return false;
         }
-        $vendor = $channel->vendor;
-        if (!$vendor instanceof SystemFinanceVendor) {
-            $this->_writeLog('finance-callback-data', $this->order, '未找到对应厂商');
+        try {
+            $channelClass = $channel->getChannelClass($this->orderInfo, 1);
+            $result       = $channelClass->recharge();
+        } catch (\Throwable $e) {
+            $this->_writeLog('finance-callback-data', $this->order, '对应支付类出错');
             return false;
         }
-        $vendor  = $vendor->sign; //第三方厂商
-        $channel = $channel->sign; //通道
-        $result  = FactoryService::getInstence()
-            ->generatePay($vendor, $channel)
-            ->setPreDataOfVerify($this->orderInfo)
-            ->verify($this->inputDatas);
         //如果第三方返回的金额大于本系统的订单金额, 对不起, 为了安全, 按掉单处理.
         if ($result['realMoney'] > $this->orderInfo->money) {
             $this->_writeLog('finance-callback-data', $this->order, '回调的上分金额大于订单金额!');
