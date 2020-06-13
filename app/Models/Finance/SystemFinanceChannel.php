@@ -30,7 +30,6 @@ class SystemFinanceChannel extends BaseModel
                                       'name'           => '金流通道名称',
                                       'sign'           => '金流通道标记',
                                       'request_mode'   => '金流通道请求模式',
-                                      'request_url'    => '金流通道请求地址',
                                       'banks_code'     => '金流通道银行码',
                                       'status'         => '金流通道状态',
                                       'desc'           => '金流通道描述',
