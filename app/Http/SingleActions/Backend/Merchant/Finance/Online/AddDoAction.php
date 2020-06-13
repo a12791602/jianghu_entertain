@@ -22,11 +22,12 @@ class AddDoAction extends BaseAction
      */
     public function execute(array $inputData): JsonResponse
     {
-        $platformSign               = $this->currentPlatformEloq->sign;
-        $platformId                 = $this->currentPlatformEloq->id;
-        $inputData['platform_sign'] = $platformSign;
-        $inputData['author_id']     = $this->user->id;
-        $tags                       = $inputData['tags'];
+        $platformSign                = $this->currentPlatformEloq->sign;
+        $platformId                  = $this->currentPlatformEloq->id;
+        $inputData['platform_sign']  = $platformSign;
+        $inputData['author_id']      = $this->user->id;
+        $inputData['last_editor_id'] = $this->user->id;
+        $tags                        = $inputData['tags'];
         Arr::forget($inputData, 'tags');
         DB::beginTransaction();
         $this->model->fill($inputData);
