@@ -124,11 +124,16 @@ class ReportAction extends MainAction
             ->get();
 
         $unconfirmed = $this->_topUpOrder()->sortByDesc('created_at');
-        $item        = collect($unconfirmed)->merge($result);
-        $item_count  = $item->count();
-        $page        = request()->page ?? 1;
-        $perPage     = request()->pageSize ?? $item_count;
-        $order       = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
+        $unconfirmed->transform(
+            static function ($item): UsersRechargeOrder {
+                return $item->load('offlineInfo');
+            },
+        );
+        $item       = collect($unconfirmed)->merge($result);
+        $item_count = $item->count();
+        $page       = request()->page ?? 1;
+        $perPage    = request()->pageSize ?? $item_count;
+        $order      = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
         return RechargeReportResource::collection($order);
     }
 
