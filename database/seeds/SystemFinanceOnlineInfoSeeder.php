@@ -24,7 +24,7 @@ class SystemFinanceOnlineInfoSeeder extends Seeder
               'channel_id'      => 1,
               'min_amount'      => '200.00',
               'max_amount'      => '10000.00',
-              'request_url'     => 'http://101.133.132.100:8088/Pay_Index_index.html',
+              'request_url'     => 'https://api.7-epp.com/pay',
               'merchant_code'   => '11296',
               'merchant_secret' => 'zfpODDwL5gS34PwTPkwu9wABdq0Krkfi',
               'desc'            => '充值完成后请耐心等待3分钟!',
