@@ -57,9 +57,8 @@ class RechargeAction extends MainAction
             $order   = $this->_saveOnlineOrderData($data);
             $channel = $this->model->channel;
             try {
-                $channelClass = $channel->channelClass;
-                $result       = $channelClass->setPreDataOfRecharge($order)
-                    ->recharge();
+                $channelClass = $channel->getChannelClass($order);
+                $result       = $channelClass->recharge();
             } catch (\Throwable $exception) {
                 throw new \RuntimeException('100300');
             }
