@@ -25,6 +25,7 @@ class ConfirmAction extends BaseAction
             throw new \Exception('101011');
         }
         if ((int) $order->is_online === UsersRechargeOrder::OFFLINE_FINANCE) {
+            unset($order->expired_at);
             $order->bank          = $inputData['bank'] ?? null;
             $order->branch        = $inputData['branch'] ?? null;
             $order->card_number   = $inputData['card_number'] ?? null;

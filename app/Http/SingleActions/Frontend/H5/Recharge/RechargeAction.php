@@ -201,6 +201,7 @@ class RechargeAction extends BaseAction
             $data['arrive_money']      = $data['money'] - $data['handling_money'];
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
+            $data['expired_at']        = now()->addMinutes(UsersRechargeOrder::EXPIRED)->toDateTimeString();
             $data['created_at']        = now()->toDateTimeString();
             if ($this->model->type_id === SystemFinanceOfflineInfo::FINANCE_TYPE_BANK) {
                 $data['snap_bank'] = $this->model->bank->name;
