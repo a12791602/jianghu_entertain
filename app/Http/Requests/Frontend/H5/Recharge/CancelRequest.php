@@ -34,6 +34,6 @@ class CancelRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['order_no' => 'required|string|min:1|max:128|exists:users_recharge_orders,order_no'];
+        return ['order_no' => 'required|string|min:1|max:128'];
     }
 }

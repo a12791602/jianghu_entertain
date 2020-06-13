@@ -46,6 +46,11 @@ class UsersRechargeOrder extends BaseModel
      */
     public const STATUS_CANCEL = -3;
     /**
+     * 线下订单状态 初始化到缓存
+     */
+    public const STATUS_UNCONFIRMED = 6;
+
+    /**
      * 线下订单有效期 单位 分钟
      */
     public const EXPIRED = 15;
