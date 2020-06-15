@@ -30,7 +30,7 @@ class FrontendUsersAccountsReportFilter extends ModelFilter
      * @param  integer $userId 用户ID.
      * @return self
      */
-    public function userId(int $userId): self
+    public function user(int $userId): self
     {
         return $this->where('user_id', $userId);
     }
