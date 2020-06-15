@@ -9,6 +9,7 @@
 
 namespace App\Services\Logs\FrontendLogs;
 
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Systems\SystemLogsFrontend;
 use App\Models\User\FrontendUser;
 use Jenssegers\Agent\Agent;
@@ -40,6 +41,26 @@ class FrontendLogProcessor
             $type = SystemLogsFrontend::OTHER;
         }
         return $type;
+    }
+
+    /**
+     * @param  string $prefix 网址前缀.
+     * @return integer
+     */
+    private function _getWebType(string $prefix): int
+    {
+        switch ($prefix) {
+            case JHHYCnst::PREFIX_H5:
+                $webType = JHHYCnst::DEVICE_H5;
+                break;
+            case JHHYCnst::PREFIX_APP:
+                $webType = JHHYCnst::DEVICE_APP;
+                break;
+            default:
+                $webType = 0;
+                break;
+        }
+        return $webType;
     }
 
     /**
@@ -89,6 +110,7 @@ class FrontendLogProcessor
         $bsVersion       = $agent->version($browser);
         $robot           = $agent->robot();
         $type            = $this->_prepareType($agent);
+        $webType         = $this->_getWebType($request->get('prefix'));
         $messageArr      = json_decode($record['message'], true, 512, JSON_THROW_ON_ERROR);
         $route_path      = explode('/', $request->path());
         $route_name      = array_pop($route_path) ?? '';
@@ -103,6 +125,7 @@ class FrontendLogProcessor
                             'user_agent'    => $request->server('HTTP_USER_AGENT'),
                             'lang'          => json_encode($agent->languages(), JSON_THROW_ON_ERROR, 512),
                             'device'        => $agent->device(),
+                            'web_type'      => $webType,
                             'os'            => $clientOs,
                             'browser'       => $browser,
                             'bs_version'    => $bsVersion,
