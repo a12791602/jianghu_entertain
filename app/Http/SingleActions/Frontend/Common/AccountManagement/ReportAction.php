@@ -4,6 +4,7 @@ namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\Resources\Frontend\FrontendUser\RechargeReportResource;
 use App\Http\SingleActions\MainAction;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Game\GameProject;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
@@ -123,7 +124,7 @@ class ReportAction extends MainAction
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $unconfirmed = $this->_topUpOrder()->sortByDesc('created_at');
+        $unconfirmed = $this->_topUpOrder()->sortByDesc('created_at')->where('user_id', $this->user->id);
         $unconfirmed->transform(
             static function ($item): UsersRechargeOrder {
                 return $item->load('offlineInfo');
@@ -132,7 +133,7 @@ class ReportAction extends MainAction
         $item       = collect($unconfirmed)->merge($result);
         $item_count = $item->count();
         $page       = request()->page ?? 1;
-        $perPage    = request()->pageSize ?? $item_count;
+        $perPage    = request()->pageSize ?? JHHYCnst::PAGINATION_PER_PAGE;
         $order      = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
         return RechargeReportResource::collection($order);
     }

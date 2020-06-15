@@ -58,4 +58,6 @@ class JHHYCnst
     public const ANNOUNCEMENT_SYSTEM = 'announcement_system';
     // 登录弹窗公告
     public const ANNOUNCEMENT_SIGN_IN = 'announcement_sign_in';
+    // 默认分页展示多少条数据
+    public const PAGINATION_PER_PAGE = 25;
 }
