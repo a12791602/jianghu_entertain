@@ -148,7 +148,7 @@ class RechargeAction extends BaseAction
                 'money'      => (float) sprintf('%.2f', $order['money']),
                 'order_no'   => $order['order_no'],
                 'qrcode'     => $this->model->qrcode,
-                'expired_at' => $order_expired_at,
+                'expired_at' => $order['expired_at'],
                ];
     }
 
