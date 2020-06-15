@@ -139,4 +139,15 @@ class GameProjectFilter extends ModelFilter
         }
         return $eloq;
     }
+
+    /**
+     * 用户ID.
+     *
+     * @param integer $userId 用户ID.
+     * @return self
+     */
+    public function user(int $userId): self
+    {
+        return $this->where('user_id', $userId);
+    }
 }

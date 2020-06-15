@@ -32,9 +32,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 根据平台标记查询.
      *
      * @param string $platform_sign PlatformSign.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function platformSign(string $platform_sign): UsersWithdrawOrderFilter
+    public function platformSign(string $platform_sign): self
     {
         return $this->where('platform_sign', $platform_sign);
     }
@@ -43,9 +43,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按状态.
      *
      * @param array $status_list StatusList.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function statusList(array $status_list): UsersWithdrawOrderFilter
+    public function statusList(array $status_list): self
     {
         return $this->whereIn('status', $status_list);
     }
@@ -54,9 +54,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按订单号搜索.
      *
      * @param string $order_no 订单号.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function orderNo(string $order_no): UsersWithdrawOrderFilter
+    public function orderNo(string $order_no): self
     {
         return $this->where('order_no', $order_no);
     }
@@ -65,9 +65,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按收款帐号类型搜索.
      *
      * @param integer $account_type 收款帐号类型.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function accountType(int $account_type): UsersWithdrawOrderFilter
+    public function accountType(int $account_type): self
     {
         return $this->where('account_type', $account_type);
     }
@@ -75,9 +75,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按申请时间.
      *
      * @param array $crated_at CreatedAt.
-     * @return UsersWithdrawOrderFilter
+     * @return self|\Illuminate\Database\Eloquent\Builder
      */
-    public function createdAt(array $crated_at): UsersWithdrawOrderFilter
+    public function createdAt(array $crated_at)
     {
         $object = $this;
         $number = (int) count($crated_at);
@@ -94,9 +94,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 根据状态查询.
      *
      * @param integer $status Status.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function status(int $status): UsersWithdrawOrderFilter
+    public function status(int $status): self
     {
         return $this->where('status', $status);
     }
@@ -106,9 +106,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按审核时间.
      *
      * @param array $review_at ReviewAt.
-     * @return UsersWithdrawOrderFilter
+     * @return self|\Illuminate\Database\Eloquent\Builder
      */
-    public function reviewAt(array $review_at): UsersWithdrawOrderFilter
+    public function reviewAt(array $review_at)
     {
         $object = $this;
         $number = (int) count($review_at);
@@ -127,9 +127,9 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按操作时间.
      *
      * @param array $operation_at OperationAt.
-     * @return UsersWithdrawOrderFilter
+     * @return self|\Illuminate\Database\Eloquent\Builder
      */
-    public function operationAt(array $operation_at): UsersWithdrawOrderFilter
+    public function operationAt(array $operation_at)
     {
         $object = $this;
         $number = (int) count($operation_at);
@@ -147,10 +147,21 @@ class UsersWithdrawOrderFilter extends ModelFilter
      * 按是否稽核扣款搜索.
      *
      * @param integer $is_audit 是否稽核扣款.
-     * @return UsersWithdrawOrderFilter
+     * @return self
      */
-    public function isAudit(int $is_audit): UsersWithdrawOrderFilter
+    public function isAudit(int $is_audit): self
     {
         return $this->where('is_audit', $is_audit);
+    }
+
+    /**
+     * 用户ID.
+     *
+     * @param integer $userId 用户ID.
+     * @return self
+     */
+    public function user(int $userId): self
+    {
+        return $this->where('user_id', $userId);
     }
 }
