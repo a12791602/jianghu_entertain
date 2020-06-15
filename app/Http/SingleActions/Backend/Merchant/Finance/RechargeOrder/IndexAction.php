@@ -56,7 +56,7 @@ class IndexAction extends BaseAction
              'created_at',
              'updated_at',
             ],
-        )->paginate($this->perPage);
+        )->orderByDesc('created_at')->paginate($this->perPage);
         return msgOut($data);
     }
 }

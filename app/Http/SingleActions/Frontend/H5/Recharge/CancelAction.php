@@ -23,6 +23,9 @@ class CancelAction extends BaseAction
         if (!$order instanceof UsersRechargeOrder) {
             throw new \RuntimeException('101011');
         }
+        $order->status = UsersRechargeOrder::STATUS_CANCEL;
+        unset($order->expired_at);
+        $order->save();
         $cache->del($this->order_key . $order['money']);
         return msgOut();
     }
