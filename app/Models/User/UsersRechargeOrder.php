@@ -18,37 +18,33 @@ class UsersRechargeOrder extends BaseModel
 {
 
     /**
-     * 这是当有一个新订单时初始化的订单状态
-     * 对于线下订单此状态代表 审核中
+     * 线下订单 初始化到缓存 还未确认
      * 对于线上订单此状态代表 未支付
      */
     public const STATUS_INIT = 0;
     /**
-     * 成功上分的订单状态
+     * 线下订单状态 客户确认付款
+     * 对于后台 线下订单此状态代表 待审核
+     */
+    public const STATUS_CONFIRM = 1;
+    /**
      * 对于线下订单此状态代表 审核通过
      * 对于线上订单此状态代表 已支付
      */
-    public const STATUS_SUCCESS = 1;
+    public const STATUS_SUCCESS = 2;
     /**
      * 线下订单状态 审核拒绝
      */
-    public const STATUS_REFUSE = -1;
-    /**
-     * 线下订单状态 订单过期
-     */
-    public const STATUS_EXPIRED = -2;
-    /**
-     * 线下订单状态 客户确认付款
-     */
-    public const STATUS_CONFIRM = 3;
+    public const STATUS_REFUSE = 3;
     /**
      * 线下订单状态 客户撤销订单
      */
-    public const STATUS_CANCEL = -3;
+    public const STATUS_CANCEL = 4;
+
     /**
      * 线下订单有效期 单位 分钟
      */
-    public const EXPIRED = 15;
+    public const STATUS_EXPIRED = 15;
 
     /**
      * 线下支付

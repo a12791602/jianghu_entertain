@@ -37,7 +37,6 @@ class CreateUsersRechargeOrdersTable extends Migration
                 $table->tinyInteger('status')->default(0)->comment('状态 0 审核中 1 审核通过');
                 $table->integer('admin_id')->nullable()->default(null)->comment('操作人ID');
                 $table->tinyInteger('is_online')->nullable()->default(null)->comment('是否是线上存款 1 是 0 否');
-                $table->tinyInteger('recharge_status')->nullable()->default(0)->comment('支付状态 1 已支付 0 未支付');
                 $table->string('remark')->nullable()->default(null)->comment('后台处理时的备注');
                 $table->string('card_number', 64)->nullable()->default(null)->comment('用户线下入款时的卡号');
                 $table->string('bank', 128)->nullable()->default(null)->comment('支行');

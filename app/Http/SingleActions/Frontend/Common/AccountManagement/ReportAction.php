@@ -4,15 +4,18 @@ namespace App\Http\SingleActions\Frontend\Common\AccountManagement;
 
 use App\Http\Resources\Frontend\FrontendUser\RechargeReportResource;
 use App\Http\SingleActions\MainAction;
+use App\Lib\Constant\JHHYCnst;
 use App\Models\Game\GameProject;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
 use App\Models\User\UsersRechargeOrder;
 use App\Models\User\UsersWithdrawOrder;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Redis;
 
 /**
  * Class report action.
@@ -29,11 +32,6 @@ class ReportAction extends MainAction
      * @var array
      */
     protected $filterDatas;
-
-    /**
-     * @var integer
-     */
-    protected $pageSize = 25;
 
     /**
      * @param Request                     $request                     Request.
@@ -56,9 +54,6 @@ class ReportAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        if (isset($inputDatas['pageSize'])) {
-            $this->pageSize = $inputDatas['pageSize'];
-        }
         $this->filterDatas = [
                               'created_at'        => $inputDatas['created_at'] ?? [],
                               'their_create_time' => $inputDatas['their_create_time'] ?? [],
@@ -118,7 +113,6 @@ class ReportAction extends MainAction
                  'order_no',
                  'money',
                  'arrive_money',
-                 'recharge_status',
                  'status',
                  'finance_type_id',
                  'created_at',
@@ -127,8 +121,20 @@ class ReportAction extends MainAction
                 ],
             )->with('offlineInfo')
             ->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize);
-        return RechargeReportResource::collection($result);
+            ->get();
+
+        $unconfirmed = $this->_topUpOrder()->sortByDesc('created_at')->where('user_id', $this->user->id);
+        $unconfirmed->transform(
+            static function ($item): UsersRechargeOrder {
+                return $item->load('offlineInfo');
+            },
+        );
+        $item       = collect($unconfirmed)->merge($result);
+        $item_count = $item->count();
+        $page       = request()->page ?? 1;
+        $perPage    = request()->pageSize ?? JHHYCnst::PAGINATION_PER_PAGE;
+        $order      = new LengthAwarePaginator($item->forPage($page, $perPage), $item_count, $perPage);
+        return RechargeReportResource::collection($order);
     }
 
     /**
@@ -140,7 +146,7 @@ class ReportAction extends MainAction
         return UsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
             ->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize);
+            ->paginate($this->perPage);
     }
 
     /**
@@ -153,6 +159,26 @@ class ReportAction extends MainAction
             ->select(['game_vendor_sign', 'game_sign', 'bet_money', 'status', 'their_create_time'])
             ->with(['game:name,sign', 'gameVendor:name,sign'])
             ->orderBy('created_at', 'desc')
-            ->paginate($this->pageSize);
+            ->paginate($this->perPage);
+    }
+
+    /**
+     * 用户发起还未确定的订单
+     * @return Collection
+     */
+    private function _topUpOrder(): Collection
+    {
+        $platform_sign = $this->currentPlatformEloq->sign;
+        $cache         = Redis::connection();
+        $order_key     = $platform_sign . ':frontend_user_' . $this->user->id . ':top_up_order:';
+        $range_key     = $cache->keys($order_key . '*');
+        $cache_prefix  = config('database.redis.options.prefix');
+        return collect($range_key)->map(
+            static function ($order_key) use ($cache, $cache_prefix): UsersRechargeOrder {
+                $order_key = str_replace($cache_prefix, '', $order_key);
+                $item      = $cache->get($order_key);
+                return unserialize($item);
+            },
+        );
     }
 }

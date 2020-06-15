@@ -2,8 +2,6 @@
 
 namespace App\Http\SingleActions\Frontend\H5\Recharge;
 
-use App\Http\SingleActions\MainAction;
-use App\Models\User\FrontendUser;
 use App\Models\User\UsersRechargeOrder;
 use Illuminate\Http\JsonResponse;
 
@@ -11,35 +9,24 @@ use Illuminate\Http\JsonResponse;
  * Class CancelAction
  * @package App\Http\SingleActions\Frontend\H5\Recharge
  */
-class CancelAction extends MainAction
+class CancelAction extends BaseAction
 {
     /**
-     * @param array $inputDatas InputDatas.
+     * @param array $inputData InputData.
      * @return JsonResponse
      * @throws \RuntimeException Exception.
      */
-    public function execute(array $inputDatas): JsonResponse
+    public function execute(array $inputData): JsonResponse
     {
-        if (! $this->user instanceof FrontendUser) {
-            throw new \RuntimeException('100505');//用户不存在
+        $cache = $this->cache;
+        $order = $this->order_item->where('order_no', $inputData['order_no'])->first();
+        if (!$order instanceof UsersRechargeOrder) {
+            throw new \RuntimeException('101011');
         }
-        $where = [
-                  'platform_sign' => $this->user->platform_sign,
-                  'order_no'      => $inputDatas['order_no'],
-                  'user_id'       => $this->user->id,
-                 ];
-        $order = UsersRechargeOrder::where($where)->first();
-        if (!$order) {
-            throw new \RuntimeException('101002');
-        }
-        if ($order->status !== UsersRechargeOrder::STATUS_INIT) {
-            throw new \RuntimeException('101000');
-        }
-
         $order->status = UsersRechargeOrder::STATUS_CANCEL;
-        if ($order->save()) {
-            return msgOut();
-        }
-        throw new \RuntimeException('101001');
+        unset($order->expired_at);
+        $order->save();
+        $cache->del($this->order_key . $order['money']);
+        return msgOut();
     }
 }

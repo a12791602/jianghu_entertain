@@ -41,7 +41,8 @@ class AddDoAction extends BaseAction
                 ],
             );
             DB::beginTransaction();
-            $dataToSave['author_id'] = $this->user->id;
+            $dataToSave['author_id']      = $this->user->id;
+            $dataToSave['last_editor_id'] = $this->user->id;
             $this->model->fill($dataToSave);
             if ($this->model->save()) {
                 $userTags                       = [];

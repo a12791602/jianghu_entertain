@@ -155,4 +155,15 @@ class UsersRechargeOrderFilter extends ModelFilter
     {
         return $this->where('snap_account', $snap_account);
     }
+
+    /**
+     * 用户ID.
+     *
+     * @param integer $userId 用户ID.
+     * @return UsersRechargeOrderFilter
+     */
+    public function user(int $userId): UsersRechargeOrderFilter
+    {
+        return $this->where('user_id', $userId);
+    }
 }
