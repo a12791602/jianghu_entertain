@@ -3,6 +3,8 @@
 namespace App\Models\Systems;
 
 use App\Models\BaseModel;
+use App\Models\User\FrontendUser;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 前台系统日志
@@ -30,4 +32,21 @@ class SystemLogsFrontend extends BaseModel
                         'inputs' => 'array',
                         'route'  => 'array',
                        ];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = [
+                                      'created_at' => '登陆日期',
+                                      'moble'      => '会员账号',
+                                     ];
+
+    /**
+     * 用户
+     * @return BelongsTo
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
+    }
 }

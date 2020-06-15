@@ -18,6 +18,9 @@ class JHHYCnst
     public const DEVICE_APK = 4;
     public const GUARD_H5   = 'frontend-h5';
     public const GUARD_APP  = 'frontend-mobile';
+    //prefix
+    public const PREFIX_H5  = 'h5-api';
+    public const PREFIX_APP = 'app-api';
     //启用状态
     public const STATUS_OPEN = 1;
     //禁用状态
