@@ -2,8 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\FrontendUser;
 
+use App\Http\Resources\Backend\Merchant\User\FrontendUser\LoginLogResource;
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersLoginLog;
+use App\Models\Systems\SystemLogsFrontend;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,14 +20,14 @@ class LoginLogAction extends MainAction
     protected $model;
 
     /**
-     * @param UsersLoginLog $usersLoginLog 用户登陆记录Model.
-     * @param Request       $request       Request.
+     * @param SystemLogsFrontend $systemLogsFrontend 前台访问日志Model.
+     * @param Request            $request            Request.
      * @throws \Exception Exception.
      */
-    public function __construct(UsersLoginLog $usersLoginLog, Request $request)
+    public function __construct(SystemLogsFrontend $systemLogsFrontend, Request $request)
     {
         parent::__construct($request);
-        $this->model = $usersLoginLog;
+        $this->model = $systemLogsFrontend;
     }
 
     /**
@@ -36,11 +37,29 @@ class LoginLogAction extends MainAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
+        if (isset($inputDatas['pageSize'])) {
+            $this->model->setPerPage($inputDatas['pageSize']);
+        }
+        $inputDatas['platform_sign'] = getCurrentPlatformSign();
+        $inputDatas['route_name']    = [
+                                        'h5-api.login',
+                                        'app-api.login',
+                                        'pc-api.login',
+                                       ];
 
-        $inputDatas['platformSign'] = $this->currentPlatformEloq->sign;
-        $data                       = $this->model
-            ->filter($inputDatas)
-            ->paginate($this->perPage);
-        return msgOut($data);
+        $result = $this->model->filter($inputDatas)
+            ->select(
+                [
+                 'ip',
+                 'mobile',
+                 'user_id',
+                 'device',
+                 'web_type',
+                 'created_at',
+                ],
+            )->with('user:id,guid')
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+        return msgOut(LoginLogResource::collection($result));
     }
 }

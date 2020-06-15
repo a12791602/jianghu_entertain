@@ -37,6 +37,7 @@ class CreateSystemLogsFrontendsTable extends Migration
                 $table->string('session', 100)->nullable()->default(null);
                 $table->string('lang', 50)->nullable()->default(null);
                 $table->string('device', 20)->nullable()->default(null)->comment('设备');
+                $table->tinyInteger('web_type')->nullable()->default(null)->comment('站点类型 1.PC 2.H5 3.APP');
                 $table->string('os', 20)->nullable()->default(null)->comment('系统');
                 $table->string('os_version', 50)->nullable()->default(null)->comment('系统版本');
                 $table->string('browser', 50)->nullable()->default(null)->comment('浏览器');

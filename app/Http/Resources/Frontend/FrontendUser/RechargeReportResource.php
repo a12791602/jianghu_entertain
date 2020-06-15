@@ -4,6 +4,7 @@ namespace App\Http\Resources\Frontend\FrontendUser;
 
 use App\Http\Resources\BaseResource;
 use App\Models\User\UsersRechargeOrder;
+use Carbon\Carbon;
 
 /**
  * Class RechargeReportResource
@@ -28,9 +29,9 @@ class RechargeReportResource extends BaseResource
     private $arrive_money;
 
     /**
-     * @var integer $recharge_status 支付状态.
+     * @var float $real_money 真实付款金额.
      */
-    private $recharge_status;
+    private $real_money;
 
     /**
      * @var integer $status 审核状态.
@@ -63,6 +64,11 @@ class RechargeReportResource extends BaseResource
     private $created_at;
 
     /**
+     * @var string $expired_at 过期时间.
+     */
+    private $expired_at;
+
+    /**
      * Transform the resource into an array.
      *
      * @param  \Illuminate\Http\Request $request Request.
@@ -80,19 +86,24 @@ class RechargeReportResource extends BaseResource
             $username = $this->offlineInfo->username ?? '';
             $branch   = $this->offlineInfo->branch ?? '';
         }
-        return [
-                'order_no'          => $this->order_no,
-                'money'             => $this->money,
-                'arrive_money'      => $this->arrive_money,
-                'recharge_status'   => $this->recharge_status,
-                'status'            => $this->status,
-                'finance_type_name' => $this->financeType->name ?? '',
-                'created_at'        => $this->created_at->toDateTimeString(),
-                'is_online'         => $this->is_online,
-                'account'           => $account,
-                'username'          => $username,
-                'branch'            => $branch,
-                'arrived_at'        => $this->arrived_at,
-               ];
+        $item = [
+                 'order_no'          => $this->order_no,
+                 'money'             => $this->money,
+                 'real_money'        => $this->real_money,
+                 'arrive_money'      => $this->arrive_money,
+                 'status'            => $this->status,
+                 'finance_type_name' => $this->financeType->name ?? '',
+                 'created_at'        => $this->created_at->toDateTimeString(),
+                 'is_online'         => $this->is_online,
+                 'account'           => $account,
+                 'username'          => $username,
+                 'branch'            => $branch,
+                 'arrived_at'        => $this->arrived_at,
+                 'expired_at'        => $this->expired_at,
+                ];
+        if (!$this->expired_at) {
+            unset($item['expired_at']);
+        }
+        return $item;
     }
 }
