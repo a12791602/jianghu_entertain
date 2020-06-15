@@ -112,6 +112,7 @@ class ReportAction extends MainAction
                 [
                  'order_no',
                  'money',
+                 'real_money',
                  'arrive_money',
                  'arrived_at',
                  'status',
