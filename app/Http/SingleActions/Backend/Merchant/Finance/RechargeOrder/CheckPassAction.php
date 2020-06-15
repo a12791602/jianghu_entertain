@@ -34,9 +34,10 @@ class CheckPassAction extends BaseAction
         if ($order->status !== UsersRechargeOrder::STATUS_CONFIRM) {
             throw new \Exception('202303');
         }
-        $order->status   = UsersRechargeOrder::STATUS_SUCCESS;
-        $order->admin_id = $this->user->id;
-        $saveStatus      = $order->save();
+        $order->status     = UsersRechargeOrder::STATUS_SUCCESS;
+        $order->admin_id   = $this->user->id;
+        $order->arrived_at = now()->toDateTimeString();
+        $saveStatus        = $order->save();
         if (! $order->user instanceof FrontendUser || !$order->user->account instanceof FrontendUsersAccount) {
             throw new \Exception('100505');//用户不存在
         }
