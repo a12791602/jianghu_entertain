@@ -86,8 +86,8 @@ class RechargeController extends Controller
         CancelAction $action,
         CancelRequest $request
     ): JsonResponse {
-        $inputDatas = $request->validated();
-        return $action->execute($inputDatas);
+        $inputData = $request->validated();
+        return $action->execute($inputData);
     }
 
     /**

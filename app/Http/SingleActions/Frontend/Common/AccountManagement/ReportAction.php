@@ -113,7 +113,6 @@ class ReportAction extends MainAction
                  'order_no',
                  'money',
                  'arrive_money',
-                 'recharge_status',
                  'status',
                  'finance_type_id',
                  'created_at',

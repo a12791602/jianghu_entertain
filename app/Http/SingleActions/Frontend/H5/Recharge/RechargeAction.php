@@ -138,7 +138,7 @@ class RechargeAction extends BaseAction
     {
         $money            = $this->inputData['money'];
         $cache            = $this->cache;
-        $order_expired_at = UsersRechargeOrder::EXPIRED * 60;
+        $order_expired_at = UsersRechargeOrder::STATUS_EXPIRED * 60;
         $order_key        = $this->order_key . $money;
         $model            = new UsersRechargeOrder();
         $order_cache      = serialize($model->fill($order));
@@ -201,7 +201,7 @@ class RechargeAction extends BaseAction
             $data['arrive_money']      = $data['money'] - $data['handling_money'];
             $data['snap_finance_type'] = $this->model->type->name;
             $data['snap_account']      = $this->model->account;
-            $data['expired_at']        = now()->addMinutes(UsersRechargeOrder::EXPIRED)->toDateTimeString();
+            $data['expired_at']        = now()->addMinutes(UsersRechargeOrder::STATUS_EXPIRED)->toDateTimeString();
             $data['created_at']        = now()->toDateTimeString();
             if ($this->model->type_id === SystemFinanceOfflineInfo::FINANCE_TYPE_BANK) {
                 $data['snap_bank'] = $this->model->bank->name;
@@ -209,7 +209,7 @@ class RechargeAction extends BaseAction
                 $data['snap_bank'] = $this->model->name;
             }
         }//end if
-        $data['status']    = UsersRechargeOrder::STATUS_UNCONFIRMED;
+        $data['status']    = UsersRechargeOrder::STATUS_INIT;
         $data['is_online'] = (int) $this->inputData['is_online'];
         $data['client_ip'] = $this->inputData['ip'];
         return $data;
