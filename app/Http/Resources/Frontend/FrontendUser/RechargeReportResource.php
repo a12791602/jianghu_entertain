@@ -29,6 +29,11 @@ class RechargeReportResource extends BaseResource
     private $arrive_money;
 
     /**
+     * @var float $real_money 真实付款金额.
+     */
+    private $real_money;
+
+    /**
      * @var integer $status 审核状态.
      */
     private $status;
@@ -84,6 +89,7 @@ class RechargeReportResource extends BaseResource
         $item = [
                  'order_no'          => $this->order_no,
                  'money'             => $this->money,
+                 'real_money'        => $this->real_money,
                  'arrive_money'      => $this->arrive_money,
                  'status'            => $this->status,
                  'finance_type_name' => $this->financeType->name ?? '',
