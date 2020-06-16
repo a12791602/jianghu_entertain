@@ -87,14 +87,14 @@ class StatisticalCommission extends Command
         $userRebate = 0; //用户个人报表的洗码奖金总额
         foreach ($vendorGroupProject as $vendorSign => $itemVendorProject) {
             $vendorSign         = (string) $vendorSign; //钩子认定foreach的key是int类型，所以做下转换
-            $vendorBetSum       = 0;
+            $vendorBetSum       = $itemVendorProject->sum('bet_money');
+            $rebatePercent      = UsersCommissionConfig::getCommissionPercent($user, $vendorSign, $vendorBetSum);
             $vendorEffectiveBet = 0;
             $vendorRebateSum    = 0;
             $projectId          = [];
             foreach ($itemVendorProject->groupBy('game_sign') as $gameSign => $itemGameProject) {
                 $gameEffectiveBet = $this->_getGameEffectiveBet($itemGameProject);
                 $gamebetSum       = $itemGameProject->sum('bet_money');
-                $rebatePercent    = UsersCommissionConfig::getCommissionPercent($user, $vendorSign, $gamebetSum);
                 $gameRebateSum    = $gameEffectiveBet * $rebatePercent / 100;
                 $saveGameRebate   = ReportDayUserGameCommission::saveReport(
                     $user,
@@ -110,7 +110,6 @@ class StatisticalCommission extends Command
                     continue;
                 }
                 $projectId           = Arr::collapse([$projectId, $itemGameProject->pluck('id')->toArray()]);
-                $vendorBetSum       += $gamebetSum;
                 $vendorEffectiveBet += $gameEffectiveBet;
                 $vendorRebateSum    += $gameRebateSum;
                 $userRebate         += $gameRebateSum;
@@ -121,6 +120,7 @@ class StatisticalCommission extends Command
                 $vendorBetSum,
                 $vendorEffectiveBet,
                 $vendorRebateSum,
+                $rebatePercent,
                 $reportDay,
             );
             $saveVendorRebate = ReportDayGameVendor::saveRebateReport($vendorSign, $reportDay, $vendorRebateSum);
