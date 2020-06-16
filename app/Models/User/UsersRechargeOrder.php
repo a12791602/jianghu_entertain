@@ -42,6 +42,11 @@ class UsersRechargeOrder extends BaseModel
     public const STATUS_CANCEL = 4;
 
     /**
+     * 线上支付失败 三方请求失败
+     */
+    public const STATUS_ONLINE_FAIL = 5;
+
+    /**
      * 线下订单有效期 单位 分钟
      */
     public const STATUS_EXPIRED = 15;

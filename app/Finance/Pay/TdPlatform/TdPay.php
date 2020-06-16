@@ -4,6 +4,10 @@ namespace App\Finance\Pay\TdPlatform;
 
 use App\Finance\Pay\Core\Base;
 use App\Finance\Pay\Core\Payment;
+use App\Models\User\UsersRechargeOrder;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 
 /**
  * Class TdPay
@@ -27,9 +31,30 @@ class TdPay extends Base implements Payment
      */
     public function recharge(): array
     {
+        $prefix                   = Request::get('prefix');
+        $routeParams              = [
+                                     'platform_sign' => $this->payInfo['platformSign'],
+                                     'order_no'      => $this->payInfo['orderNo'],
+                                     'money'         => $this->payInfo['money'],
+                                    ];
+        $payOnlineUrl             = route(
+            $prefix . '.recharge.load-online',
+            $routeParams,
+        );
+        $this->returnData['url']  = $payOnlineUrl;
+        $this->returnData['mode'] = self::MODE_JUMP;
+        return $this->returnData;
+    }
+
+    /**
+     * @return array<string,string>
+     * @throws \Exception Exception.
+     */
+    protected function getData(): array
+    {
         $data                 = [];
         $data['pay_memberid'] = $this->payInfo['merchantCode'];
-        $platformNeedNo       = date('YmdHis') . $this->payInfo['orderNo'];
+        $platformNeedNo       = time() . $this->payInfo['orderNo'];
         $this->setPlatformNeedNo($platformNeedNo);
         $data['pay_orderid']     = $platformNeedNo;
         $data['pay_applydate']   = date('Y-m-d H:i:s');
@@ -54,9 +79,6 @@ class TdPay extends Base implements Payment
             '天道支付(支付宝扫码) 请求数据信息',
             $data,
         );
-        $html                           = $this->generateRedirectPayString($data, 'post');
-        $this->returnData['payContent'] = $html;
-        $this->returnData['mode']       = self::MODE_HTML;
         $this->writeLog(
             'finance-recharge-sign',
             $this->payInfo['orderNo'],
@@ -66,7 +88,60 @@ class TdPay extends Base implements Payment
              'sign'       => $sign,
             ],
         );
-        return $this->returnData;
+        return $data;
+    }
+
+
+    /**
+     * Post Redirect Function.
+     * @throws \RuntimeException Exception.
+     * @return string
+     */
+    public function postRedirect(): string
+    {
+        $retLog     = [];
+        $resultJson = [];
+        $resultBody = null;
+        for ($i = 0; $i <= 100; $i++) {
+            $data       = $this->getData();
+            $response   = Http::asForm()->post($this->payInfo['requestUrl'], $data);
+            $resultBody = $response->body();
+            $resultJson = $response->json();
+            $retLog     = [
+                           'ok'          => $response->ok(),
+                           'successful'  => $response->successful(),
+                           'status'      => $response->status(),
+                           'headers'     => $response->headers(),
+                           'body'        => $resultBody,
+                           'JsonBody'    => $resultJson,
+                           'serverError' => $response->serverError(),
+                           'clientError' => $response->clientError(),
+                          ];
+            if ($resultJson['status'] !== 'error') {
+                break;
+            }
+            Log::info('失败数据', $retLog);
+        }
+        Log::info('请求100次之后的数据', $retLog);
+
+        if ($resultJson['status'] === 'error') {
+            $this->_setOrderFail();
+            throw new \RuntimeException($resultJson['msg'], 403);
+        }
+        if ($resultBody === null) {
+            $this->_setOrderFail();
+            throw new \RuntimeException('TD-OW000');
+        }
+        return $resultBody;
+    }
+
+    /**
+     * @return boolean
+     */
+    private function _setOrderFail(): bool
+    {
+        $this->order->status = UsersRechargeOrder::STATUS_ONLINE_FAIL;
+        return $this->order->save();
     }
 
     /**

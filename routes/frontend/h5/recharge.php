@@ -54,5 +54,13 @@ Route::group(
              'confirm',
             ],
         )->name($namePrefix . 'confirm');
+       //确认线上支付
+        Route::get(
+            'load-online/{platform_sign}/{order_no}/{money}',
+            [
+             RechargeController::class,
+             'loadOnline',
+            ],
+        )->name($namePrefix . 'load-online');
     },
 );
