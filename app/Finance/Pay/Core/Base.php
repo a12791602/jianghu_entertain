@@ -44,6 +44,15 @@ abstract class Base implements Payment
                       ];
 
     /**
+     * Signature For SingBefore and After
+     * @var string[]
+     */
+    public $signature = [
+                         'before' => '',
+                         'after'  => '',
+                        ];
+
+    /**
      * request mode 为 0 时 返回的数据.
      *
      * @var array $returnData
