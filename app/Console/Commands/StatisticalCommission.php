@@ -7,7 +7,6 @@ use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUser;
 use App\Models\Report\ReportDayUserCommission;
 use App\Models\Report\ReportDayUserGameCommission;
-use App\Models\Report\ReportDayUserGameVendor;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersCommissionConfig;
 use Carbon\Carbon;
@@ -87,43 +86,45 @@ class StatisticalCommission extends Command
     ): float {
         $userRebate = 0; //用户个人报表的洗码奖金总额
         foreach ($vendorGroupProject as $vendorSign => $itemVendorProject) {
-            $vendSign           = (string) $vendorSign; //钩子认定foreach的key是int类型，所以做下转换
-            $itemVendorbetSum   = $itemVendorProject->sum('bet_money');
-            $percent            = UsersCommissionConfig::getCommissionPercent($user, $vendSign, $itemVendorbetSum);
+            $vendorSign         = (string) $vendorSign; //钩子认定foreach的key是int类型，所以做下转换
             $vendorBetSum       = 0;
             $vendorEffectiveBet = 0;
-            $rebateSum          = 0;
+            $vendorRebateSum    = 0;
             $projectId          = [];
             foreach ($itemVendorProject->groupBy('game_sign') as $gameSign => $itemGameProject) {
                 $gameEffectiveBet = $this->_getGameEffectiveBet($itemGameProject);
                 $gamebetSum       = $itemGameProject->sum('bet_money');
-                $gameRebateSum    = $gameEffectiveBet * $percent / 100;
-                ReportDayUserGameCommission::saveReport(
+                $rebatePercent    = UsersCommissionConfig::getCommissionPercent($user, $vendorSign, $gamebetSum);
+                $gameRebateSum    = $gameEffectiveBet * $rebatePercent / 100;
+                $saveGameRebate   = ReportDayUserGameCommission::saveReport(
                     $user,
-                    $vendSign,
+                    $vendorSign,
                     $gameSign,
                     $gamebetSum,
                     $gameEffectiveBet,
                     $gameRebateSum,
                     $reportDay,
                 );
+                if ($saveGameRebate === false) {
+                    DB::rollback();
+                    continue;
+                }
                 $projectId           = Arr::collapse([$projectId, $itemGameProject->pluck('id')->toArray()]);
                 $vendorBetSum       += $gamebetSum;
                 $vendorEffectiveBet += $gameEffectiveBet;
-                $rebateSum          += $gameRebateSum;
+                $vendorRebateSum    += $gameRebateSum;
                 $userRebate         += $gameRebateSum;
             }//end foreach
             $saveUserRebate   = ReportDayUserCommission::saveReport(
                 $user,
-                $vendSign,
+                $vendorSign,
                 $vendorBetSum,
                 $vendorEffectiveBet,
-                $rebateSum,
+                $vendorRebateSum,
                 $reportDay,
             );
-            $saveVendorRebate = ReportDayGameVendor::saveRebateReport($vendSign, $reportDay, $rebateSum);
-            $userVendorRebate = ReportDayUserGameVendor::saveRebate($user, $vendSign, $reportDay, $rebateSum, $percent);
-            if ($saveUserRebate === false || $saveVendorRebate === false || $userVendorRebate === false) {
+            $saveVendorRebate = ReportDayGameVendor::saveRebateReport($vendorSign, $reportDay, $vendorRebateSum);
+            if ($saveUserRebate === false || $saveVendorRebate === false) {
                 DB::rollback();
                 continue;
             }
