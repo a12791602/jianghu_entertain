@@ -5,16 +5,15 @@ namespace App\Http\Controllers\FrontendApi\Common;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\Common\FrontendUser\AccountDestroyRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\AliPayBindingRequest;
-use App\Http\Requests\Frontend\Common\FrontendUser\AliPayFirstBindingRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\BankCardBindingRequest;
-use App\Http\Requests\Frontend\Common\FrontendUser\BankCardFirstBindingRequest;
+use App\Http\Requests\Frontend\Common\FrontendUser\FundPasswordRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\ReportRequest;
 use App\Http\Requests\Frontend\Common\FrontendUser\WithdrawalRequest;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountDestroyAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AccountListAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\AliPayBindingAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\BankCardBindingAction;
-use App\Http\SingleActions\Frontend\Common\AccountManagement\FundPasswordCheckAction;
+use App\Http\SingleActions\Frontend\Common\AccountManagement\FundPasswordAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\ReportAction;
 use App\Http\SingleActions\Frontend\Common\AccountManagement\WithdrawalAction;
 use App\Http\SingleActions\Frontend\Common\VerificationCode\PrivateVerificationCodeAction;
@@ -53,20 +52,6 @@ class AccountManagementController extends Controller
     }
 
     /**
-     * Binding bank card.
-     * @param BankCardBindingAction       $action  BankCardBindingAction.
-     * @param BankCardFirstBindingRequest $request BankCardFirstBindingRequest.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function bankCardFirstBinding(
-        BankCardBindingAction $action,
-        BankCardFirstBindingRequest $request
-    ): JsonResponse {
-        return $action->firstExecute($request);
-    }
-
-    /**
      *  Binding AliPay.
      * @param AliPayBindingAction  $action  AliPayBindingAction.
      * @param AliPayBindingRequest $request AliPayAddRequest.
@@ -81,20 +66,6 @@ class AccountManagementController extends Controller
     }
 
     /**
-     *  First binding AliPay.
-     * @param AliPayBindingAction       $action  AliPayBindingAction.
-     * @param AliPayFirstBindingRequest $request AliPayFirstBindingRequest.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function aliPayFirstBinding(
-        AliPayBindingAction $action,
-        AliPayFirstBindingRequest $request
-    ): JsonResponse {
-        return $action->firstExecute($request);
-    }
-
-    /**
      *  Destroy account.
      * @param AccountDestroyAction  $action  AccountDestroyAction.
      * @param AccountDestroyRequest $request AccountDestroyRequest.
@@ -106,17 +77,6 @@ class AccountManagementController extends Controller
         AccountDestroyRequest $request
     ): JsonResponse {
         return $action->execute($request);
-    }
-
-    /**
-     * Account fund password check.
-     * @param FundPasswordCheckAction $action FundPasswordCheckAction.
-     * @return JsonResponse
-     * @throws \Exception Exception.
-     */
-    public function fundPasswordCheck(FundPasswordCheckAction $action): JsonResponse
-    {
-        return $action->execute();
     }
 
     /**
@@ -152,6 +112,20 @@ class AccountManagementController extends Controller
      */
     public function report(ReportRequest $request, ReportAction $action): JsonResponse
     {
+        $validated = $request->validated();
+        return $action->execute($validated);
+    }
+
+    /**
+     * Set the user's fund password.
+     * @param FundPasswordAction  $action  FundPasswordCheckAction.
+     * @param FundPasswordRequest $request FundPasswordRequest.
+     * @return JsonResponse
+     */
+    public function fundPassword(
+        FundPasswordAction $action,
+        FundPasswordRequest $request
+    ): JsonResponse {
         $validated = $request->validated();
         return $action->execute($validated);
     }

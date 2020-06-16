@@ -23,6 +23,11 @@ class AccountListResource extends BaseResource
     private $code;
 
     /**
+     * @var integer $type 账户类型.
+     */
+    private $type;
+
+    /**
      * @var string $owner_name Owner_name.
      */
     private $owner_name;
@@ -44,6 +49,7 @@ class AccountListResource extends BaseResource
         return [
                 'id'                 => $this->id,
                 'code'               => $this->code,         // 银行编码
+                'type'               => $this->type,         // 账户类型
                 'owner_name'         => $this->owner_name,   // 名称
                 'card_number_hidden' => $this->card_number_hidden, // 卡号
                ];

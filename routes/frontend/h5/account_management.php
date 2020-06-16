@@ -15,13 +15,13 @@ Route::group(
             ->name($namePrefix . 'bank-card.binding');
         Route::post('alipay/binding', [AccountManagementController::class, 'aliPayBinding'])
             ->name($namePrefix . 'alipay.binding');
-        Route::get('fund-password/check', [AccountManagementController::class, 'fundPasswordCheck'])
-            ->name($namePrefix . 'fund-password.check');
         Route::post('destroy', [AccountManagementController::class, 'accountDestroy'])->name($namePrefix . 'destroy');
         Route::post('destroy/verification-code', [AccountManagementController::class, 'accountDestroyVerificationCode'])
             ->name($namePrefix . 'destroy.verification-code');
         Route::post('withdrawal', [AccountManagementController::class, 'withdrawal'])->name($namePrefix . 'withdrawal');
         //用户报表（账变明细 充值记录 提现记录）
         Route::post('report', [AccountManagementController::class, 'report'])->name($namePrefix . 'report');
+        Route::post('fund-password', [AccountManagementController::class, 'fundPassword'])
+            ->name($namePrefix . 'fund-password');
     },
 );
