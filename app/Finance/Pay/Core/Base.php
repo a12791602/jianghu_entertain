@@ -49,11 +49,11 @@ abstract class Base implements Payment
      * @var array $returnData
      */
     public $returnData = [
-                          'orderNo'    => null, //系统订单号
-                          'payContent' => null, //付款信息
-                          'money'      => null, //订单金额
-                          'realMoney'  => null, //实际支付金额
-                          'mode'       => null, //展示方式
+                          'order_no' => null, //系统订单号 返回前端的字段所以是下划线
+//                          'payContent' => null, //付款信息
+                          'money'    => null, //订单金额
+//                          'realMoney'  => null, //实际支付金额
+                          'mode'     => null, //展示方式
                          ];
 
     /**

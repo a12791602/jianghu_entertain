@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\H5\Recharge\CancelRequest;
 use App\Http\Requests\Frontend\H5\Recharge\ChannelsRequest;
 use App\Http\Requests\Frontend\H5\Recharge\ConfirmRequest;
+use App\Http\Requests\Frontend\H5\Recharge\LoadOnlineRequest;
 use App\Http\Requests\Frontend\H5\Recharge\RechargeRequest;
 use App\Http\Requests\Frontend\H5\Recharge\TypesRequest;
 use App\Http\SingleActions\Frontend\H5\Recharge\CancelAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\ChannelsAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\ConfirmAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\GetFinanceInfoAction;
+use App\Http\SingleActions\Frontend\H5\Recharge\LoadOnlineAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\RechargeAction;
 use App\Http\SingleActions\Frontend\H5\Recharge\TypesAction;
 use Illuminate\Http\JsonResponse;
@@ -59,6 +61,19 @@ class RechargeController extends Controller
     {
         $inputData       = $request->validated();
         $inputData['ip'] = $request->ip();
+        return $action->execute($inputData);
+    }
+
+    /**
+     * 发起充值
+     * @param LoadOnlineAction  $action  Action.
+     * @param LoadOnlineRequest $request Request.
+     * @throws \Exception Exception.
+     * @return mixed
+     */
+    public function loadOnline(LoadOnlineAction $action, LoadOnlineRequest $request)
+    {
+        $inputData = $request->validated();
         return $action->execute($inputData);
     }
 

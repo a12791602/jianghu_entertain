@@ -23,12 +23,13 @@ class CreateReportDayUserCommissionsTable extends Migration
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
                 $table->string('platform_sign', 10)->comment('平台标记');
-                $table->string('mobile', 11)->nullable()->default(null)->comment('用户账号（手机号码）');
-                $table->string('guid', 16)->nullable()->default(null)->comment('用户游戏唯一标识id');
-                $table->string('game_vendor_sign', 32)->nullable()->default(null)->comment('游戏厂商标识');
-                $table->decimal('bet', 18, 4)->nullable()->default(null)->comment('下注金额');
-                $table->decimal('effective_bet', 18, 4)->nullable()->default(null)->comment('有效下注金额');
-                $table->decimal('rebate', 18, 4)->nullable()->default(null)->comment('洗码返利');
+                $table->string('mobile', 11)->comment('用户账号（手机号码）');
+                $table->string('guid', 16)->comment('用户游戏唯一标识id');
+                $table->string('game_vendor_sign', 32)->comment('游戏厂商标识');
+                $table->decimal('bet', 18, 4)->nullable()->default(0)->comment('下注金额');
+                $table->decimal('effective_bet', 18, 4)->nullable()->default(0)->comment('有效下注金额');
+                $table->decimal('rebate', 18, 4)->nullable()->default(0)->comment('洗码返利');
+                $table->decimal('percent', 18, 4)->nullable()->default(0)->comment('洗码返利（百分比）');
                 $table->date('day')->comment('日期');
                 $table->nullableTimestamps();
             },

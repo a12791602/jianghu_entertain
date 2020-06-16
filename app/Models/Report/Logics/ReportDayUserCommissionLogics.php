@@ -14,6 +14,7 @@ trait ReportDayUserCommissionLogics
      * @param  float           $betMoney       下注金额.
      * @param  float           $effectiveBet   有效下注金额.
      * @param  float           $rebate         洗码金额.
+     * @param  float           $percent        洗码比例.
      * @param  CarbonInterface $reportDay      报表日期.
      * @return boolean
      */
@@ -23,6 +24,7 @@ trait ReportDayUserCommissionLogics
         float $betMoney,
         float $effectiveBet,
         float $rebate,
+        float $percent,
         CarbonInterface $reportDay
     ): bool {
         $filterArr        = [
@@ -42,6 +44,7 @@ trait ReportDayUserCommissionLogics
                                  'bet'              => $betMoney,
                                  'effective_bet'    => $effectiveBet,
                                  'rebate'           => $rebate,
+                                 'percent'          => $percent,
                                  'day'              => $reportDay,
                                 ];
             $commissionReport->fill($addData);
