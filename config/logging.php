@@ -127,9 +127,9 @@ return [
                                                     ],
 
                           //记录签名前后数据
-                       'finance-recharge-sign'   => [
+                       'finance-recharge-detail' => [
                                                      'driver' => 'daily',
-                                                     'path'   => storage_path('logs/finance/recharge/sign.log'),
+                                                     'path'   => storage_path('logs/finance/recharge/requestDetail.log'),
                                                      'level'  => 'debug',
                                                      'days'   => 14,
                                                     ],
