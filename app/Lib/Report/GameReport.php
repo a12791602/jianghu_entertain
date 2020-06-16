@@ -7,6 +7,7 @@ use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayPlatformGame;
 use App\Models\Report\ReportDayPlatformGameVendor;
 use App\Models\Report\ReportDayUser;
+use App\Models\Report\ReportDayUserGameVendor;
 
 /**
  * 游戏报表相关
@@ -25,6 +26,11 @@ class GameReport
         //用户日报表
         $saveUserReport = ReportDayUser::saveGameReport($gameProject);
         if ($saveUserReport !== true) {
+            return false;
+        }
+        //用户游戏厂商统计日报表
+        $saveUserVendorReport = ReportDayUserGameVendor::saveGameReport($gameProject);
+        if ($saveUserVendorReport !== true) {
             return false;
         }
         //代理平台游戏报表
