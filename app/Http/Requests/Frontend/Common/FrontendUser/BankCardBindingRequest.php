@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Common\FrontendUser;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\FrontendUsersBankCard;
 use App\Rules\Frontend\AccountManagement\AccountUnique;
 
 /**
@@ -11,6 +12,12 @@ use App\Rules\Frontend\AccountManagement\AccountUnique;
  */
 class BankCardBindingRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 需要依赖模型中的字段备注信息
+     */
+    protected $dependentModels = [FrontendUsersBankCard::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -45,21 +52,7 @@ class BankCardBindingRequest extends BaseFormRequest
                                   new AccountUnique($this),
                                  ],
                 'code'        => 'alpha|required',  // 银行编码
-                'bank_id'     => 'integer|required', // 银行 id
-               ];
-    }
-
-    /**
-     * Get custom messages for validator errors.
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'owner_name.required'        => '姓名不能为空。',
-                'branch.regex'               => '开户行输入有误，请重新输入。',
-                'card_number.digits_between' => '卡号输入有误，请重新输入。',
-                'owner_name.regex'           => '姓名输入有误，请重新输入。',
+                'bank_id'     => 'integer|required|exists:system_banks,id', // 银行 id
                ];
     }
 }

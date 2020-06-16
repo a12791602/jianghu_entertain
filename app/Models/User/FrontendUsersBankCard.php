@@ -38,10 +38,14 @@ class FrontendUsersBankCard extends BaseModel
      * @var array
      */
     public static $fieldDefinition = [
-                                      'user_id'    => '用户ID',
-                                      'mobile'     => '手机号码',
-                                      'bank_id'    => '银行名称',
-                                      'created_at' => '绑定时间',
+                                      'user_id'     => '用户ID',
+                                      'branch'      => '支行',
+                                      'owner_name'  => '支行',
+                                      'card_number' => '卡号',
+                                      'code'        => '银行编码',
+                                      'mobile'      => '手机号码',
+                                      'bank_id'     => '银行名称',
+                                      'created_at'  => '绑定时间',
                                      ];
 
     /**

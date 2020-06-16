@@ -33,6 +33,9 @@ class FrontendUser extends BaseAuthModel
     public const IS_TESTER_NO  = 0;
     public const TYPE_USER     = 1;
     public const TYPE_AGENCY   = 2;
+    // 是否设置了资金密码 0否 1是
+    public const FUND_PASSWORD_SET   = 1;
+    public const FUND_PASSWORD_UNSET = 0;
 
     /**
      *  账户状态->正常
