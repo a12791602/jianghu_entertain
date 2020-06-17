@@ -4,18 +4,18 @@ namespace App\Models\Report;
 
 use App\Models\BaseAuthModel;
 use App\Models\Game\GameVendor;
-use App\Models\Report\Logics\ReportDayUserCommissionLogics;
+use App\Models\Report\Logics\ReportDayUserRebateLogics;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * 用户单个游戏厂商洗码日报表
  */
-class ReportDayUserCommission extends BaseAuthModel
+class ReportDayUserRebate extends BaseAuthModel
 {
     /**
-     * ReportDayUserCommissionLogics
+     * ReportDayUserRebateLogics
      */
-    use ReportDayUserCommissionLogics;
+    use ReportDayUserRebateLogics;
     
     /**
      * @var array $guarded
