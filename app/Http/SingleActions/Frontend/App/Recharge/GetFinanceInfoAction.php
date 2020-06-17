@@ -2,6 +2,8 @@
 
 namespace App\Http\SingleActions\Frontend\App\Recharge;
 
+use App\Http\Resources\Frontend\Common\TopUp\OfflineInfoResource;
+use App\Http\Resources\Frontend\Common\TopUp\OnlineInfoResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceType;
 use App\Models\User\FrontendUser;
@@ -27,37 +29,34 @@ class GetFinanceInfoAction extends MainAction
         $data['platform_sign'] = $this->user->platform_sign;
         $data['status']        = SystemFinanceType::STATUS_YES;
         $data['direction']     = SystemFinanceType::DIRECTION_IN;
-        $items                 = SystemFinanceType::filter($data)->get(['id', 'name', 'sign', 'is_online']);
-        $result                = $items->map(
-            static function ($item) {
-                $offlineChannels = $item->offlineInfos->filter();
-                $offline_item    = null;
-                if ($offlineChannels->isNotEmpty()) {
-                    $offline_info = $offlineChannels->random();
-                    $offline_item = [
-                                     'id'          => $offline_info->id,
-                                     'account'     => $offline_info->account,
-                                     'branch'      => $offline_info->branch,
-                                     'username'    => $offline_info->username,
-                                     'type_id'     => $offline_info->type_id,
-                                     'min_amount'  => (float) sprintf('%.2f', $offline_info->min_amount),
-                                     'max_amount'  => (float) sprintf('%.2f', $offline_info->max_amount),
-                                     'service_fee' => (float) sprintf('%.2f', $offline_info->service_fee),
-                                     'bank'        => $offline_info->bank()->select(['id', 'name', 'code'])->first(),
-                                    ];
-                }//end if
-                return [
-                        'id'               => $item->id,
-                        'name'             => $item->name,
-                        'sign'             => $item->sign,
-                        'transfer_account' => $offline_item,
-                       ];
-            },
-            );
         $fresult               = [
-                                  'online_infos'  => [],
-                                  'offline_infos' => $result,
+                                  'online_infos'  => $this->_onlineInfo($data),
+                                  'offline_infos' => $this->_offlineInfos($data),
                                  ];
         return msgOut($fresult);
+    }
+
+    /**
+     * Get OffilneInfos.
+     * @param array $data Data.
+     * @return mixed
+     */
+    private function _offlineInfos(array $data)
+    {
+        $data['is_online'] = SystemFinanceType::IS_ONLINE_NO;
+        $items             = SystemFinanceType::filter($data)->get(['id', 'name', 'sign']);
+        return OfflineInfoResource::collection($items);
+    }
+
+    /**
+     * Get OnlineInfos.
+     * @param array $data Data.
+     * @return mixed
+     */
+    private function _onlineInfo(array $data)
+    {
+        $data['is_online'] = SystemFinanceType::IS_ONLINE_YES;
+        $items             = SystemFinanceType::filter($data)->get(['id', 'name', 'sign']);
+        return OnlineInfoResource::collection($items);
     }
 }
