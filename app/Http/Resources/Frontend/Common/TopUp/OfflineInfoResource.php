@@ -28,11 +28,6 @@ class OfflineInfoResource extends BaseResource
         }
         $offlineInfo = null;
         $bank        = null;
-        $data        = [
-                        'id'   => $financeType->id,
-                        'name' => $financeType->name,
-                        'sign' => $financeType->sign,
-                       ];
         if ($financeType->offlineInfos()->exists()) {
             $offlineInfo              = $financeType->offlineInfos()->get(
                 [
@@ -52,7 +47,12 @@ class OfflineInfoResource extends BaseResource
             $offlineInfo->service_fee = floatDC($offlineInfo->service_fee);
             $bank                     = $offlineInfo->bank()->select('id', 'name', 'code')->first();
         }
-        $data['transfer_account']         = $offlineInfo;
+        $data                             = [
+                                             'id'               => $financeType->id,
+                                             'name'             => $financeType->name,
+                                             'sign'             => $financeType->sign,
+                                             'transfer_account' => $offlineInfo,
+                                            ];
         $data['transfer_account']['bank'] = $bank;
         return $data;
     }
