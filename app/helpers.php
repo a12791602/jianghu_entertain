@@ -405,3 +405,14 @@ function getJHHYUrl(string $path, string $type)
 {
     return Storage::disk($type)->url($path);
 }
+
+/**
+ * 转换浮点
+ * @param  string       $field     需要转换的字段.
+ * @param integer|null $precision 要转换的浮点.
+ * @return string
+ */
+function floatDC(string $field, ?int $precision = 2): string
+{
+     return sprintf('%.' . $precision . 'f', $field);
+}
