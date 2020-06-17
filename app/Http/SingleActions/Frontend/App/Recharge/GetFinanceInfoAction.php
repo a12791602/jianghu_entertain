@@ -2,13 +2,10 @@
 
 namespace App\Http\SingleActions\Frontend\App\Recharge;
 
-use App\Http\Resources\Frontend\Common\TopUp\FinanceInfoResource;
 use App\Http\SingleActions\MainAction;
-use App\Models\Finance\SystemFinanceOfflineInfo;
-use App\Models\Finance\SystemFinanceOnlineInfo;
 use App\Models\Finance\SystemFinanceType;
+use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Collection;
 
 /**
  * Class GetFinanceInfoAction
@@ -22,111 +19,45 @@ class GetFinanceInfoAction extends MainAction
      */
     public function execute(): JsonResponse
     {
+        if (!$this->user instanceof FrontendUser) {
+            throw new \Exception('100505');//用户不存在
+        }
         $data                  = [];
         $data['tag_id']        = $this->user->user_tag_id;
         $data['platform_sign'] = $this->user->platform_sign;
         $data['status']        = SystemFinanceType::STATUS_YES;
         $data['direction']     = SystemFinanceType::DIRECTION_IN;
-        $item                  = SystemFinanceType::with(
-            [
-             'onlineInfos'  => static function ($query) use ($data): object {
-                 $query = self::getOnlineInfos($query, $data);
-                 return $query;
-             },
-             'offlineInfos' => static function ($query): object {
-                 $query = self::getOfflineInfos($query);
-                 return $query;
-             },
-            ],
-        )->filter($data)->get(['id', 'name', 'sign', 'is_online']);
-        $item->map(
-            function ($item): void {
-                if (!$item->offlineInfos instanceof Collection) {
-                    return;
-                }
-                $item->offlineInfos->transform(
-                    function ($item): ?SystemFinanceOfflineInfo {
-                        if (in_array($this->user->userTag->id, $item->tags->tag_id)) {
-                            return $item;
-                        }
-                        return null;
-                    },
-                );
-            },
-        );
-        return msgOut(FinanceInfoResource::collection($item));
-    }
-
-    /**
-     * 获取线上支付信息.
-     *
-     * @param object $query      Query.
-     * @param array  $inputDatas InputDatas.
-     * @return object
-     */
-    protected static function getOnlineInfos(object $query, array $inputDatas): object
-    {
-        //搜索的条件
-        $whereConditions = [
-                            'platform_sign'                      => $inputDatas['platform_sign'],
-                            'system_finance_online_infos.status' => SystemFinanceOnlineInfo::STATUS_YES,
-                           ];
-        //返回的字段
-        $returnField = [
-                        'system_finance_online_infos.id',
-                        'frontend_name',
-                        'frontend_remark',
-                        'min_amount',
-                        'max_amount',
-                        'handle_fee',
-                        'merchant_no',
-                        'system_finance_online_infos.desc',
+        $items                 = SystemFinanceType::filter($data)->get(['id', 'name', 'sign', 'is_online']);
+        $result                = $items->map(
+            static function ($item) {
+                $offlineChannels = $item->offlineInfos->filter();
+                $offline_item    = null;
+                if ($offlineChannels->isNotEmpty()) {
+                    $offline_info = $offlineChannels->random();
+                    $offline_item = [
+                                     'id'          => $offline_info->id,
+                                     'account'     => $offline_info->account,
+                                     'branch'      => $offline_info->branch,
+                                     'username'    => $offline_info->username,
+                                     'type_id'     => $offline_info->type_id,
+                                     'min_amount'  => (float) sprintf('%.2f', $offline_info->min_amount),
+                                     'max_amount'  => (float) sprintf('%.2f', $offline_info->max_amount),
+                                     'service_fee' => (float) sprintf('%.2f', $offline_info->service_fee),
+                                     'bank'        => $offline_info->bank()->select(['id', 'name', 'code'])->first(),
+                                    ];
+                }//end if
+                return [
+                        'id'               => $item->id,
+                        'name'             => $item->name,
+                        'sign'             => $item->sign,
+                        'transfer_account' => $offline_item,
                        ];
-        $query->whereHas(
-            'tags',
-            static function ($query) use ($inputDatas): object {
-                $query = $query->where(
-                    [
-                     'tag_id'    => $inputDatas['tag_id'],
-                     'is_online' => SystemFinanceType::IS_ONLINE_YES,
-                    ],
-                );
-                return $query;
             },
-        )->where($whereConditions)->select($returnField);
-        return $query;
-    }
-
-    /**
-     * 获取线下支付信息.
-     *
-     * @param object $query Query.
-     * @return object
-     */
-    protected static function getOfflineInfos(object $query): object
-    {
-        //搜索的条件
-        $whereConditions = ['status' => SystemFinanceOfflineInfo::STATUS_YES];
-        //返回的字段
-        $returnField = [
-                        'id',
-                        'account',
-                        'branch',
-                        'username',
-                        'bank_id',
-                        'type_id',
-                        'name',
-                        'remark',
-                        'min_amount',
-                        'max_amount',
-                        'service_fee',
-                       ];
-        $query->with('bank:id,name,code')->whereHas(
-            'tags',
-            static function ($query): object {
-                return $query->where(['is_online' => SystemFinanceType::IS_ONLINE_NO]);
-            },
-        )->where($whereConditions)->select($returnField)->orderByDesc('id');
-        return $query;
+            );
+        $fresult               = [
+                                  'online_infos'  => [],
+                                  'offline_infos' => $result,
+                                 ];
+        return msgOut($fresult);
     }
 }

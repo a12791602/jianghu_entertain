@@ -91,6 +91,7 @@ trait CommonUnit
         string $msgs,
         array $data = []
     ): void {
-        Log::channel($channel)->info(['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
+        $infoMsg = '用户id: ' . $this->order->user_id;
+        Log::channel($channel)->info($infoMsg, ['orderNo' => $orderNo, 'msg' => $msgs, 'data' => $data]);
     }
 }
