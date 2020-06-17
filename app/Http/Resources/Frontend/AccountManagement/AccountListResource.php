@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Frontend\AccountManagement;
 
 use App\Http\Resources\BaseResource;
+use App\Models\Finance\SystemPlatformBank;
 use Illuminate\Http\Request;
 
 /**
@@ -28,6 +29,11 @@ class AccountListResource extends BaseResource
     private $type;
 
     /**
+     * @var SystemPlatformBank $bank 银行卡信息.
+     */
+    private $bank;
+
+    /**
      * @var string $owner_name Owner_name.
      */
     private $owner_name;
@@ -50,6 +56,7 @@ class AccountListResource extends BaseResource
                 'id'                 => $this->id,
                 'code'               => $this->code,         // 银行编码
                 'type'               => $this->type,         // 账户类型
+                'bank'               => $this->bank->bank->name ?? null, // 银行名称
                 'owner_name'         => $this->owner_name,   // 名称
                 'card_number_hidden' => $this->card_number_hidden, // 卡号
                ];
