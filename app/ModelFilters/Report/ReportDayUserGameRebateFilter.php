@@ -5,9 +5,9 @@ namespace App\ModelFilters\Report;
 use EloquentFilter\ModelFilter;
 
 /**
- * 用户单个游戏厂商洗码日报表
+ * 用户单个游戏洗码日报表
  */
-class ReportDayUserCommissionFilter extends ModelFilter
+class ReportDayUserGameRebateFilter extends ModelFilter
 {
 
     /**
@@ -16,17 +16,17 @@ class ReportDayUserCommissionFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = ['game' => ['game_name']];
 
     /**
-     * 游戏厂商标识
+     * 游戏标识
      *
-     * @param  string $sign 游戏厂商标识.
+     * @param  string $sign 游戏标识.
      * @return self
      */
-    public function gameVendorSign(string $sign): self
+    public function gameSign(string $sign): self
     {
-        return $this->where('game_vendor_sign', $sign);
+        return $this->where('game_sign', $sign);
     }
 
     /**
@@ -56,17 +56,6 @@ class ReportDayUserCommissionFilter extends ModelFilter
     public function guid(string $guid): self
     {
         return $this->where('guid', $guid);
-    }
-
-    /**
-     * 会员账号.
-     *
-     * @param string $mobile 会员账号.
-     * @return self
-     */
-    public function mobile(string $mobile): self
-    {
-        return $this->where('mobile', $mobile);
     }
 
     /**

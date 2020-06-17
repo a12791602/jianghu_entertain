@@ -5,33 +5,33 @@ namespace App\Models\Report\Logics;
 use App\Models\User\FrontendUser;
 use Carbon\CarbonInterface;
 
-trait ReportDayUserCommissionLogics
+trait ReportDayUserGameRebateLogics
 {
     /**
-     * 保存和更新用户日总报表
+     * 保存和更新日报表
      * @param  FrontendUser    $user           用户.
      * @param  string          $gameVendorSign 游戏厂商标识.
+     * @param  string          $gameSign       游戏标识.
      * @param  float           $betMoney       下注金额.
      * @param  float           $effectiveBet   有效下注金额.
      * @param  float           $rebate         洗码金额.
-     * @param  float           $percent        洗码比例.
      * @param  CarbonInterface $reportDay      报表日期.
      * @return boolean
      */
     public static function saveReport(
         FrontendUser $user,
         string $gameVendorSign,
+        string $gameSign,
         float $betMoney,
         float $effectiveBet,
         float $rebate,
-        float $percent,
         CarbonInterface $reportDay
     ): bool {
         $filterArr        = [
-                             'platform_sign'    => $user->platform_sign,
-                             'game_vendor_sign' => $gameVendorSign,
-                             'guid'             => $user->guid,
-                             'report_day'       => [$reportDay],
+                             'platform_sign' => $user->platform_sign,
+                             'guid'          => $user->guid,
+                             'game_sign'     => $gameSign,
+                             'report_day'    => [$reportDay],
                             ];
         $commissionReport = self::filter($filterArr)->first();
         if ($commissionReport === null) {
@@ -41,10 +41,10 @@ trait ReportDayUserCommissionLogics
                                  'mobile'           => $user->mobile,
                                  'guid'             => $user->guid,
                                  'game_vendor_sign' => $gameVendorSign,
+                                 'game_sign'        => $gameSign,
                                  'bet'              => $betMoney,
                                  'effective_bet'    => $effectiveBet,
                                  'rebate'           => $rebate,
-                                 'percent'          => $percent,
                                  'day'              => $reportDay,
                                 ];
             $commissionReport->fill($addData);

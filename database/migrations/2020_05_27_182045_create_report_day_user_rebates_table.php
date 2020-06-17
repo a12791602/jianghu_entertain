@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateReportDayUserCommissionsTable
+ * Class CreateReportDayUserRebatesTable
  */
-class CreateReportDayUserCommissionsTable extends Migration
+class CreateReportDayUserRebatesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateReportDayUserCommissionsTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'report_day_user_commissions',
+            'report_day_user_rebates',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -34,7 +34,7 @@ class CreateReportDayUserCommissionsTable extends Migration
                 $table->nullableTimestamps();
             },
         );
-        DB::statement("ALTER TABLE `report_day_user_commissions` comment '用户洗码日总报表'");
+        DB::statement("ALTER TABLE `report_day_user_rebates` comment '用户洗码日总报表'");
     }
 
     /**
@@ -44,6 +44,6 @@ class CreateReportDayUserCommissionsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('report_day_user_commissions');
+        Schema::dropIfExists('report_day_user_rebates');
     }
 }
