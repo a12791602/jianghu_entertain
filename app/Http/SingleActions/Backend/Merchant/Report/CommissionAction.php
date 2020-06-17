@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayUserCommission;
+use App\Models\Report\ReportDayUserRebate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,14 +19,14 @@ class CommissionAction extends MainAction
     protected $model;
 
     /**
-     * @param ReportDayUserCommission $reportDayUserCommission 会员洗码日报表Model.
-     * @param Request                 $request                 Request.
+     * @param ReportDayUserRebate $reportDayUserRebate 会员洗码日报表Model.
+     * @param Request             $request             Request.
      * @throws \Exception Exception.
      */
-    public function __construct(ReportDayUserCommission $reportDayUserCommission, Request $request)
+    public function __construct(ReportDayUserRebate $reportDayUserRebate, Request $request)
     {
         parent::__construct($request);
-        $this->model = $reportDayUserCommission;
+        $this->model = $reportDayUserRebate;
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Frontend\Common\Commission;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayUserCommission;
+use App\Models\Report\ReportDayUserRebate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -14,20 +14,20 @@ class RebateAction extends MainAction
 {
 
     /**
-     * @var ReportDayUserCommission
+     * @var ReportDayUserRebate
      */
     protected $model;
 
     /**
-     * @param Request                 $request                 Request.
-     * @param ReportDayUserCommission $reportDayUserCommission ReportDayUserCommission.
+     * @param Request             $request             Request.
+     * @param ReportDayUserRebate $reportDayUserRebate ReportDayUserRebate.
      */
     public function __construct(
         Request $request,
-        ReportDayUserCommission $reportDayUserCommission
+        ReportDayUserRebate $reportDayUserRebate
     ) {
         parent::__construct($request);
-        $this->model = $reportDayUserCommission;
+        $this->model = $reportDayUserRebate;
     }
 
     /**

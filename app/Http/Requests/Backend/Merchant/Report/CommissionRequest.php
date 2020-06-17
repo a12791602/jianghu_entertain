@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Backend\Merchant\Report;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\Report\ReportDayUserCommission;
+use App\Models\Report\ReportDayUserRebate;
 
 /**
  * 会员洗码-列表
@@ -14,7 +14,7 @@ class CommissionRequest extends BaseFormRequest
     /**
      * @var array 需要依赖模型中的字段备注信息
      */
-    protected $dependentModels = [ReportDayUserCommission::class];
+    protected $dependentModels = [ReportDayUserRebate::class];
 
     /**
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】

@@ -5,8 +5,8 @@ namespace App\Console\Commands;
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUser;
-use App\Models\Report\ReportDayUserCommission;
-use App\Models\Report\ReportDayUserGameCommission;
+use App\Models\Report\ReportDayUserGameRebate;
+use App\Models\Report\ReportDayUserRebate;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersCommissionConfig;
 use Carbon\Carbon;
@@ -96,7 +96,7 @@ class StatisticalCommission extends Command
                 $gameEffectiveBet = $this->_getGameEffectiveBet($itemGameProject);
                 $gamebetSum       = $itemGameProject->sum('bet_money');
                 $gameRebateSum    = $gameEffectiveBet * $rebatePercent / 100;
-                $saveGameRebate   = ReportDayUserGameCommission::saveReport(
+                $saveGameRebate   = ReportDayUserGameRebate::saveReport(
                     $user,
                     $vendorSign,
                     $gameSign,
@@ -114,7 +114,7 @@ class StatisticalCommission extends Command
                 $vendorRebateSum    += $gameRebateSum;
                 $userRebate         += $gameRebateSum;
             }//end foreach
-            $saveUserRebate   = ReportDayUserCommission::saveReport(
+            $saveUserRebate   = ReportDayUserRebate::saveReport(
                 $user,
                 $vendorSign,
                 $vendorBetSum,
