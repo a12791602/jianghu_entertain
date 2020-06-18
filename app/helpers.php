@@ -112,7 +112,7 @@ function sendVerificationCode(string $mobile): array
     $currentReqTime   = Carbon::now()->timestamp;
     $nextReqTime      = Carbon::now()->addMinutes(1)->timestamp;
     $expiredAt        = now()->addMinutes(10);
-    $verification_key = 'verificationCode:' . Str::random(15);
+    $verification_key = Str::random(15);
 
     Cache::put($verification_key, ['mobile' => $mobile, 'verification_code' => $code], $expiredAt);
 
