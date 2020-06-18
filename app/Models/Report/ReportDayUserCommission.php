@@ -19,4 +19,9 @@ class ReportDayUserCommission extends BaseAuthModel
      * @var array $guarded
      */
     protected $guarded = ['id'];
+
+    /**
+     * @var array
+     */
+    public static $fieldDefinition = ['level' => '代理级别'];
 }
