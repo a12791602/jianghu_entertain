@@ -67,4 +67,15 @@ class ReportDayUserCommissionFilter extends ModelFilter
     {
         return $this->where('platform_sign', $platformSign);
     }
+
+    /**
+     * 代理层级.
+     *
+     * @param integer $level 代理层级.
+     * @return self
+     */
+    public function level(int $level): self
+    {
+        return $this->where('level', $level);
+    }
 }

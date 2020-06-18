@@ -359,6 +359,15 @@ class SystemRoutesH5Seeder extends Seeder
               'description'       => null,
               'is_open'           => 0,
              ],
+             [
+              'route_name'        => 'h5-api.commission.report',
+              'controller'        => null,
+              'method'            => 'report',
+              'frontend_model_id' => null,
+              'title'             => null,
+              'description'       => null,
+              'is_open'           => 0,
+             ],
             ],
         );
     }
