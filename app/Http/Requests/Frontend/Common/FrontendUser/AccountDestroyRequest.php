@@ -11,6 +11,17 @@ use App\Rules\Frontend\SecurityCodeCheckRule;
  */
 class AccountDestroyRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'card_id'           => '卡号ID',
+                                  'security_code'     => '安全码',
+                                  'owner_name'        => '姓名',
+                                  'verification_code' => '验证码',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -42,14 +53,5 @@ class AccountDestroyRequest extends BaseFormRequest
                 'verification_key'  => 'required|string',
                 'verification_code' => 'required',
                ];
-    }
-
-    /**
-     * Get custom messages for validator errors.
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return ['owner_name.regex' => '姓名输入有误，请重新输入。'];
     }
 }

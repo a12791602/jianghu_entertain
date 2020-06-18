@@ -10,6 +10,16 @@ use App\Http\Requests\BaseFormRequest;
  */
 class SecurityCodeRequest extends BaseFormRequest
 {
+
+    /**
+     * @var array 自定义字段 【此字段在数据库中没有的字段字典】
+     */
+    protected $extraDefinition = [
+                                  'security_code_old' => '当前安全码',
+                                  'security_code'     => '新安全码',
+                                  'verification_code' => '验证码',
+                                 ];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,25 +38,11 @@ class SecurityCodeRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
+                'security_code_old'          => 'required|digits:6',
                 'security_code'              => 'required|confirmed|digits:6',
                 'security_code_confirmation' => 'required|digits:6',
                 'verification_key'           => 'required|string',
                 'verification_code'          => 'required|string',
-               ];
-    }
-
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return [
-                'security_code.required'  => '安全码不能为空',
-                'security_code.confirmed' => '安全码两次输入不一致',
-                'security_code.digits'    => '安全码必须由6位数字组成',
                ];
     }
 }
