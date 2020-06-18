@@ -87,7 +87,8 @@ class PasswordController extends Controller
         SecurityCodeAction $action,
         SecurityCodeRequest $request
     ): JsonResponse {
-        return $action->execute($request);
+        $validated = $request->validated();
+        return $action->execute($validated);
     }
 
     /**
