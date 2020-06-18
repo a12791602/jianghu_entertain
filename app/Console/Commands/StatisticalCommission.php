@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUser;
+use App\Models\Report\ReportDayUserCommission;
 use App\Models\Report\ReportDayUserGameRebate;
 use App\Models\Report\ReportDayUserRebate;
 use App\Models\User\FrontendUser;
@@ -219,8 +220,16 @@ class StatisticalCommission extends Command
                 }
                 //保存用户佣金
                 $commission     = abs($userWinLose) * $commissionPercentage / 100;
-                $saveCommission = ReportDayUser::saveCommissionReport($agent, $reportDay, $commission);
-                if ($saveCommission !== true) {
+                $saveUserReport = ReportDayUser::saveCommissionReport($agent, $reportDay, $commission);
+                $saveCommission = ReportDayUserCommission::saveReport(
+                    $agent,
+                    $user,
+                    $userWinLose,
+                    $commission,
+                    $level,
+                    $reportDay,
+                );
+                if ($saveUserReport !== true || $saveCommission !== true) {
                     return false;
                 }
                 $vendorCommissionSum += $commission;
