@@ -71,7 +71,7 @@ class TdPay extends Base implements Payment
         $data['pay_bankcode']      = $this->channelSign;
         $data['pay_notifyurl']     = $this->payInfo['callbackUrl'];
         $data['pay_callbackurl']   = $this->payInfo['redirectUrl'];
-        $data['pay_amount']        = sprintf('%0.2f', $this->payInfo['money']);
+        $data['pay_amount']        = floatDC($this->payInfo['money']);
         $this->signature['before'] = $this->generateToBeSignedString(
             $data,
             'ksort',
