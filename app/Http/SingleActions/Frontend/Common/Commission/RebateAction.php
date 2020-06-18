@@ -63,12 +63,12 @@ class RebateAction extends MainAction
                        'game_vendor_name' => $item['game_vendor']['name'] ?? '',
                        'effective_bet'    => $item['effective_bet'],
                        'rebate'           => $item['rebate'],
-                       'percent'          => sprintf('%.2f', $item['percent']) . '%',
+                       'percent'          => $item['percent'],
                        'day'              => $item['day'],
                       ];
         }
-        $result['rebate_sum']     = (float) $rebateSum;
-        $result['rebate_current'] = (float) $rebateCurrent;
+        $result['rebate_sum']     = floatDC($rebateSum);
+        $result['rebate_current'] = floatDC($rebateCurrent);
         $result['data']           = $data;
         return msgOut($result);
     }
