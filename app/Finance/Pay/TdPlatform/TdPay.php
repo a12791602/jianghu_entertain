@@ -8,6 +8,7 @@ use App\Models\User\UsersRechargeOrder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Str;
 
 /**
  * Class TdPay
@@ -22,6 +23,15 @@ class TdPay extends Base implements Payment
      * @var mixed $channelSign
      */
     protected $channelSign;
+
+    /**
+     * 报此类错误时继续请求只到成功.
+     * @var string[]
+     */
+    protected $retryAbleErrorString = [
+                                       '暂时没有可匹配的订单',
+                                       '订单号重复',
+                                      ];
 
     /**
      * 发起支付.
@@ -106,6 +116,10 @@ class TdPay extends Base implements Payment
                            'data'        => $data,
                           ];
             if ($resultJson['status'] !== 'error') {
+                break;
+            }
+            $status = Str::contains($resultJson['msg'], $this->retryAbleErrorString);
+            if (!$status) {
                 break;
             }
             Log::channel('finance-recharge-detail')->info($infoMsg . '失败数据', $retLog);
