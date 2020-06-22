@@ -36,6 +36,8 @@ class FrontendUser extends BaseAuthModel
     // 是否设置了资金密码 0否 1是
     public const FUND_PASSWORD_SET   = 1;
     public const FUND_PASSWORD_UNSET = 0;
+    // 登录状态
+    public const IS_ONLINE_YES = 1;
 
     /**
      *  账户状态->正常

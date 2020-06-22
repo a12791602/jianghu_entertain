@@ -9,5 +9,7 @@ Route::group(
         $namePrefix = 'headquarters-api.statistics.';
         Route::get('index', [StatisticController::class, 'index'])
             ->name($namePrefix . 'index');
+        Route::get('header', [StatisticController::class, 'header'])
+            ->name($namePrefix . 'header');
     },
 );

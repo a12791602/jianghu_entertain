@@ -2,7 +2,7 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Statistic;
 
-use App\Http\Resources\Backend\Headquarters\Statistic\IndexResource;
+use App\Http\Resources\Backend\Merchant\Statistic\IndexResource;
 use App\Http\SingleActions\MainAction;
 use App\Lib\Constant\JHHYCnst;
 use App\Models\Report\ReportDayUser;
