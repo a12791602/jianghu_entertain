@@ -1377,6 +1377,16 @@ class SystemRoutesBackendSeeder extends Seeder
               'is_open'       => 0,
               'is_ack'        => 1,
              ],
+             [
+              'route_name'    => 'headquarters-api.statistics.header',
+              'controller'    => 'App\Http\Controllers\BackendApi\Headquarters\Statistic\StatisticController',
+              'method'        => 'header',
+              'menu_group_id' => 39,
+              'title'         => '顶部统计',
+              'description'   => null,
+              'is_open'       => 0,
+              'is_ack'        => 1,
+             ],
             ],
         );
     }
