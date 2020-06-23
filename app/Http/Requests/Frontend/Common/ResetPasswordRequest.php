@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Common;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\FrontendUser;
 
 /**
  * Class ResetPasswordRequest
@@ -10,6 +11,13 @@ use App\Http\Requests\BaseFormRequest;
  */
 class ResetPasswordRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [FrontendUser::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,23 +36,11 @@ class ResetPasswordRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'password'              => [
-                                            'required',
-                                            'confirmed',
-                                               //(必须存在大写+小写+数字的7到15位)
-                                            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
-                                           ],
-                'password_confirmation' => 'required',
+                'password' => [
+                               'required',
+                               'confirmed',
+                               'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                              ],
                ];
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return ['password.regex' => '密码必须由8-16位大小写字母加数字组成'];
     }
 }

@@ -36,8 +36,7 @@ class SecurityCodeCheckRule implements Rule
     public function passes($attribute, $value): bool
     {
         unset($attribute);
-        $request       = $this->request;
-        $security_code = $request->user($request->get('guard'))->security_code;
+        $security_code = $this->request->user()->fund_password;
         $checked       = Hash::check($value, $security_code);
         return $checked === true;
     }

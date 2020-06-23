@@ -29,18 +29,16 @@ class PasswordChangeRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'security_code'         => [
-                                            'required',
-                                            'digits:6',
-                                            new SecurityCodeCheckRule($this),
-                                           ],
-                'password'              => [
-                                            'required',
-                                            'confirmed',
-                                               //(必须存在大写+小写+数字的7到15位)
-                                            'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d].{7,15}$/',
-                                           ],
-                'password_confirmation' => 'required',
+                'fund_password' => [
+                                    'required',
+                                    'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                                    new SecurityCodeCheckRule($this),
+                                   ],
+                'password'      => [
+                                    'required',
+                                    'confirmed',
+                                    'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                                   ],
                ];
     }
 }
