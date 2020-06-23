@@ -5,7 +5,6 @@ namespace App\Http\SingleActions\Frontend\H5\Recharge;
 use App\Http\SingleActions\MainAction;
 use App\Models\Finance\SystemFinanceChannel;
 use App\Models\Finance\SystemFinanceOnlineInfo;
-use App\Models\User\FrontendUser;
 use App\Models\User\UsersRechargeOrder;
 
 /**
@@ -21,11 +20,7 @@ class LoadOnlineAction extends MainAction
      */
     public function execute(array $inputData): array
     {
-        //生成订单数据
-        if (! $this->user instanceof FrontendUser) {
-            return ['error_code' => '100505'];//用户不存在
-        }
-            $order = UsersRechargeOrder::filter($inputData)->first();
+        $order = UsersRechargeOrder::filter($inputData)->first();
         if (!$order instanceof UsersRechargeOrder) {
             return ['error_code' => '101011'];//充值订单不存在
         }
