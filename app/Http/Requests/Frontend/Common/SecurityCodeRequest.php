@@ -40,12 +40,12 @@ class SecurityCodeRequest extends BaseFormRequest
         return [
                 'fund_password_old' => [
                                         'required',
-                                        'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(英文字母+数字 8到16位)
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
                                        ],
                 'fund_password'     => [
                                         'required',
                                         'confirmed',
-                                        'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',//(英文字母+数字 8到16位)
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
                                        ],
                 'verification_key'  => 'required|string',
                 'verification_code' => 'required|string',
