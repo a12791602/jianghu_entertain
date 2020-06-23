@@ -83,7 +83,7 @@ class Kernel extends HttpKernel
                                     * login / registration
                                     */
                                    'frontend-registration' => [
-                                                               'throttle:5,1',
+                                                               'throttle:500,1',
                                                                'crypt',
                                                                'route-auth',
                                                               ],

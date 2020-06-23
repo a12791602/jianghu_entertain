@@ -15,8 +15,8 @@ class SecurityCodeRequest extends BaseFormRequest
      * @var array 自定义字段 【此字段在数据库中没有的字段字典】
      */
     protected $extraDefinition = [
-                                  'security_code_old' => '当前安全码',
-                                  'security_code'     => '新安全码',
+                                  'fund_password_old' => '当前安全码',
+                                  'fund_password'     => '新安全码',
                                   'verification_code' => '验证码',
                                  ];
 
@@ -38,11 +38,17 @@ class SecurityCodeRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'security_code_old'          => 'required|digits:6',
-                'security_code'              => 'required|confirmed|digits:6',
-                'security_code_confirmation' => 'required|digits:6',
-                'verification_key'           => 'required|string',
-                'verification_code'          => 'required|string',
+                'fund_password_old' => [
+                                        'required',
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                                       ],
+                'fund_password'     => [
+                                        'required',
+                                        'confirmed',
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                                       ],
+                'verification_key'  => 'required|string',
+                'verification_code' => 'required|string',
                ];
     }
 }

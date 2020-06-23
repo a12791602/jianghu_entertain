@@ -38,8 +38,7 @@ class FundPasswordRequest extends BaseFormRequest
                 'fund_password' => [
                                     'required',
                                     'confirmed',
-                                    //(必须存在大写+小写+数字的7到15位)
-                                    'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',
+                                    'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
                                    ],
                ];
     }
