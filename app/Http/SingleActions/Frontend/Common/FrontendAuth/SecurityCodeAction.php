@@ -24,7 +24,7 @@ class SecurityCodeAction extends MainAction
     {
         $verification_key = $request['verification_key'];
         $verifyData       = Cache::get($verification_key);
-        if (!Hash::check($request['security_code_old'], $this->user->security_code)) {
+        if (!Hash::check($request['fund_password_old'], $this->user->fund_password)) {
             throw new \Exception('102003');
         }
         if (!$verifyData) {
@@ -33,7 +33,7 @@ class SecurityCodeAction extends MainAction
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
             throw new \Exception('100503', 401);
         }
-        $this->user->security_code = bcrypt($request['security_code']);
+        $this->user->fund_password = bcrypt($request['fund_password']);
         $this->user->save();
         Cache::forget($verification_key);
         return msgOut();
