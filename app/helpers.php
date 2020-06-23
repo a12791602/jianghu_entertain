@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -79,11 +80,10 @@ function msgOut(
     string $substituted = ''
 ): JsonResponse {
     if ($placeholder === '' || $substituted === '') {
-        $message = $message === '' ? __('codes-map.' . $code) : $message;
+        $message = $message === '' ? errorMsgTrans($code) : $message;
     } else {
-        $message = $message === '' ? __('codes-map.' . $code, [$placeholder => $substituted]) : $message;
+        $message = $message === '' ? errorMsgTrans($code, [$placeholder => $substituted]) : $message;
     }
-
     $item = [
              'status'  => true,
              'code'    => $code,
@@ -97,6 +97,20 @@ function msgOut(
     }
     $handledData = DataCrypt::handle($item);
     return Response::json($handledData);
+}
+
+/**
+ * @param string     $code     ErrorCode.
+ * @param array|null $replaced Replace Array.
+ * @return array<string,string>|string|null
+ */
+function errorMsgTrans(string $code, ?array $replaced = [])
+{
+    if (Lang::has('codes-map.' . $code)) {
+        $replaced = Arr::wrap($replaced);
+        return __('codes-map.' . $code, $replaced);
+    }
+    return $code;
 }
 
 /**

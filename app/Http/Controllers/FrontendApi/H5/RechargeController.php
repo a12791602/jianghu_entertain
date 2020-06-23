@@ -74,7 +74,11 @@ class RechargeController extends Controller
     public function loadOnline(LoadOnlineAction $action, LoadOnlineRequest $request)
     {
         $inputData = $request->validated();
-        return $action->execute($inputData);
+        $result    = $action->execute($inputData);
+        if (isset($result['error_code'])) {
+            return view('recharge.loadOnlineError', $result);
+        }
+        return view('recharge.loadOnline', $result);
     }
 
     /**

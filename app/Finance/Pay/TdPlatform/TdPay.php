@@ -99,7 +99,7 @@ class TdPay extends Base implements Payment
         $resultJson = [];
         $resultBody = null;
         $infoMsg    = '用户id: ' . $this->order->user_id;
-        for ($i = 0; $i <= 100; $i++) {
+        for ($i = 0; $i <= 1; $i++) {
             $data       = $this->getData();
             $response   = Http::asForm()->post($this->payInfo['requestUrl'], $data);
             $resultBody = $response->body();
