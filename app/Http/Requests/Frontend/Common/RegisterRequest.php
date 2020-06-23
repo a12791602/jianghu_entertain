@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Frontend\Common;
 
 use App\Http\Requests\BaseFormRequest;
+use App\Models\User\FrontendUser;
 
 /**
  * Class RegisterRequest
@@ -10,6 +11,13 @@ use App\Http\Requests\BaseFormRequest;
  */
 class RegisterRequest extends BaseFormRequest
 {
+
+    /**
+     * 需要依赖模型中的字段备注信息
+     * @var array<int,string>
+     */
+    protected $dependentModels = [FrontendUser::class];
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -28,26 +36,14 @@ class RegisterRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'invite_code'           => 'integer',
-                'password'              => [
-                                            'required',
-                                            'confirmed',
-                                            //(必须存在大小写字母+数字的8-16位)
-                                            'regex:/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,16}$/',
-                                           ],
-                'password_confirmation' => 'required',
-                'verification_key'      => 'required|string',
-                'verification_code'     => 'required|string',
+                'invite_code'       => 'integer',
+                'password'          => [
+                                        'required',
+                                        'confirmed',
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
+                                       ],
+                'verification_key'  => 'required|string',
+                'verification_code' => 'required|string',
                ];
-    }
-
-    /**
-     * Get the error messages for the defined validation rules.
-     *
-     * @return mixed[]
-     */
-    public function messages(): array
-    {
-        return ['password.regex' => '密码仅允许8-16位数字或大小写字母组成'];
     }
 }

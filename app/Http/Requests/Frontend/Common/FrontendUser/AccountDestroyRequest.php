@@ -17,7 +17,7 @@ class AccountDestroyRequest extends BaseFormRequest
      */
     protected $extraDefinition = [
                                   'card_id'           => '卡号ID',
-                                  'security_code'     => '安全码',
+                                  'fund_password'     => '安全码',
                                   'owner_name'        => '姓名',
                                   'verification_code' => '验证码',
                                  ];
@@ -45,9 +45,9 @@ class AccountDestroyRequest extends BaseFormRequest
                                         'required',
                                         'regex:/^[\x{4e00}-\x{9fa5}].{1,5}$/u', //(1-5个中文)
                                        ],
-                'security_code'     => [
+                'fund_password'     => [
                                         'required',
-                                        'digits:6',
+                                        'regex:/^[0-9A-Za-z]{8,16}$/',//(英文字母||数字 8到16位)
                                         new SecurityCodeCheckRule($this),
                                        ],
                 'verification_key'  => 'required|string',
