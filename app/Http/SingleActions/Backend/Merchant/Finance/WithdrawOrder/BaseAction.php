@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Illuminate\Http\Request;
 
 /**
@@ -14,17 +14,17 @@ class BaseAction extends MainAction
 {
 
     /**
-     * @var UsersWithdrawOrder $model
+     * @var FrontendUsersWithdrawOrder $model
      */
     protected $model;
 
     /**
      * BaseAction constructor.
-     * @param UsersWithdrawOrder $usersWithdrawOrder 用户提现数据模型.
-     * @param Request            $request            Request.
+     * @param FrontendUsersWithdrawOrder $usersWithdrawOrder 用户提现数据模型.
+     * @param Request                    $request            Request.
      */
     public function __construct(
-        UsersWithdrawOrder $usersWithdrawOrder,
+        FrontendUsersWithdrawOrder $usersWithdrawOrder,
         Request $request
     ) {
         parent::__construct($request);

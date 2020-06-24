@@ -8,8 +8,8 @@ use App\Lib\Constant\JHHYCnst;
 use App\Models\Game\GameProject;
 use App\Models\User\FrontendUsersAccountsReport;
 use App\Models\User\FrontendUsersAccountsType;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use App\Models\User\UsersRechargeOrder;
-use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -145,7 +145,7 @@ class ReportAction extends MainAction
      */
     private function _getWithdrawReport(): LengthAwarePaginator
     {
-        return UsersWithdrawOrder::filter($this->filterDatas)
+        return FrontendUsersWithdrawOrder::filter($this->filterDatas)
             ->select(['order_no', 'amount', 'amount_received', 'account_type', 'status', 'created_at'])
             ->orderBy('created_at', 'desc')
             ->paginate($this->perPage);

@@ -5,8 +5,8 @@ namespace App\Http\SingleActions\Backend\Merchant\Notification;
 use App\Http\Resources\Backend\Merchant\Notification\IndexResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Email\SystemEmailOfMerchant;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use App\Models\User\UsersRechargeOrder;
-use App\Models\User\UsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -38,8 +38,10 @@ class StatisticAction extends MainAction
 
         $email             = SystemEmailOfMerchant::where($email_condition)->count();
         $offline_top_up    = UsersRechargeOrder::where($online_top_up_condition)->count();
-        $withdrawal_order  = UsersWithdrawOrder::where('status', UsersWithdrawOrder::STATUS_CHECK_INIT)->count();
-        $withdrawal_review = UsersWithdrawOrder::where('status', UsersWithdrawOrder::STATUS_CHECK_PASS)->count();
+        $check_init        = FrontendUsersWithdrawOrder::STATUS_CHECK_INIT;
+        $check_pass        = FrontendUsersWithdrawOrder::STATUS_CHECK_PASS;
+        $withdrawal_order  = FrontendUsersWithdrawOrder::where('status', $check_init)->count();
+        $withdrawal_review = FrontendUsersWithdrawOrder::where('status', $check_pass)->count();
 
         $item = [
                  'email'             => $email,

@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Frontend\Common\FrontendUser;
 
 use App\Http\Requests\BaseFormRequest;
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use App\Rules\Frontend\AccountManagement\FundPasswordCheckRule;
 
 /**
@@ -17,7 +17,7 @@ class WithdrawalRequest extends BaseFormRequest
      * 需要依赖模型中的字段备注信息
      * @var array<int,string>
      */
-    protected $dependentModels = [UsersWithdrawOrder::class];
+    protected $dependentModels = [FrontendUsersWithdrawOrder::class];
 
     /**
      * 自定义字段 【此字段在数据库中没有的字段字典】
