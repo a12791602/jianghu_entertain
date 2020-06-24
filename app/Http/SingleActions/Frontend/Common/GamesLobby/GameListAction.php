@@ -114,6 +114,9 @@ class GameListAction extends MainAction
         $result         = [];
         $appEnvironment = App::environment();
         foreach ($datas as $game) {
+            if (!$game->games->vendor->status) {
+                continue;
+            }
             $icon                          = $game->icon->path ?? '';
             $typeId                        = $game->games->type_id ?? 0;
             $sunTypeId                     = $game->games->sub_type_id ?? 0;
