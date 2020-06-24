@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
 use App\Models\Notification\MerchantNotificationStatistic;
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Illuminate\Http\JsonResponse;
 
 /**
@@ -30,9 +30,9 @@ class OutIndexAction extends BaseAction
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
         $returnField                 = $this->_getReturnField();
         $inputDatas['status_list']   = [
-                                        UsersWithdrawOrder::STATUS_CHECK_PASS,
-                                        UsersWithdrawOrder::STATUS_OUT_REFUSE,
-                                        UsersWithdrawOrder::STATUS_OUT_SUCESS,
+                                        FrontendUsersWithdrawOrder::STATUS_CHECK_PASS,
+                                        FrontendUsersWithdrawOrder::STATUS_OUT_REFUSE,
+                                        FrontendUsersWithdrawOrder::STATUS_OUT_SUCCESS,
                                        ];
         $data                        = $this->model->with(
             [

@@ -7,10 +7,10 @@ use App\Models\BaseAuthModel;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class UsersWithdrawOrder
+ * Class FrontendUsersWithdrawOrder
  * @package App\Models\User
  */
-class UsersWithdrawOrder extends BaseAuthModel
+class FrontendUsersWithdrawOrder extends BaseAuthModel
 {
 
     /**
@@ -22,17 +22,17 @@ class UsersWithdrawOrder extends BaseAuthModel
      */
     public const STATUS_CHECK_PASS = 1;
     /**
-     * 审核拒绝.
-     */
-    public const STATUS_CHECK_REFUSE = -1;
-    /**
      * 出款成功.
      */
-    public const STATUS_OUT_SUCESS = 2;
+    public const STATUS_OUT_SUCCESS = 2;
+    /**
+     * 审核拒绝.
+     */
+    public const STATUS_CHECK_REFUSE = 3;
     /**
      * 拒绝出款.
      */
-    public const STATUS_OUT_REFUSE = -2;
+    public const STATUS_OUT_REFUSE = 4;
     /**
      * 银行卡.
      */
@@ -90,8 +90,7 @@ class UsersWithdrawOrder extends BaseAuthModel
      */
     public function user(): BelongsTo
     {
-        $object = $this->belongsTo(FrontendUser::class, 'user_id', 'id');
-        return $object;
+        return $this->belongsTo(FrontendUser::class, 'user_id', 'id');
     }
 
     /**
@@ -99,8 +98,7 @@ class UsersWithdrawOrder extends BaseAuthModel
      */
     public function admin(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'admin_id', 'id');
     }
 
     /**
@@ -108,8 +106,7 @@ class UsersWithdrawOrder extends BaseAuthModel
      */
     public function reviewer(): BelongsTo
     {
-        $object = $this->belongsTo(MerchantAdminUser::class, 'reviewer_id', 'id');
-        return $object;
+        return $this->belongsTo(MerchantAdminUser::class, 'reviewer_id', 'id');
     }
 
     /**
@@ -153,8 +150,9 @@ class UsersWithdrawOrder extends BaseAuthModel
         for ($i = 0; $i < 10; $i++) {
             $order_no = $prefix . str_pad(strval(random_int(0, 999999)), 6, '0', STR_PAD_LEFT);
             if (!static::query()->select('order_no')->where('order_no', $order_no)->exists()) {
-                return $order_no;
+                return (string) $order_no;
             }
         }
+        return $prefix;
     }
 }

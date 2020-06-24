@@ -8,7 +8,7 @@ use EloquentFilter\ModelFilter;
  * Class UsersRechargeOrderFilter
  * @package App\ModelFilters\User
  */
-class UsersWithdrawOrderFilter extends ModelFilter
+class FrontendUsersWithdrawOrderFilter extends ModelFilter
 {
 
     /**

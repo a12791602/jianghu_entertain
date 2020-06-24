@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
              FrontendUserLevelsSeeder::class,
              FrontendUserLevelBenefitSeeder::class,
              FrontendUsersAuditSeeder::class,
-             UsersWithdrawOrderSeeder::class,
+             FrontendUsersWithdrawOrderSeeder::class,
              UsersTagSeeder::class,
              MerchantSystemMenuSeeder::class,
              MerchantAdminAccessGroupSeeder::class,

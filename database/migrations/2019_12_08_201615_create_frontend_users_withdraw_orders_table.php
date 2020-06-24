@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
 /**
- * Class CreateUsersWithdrawOrdersTable
+ * Class CreateFrontendUsersWithdrawOrdersTable
  */
-class CreateUsersWithdrawOrdersTable extends Migration
+class CreateFrontendUsersWithdrawOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -18,7 +18,7 @@ class CreateUsersWithdrawOrdersTable extends Migration
     public function up(): void
     {
         Schema::create(
-            'users_withdraw_orders',
+            'frontend_users_withdraw_orders',
             static function (Blueprint $table): void {
                 $table->increments('id');
                 $table->collation = 'utf8mb4_0900_ai_ci';
@@ -53,7 +53,7 @@ class CreateUsersWithdrawOrdersTable extends Migration
                 $table->timestamps();
             },
         );
-        DB::statement("ALTER TABLE `users_withdraw_orders` comment '用户出款订单表'");
+        DB::statement("ALTER TABLE `frontend_users_withdraw_orders` comment '用户出款订单表'");
     }
 
     /**
@@ -63,6 +63,6 @@ class CreateUsersWithdrawOrdersTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users_withdraw_orders');
+        Schema::dropIfExists('frontend_users_withdraw_orders');
     }
 }
