@@ -34,13 +34,13 @@ class CheckRefuseAction extends BaseAction
                           ];
         $withdrawOrder  = $this->model::find($inputDatas['id']);
         if (!$withdrawOrder instanceof FrontendUsersWithdrawOrder) {
-            throw new \Exception('202901');
+            throw new \Exception('202904');
         }
         if (!$withdrawOrder->user instanceof FrontendUser) {
-            throw new \Exception('202901');
+            throw new \Exception('202905');
         }
         if (!$withdrawOrder->user->account instanceof FrontendUsersAccount) {
-            throw new \Exception('202901');
+            throw new \Exception('202906');
         }
         try {
             $result = $this->model::where($whereCondition)->update($update);
