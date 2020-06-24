@@ -37,7 +37,7 @@ class OutRefuseAction extends BaseAction
             throw new \Exception('202904');
         }
         if (!$withdrawOrder->user instanceof FrontendUser) {
-            throw new \Exception('202905');
+            throw new \Exception('100505');
         }
         if (!$withdrawOrder->user->account instanceof FrontendUsersAccount) {
             throw new \Exception('202906');
