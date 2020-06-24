@@ -4,9 +4,6 @@ namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use App\Http\SingleActions\MainAction;
-use App\Lib\Constant\JHHYCnst;
-use App\Models\User\FrontendUser;
-use App\Models\User\UsersLoginLog;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -77,38 +74,12 @@ class LoginAction extends MainAction
         $user->last_login_time = Carbon::now()->timestamp;
         $user->is_online       = 1;
         $user->save();
-        $this->saveToUserLogTable($user, $request);
         $data = [
                  'access_token' => $token,
                  'token_type'   => 'Bearer',
                  'expires_at'   => $expireAt,
                 ];
         return msgOut($data);
-    }
-
-    /**
-     * Save to Login Logs
-     * @param FrontendUser             $user    UserObj.
-     * @param LoginVerificationRequest $request Reauest.
-     * @return void
-     */
-    protected function saveToUserLogTable(
-        FrontendUser $user,
-        LoginVerificationRequest $request
-    ): void {
-        $toSaveData = [
-                       'platform_sign'     => $this->currentPlatformEloq->sign,
-                       'pid'               => $this->currentPlatformEloq->id,
-                       'mobile'            => $user->mobile,
-                       'last_login_ip'     => $user->last_login_ip,
-                       'last_login_device' => JHHYCnst::DEVICE_H5,
-                       'last_login_time'   => $user->last_login_time,
-                       'guid'              => $user->guid,
-                       'origin'            => $request->headers->get('origin'),
-                      ];
-        $userLog    = new UsersLoginLog();
-        $userLog->fill($toSaveData);
-        $userLog->save();
     }
 
     /**
