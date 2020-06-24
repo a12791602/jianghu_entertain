@@ -9,8 +9,8 @@ use App\Models\Notification\MerchantNotificationStatistic;
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
 use App\Models\User\FrontendUsersBankCard;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use App\Models\User\UsersRechargeOrder;
-use App\Models\User\UsersWithdrawOrder;
 use Arr;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Redis;
@@ -64,10 +64,10 @@ class WithdrawalAction extends MainAction
         array $inputData
     ): bool {
         //提款次数处理
-        $num_withdrawal = UsersWithdrawOrder::select('id')->where('user_id', $user->id)
+        $num_withdrawal = FrontendUsersWithdrawOrder::select('id')->where('user_id', $user->id)
             ->whereDate('created_at', date('Y-m-d'))->count();
         $this->_dayWithdrawNum($user->platform_sign, $num_withdrawal);
-        $total_withdrawal = UsersWithdrawOrder::where('user_id', $user->id)
+        $total_withdrawal = FrontendUsersWithdrawOrder::where('user_id', $user->id)
             ->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('amount');
         //充值次数处理
         $num_top_up = UsersRechargeOrder::select('id')

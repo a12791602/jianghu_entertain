@@ -2,7 +2,9 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUser;
+use App\Models\User\FrontendUsersAccount;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -22,16 +24,22 @@ class OutRefuseAction extends BaseAction
     {
         $whereCondition = [
                            'id'     => $inputDatas['id'],
-                           'status' => UsersWithdrawOrder::STATUS_CHECK_PASS,
+                           'status' => FrontendUsersWithdrawOrder::STATUS_CHECK_PASS,
                           ];
         $update         = [
-                           'status'       => UsersWithdrawOrder::STATUS_CHECK_REFUSE,
+                           'status'       => FrontendUsersWithdrawOrder::STATUS_CHECK_REFUSE,
                            'remark'       => $inputDatas['remark'] ?? null,
                            'admin_id'     => $this->user->id,
                            'operation_at' => Carbon::now(),
                           ];
         $withdrawOrder  = $this->model::find($inputDatas['id']);
-        if (!$withdrawOrder || !$withdrawOrder->user || !$withdrawOrder->user->account) {
+        if (!$withdrawOrder instanceof FrontendUsersWithdrawOrder) {
+            throw new \Exception('202903');
+        }
+        if (!$withdrawOrder->user instanceof FrontendUser) {
+            throw new \Exception('202903');
+        }
+        if (!$withdrawOrder->user->account instanceof FrontendUsersAccount) {
             throw new \Exception('202903');
         }
         try {
@@ -56,7 +64,7 @@ class OutRefuseAction extends BaseAction
                         'data'    => $data,
                        ];
             Log::channel('finance-callback-system')->info((string) json_encode($logData));
-        }
+        }//end try
         throw new \Exception('202903');
     }
 }

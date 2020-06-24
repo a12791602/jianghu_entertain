@@ -28,7 +28,7 @@ class OutRefuseRequest extends BaseFormRequest
     public function rules(): array
     {
         return [
-                'id'     => 'required|integer|min:1|exists:users_withdraw_orders,id',
+                'id'     => 'required|integer|min:1|exists:frontend_users_withdraw_orders,id',
                 'remark' => 'string|min:1|max:256',
                ];
     }

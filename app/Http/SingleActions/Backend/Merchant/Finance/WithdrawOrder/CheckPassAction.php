@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
 use App\Models\Notification\MerchantNotificationStatistic;
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Log;
@@ -23,10 +23,10 @@ class CheckPassAction extends BaseAction
     {
         $whereCondition = [
                            'id'     => $inputDatas['id'],
-                           'status' => UsersWithdrawOrder::STATUS_CHECK_INIT,
+                           'status' => FrontendUsersWithdrawOrder::STATUS_CHECK_INIT,
                           ];
         $update         = [
-                           'status'      => UsersWithdrawOrder::STATUS_CHECK_PASS,
+                           'status'      => FrontendUsersWithdrawOrder::STATUS_CHECK_PASS,
                            'remark'      => $inputDatas['remark'] ?? null,
                            'reviewer_id' => $this->user->id,
                            'review_at'   => Carbon::now(),

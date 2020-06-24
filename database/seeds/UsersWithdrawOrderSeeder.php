@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Illuminate\Database\Seeder;
 
 /**
- * Class UsersWithdrawOrderSeeder
+ * Class FrontendUsersWithdrawOrderSeeder
  */
-class UsersWithdrawOrderSeeder extends Seeder
+class FrontendUsersWithdrawOrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,7 +15,7 @@ class UsersWithdrawOrderSeeder extends Seeder
      */
     public function run(): void
     {
-        UsersWithdrawOrder::insert(
+        FrontendUsersWithdrawOrder::insert(
             [
              [
               'id'              => 1,

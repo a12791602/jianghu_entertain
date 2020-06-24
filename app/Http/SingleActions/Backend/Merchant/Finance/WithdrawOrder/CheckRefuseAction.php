@@ -4,7 +4,7 @@ namespace App\Http\SingleActions\Backend\Merchant\Finance\WithdrawOrder;
 
 use App\Models\User\FrontendUser;
 use App\Models\User\FrontendUsersAccount;
-use App\Models\User\UsersWithdrawOrder;
+use App\Models\User\FrontendUsersWithdrawOrder;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Log;
@@ -24,16 +24,16 @@ class CheckRefuseAction extends BaseAction
     {
         $whereCondition = [
                            'id'     => $inputDatas['id'],
-                           'status' => UsersWithdrawOrder::STATUS_CHECK_INIT,
+                           'status' => FrontendUsersWithdrawOrder::STATUS_CHECK_INIT,
                           ];
         $update         = [
-                           'status'      => UsersWithdrawOrder::STATUS_CHECK_REFUSE,
+                           'status'      => FrontendUsersWithdrawOrder::STATUS_CHECK_REFUSE,
                            'remark'      => $inputDatas['remark'] ?? null,
                            'reviewer_id' => $this->user->id,
                            'review_at'   => Carbon::now(),
                           ];
         $withdrawOrder  = $this->model::find($inputDatas['id']);
-        if (!$withdrawOrder instanceof UsersWithdrawOrder) {
+        if (!$withdrawOrder instanceof FrontendUsersWithdrawOrder) {
             throw new \Exception('202901');
         }
         if (!$withdrawOrder->user instanceof FrontendUser) {

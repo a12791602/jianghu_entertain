@@ -205,7 +205,7 @@ class FrontendUser extends BaseAuthModel
      */
     public function withdraw(): HasMany
     {
-        return $this->hasMany(UsersWithdrawOrder::class, 'user_id', 'id');
+        return $this->hasMany(FrontendUsersWithdrawOrder::class, 'user_id', 'id');
     }
 
     /**
