@@ -77,8 +77,6 @@ class DatabaseSeeder extends Seeder
              FrontendUsersAccountsReportSeeder::class,
              NoticeCarouselSeeder::class,
              NoticeMarqueeSeeder::class,
-             ReportDayPlatformGameSeeder::class,
-             ReportDayPlatformGameVendorsSeeder::class,
              ReportDayUserSeeder::class,
              UsersCommissionConfigSeeder::class,
              UsersCommissionConfigDetailSeeder::class,
