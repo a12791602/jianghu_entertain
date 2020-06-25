@@ -4,9 +4,8 @@ namespace App\Lib\Report;
 
 use App\Models\Game\GameProject;
 use App\Models\Report\ReportDayGameVendor;
-use App\Models\Report\ReportDayPlatformGame;
-use App\Models\Report\ReportDayPlatformGameVendor;
 use App\Models\Report\ReportDayUser;
+use App\Models\Report\ReportDayUserGame;
 
 /**
  * 游戏报表相关
@@ -28,13 +27,8 @@ class GameReport
             return false;
         }
         //代理平台游戏报表
-        $savePlatformGameReport = ReportDayPlatformGame::saveGameReport($gameProject);
+        $savePlatformGameReport = ReportDayUserGame::saveGameReport($gameProject);
         if ($savePlatformGameReport !== true) {
-            return false;
-        }
-        //代理平台游戏厂商报表
-        $savePlatformVendorReport = ReportDayPlatformGameVendor::saveGameReport($gameProject);
-        if ($savePlatformVendorReport !== true) {
             return false;
         }
         //游戏厂商日总报表
