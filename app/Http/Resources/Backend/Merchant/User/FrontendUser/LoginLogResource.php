@@ -36,6 +36,11 @@ class LoginLogResource extends BaseResource
     private $device;
 
     /**
+     * @var string $origin 来源.
+     */
+    private $origin;
+
+    /**
      * @var integer $web_type 站点类型.
      */
     private $web_type;
@@ -59,6 +64,7 @@ class LoginLogResource extends BaseResource
                 'guid'       => $this->user->guid ?? '',
                 'ip'         => $this->ip,
                 'device'     => $this->device,
+                'origin'     => $this->origin,
                 'web_type'   => $this->web_type,
                 'created_at' => $this->created_at->toDateTimeString(),
                ];
