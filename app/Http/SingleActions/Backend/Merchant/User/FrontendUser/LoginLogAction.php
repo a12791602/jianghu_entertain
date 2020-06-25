@@ -54,6 +54,7 @@ class LoginLogAction extends MainAction
                  'mobile',
                  'user_id',
                  'device',
+                 'origin',
                  'web_type',
                  'created_at',
                 ],
