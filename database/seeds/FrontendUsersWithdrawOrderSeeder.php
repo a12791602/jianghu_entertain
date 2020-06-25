@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 /**
  * Class FrontendUsersWithdrawOrderSeeder
  */
-class FrontendUsersWithdrawOrderSeeder extends Seeder
+class UsersWithdrawOrderSeeder extends Seeder
 {
     /**
      * Run the database seeds.
