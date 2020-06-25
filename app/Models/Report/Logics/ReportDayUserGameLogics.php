@@ -5,10 +5,10 @@ namespace App\Models\Report\Logics;
 use App\Models\Game\GameProject;
 
 /**
- * trait ReportDayPlatformGameVendorLogics
+ * trait ReportDayUserGameLogics
  * @package App\Models\User\Logics
  */
-trait ReportDayPlatformGameVendorLogics
+trait ReportDayUserGameLogics
 {
     /**
      * @param  GameProject $gameProject 游戏注单.
@@ -18,6 +18,8 @@ trait ReportDayPlatformGameVendorLogics
     {
         $filterArr    = [
                          'platform_sign'    => $gameProject->platform_sign,
+                         'guid'             => $gameProject->guid,
+                         'game_sign'        => $gameProject->game_sign,
                          'game_vendor_sign' => $gameProject->game_vendor_sign,
                          'report_day'       => [$gameProject->created_at],
                         ];
@@ -28,8 +30,10 @@ trait ReportDayPlatformGameVendorLogics
             $reportEloq = new self();
             $addData    = [
                            'platform_sign'    => $gameProject->platform_sign,
+                           'guid'             => $gameProject->guid,
+                           'mobile'           => $gameProject->user->mobile ?? '',
+                           'game_sign'        => $gameProject->game_sign,
                            'game_vendor_sign' => $gameProject->game_vendor_sign,
-                           'game_vendor_name' => $gameProject->gameVendor->name ?? '',
                            'bet_money'        => $gameProject->bet_money,
                            'effective_bet'    => $effectiveBet,
                            'win_money'        => $gameProject->win_money,
@@ -42,7 +46,7 @@ trait ReportDayPlatformGameVendorLogics
             $reportEloq->effective_bet += $effectiveBet;
             $reportEloq->win_money     += $gameProject->win_money;
             $reportEloq->our_net_win   += $gameProject->our_net_win;
-        }
+        }//end if
         return $reportEloq->save();
     }
 }

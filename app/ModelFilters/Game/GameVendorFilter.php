@@ -41,6 +41,16 @@ class GameVendorFilter extends ModelFilter
     }
 
     /**
+     * 名称模糊查询
+     * @param  string $name Name.
+     * @return GameVendorFilter
+     */
+    public function gameVendorName(string $name): GameVendorFilter
+    {
+        return $this->whereLike('name', $name);
+    }
+
+    /**
      * 厂商查询
      * @param integer $vendor_id VendorId.
      * @return GameVendorFilter

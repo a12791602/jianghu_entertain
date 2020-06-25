@@ -3,7 +3,7 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Report;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayPlatformGameVendor;
+use App\Models\Report\ReportDayUserGame;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,16 +19,16 @@ class PlatformGameAction extends MainAction
     protected $model;
 
     /**
-     * @param ReportDayPlatformGameVendor $reportDayPlatformGameVendor 游戏报表Model.
-     * @param Request                     $request                     Request.
+     * @param ReportDayUserGame $reportDayUserGame 游戏报表Model.
+     * @param Request           $request           Request.
      * @throws \Exception Exception.
      */
     public function __construct(
-        ReportDayPlatformGameVendor $reportDayPlatformGameVendor,
+        ReportDayUserGame $reportDayUserGame,
         Request $request
     ) {
         parent::__construct($request);
-        $this->model = $reportDayPlatformGameVendor;
+        $this->model = $reportDayUserGame;
     }
 
     /**

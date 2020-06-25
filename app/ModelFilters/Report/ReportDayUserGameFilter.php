@@ -5,11 +5,11 @@ namespace App\ModelFilters\Report;
 use EloquentFilter\ModelFilter;
 
 /**
- * Class ReportDayPlatformGameVendorFilter
+ * Class ReportDayUserGameFilter
  *
  * @package App\ModelFilters\Report
  */
-class ReportDayPlatformGameVendorFilter extends ModelFilter
+class ReportDayUserGameFilter extends ModelFilter
 {
 
     /**
@@ -18,10 +18,10 @@ class ReportDayPlatformGameVendorFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = ['platform' => ['platform_name']];
+    public $relations = ['gameVendor' => ['game_vendor_name']];
 
     /**
-     * 厂商标识查询
+     * 厂商查询
      * @param string $gameVendorSign 厂商标识.
      * @return self
      */
@@ -31,13 +31,13 @@ class ReportDayPlatformGameVendorFilter extends ModelFilter
     }
 
     /**
-     * 厂商名称模糊查询
-     * @param string $gameVendorName 厂商名称.
+     * 游戏标识查询
+     * @param string $gameSign 游戏标识.
      * @return self
      */
-    public function gameVendorName(string $gameVendorName): self
+    public function gameSign(string $gameSign): self
     {
-        return $this->whereLike('game_vendor_name', $gameVendorName);
+        return $this->where('game_sign', $gameSign);
     }
 
     /**
@@ -48,6 +48,16 @@ class ReportDayPlatformGameVendorFilter extends ModelFilter
     public function platformSign(string $platformSign): self
     {
         return $this->where('platform_sign', $platformSign);
+    }
+
+    /**
+     * 用户ID
+     * @param string $guid 用户ID.
+     * @return self
+     */
+    public function guid(string $guid): self
+    {
+        return $this->where('guid', $guid);
     }
 
     /**
