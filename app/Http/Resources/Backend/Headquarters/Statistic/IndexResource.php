@@ -26,13 +26,13 @@ class IndexResource extends BaseResource
                 'total_logins'                  => [
                                                     [
                                                      'platform_name' => '江湖互娱',
-                                                     'total'         => 2,
+                                                     'total'         => $this->resource['online'],
                                                     ],
                                                    ],
                 'total_number_of_registrations' => [
                                                     [
                                                      'platform_name' => '江湖互娱',
-                                                     'total'         => 3,
+                                                     'total'         => $this->resource['registration'],
                                                     ],
                                                    ],
                 'total_top_up'                  => [

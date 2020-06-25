@@ -27,20 +27,20 @@ class OutRefuseAction extends BaseAction
                            'status' => FrontendUsersWithdrawOrder::STATUS_CHECK_PASS,
                           ];
         $update         = [
-                           'status'       => FrontendUsersWithdrawOrder::STATUS_CHECK_REFUSE,
+                           'status'       => FrontendUsersWithdrawOrder::STATUS_OUT_REFUSE,
                            'remark'       => $inputDatas['remark'] ?? null,
                            'admin_id'     => $this->user->id,
                            'operation_at' => Carbon::now(),
                           ];
         $withdrawOrder  = $this->model::find($inputDatas['id']);
         if (!$withdrawOrder instanceof FrontendUsersWithdrawOrder) {
-            throw new \Exception('202903');
+            throw new \Exception('202904');
         }
         if (!$withdrawOrder->user instanceof FrontendUser) {
-            throw new \Exception('202903');
+            throw new \Exception('100505');
         }
         if (!$withdrawOrder->user->account instanceof FrontendUsersAccount) {
-            throw new \Exception('202903');
+            throw new \Exception('202906');
         }
         try {
             $result = $this->model::where($whereCondition)->update($update);

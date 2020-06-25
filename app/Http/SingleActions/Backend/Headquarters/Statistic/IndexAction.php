@@ -3,6 +3,8 @@
 namespace App\Http\SingleActions\Backend\Headquarters\Statistic;
 
 use App\Http\Resources\Backend\Headquarters\Statistic\IndexResource;
+use App\Lib\Constant\JHHYCnst;
+use App\Models\User\FrontendUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Redis;
 
@@ -35,10 +37,14 @@ class IndexAction
                 return json_decode($item, true);
             },
         );
+        $online            = FrontendUser::where('is_online', JHHYCnst::ONLINE)->count();
+        $registration      = FrontendUser::count();
         $withdrawal_amount = $withdrawal->sum('amount');
         $withdrawal_num    = $withdrawal->unique('user_id')->count();
 
         $item = [
+                 'online'            => $online,
+                 'registration'      => $registration,
                  'withdrawal_num'    => $withdrawal_num,
                  'withdrawal_amount' => $withdrawal_amount,
                  'top_up_num'        => $top_up_num,
