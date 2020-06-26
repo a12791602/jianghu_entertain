@@ -6,6 +6,7 @@ use App\Models\BaseModel;
 use App\Models\Game\Game;
 use App\Models\Game\GameVendor;
 use App\Models\Report\Logics\ReportDayUserGameLogics;
+use App\Models\Systems\SystemPlatform;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
@@ -32,6 +33,15 @@ class ReportDayUserGame extends BaseModel
                                       'game_vendor_sign' => '游戏厂商标识',
                                       'game_name'        => '游戏名称',
                                      ];
+
+    /**
+     * 所属平台
+     * @return BelongsTo
+     */
+    public function platform(): BelongsTo
+    {
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
+    }
 
     /**
      * 游戏
