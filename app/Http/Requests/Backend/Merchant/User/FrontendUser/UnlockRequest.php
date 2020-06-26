@@ -33,6 +33,6 @@ class UnlockRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['guid' => 'required|string|exists:frontend_users,guid'];
+        return ['mobile' => 'required|string|exists:frontend_users,mobile'];
     }
 }

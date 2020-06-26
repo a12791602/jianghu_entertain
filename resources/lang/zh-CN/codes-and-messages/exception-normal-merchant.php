@@ -169,4 +169,6 @@ return [
 
         //GameAcknowledgementController
         '203200' => '厂商不对应',
+        // Auth
+        '203250' => '您的尝试登录次数超限, 请联系客服解锁!',
        ];
