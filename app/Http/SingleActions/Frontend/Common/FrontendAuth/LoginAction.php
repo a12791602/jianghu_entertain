@@ -4,6 +4,8 @@ namespace App\Http\SingleActions\Frontend\Common\FrontendAuth;
 
 use App\Http\Requests\Frontend\Common\LoginVerificationRequest;
 use App\Http\SingleActions\MainAction;
+use App\Models\User\FrontendUser;
+use Cache;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -21,15 +23,6 @@ class LoginAction extends MainAction
     use AuthenticatesUsers;
 
     /**
-     * Get the maximum number of attempts to allow.
-     * @return integer
-     */
-    public function maxAttempts(): int
-    {
-        return config('auth.max_attempts');
-    }
-
-    /**
      * Login user and create token
      *
      * @param LoginVerificationRequest $request Request.
@@ -38,25 +31,26 @@ class LoginAction extends MainAction
      */
     public function execute(LoginVerificationRequest $request): JsonResponse
     {
-        if ($this->hasTooManyLoginAttempts($request)) {
-            $this->sendLockoutResponse($request);
+        $validated     = $request->validated();
+        $platform_sign = $this->currentPlatformEloq->sign;
+        $mobile        = $validated['mobile'];
+        //Login attempts to cache prefix.
+        $login_attempt_prefix = $platform_sign . ':frontend_user_' . $mobile;
+        $login_error_num      = (int) configure($platform_sign, 'login_error_num');
+        if ((int) Cache::get($login_attempt_prefix) >= $login_error_num) {
+            $this->disableAccount($platform_sign, $mobile);
+            throw new \Exception('203250', 429);
         }
-        $validated   = $request->validated();
-        $credentials = Arr::only($validated, ['mobile', 'password']);
-
-        $credentials['platform_sign'] = $this->currentPlatformEloq->sign;
-
-        $token = $this->auth->attempt($credentials);
+        $credentials                  = Arr::only($validated, ['mobile', 'password']);
+        $credentials['platform_sign'] = $platform_sign;
+        $token                        = $this->auth->attempt($credentials);
         if (!$token) {
-            $this->incrementLoginAttempts($request);
+            Cache::increment($login_attempt_prefix);
             throw new \Exception('100002');
         }
+        Cache::delete($login_attempt_prefix);
         if ($this->auth->user()->frozen_type === 1) {
             throw new \Exception('100014');
-        }
-        if ($request->hasSession()) {
-            $request->session()->regenerate();
-            $this->clearLoginAttempts($request);
         }
         $expireInMinute = $this->auth->factory()->getTTL();
         $expireAt       = Carbon::now()->addMinutes($expireInMinute)->format('Y-m-d H:i:s');
@@ -104,5 +98,20 @@ class LoginAction extends MainAction
     protected function username(): string
     {
         return 'mobile';
+    }
+
+    /**
+     * Disable account.
+     * @param string $platform_sign Platform_sign.
+     * @param string $mobile        Mobile.
+     * @return void
+     */
+    protected function disableAccount(string $platform_sign, string $mobile): void
+    {
+        $condition = [
+                      'platform_sign' => $platform_sign,
+                      'mobile'        => $mobile,
+                     ];
+        FrontendUser::where($condition)->update(['status' => FrontendUser::STATUS_DISABLE]);
     }
 }

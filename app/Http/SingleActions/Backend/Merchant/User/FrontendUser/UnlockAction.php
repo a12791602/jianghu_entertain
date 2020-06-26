@@ -2,13 +2,16 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\User\FrontendUser;
 
+use App\Http\SingleActions\MainAction;
 use App\Models\User\FrontendUser;
+use Cache;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 /**
  * 会员解锁
  */
-class UnlockAction
+class UnlockAction extends MainAction
 {
 
     /**
@@ -17,10 +20,12 @@ class UnlockAction
     protected $model;
 
     /**
+     * @param Request      $request      Request.
      * @param FrontendUser $frontendUser 用户Model.
      */
-    public function __construct(FrontendUser $frontendUser)
+    public function __construct(Request $request, FrontendUser $frontendUser)
     {
+        parent::__construct($request);
         $this->model = $frontendUser;
     }
 
@@ -31,9 +36,17 @@ class UnlockAction
      */
     public function execute(array $inputDatas): JsonResponse
     {
-        $user         = $this->model->where('guid', $inputDatas['guid'])->first();
-        $user->status = FrontendUser::STATUS_NORMAL;
+        $mobile        = $inputDatas['mobile'];
+        $platform_sign = $this->currentPlatformEloq->sign;
+        $condition     = [
+                          'platform_sign' => $platform_sign,
+                          'mobile'        => $mobile,
+                         ];
+        $user          = $this->model->where($condition)->first();
+        $user->status  = FrontendUser::STATUS_NORMAL;
         $user->save();
+        $login_attempt_prefix = $platform_sign . ':frontend_user_' . $mobile;
+        Cache::delete($login_attempt_prefix);
         return msgOut();
     }
 }
