@@ -173,12 +173,12 @@ class FrontendUser extends BaseAuthModel
     }
 
     /**
-     * get platform
-     * @return HasOne
+     * 所属平台
+     * @return BelongsTo
      */
-    public function platform(): HasOne
+    public function platform(): BelongsTo
     {
-        return $this->hasOne(SystemPlatform::class, 'id', 'platform_id');
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
     }
 
     /**

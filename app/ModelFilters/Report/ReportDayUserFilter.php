@@ -16,7 +16,7 @@ class ReportDayUserFilter extends ModelFilter
      *
      * @var array
      */
-    public $relations = [];
+    public $relations = ['platform' => ['platform_name']];
 
     /**
      * 手机号查询
