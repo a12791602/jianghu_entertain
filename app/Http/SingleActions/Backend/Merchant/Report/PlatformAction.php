@@ -2,10 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
+use App\Http\Resources\Backend\Headquarters\Report\PlatformAccountResource;
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayPlatform;
+use App\Models\Report\ReportDayUser;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 公司报表-列表
@@ -19,14 +21,14 @@ class PlatformAction extends MainAction
     protected $model;
 
     /**
-     * @param ReportDayPlatform $reportDayPlatform 公司日报表Model.
-     * @param Request           $request           Request.
+     * @param ReportDayUser $reportDayUser Model.
+     * @param Request       $request       Request.
      * @throws \Exception Exception.
      */
-    public function __construct(ReportDayPlatform $reportDayPlatform, Request $request)
+    public function __construct(ReportDayUser $reportDayUser, Request $request)
     {
         parent::__construct($request);
-        $this->model = $reportDayPlatform;
+        $this->model = $reportDayUser;
     }
 
     /**
@@ -40,18 +42,16 @@ class PlatformAction extends MainAction
             $this->model->setPerPage($inputDatas['pageSize']);
         }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
-        $result                      = $this->model
+
+        $select = 'day as rDay,platform_sign,sum(recharge_sum) as recharge_sum,
+        sum(withdraw_sum) as withdraw_sum,sum(reduced_sum) as reduced_sum,sum(activity_sum) as activity_sum';
+        $result = $this->model
             ->filter($inputDatas)
-            ->select(
-                [
-                 'recharge_sum',
-                 'withdraw_sum',
-                 'reduced_sum',
-                 'activity_sum',
-                 'day',
-                ],
-            )->orderBy('created_at', 'desc')
+            ->select(DB::raw($select))
+            ->with('platform:sign,cn_name')
+            ->groupBy('platform_sign', 'day')
+            ->orderBy('day', 'desc')
             ->paginate();
-        return msgOut($result);
+        return msgOut(PlatformAccountResource::collection($result));
     }
 }

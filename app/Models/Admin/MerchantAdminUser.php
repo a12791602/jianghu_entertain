@@ -4,6 +4,7 @@ namespace App\Models\Admin;
 
 use App\Models\BaseAuthModel;
 use App\Models\Systems\SystemPlatform;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -52,13 +53,12 @@ class MerchantAdminUser extends BaseAuthModel
                                      ];
 
     /**
-     * 平台
-     *
-     * @return HasOne
+     * 所属平台
+     * @return BelongsTo
      */
-    public function platform(): HasOne
+    public function platform(): BelongsTo
     {
-        return $this->hasOne(SystemPlatform::class, 'sign', 'platform_sign');
+        return $this->belongsTo(SystemPlatform::class, 'platform_sign', 'sign');
     }
 
     /**

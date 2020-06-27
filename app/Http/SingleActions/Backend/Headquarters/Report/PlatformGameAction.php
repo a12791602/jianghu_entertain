@@ -2,10 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Headquarters\Report;
 
+use App\Http\Resources\Backend\Headquarters\Report\PlatformGameResource;
 use App\Http\SingleActions\MainAction;
 use App\Models\Report\ReportDayUserGame;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 厅主游戏报表
@@ -41,22 +43,22 @@ class PlatformGameAction extends MainAction
         if (isset($inputDatas['pageSize'])) {
             $this->model->setPerPage($inputDatas['pageSize']);
         }
+
+        $select = 'day as rDay,platform_sign,game_vendor_sign,sum(bet_money) as bet_money,
+        sum(effective_bet) as effective_bet,sum(win_money) as win_money,sum(our_net_win) as our_net_win,
+        sum(commission) as commission,sum(rebate) as rebate';
         $result = $this->model
-            ->select(
-                [
-                 'platform_sign',
-                 'game_vendor_name',
-                 'bet_money',
-                 'effective_bet',
-                 'win_money',
-                 'our_net_win',
-                 'day',
-                ],
-            )->with('platform:sign,cn_name')
             ->filter($inputDatas)
-            ->orderBy('created_at', 'desc')
-            ->paginate()
-            ->toArray();
-        return msgOut($result);
+            ->select(DB::raw($select))
+            ->with(
+                [
+                 'gameVendor:sign,name',
+                 'platform:sign,cn_name',
+                ],
+            )
+            ->groupBy('game_vendor_sign', 'platform_sign', 'day')
+            ->orderBy('day', 'desc')
+            ->paginate();
+        return msgOut(PlatformGameResource::collection($result));
     }
 }
