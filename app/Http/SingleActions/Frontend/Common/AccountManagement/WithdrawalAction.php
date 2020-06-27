@@ -22,6 +22,12 @@ use Log;
  */
 class WithdrawalAction extends MainAction
 {
+
+    /**
+     * @var \Illuminate\Redis\Connections\Connection $redis Redis Instance.
+     */
+    private $redis;
+
     /**
      * Account withdrawal.
      * @param WithdrawalRequest $request WithdrawalRequest.
@@ -30,8 +36,9 @@ class WithdrawalAction extends MainAction
      */
     public function execute(WithdrawalRequest $request): JsonResponse
     {
-        $inputData = $request->validated();
-        $user      = $this->user;
+        $inputData   = $request->validated();
+        $this->redis = Redis::connection();
+        $user        = $this->user;
         if (!$user instanceof FrontendUser) {
             throw new \RuntimeException('100505');//用户不存在
         }
@@ -66,7 +73,7 @@ class WithdrawalAction extends MainAction
         //提款次数处理
         $num_withdrawal = FrontendUsersWithdrawOrder::select('id')->where('user_id', $user->id)
             ->whereDate('created_at', date('Y-m-d'))->count();
-        $this->_dayWithdrawNum($user->platform_sign, $num_withdrawal);
+        $this->_checkBeforeWithdrawal($user->platform_sign, $num_withdrawal, $bankCard->id);
         $total_withdrawal = FrontendUsersWithdrawOrder::where('user_id', $user->id)
             ->whereBetween('created_at', [date('Y-m-01'), date('Y-m-t')])->sum('amount');
         //充值次数处理
@@ -122,7 +129,7 @@ class WithdrawalAction extends MainAction
             throw new \RuntimeException('100505');//用户不存在
         }
         $time  = mktime(23, 59, 59) - mktime((int) date('H'), (int) date('i'), (int) date('s'));
-        $redis = Redis::connection();
+        $redis = $this->redis;
 
         $withdraw_cache = json_encode(
             [
@@ -155,19 +162,27 @@ class WithdrawalAction extends MainAction
     }
 
     /**
-     * 检查每日可提现次数.
+     * 提现前的检查.
      * @param string  $platform_sign  平台标识.
      * @param integer $num_withdrawal Num_withdrawal.
-     * @return integer
+     * @param integer $bankCardId     BankCardId.
+     * @return void
      * @throws \RuntimeException RuntimeException.
      */
-    private function _dayWithdrawNum(string $platform_sign, int $num_withdrawal): int
-    {
+    private function _checkBeforeWithdrawal(
+        string $platform_sign,
+        int $num_withdrawal,
+        int $bankCardId
+    ): void {
+        $cache_prefix = $platform_sign . ':frontend_user_' . $this->user->id . ':binding_card:' . $bankCardId;
+        if ($this->redis->exists($cache_prefix)) {
+            $bank_card_frozen = (int) configure($platform_sign, 'bank_card_frozen');
+            throw new \RuntimeException('新绑定银行卡' . $bank_card_frozen . '小时后才可以使用!', 403);
+        }
         $day_withdraw_num = (int) configure($platform_sign, 'day_withdraw_num');
         if ($num_withdrawal >= $day_withdraw_num) {
             throw new \RuntimeException('100904');
         }
-        return (int) $day_withdraw_num;
     }
 
     /**
