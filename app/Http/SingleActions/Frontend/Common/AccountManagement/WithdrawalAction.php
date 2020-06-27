@@ -174,11 +174,20 @@ class WithdrawalAction extends MainAction
         int $num_withdrawal,
         int $bankCardId
     ): void {
+        // 新绑卡检查
         $cache_prefix = $platform_sign . ':frontend_user_' . $this->user->id . ':binding_card:' . $bankCardId;
         if ($this->redis->exists($cache_prefix)) {
             $bank_card_frozen = (int) configure($platform_sign, 'bank_card_frozen');
             throw new \RuntimeException('新绑定银行卡' . $bank_card_frozen . '小时后才可以使用!', 403);
         }
+
+        // 稽核不足检查
+        $audit_withdraw = (int) configure($platform_sign, 'audit_withdraw');
+        if ($audit_withdraw) {
+            throw new \RuntimeException('100908');
+        }
+
+        // 每日提款次数检查
         $day_withdraw_num = (int) configure($platform_sign, 'day_withdraw_num');
         if ($num_withdrawal >= $day_withdraw_num) {
             throw new \RuntimeException('100904');
