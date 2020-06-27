@@ -51,12 +51,15 @@ class RegisterAction extends MainAction
         if (!hash_equals($verifyData['verification_code'], $request['verification_code'])) {
             throw new \Exception('100503', 401);
         }
-        $parentId = 0;
-        $userRid  = [0]; //沒有邀请码时rid默认0
-        if (is_string($request['invite_code'])) {
-            $patent   = $this->_getParent($platform_sign, $request['invite_code']);
-            $parentId = $patent->id;
-            $userRid  = $patent->getRid();
+        $parentId             = 0;
+        $register_invite_code = configure($platform_sign, 'register_invite_code');
+        $userRid              = [0]; //沒有邀请码时rid默认0
+        if ((int) $register_invite_code) {
+            if (is_string($request['invite_code'])) {
+                $patent   = $this->_getParent($platform_sign, $request['invite_code']);
+                $parentId = $patent->id;
+                $userRid  = $patent->getRid();
+            }
         }
         $user   = $this->user(
             $verifyData['mobile'],
