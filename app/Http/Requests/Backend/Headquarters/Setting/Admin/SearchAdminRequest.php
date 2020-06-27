@@ -32,6 +32,6 @@ class SearchAdminRequest extends BaseFormRequest
      */
     public function rules(): array
     {
-        return ['searchStr' => 'string'];
+        return ['searchStr' => 'required|string'];
     }
 }
