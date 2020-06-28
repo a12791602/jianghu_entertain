@@ -3,9 +3,10 @@
 namespace App\Http\SingleActions\Frontend\Common\Commission;
 
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayUserRebate;
+use App\Models\Report\ReportDayUserGame;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class rebate action.
@@ -14,20 +15,20 @@ class RebateAction extends MainAction
 {
 
     /**
-     * @var ReportDayUserRebate
+     * @var ReportDayUserGame
      */
     protected $model;
 
     /**
-     * @param Request             $request             Request.
-     * @param ReportDayUserRebate $reportDayUserRebate ReportDayUserRebate.
+     * @param Request           $request           Request.
+     * @param ReportDayUserGame $reportDayUserGame ReportDayUserGame.
      */
     public function __construct(
         Request $request,
-        ReportDayUserRebate $reportDayUserRebate
+        ReportDayUserGame $reportDayUserGame
     ) {
         parent::__construct($request);
-        $this->model = $reportDayUserRebate;
+        $this->model = $reportDayUserGame;
     }
 
     /**
@@ -42,34 +43,31 @@ class RebateAction extends MainAction
         }
         $inputDatas['platform_sign'] = getCurrentPlatformSign();
         $inputDatas['guid']          = $this->user->guid;
-        $userPercent                 = $this->model->filter($inputDatas)
-        ->select(
-            [
-             'game_vendor_sign',
-             'effective_bet',
-             'rebate',
-             'percent',
-             'day',
-            ],
-        )->with('gameVendor:sign,name');
 
-        $rebateSum           = $userPercent->sum('rebate');
-        $userPercentPaginate = $userPercent->paginate();
-        $rebateCurrent       = $userPercentPaginate->sum('rebate');
-        $result              = $userPercentPaginate->toArray();
-        $data                = [];
-        foreach ($result['data'] as $item) {
+        $select            = 'day as rDay,game_vendor_sign,sum(effective_bet) as effective_bet,sum(rebate) as rebate';
+        $reportDayUserGame = $this->model
+            ->filter($inputDatas)
+            ->select(DB::raw($select))
+            ->with('gameVendor:sign,name')
+            ->groupBy('game_vendor_sign', 'day')
+            ->orderBy('day', 'desc');
+        $rebateSum         = $reportDayUserGame->sum('rebate');
+        $resultPaginate    = $reportDayUserGame->paginate();
+        $rebateCurrent     = $resultPaginate->sum('rebate');
+        $resultArr         = $resultPaginate->toArray();
+        $data              = [];
+        foreach ($resultArr['data'] as $item) {
             $data[] = [
-                       'game_vendor_name' => $item['game_vendor']['name'] ?? '',
-                       'effective_bet'    => $item['effective_bet'],
-                       'rebate'           => $item['rebate'],
-                       'percent'          => $item['percent'],
-                       'day'              => $item['day'],
+                       'day'              => $item['rDay'],
+                       'game_vendor_name' => $item['gameVendor']['name'] ?? '',
+                       'effective_bet'    => floatDC($item['effective_bet']),
+                       'rebate'           => floatDC($item['rebate']),
+                       'percent'          => $item['rebate'] / $item['effective_bet'] * 100 . '%', //洗码百分比
                       ];
         }
-        $result['rebate_sum']     = floatDC($rebateSum);
-        $result['rebate_current'] = floatDC($rebateCurrent);
-        $result['data']           = $data;
-        return msgOut($result);
+        $resultArr['rebate_current'] = floatDC($rebateCurrent);
+        $resultArr['rebate_sum']     = floatDC($rebateSum);
+        $resultArr['data']           = $data;
+        return msgOut($resultArr);
     }
 }

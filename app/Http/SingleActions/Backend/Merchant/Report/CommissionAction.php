@@ -2,10 +2,12 @@
 
 namespace App\Http\SingleActions\Backend\Merchant\Report;
 
+use App\Http\Resources\Backend\Merchant\Report\CommissionResource;
 use App\Http\SingleActions\MainAction;
-use App\Models\Report\ReportDayUserRebate;
+use App\Models\Report\ReportDayUserGame;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 /**
  * 会员洗码-列表
@@ -19,14 +21,14 @@ class CommissionAction extends MainAction
     protected $model;
 
     /**
-     * @param ReportDayUserRebate $reportDayUserRebate 会员洗码日报表Model.
-     * @param Request             $request             Request.
+     * @param ReportDayUserGame $reportDayUserGame Model.
+     * @param Request           $request           Request.
      * @throws \Exception Exception.
      */
-    public function __construct(ReportDayUserRebate $reportDayUserRebate, Request $request)
+    public function __construct(ReportDayUserGame $reportDayUserGame, Request $request)
     {
         parent::__construct($request);
-        $this->model = $reportDayUserRebate;
+        $this->model = $reportDayUserGame;
     }
 
     /**
@@ -41,21 +43,15 @@ class CommissionAction extends MainAction
         }
         $inputDatas['platform_sign'] = $this->currentPlatformEloq->sign;
 
+        $select = 'day as rDay,game_vendor_sign,guid,mobile,sum(bet_money) as bet_money,
+        sum(effective_bet) as effective_bet,sum(rebate) as rebate';
         $result = $this->model
             ->filter($inputDatas)
-            ->select(
-                [
-                 'mobile',
-                 'guid',
-                 'game_vendor_sign',
-                 'bet',
-                 'effective_bet',
-                 'rebate',
-                 'day',
-                ],
-            )->with('gameVendor:sign,name')
-            ->orderBy('created_at', 'desc')
+            ->select(DB::raw($select))
+            ->with('gameVendor:sign,name')
+            ->groupBy('guid', 'game_vendor_sign', 'day')
+            ->orderBy('day', 'desc')
             ->paginate();
-        return msgOut($result);
+        return msgOut(CommissionResource::collection($result));
     }
 }
