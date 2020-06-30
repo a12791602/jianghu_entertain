@@ -3,11 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Game\GameProject;
-use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUser;
 use App\Models\Report\ReportDayUserCommission;
-use App\Models\Report\ReportDayUserGameRebate;
-use App\Models\Report\ReportDayUserRebate;
 use App\Models\User\FrontendUser;
 use App\Models\User\UsersCommissionConfig;
 use Carbon\Carbon;
@@ -63,7 +60,7 @@ class StatisticalCommission extends Command
             $vendorGroupProject = $itemUserProjects->groupBy('game_vendor_sign');
             DB::beginTransaction();
             //游戏相关报表
-            $userRebate = $this->_saveGameReport($vendorGroupProject, $user, $reportDay);
+            $userRebate = $this->_saveGameReport($vendorGroupProject, $user);
             //佣金返利报表
             $saveReportCommisstion = $this->_saveReportCommisstion($user, $reportDay, $userRebate, $vendorGroupProject);
             if ($saveReportCommisstion !== true) {
@@ -75,60 +72,26 @@ class StatisticalCommission extends Command
     }
 
     /**
-     * @param  Collection      $vendorGroupProject 注单.
-     * @param  FrontendUser    $user               用户.
-     * @param  CarbonInterface $reportDay          日期.
+     * @param  Collection   $vendorGroupProject 注单.
+     * @param  FrontendUser $user               用户.
      * @return float
      */
     private function _saveGameReport(
         Collection $vendorGroupProject,
-        FrontendUser $user,
-        CarbonInterface $reportDay
+        FrontendUser $user
     ): float {
         $userRebate = 0; //用户个人报表的洗码奖金总额
         foreach ($vendorGroupProject as $vendorSign => $itemVendorProject) {
-            $vendorSign         = (string) $vendorSign; //钩子认定foreach的key是int类型，所以做下转换
-            $vendorBetSum       = $itemVendorProject->sum('bet_money');
-            $rebatePercent      = UsersCommissionConfig::getCommissionPercent($user, $vendorSign, $vendorBetSum);
-            $vendorEffectiveBet = 0;
-            $vendorRebateSum    = 0;
-            $projectId          = [];
-            foreach ($itemVendorProject->groupBy('game_sign') as $gameSign => $itemGameProject) {
+            $vendorSign    = (string) $vendorSign; //钩子认定foreach的key是int类型，所以做下转换
+            $vendorBetSum  = $itemVendorProject->sum('bet_money');
+            $rebatePercent = UsersCommissionConfig::getCommissionPercent($user, $vendorSign, $vendorBetSum);
+            $projectId     = [];
+            foreach ($itemVendorProject->groupBy('game_sign') as $itemGameProject) {
                 $gameEffectiveBet = $this->_getGameEffectiveBet($itemGameProject);
-                $gamebetSum       = $itemGameProject->sum('bet_money');
                 $gameRebateSum    = $gameEffectiveBet * $rebatePercent / 100;
-                $saveGameRebate   = ReportDayUserGameRebate::saveReport(
-                    $user,
-                    $vendorSign,
-                    $gameSign,
-                    $gamebetSum,
-                    $gameEffectiveBet,
-                    $gameRebateSum,
-                    $reportDay,
-                );
-                if ($saveGameRebate === false) {
-                    DB::rollback();
-                    continue;
-                }
-                $projectId           = Arr::collapse([$projectId, $itemGameProject->pluck('id')->toArray()]);
-                $vendorEffectiveBet += $gameEffectiveBet;
-                $vendorRebateSum    += $gameRebateSum;
-                $userRebate         += $gameRebateSum;
+                $projectId        = Arr::collapse([$projectId, $itemGameProject->pluck('id')->toArray()]);
+                $userRebate      += $gameRebateSum;
             }//end foreach
-            $saveUserRebate   = ReportDayUserRebate::saveReport(
-                $user,
-                $vendorSign,
-                $vendorBetSum,
-                $vendorEffectiveBet,
-                $vendorRebateSum,
-                $rebatePercent,
-                $reportDay,
-            );
-            $saveVendorRebate = ReportDayGameVendor::saveRebateReport($vendorSign, $reportDay, $vendorRebateSum);
-            if ($saveUserRebate === false || $saveVendorRebate === false) {
-                DB::rollback();
-                continue;
-            }
             GameProject::whereIn('id', $projectId)->update(['commission_status' => GameProject::COMMISSION_STATUS_YES]);
         }//end foreach
         return $userRebate;
@@ -167,8 +130,8 @@ class StatisticalCommission extends Command
         if ($saveRebate === false) {
             return false;
         }
-        foreach ($vendorGroupProject as $gameVendorSign => $gameProjects) {
-            $saveCommission = $this->_saveCommission($user, $reportDay, (string) $gameVendorSign, $gameProjects);
+        foreach ($vendorGroupProject as $gameProjects) {
+            $saveCommission = $this->_saveCommission($user, $reportDay, $gameProjects);
             if ($saveCommission === false) {
                 return false;
             }
@@ -178,20 +141,17 @@ class StatisticalCommission extends Command
 
     /**
      * 保存佣金报表
-     * @param  FrontendUser    $user           用户.
-     * @param  CarbonInterface $reportDay      日期.
-     * @param  string          $gameVendorSign 游戏厂商标识.
-     * @param  Collection      $gameProjects   游戏注单.
+     * @param  FrontendUser    $user         用户.
+     * @param  CarbonInterface $reportDay    日期.
+     * @param  Collection      $gameProjects 游戏注单.
      * @return boolean
      */
     private function _saveCommission(
         FrontendUser $user,
         CarbonInterface $reportDay,
-        string $gameVendorSign,
         Collection $gameProjects
     ): bool {
-        $vendorCommissionSum = 0;
-        $userWinLose         = $gameProjects->sum('win_money') - $gameProjects->sum('bet_money');
+        $userWinLose = $gameProjects->sum('win_money') - $gameProjects->sum('bet_money');
         //玩家不输钱的时候不需要给上级发放佣金
         if ($userWinLose >= 0) {
             return true;
@@ -232,9 +192,8 @@ class StatisticalCommission extends Command
                 if ($saveUserReport !== true || $saveCommission !== true) {
                     return false;
                 }
-                $vendorCommissionSum += $commission;
             }//end foreach
         }//end if
-        return ReportDayGameVendor::saveCommissionReport($gameVendorSign, $reportDay, $vendorCommissionSum);
+        return true;
     }
 }

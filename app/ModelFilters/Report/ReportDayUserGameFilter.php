@@ -61,6 +61,16 @@ class ReportDayUserGameFilter extends ModelFilter
     }
 
     /**
+     * 手机号码
+     * @param string $mobile 手机号码.
+     * @return self
+     */
+    public function mobile(string $mobile): self
+    {
+        return $this->where('mobile', $mobile);
+    }
+
+    /**
      * 日期
      * @param  array $reportDay 日期.
      * @return self|\Illuminate\Database\Eloquent\Builder

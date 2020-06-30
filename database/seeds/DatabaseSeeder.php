@@ -80,11 +80,8 @@ class DatabaseSeeder extends Seeder
              ReportDayUserSeeder::class,
              UsersCommissionConfigSeeder::class,
              UsersCommissionConfigDetailSeeder::class,
-             ReportDayUserRebateSeeder::class,
-             ReportDayUserGameRebateSeeder::class,
              ActivitiesConfigRegFirstimeRandomSeeder::class,
              ActivitiesDynPlatformSeeder::class,
-             ReportDayGameVendorSeeder::class,
              ReportDayUserGameSeeder::class,
             ],
         );

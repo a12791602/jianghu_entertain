@@ -3,7 +3,6 @@
 namespace App\Lib\Report;
 
 use App\Models\Game\GameProject;
-use App\Models\Report\ReportDayGameVendor;
 use App\Models\Report\ReportDayUser;
 use App\Models\Report\ReportDayUserGame;
 
@@ -27,11 +26,6 @@ class GameReport
             return false;
         }
         //代理平台游戏报表
-        $savePlatformGameReport = ReportDayUserGame::saveGameReport($gameProject);
-        if ($savePlatformGameReport !== true) {
-            return false;
-        }
-        //游戏厂商日总报表
-        return ReportDayGameVendor::saveGameReport($gameProject);
+        return ReportDayUserGame::saveGameReport($gameProject);
     }
 }
