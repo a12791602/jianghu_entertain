@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class BaseModel extends Model
 {
-    use Cachable;
+//    use Cachable;
     use Filterable;
     use BaseModelLogics;
 

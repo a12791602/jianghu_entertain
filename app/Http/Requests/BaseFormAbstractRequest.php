@@ -9,8 +9,8 @@
 
 namespace App\Http\Requests;
 
+use Elegant\Sanitizer\Laravel\SanitizesInput;
 use Illuminate\Foundation\Http\FormRequest;
-use Waavi\Sanitizer\Laravel\SanitizesInput;
 
 /**
  * Class for base form request.

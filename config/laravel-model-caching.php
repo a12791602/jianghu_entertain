@@ -1,6 +1,6 @@
 <?php
 return [
-        'cache-prefix'        => '',
+        'cache-prefix'        => 'jianghuhuyu',
 
         'enabled'             => env('MODEL_CACHE_ENABLED', true),
 
